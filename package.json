@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@staticcanvas/logcad": "^0.6.0",
+    "@staticcanvas/snailtrail": "^0.2.2"
+  }
+}
