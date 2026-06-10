@@ -273,6 +273,10 @@
     - text: Progress Bar
       url: /components/progress/
       icon: activity
+    - text: System Metrics Grid
+      url: /components/metrics/
+      icon: cpu
+      description: "High-density KPI and system metrics display panel"
     - text: Previously Read
       url: /components/previously-read/
       icon: history
