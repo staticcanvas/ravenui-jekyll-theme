@@ -1,1 +1,6 @@
-{% assign separator = include.separator | default: "+" %}{% assign keys_array = include.keys | split: "," %}{% assign size = include.size | default: "md" %}<span class="zd-kbd-group {{ include.class }}">{% for key in keys_array %}{% if forloop.first == false %}<span class="zd-kbd-separator">{{ separator }}</span>{% endif %}{% include comps/kbd.html key=key size=size %}{% endfor %}</span>
+{%- comment -%}
+Component: Keyboard Shortcut Group (kbd-group)
+Purpose: Groups multiple styled keyboard keys side by side with connector symbols.
+Caveats: Output must remain collapsed on a single line to prevent Kramdown paragraph wrapping.
+Usage: {% include comps/kbd-group.html keys="Ctrl,Alt,Del" separator="+" size="md" %}
+{%- endcomment -%}{% assign separator = include.separator | default: "+" %}{% assign keys_array = include.keys | split: "," %}{% assign size = include.size | default: "md" %}<span class="zd-kbd-group {{ include.class }}">{% for key in keys_array %}{% if forloop.first == false %}<span class="zd-kbd-separator">{{ separator }}</span>{% endif %}{% include comps/kbd.html key=key size=size %}{% endfor %}</span>

@@ -128,7 +128,7 @@
 - [x] Check comps/* components that do not have corresponding docs/* documentation pages.
 - [x] Refine documentation sections to make them clear, robust, and technical.
 - [x] Remove any loose tone, focusing on professional and robust documentation.
-- [ ] Check CSS, JS, and Liquid for any unused code, for components, add a milti-line liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
-- [ ] peform additional polish.
+- [x] Check CSS, JS, and Liquid for any unused code, for components, add a milti-line liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
+- [x] peform additional polish.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.
