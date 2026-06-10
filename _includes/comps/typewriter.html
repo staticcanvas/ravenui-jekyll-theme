@@ -1,0 +1,54 @@
+{% assign words = include.words | default: "Hello|World" | split: "|" %}
+{% assign speed = include.speed | default: 100 %}
+{% assign delay = include.delay | default: 1500 %}
+{% assign id = include.id | default: "zd-typewriter" %}
+
+<span class="zd-typewriter-container {{ include.class }}" id="{{ id }}-container">
+    <span class="zd-typewriter-text" id="{{ id }}"></span>
+    <span class="zd-typewriter-cursor">|</span>
+</span>
+
+<script>
+(function() {
+    const words = {{ words | jsonify }};
+    const speed = parseInt("{{ speed }}");
+    const delay = parseInt("{{ delay }}");
+    const el = document.getElementById("{{ id }}");
+    if (!el) return;
+    
+    let wordIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentWord = words[wordIdx];
+        if (isDeleting) {
+            el.textContent = currentWord.substring(0, charIdx - 1);
+            charIdx--;
+        } else {
+            el.textContent = currentWord.substring(0, charIdx + 1);
+            charIdx++;
+        }
+        
+        let typeSpeed = speed;
+        if (isDeleting) typeSpeed /= 2;
+        
+        if (!isDeleting && charIdx === currentWord.length) {
+            typeSpeed = delay;
+            isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            wordIdx = (wordIdx + 1) % words.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", type);
+    } else {
+        type();
+    }
+})();
+</script>
