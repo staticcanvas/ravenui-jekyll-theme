@@ -153,6 +153,10 @@
       url: /components/copy-button/
       icon: copy
       description: "Standalone copy-to-clipboard button for arbitrary text"
+    - text: Context Tooltip
+      url: /components/tooltip/
+      icon: info
+      description: "Pure-CSS context tooltip for abbreviations and definitions"
     - text: Gradient Text
       url: /components/gradient-text/
       icon: type

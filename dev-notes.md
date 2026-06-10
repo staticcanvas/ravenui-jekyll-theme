@@ -102,7 +102,7 @@
 - [x] Icon showcase grid component to present groups of icons with copy triggers.
 - [x] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
 - [x] CSS-based file directory tree diagram component to showcase project layout structures.
-- [ ] Pure-CSS context tooltip component for definitions and abbreviations.
+- [x] Pure-CSS context tooltip component for definitions and abbreviations.
 - [ ] High-density system metrics container component to group metrics/stats cards.
 
 ## Bug Fixes

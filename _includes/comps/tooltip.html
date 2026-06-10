@@ -1,0 +1,1 @@
+{% assign term = include.term %}{% assign definition = include.definition %}{% assign position = include.position | default: "top" %}<span class="zd-tooltip-trigger zd-tooltip--{{ position }} {{ include.class }}" data-tooltip="{{ definition | escape }}">{{ term }}</span>
