@@ -4,6 +4,10 @@
 {% include core/head.html %}
 
 <body>
+    {% if site.zd_announcement.enabled %}
+        {% include comps/announcement.html %}
+    {% endif %}
+
     {% assign show_progress = site.theme_settings.scroll_progress %}
     {% if page.scroll_progress == false %}
         {% assign show_progress = false %}

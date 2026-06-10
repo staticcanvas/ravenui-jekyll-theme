@@ -42,6 +42,18 @@ zd_show_powered_by: true
 zd_use_cdn: true
 font_awesome: false
 
+# Announcement Banner Settings
+zd_announcement:
+  enabled: true
+  id: "welcome-banner-v1"
+  text: "Welcome to ZeroDark SP! Check out the new Keyboard Shortcuts component."
+  icon: "megaphone"
+  color: "var(--zd-clr-viridian)"
+  link: "/components/kbd/"
+  link_text: "View Docs"
+  dismissible: true
+  type: "success"
+
 
 # Build settings
 sass:

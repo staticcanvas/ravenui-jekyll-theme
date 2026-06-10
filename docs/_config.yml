@@ -57,6 +57,18 @@ twitter_username: staticcanvas
 linkedin_username: staticcanvas
 bluesky_username: staticcanvas
 
+# --- Announcement Banner Settings ---
+zd_announcement:
+  enabled: true
+  id: "welcome-banner-v1"
+  text: "Welcome to ZeroDark SP! Check out the new Keyboard Shortcuts component."
+  icon: "megaphone"
+  color: "var(--zd-clr-viridian)"
+  link: "/components/kbd/"
+  link_text: "View Docs"
+  dismissible: true
+  type: "success"
+
 # --- Documentation Meta (Edit Links) ---
 github_repo: zero-dark-sp
 github_repo_url: https://github.com/staticcanvas/zero-dark-sp

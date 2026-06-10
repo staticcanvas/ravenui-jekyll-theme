@@ -189,6 +189,10 @@
     - text: Callout
       url: /components/callout/
       icon: alert-circle
+    - text: Announcement Banner
+      url: /components/announcement/
+      icon: megaphone
+      description: "Full-width viewport alert and announcement banners"
     - text: Inline Callout
       url: /components/inline-callout/
       icon: alert-circle

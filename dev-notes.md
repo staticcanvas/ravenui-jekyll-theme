@@ -97,7 +97,7 @@
 - [x] **foot.html** - Extend the footer to include a _includes/core/foot.html partial, which can be used to add custom content to the bottom of the page. This can include links to social media, copyright information, or other relevant details. The footer is currently hardcoded to include the copyright and social media links, so this would need to be updated to accommodate any additional content.
 - [x] Collapsible details/summary block component for optional content folding.
 - [x] Keyboard shortcuts group component to render standard KBD keys side by side.
-- [ ] Full-width viewport alert/announcement banner component for site-wide alerts.
+- [x] Full-width viewport alert/announcement banner component for site-wide alerts.
 - [ ] Standalone copy-to-clipboard button component for arbitrary inline text blocks.
 - [ ] Icon showcase grid component to present groups of icons with copy triggers.
 - [ ] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
@@ -128,5 +128,7 @@
 - [x] Check comps/* components that do not have corresponding docs/* documentation pages.
 - [x] Refine documentation sections to make them clear, robust, and technical.
 - [x] Remove any loose tone, focusing on professional and robust documentation.
+- [ ] Check CSS, JS, and Liquid for any unused code, for components, add a milti-line liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
+- [ ] peform additional polish.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.
