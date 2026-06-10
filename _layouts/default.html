@@ -63,6 +63,11 @@
             {{ content }}
             
             {% include comps/page-nav.html %}
+
+            {% if site.zd_feedback.enabled and page.feedback != false %}
+                {% include comps/feedback.html %}
+            {% endif %}
+
             {% include core/footer.html %}
         </main>
 

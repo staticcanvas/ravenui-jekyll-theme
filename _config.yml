@@ -54,6 +54,14 @@ zd_announcement:
   dismissible: true
   type: "success"
 
+# Feedback Widget Settings
+zd_feedback:
+  enabled: true
+  question: "Was this page helpful?"
+  yes_label: "Yes"
+  no_label: "No"
+  thank_you: "Thank you for your feedback!"
+
 
 # Build settings
 sass:

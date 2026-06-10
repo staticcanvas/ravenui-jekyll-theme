@@ -122,6 +122,10 @@
       url: /components/icon/
       icon: star
       description: "Visual icons for enhancing UI"
+    - text: Icon Showcase Grid
+      url: /components/icon-grid/
+      icon: grid
+      description: "Grid layout for grouping icons with copy triggers"
     - text: Simple Icon
       url: /components/simple-icon/
       icon: github
@@ -141,6 +145,10 @@
       url: /components/kbd/
       icon: keyboard
       description: "Keyboard shortcut keys and groups rendered side by side"
+    - text: Standalone Copy Button
+      url: /components/copy-button/
+      icon: copy
+      description: "Standalone copy-to-clipboard button for arbitrary text"
     - text: Gradient Text
       url: /components/gradient-text/
       icon: type
@@ -200,6 +208,10 @@
       url: /components/customer-callout/
       icon: star
       description: "Review and testimonial cards with star ratings"
+    - text: Dynamic Feedback Widget
+      url: /components/feedback/
+      icon: message-square
+      description: "Page helpfulness feedback collector with analytics"
 
     - text: Package Tabs
       url: /components/package-tabs/

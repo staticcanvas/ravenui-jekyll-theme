@@ -98,9 +98,9 @@
 - [x] Collapsible details/summary block component for optional content folding.
 - [x] Keyboard shortcuts group component to render standard KBD keys side by side.
 - [x] Full-width viewport alert/announcement banner component for site-wide alerts.
-- [ ] Standalone copy-to-clipboard button component for arbitrary inline text blocks.
-- [ ] Icon showcase grid component to present groups of icons with copy triggers.
-- [ ] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
+- [x] Standalone copy-to-clipboard button component for arbitrary inline text blocks.
+- [x] Icon showcase grid component to present groups of icons with copy triggers.
+- [x] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
 - [ ] CSS-based file directory tree diagram component to showcase project layout structures.
 - [ ] Pure-CSS context tooltip component for definitions and abbreviations.
 - [ ] High-density system metrics container component to group metrics/stats cards.
