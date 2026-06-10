@@ -202,9 +202,13 @@
     - text: Example Block
       url: /components/example-block/
       icon: box
+    - text: Command Reference
+      url: /components/command-ref/
+      icon: terminal
     - text: API Reference
-      url: /components/api-ref/
+      url: /components/api-reference/
       icon: code
+
     - text: FAQ Accordion
       url: /components/faq/
       icon: help-circle
