@@ -212,6 +212,10 @@
     - text: FAQ Accordion
       url: /components/faq/
       icon: help-circle
+    - text: Details Dropdown
+      url: /components/details/
+      icon: chevron-down
+      description: "Collapsible disclosures block for folding content"
     - text: CodePen Embed
       url: /components/codepen/
       icon: codepen
