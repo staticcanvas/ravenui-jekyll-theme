@@ -2,7 +2,8 @@
 # Architecture: Ruby Gem Workflow + GitLab Pages
 # Image: Official Ruby 3.2 (Optimized for Jekyll)
 
-image: ruby:3.2
+image: phellams-automator:${AUTOMATOR_VERSION}
+
 
 variables:
   JEKYLL_ENV: production
@@ -19,6 +20,50 @@ stages:
   - deploy
   - release
 
+# ____________________________________________________________
+# ########| @Define job templates for reuse (via YAML anchors)
+
+.test_build: &test_build
+  tags:
+    - docker
+  stage: test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+      when: on_success
+      #?NOTE: gitlab supports REGEX RE2 regular expression engine
+      # - if: $CI_COMMIT_TAG =~ /^v?\d+\.\d+\.\d+(?:-(?:alpha|beta|rc|preview|prerelease)(?:\.\d+[a-z]*)?)?(?:\+[a-zA-Z0-9-.]+)?$/
+      #   when: always
+
+.build_template: &build_template
+  stage: deploy
+  tags:
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+      when: always
+    # - if: $CI_COMMIT_TAG =~ /^v?\d+\.\d+\.\d+(?:-(?:alpha|beta|rc|preview|prerelease)(?:\.\d+[a-z]*)?)?(?:\+[a-zA-Z0-9-.]+)?$/
+    #   when: always
+
+.deploy_template: &deploy_template
+  stage: deploy
+  tags:
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^v?\d+\.\d+\.\d+(?:-(?:alpha|beta|rc|preview|prerelease)(?:\.\d+[a-z]*)?)?(?:\+[a-zA-Z0-9-.]+)?$/
+      when: on_success
+
+.release_template: &release_template
+  stage: release
+  tags:
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^v?\d+\.\d+\.\d+(?:-(?:alpha|beta|rc|preview|prerelease)(?:\.\d+[a-z]*)?)?(?:\+[a-zA-Z0-9-.]+)?$/
+      when: on_success
+
 before_script:
   - gem install bundler
   - bundle config set --local path 'vendor/bundle'
@@ -27,7 +72,7 @@ before_script:
 # 1. 🧪 TEST STAGE
 # Ensures the code builds without errors and lints the HTML.
 test_build:
-  stage: test
+  <<: *test_build
   script:
     - echo "🔍 Starting ZeroDark Diagnostic..."
     - bundle exec jekyll build --strict_front_matter --future
@@ -38,7 +83,7 @@ test_build:
 # 2. 📦 BUILD STAGE
 # Compiles the actual Ruby Gem (*.gem) file for distribution.
 build_gem:
-  stage: build
+  <<: *build_template
   script:
     - echo "💎 Building ZeroDark Gem..."
     - gem build $GEM_NAME.gemspec
@@ -49,25 +94,29 @@ build_gem:
       - build_artifacts/
     expire_in: 1 week
 
-# 3. 🚀 DEPLOY STAGE (GitLab Pages)
-# Deploys the Platinum Master Documentation to GitLab Pages.
+# 3. 🚀 DEPLOY STAGE (GitLab Pages) we Will deploy to cloud flare
+# Deploys the Platinum Master Documentation to Cloudflare Static Pages using wrangler
 pages:
-  stage: deploy
+  <<: *build_template
   script:
-    - echo "🌑 Deploying Platinum Master to Pages..."
+    # - echo "🌑 Deploying Platinum Master to Pages..."
+    # - bundle exec jekyll build -d public
+    - echo "🌑 Deploying Platinum Master to Cloudflare Static Pages..."
+    - echo "🌑 bundle exec jekyll build -d public"
     - bundle exec jekyll build -d public
+    - echo "🌑 wrangler pages publish ./public --branch main"
+    - npm install -g wrangler
+    - npx wrangler pages publish ./public --branch main
   artifacts:
     paths:
       - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
 
 # 4. 🏷️ RELEASE STAGE
 # Triggers only when a tag (e.g., v3.0.0) is pushed.
 # 1. Pushes the Gem to the GitLab Package Registry.
 # 2. Creates a formal GitLab Release entry with ZIP asset.
 publish_release:
-  stage: release
+  <<: *release_template
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
     - if: $CI_COMMIT_TAG
