@@ -100,6 +100,11 @@
       url: /components/last-edited/
       icon: clock
       description: "Track and display page modification timestamps"
+    - text: Sponsored By
+      url: /components/sponsored-by/
+      icon: heart
+      description: "Grid of partner or sponsor logos and links"
+
 
 
 - title: Elements & Media
@@ -169,6 +174,11 @@
     - text: Inline Callout
       url: /components/inline-callout/
       icon: alert-circle
+    - text: Customer Callout
+      url: /components/customer-callout/
+      icon: star
+      description: "Review and testimonial cards with star ratings"
+
     - text: Package Tabs
       url: /components/package-tabs/
       icon: package

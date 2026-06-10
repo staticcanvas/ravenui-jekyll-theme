@@ -1,0 +1,24 @@
+{% assign sponsor_title = include.title | default: "Sponsored By" %}
+{% assign sponsors = include.items | default: site.data.sponsors %}
+
+{% if sponsors %}
+  <div class="zd-sponsored-by {{ include.class }}">
+    {% if sponsor_title != "" and sponsor_title != nil %}
+      <h5 class="zd-sponsored-by-title">{{ sponsor_title }}</h5>
+    {% endif %}
+    <div class="zd-sponsored-by-grid" style="--sponsor-grid-columns: {{ include.columns | default: sponsors.size | at_most: 6 | at_least: 2 }};">
+      {% for sponsor in sponsors %}
+        <a href="{{ sponsor.url | default: '#' }}" 
+           class="zd-sponsored-by-item" 
+           {% if sponsor.url %}target="_blank" rel="noopener noreferrer"{% endif %}
+           title="{{ sponsor.name }}">
+          {% if sponsor.logo %}
+            <img src="{{ sponsor.logo | relative_url }}" alt="{{ sponsor.name }}" class="zd-sponsored-by-logo" loading="lazy" />
+          {% else %}
+            <span class="zd-sponsored-by-text">{{ sponsor.name }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
