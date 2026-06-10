@@ -43,6 +43,35 @@
   {% assign max_val = 1.0 %}
 {% endif %}
 
+{% if type == "scatter" or type == "bubble" %}
+  {% comment %} Parse coordinates for scatter/bubble charts {% endcomment %}
+  {% assign max_x = 0.0 %}
+  {% assign max_y = 0.0 %}
+  {% assign max_r = 0.0 %}
+  
+  {% if data.first %}
+    {% assign points = data %}
+  {% else %}
+    {% assign points = data | split: "," %}
+  {% endif %}
+  
+  {% for pt in points %}
+    {% assign pt_str = pt | strip %}
+    {% assign parts = pt_str | split: ":" %}
+    {% assign px_val = parts[0] | plus: 0.0 %}
+    {% assign py_val = parts[1] | plus: 0.0 %}
+    {% assign pr_val = parts[2] | default: 1.0 | plus: 0.0 %}
+    
+    {% if px_val > max_x %}{% assign max_x = px_val %}{% endif %}
+    {% if py_val > max_y %}{% assign max_y = py_val %}{% endif %}
+    {% if pr_val > max_r %}{% assign max_r = pr_val %}{% endif %}
+  {% endfor %}
+  
+  {% if max_x == 0.0 %}{% assign max_x = 1.0 %}{% endif %}
+  {% if max_y == 0.0 %}{% assign max_y = 1.0 %}{% endif %}
+  {% if max_r == 0.0 %}{% assign max_r = 1.0 %}{% endif %}
+{% endif %}
+
 <div class="zd-svg-chart-container {{ include.class }}" id="{{ id }}" style="margin-block: 2rem; width: 100%;">
   {% if title %}
     <h5 class="zd-svg-chart-title" style="margin-bottom: 0.5rem; font-family: var(--zd-font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--zd-clr-slate);">{{ title }}</h5>
@@ -60,12 +89,16 @@
       {% assign plot_height = height | minus: chart_padding_top | minus: chart_padding_bottom %}
       {% assign plot_width = width | minus: chart_padding_left | minus: chart_padding_right %}
       
-      {% if type == "bar" or type == "line" %}
+      {% if type == "bar" or type == "line" or type == "scatter" or type == "bubble" %}
         {% comment %} Draw Y-axis grid lines (4 lines) {% endcomment %}
         {% for i in (0..4) %}
           {% assign y_ratio = i | times: 0.25 %}
           {% assign y_coord = plot_height | times: y_ratio | plus: chart_padding_top %}
-          {% assign grid_val = 1.0 | minus: y_ratio | times: max_val | round: 1 %}
+          {% if type == "scatter" or type == "bubble" %}
+            {% assign grid_val = 1.0 | minus: y_ratio | times: max_y | round: 1 %}
+          {% else %}
+            {% assign grid_val = 1.0 | minus: y_ratio | times: max_val | round: 1 %}
+          {% endif %}
           
           <line x1="{{ chart_padding_left }}" y1="{{ y_coord }}" x2="{{ width | minus: chart_padding_right }}" y2="{{ y_coord }}" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
           <text x="{{ chart_padding_left | minus: 8 }}" y="{{ y_coord | plus: 4 }}" fill="#8a99ad" font-size="9" text-anchor="end">{{ grid_val }}</text>
@@ -214,9 +247,242 @@
           <rect x="{{ legend_left }}" y="{{ y_coord }}" width="10" height="10" fill="{{ stroke_color }}" rx="2" />
           <text x="{{ legend_left | plus: 18 }}" y="{{ y_coord | plus: 9 }}" fill="#edf1f5" font-size="9">{{ labels[idx] | strip }} ({{ val }} - {{ percent | round: 1 }}%)</text>
         {% endfor %}
+
+      {% elsif type == "polarArea" %}
+        {% comment %} Draw Polar Area chart using CSS dasharray sectors on dynamic radius {% endcomment %}
+        {% assign total_sum = 0.0 %}
+        {% for val in data %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign total_sum = total_sum | plus: num_val %}
+        {% endfor %}
+        {% if total_sum == 0.0 %}{% assign total_sum = 1.0 %}{% endif %}
+
+        {% assign items_count = data.size %}
+        {% assign angle_step = 360.0 | divided_by: items_count %}
+        {% assign max_radius = height | divided_by: 2 | minus: 30 %}
+        {% assign chart_center_x = width | divided_by: 3 | minus: 20 %}
+        {% assign chart_center_y = height | divided_by: 2 %}
+
+        <g transform="translate({{ chart_center_x }}, {{ chart_center_y }})">
+          {% for val in data %}
+            {% assign idx = forloop.index0 %}
+            {% assign num_val = val | plus: 0.0 %}
+            
+            {% comment %} Calculate radius relative to max value {% endcomment %}
+            {% assign relative_radius = num_val | divided_by: max_val | times: max_radius %}
+            {% if relative_radius < 5.0 %}{% assign relative_radius = 5.0 %}{% endif %}
+            
+            {% comment %} Circle radius and stroke width trick for solid sector {% endcomment %}
+            {% assign circ_radius = relative_radius | divided_by: 2.0 %}
+            {% assign stroke_w = relative_radius %}
+            {% assign circ_len = 3.14159265 | times: relative_radius %}
+            {% assign active_len = circ_len | divided_by: items_count %}
+            
+            {% assign color_idx = idx | modulo: 6 %}
+            {% if color_idx == 0 %}
+              {% assign stroke_color = "rgba(0, 255, 157, 0.45)" %}
+              {% assign border_color = "#00ff9d" %}
+            {% elsif color_idx == 1 %}
+              {% assign stroke_color = "rgba(183, 156, 237, 0.45)" %}
+              {% assign border_color = "#b79ced" %}
+            {% elsif color_idx == 2 %}
+              {% assign stroke_color = "rgba(0, 180, 216, 0.45)" %}
+              {% assign border_color = "#00b4d8" %}
+            {% elsif color_idx == 3 %}
+              {% assign stroke_color = "rgba(255, 159, 28, 0.45)" %}
+              {% assign border_color = "#ff9f1c" %}
+            {% elsif color_idx == 4 %}
+              {% assign stroke_color = "rgba(231, 29, 54, 0.45)" %}
+              {% assign border_color = "#e71d36" %}
+            {% else %}
+              {% assign stroke_color = "rgba(46, 196, 182, 0.45)" %}
+              {% assign border_color = "#2ec4b6" %}
+            {% endif %}
+            
+            {% assign rotation = idx | times: angle_step | minus: 90.0 %}
+            
+            <circle cx="0" cy="0" r="{{ circ_radius }}" fill="none" stroke="{{ stroke_color }}" stroke-width="{{ stroke_w }}" stroke-dasharray="{{ active_len }} {{ circ_len }}" transform="rotate({{ rotation }})">
+              <title>{{ labels[idx] | strip }}: {{ val }}</title>
+            </circle>
+            
+            {% comment %} Draw sector outer border arc {% endcomment %}
+            <circle cx="0" cy="0" r="{{ relative_radius }}" fill="none" stroke="{{ border_color }}" stroke-width="1.5" stroke-dasharray="{{ active_len | times: 2.0 }} {{ circ_len | times: 2.0 }}" transform="rotate({{ rotation }})" />
+          {% endfor %}
+        </g>
+
+        {% comment %} Draw Legend on the right side {% endcomment %}
+        {% assign legend_left = width | divided_by: 3 | times: 2 | minus: 20 %}
+        {% assign legend_top = height | divided_by: 2 | minus: data.size | times: 10 %}
+        
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign color_idx = idx | modulo: 6 %}
+          {% if color_idx == 0 %}
+            {% assign border_color = "#00ff9d" %}
+          {% elsif color_idx == 1 %}
+            {% assign border_color = "#b79ced" %}
+          {% elsif color_idx == 2 %}
+            {% assign border_color = "#00b4d8" %}
+          {% elsif color_idx == 3 %}
+            {% assign border_color = "#ff9f1c" %}
+          {% elsif color_idx == 4 %}
+            {% assign border_color = "#e71d36" %}
+          {% else %}
+            {% assign border_color = "#2ec4b6" %}
+          {% endif %}
+          
+          {% assign y_coord = legend_top | plus: idx | times: 20 %}
+          <rect x="{{ legend_left }}" y="{{ y_coord }}" width="10" height="10" fill="{{ border_color }}" rx="2" />
+          <text x="{{ legend_left | plus: 18 }}" y="{{ y_coord | plus: 9 }}" fill="#edf1f5" font-size="9">{{ labels[idx] | strip }} ({{ val }})</text>
+        {% endfor %}
+
+      {% elsif type == "radar" %}
+        {% assign N = data.size %}
+        {% comment %} Determine trigonometric lookup values based on N {% endcomment %}
+        {% if N == 3 %}
+          {% assign cos_vals = "1.0,-0.5,-0.5" | split: "," %}
+          {% assign sin_vals = "0.0,0.866,-0.866" | split: "," %}
+        {% elsif N == 4 %}
+          {% assign cos_vals = "1.0,0.0,-1.0,0.0" | split: "," %}
+          {% assign sin_vals = "0.0,1.0,0.0,-1.0" | split: "," %}
+        {% elsif N == 5 %}
+          {% assign cos_vals = "1.0,0.309,-0.809,-0.809,0.309" | split: "," %}
+          {% assign sin_vals = "0.0,0.951,0.588,-0.588,-0.951" | split: "," %}
+        {% elsif N == 6 %}
+          {% assign cos_vals = "1.0,0.5,-0.5,-1.0,-0.5,0.5" | split: "," %}
+          {% assign sin_vals = "0.0,0.866,0.866,0.0,-0.866,-0.866" | split: "," %}
+        {% elsif N == 7 %}
+          {% assign cos_vals = "1.0,0.624,-0.223,-0.901,-0.901,-0.223,0.624" | split: "," %}
+          {% assign sin_vals = "0.0,0.782,0.975,0.434,-0.434,-0.975,-0.782" | split: "," %}
+        {% else %}
+          {% comment %} Fallback to N=8 or default {% endcomment %}
+          {% assign N = 8 %}
+          {% assign cos_vals = "1.0,0.707,0.0,-0.707,-1.0,-0.707,0.0,0.707" | split: "," %}
+          {% assign sin_vals = "0.0,0.707,1.0,0.707,0.0,-0.707,-1.0,-0.707" | split: "," %}
+        {% endif %}
+
+        {% assign max_radius = height | divided_by: 2 | minus: 35 %}
+        {% assign chart_center_x = width | divided_by: 3 | minus: 20 %}
+        {% assign chart_center_y = height | divided_by: 2 %}
+
+        {% comment %} Draw grid rings {% endcomment %}
+        {% for level in (1..4) %}
+          {% assign lvl_ratio = level | times: 0.25 %}
+          {% assign lvl_radius = max_radius | times: lvl_ratio %}
+          {% assign lvl_points = "" %}
+          
+          {% for idx in (0..N) %}
+            {% assign mod_idx = idx | modulo: N %}
+            {% assign cos_val = cos_vals[mod_idx] | plus: 0.0 %}
+            {% assign sin_val = sin_vals[mod_idx] | plus: 0.0 %}
+            {% assign px = cos_val | times: lvl_radius | plus: chart_center_x | round: 1 %}
+            {% assign py = chart_center_y | minus: sin_val | times: lvl_radius | round: 1 %}
+            {% assign lvl_points = lvl_points | append: px | append: "," | append: py | append: " " %}
+          {% endfor %}
+          
+          <polygon points="{{ lvl_points }}" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" />
+        {% endfor %}
+
+        {% comment %} Draw spokes and labels {% endcomment %}
+        {% for idx in (0..N) %}
+          {% if idx < N %}
+            {% assign cos_val = cos_vals[idx] | plus: 0.0 %}
+            {% assign sin_val = sin_vals[idx] | plus: 0.0 %}
+            {% assign px = cos_val | times: max_radius | plus: chart_center_x %}
+            {% assign py = chart_center_y | minus: sin_val | times: max_radius %}
+            
+            <line x1="{{ chart_center_x }}" y1="{{ chart_center_y }}" x2="{{ px }}" y2="{{ py }}" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+            
+            {% assign label_x = cos_val | times: max_radius | plus: 15 | plus: chart_center_x %}
+            {% assign label_y = chart_center_y | minus: sin_val | times: max_radius | plus: 15 %}
+            {% assign text_anchor = "middle" %}
+            {% if cos_val > 0.3 %}{% assign text_anchor = "start" %}{% assign label_x = label_x | minus: 10 %}{% endif %}
+            {% if cos_val < -0.3 %}{% assign text_anchor = "end" %}{% assign label_x = label_x | plus: 10 %}{% endif %}
+            
+            <text x="{{ label_x }}" y="{{ label_y | plus: 4 }}" fill="#8a99ad" font-size="8" text-anchor="{{ text_anchor }}">{{ labels[idx] | strip }}</text>
+          {% endif %}
+        {% endfor %}
+
+        {% comment %} Plot data polygon {% endcomment %}
+        {% assign data_points = "" %}
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign point_radius = num_val | divided_by: max_val | times: max_radius %}
+          {% assign cos_val = cos_vals[idx] | plus: 0.0 %}
+          {% assign sin_val = sin_vals[idx] | plus: 0.0 %}
+          {% assign px = cos_val | times: point_radius | plus: chart_center_x | round: 1 %}
+          {% assign py = chart_center_y | minus: sin_val | times: point_radius | round: 1 %}
+          {% assign data_points = data_points | append: px | append: "," | append: py | append: " " %}
+        {% endfor %}
+        
+        <polygon points="{{ data_points }}" fill="rgba(0, 255, 157, 0.08)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="2" />
+
+        {% comment %} Plot individual data vertices {% endcomment %}
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign point_radius = num_val | divided_by: max_val | times: max_radius %}
+          {% assign cos_val = cos_vals[idx] | plus: 0.0 %}
+          {% assign sin_val = sin_vals[idx] | plus: 0.0 %}
+          {% assign px = cos_val | times: point_radius | plus: chart_center_x %}
+          {% assign py = chart_center_y | minus: sin_val | times: point_radius %}
+          
+          <circle cx="{{ px }}" cy="{{ py }}" r="3.5" fill="var(--zd-bg-panel, #161b24)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="1.5">
+            <title>{{ labels[idx] | strip }}: {{ val }}</title>
+          </circle>
+        {% endfor %}
+
+        {% comment %} Draw Legend on the right side {% endcomment %}
+        {% assign legend_left = width | divided_by: 3 | times: 2 | minus: 20 %}
+        {% assign legend_top = height | divided_by: 2 | minus: data.size | times: 10 %}
+        
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign y_coord = legend_top | plus: idx | times: 20 %}
+          <rect x="{{ legend_left }}" y="{{ y_coord }}" width="10" height="10" fill="var(--zd-clr-highlight, #00ff9d)" rx="2" />
+          <text x="{{ legend_left | plus: 18 }}" y="{{ y_coord | plus: 9 }}" fill="#edf1f5" font-size="9">{{ labels[idx] | strip }} ({{ val }})</text>
+        {% endfor %}
+
+      {% elsif type == "scatter" or type == "bubble" %}
+        {% comment %} Draw Scatter or Bubble chart {% endcomment %}
+        
+        {% comment %} Draw X-axis grid lines (5 vertical grid lines) {% endcomment %}
+        {% for i in (0..4) %}
+          {% assign x_ratio = i | times: 0.25 %}
+          {% assign x_coord = plot_width | times: x_ratio | plus: chart_padding_left %}
+          {% assign grid_val_x = x_ratio | times: max_x | round: 1 %}
+          
+          <line x1="{{ x_coord }}" y1="{{ chart_padding_top }}" x2="{{ x_coord }}" y2="{{ height | minus: chart_padding_bottom }}" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
+          <text x="{{ x_coord }}" y="{{ height | minus: 25 }}" fill="#8a99ad" font-size="9" text-anchor="middle">{{ grid_val_x }}</text>
+        {% endfor %}
+        
+        {% comment %} Draw grid points {% endcomment %}
+        {% for pt in points %}
+          {% assign idx = forloop.index0 %}
+          {% assign pt_str = pt | strip %}
+          {% assign parts = pt_str | split: ":" %}
+          {% assign x_val = parts[0] | plus: 0.0 %}
+          {% assign y_val = parts[1] | plus: 0.0 %}
+          {% assign r_val = parts[2] | default: 1.0 | plus: 0.0 %}
+          
+          {% assign px = x_val | divided_by: max_x | times: plot_width | plus: chart_padding_left %}
+          {% assign py = height | minus: chart_padding_bottom | minus: y_val | divided_by: max_y | times: plot_height %}
+          
+          {% if type == "bubble" %}
+            {% assign radius_bubble = r_val | divided_by: max_r | times: 16.0 | plus: 4.0 %}
+            <circle cx="{{ px }}" cy="{{ py }}" r="{{ radius_bubble }}" fill="rgba(0, 255, 157, 0.15)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="1.5">
+              <title>{% if labels[idx] %}{{ labels[idx] | strip }}: {% endif %}(X: {{ x_val }}, Y: {{ y_val }}, R: {{ r_val }})</title>
+            </circle>
+          {% else %}
+            <circle cx="{{ px }}" cy="{{ py }}" r="4.5" fill="var(--zd-bg-panel, #161b24)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="1.5">
+              <title>{% if labels[idx] %}{{ labels[idx] | strip }}: {% endif %}(X: {{ x_val }}, Y: {{ y_val }})</title>
+            </circle>
+          {% endif %}
+        {% endfor %}
       {% endif %}
       
-      {% if type == "bar" or type == "line" %}
+      {% if type == "bar" or type == "line" or type == "scatter" or type == "bubble" %}
         {% comment %} Draw axis borders {% endcomment %}
         <line x1="{{ chart_padding_left }}" y1="{{ chart_padding_top }}" x2="{{ chart_padding_left }}" y2="{{ height | minus: chart_padding_bottom }}" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
         <line x1="{{ chart_padding_left }}" y1="{{ height | minus: chart_padding_bottom }}" x2="{{ width | minus: chart_padding_right }}" y2="{{ height | minus: chart_padding_bottom }}" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />

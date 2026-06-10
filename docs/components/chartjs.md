@@ -52,6 +52,80 @@ datasets:
 
 ---
 
+## **Polar Area & Radar Chart Examples**
+
+Polar Area and Radar charts compare multiple metrics.
+
+{% include comps/chartjs.html id="chartjs-polar" type="polarArea" labels="A, B, C, D" data="70, 50, 90, 40" height="250px" %}
+
+{% capture chartjs_polar_eg %}
+{% raw %}
+```liquid
+{% include comps/chartjs.html 
+   id="chartjs-polar" 
+   type="polarArea" 
+   labels="A, B, C, D" 
+   data="70, 50, 90, 40" 
+   height="250px" %}
+```
+{% endraw %}
+{% endcapture %}
+{% include comps/example-code.html content=chartjs_polar_eg %}
+
+{% include comps/chartjs.html id="chartjs-radar" type="radar" labels="Speed, Power, Armor, Range, Stealth" data="80, 90, 70, 60, 85" height="250px" %}
+
+{% capture chartjs_radar_eg %}
+{% raw %}
+```liquid
+{% include comps/chartjs.html 
+   id="chartjs-radar" 
+   type="radar" 
+   labels="Speed, Power, Armor, Range, Stealth" 
+   data="80, 90, 70, 60, 85" 
+   height="250px" %}
+```
+{% endraw %}
+{% endcapture %}
+{% include comps/example-code.html content=chartjs_radar_eg %}
+
+---
+
+## **Scatter & Bubble Chart Examples**
+
+Scatter and Bubble charts accept coordinate datasets.
+
+{% include comps/chartjs.html id="chartjs-scatter" type="scatter" datasets="[{label: 'Points', data: [{x: 1, y: 3}, {x: 2, y: 5}, {x: 3, y: 2}]}]" height="250px" %}
+
+{% capture chartjs_scatter_eg %}
+{% raw %}
+```liquid
+{% include comps/chartjs.html 
+   id="chartjs-scatter" 
+   type="scatter" 
+   datasets="[{label: 'Points', data: [{x: 1, y: 3}, {x: 2, y: 5}, {x: 3, y: 2}]}]" 
+   height="250px" %}
+```
+{% endraw %}
+{% endcapture %}
+{% include comps/example-code.html content=chartjs_scatter_eg %}
+
+{% include comps/chartjs.html id="chartjs-bubble" type="bubble" datasets="[{label: 'Bubbles', data: [{x: 10, y: 20, r: 15}, {x: 15, y: 10, r: 8}, {x: 20, y: 30, r: 12}]}]" height="250px" %}
+
+{% capture chartjs_bubble_eg %}
+{% raw %}
+```liquid
+{% include comps/chartjs.html 
+   id="chartjs-bubble" 
+   type="bubble" 
+   datasets="[{label: 'Bubbles', data: [{x: 10, y: 20, r: 15}, {x: 15, y: 10, r: 8}, {x: 20, y: 30, r: 12}]}]" 
+   height="250px" %}
+```
+{% endraw %}
+{% endcapture %}
+{% include comps/example-code.html content=chartjs_bubble_eg %}
+
+---
+
 ## **API Reference**
 
 | Parameter | Type | Default | Description |

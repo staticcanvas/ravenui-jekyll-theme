@@ -67,9 +67,9 @@
 ## Extended Components
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
 - [x] Written-by component.
-- [ ] svgcharts component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
-- [ ] chartjs component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
-- [ ] other well known charting libraries, maybe we can make a generic chart component that can be used for any charting library, update docs to reflect feature.
+- [x] svgcharts component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
+- [x] chartjs component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
+- [x] other well known charting libraries, maybe we can make a generic chart component that can be used for any charting library, update docs to reflect feature.
 - [x] codepen component - allows users to embed CodePens with ease, update docs to reflect feature.
 - [x] code sandbox component - allows users to embed CodeSandboxes with ease, update docs to reflect feature.
 - [x] youtube component - allows users to embed YouTube videos with ease, update docs to reflect feature.
