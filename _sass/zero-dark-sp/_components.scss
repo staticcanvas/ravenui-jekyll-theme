@@ -875,4 +875,27 @@ div.highlight::before {
   color: var(--zd-clr-slate, #8a99ad);
 }
 
+/* CODEPEN COMPONENT */
+.zd-codepen-container {
+  margin-block: 2rem;
+  width: 100%;
+  border: var(--zd-border, 1px solid #25303d);
+  border-radius: var(--zd-radius, 4px);
+  overflow: hidden;
+  box-shadow: var(--zd-elevation-surface);
+  background: var(--zd-bg-panel, #161b24);
+}
+
+/* CODESANDBOX COMPONENT */
+.zd-codesandbox-container {
+  margin-block: 2rem;
+  width: 100%;
+  border: var(--zd-border, 1px solid #25303d);
+  border-radius: var(--zd-radius, 4px);
+  overflow: hidden;
+  box-shadow: var(--zd-elevation-surface);
+  background: var(--zd-bg-panel, #161b24);
+}
+
+
 

@@ -1,0 +1,24 @@
+{% assign id = include.id %}
+{% assign user = include.user | default: site.codepen_username | default: "pen" %}
+{% assign height = include.height | default: 350 %}
+{% assign theme = include.theme | default: "dark" %}
+{% assign tab = include.tab | default: "result" %}
+{% assign title = include.title | default: "CodePen Embed" %}
+
+{% if id %}
+<div class="zd-codepen-container {{ include.class }}" style="height: {{ height }}px;">
+  <iframe 
+    height="{{ height }}" 
+    style="width: 100%; border: none;" 
+    scrolling="no" 
+    title="{{ title | escape }}" 
+    src="https://codepen.io/{{ user }}/embed/{{ id }}?height={{ height }}&theme-id={{ theme }}&default-tab={{ tab }}" 
+    frameborder="no" 
+    loading="lazy" 
+    allowtransparency="true" 
+    allowfullscreen="true">
+    See the Pen <a href="https://codepen.io/{{ user }}/pen/{{ id }}">{{ id }}</a> by {{ user }}
+    on <a href="https://codepen.io">CodePen</a>.
+  </iframe>
+</div>
+{% endif %}
