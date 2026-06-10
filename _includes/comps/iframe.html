@@ -1,0 +1,22 @@
+{% assign url = include.url %}
+{% assign aspect_ratio = include.aspect_ratio | default: "16/9" %}
+{% assign title = include.title | default: "External Content" %}
+{% assign max_width = include.max_width | default: "100%" %}
+{% assign height = include.height | default: "auto" %}
+
+{% if url %}
+  <div class="zd-iframe-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }}; --max-width: {{ max_width }}; --height: {{ height }};">
+    <div class="zd-iframe-placeholder">
+      <div class="zd-iframe-spinner"></div>
+      <span class="zd-iframe-loading-text">Loading secure frame...</span>
+    </div>
+    <iframe
+      src="{{ url }}"
+      title="{{ title | escape }}"
+      frameborder="0"
+      loading="lazy"
+      onload="this.previousElementSibling.style.opacity = 0; setTimeout(() => this.previousElementSibling.style.display = 'none', 300);"
+      allowfullscreen>
+    </iframe>
+  </div>
+{% endif %}

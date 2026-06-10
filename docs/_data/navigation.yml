@@ -151,6 +151,15 @@
     - text: Horizontal Separator (HR)
       url: /components/hr/
       icon: minus
+    - text: YouTube Embed
+      url: /components/youtube/
+      icon: video
+      description: "Privacy-friendly responsive YouTube video player embeds"
+    - text: Responsive Iframe
+      url: /components/iframe/
+      icon: monitor
+      description: "Embed external pages responsively with built-in loading spinner"
+
 
 - title: Interactive & Code
   links:
