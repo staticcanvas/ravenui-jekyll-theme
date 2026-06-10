@@ -77,8 +77,6 @@ test_build:
     - echo "🔍 Starting ZeroDark Diagnostic..."
     - bundle exec jekyll build --strict_front_matter --future
     - echo "✅ Build Verification Complete."
-  except:
-    - tags
 
 # 2. 📦 BUILD STAGE
 # Compiles the actual Ruby Gem (*.gem) file for distribution.
