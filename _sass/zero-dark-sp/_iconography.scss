@@ -1,0 +1,9 @@
+/* HEADINGS */
+.zd-heading { display: flex; align-items: center; gap: 0.5rem; }
+.zd-heading-icon { display: inline-flex; align-items: center; }
+
+/* ICONS */
+.zd-icon { display: inline-flex; align-items: center; vertical-align: middle; }
+.zd-icon-animated { transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.zd-icon-animated:hover { transform: scale(1.2) rotate(5deg); }
+.zd-icon-spin { animation: icon-spin 4s linear infinite; }

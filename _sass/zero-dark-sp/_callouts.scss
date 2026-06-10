@@ -1,0 +1,60 @@
+/* ADMONITIONS (CALLOUTS) */
+.zd-callout { 
+  padding: 1.25rem 1.5rem; 
+  border-radius: var(--zd-radius); 
+  margin-block: 2.5rem; 
+  border-inline-start: 4px solid; 
+  background: var(--zd-bg-surface);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.zd-callout::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.zd-callout--note { border-color: var(--zd-clr-info); }
+.zd-callout--note::before { background: var(--zd-clr-info); }
+.zd-callout--note .zd-callout-title { color: var(--zd-clr-info); }
+
+.zd-callout--warn { border-color: var(--zd-clr-warning); }
+.zd-callout--warn::before { background: var(--zd-clr-warning); }
+.zd-callout--warn .zd-callout-title { color: var(--zd-clr-warning); }
+
+.zd-callout--danger { border-color: var(--zd-clr-danger); }
+.zd-callout--danger::before { background: var(--zd-clr-danger); }
+.zd-callout--danger .zd-callout-title { color: var(--zd-clr-danger); }
+
+.zd-callout--success { border-color: var(--zd-clr-highlight); }
+.zd-callout--success::before { background: var(--zd-clr-highlight); }
+.zd-callout--success .zd-callout-title { color: var(--zd-clr-highlight); }
+
+.zd-callout-title { 
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800; 
+  text-transform: uppercase; 
+  font-size: 0.75rem; 
+  margin-block-end: 0.75rem; 
+  letter-spacing: 0.12em; 
+}
+
+.zd-callout--inline {
+  display: inline-flex;
+  align-items: center;
+  margin-block: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-inline-start-width: 3px;
+  box-shadow: var(--zd-elevation-surface);
+  
+  .zd-callout-title { margin-block-end: 0; margin-inline-end: 1rem; flex-shrink: 0; }
+  .zd-callout-content { margin: 0; line-height: 1.2; }
+}
+
+.zd-callout-content { color: #bbb; font-size: 0.95rem; position: relative; z-index: 1; }

@@ -1,0 +1,17 @@
+<div class="zd-hero-card">
+    <div class="zd-hero-card-header">
+        <h2 class="zd-hero-card-title">{{ include.title }}</h2>
+        <p class="zd-hero-card-tagline">{{ include.description }}</p>
+    </div>
+    <div class="zd-hero-card-body">
+        {{ include.content }}
+    </div>
+    {% if include.cta_text %}
+    <div class="zd-hero-card-footer">
+        <a href="{{ include.cta_url | relative_url }}" class="zd-btn-primary">
+            {{ include.cta_text }}
+            {% include comps/icon.html name="arrow-right" size=16 %}
+        </a>
+    </div>
+    {% endif %}
+</div>

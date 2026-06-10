@@ -1,0 +1,25 @@
+/* LAYOUT GRID */
+.zd-container {
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+@media (min-width: 64rem) {
+  .zd-container { 
+    grid-template-columns: 240px 1fr 260px; 
+    gap: 4rem; 
+    align-items: start;
+  }
+}
+
+.zd-hero { padding: var(--zd-hero-padding, 1rem) 0; border-block-end: var(--zd-border); margin-block-end: 3rem; }
+.zd-content { 
+  padding-block-end: 2rem; 
+  width: 100%;
+  justify-self: stretch;
+  min-width: 0; /* Prevents grid blowout from large code blocks */
+}

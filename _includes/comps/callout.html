@@ -1,0 +1,18 @@
+<div class="zd-callout zd-callout--{{ include.type | default: 'note' }} {% if include.inline %}zd-callout--inline{% endif %}">
+    <span class="zd-callout-title">
+        {% case include.type %}
+            {% when 'success' %}
+                <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
+            {% when 'warn' %}
+                <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i>
+            {% when 'danger' %}
+                <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+            {% else %}
+                <i data-lucide="info" style="width: 14px; height: 14px;"></i>
+        {% endcase %}
+        {{ include.title | default: include.type | capitalize }}
+    </span>
+    <div class="zd-callout-content">
+        {{ include.content }}
+    </div>
+</div>

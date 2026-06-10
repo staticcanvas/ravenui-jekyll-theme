@@ -1,0 +1,70 @@
+/* 🌀 ZERODARK SP Animations
+ * Standardized animation library for UI elements.
+ */
+
+// Continuous Animations
+.zd-anim-continuous {
+  animation-iteration-count: infinite !important;
+}
+
+// 1. Rotation / Spin
+@keyframes zd-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.zd-anim-spin { animation: zd-spin 4s linear infinite; }
+
+// 2. Pulse / Scale
+@keyframes zd-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.zd-anim-pulse { animation: zd-pulse 2s ease-in-out; }
+
+// 3. Shake / Nudge
+@keyframes zd-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+.zd-anim-shake { animation: zd-shake 0.5s ease-in-out; }
+
+// 4. Stroke Draw (Handled via JS for SVG paths usually, but CSS can do basics)
+@keyframes zd-draw {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+.zd-anim-draw {
+  stroke-dasharray: 100;
+  animation: zd-draw 2s ease-out forwards;
+}
+
+// 5. Flap / Toggle
+@keyframes zd-flap {
+  0% { transform: scaleY(1); transform-origin: top; }
+  50% { transform: scaleY(0.5); transform-origin: top; }
+  100% { transform: scaleY(1); transform-origin: top; }
+}
+.zd-anim-flap { animation: zd-flap 1.5s ease-in-out infinite; }
+
+// Hover Triggers
+.zd-hover-pulse:hover { animation: zd-pulse 0.6s ease-in-out infinite; }
+.zd-hover-spin:hover { animation: zd-spin 1s linear infinite; }
+.zd-hover-shake:hover { animation: zd-shake 0.4s ease-in-out infinite; }
+.zd-hover-draw:hover { stroke-dasharray: 100; animation: zd-draw 1s ease-out forwards; }
+
+// Click Triggers (Active state)
+.zd-click-pulse:active { transform: scale(0.9); transition: 0.1s; }
+.zd-click-shake:active { animation: zd-shake 0.2s ease-in-out; }
+
+// VHS Flicker & Distortion (Preserved)
+@keyframes vhs-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.4; } 100% { opacity: 0.1; } }
+@keyframes vhs-distort { 
+  0% { transform: skew(0deg); }
+  1% { transform: skew(3deg); }
+  2% { transform: skew(0deg); }
+  98% { transform: skew(0deg); }
+  99% { transform: skew(-2deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes terminal-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes space-drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }

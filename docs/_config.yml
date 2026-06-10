@@ -1,0 +1,83 @@
+# 🌑 ZERODARK SP - Configuration Reference
+# This file contains all available configuration settings for the theme.
+# Settings that are optional or not required for the default docs site are commented out.
+
+# --- Core Identity ---
+title: ZeroDark SP Documentation
+description: Official documentation for the ZeroDark SP Jekyll theme.
+logo_text: ZERODARK-SP
+logo_subtext: DOCS
+copyright: "© 2026 StaticCanvas. All rights reserved."
+
+# --- Theme Engine ---
+theme: zero-dark-sp
+
+# --- Navigation & Base ---
+url: "" 
+baseurl: "/"
+
+# --- Advanced Theme Settings ---
+theme_settings:
+  # Branding
+  logo:
+    path: /logo.svg                 # Path to image logo in sidebar
+    alt: ZeroDark SP                # Alt text for logo
+    height: 40px                    # Visual height of logo (px) 
+  # favicon:
+  #   path: /favicon.ico
+  #   height: 32px
+
+  # Interface
+  scroll_progress: true             # Toggle global reading progress bar
+  zd_toc_default_open: true         # Should TOC be open by default on desktop?
+
+# --- Feature Toggles ---
+zd_output_title_default: true       # Render H1 and tags at top of page?
+zd_toc_levels: ["h2", "h3", "h4"]   # HTML headers to include in TOC (e.g. ["h2", "h3", "h4"])
+zd_progress_bar: true               # Legacy toggle for progress bar (use theme_settings.scroll_progress)
+zd_code_copy: true                  # Enable 'COPY' button on code blocks
+zd_code_lang: true                  # Show language label on code blocks
+
+
+# --- Visual Defaults ---
+zd_icon_size: 16                    # Default size for icons in nav/includes
+zd_accent_color: "#00ff9d"          # Primary theme accent color
+zd_nav_spacing: compact             # Spacing for navigation items (options: compact, relaxed)
+zd_heading_spacing: relaxed         # Spacing for headings (options: relaxed, tight)
+
+# --- Debug & Development ---
+zd_debug: true                      # Enable debug mode for development (shows warnings in console)
+
+# --- Social Integration (Sidebar) ---
+github_username: staticcanvas
+gitlab_username: staticcanvas
+twitter_username: staticcanvas
+linkedin_username: staticcanvas
+bluesky_username: staticcanvas
+
+# --- Documentation Meta (Edit Links) ---
+github_repo: zero-dark-sp
+github_repo_url: https://github.com/staticcanvas/zero-dark-sp
+github_branch: main
+# gitlab_repo: zero-dark-sp
+# gitlab_repo_url: https://gitlab.com/staticcanvas/zero-dark-sp
+# gitlab_branch: main
+
+# --- Build Settings ---
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+      start_line: 1
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# --- Plugins ---
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap

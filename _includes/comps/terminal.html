@@ -1,0 +1,13 @@
+<div class="zd-terminal">
+    <div class="zd-terminal-header">
+        <div class="zd-terminal-dots">
+            <span class="zd-terminal-dot zd-terminal-dot--red"></span>
+            <span class="zd-terminal-dot zd-terminal-dot--yellow"></span>
+            <span class="zd-terminal-dot zd-terminal-dot--green"></span>
+        </div>
+        <div class="zd-terminal-title">{{ include.title | default: "bash" }}</div>
+    </div>
+    <div class="zd-terminal-body">
+        {{ include.content }}
+    </div>
+</div>

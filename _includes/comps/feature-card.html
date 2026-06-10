@@ -1,0 +1,7 @@
+<div class="zd-feature-card">
+    <div class="zd-feature-card-icon" style="color: {{ include.color | default: 'var(--zd-clr-highlight)' }};">
+        {% include comps/icon.html name=include.icon size=32 %}
+    </div>
+    <h4 class="zd-feature-card-title">{{ include.title }}</h4>
+    <p class="zd-feature-card-desc">{{ include.description }}</p>
+</div>

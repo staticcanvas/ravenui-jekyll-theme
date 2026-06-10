@@ -1,0 +1,62 @@
+<aside class="zd-sidebar">
+    {% if site.theme_settings.logo.path %}
+    <a href="{{ "/" | relative_url }}" class="zd-logo-container">
+        <img src="{{ site.theme_settings.logo.path | relative_url }}" 
+             alt="{{ site.title }}" 
+             style="height: {{ site.theme_settings.logo.height | default: '32px' }}; margin-block-end: 1rem; display: block;">
+    </a>
+    {% endif %}
+    <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "DOCS" }}</span></a>
+
+    <div class="zd-search-trigger" id="zd-search-trigger">
+        <i data-lucide="search" style="width: 14px; height: 14px;"></i>
+        <span>Search Docs...</span>
+        <kbd>/</kbd>
+    </div>
+
+    <div class="zd-socials">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" class="zd-social-link">GH</a>
+        {% endif %}
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="zd-social-link">X</a>
+        {% endif %}
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="zd-social-link">LI</a>
+        {% endif %}
+    </div>
+
+    <nav class="zd-nav" aria-label="Documentation Navigation">
+        {% for section in site.data.navigation %}
+        {% if section.type == "separator" %}
+            <hr class="zd-nav-separator">
+        {% elsif section.type == "title" %}
+            <div class="zd-nav-group-title">{{ section.title }}</div>
+        {% else %}
+            <div {% if forloop.index > 1 %}style="margin-block-start: 1.25rem;"{% endif %}>
+                <h4 style="font-size:0.7rem; text-transform:uppercase; color:#444; margin-bottom:0.35rem;">{{ section.title }}</h4>
+                {% for link in section.links %}
+                {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                {% assign link_url = link.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                <a href="{{ link.url | relative_url }}" class="zd-nav-link" {% if page_url == link_url %}aria-current="page"{% endif %}>
+                    {% if link.icon %}
+                        {% if link.source == "simple" %}
+                            {% include comps/simple-icon.html name=link.icon size=14 color=link.color %}
+                            <span style="margin-inline-start: 8px;"></span>
+                        {% elsif link.source == "fa" %}
+                            {% include comps/font-awesome.html name=link.icon size=14 color=link.color %}
+                            <span style="margin-inline-start: 8px;"></span>
+                        {% else %}
+                            <i data-lucide="{{ link.icon }}" 
+                               style="width: 14px; height: 14px; margin-inline-end: 8px; vertical-align: middle; {% if link.color %}color: {{ link.color }};{% endif %}">
+                            </i>
+                        {% endif %}
+                    {% endif %}
+                    {{ link.text }}
+                </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endfor %}
+    </nav>
+</aside>

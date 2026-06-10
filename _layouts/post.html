@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<article class="zd-post">
+    <header class="zd-post-header">
+        <div class="zd-post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}" class="zd-post-date">
+                {% include comps/icon.html name="calendar" size=12 %} {{ page.date | date: "%B %d, %Y" }}
+            </time>
+            {% if page.author %}
+            <span class="zd-post-author">
+                {% include comps/icon.html name="user" size=12 %} {{ page.author }}
+            </span>
+            {% endif %}
+            {% if page.category %}
+            <span class="zd-post-category">
+                {% include comps/icon.html name="folder" size=12 %} {{ page.category }}
+            </span>
+            {% endif %}
+        </div>
+        
+        <h1 class="zd-post-title">{{ page.title }}</h1>
+        
+        {% if page.description %}
+        <p class="zd-post-description">{{ page.description }}</p>
+        {% endif %}
+
+        {% if page.tags %}
+        <div class="zd-tag-container">
+            {% for tag in page.tags %}
+            <span class="zd-tag">{% include comps/icon.html name="tag" size="10" %} {{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="zd-post-content">
+        {{ content }}
+    </div>
+
+    <footer class="zd-post-footer">
+        <a href="{{ "/" | relative_url }}" class="zd-btn-outline">
+            {% include comps/icon.html name="arrow-left" size=12 %} Back to Docs
+        </a>
+    </footer>
+</article>

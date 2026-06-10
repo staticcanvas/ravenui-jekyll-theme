@@ -1,0 +1,23 @@
+{% assign color = include.color | default: "var(--zd-clr-highlight)" %}
+{% assign size = include.size | default: "0.85rem" %}
+{% assign icon = include.icon %}
+{% assign radius = include.radius | default: "var(--zd-radius)" %}
+{% assign border_size = include.border-size | default: "1px" %}
+{% assign border_color = include.border-color | default: "transparent" %}
+
+<a href="{{ include.url | relative_url }}" 
+   class="zd-btn {{ include.class }}" 
+   style="--btn-color: {{ color }}; --btn-size: {{ size }}; --btn-radius: {{ radius }}; --btn-border-size: {{ border_size }}; --btn-border-color: {{ border_color }};"
+   {% if include.target %}target="{{ include.target }}"{% endif %}
+   {% if include.rel %}rel="{{ include.rel }}"{% endif %}>
+    {% if icon %}
+        {% if include.source == "simple" %}
+            {% include comps/simple-icon.html name=icon size=14 color="inherit" %}
+        {% elsif include.source == "fa" %}
+            {% include comps/font-awesome.html name=icon size=14 color="inherit" %}
+        {% else %}
+            {% include comps/icon.html name=icon size=14 color="inherit" %}
+        {% endif %}
+    {% endif %}
+    <span>{{ include.text | default: "Button" }}</span>
+</a>

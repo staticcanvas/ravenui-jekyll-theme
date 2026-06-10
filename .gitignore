@@ -1,0 +1,16 @@
+# Build Artifacts
+_site/
+.jekyll-cache/
+docs/_site/
+docs/.jekyll-cache/
+
+# Bundler & Vendor
+.bundle/
+vendor/
+
+# Node modules
+node_modules/
+
+# Local configuration & cache
+.DS_Store
+*.log

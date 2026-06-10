@@ -1,0 +1,51 @@
+title: ZeroDark
+description: A high-contrast, professional Jekyll theme optimized for technical documentation.
+logo_text: ZERODARK
+logo_subtext: SP
+copyright: "© 2026 ZeroDark Systems. All rights reserved."
+
+# Repository Settings
+repository:
+  platform: github # options: github, gitlab, bitbucket, codeberg
+  user: staticcanvas
+  repo: zero-dark-sp
+  branch: main
+  edit_mode: standard # options: standard, vscode
+
+theme_settings:
+  logo:
+    path: /assets/img/logo.svg
+    height: 32px
+  scroll_progress: true
+
+# Social
+github_username: staticcanvas
+twitter_username: staticcanvas
+linkedin_username: staticcanvas
+
+# Theme Features
+zd_output_title_default: true
+zd_toc_default_open: true
+zd_progress_bar: true
+zd_code_copy: true
+zd_code_lang: true
+
+# Defaults
+zd_icon_size: 16
+zd_toc_levels: ["h2", "h3", "h4"]
+zd_debug: true
+zd_accent_color: "#00ff9d"
+zd_nav_spacing: compact
+zd_show_powered_by: true
+zd_use_cdn: true
+font_awesome: false
+
+
+# Build settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

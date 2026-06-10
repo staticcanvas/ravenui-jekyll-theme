@@ -1,0 +1,7 @@
+{% assign style = include.style | default: "fas" %}
+{% assign size = include.size | default: "16" %}
+
+<i class="{{ style }} fa-{{ include.name }} {{ include.class }} {% if include.animation %}fa-{{ include.animation }}{% endif %}" 
+   style="font-size: {{ size }}px; {% if include.color %}color: {{ include.color }};{% endif %} vertical-align: middle;"
+   aria-hidden="true">
+</i>

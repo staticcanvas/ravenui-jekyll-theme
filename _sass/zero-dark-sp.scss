@@ -1,0 +1,41 @@
+/* * 🌑 ZERODARK SP v1.3.3
+ * A professional, high-performance Jekyll theme.
+ * Refactored: Modular SCSS Architecture
+ * Compliance: [Fluent UI Integration] [Source of Truth Architecture]
+ */
+
+// 1. Foundation & Variables
+@use "zero-dark-sp/root";
+@use "zero-dark-sp/animations";
+
+// 2. Base Styles
+@use "zero-dark-sp/base";
+@use "zero-dark-sp/typography";
+@use "zero-dark-sp/layout";
+@use "zero-dark-sp/utilities";
+
+// 3. Navigation & Sidebars
+@use "zero-dark-sp/navigation";
+@use "zero-dark-sp/sidebar";
+@use "zero-dark-sp/toc";
+@use "zero-dark-sp/search";
+
+// 4. Components
+@use "zero-dark-sp/components";
+@use "zero-dark-sp/color-blocks";
+@use "zero-dark-sp/callouts";
+@use "zero-dark-sp/api-ref";
+@use "zero-dark-sp/roadmap";
+@use "zero-dark-sp/vhs";
+@use "zero-dark-sp/releases";
+@use "zero-dark-sp/breadcrumbs";
+@use "zero-dark-sp/details";
+@use "zero-dark-sp/blog";
+@use "zero-dark-sp/posts";
+@use "zero-dark-sp/splash-components";
+@use "zero-dark-sp/specialist-layouts";
+@use "zero-dark-sp/space";
+@use "zero-dark-sp/iconography";
+
+// 5. Third Party / Syntax Highlighting
+@use "rogue/ethereal";

@@ -1,0 +1,46 @@
+/* SPACE & SPLASH */
+.zd-space-layout {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--zd-space-lg);
+  background: radial-gradient(circle at center, #111 0%, #050505 100%);
+  border-radius: var(--zd-radius);
+  border: var(--zd-border);
+  overflow: hidden;
+}
+
+.zd-space-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.2;
+  animation: space-drift 100s linear infinite;
+}
+
+.zd-space-content { position: relative; z-index: 2; max-width: 800px; }
+
+.zd-splash-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.zd-splash-main { width: 100%; max-width: 1200px; display: grid; grid-template-rows: auto 1fr auto; gap: 4rem; }
+.zd-splash-header { border-block-end: var(--zd-border); padding-block-end: 1rem; }
+.zd-splash-footer { border-block-start: var(--zd-border); padding-block-start: 1rem; font-size: 0.75rem; color: #444; }
+.zd-splash-hero { display: flex; flex-direction: column; justify-content: center; }
+
+.zd-splash-variant-terminal .zd-splash-hero { font-family: var(--zd-font-mono); background: var(--zd-bg-surface); padding: 2.5rem; border: 1px solid #333; border-radius: var(--zd-radius); color: var(--zd-clr-highlight); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+.zd-splash-variant-terminal .zd-splash-hero h1::before { content: "> "; }
+.zd-splash-variant-terminal .zd-splash-hero h1::after { content: "_"; animation: terminal-cursor 1s infinite; }
+
+.zd-splash-variant-app .zd-splash-hero { text-align: center; align-items: center; }
+.zd-splash-variant-docs .zd-splash-hero { max-width: 700px; }

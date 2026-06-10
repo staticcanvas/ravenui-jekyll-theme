@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en" }}">
+
+{% include core/head.html %}
+
+<body class="zd-splash-variant-{{ page.variant | default: 'generic' }}">
+
+    <div class="zd-splash-container">
+        <main class="zd-splash-main">
+            <header class="zd-splash-header">
+                <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "SP" }}</span></a>
+            </header>
+
+            <section class="zd-splash-hero">
+                {{ content }}
+            </section>
+
+            <footer class="zd-splash-footer">
+                {{ site.copyright }}
+            </footer>
+        </main>
+    </div>
+
+</body>
+</html>

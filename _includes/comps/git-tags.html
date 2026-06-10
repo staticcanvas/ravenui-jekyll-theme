@@ -1,0 +1,29 @@
+<div class="zd-git-tags-grid">
+    {% assign tag_source = include.data | default: site.data.tags %}
+    {% if tag_source %}
+        {% assign test_first = tag_source | slice: 0 %}
+        {% if tag_source.first == nil and test_first != nil %}
+            {% assign tag_source = tag_source | from_yaml %}
+        {% endif %}
+        {% for tag in tag_source %}
+        <div class="zd-git-tag-card">
+            <div class="zd-git-tag-card-header">
+                {% include comps/icon.html name="tag" size="14" color="var(--zd-clr-highlight)" %}
+                <code>{{ tag.name }}</code>
+            </div>
+            {% if tag.commit %}
+            <div class="zd-git-tag-card-meta">
+                <span title="Commit SHA">{% include comps/icon.html name="hash" size="10" %} {{ tag.commit.sha | truncate: 7, "" }}</span>
+            </div>
+            {% endif %}
+            {% if tag.zipball_url %}
+            <a href="{{ tag.zipball_url }}" class="zd-git-tag-download">
+                {% include comps/icon.html name="download" size="12" %} Source (ZIP)
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="fg-muted">No tag data provided.</p>
+    {% endif %}
+</div>

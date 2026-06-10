@@ -1,0 +1,99 @@
+.zd-post {
+    max-width: 800px;
+    margin-inline: auto;
+    padding-block: 4rem;
+}
+
+.zd-post-header {
+    margin-block-end: 4rem;
+    border-block-end: var(--zd-border);
+    padding-block-end: 2rem;
+}
+
+.zd-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-family: var(--zd-font-mono);
+    font-size: 0.75rem;
+    color: #555;
+    margin-block-end: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    span, time {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}
+
+.zd-post-title {
+    margin-block-end: 1rem;
+}
+
+.zd-post-description {
+    font-size: 1.1rem;
+    color: #888;
+    line-height: 1.6;
+    margin-block-end: 1.5rem;
+}
+
+.zd-post-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #aaa;
+
+    h2 { margin-block-start: 3rem; }
+    h3 { margin-block-start: 2rem; }
+    p { margin-block-end: 1.5rem; }
+}
+
+.zd-post-footer {
+    margin-block-start: 5rem;
+    padding-block-start: 2rem;
+    border-block-start: var(--zd-border);
+}
+
+.zd-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius);
+    color: var(--zd-clr-platinum);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.2s;
+
+    &:hover {
+        border-color: var(--zd-clr-highlight);
+        color: var(--zd-clr-highlight);
+        background: rgba(0, 255, 157, 0.05);
+    }
+}
+
+/* POST VARIANTS */
+.zd-news-banner {
+    background: var(--zd-clr-danger);
+    color: var(--zd-bg-base);
+    font-family: var(--zd-font-mono);
+    font-weight: 900;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    margin-block-end: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.zd-tech-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--zd-font-mono);
+    font-size: 0.7rem;
+    color: #555;
+    letter-spacing: 0.15em;
+    margin-block-end: 2.5rem;
+}

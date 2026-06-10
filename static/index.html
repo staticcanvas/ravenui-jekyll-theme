@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroDark — Platinum Master v1.2.2 [Complete]</title>
+  <style>
+    /* * 🌑 ZERODARK PLATINUM MASTER v1.2.2
+     * Status: ALL ORIGINAL ELEMENTS RESTORED + DETERMINISTIC ENGINE
+     */
+    :root {
+      --zd-bg-base: #050505; 
+      --zd-bg-surface: #0a0a0a;
+      --zd-bg-elevated: #111111;
+      --zd-clr-platinum: #e5e5e5;
+      --zd-clr-highlight: #00ff9d;
+      --zd-clr-warning: #ffcc00;
+      --zd-clr-danger: #ff4444;
+      --zd-clr-info: #3399ff;
+
+      --zd-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --zd-font-mono: "JetBrains Mono", "Fira Code", monospace;
+      --zd-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+      --zd-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+      --zd-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+      --zd-radius: 4px;
+      --zd-border: 1px solid #222;
+      --z-sticky: 200;
+    }
+
+    /* RESET & BASE */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+    body {
+      background-color: var(--zd-bg-base);
+      color: #888;
+      font-family: var(--zd-font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 { color: var(--zd-clr-platinum); letter-spacing: -0.02em; font-weight: 700; margin-block-end: 1rem; }
+    h1 { font-size: 2.5rem; line-height: 1.1; }
+    h2 { font-size: 1.75rem; border-block-end: var(--zd-border); padding-block-end: 0.5rem; margin-block-start: 3rem; }
+    h3 { font-size: 1.25rem; margin-block-start: 2rem; color: #ccc; }
+    h4 { font-size: 0.7rem; text-transform: uppercase; color: #444; margin-block-end: 0.5rem; }
+    
+    p, ul, ol { margin-block-end: 1.5rem; max-width: 65ch; }
+    a { color: var(--zd-clr-platinum); text-decoration: none; border-block-end: 1px solid #222; transition: 0.2s; }
+    a:hover { border-color: var(--zd-clr-highlight); color: var(--zd-clr-highlight); }
+
+    /* LAYOUT */
+    .zd-container {
+      max-width: 1000px;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 48rem) {
+      .zd-container { grid-template-columns: 240px 1fr; gap: 3rem; }
+    }
+
+    /* SIDEBAR & STICKY HEADER */
+    .zd-sidebar {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+      background: color-mix(in srgb, var(--zd-bg-base) 94%, transparent);
+      backdrop-filter: blur(10px);
+      border-block-end: var(--zd-border);
+      padding-block: var(--zd-space-sm);
+    }
+
+    @media (min-width: 48rem) {
+      .zd-sidebar {
+        top: 2rem;
+        height: fit-content;
+        border-block-end: none;
+        border-inline-end: var(--zd-border);
+        background: transparent;
+        backdrop-filter: none;
+        padding-block: 0;
+        padding-inline-end: 1rem;
+      }
+    }
+
+    .zd-logo { font-weight: 800; color: var(--zd-clr-platinum); font-size: 1.2rem; display: block; margin-block-end: 1rem; text-decoration: none; border: none; }
+    
+    /* SOCIALS [Original Design Restored] */
+    .zd-socials { display: flex; gap: 1rem; margin-block-end: 2rem; padding-block-end: 1rem; border-block-end: var(--zd-border); font-family: var(--zd-font-mono); font-size: 0.75rem; }
+    .zd-social-link { color: #555; border: none; text-transform: uppercase; }
+    .zd-social-link:hover { color: var(--zd-clr-platinum); }
+
+    /* TOC DISCLOSURE */
+    .zd-toc-summary { list-style: none; cursor: pointer; color: var(--zd-clr-highlight); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; padding-block: 0.5rem; outline: none; }
+    .zd-toc-summary::-webkit-details-marker { display: none; }
+    @media (min-width: 48rem) { .zd-toc-summary { display: none; } }
+
+    .zd-nav-link { display: block; padding: 0.4rem 0; color: #666; font-size: 0.9rem; border: none; }
+    .zd-nav-link:hover { color: var(--zd-clr-platinum); }
+    .zd-nav-link[aria-current="page"] { color: var(--zd-clr-highlight); font-weight: 600; }
+
+    /* MARKDOWN COMPONENTS */
+    .zd-content { padding-block-end: 5rem; }
+    .zd-hero { padding: 4rem 0; border-block-end: var(--zd-border); margin-block-end: 3rem; }
+    
+    .zd-callout { padding: 1rem; border-radius: var(--zd-radius); margin-block: 1.5rem; border-inline-start: 3px solid; background: var(--zd-bg-surface); }
+    .zd-callout--note { border-color: var(--zd-clr-info); background: rgba(51, 153, 255, 0.05); }
+    .zd-callout--warn { border-color: var(--zd-clr-warning); background: rgba(255, 204, 0, 0.05); }
+    .zd-callout-title { display: block; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; margin-block-end: 0.5rem; color: inherit; letter-spacing: 0.05em; }
+
+    .highlight { background: var(--zd-bg-surface); border: var(--zd-border); border-radius: var(--zd-radius); padding: 1rem; overflow-x: auto; font-family: var(--zd-font-mono); font-size: 0.9rem; margin-block: 1.5rem; color: #ccc; }
+    
+    code { font-family: var(--zd-font-mono); background: var(--zd-bg-elevated); padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.85em; color: #ccc; }
+    kbd { font-family: var(--zd-font-mono); background: var(--zd-bg-surface); border: 1px solid #444; border-block-end: 2px solid #444; padding: 0.1em 0.4em; border-radius: 3px; color: var(--zd-clr-platinum); font-size: 0.75rem; }
+    
+    .zd-liquid-tag { color: #b57edc; font-family: var(--zd-font-mono); opacity: 0.8; font-size: 0.9em; }
+    .zd-ial { color: #777; font-family: var(--zd-font-mono); font-size: 0.8em; vertical-align: super; }
+    .badge { display: inline-block; padding: 0.15em 0.5em; border-radius: 99px; font-size: 0.7rem; font-weight: 700; background: #222; border: 1px solid #333; margin-left: 0.5rem; vertical-align: middle; color: var(--zd-clr-platinum); }
+    mark { background: rgba(0, 255, 157, 0.15); color: var(--zd-clr-highlight); padding: 0.1em 0.3em; border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="zd-container">
+  <aside class="zd-sidebar">
+    <a href="#" class="zd-logo">ZERODARK <span style="font-weight:400; color:#666;">// DOCS</span></a>
+    
+    <div class="zd-socials">
+      <a href="#" class="zd-social-link">GH</a>
+      <a href="#" class="zd-social-link">X</a>
+      <a href="#" class="zd-social-link">FB</a>
+      <a href="#" class="zd-social-link">LI</a>
+    </div>
+
+    <details class="zd-toc-disclosure" open id="toc-disclosure">
+      <summary class="zd-toc-summary">Navigate Page</summary>
+      <nav class="zd-nav">
+        <div>
+          <h4>Start</h4>
+          <a href="#intro" class="zd-nav-link" aria-current="page">Introduction</a>
+          <a href="#markdown" class="zd-nav-link">Markdown Elements</a>
+        </div>
+        <div style="margin-block-start: 1.5rem;">
+          <h4>Core</h4>
+          <a href="#syntax" class="zd-nav-link">Syntax Highlighting</a>
+          <a href="#callouts" class="zd-nav-link">Callouts</a>
+          <a href="#liquid" class="zd-nav-link">Liquid & IAL</a>
+        </div>
+      </nav>
+    </details>
+  </aside>
+
+  <main class="zd-content">
+    <section id="intro" class="zd-hero">
+      <h1>ZeroDark <span class="badge">v1.2.2</span></h1>
+      <p>The visual authority restored. Designed for long-form technical reading with zero eye strain.</p>
+    </section>
+
+    <section id="markdown">
+      <h2>Markdown Elements</h2>
+      <p>Standard elements are styled for maximum readability on OLED screens using <mark>true dark</mark> backgrounds.</p>
+      <p>Use shortcuts like <kbd>CTRL</kbd> + <kbd>C</kbd> for commands.</p>
+      <blockquote>
+        "Precision in typography is the difference between a tool and a toy."
+      </blockquote>
+    </section>
+
+    <section id="syntax">
+      <h2>Syntax Highlighting</h2>
+      <div class="highlight">
+        <pre><code><span style="color: #555; font-style: italic;"># Immutable Logic</span>
+<span style="color: #cc77ff; font-weight: bold;">def</span> <span style="color: var(--zd-clr-highlight);">verify_sot</span>(elements)
+  <span style="color: #cc77ff; font-weight: bold;">return</span> elements.all? { |e| e.status == <span style="color: var(--zd-clr-highlight);">:locked</span> }
+<span style="color: #cc77ff; font-weight: bold;">end</span></code></pre>
+      </div>
+    </section>
+
+    <section id="callouts">
+      <h2>Admonitions</h2>
+      <div class="zd-callout zd-callout--note">
+        <span class="zd-callout-title">Note</span>
+        This sticky navigation pattern ensures high performance without layout-triggering animations.
+      </div>
+    </section>
+
+    <section id="liquid">
+      <h2>Liquid & IAL</h2>
+      <p>Use <span class="zd-liquid-tag">{% include header.html %}</span> for partials. Assign classes via IAL: <code>{: .locked }</code> <span class="zd-ial">{: .locked }</span>.</p>
+    </section>
+
+    <footer style="margin-top: 5rem; padding-top: 2rem; border-top: var(--zd-border); color: #444; font-size: 0.8rem;">
+      <p>© 2026 ZeroDark Systems. All Design Elements Restored & Locked.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  /* 🧱 Platinum TOC Utility v1.2.2 */
+  const tocDisclosure = document.getElementById('toc-disclosure');
+  const navLinks = document.querySelectorAll('.zd-nav-link');
+  const mobileBreakpoint = 768;
+
+  function syncNavState() {
+    if (window.innerWidth >= mobileBreakpoint) {
+      tocDisclosure.open = true;
+    }
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < mobileBreakpoint) {
+        tocDisclosure.open = false;
+      }
+      navLinks.forEach(l => l.removeAttribute('aria-current'));
+      link.setAttribute('aria-current', 'page');
+    });
+  });
+
+  window.addEventListener('resize', syncNavState);
+  window.addEventListener('DOMContentLoaded', syncNavState);
+</script>
+
+</body>
+</html>

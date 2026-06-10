@@ -1,0 +1,86 @@
+:root {
+  --zd-bg-base: #050505; 
+  --zd-bg-surface: #0a0a0a;
+  --zd-bg-elevated: #111111;
+  --zd-clr-platinum: #e5e5e5;
+  --zd-clr-highlight: #00ff9d;
+  --zd-clr-warning: #ffcc00;
+  --zd-clr-danger: #ff4444;
+  --zd-clr-info: #3399ff;
+
+  --zd-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --zd-font-mono: "MonaspiceAr Nerd Font Mono", "JetBrains Mono", "Fira Code", monospace;
+  --zd-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+  --zd-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  --zd-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --zd-radius: 4px;
+  --zd-radius-lg: 8px;
+  --zd-radius-xl: 12px;
+  --zd-border: 1px solid #222;
+  --z-sticky: 200;
+  --z-fixed: 5000;
+
+  /* Fluent UI Transitions */
+  --zd-transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  --zd-transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --zd-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fluent UI Elevations */
+  --zd-elevation-depth: 0 1.6px 3.6px 0 rgba(0,0,0,0.3), 0 0.3px 0.9px 0 rgba(0,0,0,0.2);
+  --zd-elevation-surface: 0 3.2px 7.2px 0 rgba(0,0,0,0.4), 0 0.6px 1.8px 0 rgba(0,0,0,0.3);
+  --zd-elevation-modal: 0 6.4px 14.4px 0 rgba(0,0,0,0.5), 0 1.2px 3.6px 0 rgba(0,0,0,0.4);
+  --zd-elevation-high: 0 25.6px 57.6px 0 rgba(0,0,0,0.6), 0 4.8px 14.4px 0 rgba(0,0,0,0.5);
+
+  // Ethereal Rouge syntax highlighting colors
+  --syntax-bg: #0f0f18;
+  --syntax-text: #e4e4f0;
+  --syntax-comment: #7878a0;
+  --syntax-keyword: #c06bff;
+  --syntax-function: #6bffdb;
+  --syntax-string: #6bff9d;
+  --syntax-number: #ffdb6b;
+  --syntax-operator: #ff6b9d;
+  --syntax-variable: #6b9dff;
+  --syntax-class: #ffb46b;
+  --syntax-constant: #ff8c6b;
+  --syntax-tag: #f472b6;
+  --syntax-attribute: #a78bfa;
+  --syntax-error: #ff4d6d;
+  --syntax-success: #4dffaa;
+  --syntax-selection: rgba(192, 107, 255, 0.2);
+
+  /* BRAND PALETTE */
+  --zd-clr-viridian: #00ff9d;
+  --zd-clr-info-alt: #4A9EE8;
+  --zd-clr-note: #9B7AE0;
+  --zd-clr-warning-alt: #E8994A;
+  --zd-clr-danger-alt: #E05A5A;
+  --zd-clr-black: #0A0C0E;
+  --zd-clr-void: #10141A;
+  --zd-clr-ink: #161B24;
+  --zd-clr-slate: #1E2530;
+  --zd-clr-steel: #2A3340;
+  --zd-clr-mist: #3D4D5E;
+  --zd-clr-smoke: #5A6E82;
+  --zd-clr-ash: #8A9BAC;
+  --zd-clr-silver: #B8C5D0;
+  --zd-clr-ghost: #D6DFE7;
+  --zd-clr-white: #EDF1F5;
+
+  /* UI SYSTEM COLORS */
+  --zd-border-subtle:      #1A212B;
+  --zd-border-default:     #25303D;
+  --zd-border-strong:      #344252;
+  --zd-border-accent:      #00FF9D;
+  --zd-bg-panel:           #161B24;
+  --zd-bg-card:            #1B212B;
+  --zd-bg-hover:           #242C38;
+  --zd-bg-active:          #2C3645;
+
+  /* TERMINAL PALETTE */
+  --zd-clr-terminal-green: #00FF9D;
+  --zd-clr-terminal-blue:  #4DA3FF;
+  --zd-clr-terminal-purple:#B06CF7;
+  --zd-clr-terminal-orange:#FF9E57;
+  --zd-clr-terminal-red:   #FF6B6B;
+}

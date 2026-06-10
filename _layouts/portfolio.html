@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en" }}">
+
+{% include core/head.html %}
+
+<body class="zd-layout-portfolio">
+
+    <div class="zd-portfolio-container">
+        <header class="zd-portfolio-header">
+            <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "PORTFOLIO" }}</span></a>
+        </header>
+
+        <main class="zd-portfolio-main">
+            <div class="zd-portfolio-hero">
+                <h1 class="zd-portfolio-title">{{ page.title }}</h1>
+                <p class="zd-portfolio-description">{{ page.description }}</p>
+            </div>
+
+            <div class="zd-portfolio-grid">
+                {{ content }}
+            </div>
+        </main>
+
+        <footer class="zd-portfolio-footer">
+            {{ site.copyright }}
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% assign current_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+{% assign found_current = false %}
+{% assign next_page = nil %}
+
+{% for section in site.data.navigation %}
+    {% for link in section.links %}
+        {% assign link_url = link.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+        
+        {% if found_current %}
+            {% assign next_page = link %}
+            {% break %}
+        {% endif %}
+        
+        {% if current_url == link_url %}
+            {% assign found_current = true %}
+        {% endif %}
+    {% endfor %}
+    {% if next_page %}{% break %}{% endif %}
+{% endfor %}
+
+{% if next_page or site.theme_settings.back_to_top != false %}
+<div class="zd-page-nav">
+    {% if site.theme_settings.back_to_top != false %}
+    <a href="#" class="zd-btn-nav zd-btn-nav--top">
+        {% include comps/icon.html name="arrow-up" size=14 %} Back to Top
+    </a>
+    {% endif %}
+
+    {% if next_page %}
+    <a href="{{ next_page.url | relative_url }}" class="zd-btn-nav zd-btn-nav--next">
+        <div style="text-align: right;">
+            <span class="zd-btn-nav-label">Next Page</span>
+            <span class="zd-btn-nav-title">{{ next_page.text }}</span>
+        </div>
+        {% include comps/icon.html name="arrow-right" size=18 %}
+    </a>
+    {% endif %}
+</div>
+{% endif %}

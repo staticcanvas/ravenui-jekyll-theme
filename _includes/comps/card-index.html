@@ -1,0 +1,30 @@
+<div class="zd-card-index">
+    {% if include.items %}
+        {% assign links = include.items %}
+    {% else %}
+        {% assign target = site.data.navigation | where: "title", include.section | first %}
+        {% assign links = target.links %}
+    {% endif %}
+
+    {% if links %}
+        <div class="zd-card-grid">
+        {% for link in links %}
+            <a href="{{ link.url | relative_url }}" class="zd-card zd-card--glass">
+                <div class="zd-card-icon">
+                    {% if link.source == "simple" %}
+                        {% include comps/simple-icon.html name=link.icon size=24 color=link.color %}
+                    {% elsif link.source == "fa" %}
+                        {% include comps/font-awesome.html name=link.icon size=24 color=link.color %}
+                    {% else %}
+                        {% include comps/icon.html name=link.icon size=24 color=link.color %}
+                    {% endif %}
+                </div>
+                <h4 class="zd-card-title">{{ link.text | default: link.title }}</h4>
+                <p class="zd-card-content">{{ link.description | default: "No description available." }}</p>
+            </a>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p class="fg-muted">Section "{{ include.section }}" not found in navigation.</p>
+    {% endif %}
+</div>
