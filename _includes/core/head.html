@@ -67,5 +67,39 @@
     {% if site.mermaid or page.mermaid %}
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.4/dist/mermaid.min.js"></script>
     {% endif %}
+
+    {% if site.google_analytics %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.google_analytics }}');
+
+      // Auto-event listener for links
+      window.addEventListener('DOMContentLoaded', () => {
+        document.body.addEventListener('click', (e) => {
+          const a = e.target.closest('a');
+          if (a && a.href) {
+            try {
+              const url = new URL(a.href, window.location.href);
+              const isOutbound = url.hostname !== window.location.hostname;
+              const isDownload = /\.(zip|tar|gz|pdf|gemspec|gem)$/i.test(url.pathname);
+
+              if (isOutbound || isDownload) {
+                gtag('event', 'click', {
+                  'event_category': isOutbound ? 'outbound_link' : 'download',
+                  'event_label': a.href,
+                  'transport_type': 'beacon'
+                });
+              }
+            } catch (err) { /* invalid URL */ }
+          }
+        });
+      });
+    </script>
+    {% endif %}
 </head>
+
 
