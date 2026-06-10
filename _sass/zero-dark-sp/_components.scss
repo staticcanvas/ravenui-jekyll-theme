@@ -1002,3 +1002,203 @@ h6:hover .zd-heading-anchor {
   opacity: 0.7;
 }
 
+/* IMAGE COMPONENT (BLUR UP) */
+.zd-image-container {
+  width: 100%;
+  margin-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.zd-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--image-radius, var(--zd-radius));
+  border: var(--zd-border, 1px solid #25303d);
+  background: var(--zd-bg-panel, #161b24);
+  box-shadow: var(--zd-elevation-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zd-image-main {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.zd-image-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(15px);
+  transform: scale(1.1);
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+
+  &.fade-out {
+    opacity: 0;
+  }
+}
+
+.zd-image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: zd-shimmer 1.5s infinite linear;
+  z-index: 1;
+  transition: opacity 0.4s ease;
+
+  &.fade-out {
+    opacity: 0;
+  }
+}
+
+.zd-image-caption {
+  font-size: 0.75rem;
+  color: var(--zd-clr-slate, #8a99ad);
+  text-align: center;
+  font-family: var(--zd-font-mono, monospace);
+  margin-block-start: 0.25rem;
+}
+
+@keyframes zd-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* CAROUSEL COMPONENT */
+.zd-carousel-container {
+  position: relative;
+  width: 100%;
+  margin-block: 2rem;
+  border-radius: var(--zd-radius, 4px);
+  border: var(--zd-border, 1px solid #25303d);
+  overflow: hidden;
+  box-shadow: var(--zd-elevation-high);
+  background: #000;
+  height: var(--carousel-height);
+}
+
+.zd-carousel-track-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.zd-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zd-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .zd-image-container {
+    margin: 0;
+    height: 100%;
+  }
+}
+
+.zd-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(22, 27, 36, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--zd-clr-platinum, #edf1f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &:hover {
+    background: rgba(22, 27, 36, 0.9);
+    border-color: var(--zd-clr-highlight, #00ff9d);
+    color: var(--zd-clr-highlight);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+.zd-carousel-btn--prev {
+  left: 1rem;
+}
+
+.zd-carousel-btn--next {
+  right: 1rem;
+}
+
+.zd-carousel-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.zd-carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  &.active {
+    background: var(--zd-clr-highlight, #00ff9d);
+    width: 24px;
+    border-radius: 99px;
+  }
+}
+
+

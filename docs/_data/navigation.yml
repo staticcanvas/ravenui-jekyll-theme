@@ -169,6 +169,15 @@
       url: /components/iframe/
       icon: monitor
       description: "Embed external pages responsively with built-in loading spinner"
+    - text: Image Component
+      url: /components/image/
+      icon: image
+      description: "Progressive lazy loading images with blur-up support"
+    - text: Image Carousel
+      url: /components/carousel/
+      icon: image
+      description: "Responsive sliding image deck with navigation controls"
+
 
 
 - title: Interactive & Code
