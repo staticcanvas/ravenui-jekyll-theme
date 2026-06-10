@@ -2,7 +2,7 @@
 # Architecture: Ruby Gem Workflow + GitLab Pages
 # Image: Official Ruby 3.2 (Optimized for Jekyll)
 
-image: phellams-automator:${AUTOMATOR_VERSION}
+image: sgkens/phellams-automator:${AUTOMATOR_VERSION}
 
 
 variables:
