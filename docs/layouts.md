@@ -32,16 +32,16 @@ The `default.html` layout is the engine of the theme. It manages the dual-sideba
 
 We provide several specialized layouts for different content types:
 
-| Layout | Usage | Description |
-| :--- | :--- | :--- |
-| `default` | Docs | The core three-column documentation template. |
-| `space` | Hero | A cinematic, center-aligned layout with starfield animations. |
-| `splash` | Landing | Minimalist variants (Terminal, App, Docs) for entry pages. |
-| `post` | Articles | Optimized for long-form content with author and date metadata. |
-| `portfolio` | Portfolio | A visual-first showcase layout for project galleries. |
-| `metrics` | Stats | A data-driven layout optimized for dashboards and metrics. |
-| `blog-list` | Blog Index | A high-density linear list for chronological post browsing. |
-| `card-index` | Navigation | A card-based navigation portal using `site.data.navigation`. |
+| Layout | Usage | Description | Live Preview |
+| :--- | :--- | :--- | :--- |
+| `default` | Docs | The core three-column documentation template. | _Standard Docs_ |
+| `space` | Hero | A cinematic, center-aligned layout with starfield animations. | [Preview Example]({{ "/examples/space/" | relative_url }}) |
+| `splash` | Landing | Minimalist variants (Terminal, App, Docs) for entry pages. | [Terminal]({{ "/examples/splash-terminal/" | relative_url }}) \| [App]({{ "/examples/splash-app/" | relative_url }}) \| [Docs]({{ "/examples/splash-docs/" | relative_url }}) |
+| `post` | Articles | Optimized for long-form content with author and date metadata. | _Standard Post_ |
+| `portfolio` | Portfolio | A visual-first showcase layout for project galleries. | [Preview Example]({{ "/examples/portfolio/" | relative_url }}) |
+| `metrics` | Stats | A data-driven layout optimized for dashboards and metrics. | [Preview Example]({{ "/examples/metrics/" | relative_url }}) |
+| `blog-list` | Blog Index | A high-density linear list for chronological post browsing. | [Preview Example]({{ "/examples/blog-list/" | relative_url }}) |
+| `card-index` | Navigation | A card-based navigation portal using `site.data.navigation`. | _Gallery Index_ |
 
 {% include comps/heading.html tag="h2" text="Splash Variants" icon="monitor" size=20 %}
 

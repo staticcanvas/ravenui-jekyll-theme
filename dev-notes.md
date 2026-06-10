@@ -88,9 +88,9 @@
 - [x] Image carousel component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
 - [x] **Typewriter Component:** Implemented typewriter component and documented it.
 - [x] **FAQ Accordion:** Implemented FAQ component and FAQ item component, and documented usage.
-- [ ] Make sure all markdown elements are themed correctly to match the theme, update docs to reflect feature.
-- [ ] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
-- [ ] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
+- [x] Make sure all markdown elements are themed correctly to match the theme, update docs to reflect feature.
+- [x] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
+- [x] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
 - [x] **Custom HR:** Implemented `hr.html` component supporting gradient lines and centered text/icons.
 
 ## Bug Fixes
@@ -110,6 +110,7 @@
 - [x] **Liquid IRL Guide:** Created `docs/liquid-irl.md` demonstrating how to use theme-specific CSS utility classes.
 - [x] **Specialist Layouts:** Implemented "Portfolio", "Metrics/Stats", and "Hero Showcase" templates.
 - [x] **Releases & Tags Documentation:** Created `docs/releases.md` with usage examples for `releases.html` and `tags.html`.
+- [ ] **picsum** for show casing images in the docs use https://picsum.photos/200/300 for random images
 
 ## Release Hardening
 - [ ] Check comps/* components that do not have corresponding docs/* documentation pages.
