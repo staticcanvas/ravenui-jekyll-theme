@@ -104,6 +104,11 @@
       url: /components/sponsored-by/
       icon: heart
       description: "Grid of partner or sponsor logos and links"
+    - text: Rendered Showcase
+      url: /components/rendered-el-showcase/
+      icon: eye
+      description: "Display rendered UI elements in a technical grid frame"
+
 
 
 
