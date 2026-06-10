@@ -1,0 +1,163 @@
+{% assign id = include.id | default: "chart-1" %}
+{% assign type = include.type | default: "bar" %}
+{% assign height = include.height | default: "300px" %}
+{% assign title = include.title %}
+
+{% if include.source %}
+  {% assign data_source = site.data[include.source] %}
+  {% if include.key %}
+    {% assign data_source = data_source[include.key] %}
+  {% endif %}
+{% endif %}
+
+{% assign labels = include.labels %}
+{% assign data = include.data %}
+{% assign datasets = include.datasets %}
+
+{% if data_source %}
+  {% assign labels = data_source.labels %}
+  {% assign datasets = data_source.datasets %}
+  {% assign data = data_source.data %}
+{% endif %}
+
+<div class="zd-chartjs-container {{ include.class }}" id="zd-chartjs-{{ id }}" style="position: relative; height: {{ height }}; width: 100%; margin-block: 2rem;">
+  {% if title %}
+    <h5 class="zd-chartjs-title" style="margin-bottom: 0.5rem; font-family: var(--zd-font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--zd-clr-slate);">{{ title }}</h5>
+  {% endif %}
+  <canvas id="{{ id }}"></canvas>
+</div>
+
+<!-- Load Chart.js CDN -->
+{% unless site.zd_chartjs_script_loaded %}
+  {% assign site.zd_chartjs_script_loaded = true %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endunless %}
+
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    // Wait for Chart to be loaded
+    const checkChart = setInterval(() => {
+      if (typeof Chart !== 'undefined') {
+        clearInterval(checkChart);
+        initChart();
+      }
+    }, 50);
+
+    function initChart() {
+      const ctx = document.getElementById('{{ id }}');
+      if (!ctx) return;
+
+      let labels = [];
+      let datasets = [];
+
+      {% if labels %}
+        {% if labels.first %}
+          labels = {{ labels | jsonify }};
+        {% else %}
+          labels = "{{ labels }}".split(',').map(s => s.trim());
+        {% endif %}
+      {% endif %}
+
+      {% if datasets %}
+        // Handle datasets array/object passed from YAML
+        {% if datasets.first %}
+          datasets = {{ datasets | jsonify }};
+        {% else %}
+          try {
+            datasets = JSON.parse('{{ datasets | replace: "'", '"' }}');
+          } catch(e) {
+            console.error("Failed to parse datasets:", e);
+          }
+        {% endif %}
+      {% elsif data %}
+        // Single dataset fallback
+        let rawData = [];
+        {% if data.first %}
+          rawData = {{ data | jsonify }};
+        {% else %}
+          rawData = "{{ data }}".split(',').map(Number);
+        {% endif %}
+        
+        datasets = [{
+          label: "{{ include.dataset_label | default: 'Dataset 1' }}",
+          data: rawData,
+          backgroundColor: 'rgba(0, 255, 157, 0.15)',
+          borderColor: '#00ff9d',
+          borderWidth: 1.5,
+          tension: 0.3
+        }];
+      {% endif %}
+
+      // Add ZeroDark style defaults to datasets
+      datasets.forEach(ds => {
+        if (!ds.borderColor) ds.borderColor = '{{ include.color | default: "var(--zd-clr-highlight, #00ff9d)" }}';
+        if (!ds.backgroundColor) {
+          if (ds.borderColor === '#00ff9d' || ds.borderColor === 'var(--zd-clr-highlight, #00ff9d)') {
+            ds.backgroundColor = 'rgba(0, 255, 157, 0.08)';
+          } else {
+            ds.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+          }
+        }
+        if (ds.borderWidth === undefined) ds.borderWidth = 1.5;
+        if (ds.tension === undefined) ds.tension = 0.3;
+      });
+
+      const config = {
+        type: '{{ type }}',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: {{ include.legend | default: true }},
+              labels: {
+                color: '#8a99ad',
+                font: { family: 'var(--zd-font-mono, monospace)', size: 10 }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)' },
+              ticks: { color: '#8a99ad', font: { family: 'var(--zd-font-mono, monospace)', size: 9 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)' },
+              ticks: { color: '#8a99ad', font: { family: 'var(--zd-font-mono, monospace)', size: 9 } }
+            }
+          }
+        }
+      };
+
+      // Apply type-specific overrides
+      if ('{{ type }}' === 'pie' || '{{ type }}' === 'doughnut' || '{{ type }}' === 'polarArea') {
+        delete config.options.scales;
+        datasets.forEach(ds => {
+          ds.backgroundColor = [
+            'rgba(0, 255, 157, 0.2)', 
+            'rgba(183, 156, 237, 0.2)', 
+            'rgba(0, 180, 216, 0.2)', 
+            'rgba(255, 159, 28, 0.2)', 
+            'rgba(231, 29, 54, 0.2)', 
+            'rgba(46, 196, 182, 0.2)'
+          ];
+          ds.borderColor = [
+            '#00ff9d',
+            '#b79ced',
+            '#00b4d8',
+            '#ff9f1c',
+            '#e71d36',
+            '#2ec4b6'
+          ];
+          ds.borderWidth = 1;
+        });
+      }
+
+      new Chart(ctx, config);
+    }
+  });
+</script>

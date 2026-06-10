@@ -241,6 +241,11 @@
       url: /components/previously-read/
       icon: history
       description: "localStorage-backed reading history list tracker"
+    - text: Chart.js
+      url: /components/chartjs/
+      icon: bar-chart-2
+      description: "Interactive data charts using Chart.js"
+
 
 
 - type: separator
