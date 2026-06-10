@@ -133,6 +133,15 @@
     - text: VHS Effect
       url: /components/vhs/
       icon: monitor
+    - text: Typewriter
+      url: /components/typewriter/
+      icon: type
+    - text: Shield
+      url: /components/shield/
+      icon: tag
+    - text: Horizontal Separator (HR)
+      url: /components/hr/
+      icon: minus
 
 - title: Interactive & Code
   links:
@@ -154,6 +163,9 @@
     - text: API Reference
       url: /components/api-ref/
       icon: code
+    - text: FAQ Accordion
+      url: /components/faq/
+      icon: help-circle
 
 - title: Data & History
   links:
@@ -169,6 +181,9 @@
     - text: Git Tags
       url: /components/git-tags/
       icon: tag
+    - text: Progress Bar
+      url: /components/progress/
+      icon: activity
 
 - type: separator
 
