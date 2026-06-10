@@ -92,6 +92,15 @@
     - text: Page Navigation
       url: /components/page-nav/
       icon: navigation
+    - text: Written By
+      url: /components/written-by/
+      icon: user
+      description: "Show author metadata, bio, avatar, and social handles"
+    - text: Last Edited
+      url: /components/last-edited/
+      icon: clock
+      description: "Track and display page modification timestamps"
+
 
 - title: Elements & Media
   links:
