@@ -92,6 +92,19 @@
 - [x] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
 - [x] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
 - [x] **Custom HR:** Implemented `hr.html` component supporting gradient lines and centered text/icons.
+- [x] **version tag** - add version badge to the top of the page perhaps after // DOCS SubText use our existing version tag component, enable via _config. update documents to reflect
+- [x] **foot.html** - Extend the footer to include a _includes/core/foot.html partial, which can be used to add custom content to the bottom of the page. This can include links to social media, copyright information, or other relevant details. The footer is currently hardcoded to include the copyright and social media links, so this would need to be updated to accommodate any additional content.
+- [ ] **10 Proposed Components (Selection Phase)**:
+    - [ ] Collapsible details/summary block component for optional content folding.
+    - [ ] Keyboard shortcuts group component to render standard KBD keys side by side.
+    - [ ] Code switcher tabbed component (e.g. npm, bun, yarn, pnpm tabs).
+    - [ ] Full-width viewport alert/announcement banner component for site-wide alerts.
+    - [ ] Standalone copy-to-clipboard button component for arbitrary inline text blocks.
+    - [ ] Icon showcase grid component to present groups of icons with copy triggers.
+    - [ ] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
+    - [ ] CSS-based file directory tree diagram component to showcase project layout structures.
+    - [ ] Pure-CSS context tooltip component for definitions and abbreviations.
+    - [ ] High-density system metrics container component to group metrics/stats cards.
 
 ## Bug Fixes
 - [x] **Ruby 3.4 Compatibility:** Fixed Gemfile to include `csv`, `base64`, and `bigdecimal` gems which were removed from the Ruby 3.4 standard library.

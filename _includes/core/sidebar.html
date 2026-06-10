@@ -7,6 +7,11 @@
     </a>
     {% endif %}
     <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "DOCS" }}</span></a>
+    {% if site.zd_show_version and site.version %}
+    <div style="margin-block-start: -1rem; margin-block-end: 1.5rem;">
+        {% include comps/tag.html type="version" text=site.version %}
+    </div>
+    {% endif %}
 
     <div class="zd-search-trigger" id="zd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>
