@@ -110,11 +110,11 @@
 - [x] **Liquid IRL Guide:** Created `docs/liquid-irl.md` demonstrating how to use theme-specific CSS utility classes.
 - [x] **Specialist Layouts:** Implemented "Portfolio", "Metrics/Stats", and "Hero Showcase" templates.
 - [x] **Releases & Tags Documentation:** Created `docs/releases.md` with usage examples for `releases.html` and `tags.html`.
-- [ ] **picsum** for show casing images in the docs use https://picsum.photos/200/300 for random images
+- [x] **picsum** for show casing images in the docs use https://picsum.photos/200/300 for random images
 
 ## Release Hardening
-- [ ] Check comps/* components that do not have corresponding docs/* documentation pages.
-- [ ] Refine documentation sections to make them clear, robust, and technical.
-- [ ] Remove any loose tone, focusing on professional and robust documentation.
+- [x] Check comps/* components that do not have corresponding docs/* documentation pages.
+- [x] Refine documentation sections to make them clear, robust, and technical.
+- [x] Remove any loose tone, focusing on professional and robust documentation.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.

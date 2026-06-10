@@ -66,7 +66,7 @@ Display your project's key selling points using the responsive feature grid.
     {% include comps/feature-card.html 
        icon="box" 
        title="Modular Design" 
-       description="Refactored into 18+ discrete modules for easy customization." 
+       description="Refactored into 18+ discrete modules to simplify customization." 
        color="#3399ff"
     %}
     {% include comps/feature-card.html 
