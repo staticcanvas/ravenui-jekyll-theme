@@ -137,6 +137,10 @@
     - text: Tag Component
       url: /components/tag/
       icon: tag
+    - text: Keyboard Shortcuts
+      url: /components/kbd/
+      icon: keyboard
+      description: "Keyboard shortcut keys and groups rendered side by side"
     - text: Gradient Text
       url: /components/gradient-text/
       icon: type
