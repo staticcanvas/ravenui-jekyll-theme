@@ -1,0 +1,41 @@
+{% assign grid_size = include.size | default: "200px" %}
+{% assign swatch_height = include.height | default: "100px" %}
+{% assign swatch_size = include.swatch_size | default: "12px" %}
+{% assign mode = include.mode | default: "card" %}
+
+{% if mode == "swatch" %}
+<div class="zd-grid-palette-swatches">
+    {% for item in include.items %}
+    <div class="zd-palette-swatch-only" 
+         style="background-color: {{ item.color }}; --zd-swatch-size: {{ swatch_size }};"
+         title="{{ item.title | escape }}{% if item.subtext %} - {{ item.subtext | escape }}{% endif %} ({{ item.color | escape }})">
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="zd-grid-palette" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
+    {% for item in include.items %}
+    <div class="zd-palette-card">
+        <div class="zd-palette-swatch" 
+             style="background-color: {{ item.color }}; height: {{ swatch_height }}; display: flex; align-items: center; justify-content: center; position: relative;">
+            {% if item.icon %}
+                {% if item.icon_type == "simple" %}
+                    {% include comps/simple-icon.html name=item.icon size=32 color="#ffffff" %}
+                {% elsif item.icon_type == "fa" %}
+                    {% include comps/font-awesome.html name=item.icon size=32 color="#ffffff" %}
+                {% else %}
+                    {% include comps/icon.html name=item.icon size=32 color="#ffffff" %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="zd-palette-info">
+            <h4 class="zd-palette-title">{{ item.title }}</h4>
+            <p class="zd-palette-subtext">{{ item.subtext }}</p>
+            {% if item.color %}
+            <code class="zd-palette-code">{{ item.color }}</code>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

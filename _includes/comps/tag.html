@@ -1,0 +1,11 @@
+{% assign type = include.type | default: "default" %}
+{% assign text = include.text | default: "tag" %}
+{% assign icon = include.icon %}
+{% assign color = include.color %}
+
+<span class="zd-tag zd-tag--{{ type }} {{ include.class }}" {% if color %}style="color: {{ color }}; border-color: color-mix(in srgb, {{ color }} 30%, transparent); background: color-mix(in srgb, {{ color }} 6%, transparent);"{% endif %}>
+    {% if icon %}
+        {% include comps/icon.html name=icon size=10 %}
+    {% endif %}
+    {{ text }}
+</span>
