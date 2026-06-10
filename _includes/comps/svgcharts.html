@@ -1,0 +1,227 @@
+{% assign id = include.id | default: "svg-chart-1" %}
+{% assign type = include.type | default: "bar" %}
+{% assign height = include.height | default: 220 | plus: 0 %}
+{% assign width = include.width | default: 600 | plus: 0 %}
+{% assign title = include.title %}
+
+{% if include.source %}
+  {% assign data_source = site.data[include.source] %}
+  {% if include.key %}
+    {% assign data_source = data_source[include.key] %}
+  {% endif %}
+{% endif %}
+
+{% assign raw_labels = include.labels %}
+{% assign raw_data = include.data %}
+
+{% if data_source %}
+  {% assign raw_labels = data_source.labels %}
+  {% assign raw_data = data_source.data %}
+{% endif %}
+
+{% if raw_labels.first %}
+  {% assign labels = raw_labels %}
+{% else %}
+  {% assign labels = raw_labels | split: "," %}
+{% endif %}
+
+{% if raw_data.first %}
+  {% assign data = raw_data %}
+{% else %}
+  {% assign data = raw_data | split: "," %}
+{% endif %}
+
+{% comment %} Find maximum value in data for scaling {% endcomment %}
+{% assign max_val = 0.0 %}
+{% for val in data %}
+  {% assign num_val = val | plus: 0.0 %}
+  {% if num_val > max_val %}
+    {% assign max_val = num_val %}
+  {% endif %}
+{% endfor %}
+{% if max_val == 0.0 %}
+  {% assign max_val = 1.0 %}
+{% endif %}
+
+<div class="zd-svg-chart-container {{ include.class }}" id="{{ id }}" style="margin-block: 2rem; width: 100%;">
+  {% if title %}
+    <h5 class="zd-svg-chart-title" style="margin-bottom: 0.5rem; font-family: var(--zd-font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--zd-clr-slate);">{{ title }}</h5>
+  {% endif %}
+  
+  <div class="zd-svg-chart-wrapper" style="overflow-x: auto; max-width: 100%;">
+    <svg width="{{ width }}" height="{{ height }}" viewBox="0 0 {{ width }} {{ height }}" style="background: var(--zd-bg-panel, #161b24); border: var(--zd-border, 1px solid #25303d); border-radius: var(--zd-radius, 4px); font-family: var(--zd-font-mono, monospace);">
+      
+      {% comment %} Define grid lines and backgrounds {% endcomment %}
+      {% assign chart_padding_top = 30 %}
+      {% assign chart_padding_bottom = 40 %}
+      {% assign chart_padding_left = 50 %}
+      {% assign chart_padding_right = 20 %}
+      
+      {% assign plot_height = height | minus: chart_padding_top | minus: chart_padding_bottom %}
+      {% assign plot_width = width | minus: chart_padding_left | minus: chart_padding_right %}
+      
+      {% if type == "bar" or type == "line" %}
+        {% comment %} Draw Y-axis grid lines (4 lines) {% endcomment %}
+        {% for i in (0..4) %}
+          {% assign y_ratio = i | times: 0.25 %}
+          {% assign y_coord = plot_height | times: y_ratio | plus: chart_padding_top %}
+          {% assign grid_val = 1.0 | minus: y_ratio | times: max_val | round: 1 %}
+          
+          <line x1="{{ chart_padding_left }}" y1="{{ y_coord }}" x2="{{ width | minus: chart_padding_right }}" y2="{{ y_coord }}" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
+          <text x="{{ chart_padding_left | minus: 8 }}" y="{{ y_coord | plus: 4 }}" fill="#8a99ad" font-size="9" text-anchor="end">{{ grid_val }}</text>
+        {% endfor %}
+      {% endif %}
+      
+      {% if type == "bar" %}
+        {% comment %} Draw Bars {% endcomment %}
+        {% assign bar_count = data.size %}
+        {% assign bar_spacing = plot_width | divided_by: bar_count %}
+        {% assign bar_width = bar_spacing | times: 0.6 %}
+        
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign bar_h = num_val | divided_by: max_val | times: plot_height %}
+          {% assign x_coord = idx | times: bar_spacing | plus: chart_padding_left | plus: bar_spacing | minus: bar_width | divided_by: 2 %}
+          {% assign y_coord = height | minus: chart_padding_bottom | minus: bar_h %}
+          
+          <rect x="{{ x_coord }}" y="{{ y_coord }}" width="{{ bar_width }}" height="{{ bar_h }}" fill="rgba(0, 255, 157, 0.12)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="1.5" rx="2">
+            <title>{{ labels[idx] | strip }}: {{ val }}</title>
+          </rect>
+          
+          <text x="{{ x_coord | plus: bar_width | divided_by: 2 }}" y="{{ height | minus: 15 }}" fill="#8a99ad" font-size="9" text-anchor="middle">{{ labels[idx] | strip }}</text>
+        {% endfor %}
+        
+      {% elsif type == "line" %}
+        {% comment %} Draw Line {% endcomment %}
+        {% assign point_count = data.size %}
+        {% assign divisor = point_count | minus: 1 %}
+        {% if divisor <= 0 %}{% assign divisor = 1 %}{% endif %}
+        {% assign point_spacing = plot_width | divided_by: divisor %}
+        
+        {% comment %} Calculate points string {% endcomment %}
+        {% assign points_str = "" %}
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign point_h = num_val | divided_by: max_val | times: plot_height %}
+          {% assign x_coord = idx | times: point_spacing | plus: chart_padding_left %}
+          {% assign y_coord = height | minus: chart_padding_bottom | minus: point_h %}
+          {% assign points_str = points_str | append: x_coord | append: "," | append: y_coord | append: " " %}
+        {% endfor %}
+        
+        {% comment %} Draw area under line {% endcomment %}
+        {% assign fill_points = points_str | append: width | minus: chart_padding_right | append: "," | append: height | minus: chart_padding_bottom | append: " " | append: chart_padding_left | append: "," | append: height | minus: chart_padding_bottom %}
+        <polygon points="{{ fill_points }}" fill="rgba(0, 255, 157, 0.03)" />
+        
+        {% comment %} Draw path polyline {% endcomment %}
+        <polyline points="{{ points_str }}" fill="none" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="2" />
+        
+        {% comment %} Draw individual points and labels {% endcomment %}
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign point_h = num_val | divided_by: max_val | times: plot_height %}
+          {% assign x_coord = idx | times: point_spacing | plus: chart_padding_left %}
+          {% assign y_coord = height | minus: chart_padding_bottom | minus: point_h %}
+          
+          <circle cx="{{ x_coord }}" cy="{{ y_coord }}" r="4" fill="var(--zd-bg-panel, #161b24)" stroke="var(--zd-clr-highlight, #00ff9d)" stroke-width="1.5">
+            <title>{{ labels[idx] | strip }}: {{ val }}</title>
+          </circle>
+          
+          <text x="{{ x_coord }}" y="{{ height | minus: 15 }}" fill="#8a99ad" font-size="9" text-anchor="middle">{{ labels[idx] | strip }}</text>
+        {% endfor %}
+        
+      {% elsif type == "pie" or type == "doughnut" %}
+        {% comment %} Draw Pie or Doughnut chart using CSS dasharray on radius 15.915494 {% endcomment %}
+        {% assign radius = 15.91549430918954 %}
+        {% assign stroke_w = 31.83 %}
+        {% if type == "doughnut" %}
+          {% assign stroke_w = 12 %}
+        {% endif %}
+        
+        {% comment %} Calculate total sum of values for percentage translation {% endcomment %}
+        {% assign total_sum = 0.0 %}
+        {% for val in data %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign total_sum = total_sum | plus: num_val %}
+        {% endfor %}
+        {% if total_sum == 0.0 %}
+          {% assign total_sum = 1.0 %}
+        {% endif %}
+        
+        {% assign chart_center_x = width | divided_by: 3 | minus: 20 %}
+        <g transform="translate({{ chart_center_x }}, {{ height | divided_by: 2 }}) scale(3)">
+          {% assign cumulative_percent = 0.0 %}
+          {% for val in data %}
+            {% assign idx = forloop.index0 %}
+            {% assign num_val = val | plus: 0.0 %}
+            {% assign percent = num_val | divided_by: total_sum | times: 100.0 %}
+            
+            {% comment %} Select color from pre-defined palette {% endcomment %}
+            {% assign color_idx = idx | modulo: 6 %}
+            {% if color_idx == 0 %}
+              {% assign stroke_color = "#00ff9d" %}
+            {% elsif color_idx == 1 %}
+              {% assign stroke_color = "#b79ced" %}
+            {% elsif color_idx == 2 %}
+              {% assign stroke_color = "#00b4d8" %}
+            {% elsif color_idx == 3 %}
+              {% assign stroke_color = "#ff9f1c" %}
+            {% elsif color_idx == 4 %}
+              {% assign stroke_color = "#e71d36" %}
+            {% else %}
+              {% assign stroke_color = "#2ec4b6" %}
+            {% endif %}
+            
+            {% assign offset = 100.0 | minus: cumulative_percent %}
+            {% if offset == 100.0 %}{% assign offset = 0.0 %}{% endif %}
+            
+            <circle cx="0" cy="0" r="{{ radius }}" fill="none" stroke="{{ stroke_color }}" stroke-width="{{ stroke_w }}" stroke-dasharray="{{ percent }} {{ 100.0 | minus: percent }}" stroke-dashoffset="{{ offset }}" transform="rotate(-90)">
+              <title>{{ labels[idx] | strip }}: {{ val }} ({{ percent | round: 1 }}%)</title>
+            </circle>
+            
+            {% assign cumulative_percent = cumulative_percent | plus: percent %}
+          {% endfor %}
+        </g>
+        
+        {% comment %} Draw Legend on the right side {% endcomment %}
+        {% assign legend_left = width | divided_by: 3 | times: 2 | minus: 20 %}
+        {% assign legend_top = height | divided_by: 2 | minus: data.size | times: 10 %}
+        
+        {% for val in data %}
+          {% assign idx = forloop.index0 %}
+          {% assign num_val = val | plus: 0.0 %}
+          {% assign percent = num_val | divided_by: total_sum | times: 100.0 %}
+          
+          {% assign color_idx = idx | modulo: 6 %}
+          {% if color_idx == 0 %}
+            {% assign stroke_color = "#00ff9d" %}
+          {% elsif color_idx == 1 %}
+            {% assign stroke_color = "#b79ced" %}
+          {% elsif color_idx == 2 %}
+            {% assign stroke_color = "#00b4d8" %}
+          {% elsif color_idx == 3 %}
+            {% assign stroke_color = "#ff9f1c" %}
+          {% elsif color_idx == 4 %}
+            {% assign stroke_color = "#e71d36" %}
+          {% else %}
+            {% assign stroke_color = "#2ec4b6" %}
+          {% endif %}
+          
+          {% assign y_coord = legend_top | plus: idx | times: 20 %}
+          
+          <rect x="{{ legend_left }}" y="{{ y_coord }}" width="10" height="10" fill="{{ stroke_color }}" rx="2" />
+          <text x="{{ legend_left | plus: 18 }}" y="{{ y_coord | plus: 9 }}" fill="#edf1f5" font-size="9">{{ labels[idx] | strip }} ({{ val }} - {{ percent | round: 1 }}%)</text>
+        {% endfor %}
+      {% endif %}
+      
+      {% if type == "bar" or type == "line" %}
+        {% comment %} Draw axis borders {% endcomment %}
+        <line x1="{{ chart_padding_left }}" y1="{{ chart_padding_top }}" x2="{{ chart_padding_left }}" y2="{{ height | minus: chart_padding_bottom }}" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+        <line x1="{{ chart_padding_left }}" y1="{{ height | minus: chart_padding_bottom }}" x2="{{ width | minus: chart_padding_right }}" y2="{{ height | minus: chart_padding_bottom }}" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+      {% endif %}
+      
+    </svg>
+  </div>
+</div>

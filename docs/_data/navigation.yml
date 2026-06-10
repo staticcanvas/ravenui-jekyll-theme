@@ -245,6 +245,11 @@
       url: /components/chartjs/
       icon: bar-chart-2
       description: "Interactive data charts using Chart.js"
+    - text: SVG Charts
+      url: /components/svgcharts/
+      icon: bar-chart
+      description: "Lightweight pure SVG zero-JS data charts"
+
 
 
 
