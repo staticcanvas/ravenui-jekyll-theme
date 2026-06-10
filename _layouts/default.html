@@ -305,10 +305,26 @@
             setupCodeBlocks();
             setupHeadingAnchors();
 
+            // Visited pages tracker for local history
+            try {
+                const currentUrl = window.location.pathname;
+                const currentTitle = document.title || 'Untitled Page';
+                if (currentUrl && currentUrl !== '/' && !currentUrl.includes('/search') && !currentUrl.includes('/blog')) {
+                    let visited = JSON.parse(localStorage.getItem('zd_visited_pages') || '[]');
+                    visited = visited.filter(item => item.url !== currentUrl);
+                    visited.unshift({
+                        url: currentUrl,
+                        title: currentTitle,
+                        timestamp: Date.now()
+                    });
+                    localStorage.setItem('zd_visited_pages', JSON.stringify(visited.slice(0, 20)));
+                }
+            } catch (e) { console.warn("Failed to record visited page:", e); }
+
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
-
             }
+
 
             if (typeof mermaid !== 'undefined') {
                 mermaid.initialize({

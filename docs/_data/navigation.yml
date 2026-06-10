@@ -237,6 +237,11 @@
     - text: Progress Bar
       url: /components/progress/
       icon: activity
+    - text: Previously Read
+      url: /components/previously-read/
+      icon: history
+      description: "localStorage-backed reading history list tracker"
+
 
 - type: separator
 
