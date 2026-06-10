@@ -100,6 +100,10 @@
       url: /components/last-edited/
       icon: clock
       description: "Track and display page modification timestamps"
+    - text: Directory Tree
+      url: /components/tree/
+      icon: folder-git
+      description: "CSS-based folder and file structure tree diagram"
     - text: Sponsored By
       url: /components/sponsored-by/
       icon: heart
