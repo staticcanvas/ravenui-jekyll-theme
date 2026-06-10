@@ -1,13 +1,1 @@
-{% assign color = include.color | default: "ffffff" %}
-{% assign size = include.size | default: "16" %}
-{% assign slug = include.name | downcase | replace: ' ', '-' %}
-
-{% if color contains 'var(--zd-clr-highlight)' or color == '#00ff9d' %}
-    {% assign hex = "00ff9d" %}
-{% elsif color contains '#' %}
-    {% assign hex = color | replace: '#', '' %}
-{% else %}
-    {% assign hex = color %}
-{% endif %}
-
-<img src="https://cdn.simpleicons.org/{{ slug }}/{{ hex }}" class="zd-simple-icon {{ include.class }} {% if include.animation %}zd-anim-{{ include.animation }}{% endif %}{% if include.hover %}zd-hover-{{ include.hover }}{% endif %}" style="width: {{ size }}px; height: {{ size }}px; vertical-align: middle;" alt="{{ include.name }} icon">
+{% assign color = include.color | default: "ffffff" %}{% assign size = include.size | default: "16" %}{% assign slug = include.name | downcase | replace: ' ', '-' %}{% if color contains 'var(--zd-clr-highlight)' or color == '#00ff9d' %}{% assign hex = "00ff9d" %}{% elsif color contains '#' %}{% assign hex = color | replace: '#', '' %}{% else %}{% assign hex = color %}{% endif %}<img src="https://cdn.simpleicons.org/{{ slug }}/{{ hex }}" class="zd-simple-icon {{ include.class }} {% if include.animation %}zd-anim-{{ include.animation }}{% endif %}{% if include.hover %}zd-hover-{{ include.hover }}{% endif %}" style="width: {{ size }}px; height: {{ size }}px; vertical-align: middle;" alt="{{ include.name }} icon">
