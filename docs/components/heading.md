@@ -29,6 +29,18 @@ The `heading.html` component provides a standard way to create section headings 
 
 ---
 
+## **Heading Anchor Links**
+
+ZeroDark SP automatically generates hoverable anchor links (`#`) next to all section headings (`h1` through `h6`) that have an ID.
+
+By default, these links are invisible and fade in when hovering over the heading. You can configure the anchors to be permanently visible (with a subtle opacity) by adding the following setting to your `_config.yml` file:
+
+```yaml
+zd_headings_always_visible: true
+```
+
+---
+
 {% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
@@ -39,3 +51,4 @@ The `heading.html` component provides a standard way to create section headings 
 | `color` | String | Platinum | CSS color for the icon. |
 | `text_color` | String | Platinum | CSS color for the text. |
 | `size` | Integer | `20` | Size of the icon in pixels. |
+

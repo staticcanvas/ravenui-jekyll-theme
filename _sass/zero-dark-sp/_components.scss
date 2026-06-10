@@ -972,3 +972,33 @@ div.highlight::before {
   background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
 }
+
+/* HEADING ANCHORS */
+.zd-heading-anchor {
+  margin-inline-start: 0.5rem;
+  color: var(--zd-clr-highlight, #00ff9d);
+  opacity: 0;
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: opacity 0.2s ease;
+  font-weight: normal;
+  display: inline-block;
+
+  &.always-visible {
+    opacity: 0.45;
+  }
+
+  &:hover, &.always-visible:hover {
+    opacity: 1 !important;
+  }
+}
+
+h1:hover .zd-heading-anchor,
+h2:hover .zd-heading-anchor,
+h3:hover .zd-heading-anchor,
+h4:hover .zd-heading-anchor,
+h5:hover .zd-heading-anchor,
+h6:hover .zd-heading-anchor {
+  opacity: 0.7;
+}
+
