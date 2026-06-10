@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en" }}">
+
+{% include core/head.html %}
+
+<body>
+    {% assign show_progress = site.theme_settings.scroll_progress %}
+    {% if page.scroll_progress == false %}
+        {% assign show_progress = false %}
+    {% elsif page.scroll_progress == true %}
+        {% assign show_progress = true %}
+    {% endif %}
+
+    {% if show_progress %}
+    <div class="zd-progress-container"><div id="zd-progress-bar" class="zd-progress-bar"></div></div>
+    {% endif %}
+
+    <div class="zd-container">
+        <aside class="zd-sidebar-left">
+            {% include core/sidebar.html %}
+        </aside>
+        <script>
+            // Seamless Sidebar Scroll Persistence (Early Execution)
+            (function() {
+                const sidebar = document.querySelector('.zd-sidebar-left');
+                const storedScroll = localStorage.getItem('sidebarScroll');
+                if (sidebar && storedScroll) {
+                    sidebar.scrollTop = parseInt(storedScroll);
+                }
+            })();
+        </script>
+
+        <main class="zd-content">
+            {% include comps/breadcrumbs.html %}
+            {% assign output_title = site.zd_output_title_default | default: true %}
+            {% if page.output-title == false %}
+                {% assign output_title = false %}
+            {% elsif page.output-title == true %}
+                {% assign output_title = true %}
+            {% endif %}
+
+            {% if output_title %}
+            <section class="zd-hero">
+                <h1>{{ page.title }}</h1>
+                {% if page.description %}
+                <p>{{ page.description }}</p>
+                {% endif %}
+                
+                {% if page.tags %}
+                <div class="zd-tag-container">
+                    {% for tag in page.tags %}
+                    <span class="zd-tag">{% include comps/icon.html name="tag" size="10" %} {{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </section>
+            {% endif %}
+
+            {{ content }}
+            
+            {% include comps/page-nav.html %}
+            {% include core/footer.html %}
+        </main>
+
+        <div id="zd-page-toc-container" class="zd-page-toc-container" style="display: none;">
+            <h4 class="zd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
+            <nav id="zd-page-toc" class="zd-page-toc"></nav>
+        </div>
+
+        <aside class="zd-sidebar-right">
+            <!-- TOC content is moved to a top-level container to support mobile visibility -->
+        </aside>
+    </div>
+
+    <div id="zd-search-modal" class="zd-search-modal">
+        <div class="zd-search-modal-backdrop" id="zd-search-backdrop"></div>
+        <div class="zd-search-modal-content">
+            <header class="zd-search-modal-header">
+                <div id="zd-search-ui"></div>
+            </header>
+        </div>
+    </div>
+
+    <div class="zd-mobile-controls">
+        <button id="zd-nav-toggle" class="zd-mobile-btn" aria-label="Toggle Navigation">
+            {% include comps/icon.html name="menu" size="20" %}
+        </button>
+        <button id="zd-toc-toggle" class="zd-toc-toggle zd-mobile-btn" aria-label="Toggle Table of Contents">
+            <span class="zd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
+        </button>
+    </div>
+
+    <script type="module">
+        /* 🌑 ZERODARK SP Core Utilities v1.3.4 */
+        
+        // 0. Global State & Elements
+        const searchModal = document.getElementById('zd-search-modal');
+        const searchBackdrop = document.getElementById('zd-search-backdrop');
+        const searchTrigger = document.getElementById('zd-search-trigger');
+        const navToggle = document.getElementById('zd-nav-toggle');
+        const sidebarLeft = document.querySelector('.zd-sidebar-left');
+        const contentArea = document.querySelector('.zd-content');
+        const tocContainer = document.getElementById('zd-page-toc-container');
+        const tocNav = document.getElementById('zd-page-toc');
+        const tocToggle = document.getElementById('zd-toc-toggle');
+        const progressBar = document.getElementById('zd-progress-bar');
+
+        // 1. Search Logic
+        function openSearch() {
+            if (!searchModal) return;
+            searchModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const input = document.querySelector('.pagefind-ui__search-input');
+                if (input) input.focus();
+            }, 100);
+        }
+
+        function closeSearch() {
+            if (!searchModal) return;
+            searchModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (searchTrigger) searchTrigger.addEventListener('click', openSearch);
+        if (searchBackdrop) searchBackdrop.addEventListener('click', closeSearch);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                e.preventDefault();
+                openSearch();
+            }
+            if (e.key === 'Escape') closeSearch();
+        });
+
+        // 2. Mobile Nav Logic
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                sidebarLeft.classList.toggle('active');
+                navToggle.classList.toggle('active');
+                if (window.innerWidth < 1024) {
+                    if (tocContainer) tocContainer.classList.remove('active');
+                    if (tocToggle) tocToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // 3. TOC Generation & Scroll-Spy
+        function generateTOC() {
+            if (!contentArea || !tocNav) return;
+            const tocLevels = {{ site.zd_toc_levels | jsonify }} || ["h2", "h3"];
+            const selector = tocLevels.join(', ');
+            const headings = contentArea.querySelectorAll(selector);
+            if (headings.length === 0) return;
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-5% 0px -75% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('.zd-toc-link').forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            headings.forEach((heading, index) => {
+                const id = heading.id || `heading-${index}`;
+                heading.id = id;
+                
+                const link = document.createElement('a');
+                link.href = `#${id}`;
+                link.textContent = heading.textContent.replace(/[^\x00-\x7F]/g, "").trim();
+                link.className = `zd-toc-link zd-toc-level-${heading.tagName.toLowerCase()}`;
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 1024) {
+                        tocContainer.classList.remove('active');
+                        tocToggle.classList.remove('active');
+                    }
+                });
+                tocNav.appendChild(link);
+                observer.observe(heading);
+            });
+            
+            tocContainer.style.display = 'block';
+            if (window.innerWidth >= 1024) {
+                {% if site.zd_toc_default_open %}
+                tocContainer.classList.add('active'); 
+                if (tocToggle) tocToggle.classList.add('active');
+                {% endif %}
+            }
+        }
+
+        if (tocToggle) {
+            tocToggle.addEventListener('click', () => {
+                tocContainer.classList.toggle('active');
+                tocToggle.classList.toggle('active');
+                if (window.innerWidth < 1024) {
+                    sidebarLeft.classList.remove('active');
+                    if (navToggle) navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // 4. Code Block Utilities
+        function setupCodeBlocks() {
+            document.querySelectorAll('div.highlight').forEach(block => {
+                if (block.querySelector('.zd-copy-btn')) return;
+
+                {% if site.zd_code_copy %}
+                const btn = document.createElement('button');
+                btn.className = 'zd-copy-btn';
+                btn.textContent = 'COPY';
+                
+                btn.addEventListener('click', () => {
+                    const codeElement = block.querySelector('code');
+                    const code = codeElement ? codeElement.innerText : block.innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        btn.textContent = 'COPIED';
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = 'COPY';
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    });
+                });
+                block.appendChild(btn);
+                {% endif %}
+                
+                {% if site.zd_code_lang %}
+                if (!block.getAttribute('data-lang') || block.getAttribute('data-lang') === 'code') {
+                    const parent = block.closest('.highlighter-rouge');
+                    const langClass = parent ? Array.from(parent.classList).find(c => c.startsWith('language-')) : null;
+                    if (langClass) {
+                        block.setAttribute('data-lang', langClass.replace('language-', ''));
+                    } else {
+                        const pre = block.querySelector('pre');
+                        const preLangClass = pre ? Array.from(pre.classList).find(c => c.startsWith('language-')) : null;
+                        if (preLangClass) {
+                            block.setAttribute('data-lang', preLangClass.replace('language-', ''));
+                        } else {
+                            block.setAttribute('data-lang', 'text');
+                        }
+                    }
+                }
+                {% endif %}
+            });
+        }
+
+        // 5. Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            // Pagefind
+            if (typeof PagefindUI !== 'undefined') {
+                try {
+                    new PagefindUI({
+                        element: "#zd-search-ui",
+                        showSubResults: true,
+                        showImages: false,
+                        resetStyles: false,
+                        translations: { placeholder: "Search documentation..." }
+                    });
+                } catch (e) { console.warn("Pagefind UI failed:", e); }
+            }
+
+            // Progress Bar
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + "%";
+                });
+            }
+
+            generateTOC();
+            setupCodeBlocks();
+
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'dark',
+                    securityLevel: 'loose',
+                    themeVariables: {
+                        primaryColor: '#161b24',
+                        primaryTextColor: '#edf1f5',
+                        primaryBorderColor: '#25303d',
+                        lineColor: '#00ff9d',
+                        secondaryColor: '#1e2530',
+                        tertiaryColor: '#2a3340'
+                    }
+                });
+            }
+
+
+            // Sidebar Active Link Visibility & Persistence
+            if (sidebarLeft) {
+                const activeLink = document.querySelector('.zd-nav-link[aria-current="page"]');
+                
+                // Fallback: Ensure active link is visible if not already in viewport
+                if (activeLink) {
+                    activeLink.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                }
+
+                // Persist scroll position on every scroll event
+                sidebarLeft.addEventListener('scroll', () => {
+                    localStorage.setItem('sidebarScroll', sidebarLeft.scrollTop);
+                }, { passive: true });
+            }
+
+            // {% if site.zd_debug %}
+            // // 6. Debug Utilities (LogCAD & SnailTrail)
+            // try {
+            //     const { LogCAD } = await import('https://esm.sh/@staticcanvas/logcad');
+            //     const { SnailTrail } = await import('https://esm.sh/@staticcanvas/snailtrail');
+
+            //     const logger = new LogCAD({ tag: 'ZeroDark' });
+            //     logger.info('System Online', { version: '1.3.4' });
+
+            //     new SnailTrail({
+            //         position: 'bottom-right',
+            //         theme: 'dark'
+            //     });
+            // } catch (e) {
+            //     console.warn('Debug utilities failed to load:', e);
+            // }
+            // {% endif %}
+        });
+    </script>
+</body>
+
+</html>

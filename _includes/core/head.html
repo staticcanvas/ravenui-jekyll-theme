@@ -1,0 +1,71 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "ZeroDark" }}</title>
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+    
+    {% if site.zd_use_cdn != false %}
+        <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.min.js"></script>
+        {% if site.font_awesome %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        {% endif %}
+    {% else %}
+        <script src="{{ "/assets/js/vendor/lucide.0.400.0.min.js" | relative_url }}"></script>
+        {% if site.font_awesome %}
+        <link rel="stylesheet" href="{{ "/assets/css/vendor/fontawesome.6.5.2.min.css" | relative_url }}">
+        {% endif %}
+    {% endif %}
+
+    <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
+    {% if site.description %}
+    <meta name="description" content="{{ site.description }}">
+    {% endif %}
+    {% seo %}
+
+    <style>
+        :root {
+            {% assign spacing = site.zd_nav_spacing | default: "compact" %}
+            {% if spacing == "compact" %}
+                --zd-nav-padding: 0rem;
+                --zd-heading-margin: 0.5rem;
+                --zd-hero-padding: 0.5rem;
+                --zd-content-margin: 0.75rem;
+            {% elsif spacing == "tight" %}
+                --zd-nav-padding: 0.25rem;
+                --zd-heading-margin: 0.75rem;
+                --zd-hero-padding: 1rem;
+                --zd-content-margin: 1rem;
+            {% elsif spacing == "comfy" %}
+                --zd-nav-padding: 0.3rem;
+                --zd-heading-margin: 1.5rem;
+                --zd-hero-padding: 2rem;
+                --zd-content-margin: 1.5rem;
+            {% elsif spacing == "spacy" %}
+                --zd-nav-padding: 0.5rem;
+                --zd-heading-margin: 2.5rem;
+                --zd-hero-padding: 4rem;
+                --zd-content-margin: 2rem;
+            {% else %}
+                --zd-nav-padding: 0rem;
+                --zd-heading-margin: 1rem;
+                --zd-hero-padding: 1rem;
+                --zd-content-margin: 1.5rem;
+            {% endif %}
+        }
+    </style>
+    
+    {% if site.math or page.math %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    {% endif %}
+
+    {% if site.mermaid or page.mermaid %}
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.4/dist/mermaid.min.js"></script>
+    {% endif %}
+</head>
+
