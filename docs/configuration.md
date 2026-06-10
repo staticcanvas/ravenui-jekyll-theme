@@ -120,3 +120,26 @@ Below are the third-party assets integrated into ZeroDark SP:
 
 > [!NOTE]
 > If `zd_use_cdn` is set to `false`, make sure the corresponding vendor files are present in your site's local assets.
+
+---
+
+## **Google Analytics Integration**
+
+ZeroDark SP features native integration with Google Analytics 4 (GA4), including automatic outbound link click tracking and file download tracking.
+
+### **Setup**
+
+To enable Google Analytics, add your measurement ID to your root `_config.yml` file:
+
+```yaml
+google_analytics: G-XXXXXXXXXX
+```
+
+Once defined, the theme will automatically load the global tag script (`gtag.js`) on every page.
+
+### **Auto-Event Tracking**
+
+The theme automatically listens for click events on links and logs the following events:
+- **Outbound Link Clicks**: Clicks to external domains are tracked with the event category `outbound_link`.
+- **File Downloads**: Clicks to download files (matching `.zip`, `.tar`, `.gz`, `.pdf`, `.gem`, `.gemspec`) are logged with the event category `download`.
+

@@ -58,8 +58,11 @@ ZeroDark SP includes a wide range of custom components to help you build profess
 - title: Example Block
   url: /components/example-block/
   icon: box
+- title: Command Reference
+  url: /components/command-ref/
+  icon: terminal
 - title: API Reference
-  url: /components/api-ref/
+  url: /components/api-reference/
   icon: code
 " | from_yaml %}
 {% include comps/card-index.html section="Interactive & Code" items=interactive_items %}

@@ -253,6 +253,29 @@
             });
         }
 
+        // 4.5. Heading Anchor Links
+        function setupHeadingAnchors() {
+            if (!contentArea) return;
+            const alwaysVisible = {% if site.zd_headings_always_visible %}true{% else %}false{% endif %};
+            const headings = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            headings.forEach(heading => {
+                if (!heading.id) return;
+                if (heading.tagName === 'H1' && heading.closest('.zd-hero')) return;
+                if (heading.querySelector('.zd-heading-anchor')) return;
+                
+                const anchor = document.createElement('a');
+                anchor.className = 'zd-heading-anchor';
+                if (alwaysVisible) {
+                    anchor.classList.add('always-visible');
+                }
+                anchor.href = `#${heading.id}`;
+                anchor.ariaLabel = `Link to this section`;
+                anchor.textContent = '#';
+                
+                heading.appendChild(anchor);
+            });
+        }
+
         // 5. Initialization
         window.addEventListener('DOMContentLoaded', () => {
             // Pagefind
@@ -280,10 +303,28 @@
 
             generateTOC();
             setupCodeBlocks();
+            setupHeadingAnchors();
+
+            // Visited pages tracker for local history
+            try {
+                const currentUrl = window.location.pathname;
+                const currentTitle = document.title || 'Untitled Page';
+                if (currentUrl && currentUrl !== '/' && !currentUrl.includes('/search') && !currentUrl.includes('/blog')) {
+                    let visited = JSON.parse(localStorage.getItem('zd_visited_pages') || '[]');
+                    visited = visited.filter(item => item.url !== currentUrl);
+                    visited.unshift({
+                        url: currentUrl,
+                        title: currentTitle,
+                        timestamp: Date.now()
+                    });
+                    localStorage.setItem('zd_visited_pages', JSON.stringify(visited.slice(0, 20)));
+                }
+            } catch (e) { console.warn("Failed to record visited page:", e); }
 
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+
 
             if (typeof mermaid !== 'undefined') {
                 mermaid.initialize({

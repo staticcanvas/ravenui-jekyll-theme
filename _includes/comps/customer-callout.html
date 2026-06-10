@@ -1,0 +1,40 @@
+{% assign quote = include.quote %}
+{% assign author = include.author %}
+{% assign role = include.role %}
+{% assign avatar = include.avatar %}
+{% assign rating = include.rating | plus: 0 %}
+{% assign color = include.color | default: "var(--zd-clr-highlight)" %}
+
+{% if quote %}
+<div class="zd-customer-callout {{ include.class }}" style="--callout-accent: {{ color }};">
+  {% if rating > 0 %}
+  <div class="zd-customer-callout-rating">
+    {% for i in (1..5) %}
+      {% if i <= rating %}
+        {% include comps/icon.html name="star" size=12 class="zd-star--filled" %}
+      {% else %}
+        {% include comps/icon.html name="star" size=12 class="zd-star--empty" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  
+  <blockquote class="zd-customer-callout-quote">
+    “{{ quote }}”
+  </blockquote>
+  
+  <div class="zd-customer-callout-footer">
+    {% if avatar %}
+    <div class="zd-customer-callout-avatar-wrap">
+      <img src="{{ avatar | relative_url }}" alt="{{ author }}" class="zd-customer-callout-avatar" loading="lazy" />
+    </div>
+    {% endif %}
+    <div class="zd-customer-callout-meta">
+      <strong class="zd-customer-callout-author">{{ author }}</strong>
+      {% if role %}
+      <span class="zd-customer-callout-role">{{ role }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}

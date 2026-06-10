@@ -31,4 +31,4 @@ The `card-index.html` component generates a grid of visual cards based on a spec
 
 ---
 
-{% include comps/callout.html type="tip" title="Dynamic Cards" content="To add descriptions to the cards, simply add a `description` field to your links in `navigation.yml`. The component will automatically pick them up." %}
+{% include comps/callout.html type="tip" title="Dynamic Cards" content="To add descriptions to the cards, add a `description` field to your links in `navigation.yml`. The component will automatically pick them up." %}

@@ -1,0 +1,37 @@
+{% assign video_id = include.id %}
+{% assign aspect_ratio = include.aspect_ratio | default: "16/9" %}
+{% assign title = include.title | default: "YouTube video player" %}
+{% assign autoplay = include.autoplay | default: false %}
+{% assign mute = include.mute | default: false %}
+{% assign start = include.start %}
+
+{% if video_id %}
+  {% assign embed_url = "https://www.youtube-nocookie.com/embed/" | append: video_id %}
+  {% assign query_params = "" %}
+  
+  {% if autoplay %}
+    {% assign query_params = query_params | append: "autoplay=1&" %}
+  {% endif %}
+  {% if mute %}
+    {% assign query_params = query_params | append: "mute=1&" %}
+  {% endif %}
+  {% if start %}
+    {% assign query_params = query_params | append: "start=" | append: start | append: "&" %}
+  {% endif %}
+  
+  {% if query_params != "" %}
+    {% assign embed_url = embed_url | append: "?" | append: query_params %}
+  {% endif %}
+
+  <div class="zd-youtube-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }};">
+    <iframe
+      src="{{ embed_url }}"
+      title="{{ title | escape }}"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+{% endif %}

@@ -66,31 +66,31 @@
 
 ## Extended Components
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
-- [ ] Written-by component.
+- [x] Written-by component.
 - [ ] svgcharts component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
 - [ ] chartjs component - support for line, bar, pie, doughnut, radar, polar area, bubble, also support sourcing from site.data.placeholderName and scatter charts, update docs to reflect feature.
 - [ ] other well known charting libraries, maybe we can make a generic chart component that can be used for any charting library, update docs to reflect feature.
-- [ ] codepen component - allows users to embed CodePens with ease, update docs to reflect feature.
-- [ ] code sandbox component - allows users to embed CodeSandboxes with ease, update docs to reflect feature.
-- [ ] youtube component - allows users to embed YouTube videos with ease, update docs to reflect feature.
-- [ ] sponsored-by component - allows users to add a sponsored by section with logo and link to sponsor, update docs to reflect feature.
-- [ ] customer callout component - users that have used the product and liked it.
-- [ ] new component: last edited. Should have the last edited date and author. This can be enabled in _config; defaults to showing edited date and time.
-- [ ] image component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
-- [ ] iframe component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
-- [ ] rendered-el-showcase.html - wraps the element in another element with an SVG containing tilted vertical lines, a title, and logo as an example of rendered code. We allow users to specify title name, size, and icon.
-- [ ] headings "link" anchor invisible by default, user can enable always visible in _config, update docs to reflect feature.
-- [ ] previously read: a localStorage-backed page tracker that can be used to show users which pages they have already read, update docs to reflect feature.
-- [ ] enable Google Analytics and update docs to reflect feature.
-- [ ] enable posting to Google Analytics when a user clicks on a link, update docs to reflect feature.
+- [x] codepen component - allows users to embed CodePens with ease, update docs to reflect feature.
+- [x] code sandbox component - allows users to embed CodeSandboxes with ease, update docs to reflect feature.
+- [x] youtube component - allows users to embed YouTube videos with ease, update docs to reflect feature.
+- [x] sponsored-by component - allows users to add a sponsored by section with logo and link to sponsor, update docs to reflect feature.
+- [x] customer callout component - users that have used the product and liked it.
+- [x] new component: last edited. Should have the last edited date and author. This can be enabled in _config; defaults to showing edited date and time.
+- [x] image component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
+- [x] iframe component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
+- [x] rendered-el-showcase.html - wraps the element in another element with an SVG containing tilted vertical lines, a title, and logo as an example of rendered code. We allow users to specify title name, size, and icon.
+- [x] headings "link" anchor invisible by default, user can enable always visible in _config, update docs to reflect feature.
+- [x] previously read: a localStorage-backed page tracker that can be used to show users which pages they have already read, update docs to reflect feature.
+- [x] enable Google Analytics and update docs to reflect feature.
+- [x] enable posting to Google Analytics when a user clicks on a link, update docs to reflect feature.
 - [x] **Shields.io Badges:** Implemented shield component and documented it.
 - [x] **Badges Component:** Supported via the new customizable tag and shield components.
-- [ ] Image carousel component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
+- [x] Image carousel component - supports lazy loading, blur up, and different sizes for responsive design, update docs to reflect feature.
 - [x] **Typewriter Component:** Implemented typewriter component and documented it.
 - [x] **FAQ Accordion:** Implemented FAQ component and FAQ item component, and documented usage.
-- [ ] Make sure all markdown elements are themed correctly to match the theme, update docs to reflect feature.
-- [ ] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
-- [ ] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
+- [x] Make sure all markdown elements are themed correctly to match the theme, update docs to reflect feature.
+- [x] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
+- [x] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
 - [x] **Custom HR:** Implemented `hr.html` component supporting gradient lines and centered text/icons.
 
 ## Bug Fixes
@@ -110,10 +110,11 @@
 - [x] **Liquid IRL Guide:** Created `docs/liquid-irl.md` demonstrating how to use theme-specific CSS utility classes.
 - [x] **Specialist Layouts:** Implemented "Portfolio", "Metrics/Stats", and "Hero Showcase" templates.
 - [x] **Releases & Tags Documentation:** Created `docs/releases.md` with usage examples for `releases.html` and `tags.html`.
+- [x] **picsum** for show casing images in the docs use https://picsum.photos/200/300 for random images
 
 ## Release Hardening
-- [ ] Check comps/* components that do not have corresponding docs/* documentation pages.
-- [ ] Refine documentation sections to make them clear, robust, and technical.
-- [ ] Remove any loose tone, focusing on professional and robust documentation.
+- [x] Check comps/* components that do not have corresponding docs/* documentation pages.
+- [x] Refine documentation sections to make them clear, robust, and technical.
+- [x] Remove any loose tone, focusing on professional and robust documentation.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.

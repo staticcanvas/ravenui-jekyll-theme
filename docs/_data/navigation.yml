@@ -92,6 +92,25 @@
     - text: Page Navigation
       url: /components/page-nav/
       icon: navigation
+    - text: Written By
+      url: /components/written-by/
+      icon: user
+      description: "Show author metadata, bio, avatar, and social handles"
+    - text: Last Edited
+      url: /components/last-edited/
+      icon: clock
+      description: "Track and display page modification timestamps"
+    - text: Sponsored By
+      url: /components/sponsored-by/
+      icon: heart
+      description: "Grid of partner or sponsor logos and links"
+    - text: Rendered Showcase
+      url: /components/rendered-el-showcase/
+      icon: eye
+      description: "Display rendered UI elements in a technical grid frame"
+
+
+
 
 - title: Elements & Media
   links:
@@ -142,6 +161,24 @@
     - text: Horizontal Separator (HR)
       url: /components/hr/
       icon: minus
+    - text: YouTube Embed
+      url: /components/youtube/
+      icon: video
+      description: "Privacy-friendly responsive YouTube video player embeds"
+    - text: Responsive Iframe
+      url: /components/iframe/
+      icon: monitor
+      description: "Embed external pages responsively with built-in loading spinner"
+    - text: Image Component
+      url: /components/image/
+      icon: image
+      description: "Progressive lazy loading images with blur-up support"
+    - text: Image Carousel
+      url: /components/carousel/
+      icon: image
+      description: "Responsive sliding image deck with navigation controls"
+
+
 
 - title: Interactive & Code
   links:
@@ -151,6 +188,11 @@
     - text: Inline Callout
       url: /components/inline-callout/
       icon: alert-circle
+    - text: Customer Callout
+      url: /components/customer-callout/
+      icon: star
+      description: "Review and testimonial cards with star ratings"
+
     - text: Package Tabs
       url: /components/package-tabs/
       icon: package
@@ -160,12 +202,27 @@
     - text: Example Block
       url: /components/example-block/
       icon: box
+    - text: Command Reference
+      url: /components/command-ref/
+      icon: terminal
     - text: API Reference
-      url: /components/api-ref/
+      url: /components/api-reference/
       icon: code
+
     - text: FAQ Accordion
       url: /components/faq/
       icon: help-circle
+    - text: CodePen Embed
+      url: /components/codepen/
+      icon: codepen
+      source: simple
+      description: "Embed interactive pens from CodePen"
+    - text: CodeSandbox Embed
+      url: /components/codesandbox/
+      icon: codesandbox
+      source: simple
+      description: "Embed sandbox web environments from CodeSandbox"
+
 
 - title: Data & History
   links:
@@ -184,6 +241,21 @@
     - text: Progress Bar
       url: /components/progress/
       icon: activity
+    - text: Previously Read
+      url: /components/previously-read/
+      icon: history
+      description: "localStorage-backed reading history list tracker"
+    - text: Chart.js
+      url: /components/chartjs/
+      icon: bar-chart-2
+      description: "Interactive data charts using Chart.js"
+    - text: SVG Charts
+      url: /components/svgcharts/
+      icon: bar-chart
+      description: "Lightweight pure SVG zero-JS data charts"
+
+
+
 
 - type: separator
 

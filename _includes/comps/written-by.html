@@ -1,0 +1,52 @@
+{% assign author_name = include.name | default: page.author | default: site.author.name | default: site.author %}
+{% assign author_avatar = include.avatar | default: site.author.avatar %}
+{% assign author_role = include.role | default: site.author.role %}
+{% assign author_bio = include.bio | default: site.author.bio %}
+{% assign author_twitter = include.twitter | default: site.author.twitter %}
+{% assign author_github = include.github | default: site.author.github %}
+{% assign author_linkedin = include.linkedin | default: site.author.linkedin %}
+{% assign author_email = include.email | default: site.author.email %}
+
+<div class="zd-written-by" style="--author-color: {{ include.color | default: 'var(--zd-clr-highlight)' }};">
+    {% if author_avatar %}
+    <div class="zd-written-by-avatar-wrap">
+        <img src="{{ author_avatar | relative_url }}" alt="{{ author_name }}" class="zd-written-by-avatar" loading="lazy" />
+    </div>
+    {% endif %}
+    <div class="zd-written-by-content">
+        <div class="zd-written-by-header">
+            <div class="zd-written-by-meta">
+                <span class="zd-written-by-label">{{ include.label | default: "Written By" }}</span>
+                <h4 class="zd-written-by-name">{{ author_name }}</h4>
+                {% if author_role %}
+                <span class="zd-written-by-role">{{ author_role }}</span>
+                {% endif %}
+            </div>
+            <div class="zd-written-by-socials">
+                {% if author_github %}
+                <a href="https://github.com/{{ author_github }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    {% include comps/icon.html name="github" size=14 %}
+                </a>
+                {% endif %}
+                {% if author_twitter %}
+                <a href="https://twitter.com/{{ author_twitter }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="Twitter">
+                    {% include comps/icon.html name="twitter" size=14 %}
+                </a>
+                {% endif %}
+                {% if author_linkedin %}
+                <a href="https://linkedin.com/in/{{ author_linkedin }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                    {% include comps/icon.html name="linkedin" size=14 %}
+                </a>
+                {% endif %}
+                {% if author_email %}
+                <a href="mailto:{{ author_email }}" class="zd-written-by-social" title="Email">
+                    {% include comps/icon.html name="mail" size=14 %}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% if author_bio %}
+        <p class="zd-written-by-bio">{{ author_bio }}</p>
+        {% endif %}
+    </div>
+</div>
