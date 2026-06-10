@@ -14,9 +14,13 @@ We have extended the default Jekyll/Kramdown rendering to match the theme's prof
 > ZeroDark SP blockquotes feature a subtle accent border and muted text, perfect for secondary information or context.
 
 #### Inline Code
-Use backticks for `inline code snippets`. These use the **JetBrains Mono** font and a subtle background highlight.
+Use backticks for `inline code snippets`. These use the font family configured for mono text with a subtle background highlight.
+
+#### Keyboard Shortcuts
+You can render styled keys like <kbd>Ctrl</kbd> + <kbd>/</kbd> to document shortcuts.
 
 ---
+
 
 {% include comps/heading.html tag="h2" text="Code Blocks" icon="code" size=20 %}
 
