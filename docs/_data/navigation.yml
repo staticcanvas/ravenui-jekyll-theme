@@ -1,0 +1,211 @@
+- title: Documentation
+  type: title
+
+- title: Getting Started
+  links:
+    - text: Introduction
+      url: /
+      icon: home
+      color: "#00ff9d"
+    - text: Installation
+      url: /installation/
+      icon: download
+      color: "#3399ff"
+
+- title: Blog
+  links:
+    - text: Blog Index
+      url: /blog/
+      icon: book-open
+    - text: Latest Post
+      url: /posts/
+      icon: file-text
+
+- title: Configuration
+  links:
+    - text: Site Settings
+      url: /configuration/
+      icon: settings
+      color: "#ffcc00"
+    - text: Navigation
+      url: /navigation/
+      icon: menu
+    - text: Search Integration
+      url: /search/
+      icon: search
+
+- type: separator
+
+- title: Component Library
+  type: title
+
+- title: Layouts & UI
+  links:
+    - text: Core Layouts
+      url: /layouts/
+      icon: layout
+    - text: Splash Pages
+      url: /splash-pages/
+      icon: monitor
+      color: "#3399ff"
+    - text: Markdown Overrides
+      url: /markdown/
+      icon: type
+    - text: Liquid IRL
+      url: /liquid-irl/
+      icon: code
+      color: "#ffcc00"
+    - text: Theme Colors
+      url: /theme-colors/
+      icon: palette
+      color: "#00ff9d"
+
+- title: Component Index
+  links:
+    - text: Component Gallery
+      url: /components/
+      icon: package
+
+- title: Display & Layout
+  links:
+    - text: Card
+      url: /components/card/
+      icon: square
+    - text: Feature Card
+      url: /components/feature-card/
+      icon: zap
+    - text: Feature Grid
+      url: /components/feature-grid/
+      icon: grid
+    - text: Hero Card
+      url: /components/hero-card/
+      icon: monitor
+    - text: Card Index
+      url: /components/card-index/
+      icon: layers
+    - text: Heading
+      url: /components/heading/
+      icon: type
+    - text: Breadcrumbs
+      url: /components/breadcrumbs/
+      icon: map
+    - text: Page Navigation
+      url: /components/page-nav/
+      icon: navigation
+
+- title: Elements & Media
+  links:
+    - text: Button
+      url: /components/button/
+      icon: cursor-pointer
+      description: "Clickable buttons for actions and links"
+    - text: Icon
+      url: /components/icon/
+      icon: star
+      description: "Visual icons for enhancing UI"
+    - text: Simple Icon
+      url: /components/simple-icon/
+      icon: github
+      source: simple
+      description: "Brand and service logos from Simple Icons"
+    - text: Font Awesome
+      url: /components/font-awesome/
+      icon: flag
+      description: "Traditional vector icons from Font Awesome"
+    - text: Tags
+      url: /components/tags/
+      icon: tag
+    - text: Tag Component
+      url: /components/tag/
+      icon: tag
+    - text: Gradient Text
+      url: /components/gradient-text/
+      icon: type
+    - text: Color Block
+      url: /components/color-block/
+      icon: palette
+    - text: Grid Palette
+      url: /components/grid-palette/
+      icon: grid
+    - text: Terminal
+      url: /components/terminal/
+      icon: terminal
+    - text: VHS Effect
+      url: /components/vhs/
+      icon: monitor
+
+- title: Interactive & Code
+  links:
+    - text: Callout
+      url: /components/callout/
+      icon: alert-circle
+    - text: Inline Callout
+      url: /components/inline-callout/
+      icon: alert-circle
+    - text: Package Tabs
+      url: /components/package-tabs/
+      icon: package
+    - text: Example Code
+      url: /components/example-code/
+      icon: code
+    - text: Example Block
+      url: /components/example-block/
+      icon: box
+    - text: API Reference
+      url: /components/api-ref/
+      icon: code
+
+- title: Data & History
+  links:
+    - text: Roadmap
+      url: /components/roadmap/
+      icon: map
+    - text: Roadmap Item
+      url: /components/roadmap-item/
+      icon: map-pin
+    - text: Releases
+      url: /components/releases/
+      icon: package
+    - text: Git Tags
+      url: /components/git-tags/
+      icon: tag
+
+- type: separator
+
+- title: Deployment
+  type: title
+
+- title: Hosting & Platforms
+  links:
+    - text: GitHub
+      url: /deployment/github/
+      icon: github
+      source: simple
+    - text: GitLab
+      url: /deployment/gitlab/
+      icon: gitlab
+      source: simple
+    - text: Cloudflare
+      url: /deployment/cloudflare/
+      icon: cloudflare
+      source: simple
+    - text: Netlify
+      url: /deployment/netlify/
+      icon: netlify
+      source: simple
+    - text: Vercel
+      url: /deployment/vercel/
+      icon: vercel
+      source: simple
+    - text: Other Platforms
+      url: /deployment/other/
+      icon: globe
+
+- type: separator
+
+- title: Advanced
+  links:
+    - text: Customization
+      url: /customization/
+      icon: sliders
+      color: "#3399ff"
