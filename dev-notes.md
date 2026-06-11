@@ -136,6 +136,7 @@
 - [x] **Timeline** - Vertical chronological list. Each entry: date, heading, body. Reads from YAML.
 - because we have alot of components that depend on other components, lets document this in the liquid comments and in documentation, for documentation perhaps can can add dependancies to yaml header abd have it either dont output if empty of auto output , lets create a dependency conponent, to beautifully so this - i think this will help development and expansion.
 - htags and and toc, because we use htags in components toc can sometimes be off, can we refine to only pick up htags that are part of the main content so toc is correct.
+- [x] **CI-Bundler-Issue** - bundler before script dont like to be ran as root, ive remove the before script for global scope and attched it to build stage. unsure how to fix this. this is causing build to fail - source bundler docs and find fix.
 
 --- MULTILINE TASK:---
 
