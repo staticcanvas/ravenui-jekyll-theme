@@ -254,6 +254,10 @@
       icon: codesandbox
       source: simple
       description: "Embed sandbox web environments from CodeSandbox"
+    - text: Modal / Dialog
+      url: /components/modal/
+      icon: maximize
+      description: "Accessible dialog overlay with focus trap and ESC close"
 
 
 - title: Data & History
@@ -289,6 +293,18 @@
       url: /components/svgcharts/
       icon: bar-chart
       description: "Lightweight pure SVG zero-JS data charts"
+    - text: Data Table
+      url: /components/datatable/
+      icon: table
+      description: "Interactive table with search, sorting, and pagination"
+    - text: Timeline
+      url: /components/timeline/
+      icon: activity
+      description: "Chronological vertical timeline list for milestones"
+    - text: Tag Cloud
+      url: /components/tag-cloud/
+      icon: tag
+      description: "Interactive tag cloud sized by post counts"
 
 
 

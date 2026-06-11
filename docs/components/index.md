@@ -64,6 +64,9 @@ ZeroDark SP includes a wide range of custom components to help you build profess
 - title: API Reference
   url: /components/api-reference/
   icon: code
+- title: Modal / Dialog
+  url: /components/modal/
+  icon: maximize
 " | from_yaml %}
 {% include comps/card-index.html section="Interactive & Code" items=interactive_items %}
 

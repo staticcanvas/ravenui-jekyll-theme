@@ -1,0 +1,274 @@
+{%- comment -%}
+Component__: DataTable
+Purpose____: Displays structured data from JSON, YAML, or CSV with sorting, filtering, and pagination.
+Caveats____: Output is enhanced via Vanilla JS. Table headers can be passed as an array of objects or a comma-separated string.
+Usage______: {% include comps/datatable.html data_source="table1" headers="name:Name,role:Role,loc:Location" %}
+{%- endcomment -%}
+
+{%- assign items = include.items | default: site.data[include.data_source] -%}
+
+{%- if include.headers[0].key -%}
+  {%- assign headers_type = "array" -%}
+  {%- assign table_headers = include.headers -%}
+{%- else -%}
+  {%- assign headers_type = "string" -%}
+  {%- assign table_headers = include.headers | split: "," -%}
+{%- endif -%}
+
+{%- capture temp_random -%}
+  {%- increment zd_table_counter -%}
+{%- endcapture -%}
+
+{%- assign table_id = include.id | default: "zd-table-" | append: temp_random -%}
+
+<div class="zd-datatable-container" id="{{ table_id }}" class="{{ include.class }}">
+  <!-- Controls -->
+  <div class="zd-datatable-controls">
+    <div class="zd-datatable-search-wrapper">
+      <input type="text" class="zd-datatable-search" placeholder="Search table..." aria-label="Search table">
+    </div>
+    <div class="zd-datatable-length-wrapper">
+      <label>Show 
+        <select class="zd-datatable-length">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select> entries
+      </label>
+    </div>
+  </div>
+
+  <!-- Table Scroll Container -->
+  <div class="zd-datatable-scroll">
+    <table class="zd-datatable">
+      <thead>
+        <tr>
+          {%- for header in table_headers -%}
+            {%- if headers_type == "array" -%}
+              {%- assign key = header.key -%}
+              {%- assign label = header.label -%}
+            {%- else -%}
+              {%- assign parts = header | split: ":" -%}
+              {%- assign key = parts[0] | strip -%}
+              {%- assign label = parts[1] | default: key | strip -%}
+            {%- endif -%}
+            <th class="zd-sortable" data-column="{{ key }}" tabindex="0" role="columnheader" aria-sort="none">
+              <span class="zd-th-content">
+                {{ label }}
+                <span class="zd-sort-icon">↕</span>
+              </span>
+            </th>
+          {%- endfor -%}
+        </tr>
+      </thead>
+      <tbody>
+        {%- for row in items -%}
+          <tr class="zd-datatable-tr">
+            {%- for header in table_headers -%}
+              {%- if headers_type == "array" -%}
+                {%- assign key = header.key -%}
+              {%- else -%}
+                {%- assign parts = header | split: ":" -%}
+                {%- assign key = parts[0] | strip -%}
+              {%- endif -%}
+              <td class="zd-datatable-td" data-col="{{ key }}">{{ row[key] }}</td>
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Info and Buttons -->
+  <div class="zd-datatable-pagination-wrapper">
+    <div class="zd-datatable-info">
+      Showing <span class="zd-datatable-start">1</span> to <span class="zd-datatable-end">10</span> of <span class="zd-datatable-total">10</span> entries
+    </div>
+    <div class="zd-datatable-pagination">
+      <!-- Generated via JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const container = document.getElementById('{{ table_id }}');
+  if (!container) return;
+
+  const table = container.querySelector('.zd-datatable');
+  const tbody = table.querySelector('tbody');
+  const searchInput = container.querySelector('.zd-datatable-search');
+  const lengthSelect = container.querySelector('.zd-datatable-length');
+  const headers = table.querySelectorAll('.zd-sortable');
+  
+  // Extract all rows initially rendered for JS manipulation
+  let originalData = [];
+  const rows = tbody.querySelectorAll('.zd-datatable-tr');
+  rows.forEach(row => {
+    let rowData = {};
+    const cells = row.querySelectorAll('.zd-datatable-td');
+    cells.forEach(cell => {
+      const col = cell.getAttribute('data-col');
+      rowData[col] = cell.innerHTML;
+    });
+    originalData.push({ element: row, data: rowData });
+  });
+
+  let currentData = [...originalData];
+  let currentPage = 1;
+  let pageSize = parseInt(lengthSelect.value) || 10;
+  let sortColumn = null;
+  let sortDir = 'none'; // 'asc', 'desc', 'none'
+
+  function renderTable() {
+    // 1. Filter
+    const query = searchInput.value.toLowerCase().trim();
+    let filteredData = originalData;
+    if (query) {
+      filteredData = originalData.filter(item => {
+        return Object.values(item.data).some(val => {
+          const text = val.replace(/<[^>]*>/g, '').toLowerCase();
+          return text.includes(query);
+        });
+      });
+    }
+
+    // 2. Sort
+    if (sortColumn && sortDir !== 'none') {
+      filteredData.sort((a, b) => {
+        let valA = a.data[sortColumn].replace(/<[^>]*>/g, '').trim();
+        let valB = b.data[sortColumn].replace(/<[^>]*>/g, '').trim();
+        
+        const numA = parseFloat(valA);
+        const numB = parseFloat(valB);
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return sortDir === 'asc' ? numA - numB : numB - numA;
+        }
+        
+        return sortDir === 'asc' 
+          ? valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' })
+          : valB.localeCompare(valA, undefined, { numeric: true, sensitivity: 'base' });
+      });
+    }
+
+    // 3. Paginate
+    const totalEntries = filteredData.length;
+    let totalPages = Math.ceil(totalEntries / pageSize);
+    if (totalPages < 1) totalPages = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, totalEntries);
+
+    tbody.innerHTML = '';
+    if (totalEntries === 0) {
+      const colCount = table.querySelectorAll('th').length;
+      tbody.innerHTML = `<tr class="zd-datatable-tr"><td class="zd-datatable-td text-center" colspan="${colCount}">No matching records found</td></tr>`;
+    } else {
+      for (let i = startIdx; i < endIdx; i++) {
+        tbody.appendChild(filteredData[i].element);
+      }
+    }
+
+    // Update info elements
+    container.querySelector('.zd-datatable-start').textContent = totalEntries === 0 ? 0 : startIdx + 1;
+    container.querySelector('.zd-datatable-end').textContent = endIdx;
+    container.querySelector('.zd-datatable-total').textContent = totalEntries;
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    const pagContainer = container.querySelector('.zd-datatable-pagination');
+    pagContainer.innerHTML = '';
+
+    // Previous Button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = `zd-page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+    prevBtn.textContent = 'Prev';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    });
+    pagContainer.appendChild(prevBtn);
+
+    // Page Buttons
+    const maxPagesToShow = 5;
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+    if (endPage - startPage < maxPagesToShow - 1) {
+      startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+
+    for (let p = startPage; p <= endPage; p++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `zd-page-btn ${p === currentPage ? 'active' : ''}`;
+      pageBtn.textContent = p;
+      pageBtn.addEventListener('click', () => {
+        currentPage = p;
+        renderTable();
+      });
+      pagContainer.appendChild(pageBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = `zd-page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    });
+    pagContainer.appendChild(nextBtn);
+  }
+
+  // Event Listeners
+  searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    renderTable();
+  });
+
+  lengthSelect.addEventListener('change', () => {
+    pageSize = parseInt(lengthSelect.value) || 10;
+    currentPage = 1;
+    renderTable();
+  });
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      const col = header.getAttribute('data-column');
+      if (sortColumn === col) {
+        sortDir = sortDir === 'asc' ? 'desc' : sortDir === 'desc' ? 'none' : 'asc';
+      } else {
+        sortColumn = col;
+        sortDir = 'asc';
+      }
+
+      headers.forEach(h => {
+        if (h !== header) {
+          h.setAttribute('aria-sort', 'none');
+        }
+      });
+
+      header.setAttribute('aria-sort', sortDir === 'asc' ? 'ascending' : sortDir === 'desc' ? 'descending' : 'none');
+      renderTable();
+    });
+
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+
+  renderTable();
+})();
+</script>

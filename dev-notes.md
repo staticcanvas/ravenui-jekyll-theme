@@ -63,6 +63,7 @@
 - [x] **LaTeX Math Integration:** Added KaTeX math expressions support and documented it.
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
+- [ ] **splash page** using one of or splase page layout, the design the layout of the splash page, zero-dark-sp is a very involved theme. suppasing just the docs, can comes closer to something dasisy-ui. in saying that, the splash page is the first page that the user sees when they open the site, lets make it profressionl, informative, usfull. and eligant, zero-dark-sp.
 
 ## Extended Components
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
@@ -112,6 +113,111 @@
 - [x] **Permalink Conflict:** Resolved duplication by removing `docs/blog/index.md` in favor of `docs/blog.md`.
 - [x] **Unwanted Spacing:** Removed blank scrolling whitespace below the footer.
 - [x] **Releases/Tags:** Resolved access problems fetching YAML data.
+- [ ] **Task for me** - go through each page make a detailed log of inconsisitancies bugs, possible fixes, and solutions.
+- [ ] **QOL** - Are we missing any QOL feature, perhaps do a deep dive into QOL compoents, configuration, and documentation.
+- [x] **DataTable** - Component that can be used to display data in a table format, with sorting, filtering, and pagination. source: `_data/table1.json`|`data/table2.yaml` | `_data/table3.csv`, Structured data injection. 
+- [x] **Tag Cloud** - Renders all site tags sized by post count. Links to filtered index pages.
+- [x] - **Modal / Dialog** Accessible dialog overlay. Focus trap, ESC close, aria-modal. Content via include slot.
+- [ ] **Site Stats**: Auto-calculated counts: posts, tags, categories, words, reading time. Displayed in about/meta pages.
+- [ ] **Figure / Caption** - Semantic figure+figcaption. Supports alignment (left/right float, full-width). Optional link.
+- [ ] **OG Image Generator** - Jekyll plugin or template that auto-generates social share images from post title/date.
+- [ ] **Progress / Steps Bar** - Visual step indicator for multi-part tutorials or onboarding. Active, complete, upcoming states.
+- [ ] **Liquid Commets for compoenents** - add liquid comments to all components, and add a liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
+    ```liquid
+    {%- comment -%}
+    Component__: System Metrics Grid
+    Purpose____: Displays a high-density grid panel of color-accented KPI and metric cards.
+    Caveats____: Output must remain collapsed on a single line to prevent Kramdown paragraph wrapping.
+    Usage______: {% include comps/metrics.html items=page.metrics_data grid_size="180px" %}
+    {%- endcomment -%}
+   ```
+- [x] **Tooltip** - Hover/focus tooltip via CSS or JS. Placement auto-flip. ARIA-described.
+- [ ] **Feature Grid** - 2-4 column icon + title + description cards. Pulls from front-matter or a data file.
+- [x] **Timeline** - Vertical chronological list. Each entry: date, heading, body. Reads from YAML.
+- because we have alot of components that depend on other components, lets document this in the liquid comments and in documentation, for documentation perhaps can can add dependancies to yaml header abd have it either dont output if empty of auto output , lets create a dependency conponent, to beautifully so this - i think this will help development and expansion.
+- htags and and toc, because we use htags in components toc can sometimes be off, can we refine to only pick up htags that are part of the main content so toc is correct.
+
+--- MULTILINE TASK:---
+
+---
+
+**Zero-Dark — Feature / Improvement Notes**
+
+---
+
+- **Dev/Prod Switch — Environment Flags**
+  Prevents PostHog or Google Analytics from polluting production metrics.
+
+- **Minification**
+  Minification only runs in CI. Add to the CI step alongside linting — but be mindful that linters may break Liquid syntax that requires single-line formatting. Icons and other elements nested inside other elements will break if their HTML spans multiple lines. There are workarounds, but I prefer to note this directly in the component documentation, as I have done with almost all components, so developers can read and understand why.
+
+- **Footer Layout — `footer-2col`, `footer-3col`, `footer-item`**
+  Allows construction of footer sections using discrete items: links, icons, logos, images, iframes, badges, and more. Using `footer-item` to specify the target column enables seamless footer construction that matches the style of professional sites — whether simple or detailed. These components should appear before the licence and "powered by" section.
+
+- **Introduction Page**
+  The introduction page needs to be informative and clearly written. Include a notice that Zero Dark was purposefully designed not to support collections siblings — this is intentional, not an oversight.
+
+- **Quick Start + Advanced Installation**
+  Provide a quick-start guide alongside an advanced installation path. Advanced options should cover: building from source, cloning the repo and replacing or editing docs, changing the folder structure, and using the Zero Dark docs implementation to build a site — for users who don't want the default docs website. Consider a summary page for advanced installation with a link to an in-depth page covering working directly with the repo.
+
+- **Extend Zero Dark — `zerodark-sp` Developer Guide**
+  A dedicated developer guide covering the full Zero Dark folder layout and extension points.
+
+- **Collections Support — Architecture Decision (Unresolved)**
+  I wasn't going to support collections natively. The plan was to fork Zero Dark on release and build a collections-focused variant. The question is whether to include collections support in `zerodark-sp` to avoid near-duplicate codebases, or whether a separate theme is still the better move. Unresolved — needs a decision before release.
+
+- **Rouge Code Blocks — Line Numbers**
+  Give users the ability to enable line numbers on code blocks.
+
+- **Theme Configuration via `_config.yml` — `theme_settings` Object**
+  Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full colour palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customisation.
+
+- **Typography Configuration via `_config.yml`**
+  Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
+
+- **Unexplored Jekyll Features**
+  Audit Jekyll's full feature set for anything not currently used that could improve the theme or enable a new feature worth adding.
+
+- **Documentation Requirement — All of the Above**
+  For every item above: if it results in a new component, ensure `docs/components` has a corresponding component page. For all other updates, ensure the documentation reflects the change.
+
+
+> The **collections architecture decision** is the one I'd suggest resolving early — it has a knock-on effect on the `zerodark-sp` guide scope and whether the fork ever gets maintained in parallel. Worth a short decision note even if just to record "decided: separate theme, reason: X."
+
+> The **`theme_settings` object** is a strong QOL feature — worth sketching out the key names before implementing so the public API is clean from the start rather than retrofitted.
+
+*Solution to the Collections Architecture Decision: Consulted a another web enginneer claude 4.8* 
+
+Here's the honest case.
+
+---
+
+**Your `_data/navigation.yaml` approach is clever, but it's fighting Jekyll rather than using it.**
+
+What you've built is essentially a manual collection — you're storing structured content metadata in YAML, iterating over it with Liquid, and outputting index pages. That works, and for small, stable content it's fine. But here's where it starts costing you:
+
+**You lose `site.posts`-style filtering for free.** Tags, categories, date sorting, pagination — all of that is built into collections. Your YAML approach means you're reimplementing that logic manually every time a user wants a filtered index. That's complexity you're pushing onto the site builder, not absorbing in the theme.
+
+**Content and metadata are split.** With your current approach, a user creates a page *and* has to register it in `navigation.yaml`. Two files, two places to keep in sync. They will get out of sync. Non-technical users will absolutely get out of sync.
+
+**You're already almost there.** You said it yourself — "not quite but almost." That gap is exactly where users hit friction. If they expect collection behaviour and get 80% of it, the 20% they're missing feels like a bug, not a design decision.
+
+**The fork plan has a real cost.** Maintaining two themes that are structurally similar means every bug fix, every QOL improvement, every font config update gets done twice — or one fork quietly falls behind. That's a maintenance burden that compounds. Most dual-theme projects end up with one abandoned variant within a year.
+
+---
+
+**The honest counter-argument in your favour:**
+
+Collections do add complexity to the theme internals. Pagination, `jekyll-paginate-v2` config, collection-scoped front-matter defaults — it's real work, and it makes `_config.yml` more involved for users who don't need it. Your YAML approach genuinely is simpler for purely static, manually curated sites.
+
+---
+
+**My frank recommendation:**
+
+Add collection support to Zero Dark with a feature flag — `collections: false` by default. Users who don't need it see nothing different. Users who do get first-class support without a separate fork to maintain. The `_data/navigation.yaml` system stays as the manual/curated path. They coexist.
+
+You avoid the fork, you avoid the maintenance split, and the theme becomes genuinely capable rather than "almost."
+
 
 ## View Transitions
 - [x] **Page Transitions:** Basic view transition support implemented for seamless page navigation.

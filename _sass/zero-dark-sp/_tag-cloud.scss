@@ -1,0 +1,52 @@
+// Premium Tag Cloud styling
+// Compliance: [Visual & UI Elegance (Handcrafted)]
+
+.zd-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  margin-block: 2rem;
+  padding: 1.5rem;
+  background: var(--zd-bg-card, rgba(30, 30, 40, 0.3));
+  border: 1px solid var(--zd-border-default, rgba(255, 255, 255, 0.05));
+  border-radius: var(--zd-radius, 8px);
+}
+
+.zd-tag-cloud-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--zd-border-subtle, rgba(255, 255, 255, 0.08));
+  color: var(--zd-clr-mist, #cbd5e1);
+  text-decoration: none !important;
+  line-height: 1;
+  transition: all var(--zd-transition-fast, 0.2s);
+
+  &:hover {
+    color: var(--zd-clr-white, #fff);
+    background: rgba(46, 196, 182, 0.1);
+    border-color: var(--zd-clr-viridian, #2ec4b6);
+    transform: scale(1.05);
+  }
+
+  // Sizing tiers based on post counts
+  &.zd-tag-cloud-size-1 { font-size: 0.8rem; }
+  &.zd-tag-cloud-size-2 { font-size: 0.95rem; font-weight: 500; }
+  &.zd-tag-cloud-size-3 { font-size: 1.1rem; font-weight: 600; color: var(--zd-clr-platinum, #e2e8f0); }
+  &.zd-tag-cloud-size-4 { font-size: 1.25rem; font-weight: 700; color: var(--zd-clr-platinum, #e2e8f0); }
+  &.zd-tag-cloud-size-5 { font-size: 1.4rem; font-weight: 800; color: var(--zd-clr-white, #fff); border-color: rgba(255, 255, 255, 0.15); }
+
+  .zd-tag-cloud-count {
+    font-size: 0.75em;
+    padding: 0.15rem 0.4rem;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--zd-clr-viridian, #2ec4b6);
+    font-family: var(--zd-font-mono, monospace);
+  }
+}
