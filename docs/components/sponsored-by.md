@@ -19,7 +19,7 @@ The `sponsored-by.html` component renders a structured grid of sponsor or partne
   url: https://example.com
 " | from_yaml %}
 
-{% include comps/sponsored-by.html title="Our Premium Sponsors" items=test_sponsors columns=3 %}
+{% include comps/sponsored-by.html title="Our Valued Sponsors" items=test_sponsors columns=3 %}
 
 {% capture sb_eg %}
 {% raw %}
@@ -34,7 +34,7 @@ The `sponsored-by.html` component renders a structured grid of sponsor or partne
 " | from_yaml %}
 
 {% include comps/sponsored-by.html 
-   title="Our Premium Sponsors" 
+   title="Our Valued Sponsors" 
    items=sponsors 
    columns=3 %}
 ```

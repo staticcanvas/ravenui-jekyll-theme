@@ -23,7 +23,7 @@ theme_settings:
     path: /logo.svg                 # Path to image logo in sidebar
     alt: ZeroDark SP                # Alt text for logo
     height: 40px                    # Visual height of logo (px) 
-    layout: inline                  # Layout type for sidebar branding (options: inline, stacked, split)
+    layout: split                  # Layout type for sidebar branding (options: inline, stacked, split)
   # favicon:
   #   path: /favicon.ico
   #   height: 32px

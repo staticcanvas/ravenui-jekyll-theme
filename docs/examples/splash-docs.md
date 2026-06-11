@@ -14,7 +14,7 @@ A focused, elegant landing layout designed for starting points of documentation 
     {% include comps/feature-card.html 
        icon="book-open" 
        title="Technical Writing" 
-       description="Designed with IBM Plex Sans and Fraunces for premium typography and high readability." 
+       description="Designed with IBM Plex Sans and Fraunces for elegant typography and high readability." 
     %}
     {% include comps/feature-card.html 
        icon="cpu" 

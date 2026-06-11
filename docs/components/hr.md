@@ -6,7 +6,7 @@ tags: [ui, elements, dividers]
 description: Stylized horizontal lines with text labels, icons, and gradients.
 ---
 
-The `hr.html` component replaces default browser horizontal rules with premium solid or gradient lines featuring optional centered, left-aligned, or right-aligned labels and icons.
+The `hr.html` component replaces default browser horizontal rules with professional solid or gradient lines featuring optional centered, left-aligned, or right-aligned labels and icons.
 
 {% include comps/heading.html tag="h2" text="Solid Separators" icon="minus" size=20 %}
 

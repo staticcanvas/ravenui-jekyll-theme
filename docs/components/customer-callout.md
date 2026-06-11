@@ -3,7 +3,7 @@ layout: default
 title: Customer Callout (Testimonial)
 output-title: true
 tags: [ui, elements, interactive, callout]
-description: Premium testimonial and review cards with star ratings and avatar support.
+description: Elegant testimonial and review cards with star ratings and avatar support.
 ---
 
 The `customer-callout.html` component renders testimonial cards for customers, users, or reviewers. It features custom borders, optional star ratings, and author avatar support.

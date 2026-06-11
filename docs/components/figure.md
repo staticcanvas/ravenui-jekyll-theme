@@ -10,7 +10,7 @@ The `figure.html` component provides a semantic wrapper for images (`<figure>` a
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="image" size=20 %}
 
-{% include comps/figure.html src="https://picsum.photos/800/400" caption="A premium high-resolution cover mockup sourced dynamically from Lorem Picsum." align="center" %}
+{% include comps/figure.html src="https://picsum.photos/800/400" caption="A high-resolution cover mockup sourced dynamically from Lorem Picsum." align="center" %}
 
 {% capture figure_eg %}
 {% raw %}

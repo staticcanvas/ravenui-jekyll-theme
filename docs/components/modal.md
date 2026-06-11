@@ -3,7 +3,7 @@ layout: default
 title: Modal / Dialog
 output-title: true
 tags: [ui, interactive, dialogs]
-description: A premium, accessible modal dialog overlay supporting focus trapping, ESC close, and keyboard navigation.
+description: A professional, accessible modal dialog overlay supporting focus trapping, ESC close, and keyboard navigation.
 ---
 
 The `modal.html` component implements an overlay dialog adhering to modern accessibility (WAI-ARIA) specifications. It features a blur-filtered backdrop, automatic focus capture on open, escape key binding, click-outside-to-dismiss behavior, and focus restoration to the trigger button upon close.

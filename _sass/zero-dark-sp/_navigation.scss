@@ -101,11 +101,11 @@
     font-size: 1.2rem;
   }
   
-  .zd-brand-text-link:hover .zd-brand-title {
+  .zd-brand-title-link:hover .zd-brand-title {
     color: var(--zd-clr-highlight);
   }
 
-  .zd-brand-badge {
+  .zd-brand-badge-wrapper {
     display: inline-flex;
     align-items: center;
   }
@@ -114,89 +114,109 @@
 /* 1. Inline Layout */
 .zd-brand--inline {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
 
-  .zd-brand-content {
+  .zd-brand-top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .zd-brand-bottom-row {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    margin-top: 0.15rem;
+    margin-left: 0;
   }
-
-  .zd-brand-text-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  
+  &.zd-brand--has-logo .zd-brand-bottom-row {
+    margin-left: calc(var(--zd-logo-width, 32px) + 0.6rem);
+  }
+  
+  .zd-brand-title {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
-/* 2. Stacked Layout */
+/* 2. Stacked Layout (Original Layout before change) */
 .zd-brand--stacked {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 0.75rem;
+  display: block;
 
-  .zd-brand-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+  .zd-brand-top-row {
+    display: block;
   }
 
-  .zd-brand-text-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
+  .zd-brand-logo-link {
+    display: block;
+    margin-block-end: 1rem;
+    width: fit-content;
+  }
+
+  .zd-brand-title-link {
+    display: inline;
+    vertical-align: middle;
   }
 
   .zd-brand-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    display: inline;
+    vertical-align: middle;
   }
 
-  .zd-brand-subtext {
-    font-size: 0.9rem;
-    color: #555;
+  .zd-brand-bottom-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline-start: 0.5rem;
+    vertical-align: middle;
   }
 }
 
 /* 3. Split Layout */
 .zd-brand--split {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
 
-  .zd-brand-content {
+  .zd-brand-top-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .zd-brand-logo-link {
+    display: block;
+  }
+
+  .zd-brand-title-link {
+    display: block;
+  }
+
+  .zd-brand-title {
+    font-size: 1.25rem;
+  }
+
+  .zd-brand-bottom-row {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
   }
 
-  .zd-brand-text-link {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.1rem;
-  }
-
-  .zd-brand-title {
-    font-size: 1.15rem;
-    line-height: 1.1;
-  }
-
   .zd-brand-subtext {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #555;
-    line-height: 1;
   }
 }
 

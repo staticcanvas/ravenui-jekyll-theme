@@ -1,21 +1,24 @@
 <aside class="zd-sidebar">
     {% assign brand_layout = site.theme_settings.logo.layout | default: "inline" %}
-    <div class="zd-brand zd-brand--{{ brand_layout }}">
-        {% if site.theme_settings.logo.path %}
-        <a href="{{ "/" | relative_url }}" class="zd-brand-logo-link">
-            <img src="{{ site.theme_settings.logo.path | relative_url }}" 
-                 alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
-                 class="zd-brand-logo-img"
-                 style="height: {{ site.theme_settings.logo.height | default: '32px' }};">
-        </a>
-        {% endif %}
-        <div class="zd-brand-content">
-            <a href="{{ "/" | relative_url }}" class="zd-brand-text-link">
-                <span class="zd-brand-title">{{ site.logo_text | default: "ZERODARK" }}</span>
-                <span class="zd-brand-subtext">// {{ site.logo_subtext | default: "DOCS" }}</span>
+    <div class="zd-brand zd-brand--{{ brand_layout }}{% if site.theme_settings.logo.path %} zd-brand--has-logo{% endif %}"
+         style="--zd-logo-width: {{ site.theme_settings.logo.height | default: '32px' }};">
+        <div class="zd-brand-top-row">
+            {% if site.theme_settings.logo.path %}
+            <a href="{{ "/" | relative_url }}" class="zd-brand-logo-link">
+                <img src="{{ site.theme_settings.logo.path | relative_url }}" 
+                     alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
+                     class="zd-brand-logo-img"
+                     style="height: {{ site.theme_settings.logo.height | default: '32px' }};">
             </a>
+            {% endif %}
+            <a href="{{ "/" | relative_url }}" class="zd-brand-title-link">
+                <span class="zd-brand-title">{{ site.logo_text | default: "ZERODARK" }}</span>
+            </a>
+        </div>
+        <div class="zd-brand-bottom-row">
+            <span class="zd-brand-subtext">// {{ site.logo_subtext | default: "DOCS" }}</span>
             {% if site.zd_show_version and site.version %}
-                <span class="zd-brand-badge">
+                <span class="zd-brand-badge-wrapper">
                     {% include comps/tag.html type="version" text=site.version icon="tag" color="var(--zd-clr-highlight)" class="zd-logo-badge" %}
                 </span>
             {% endif %}

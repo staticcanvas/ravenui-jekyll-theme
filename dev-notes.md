@@ -19,6 +19,7 @@
 - [x] **Component Index:** Expanded the gallery in `docs/components/index.md` to showcase all 4 component categories.
 - [x] **Final Visual Audit:** Completed full pass on all 22 component pages; verified consistency in API tables and examples.
 - [x] **Test Build:** Successfully verified project integrity with `bundle exec jekyll build`.
+- [ ] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
 
 ## UI Adjustments
 - [x] **Fluent UI Refinement:** Applied visual polish to splash components (cards, buttons, terminals) including subtle elevations, refined borders (`color-mix`), and scale-based interactive states.
@@ -64,7 +65,7 @@
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
 - [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
-
+- [ ] **animations** - add suttle animations to components like callout, badges, tags, heros, cards, that would make sence but not too distracting, page loads and transitions, and scrolls. set a object in global config that can be used to enable or disable animations.
 ## Extended Components and Features
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
 - [x] Written-by component.
@@ -137,6 +138,8 @@
 - [ ] **Pneumatic / Numeric UI Elements**: Integrate subtle pneumatic micro-animations and numeric tickers for stats.
 - [ ] **Component Reusability Pass**: Refactor complex layout snippets into modular components and expose utility grids for layout composition.
 - [x] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
+    - [x] **Resolved**: Partitioned branding elements into top and bottom rows with styling offsets to ensure `inline`, `stacked`, and `split` layouts align dynamically and display elegantly.
+
 - [ ] **Morphing Social Icons**: Animate social media icons so they morph smoothly from text labels to simple icon logos.
 - [ ] **TOC Custom Designs**: Implement three TOC styles (lines, nodes, simple/default) configurable in `_config.yml`, along with customizable font sizes.
 - [x] **Dev/Prod Switch — Environment Flags** - Prevents PostHog or Google Analytics from polluting production metrics.
@@ -165,7 +168,20 @@
        - [ ] apps/cli/module/tool
        - [ ] Add Others that would work and be usfull
 - [ ] **Rename Theme** - Because we no longer need the second theme Zero-Dark-MP, we can rename to "Zero-Dark" in readme and docs use Zero-Dark Jekyll theme.
+- [x] **Remove words like 'premium'**: Replaced 'premium' with 'elegant', 'professional', or 'useful' across all SASS comments, layout files, and documentation pages.
+- [ ] aswell as the three colour layout, we should give the user the ability to have a header bar and allow data.navheader user can add addition navitems view on gitlab badges chamge orientation from left to right or middle 
 
+- [ ] Some additions layouts that can blog, ariticals, blank
+
+Live componenents api endpoints fetch and display data, free server ice, make sure wr cache for maximum performance and less git rate.
+
+- [ ] fetch abd receive data from thetvgb, themdb, free anime meta data, warhammer if any, other userfull meta data providers that are free to use.
+- [ ] media details  - display indicate details, make it robust so it can support music and and other possible like anime warhammer
+- [ ] media card, supports custom properties 
+- [ ] related carousel perhaps we use existing, 
+- [ ] components to make info sites like animecharts or warhapper infor/wikki things of that nature
+- [ ] spinners for dynamic components - themed to match - cool fetch animation.
+- [ ] we could put these under extra components.
 
 ## Bug Fixes
 - [x] **Ruby 3.4 Compatibility:** Fixed Gemfile to include `csv`, `base64`, and `bigdecimal` gems which were removed from the Ruby 3.4 standard library.
