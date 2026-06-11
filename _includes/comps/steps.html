@@ -1,0 +1,44 @@
+{%- comment -%}
+Component__: Progress / Steps Bar
+Purpose____: Renders a visual step progress indicator for multi-part tutorials.
+Caveats____: Connects with custom YAML data or takes items and current step index.
+Usage______: {% include comps/steps.html items=page.steps current=2 %}
+{%- endcomment -%}
+
+{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign current_step = include.current | plus: 0 | default: 0 -%}
+
+<div class="zd-steps-wrapper {{ include.class }}">
+  <div class="zd-steps">
+    {%- for item in items -%}
+      {%- assign step_status = item.status -%}
+      {%- if current_step > 0 -%}
+        {%- if forloop.index < current_step -%}
+          {%- assign step_status = "complete" -%}
+        {%- elsif forloop.index == current_step -%}
+          {%- assign step_status = "active" -%}
+        {%- else -%}
+          {%- assign step_status = "upcoming" -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- assign step_status = step_status | default: "upcoming" -%}
+
+      <div class="zd-step zd-step--{{ step_status }}">
+        <div class="zd-step-connector"></div>
+        <div class="zd-step-badge">
+          {%- if step_status == "complete" -%}
+            {%- include comps/icon.html name="check" size=12 -%}
+          {%- else -%}
+            {{ forloop.index }}
+          {%- endif -%}
+        </div>
+        <div class="zd-step-content">
+          <div class="zd-step-title">{{ item.title | default: item }}</div>
+          {%- if item.description -%}
+            <div class="zd-step-description">{{ item.description }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

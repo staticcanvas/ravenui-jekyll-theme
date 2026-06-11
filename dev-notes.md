@@ -63,7 +63,7 @@
 - [x] **LaTeX Math Integration:** Added KaTeX math expressions support and documented it.
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
-- [ ] **splash page** using one of or splase page layout, the design the layout of the splash page, zero-dark-sp is a very involved theme. suppasing just the docs, can comes closer to something dasisy-ui. in saying that, the splash page is the first page that the user sees when they open the site, lets make it profressionl, informative, usfull. and eligant, zero-dark-sp.
+- [ ] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
 
 ## Extended Components
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
@@ -113,16 +113,16 @@
 - [x] **Permalink Conflict:** Resolved duplication by removing `docs/blog/index.md` in favor of `docs/blog.md`.
 - [x] **Unwanted Spacing:** Removed blank scrolling whitespace below the footer.
 - [x] **Releases/Tags:** Resolved access problems fetching YAML data.
-- [ ] **Task for me** - go through each page make a detailed log of inconsisitancies bugs, possible fixes, and solutions.
-- [ ] **QOL** - Are we missing any QOL feature, perhaps do a deep dive into QOL compoents, configuration, and documentation.
+- [ ] **Consistency Audit**: Walk through each documentation page and compile a detailed log of visual inconsistencies, bugs, potential fixes, and design improvements.
+- [ ] **Quality of Life (QOL) Audit**: Perform a deep dive into QOL components, configuration options, and documentation to identify and implement missing user-experience improvements.
 - [x] **DataTable** - Component that can be used to display data in a table format, with sorting, filtering, and pagination. source: `_data/table1.json`|`data/table2.yaml` | `_data/table3.csv`, Structured data injection. 
 - [x] **Tag Cloud** - Renders all site tags sized by post count. Links to filtered index pages.
 - [x] - **Modal / Dialog** Accessible dialog overlay. Focus trap, ESC close, aria-modal. Content via include slot.
-- [ ] **Site Stats**: Auto-calculated counts: posts, tags, categories, words, reading time. Displayed in about/meta pages.
-- [ ] **Figure / Caption** - Semantic figure+figcaption. Supports alignment (left/right float, full-width). Optional link.
-- [ ] **OG Image Generator** - Jekyll plugin or template that auto-generates social share images from post title/date.
-- [ ] **Progress / Steps Bar** - Visual step indicator for multi-part tutorials or onboarding. Active, complete, upcoming states.
-- [ ] **Liquid Commets for compoenents** - add liquid comments to all components, and add a liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
+- [x] **Site Stats**: Auto-calculated counts: posts, tags, categories, words, reading time. Displayed in about/meta pages.
+- [x] **Figure / Caption** - Semantic figure+figcaption. Supports alignment (left/right float, full-width). Optional link.
+- [ ] **OG Image Generator**: A Jekyll plugin or template that auto-generates social sharing images containing the post title, category, and date.
+- [x] **Progress / Steps Bar** - Visual step indicator for multi-part tutorials or onboarding. Active, complete, upcoming states.
+- [ ] **Component Liquid Comments**: Add descriptive Liquid comments to the top of all component files explaining the component's purpose, caveats, and usage examples, and update the documentation accordingly.
     ```liquid
     {%- comment -%}
     Component__: System Metrics Grid
@@ -132,11 +132,22 @@
     {%- endcomment -%}
    ```
 - [x] **Tooltip** - Hover/focus tooltip via CSS or JS. Placement auto-flip. ARIA-described.
-- [ ] **Feature Grid** - 2-4 column icon + title + description cards. Pulls from front-matter or a data file.
+- [ ] **Feature Grid**: A grid component (2-4 columns) showcasing icons, titles, and descriptions, sourcing its items from page front-matter or a YAML/JSON data file.
 - [x] **Timeline** - Vertical chronological list. Each entry: date, heading, body. Reads from YAML.
-- because we have alot of components that depend on other components, lets document this in the liquid comments and in documentation, for documentation perhaps can can add dependancies to yaml header abd have it either dont output if empty of auto output , lets create a dependency conponent, to beautifully so this - i think this will help development and expansion.
-- htags and and toc, because we use htags in components toc can sometimes be off, can we refine to only pick up htags that are part of the main content so toc is correct.
+- **Component Dependency Mapping**: Since many components depend on others, document these dependencies in Liquid comments and documentation. Optionally, define dependencies in the front-matter YAML header of components and render them beautifully using a dedicated dependency component.
+- **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
 - [x] **CI-Bundler-Issue** - bundler before script dont like to be ran as root, ive remove the before script for global scope and attched it to build stage. unsure how to fix this. this is causing build to fail - source bundler docs and find fix.
+
+- [ ] **Document Count Metrics**: Create a new automatic JSON data endpoint (`docstats.json`) showing the document count metrics of the site.
+- [ ] **Search Integrations**: Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia).
+- [ ] **Static Page Feedback**: Support static page likes, comments, and reviews.
+- [ ] **Visual Statistics**: Render site stats using visual charts.
+- [ ] **Pneumatic / Numeric UI Elements**: Integrate subtle pneumatic micro-animations and numeric tickers for stats.
+- [ ] **Component Reusability Pass**: Refactor complex layout snippets into modular components and expose utility grids for layout composition.
+- [ ] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
+- [ ] **Morphing Social Icons**: Animate social media icons so they morph smoothly from text labels to simple icon logos.
+- [ ] **TOC Custom Designs**: Implement three TOC styles (lines, nodes, simple/default) configurable in `_config.yml`, along with customizable font sizes.
+
 
 --- MULTILINE TASK:---
 

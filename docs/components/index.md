@@ -38,6 +38,9 @@ ZeroDark SP includes a wide range of custom components to help you build profess
 - title: VHS Effect
   url: /components/vhs/
   icon: monitor
+- title: Figure / Caption
+  url: /components/figure/
+  icon: image
 " | from_yaml %}
 {% include comps/card-index.html section="Elements & Media" items=media_items %}
 

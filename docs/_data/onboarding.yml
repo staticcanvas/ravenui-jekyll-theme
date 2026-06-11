@@ -1,0 +1,6 @@
+- title: "Repository Setup"
+  description: "Clone the theme repository and run bundle install."
+- title: "Configuration"
+  description: "Expose key settings and details inside _config.yml."
+- title: "Deployment"
+  description: "Publish your static site to GitLab Pages or Cloudflare."
