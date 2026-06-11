@@ -1,6 +1,6 @@
-# 🖤 ZeroDark CI/CD Pipeline
-# Architecture: Ruby Gem Workflow + GitLab Pages
-# Image: Official Ruby 3.2 (Optimized for Jekyll)
+# ZeroDark CI/CD Pipeline
+# Architecture: Ruby Gem Workflow + GitLab Pages + Cloudflare Pages
+# Image: sgkens/phellams-automator : https://hub.docker.com/r/sgkens/phellams-automator
 
 image: sgkens/phellams-automator:${AUTOMATOR_VERSION}
 
@@ -11,6 +11,7 @@ variables:
   GEM_NAME: "zero-dark-sp"
   BUNDLE_SILENCE_ROOT_WARNING: "1"
   BUNDLE_PATH: "vendor/bundle"
+  GIT_DEPTH: "0"
 
 cache:
   paths:

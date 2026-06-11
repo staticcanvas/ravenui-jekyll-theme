@@ -128,7 +128,7 @@
 - [x] **Feature Grid**: A grid component (2-4 columns) showcasing icons, titles, and descriptions, sourcing its items from page front-matter or a YAML/JSON data file.
 - [x] **Timeline** - Vertical chronological list. Each entry: date, heading, body. Reads from YAML.
 - [x] **Component Dependency Mapping**: Since many components depend on others, document these dependencies in Liquid comments and documentation. Optionally, define dependencies in the front-matter YAML header of components and render them beautifully using a dedicated dependency component.
-- **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
+- [x] **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
 - [x] **CI-Bundler-Issue** - bundler before script dont like to be ran as root, ive remove the before script for global scope and attched it to build stage. unsure how to fix this. this is causing build to fail - source bundler docs and find fix.
 - [x] **Document Count Metrics**: Create a new automatic JSON data endpoint (`docstats.json`) showing the document count metrics of the site.
 - [ ] **Search Integrations**: Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia).
