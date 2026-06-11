@@ -1,0 +1,40 @@
+{%- assign item_type = include.type | default: "text" -%}
+{%- assign item_text = include.text -%}
+{%- assign item_url = include.url -%}
+{%- assign item_icon = include.icon -%}
+{%- assign item_color = include.color -%}
+{%- assign item_src = include.src -%}
+{%- assign item_alt = include.alt -%}
+{%- assign item_subtext = include.subtext -%}
+<div class="zd-footer-item zd-footer-item--{{ item_type }}" {% if include.style %}style="{{ include.style }}"{% endif %}>
+  {%- if item_type == "link" -%}
+    <a href="{{ item_url | relative_url }}" class="zd-footer-link">
+      {%- if item_icon -%}
+        {% include comps/icon.html name=item_icon size=14 %}
+      {%- endif -%}
+      {{ item_text }}
+    </a>
+  {%- elsif item_type == "icon" -%}
+    <a href="{{ item_url | relative_url }}" class="zd-footer-icon-link" aria-label="{{ item_text | default: item_icon }}" target="_blank" rel="noopener noreferrer">
+      {% include comps/icon.html name=item_icon size=18 color=item_color %}
+    </a>
+  {%- elsif item_type == "logo" -%}
+    <div class="zd-footer-logo">
+      {%- if item_src -%}
+        <img src="{{ item_src | relative_url }}" alt="{{ item_alt | default: item_text }}" class="zd-footer-logo-img">
+      {%- endif -%}
+      <span class="zd-footer-logo-text">{{ item_text }}</span>
+      {%- if item_subtext -%}
+        <span class="zd-footer-logo-subtext">{{ item_subtext }}</span>
+      {%- endif -%}
+    </div>
+  {%- elsif item_type == "image" -%}
+    <img src="{{ item_src | relative_url }}" alt="{{ item_alt | default: '' }}" class="zd-footer-img">
+  {%- elsif item_type == "iframe" -%}
+    <iframe src="{{ item_src }}" class="zd-footer-iframe" style="border:none; width:100%; height:80px; overflow:hidden;" scrolling="no"></iframe>
+  {%- elsif item_type == "badge" -%}
+    {% include comps/tag.html text=item_text color=item_color icon=item_icon %}
+  {%- else -%}
+    <span class="zd-footer-text">{{ item_text }}</span>
+  {%- endif -%}
+</div>

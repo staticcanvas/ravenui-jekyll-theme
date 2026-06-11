@@ -3,9 +3,9 @@
 # Settings that are optional or not required for the default docs site are commented out.
 
 # --- Core Identity ---------------------------------------------------------
-title: ZeroDark SP Documentation
-description: Official documentation for the ZeroDark SP Jekyll theme.
-logo_text: ZERODARK-SP
+title: Zero-Dark Documentation
+description: Official documentation for the Zero-Dark Jekyll theme.
+logo_text: ZERODARK
 logo_subtext: DOCS
 copyright: "© 2026 StaticCanvas. All rights reserved."
 
@@ -21,7 +21,7 @@ theme_settings:
   # Branding
   logo:
     path: /logo.svg                 # Path to image logo in sidebar
-    alt: ZeroDark SP                # Alt text for logo
+    alt: Zero-Dark                # Alt text for logo
     height: 40px                    # Visual height of logo (px) 
     layout: split                  # Layout type for sidebar branding (options: inline, stacked, split)
   # favicon:
@@ -31,6 +31,65 @@ theme_settings:
   # Interface
   scroll_progress: true             # Toggle global reading progress bar
   zd_toc_default_open: true         # Should TOC be open by default on desktop?
+
+  # Typography Configurations
+  typography:
+    google_fonts: "Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500|IBM+Plex+Sans:wght@500"
+    font_sans: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font_mono: "'MonaspiceAr Nerd Font Mono', 'JetBrains Mono', 'Fira Code', monospace"
+    h1:
+      font_family: "'Fraunces', serif"
+      weight: "400"
+    h2:
+      font_family: "'Fraunces', serif"
+      weight: "500"
+    h3:
+      font_family: "'IBM Plex Sans', sans-serif"
+      weight: "500"
+    body:
+      weight: "400"
+
+  # Dynamic Footer Layout (2 or 3 columns)
+  footer:
+    columns:
+      - title: "Documentation"
+        items:
+          - type: link
+            text: "Introduction"
+            url: "/"
+            icon: "home"
+          - type: link
+            text: "Installation"
+            url: "/installation/"
+            icon: "download"
+          - type: link
+            text: "Advanced Installation"
+            url: "/installation/advanced/"
+            icon: "settings"
+      - title: "Components"
+        items:
+          - type: link
+            text: "Gallery"
+            url: "/components/"
+            icon: "package"
+          - type: link
+            text: "Liquid IRL"
+            url: "/liquid-irl/"
+            icon: "code"
+          - type: link
+            text: "Theme Colors"
+            url: "/theme-colors/"
+            icon: "palette"
+      - title: "Project"
+        items:
+          - type: text
+            text: "Zero-Dark is an elegant Jekyll theme designed for technical documentations and developers."
+          - type: icon
+            icon: "github"
+            url: "https://github.com/staticcanvas"
+          - type: icon
+            icon: "linkedin"
+            url: "https://linkedin.com/in/staticcanvas"
 
 # --- Feature Toggles -------------------------------------------------------\
 zd_output_title_default: true       # Render H1 and tags at top of page?
@@ -49,7 +108,7 @@ zd_heading_spacing: relaxed         # Spacing for headings (options: relaxed, ti
 # --- Debug & Development ---------------------------------------------------\
 zd_debug: true                      # Enable debug mode for development (shows warnings in console)
 zd_show_version: true               # Show version tag in the sidebar logo section
-version: 1.16.2                     # Current version of the project/docs
+version: 1.16.5                     # Current version of the project/docs
 
 # --- Social Integration (Sidebar) ------------------------------------------\
 github_username: staticcanvas

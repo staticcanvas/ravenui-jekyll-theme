@@ -1,10 +1,29 @@
 <footer class="zd-footer" id="footer" style="margin-top: 5rem; padding-top: 2rem; border-top: var(--zd-border); font-size: 0.8rem;">
+    {% if site.theme_settings.footer.columns %}
+        {% assign cols_count = site.theme_settings.footer.columns | size %}
+        {% if cols_count == 2 %}
+            {% assign c1_items = site.theme_settings.footer.columns[0].items %}
+            {% assign c1_title = site.theme_settings.footer.columns[0].title %}
+            {% assign c2_items = site.theme_settings.footer.columns[1].items %}
+            {% assign c2_title = site.theme_settings.footer.columns[1].title %}
+            {% include comps/footer-2col.html col1=c1_items col1_title=c1_title col2=c2_items col2_title=c2_title %}
+        {% elsif cols_count == 3 %}
+            {% assign c1_items = site.theme_settings.footer.columns[0].items %}
+            {% assign c1_title = site.theme_settings.footer.columns[0].title %}
+            {% assign c2_items = site.theme_settings.footer.columns[1].items %}
+            {% assign c2_title = site.theme_settings.footer.columns[1].title %}
+            {% assign c3_items = site.theme_settings.footer.columns[2].items %}
+            {% assign c3_title = site.theme_settings.footer.columns[2].title %}
+            {% include comps/footer-3col.html col1=c1_items col1_title=c1_title col2=c2_items col2_title=c2_title col3=c3_items col3_title=c3_title %}
+        {% endif %}
+    {% endif %}
+
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
         <div>
             <p style="opacity: 0.4;">{{ site.copyright | default: "© 2026 ZeroDark Systems. All rights reserved." }}</p>
             {% if site.zd_show_powered_by %}
             <p style="margin-top: 0.5rem; font-size: 0.65rem; opacity: 0.3; text-transform: uppercase; letter-spacing: 0.05em;">
-                Powered by <a href="https://github.com/staticcanvas/zero-dark-sp" target="_blank" style="color: inherit; border-bottom: 1px dashed rgba(255,255,255,0.2);">ZeroDark SP</a>
+                Powered by <a href="https://github.com/staticcanvas/zero-dark-sp" target="_blank" style="color: inherit; border-bottom: 1px dashed rgba(255,255,255,0.2);">Zero-Dark</a>
             </p>
             {% endif %}
         </div>

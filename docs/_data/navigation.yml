@@ -11,6 +11,10 @@
       url: /installation/
       icon: download
       color: "#3399ff"
+    - text: Advanced Installation
+      url: /installation/advanced/
+      icon: settings
+      color: "#ffcc00"
 
 - title: Blog
   links:
@@ -83,6 +87,10 @@
     - text: Card Index
       url: /components/card-index/
       icon: layers
+    - text: Footer Components
+      url: /components/footer/
+      icon: layout
+      description: "Modular footer grid layout and columns components"
     - text: Heading
       url: /components/heading/
       icon: type

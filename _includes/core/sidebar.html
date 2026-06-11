@@ -33,13 +33,22 @@
 
     <div class="zd-socials">
         {% if site.github_username %}
-        <a href="https://github.com/{{ site.github_username }}" class="zd-social-link">GH</a>
+        <a href="https://github.com/{{ site.github_username }}" class="zd-social-link" aria-label="GitHub">
+            <span class="zd-social-text">GH</span>
+            <span class="zd-social-icon"><i data-lucide="github"></i></span>
+        </a>
         {% endif %}
         {% if site.twitter_username %}
-        <a href="https://twitter.com/{{ site.twitter_username }}" class="zd-social-link">X</a>
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="zd-social-link" aria-label="Twitter">
+            <span class="zd-social-text">X</span>
+            <span class="zd-social-icon"><i data-lucide="twitter"></i></span>
+        </a>
         {% endif %}
         {% if site.linkedin_username %}
-        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="zd-social-link">LI</a>
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="zd-social-link" aria-label="LinkedIn">
+            <span class="zd-social-text">LI</span>
+            <span class="zd-social-icon"><i data-lucide="linkedin"></i></span>
+        </a>
         {% endif %}
     </div>
 

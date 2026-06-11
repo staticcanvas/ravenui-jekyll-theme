@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "zero-dark-sp"
-  spec.version       = File.read("VERSION").strip
+  spec.version       = File.read(File.expand_path("VERSION", __dir__)).strip
   spec.authors       = ["staticcanvas"]
   spec.email         = ["sgkens@gmail.com"]
 
@@ -11,7 +11,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://gitlab.com/staticcanvas/zero-dark-sp"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_sass|assets|LICENSE|README|VERSION)}) }
+  spec.files         = Dir.chdir(File.dirname(__FILE__)) do
+    `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_sass|assets|LICENSE|README|VERSION)}) }
+  end
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "jekyll", "~> 4.3"
