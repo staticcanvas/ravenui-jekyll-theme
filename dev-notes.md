@@ -173,6 +173,8 @@
 - [x] **Navigation Sync:** Added `docs/releases.md` to `_data/navigation.yml` under "Components".
 - [x] **Permalink Conflict:** Resolved duplication by removing `docs/blog/index.md` in favor of `docs/blog.md`.
 - [x] **Unwanted Spacing:** Removed blank scrolling whitespace below the footer.
+- [x] **CI Gemfile Location Bug:** Fixed GitLab CI `test_build` job failure where Bundler threw `Could not locate Gemfile`. This was caused by the files being named `GemFile` and `GemFile.lock` with a capital `F`. In case-sensitive Linux CI docker environments, Bundler was unable to find them. Resolved by renaming the files to lowercase `Gemfile` and `Gemfile.lock`.
+
 
        
 
