@@ -1,3 +1,37 @@
-<div class="zd-feature-grid">
+{%- comment -%}
+Component__: Feature Grid
+Purpose____: Renders a responsive grid layout for feature cards, supporting static captured HTML or data-driven objects.
+Caveats____: Keeps column width responsive. Wraps cards in anchor tags if a link is specified.
+Usage______: 
+            {% include comps/feature-grid.html data_source="features" columns=3 %}
+            or
+            {% capture grid_content %}[include comps/feature-card.html ...]{% endcapture %}
+            {% include comps/feature-grid.html content=grid_content %}
+{%- endcomment -%}
+
+{%- assign columns = include.columns | default: 3 | plus: 0 -%}
+{%- assign items = include.items | default: site.data[include.data_source] -%}
+
+<div class="zd-feature-grid {{ include.class }}" style="--zd-grid-cols: {{ columns }};">
+  {%- if include.content -%}
     {{ include.content }}
+  {%- elsif items -%}
+    {%- for item in items -%}
+      {%- if item.link -%}
+        <a href="{{ item.link | relative_url }}" class="zd-feature-card-wrapper" style="text-decoration: none;">
+      {%- endif -%}
+      <div class="zd-feature-card">
+        {%- if item.icon -%}
+          <div class="zd-feature-card-icon" style="color: {{ item.color | default: 'var(--zd-clr-highlight)' }};">
+            {%- include comps/icon.html name=item.icon size=32 -%}
+          </div>
+        {%- endif -%}
+        <h4 class="zd-feature-card-title">{{ item.title }}</h4>
+        <p class="zd-feature-card-desc">{{ item.description }}</p>
+      </div>
+      {%- if item.link -%}
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
 </div>

@@ -1,0 +1,25 @@
+{%- comment -%}
+Component__: Dependencies
+Purpose____: Displays required sub-components with links to their documentation.
+Caveats____: Expects a comma-separated string of dependency component names.
+Usage______: {% include comps/dependencies.html deps="icon,button" %}
+{%- endcomment -%}
+
+{%- assign deps_array = include.deps | split: "," -%}
+
+<div class="zd-dependencies-container {{ include.class }}">
+  <span class="zd-dependencies-label">
+    {%- include comps/icon.html name="link-2" size=12 -%}
+    Requires:
+  </span>
+  <div class="zd-dependencies-list">
+    {%- for dep in deps_array -%}
+      {%- assign dep_name = dep | strip -%}
+      {%- assign dep_url = "/components/" | append: dep_name | append: "/" -%}
+      <a href="{{ dep_url | relative_url }}" class="zd-dependency-badge">
+        {%- include comps/icon.html name="package" size=10 -%}
+        {{ dep_name }}
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

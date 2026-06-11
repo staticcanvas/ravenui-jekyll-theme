@@ -112,6 +112,11 @@
       url: /components/rendered-el-showcase/
       icon: eye
       description: "Display rendered UI elements in a technical grid frame"
+    - text: Dependencies
+      url: /components/dependencies/
+      icon: link-2
+      description: "Display component dependency badges linked to documentation"
+
 
 
 

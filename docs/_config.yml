@@ -48,7 +48,7 @@ zd_heading_spacing: relaxed         # Spacing for headings (options: relaxed, ti
 # --- Debug & Development ---------------------------------------------------\
 zd_debug: true                      # Enable debug mode for development (shows warnings in console)
 zd_show_version: true               # Show version tag in the sidebar logo section
-version: 1.0.1                      # Current version of the project/docs
+version: 1.0.2                      # Current version of the project/docs
 
 # --- Social Integration (Sidebar) ------------------------------------------\
 github_username: staticcanvas
