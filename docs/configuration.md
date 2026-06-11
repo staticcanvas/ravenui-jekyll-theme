@@ -17,6 +17,7 @@ theme_settings:
   logo:
     path: /assets/img/logo.svg
     height: 32px
+    layout: inline # options: inline, stacked, split
   scroll_progress: true
 ```
 
@@ -24,6 +25,7 @@ theme_settings:
 | :--- | :--- | :--- | :--- |
 | `logo.path` | String | `null` | Path to an image logo displayed in the sidebar. |
 | `logo.height` | String | `32px` | Visual height of the sidebar logo. |
+| `logo.layout` | String | `inline` | Layout style for sidebar branding (`inline`, `stacked`, `split`). |
 | `scroll_progress` | Boolean | `true` | Global toggle for the reading progress bar. |
 
 ---
@@ -120,6 +122,22 @@ Below are the third-party assets integrated into ZeroDark SP:
 
 > [!NOTE]
 > If `zd_use_cdn` is set to `false`, make sure the corresponding vendor files are present in your site's local assets.
+
+---
+
+## **Code Block Line Numbers**
+
+To enable line numbers on code blocks, configure your Jekyll site's Kramdown parser settings in `_config.yml`:
+
+```yaml
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+```
+
+The theme automatically styles the resulting `.rouge-table` and `.gutter` elements to align perfectly with the theme's high-contrast dark aesthetic.
 
 ---
 

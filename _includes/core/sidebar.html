@@ -1,18 +1,26 @@
 <aside class="zd-sidebar">
-    {% if site.theme_settings.logo.path %}
-    <a href="{{ "/" | relative_url }}" class="zd-logo-container">
-        <img src="{{ site.theme_settings.logo.path | relative_url }}" 
-             alt="{{ site.title }}" 
-             style="height: {{ site.theme_settings.logo.height | default: '32px' }}; margin-block-end: 1rem; display: block;">
-    </a>
-    {% endif %}
-    <a href="{{ "/" | relative_url }}" class="zd-logo" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-        <span>{{ site.logo_text | default: "ZERODARK" }}</span>
-        <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "DOCS" }}</span>
-        {% if site.zd_show_version and site.version %}
-            {% include comps/tag.html type="version" text=site.version icon="tag" color="var(--zd-clr-highlight)" class="zd-logo-badge" %}
+    {% assign brand_layout = site.theme_settings.logo.layout | default: "inline" %}
+    <div class="zd-brand zd-brand--{{ brand_layout }}">
+        {% if site.theme_settings.logo.path %}
+        <a href="{{ "/" | relative_url }}" class="zd-brand-logo-link">
+            <img src="{{ site.theme_settings.logo.path | relative_url }}" 
+                 alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
+                 class="zd-brand-logo-img"
+                 style="height: {{ site.theme_settings.logo.height | default: '32px' }};">
+        </a>
         {% endif %}
-    </a>
+        <div class="zd-brand-content">
+            <a href="{{ "/" | relative_url }}" class="zd-brand-text-link">
+                <span class="zd-brand-title">{{ site.logo_text | default: "ZERODARK" }}</span>
+                <span class="zd-brand-subtext">// {{ site.logo_subtext | default: "DOCS" }}</span>
+            </a>
+            {% if site.zd_show_version and site.version %}
+                <span class="zd-brand-badge">
+                    {% include comps/tag.html type="version" text=site.version icon="tag" color="var(--zd-clr-highlight)" class="zd-logo-badge" %}
+                </span>
+            {% endif %}
+        </div>
+    </div>
 
     <div class="zd-search-trigger" id="zd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>

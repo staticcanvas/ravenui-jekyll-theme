@@ -63,7 +63,7 @@
 - [x] **LaTeX Math Integration:** Added KaTeX math expressions support and documented it.
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
-- [ ] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
+- [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
 
 ## Extended Components and Features
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
@@ -136,17 +136,17 @@
 - [ ] **Visual Statistics**: Render site stats using visual charts.
 - [ ] **Pneumatic / Numeric UI Elements**: Integrate subtle pneumatic micro-animations and numeric tickers for stats.
 - [ ] **Component Reusability Pass**: Refactor complex layout snippets into modular components and expose utility grids for layout composition.
-- [ ] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
+- [x] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
 - [ ] **Morphing Social Icons**: Animate social media icons so they morph smoothly from text labels to simple icon logos.
 - [ ] **TOC Custom Designs**: Implement three TOC styles (lines, nodes, simple/default) configurable in `_config.yml`, along with customizable font sizes.
-- [ ] **Dev/Prod Switch — Environment Flags** - Prevents PostHog or Google Analytics from polluting production metrics.
+- [x] **Dev/Prod Switch — Environment Flags** - Prevents PostHog or Google Analytics from polluting production metrics.
 - [ ] **Minification** - Minification only runs in CI. Add to the CI step alongside linting — but be mindful that linters may break Liquid syntax that requires single-line formatting. Icons and other elements nested inside other elements will break if their HTML spans multiple lines. There are workarounds, but I prefer to note this directly in the component documentation, as I have done with almost all components, so developers can read and understand why.
 - [ ] **Footer Layout — `footer-2col`, `footer-3col`, `footer-item`** - Allows construction of footer sections using discrete items: links, icons, logos, images, iframes, badges, and more. Using `footer-item` to specify the target column enables seamless footer construction that matches the style of professional sites — whether simple or detailed. These components should appear before the licence and "powered by" section.
 - [ ] **Introduction Page** - The introduction page needs to be informative and clearly written. Include a notice that Zero Dark was purposefully designed not to support collections siblings — this is intentional, not an oversight.
 - [ ] **Quick Start + Advanced Installation** - Provide a quick-start guide alongside an advanced installation path. Advanced options should cover: building from source, cloning the repo and replacing or editing docs, changing the folder structure, and using the Zero Dark docs implementation to build a site — for users who don't want the default docs website. Consider a summary page for advanced installation with a link to an in-depth page covering working directly with the repo.
 - [ ] **Extend Zero Dark — `zerodark-sp` Developer Guide** - A dedicated developer guide covering the full Zero Dark folder layout and extension points.
 - [ ] **Collections Support — Architecture Decision (Unresolved)** - wasn't going to support collections natively. The plan was to fork Zero Dark on release and build a collections-focused variant. The question is whether to include collections support in `zerodark-sp` to avoid near-duplicate codebases, or whether a separate theme is still the better move. Unresolved — needs a decision before release.
-- [ ] **Rouge Code Blocks — Line Numbers** - Give users the ability to enable line numbers on code blocks.
+- [x] **Rouge Code Blocks — Line Numbers** - Give users the ability to enable line numbers on code blocks.
 - [ ] **Theme Configuration via `_config.yml` — `theme_settings` Object**  - Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full colour palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customisation.
 - [ ] **Typography Configuration via `_config.yml`** - Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
 - [ ] **Unexplored Jekyll Features** - Audit Jekyll's full feature set for anything not currently used that could improve the theme or enable a new feature worth adding.

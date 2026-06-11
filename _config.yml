@@ -16,6 +16,7 @@ theme_settings:
   logo:
     path: /assets/img/logo.svg
     height: 32px
+    layout: inline # options: inline, stacked, split
   scroll_progress: true
 
 # Social
