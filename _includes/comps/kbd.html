@@ -1,0 +1,6 @@
+{%- comment -%}
+Component: Keyboard Key (kbd)
+Purpose: Renders a single styled keyboard key matching Fluent UI aesthetics.
+Caveats: Output must remain collapsed on a single line to prevent Kramdown paragraph wrapping.
+Usage: {% include comps/kbd.html key="Ctrl" size="md" %}
+{%- endcomment -%}{% assign key = include.key | default: include.text %}{% assign size = include.size | default: "md" %}<kbd class="zd-kbd zd-kbd--{{ size }} {{ include.class }}">{{ key }}</kbd>

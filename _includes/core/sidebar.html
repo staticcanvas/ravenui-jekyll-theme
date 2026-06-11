@@ -6,7 +6,13 @@
              style="height: {{ site.theme_settings.logo.height | default: '32px' }}; margin-block-end: 1rem; display: block;">
     </a>
     {% endif %}
-    <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "DOCS" }}</span></a>
+    <a href="{{ "/" | relative_url }}" class="zd-logo" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span>{{ site.logo_text | default: "ZERODARK" }}</span>
+        <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "DOCS" }}</span>
+        {% if site.zd_show_version and site.version %}
+            {% include comps/tag.html type="version" text=site.version icon="tag" color="var(--zd-clr-highlight)" class="zd-logo-badge" %}
+        {% endif %}
+    </a>
 
     <div class="zd-search-trigger" id="zd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>

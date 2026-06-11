@@ -1,0 +1,41 @@
+// Standalone Copy-to-Clipboard Button
+// Compliance: [Fluent UI Integration]
+
+.zd-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: var(--zd-clr-slate);
+  border: 1px solid var(--zd-border-default);
+  border-radius: var(--zd-radius);
+  color: var(--zd-clr-silver);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--zd-font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--zd-transition-fast);
+  user-select: none;
+  vertical-align: middle;
+
+  &:hover {
+    color: var(--zd-clr-white);
+    background-color: var(--zd-bg-hover);
+    border-color: var(--zd-border-strong);
+  }
+
+  &:active {
+    background-color: var(--zd-bg-active);
+  }
+
+  &.copied {
+    color: var(--zd-clr-viridian);
+    border-color: var(--zd-clr-viridian);
+    background-color: color-mix(in srgb, var(--zd-clr-viridian) 8%, transparent);
+  }
+}
+
+.zd-copy-button-label {
+  font-size: 0.75rem;
+}

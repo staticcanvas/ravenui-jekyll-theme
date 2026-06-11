@@ -92,6 +92,18 @@
 - [x] change api-ref to command-ref; create a new component called api-reference which can be used for traditional API documentation akin to web (not CLI).
 - [x] Example pages for all the different layouts. These do not need to be in the menu; just a page and a button going back to the previous page.
 - [x] **Custom HR:** Implemented `hr.html` component supporting gradient lines and centered text/icons.
+- [x] **version tag** - add version badge to the top of the page perhaps after // DOCS SubText use our existing version tag component, enable via _config. update documents to reflect
+    - [x] change badge location to inside logo so it appears inline after // DOCS SubText, add icon and color, update docs to reflect
+- [x] **foot.html** - Extend the footer to include a _includes/core/foot.html partial, which can be used to add custom content to the bottom of the page. This can include links to social media, copyright information, or other relevant details. The footer is currently hardcoded to include the copyright and social media links, so this would need to be updated to accommodate any additional content.
+- [x] Collapsible details/summary block component for optional content folding.
+- [x] Keyboard shortcuts group component to render standard KBD keys side by side.
+- [x] Full-width viewport alert/announcement banner component for site-wide alerts.
+- [x] Standalone copy-to-clipboard button component for arbitrary inline text blocks.
+- [x] Icon showcase grid component to present groups of icons with copy triggers.
+- [x] Dynamic feedback widget component ("Was this page helpful?") with analytics hooks.
+- [x] CSS-based file directory tree diagram component to showcase project layout structures.
+- [x] Pure-CSS context tooltip component for definitions and abbreviations.
+- [x] High-density system metrics container component to group metrics/stats cards.
 
 ## Bug Fixes
 - [x] **Ruby 3.4 Compatibility:** Fixed Gemfile to include `csv`, `base64`, and `bigdecimal` gems which were removed from the Ruby 3.4 standard library.
@@ -116,5 +128,7 @@
 - [x] Check comps/* components that do not have corresponding docs/* documentation pages.
 - [x] Refine documentation sections to make them clear, robust, and technical.
 - [x] Remove any loose tone, focusing on professional and robust documentation.
+- [x] Check CSS, JS, and Liquid for any unused code, for components, add a milti-line liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
+- [x] peform additional polish.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.

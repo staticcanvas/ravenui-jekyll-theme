@@ -1,0 +1,86 @@
+// CSS-based File Directory Tree
+// Compliance: [Fluent UI Integration]
+
+.zd-tree-container {
+  background: var(--zd-bg-surface);
+  border: 1px solid var(--zd-border-default);
+  border-radius: var(--zd-radius-lg);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  font-family: var(--zd-font-mono);
+  font-size: 0.85rem;
+  color: var(--zd-clr-silver);
+  overflow-x: auto;
+}
+
+ul.zd-tree,
+ul.zd-tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+ul.zd-tree ul {
+  margin-left: 1.25rem; // spacing for child nodes
+}
+
+ul.zd-tree li {
+  margin: 0;
+  padding: 0.35rem 0;
+  position: relative;
+}
+
+// Connector lines
+ul.zd-tree li::before {
+  content: "";
+  position: absolute;
+  top: 0.95rem;
+  left: -0.75rem;
+  width: 0.65rem;
+  height: 1px;
+  border-top: 1px dashed var(--zd-border-strong);
+}
+
+ul.zd-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -0.75rem;
+  width: 1px;
+  height: 100%;
+  border-left: 1px dashed var(--zd-border-strong);
+}
+
+ul.zd-tree li:last-child::after {
+  height: 0.95rem; // stops at the horizontal branch
+}
+
+ul.zd-tree > li::after,
+ul.zd-tree > li::before {
+  display: none; // hide connectors on root nodes
+}
+
+.zd-tree-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--zd-clr-white);
+  padding: 0.15rem 0.35rem;
+  border-radius: var(--zd-radius);
+  transition: background var(--zd-transition-fast);
+  cursor: default;
+
+  &:hover {
+    background: var(--zd-bg-hover);
+  }
+}
+
+.zd-tree-icon {
+  color: var(--zd-clr-viridian);
+  flex-shrink: 0;
+}
+
+.zd-tree-text {
+  font-weight: 500;
+}

@@ -1,0 +1,107 @@
+// High-Density System Metrics Component
+// Compliance: [Fluent UI Integration]
+
+.zd-metrics-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.zd-metric-card {
+  background: var(--zd-bg-surface);
+  border: 1px solid var(--zd-border-default);
+  border-radius: var(--zd-radius-lg);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  transition: all var(--zd-transition-base);
+  box-shadow: var(--zd-elevation-depth);
+  box-sizing: border-box;
+
+  --zd-metric-accent: var(--zd-clr-viridian);
+
+  &:hover {
+    background-color: var(--zd-bg-hover);
+    border-color: var(--zd-border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--zd-elevation-surface);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    width: 2.5px;
+    height: 70%;
+    background: var(--zd-metric-accent);
+    border-radius: 0 var(--zd-radius) var(--zd-radius) 0;
+  }
+}
+
+.zd-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.zd-metric-icon {
+  color: var(--zd-metric-accent);
+  display: inline-flex;
+  align-items: center;
+}
+
+.zd-metric-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--zd-clr-smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zd-metric-body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.zd-metric-value {
+  font-family: var(--zd-font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--zd-clr-white);
+  line-height: 1;
+}
+
+.zd-metric-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--zd-radius);
+  line-height: 1;
+
+  &.zd-trend--up {
+    color: var(--zd-clr-viridian);
+    background: color-mix(in srgb, var(--zd-clr-viridian) 8%, transparent);
+  }
+
+  &.zd-trend--down {
+    color: var(--zd-clr-danger);
+    background: color-mix(in srgb, var(--zd-clr-danger) 8%, transparent);
+  }
+
+  &.zd-trend--neutral {
+    color: var(--zd-clr-silver);
+    background: color-mix(in srgb, var(--zd-clr-silver) 8%, transparent);
+  }
+}

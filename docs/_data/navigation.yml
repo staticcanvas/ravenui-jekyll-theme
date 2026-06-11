@@ -100,6 +100,10 @@
       url: /components/last-edited/
       icon: clock
       description: "Track and display page modification timestamps"
+    - text: Directory Tree
+      url: /components/tree/
+      icon: folder-git
+      description: "CSS-based folder and file structure tree diagram"
     - text: Sponsored By
       url: /components/sponsored-by/
       icon: heart
@@ -122,6 +126,10 @@
       url: /components/icon/
       icon: star
       description: "Visual icons for enhancing UI"
+    - text: Icon Showcase Grid
+      url: /components/icon-grid/
+      icon: grid
+      description: "Grid layout for grouping icons with copy triggers"
     - text: Simple Icon
       url: /components/simple-icon/
       icon: github
@@ -137,6 +145,18 @@
     - text: Tag Component
       url: /components/tag/
       icon: tag
+    - text: Keyboard Shortcuts
+      url: /components/kbd/
+      icon: keyboard
+      description: "Keyboard shortcut keys and groups rendered side by side"
+    - text: Standalone Copy Button
+      url: /components/copy-button/
+      icon: copy
+      description: "Standalone copy-to-clipboard button for arbitrary text"
+    - text: Context Tooltip
+      url: /components/tooltip/
+      icon: info
+      description: "Pure-CSS context tooltip for abbreviations and definitions"
     - text: Gradient Text
       url: /components/gradient-text/
       icon: type
@@ -185,6 +205,10 @@
     - text: Callout
       url: /components/callout/
       icon: alert-circle
+    - text: Announcement Banner
+      url: /components/announcement/
+      icon: megaphone
+      description: "Full-width viewport alert and announcement banners"
     - text: Inline Callout
       url: /components/inline-callout/
       icon: alert-circle
@@ -192,6 +216,10 @@
       url: /components/customer-callout/
       icon: star
       description: "Review and testimonial cards with star ratings"
+    - text: Dynamic Feedback Widget
+      url: /components/feedback/
+      icon: message-square
+      description: "Page helpfulness feedback collector with analytics"
 
     - text: Package Tabs
       url: /components/package-tabs/
@@ -212,6 +240,10 @@
     - text: FAQ Accordion
       url: /components/faq/
       icon: help-circle
+    - text: Details Dropdown
+      url: /components/details/
+      icon: chevron-down
+      description: "Collapsible disclosures block for folding content"
     - text: CodePen Embed
       url: /components/codepen/
       icon: codepen
@@ -241,6 +273,10 @@
     - text: Progress Bar
       url: /components/progress/
       icon: activity
+    - text: System Metrics Grid
+      url: /components/metrics/
+      icon: cpu
+      description: "High-density KPI and system metrics display panel"
     - text: Previously Read
       url: /components/previously-read/
       icon: history

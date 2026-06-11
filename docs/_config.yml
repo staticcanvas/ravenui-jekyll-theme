@@ -47,6 +47,8 @@ zd_heading_spacing: relaxed         # Spacing for headings (options: relaxed, ti
 
 # --- Debug & Development ---
 zd_debug: true                      # Enable debug mode for development (shows warnings in console)
+zd_show_version: true               # Show version tag in the sidebar logo section
+version: 1.0.0                      # Current version of the project/docs
 
 # --- Social Integration (Sidebar) ---
 github_username: staticcanvas
@@ -54,6 +56,26 @@ gitlab_username: staticcanvas
 twitter_username: staticcanvas
 linkedin_username: staticcanvas
 bluesky_username: staticcanvas
+
+# --- Announcement Banner Settings ---
+zd_announcement:
+  enabled: true
+  id: "welcome-banner-v1"
+  text: "Welcome to ZeroDark SP! Check out the new Keyboard Shortcuts component."
+  icon: "megaphone"
+  color: "var(--zd-clr-viridian)"
+  link: "/components/kbd/"
+  link_text: "View Docs"
+  dismissible: true
+  type: "success"
+
+# --- Feedback Widget Settings ---
+zd_feedback:
+  enabled: true
+  question: "Was this page helpful?"
+  yes_label: "Yes"
+  no_label: "No"
+  thank_you: "Thank you for your feedback!"
 
 # --- Documentation Meta (Edit Links) ---
 github_repo: zero-dark-sp
