@@ -112,6 +112,11 @@
       url: /components/rendered-el-showcase/
       icon: eye
       description: "Display rendered UI elements in a technical grid frame"
+    - text: Dependencies
+      url: /components/dependencies/
+      icon: link-2
+      description: "Display component dependency badges linked to documentation"
+
 
 
 
@@ -197,6 +202,10 @@
       url: /components/carousel/
       icon: image
       description: "Responsive sliding image deck with navigation controls"
+    - text: Figure / Caption
+      url: /components/figure/
+      icon: image
+      description: "Semantic figure and figcaption with alignment and optional links"
 
 
 
@@ -254,6 +263,10 @@
       icon: codesandbox
       source: simple
       description: "Embed sandbox web environments from CodeSandbox"
+    - text: Modal / Dialog
+      url: /components/modal/
+      icon: maximize
+      description: "Accessible dialog overlay with focus trap and ESC close"
 
 
 - title: Data & History
@@ -273,6 +286,14 @@
     - text: Progress Bar
       url: /components/progress/
       icon: activity
+    - text: Progress / Steps Bar
+      url: /components/steps/
+      icon: activity
+      description: "Visual step indicator for onboarding or tutorials"
+    - text: Site Stats
+      url: /components/site-stats/
+      icon: bar-chart-2
+      description: "Site-wide statistics including posts, tags, words, and reading time"
     - text: System Metrics Grid
       url: /components/metrics/
       icon: cpu
@@ -289,6 +310,18 @@
       url: /components/svgcharts/
       icon: bar-chart
       description: "Lightweight pure SVG zero-JS data charts"
+    - text: Data Table
+      url: /components/datatable/
+      icon: table
+      description: "Interactive table with search, sorting, and pagination"
+    - text: Timeline
+      url: /components/timeline/
+      icon: activity
+      description: "Chronological vertical timeline list for milestones"
+    - text: Tag Cloud
+      url: /components/tag-cloud/
+      icon: tag
+      description: "Interactive tag cloud sized by post counts"
 
 
 

@@ -1,0 +1,12 @@
+- icon: cpu
+  title: High Performance
+  description: Sub-second builds and lean static asset output.
+  color: "#00ff9d"
+- icon: shield
+  title: Hardened Security
+  description: Zero dynamic server execution. Strictly static files.
+  color: "#3399ff"
+- icon: code
+  title: Modern Tooling
+  description: Built with Sass and advanced Liquid templating.
+  color: "#ffcc00"

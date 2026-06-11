@@ -45,6 +45,14 @@
 @use "zero-dark-sp/tree";
 @use "zero-dark-sp/tooltip";
 @use "zero-dark-sp/metrics";
+@use "zero-dark-sp/datatable";
+@use "zero-dark-sp/timeline";
+@use "zero-dark-sp/tag-cloud";
+@use "zero-dark-sp/modal";
+@use "zero-dark-sp/figure";
+@use "zero-dark-sp/steps";
+@use "zero-dark-sp/dependencies";
+
 
 // 5. Third Party / Syntax Highlighting
 @use "rogue/ethereal";

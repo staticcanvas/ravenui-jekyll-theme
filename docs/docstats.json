@@ -1,0 +1,50 @@
+---
+permalink: /docstats.json
+layout: none
+---
+{
+  "site": {
+    "title": {{ site.title | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "version": {{ site.version | default: "1.0.0" | jsonify }}
+  },
+  "counts": {
+    "total_documents": {{ site.pages.size | plus: site.posts.size }},
+    "pages": {{ site.pages.size }},
+    "posts": {{ site.posts.size }},
+    "tags": {{ site.tags.size }},
+    "categories": {{ site.categories.size }}
+  },
+  "tags": [
+    {%- for tag in site.tags -%}
+      {
+        "name": {{ tag[0] | jsonify }},
+        "count": {{ tag[1].size }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "categories": [
+    {%- for category in site.categories -%}
+      {
+        "name": {{ category[0] | jsonify }},
+        "count": {{ category[1].size }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "metrics": {
+    {%- assign total_words = 0 -%}
+    {%- for post in site.posts -%}
+      {%- assign post_words = post.content | number_of_words -%}
+      {%- assign total_words = total_words | plus: post_words -%}
+    {%- endfor -%}
+    {%- for page in site.pages -%}
+      {%- if page.content -%}
+        {%- assign page_words = page.content | number_of_words -%}
+        {%- assign total_words = total_words | plus: page_words -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign total_minutes = total_words | divided_by: 200 | at_least: 1 -%}
+    "total_word_count": {{ total_words }},
+    "estimated_reading_time_minutes": {{ total_minutes }}
+  }
+}

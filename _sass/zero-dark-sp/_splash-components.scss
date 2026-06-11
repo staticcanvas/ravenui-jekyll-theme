@@ -219,10 +219,28 @@
 /* FEATURE GRID */
 .zd-feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(var(--zd-grid-cols, 3), minmax(0, 1fr));
     gap: 2.5rem;
     margin-block: 5rem;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(min(2, var(--zd-grid-cols, 3)), minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
 }
+
+.zd-feature-card-wrapper {
+    display: block;
+    height: 100%;
+    
+    .zd-feature-card {
+        height: 100%;
+    }
+}
+
 
 .zd-feature-card {
     padding: 3rem;

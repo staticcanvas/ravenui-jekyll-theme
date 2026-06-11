@@ -1,0 +1,90 @@
+{%- comment -%}
+Component__: Site Stats
+Purpose____: Displays auto-calculated metrics (posts, tags, categories, words, reading time).
+Caveats____: Calculates reading time using standard 200 words/minute average.
+Usage______: {% include comps/site-stats.html grid_size="160px" %}
+{%- endcomment -%}
+
+{%- assign total_words = 0 -%}
+{%- for post in site.posts -%}
+  {%- assign post_words = post.content | number_of_words -%}
+  {%- assign total_words = total_words | plus: post_words -%}
+{%- endfor -%}
+
+{%- assign total_minutes = total_words | divided_by: 200 | at_least: 1 -%}
+{%- if total_minutes >= 60 -%}
+  {%- assign hours = total_minutes | divided_by: 60 -%}
+  {%- assign mins = total_minutes | modulo: 60 -%}
+  {%- capture reading_time_str -%}{{ hours }}h {{ mins }}m{%- endcapture -%}
+{%- else -%}
+  {%- capture reading_time_str -%}{{ total_minutes }} mins{%- endcapture -%}
+{%- endif -%}
+
+{%- assign grid_size = include.grid_size | default: "150px" -%}
+
+<div class="zd-metrics-grid {{ include.class }}" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
+  <!-- Posts Stat -->
+  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-viridian); border-color: color-mix(in srgb, var(--zd-clr-viridian) 20%, transparent);">
+    <div class="zd-metric-header">
+      <span class="zd-metric-icon">{%- include comps/icon.html name="book-open" size=14 -%}</span>
+      <span class="zd-metric-title">Total Posts</span>
+    </div>
+    <div class="zd-metric-body">
+      <span class="zd-metric-value">{{ site.posts.size }}</span>
+    </div>
+  </div>
+
+  <!-- Tags Stat -->
+  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-info); border-color: color-mix(in srgb, var(--zd-clr-info) 20%, transparent);">
+    <div class="zd-metric-header">
+      <span class="zd-metric-icon">{%- include comps/icon.html name="tag" size=14 -%}</span>
+      <span class="zd-metric-title">Total Tags</span>
+    </div>
+    <div class="zd-metric-body">
+      <span class="zd-metric-value">{{ site.tags.size }}</span>
+    </div>
+  </div>
+
+  <!-- Categories Stat -->
+  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-warning); border-color: color-mix(in srgb, var(--zd-clr-warning) 20%, transparent);">
+    <div class="zd-metric-header">
+      <span class="zd-metric-icon">{%- include comps/icon.html name="folder" size=14 -%}</span>
+      <span class="zd-metric-title">Categories</span>
+    </div>
+    <div class="zd-metric-body">
+      <span class="zd-metric-value">{{ site.categories.size }}</span>
+    </div>
+  </div>
+
+  {%- if include.show_words != false -%}
+  <!-- Words Stat -->
+  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-platinum); border-color: color-mix(in srgb, var(--zd-clr-platinum) 20%, transparent);">
+    <div class="zd-metric-header">
+      <span class="zd-metric-icon">{%- include comps/icon.html name="file-text" size=14 -%}</span>
+      <span class="zd-metric-title">Word Count</span>
+    </div>
+    <div class="zd-metric-body">
+      <span class="zd-metric-value">
+        {%- if total_words >= 1000 -%}
+          {{ total_words | divided_by: 1000.0 | round: 1 }}k
+        {%- else -%}
+          {{ total_words }}
+        {%- endif -%}
+      </span>
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if include.show_reading_time != false -%}
+  <!-- Reading Time Stat -->
+  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-viridian); border-color: color-mix(in srgb, var(--zd-clr-viridian) 20%, transparent);">
+    <div class="zd-metric-header">
+      <span class="zd-metric-icon">{%- include comps/icon.html name="clock" size=14 -%}</span>
+      <span class="zd-metric-title">Reading Time</span>
+    </div>
+    <div class="zd-metric-body">
+      <span class="zd-metric-value">{{ reading_time_str }}</span>
+    </div>
+  </div>
+  {%- endif -%}
+</div>

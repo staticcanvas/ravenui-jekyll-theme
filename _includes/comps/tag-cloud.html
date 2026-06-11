@@ -1,0 +1,32 @@
+{%- comment -%}
+Component__: Tag Cloud
+Purpose____: Renders all site tags sized proportionally by post count.
+Caveats____: Links to filtered tag indexes, dynamically calculating size ranks based on post counts.
+Usage______: {% include comps/tag-cloud.html base_url="/tags.html" %}
+{%- endcomment -%}
+
+{%- assign base_url = include.base_url | default: "/tags.html" -%}
+
+<div class="zd-tag-cloud {{ include.class }}">
+  {%- for tag in site.tags -%}
+    {%- assign tag_name = tag[0] -%}
+    {%- assign post_count = tag[1] | size -%}
+    
+    {%- if post_count <= 1 -%}
+      {%- assign size_class = "zd-tag-cloud-size-1" -%}
+    {%- elsif post_count <= 3 -%}
+      {%- assign size_class = "zd-tag-cloud-size-2" -%}
+    {%- elsif post_count <= 6 -%}
+      {%- assign size_class = "zd-tag-cloud-size-3" -%}
+    {%- elsif post_count <= 10 -%}
+      {%- assign size_class = "zd-tag-cloud-size-4" -%}
+    {%- else -%}
+      {%- assign size_class = "zd-tag-cloud-size-5" -%}
+    {%- endif -%}
+
+    <a href="{{ base_url | relative_url }}#{{ tag_name | slugify }}" class="zd-tag-cloud-item {{ size_class }}">
+      <span class="zd-tag-cloud-name">{{ tag_name }}</span>
+      <span class="zd-tag-cloud-count">{{ post_count }}</span>
+    </a>
+  {%- endfor -%}
+</div>

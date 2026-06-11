@@ -1,1 +1,11 @@
-{% assign term = include.term %}{% assign definition = include.definition %}{% assign position = include.position | default: "top" %}<span class="zd-tooltip-trigger zd-tooltip--{{ position }} {{ include.class }}" data-tooltip="{{ definition | escape }}">{{ term }}</span>
+{%- comment -%}
+Component__: Tooltip
+Purpose____: Hover/focus tooltip for definitions and abbreviations.
+Caveats____: Uses CSS positioning for the visual element and a screen-reader-only element for accessibility.
+Usage______: {% include comps/tooltip.html term="API" definition="Application Programming Interface" position="top" %}
+{%- endcomment -%}
+{%- assign term = include.term -%}
+{%- assign definition = include.definition -%}
+{%- assign position = include.position | default: "top" -%}
+{%- assign unique_id = include.id | default: term | slugify | append: "-" | append: term.size -%}
+<span class="zd-tooltip-trigger zd-tooltip--{{ position }} {{ include.class }}" aria-describedby="tooltip-{{ unique_id }}" tabindex="0" data-tooltip="{{ definition | escape }}">{{ term }}</span><span id="tooltip-{{ unique_id }}" class="zd-sr-only" role="tooltip">{{ definition }}</span>

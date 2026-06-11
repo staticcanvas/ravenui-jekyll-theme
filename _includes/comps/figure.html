@@ -1,0 +1,27 @@
+{%- comment -%}
+Component__: Figure / Caption
+Purpose____: Semantic figure+figcaption for images. Supports alignment (left, right, center, full) and borders.
+Caveats____: Automatically applies relative_url to image source paths.
+Usage______: {% include comps/figure.html src="/assets/img/test.jpg" caption="An image caption" align="center" %}
+{%- endcomment -%}
+
+{%- assign align = include.align | default: "center" -%}
+{%- assign has_border = include.border | default: true -%}
+
+<figure class="zd-figure zd-figure--{{ align }} {% if has_border %}zd-figure--border{% endif %} {{ include.class }}">
+  {%- if include.link -%}
+    <a href="{{ include.link | relative_url }}" {% if include.link_target -%}target="{{ include.link_target }}"{%- endif -%}>
+  {%- endif -%}
+  
+  <img src="{{ include.src | relative_url }}" alt="{{ include.alt | default: include.caption | escape }}" loading="lazy">
+  
+  {%- if include.link -%}
+    </a>
+  {%- endif -%}
+  
+  {%- if include.caption -%}
+    <figcaption class="zd-figcaption {{ include.caption_class }}">
+      {{ include.caption }}
+    </figcaption>
+  {%- endif -%}
+</figure>
