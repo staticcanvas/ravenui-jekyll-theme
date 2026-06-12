@@ -63,8 +63,7 @@
 
     &:hover {
         border-color: var(--zd-clr-highlight);
-        transform: translateY(-6px) scale(1.01);
-        box-shadow: var(--zd-elevation-high), 0 0 20px rgba(0, 255, 157, 0.05);
+        box-shadow: var(--zd-elevation-high);
     }
 }
 
@@ -75,7 +74,7 @@
 }
 
 .zd-card-icon { margin-block-end: 1.5rem; opacity: 0.8; transition: var(--zd-transition-base); }
-.zd-card:hover .zd-card-icon { opacity: 1; transform: scale(1.1); }
+.zd-card:hover .zd-card-icon { opacity: 1; }
 .zd-card-title { color: var(--zd-clr-platinum); margin-block-end: 1.25rem; font-size: 1.25rem; font-weight: 700; }
 .zd-card-content { color: #888; font-size: 1rem; line-height: 1.6; }
 

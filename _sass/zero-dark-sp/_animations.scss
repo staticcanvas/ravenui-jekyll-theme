@@ -68,3 +68,117 @@
 
 @keyframes terminal-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes space-drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+
+/* Scoped Animations & Transition System (Fluent UI Standard) */
+
+// Keyframes
+@keyframes zd-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zd-fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// 1. Page Load Animations
+.zd-animations-enabled.zd-anim-page-loads {
+  .zd-hero {
+    animation: zd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .zd-content > :not(.zd-hero) {
+    animation: zd-fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.08s;
+  }
+  
+  .zd-sidebar-left {
+    animation: zd-fade-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+// 2. Interactive Hover Micro-Animations
+.zd-animations-enabled.zd-anim-hover-effects {
+  // Cards
+  .zd-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: var(--zd-elevation-high), 0 0 20px rgba(0, 255, 157, 0.05);
+    }
+    
+    .zd-card-icon {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    &:hover .zd-card-icon {
+      transform: scale(1.1);
+    }
+  }
+  
+  // Callouts
+  .zd-callout {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-inline-start-width 0.2s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateX(4px);
+      border-inline-start-width: 6px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  // Badges & Tags
+  .zd-tag {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 2px 8px rgba(0, 255, 157, 0.1);
+    }
+  }
+  
+  // Buttons
+  .zd-btn, button.zd-mobile-btn, .zd-copy-btn, .zd-feedback-btn {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px) scale(1.02);
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+// 3. Smooth Scrolling
+.zd-animations-enabled {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// 4. Accessibility Fallback (Reduced Motion)
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

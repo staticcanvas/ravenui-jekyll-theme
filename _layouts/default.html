@@ -3,7 +3,7 @@
 
 {% include core/head.html %}
 
-<body>
+<body{% if site.theme_settings.animations.enabled != false %} class="zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}"{% endif %}>
     {% if site.zd_announcement.enabled %}
         {% include comps/announcement.html %}
     {% endif %}
