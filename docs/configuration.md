@@ -20,6 +20,12 @@ theme_settings:
     layout: inline # options: inline, stacked, split
   scroll_progress: true
   
+  # Animations Controls
+  animations:
+    enabled: true                   # Enable/disable all animations globally
+    page_loads: true                # Enable subtle page load fade-in animations
+    hover_effects: true             # Enable hover scale/rotate micro-animations on interactive elements
+  
   # Typography Configurations
   typography:
     google_fonts: "Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500|IBM+Plex+Sans:wght@500"
@@ -44,6 +50,9 @@ theme_settings:
 | `logo.height` | String | `32px` | Visual height of the sidebar logo. |
 | `logo.layout` | String | `inline` | Layout style for sidebar branding (`inline`, `stacked`, `split`). |
 | `scroll_progress` | Boolean | `true` | Global toggle for the reading progress bar. |
+| `animations.enabled` | Boolean | `true` | Global switch for all animations. |
+| `animations.page_loads` | Boolean | `true` | Enables fade-in and slide animations on load. |
+| `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |
 | `typography.google_fonts` | String | *Fraunces & IBM Plex* | Custom Google Font query string to load from CDN. |
 | `typography.font_sans` | String | System default | Font stack for body text. |
 | `typography.font_mono` | String | System default | Font stack for monospace code blocks. |
