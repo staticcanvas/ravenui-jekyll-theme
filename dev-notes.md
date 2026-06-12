@@ -44,7 +44,7 @@
 - [x] **Component Index:** Expanded the gallery in `docs/components/index.md` to showcase all 4 component categories.
 - [x] **Final Visual Audit:** Completed full pass on all 22 component pages; verified consistency in API tables and examples.
 - [x] **Test Build:** Successfully verified project integrity with `bundle exec jekyll build`.
-
+- [x] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
 
 ## UI Adjustments
 - [x] **Fluent UI Refinement:** Applied visual polish to splash components (cards, buttons, terminals) including subtle elevations, refined borders (`color-mix`), and scale-based interactive states.
@@ -162,7 +162,7 @@
 - [x] **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
 - [x] **CI-Bundler-Issue** - bundler before script dont like to be ran as root, ive remove the before script for global scope and attched it to build stage. unsure how to fix this. this is causing build to fail - source bundler docs and find fix.
 - [x] **Document Count Metrics**: Create a new automatic JSON data endpoint (`docstats.json`) showing the document count metrics of the site.
-- [ ] **Search Integrations**: Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia).
+- [x] **Search Integrations**: Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia).
 - [ ] **Static Page Feedback**: Support static page likes, comments, and reviews.
 - [ ] **Visual Statistics**: Render site stats using visual charts.
 - [ ] **Pneumatic / Numeric UI Elements**: Integrate subtle pneumatic micro-animations and numeric tickers for stats.

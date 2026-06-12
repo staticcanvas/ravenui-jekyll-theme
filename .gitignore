@@ -6,7 +6,7 @@ docs/.jekyll-cache/
 
 # Bundler & Vendor
 .bundle/
-vendor/
+/vendor/
 
 # Node modules
 node_modules/
