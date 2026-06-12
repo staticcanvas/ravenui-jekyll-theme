@@ -50,3 +50,5 @@ bundle exec jekyll serve
 {% include comps/heading.html tag="h2" text="Post-Installation" icon="check-circle" size=20 %}
 
 Once installed, we recommend visiting the [Configuration](/configuration/) guide to set up your site title, logo, and social links.
+
+For advanced setups, custom layout configurations, or building from source, see our [Advanced Installation](/installation/advanced/) guide.

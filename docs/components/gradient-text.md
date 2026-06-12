@@ -32,13 +32,13 @@ The `gradient-text.html` component renders headings or text styled with linear C
 You can customize the HTML tag, weight, and font-size of the rendered gradient text.
 
 <div>
-    {% include comps/gradient-text.html text="Premium Bold Subtitle" tag="p" size="1.25rem" weight="800" from="#ff007f" to="#7f00ff" %}
+    {% include comps/gradient-text.html text="Elegant Bold Subtitle" tag="p" size="1.25rem" weight="800" from="#ff007f" to="#7f00ff" %}
 </div>
 
 {% capture grad_custom_eg %}
 {% raw %}
 ```liquid
-{% include comps/gradient-text.html text="Premium Bold Subtitle" tag="p" size="1.25rem" weight="800" from="#ff007f" to="#7f00ff" %}
+{% include comps/gradient-text.html text="Elegant Bold Subtitle" tag="p" size="1.25rem" weight="800" from="#ff007f" to="#7f00ff" %}
 ```
 {% endraw %}
 {% endcapture %}

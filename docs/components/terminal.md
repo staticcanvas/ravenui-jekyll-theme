@@ -6,7 +6,7 @@ tags: [ui, components, terminal, cli]
 description: A high-fidelity terminal component for showcasing command-line interactions.
 ---
 
-ZeroDark SP includes a premium `terminal.html` component that simulates a modern command-line interface with support for multiple tabs, status indicators, and syntax-highlighted commands.
+ZeroDark SP includes a professional `terminal.html` component that simulates a modern command-line interface with support for multiple tabs, status indicators, and syntax-highlighted commands.
 
 {% include comps/heading.html tag="h2" text="Basic Usage" icon="terminal" size=20 %}
 

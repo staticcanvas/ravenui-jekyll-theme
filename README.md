@@ -1,4 +1,4 @@
-# ZeroDark SP
+# Zero-Dark
 
 A professional, high-contrast Jekyll theme optimized for technical documentation and long-form readability.
 
@@ -56,7 +56,7 @@ Once deployed, the master documentation is hosted via GitLab Pages.
 
 If you do not wish to use the Ruby Gem or clone the repository, pre-packaged releases are available as direct ZIP downloads. 
 
-You can download `zero-dark-sp-v[VERSION].zip` directly from the **GitLab Release page** for your chosen version and extract it to use it as a standalone template.
+You can download `zero-dark-v[VERSION].zip` directly from the **GitLab Release page** for your chosen version and extract it to use it as a standalone template.
 
 ---
 

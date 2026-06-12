@@ -17,14 +17,38 @@ theme_settings:
   logo:
     path: /assets/img/logo.svg
     height: 32px
+    layout: inline # options: inline, stacked, split
   scroll_progress: true
+  
+  # Typography Configurations
+  typography:
+    google_fonts: "Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500|IBM+Plex+Sans:wght@500"
+    font_sans: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font_mono: "'MonaspiceAr Nerd Font Mono', 'JetBrains Mono', 'Fira Code', monospace"
+    h1:
+      font_family: "'Fraunces', serif"
+      weight: "400"
+    h2:
+      font_family: "'Fraunces', serif"
+      weight: "500"
+    h3:
+      font_family: "'IBM Plex Sans', sans-serif"
+      weight: "500"
+    body:
+      weight: "400"
 ```
 
 | Field | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `logo.path` | String | `null` | Path to an image logo displayed in the sidebar. |
 | `logo.height` | String | `32px` | Visual height of the sidebar logo. |
+| `logo.layout` | String | `inline` | Layout style for sidebar branding (`inline`, `stacked`, `split`). |
 | `scroll_progress` | Boolean | `true` | Global toggle for the reading progress bar. |
+| `typography.google_fonts` | String | *Fraunces & IBM Plex* | Custom Google Font query string to load from CDN. |
+| `typography.font_sans` | String | System default | Font stack for body text. |
+| `typography.font_mono` | String | System default | Font stack for monospace code blocks. |
+| `typography.h1`, `h2`, `h3`, `body` | Object | `null` | Typography overrides including `font_family`, `size`, and `weight`. |
+| `footer.columns` | Array | `null` | Dynamic footer multi-column layouts configuration. |
 
 ---
 
@@ -120,6 +144,22 @@ Below are the third-party assets integrated into ZeroDark SP:
 
 > [!NOTE]
 > If `zd_use_cdn` is set to `false`, make sure the corresponding vendor files are present in your site's local assets.
+
+---
+
+## **Code Block Line Numbers**
+
+To enable line numbers on code blocks, configure your Jekyll site's Kramdown parser settings in `_config.yml`:
+
+```yaml
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+```
+
+The theme automatically styles the resulting `.rouge-table` and `.gutter` elements to align perfectly with the theme's high-contrast dark aesthetic.
 
 ---
 

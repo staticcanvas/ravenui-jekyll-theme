@@ -8,6 +8,11 @@ description: ZeroDark SP is a high-performance Jekyll theme engineered for techn
 
 ZeroDark SP is a professional Jekyll theme optimized for technical documentation and long-form readability.
 
+{% capture collections_notice %}
+Zero Dark is intentionally designed to prioritize structured, hierarchy-driven documentation via curated sidebar navigation (`_data/navigation.yml`). It does not support automatic Jekyll collection siblings (next/previous page lists) by design. For deep collections structures, a separate variant is planned to preserve the simplicity of the core theme.
+{% endcapture %}
+{% include comps/callout.html type="note" title="Architecture Decision" content=collections_notice %}
+
 {% include comps/heading.html tag="h2" text="Project Status" icon="activity" size=20 %}
 
 {% capture roadmap_content %}

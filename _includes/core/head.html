@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+    {% if site.theme_settings.typography.google_fonts %}
+        <link href="https://fonts.googleapis.com/css2?family={{ site.theme_settings.typography.google_fonts }}&display=swap" rel="stylesheet">
+    {% else %}
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+    {% endif %}
     
     {% if site.zd_use_cdn != false %}
         <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.min.js"></script>
@@ -55,7 +59,42 @@
                 --zd-hero-padding: 1rem;
                 --zd-content-margin: 1.5rem;
             {% endif %}
+
+            {% if site.theme_settings.typography.font_sans %}
+                --zd-font-sans: {{ site.theme_settings.typography.font_sans }};
+            {% endif %}
+            {% if site.theme_settings.typography.font_mono %}
+                --zd-font-mono: {{ site.theme_settings.typography.font_mono }};
+            {% endif %}
         }
+
+        {% if site.theme_settings.typography.h1 %}
+            h1 {
+                {% if site.theme_settings.typography.h1.font_family %}font-family: {{ site.theme_settings.typography.h1.font_family }} !important;{% endif %}
+                {% if site.theme_settings.typography.h1.size %}font-size: {{ site.theme_settings.typography.h1.size }} !important;{% endif %}
+                {% if site.theme_settings.typography.h1.weight %}font-weight: {{ site.theme_settings.typography.h1.weight }} !important;{% endif %}
+            }
+        {% endif %}
+        {% if site.theme_settings.typography.h2 %}
+            h2 {
+                {% if site.theme_settings.typography.h2.font_family %}font-family: {{ site.theme_settings.typography.h2.font_family }} !important;{% endif %}
+                {% if site.theme_settings.typography.h2.size %}font-size: {{ site.theme_settings.typography.h2.size }} !important;{% endif %}
+                {% if site.theme_settings.typography.h2.weight %}font-weight: {{ site.theme_settings.typography.h2.weight }} !important;{% endif %}
+            }
+        {% endif %}
+        {% if site.theme_settings.typography.h3 %}
+            h3 {
+                {% if site.theme_settings.typography.h3.font_family %}font-family: {{ site.theme_settings.typography.h3.font_family }} !important;{% endif %}
+                {% if site.theme_settings.typography.h3.size %}font-size: {{ site.theme_settings.typography.h3.size }} !important;{% endif %}
+                {% if site.theme_settings.typography.h3.weight %}font-weight: {{ site.theme_settings.typography.h3.weight }} !important;{% endif %}
+            }
+        {% endif %}
+        {% if site.theme_settings.typography.body %}
+            body {
+                {% if site.theme_settings.typography.body.size %}font-size: {{ site.theme_settings.typography.body.size }} !important;{% endif %}
+                {% if site.theme_settings.typography.body.weight %}font-weight: {{ site.theme_settings.typography.body.weight }} !important;{% endif %}
+            }
+        {% endif %}
     </style>
     
     {% if site.math or page.math %}
@@ -68,7 +107,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.4/dist/mermaid.min.js"></script>
     {% endif %}
 
-    {% if site.google_analytics %}
+    {% if jekyll.environment == "production" and site.google_analytics %}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>

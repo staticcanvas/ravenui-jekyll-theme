@@ -19,6 +19,7 @@
 - [x] **Component Index:** Expanded the gallery in `docs/components/index.md` to showcase all 4 component categories.
 - [x] **Final Visual Audit:** Completed full pass on all 22 component pages; verified consistency in API tables and examples.
 - [x] **Test Build:** Successfully verified project integrity with `bundle exec jekyll build`.
+- [ ] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
 
 ## UI Adjustments
 - [x] **Fluent UI Refinement:** Applied visual polish to splash components (cards, buttons, terminals) including subtle elevations, refined borders (`color-mix`), and scale-based interactive states.
@@ -63,8 +64,8 @@
 - [x] **LaTeX Math Integration:** Added KaTeX math expressions support and documented it.
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
-- [ ] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
-
+- [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
+- [ ] **animations** - add suttle animations to components like callout, badges, tags, heros, cards, that would make sence but not too distracting, page loads and transitions, and scrolls. set a object in global config that can be used to enable or disable animations.
 ## Extended Components and Features
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
 - [x] Written-by component.
@@ -128,7 +129,7 @@
 - [x] **Feature Grid**: A grid component (2-4 columns) showcasing icons, titles, and descriptions, sourcing its items from page front-matter or a YAML/JSON data file.
 - [x] **Timeline** - Vertical chronological list. Each entry: date, heading, body. Reads from YAML.
 - [x] **Component Dependency Mapping**: Since many components depend on others, document these dependencies in Liquid comments and documentation. Optionally, define dependencies in the front-matter YAML header of components and render them beautifully using a dedicated dependency component.
-- **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
+- [x] **Heading & TOC Refinement**: Ensure the Table of Contents (TOC) only picks up headings from the main article content rather than auxiliary headings inside widgets or layout components.
 - [x] **CI-Bundler-Issue** - bundler before script dont like to be ran as root, ive remove the before script for global scope and attched it to build stage. unsure how to fix this. this is causing build to fail - source bundler docs and find fix.
 - [x] **Document Count Metrics**: Create a new automatic JSON data endpoint (`docstats.json`) showing the document count metrics of the site.
 - [ ] **Search Integrations**: Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia).
@@ -136,19 +137,21 @@
 - [ ] **Visual Statistics**: Render site stats using visual charts.
 - [ ] **Pneumatic / Numeric UI Elements**: Integrate subtle pneumatic micro-animations and numeric tickers for stats.
 - [ ] **Component Reusability Pass**: Refactor complex layout snippets into modular components and expose utility grids for layout composition.
-- [ ] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
-- [ ] **Morphing Social Icons**: Animate social media icons so they morph smoothly from text labels to simple icon logos.
+- [x] **Sidebar Branding Layouts**: Expose three configurable layouts for the sidebar logo, title, and subtext.
+    - [x] **Resolved**: Partitioned branding elements into top and bottom rows with styling offsets to ensure `inline`, `stacked`, and `split` layouts align dynamically and display elegantly.
+
+- [x] **Morphing Social Icons**: Animate social media icons so they morph smoothly from text labels to simple icon logos.
 - [ ] **TOC Custom Designs**: Implement three TOC styles (lines, nodes, simple/default) configurable in `_config.yml`, along with customizable font sizes.
-- [ ] **Dev/Prod Switch — Environment Flags** - Prevents PostHog or Google Analytics from polluting production metrics.
+- [x] **Dev/Prod Switch — Environment Flags** - Prevents PostHog or Google Analytics from polluting production metrics.
 - [ ] **Minification** - Minification only runs in CI. Add to the CI step alongside linting — but be mindful that linters may break Liquid syntax that requires single-line formatting. Icons and other elements nested inside other elements will break if their HTML spans multiple lines. There are workarounds, but I prefer to note this directly in the component documentation, as I have done with almost all components, so developers can read and understand why.
-- [ ] **Footer Layout — `footer-2col`, `footer-3col`, `footer-item`** - Allows construction of footer sections using discrete items: links, icons, logos, images, iframes, badges, and more. Using `footer-item` to specify the target column enables seamless footer construction that matches the style of professional sites — whether simple or detailed. These components should appear before the licence and "powered by" section.
-- [ ] **Introduction Page** - The introduction page needs to be informative and clearly written. Include a notice that Zero Dark was purposefully designed not to support collections siblings — this is intentional, not an oversight.
-- [ ] **Quick Start + Advanced Installation** - Provide a quick-start guide alongside an advanced installation path. Advanced options should cover: building from source, cloning the repo and replacing or editing docs, changing the folder structure, and using the Zero Dark docs implementation to build a site — for users who don't want the default docs website. Consider a summary page for advanced installation with a link to an in-depth page covering working directly with the repo.
+- [x] **Footer Layout — `footer-2col`, `footer-3col`, `footer-item`** - Allows construction of footer sections using discrete items: links, icons, logos, images, iframes, badges, and more. Using `footer-item` to specify the target column enables seamless footer construction that matches the style of professional sites — whether simple or detailed. These components should appear before the licence and "powered by" section.
+- [x] **Introduction Page** - The introduction page needs to be informative and clearly written. Include a notice that Zero Dark was purposefully designed not to support collections siblings — this is intentional, not an oversight.
+- [x] **Quick Start + Advanced Installation** - Provide a quick-start guide alongside an advanced installation path. Advanced options should cover: building from source, cloning the repo and replacing or editing docs, changing the folder structure, and using the Zero Dark docs implementation to build a site — for users who don't want the default docs website. Consider a summary page for advanced installation with a link to an in-depth page covering working directly with the repo.
 - [ ] **Extend Zero Dark — `zerodark-sp` Developer Guide** - A dedicated developer guide covering the full Zero Dark folder layout and extension points.
 - [ ] **Collections Support — Architecture Decision (Unresolved)** - wasn't going to support collections natively. The plan was to fork Zero Dark on release and build a collections-focused variant. The question is whether to include collections support in `zerodark-sp` to avoid near-duplicate codebases, or whether a separate theme is still the better move. Unresolved — needs a decision before release.
-- [ ] **Rouge Code Blocks — Line Numbers** - Give users the ability to enable line numbers on code blocks.
-- [ ] **Theme Configuration via `_config.yml` — `theme_settings` Object**  - Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full colour palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customisation.
-- [ ] **Typography Configuration via `_config.yml`** - Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
+- [x] **Rouge Code Blocks — Line Numbers** - Give users the ability to enable line numbers on code blocks.
+- [x] **Theme Configuration via `_config.yml` — `theme_settings` Object**  - Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full colour palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customisation.
+- [x] **Typography Configuration via `_config.yml`** - Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
 - [ ] **Unexplored Jekyll Features** - Audit Jekyll's full feature set for anything not currently used that could improve the theme or enable a new feature worth adding.
 - [ ] **Documentation Requirement — All of the Above** - For every item above: if it results in a new component, ensure `docs/components` has a corresponding component page. For all other updates, ensure the documentation reflects the change.
 - [ ] **collection support**Add collection support to Zero Dark with a feature flag — collections: false by default. Users who don't need it see nothing different. Users who do get first-class support without a separate fork to maintain. The _data/navigation.yaml system stays as the manual/curated path. They coexist.
@@ -164,8 +167,21 @@
        - [ ] commands
        - [ ] apps/cli/module/tool
        - [ ] Add Others that would work and be usfull
-- [ ] **Rename Theme** - Because we no longer need the second theme Zero-Dark-MP, we can rename to "Zero-Dark" in readme and docs use Zero-Dark Jekyll theme.
+- [x] **Rename Theme** - Because we no longer need the second theme Zero-Dark-MP, we can rename to "Zero-Dark" in readme and docs use Zero-Dark Jekyll theme.
+- [x] **Remove words like 'premium'**: Replaced 'premium' with 'elegant', 'professional', or 'useful' across all SASS comments, layout files, and documentation pages.
+- [ ] aswell as the three colour layout, we should give the user the ability to have a header bar and allow data.navheader user can add addition navitems view on gitlab badges chamge orientation from left to right or middle 
 
+- [ ] Some additions layouts that can blog, ariticals, blank
+
+Live componenents api endpoints fetch and display data, free server ice, make sure wr cache for maximum performance and less git rate.
+
+- [ ] fetch abd receive data from thetvgb, themdb, free anime meta data, warhammer if any, other userfull meta data providers that are free to use.
+- [ ] media details  - display indicate details, make it robust so it can support music and and other possible like anime warhammer
+- [ ] media card, supports custom properties 
+- [ ] related carousel perhaps we use existing, 
+- [ ] components to make info sites like animecharts or warhapper infor/wikki things of that nature
+- [ ] spinners for dynamic components - themed to match - cool fetch animation.
+- [ ] we could put these under extra components.
 
 ## Bug Fixes
 - [x] **Ruby 3.4 Compatibility:** Fixed Gemfile to include `csv`, `base64`, and `bigdecimal` gems which were removed from the Ruby 3.4 standard library.
@@ -173,6 +189,8 @@
 - [x] **Navigation Sync:** Added `docs/releases.md` to `_data/navigation.yml` under "Components".
 - [x] **Permalink Conflict:** Resolved duplication by removing `docs/blog/index.md` in favor of `docs/blog.md`.
 - [x] **Unwanted Spacing:** Removed blank scrolling whitespace below the footer.
+- [x] **CI Gemfile Location Bug:** Fixed GitLab CI `test_build` job failure where Bundler threw `Could not locate Gemfile`. This was caused by the files being named `GemFile` and `GemFile.lock` with a capital `F`. In case-sensitive Linux CI docker environments, Bundler was unable to find them. Resolved by renaming the files to lowercase `Gemfile` and `Gemfile.lock`.
+
 
        
 

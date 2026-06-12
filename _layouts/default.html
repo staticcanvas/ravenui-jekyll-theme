@@ -159,7 +159,17 @@
             if (!contentArea || !tocNav) return;
             const tocLevels = {{ site.zd_toc_levels | jsonify }} || ["h2", "h3"];
             const selector = tocLevels.join(', ');
-            const headings = contentArea.querySelectorAll(selector);
+            const allHeadings = contentArea.querySelectorAll(selector);
+            const headings = Array.from(allHeadings).filter(heading => {
+                let parent = heading.parentElement;
+                while (parent && parent !== contentArea) {
+                    const classes = parent.classList ? Array.from(parent.classList) : [];
+                    const isComponent = classes.some(c => c.startsWith('zd-') && c !== 'zd-content' && c !== 'zd-hero' && c !== 'zd-container');
+                    if (isComponent) return false;
+                    parent = parent.parentElement;
+                }
+                return true;
+            });
             if (headings.length === 0) return;
             
             const observerOptions = {
