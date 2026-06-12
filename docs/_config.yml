@@ -32,6 +32,12 @@ theme_settings:
   scroll_progress: true             # Toggle global reading progress bar
   zd_toc_default_open: true         # Should TOC be open by default on desktop?
 
+  # Animations Controls
+  animations:
+    enabled: true                   # Enable/disable all animations globally
+    page_loads: true                # Enable subtle page load fade-in animations
+    hover_effects: true             # Enable hover scale/rotate micro-animations on interactive elements
+
   # Typography Configurations
   typography:
     google_fonts: "Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500|IBM+Plex+Sans:wght@500"
@@ -108,7 +114,7 @@ zd_heading_spacing: relaxed         # Spacing for headings (options: relaxed, ti
 # --- Debug & Development ---------------------------------------------------\
 zd_debug: true                      # Enable debug mode for development (shows warnings in console)
 zd_show_version: true               # Show version tag in the sidebar logo section
-version: 1.16.5                     # Current version of the project/docs
+version: 1.16.6                     # Current version of the project/docs
 
 # --- Social Integration (Sidebar) ------------------------------------------\
 github_username: staticcanvas

@@ -1,4 +1,29 @@
-# ZeroDark SP - Development Notes
+# ZeroDark SP - Development Notes - And WorkFlow Instuctions
+
+---
+
+**TASKS!** - work through tasks items if task is not apart of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
+    - If a task item has more to it of is incomplete of implimation is not the best or its the simple way or advance way add a `> **After Thought**` or `> **Note!**` comment with notes
+
+**SKILL!** - Use Skill `fluent-ui` for all tasks, fluent is a modern ui Specialized Agent for web Development for Staticcanvas.
+
+**MCP!** - Use `gitlab` for interations with gitlab.
+    - main branch is `main`
+    - develop branch is `develop`
+    - feature branches are `feature/*`
+    - fix branches are `fix/*`
+    - hotfix branches are `hotfix/*`
+    - release branches are `release/*`
+    - create a new branch from `develop` and name it `feature/my-feature` 
+    - create task with group avabile labels if need new create new label
+    - create milstone to group tasks
+    - close tasks when done
+    - create a new task for each issue
+    - add a comment to the issue with the task id
+    - assign to use `sgkens`
+
+****
+---
 
 ## Issues Remaining
 - [x] **Mobile TOC Visibility:** The TOC button is clickable on mobile, and the container now displays correctly with a glassmorphism effect and proper positioning. Fixed via `_layouts/default.html` and `_sass/zero-dark-sp/_toc.scss`.
@@ -19,7 +44,7 @@
 - [x] **Component Index:** Expanded the gallery in `docs/components/index.md` to showcase all 4 component categories.
 - [x] **Final Visual Audit:** Completed full pass on all 22 component pages; verified consistency in API tables and examples.
 - [x] **Test Build:** Successfully verified project integrity with `bundle exec jekyll build`.
-- [ ] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
+
 
 ## UI Adjustments
 - [x] **Fluent UI Refinement:** Applied visual polish to splash components (cards, buttons, terminals) including subtle elevations, refined borders (`color-mix`), and scale-based interactive states.
@@ -64,8 +89,13 @@
 - [x] **LaTeX Math Integration:** Added KaTeX math expressions support and documented it.
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
-- [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in a premium way.
-- [ ] **animations** - add suttle animations to components like callout, badges, tags, heros, cards, that would make sence but not too distracting, page loads and transitions, and scrolls. set a object in global config that can be used to enable or disable animations.
+- [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in an elegant way.
+- [x] **animations** - add suttle animations to components like callout, badges, tags, heros, cards, that would make sence but not too distracting, page loads and transitions, and scrolls. set a object in global config that can be used to enable or disable animations.
+
+## Search Intergrations
+- [ ] **pagefind** - Pagefind js and css local files, we use the same logic for fonts and allow local or cdn for maximum compatability 
+- [ ] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
+
 ## Extended Components and Features
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
 - [x] Written-by component.

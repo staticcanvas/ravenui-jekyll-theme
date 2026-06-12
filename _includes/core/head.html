@@ -139,6 +139,17 @@
       });
     </script>
     {% endif %}
+
+    {% if site.theme_settings.animations.enabled == false %}
+    <style>
+      /* Disable all transitions and animations */
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    </style>
+    {% endif %}
 </head>
 
 
