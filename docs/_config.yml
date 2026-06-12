@@ -30,6 +30,15 @@ theme_settings:
 
   # Interface
   scroll_progress: true             # Toggle global reading progress bar
+
+  # Search Configuration
+  search:
+    provider: pagefind            # options: pagefind, lyra, algolia
+    use_cdn: true                 # load search library assets via CDN vs local files
+    algolia:
+      app_id: "your_app_id"
+      api_key: "your_search_only_api_key"
+      index_name: "your_index_name"
   zd_toc_default_open: true         # Should TOC be open by default on desktop?
 
   # Typography Configurations

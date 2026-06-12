@@ -1,0 +1,22 @@
+---
+layout: none
+permalink: /search-index.json
+---
+[
+  {%- assign documents = site.pages | concat: site.posts -%}
+  {%- assign count = 0 -%}
+  {%- for doc in documents -%}
+    {%- if doc.title and doc.layout != nil and doc.layout != "none" -%}
+      {%- unless doc.url contains '.json' or doc.url contains '.xml' or doc.url contains '.css' or doc.url contains 'assets/' -%}
+        {%- if count > 0 -%},{%- endif -%}
+        {
+          "title": {{ doc.title | jsonify }},
+          "url": {{ doc.url | relative_url | jsonify }},
+          "description": {{ doc.description | default: doc.excerpt | default: "" | strip_html | strip_newlines | truncate: 150 | jsonify }},
+          "content": {{ doc.content | strip_html | newline_to_space | replace: '    ', ' ' | replace: '   ', ' ' | replace: '  ', ' ' | strip | jsonify }}
+        }
+        {%- assign count = count | plus: 1 -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+]

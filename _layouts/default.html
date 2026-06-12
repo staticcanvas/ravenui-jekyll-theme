@@ -81,11 +81,25 @@
         </aside>
     </div>
 
+    {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
     <div id="zd-search-modal" class="zd-search-modal">
         <div class="zd-search-modal-backdrop" id="zd-search-backdrop"></div>
         <div class="zd-search-modal-content">
             <header class="zd-search-modal-header">
-                <div id="zd-search-ui"></div>
+                {%- if search_provider == "pagefind" -%}
+                    <div id="zd-search-ui"></div>
+                {%- else -%}
+                    <div class="zd-custom-search-container">
+                        <div class="zd-custom-search-input-wrapper">
+                            <span class="zd-custom-search-icon">{% include comps/icon.html name="search" size="18" %}</span>
+                            <input type="text" id="zd-custom-search-input" class="zd-custom-search-input" placeholder="Search documentation..." autocomplete="off">
+                            <button id="zd-custom-search-clear" class="zd-custom-search-clear" style="display: none;">
+                                {% include comps/icon.html name="x" size="16" %}
+                            </button>
+                        </div>
+                        <div id="zd-custom-search-results" class="zd-custom-search-results"></div>
+                    </div>
+                {%- endif -%}
             </header>
         </div>
     </div>
@@ -120,8 +134,10 @@
             searchModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             setTimeout(() => {
-                const input = document.querySelector('.pagefind-ui__search-input');
-                if (input) input.focus();
+                const pagefindInput = document.querySelector('.pagefind-ui__search-input');
+                const customInput = document.getElementById('zd-custom-search-input');
+                if (pagefindInput) pagefindInput.focus();
+                else if (customInput) customInput.focus();
             }, 100);
         }
 
@@ -295,19 +311,201 @@
             });
         }
 
+        // 4.75. Custom Search (Lyra / Algolia) Logic
+        let localSearchEngine = null;
+        let algoliaIndex = null;
+
+        async function initLyra() {
+            try {
+                const response = await fetch('{{ "/search-index.json" | relative_url }}');
+                const documents = await response.json();
+                
+                {% if site.theme_settings.search.use_cdn != false %}
+                try {
+                    const { create, insertMultiple, search } = await import('https://cdn.jsdelivr.net/npm/@orama/orama@1.2.0/+esm');
+                    const db = await create({
+                        schema: {
+                            title: 'string',
+                            description: 'string',
+                            content: 'string'
+                        }
+                    });
+                    await insertMultiple(db, documents);
+                    localSearchEngine = {
+                        search: async (q) => {
+                            const results = await search(db, { term: q, properties: ['title', 'description', 'content'] });
+                            return results.hits.map(hit => {
+                                const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+                                const helper = new ZDSearchLocal([]);
+                                return {
+                                    title: helper.highlightText(hit.document.title || '', terms),
+                                    url: hit.document.url,
+                                    excerpt: helper.generateExcerpt(hit.document.content || hit.document.description || '', terms)
+                                };
+                            });
+                        }
+                    };
+                    console.log("Lyra (Orama CDN) initialized successfully.");
+                    return;
+                } catch (err) {
+                    console.warn("Failed to load Orama from CDN. Falling back to local ZDSearchLocal:", err);
+                }
+                {% endif %}
+                
+                if (typeof ZDSearchLocal !== 'undefined') {
+                    const engine = new ZDSearchLocal(documents);
+                    localSearchEngine = {
+                        search: async (q) => engine.search(q)
+                    };
+                    console.log("ZDSearchLocal initialized successfully.");
+                }
+            } catch (e) {
+                console.error("Failed to initialize Lyra/Local search:", e);
+            }
+        }
+
+        function initAlgolia() {
+            const appId = "{{ site.theme_settings.search.algolia.app_id }}";
+            const apiKey = "{{ site.theme_settings.search.algolia.api_key }}";
+            const indexName = "{{ site.theme_settings.search.algolia.index_name }}";
+            
+            if (!appId || !apiKey || !indexName) {
+                console.error("Algolia configuration missing in _config.yml.");
+                return;
+            }
+            
+            try {
+                if (typeof algoliasearch !== 'undefined') {
+                    const client = algoliasearch(appId, apiKey);
+                    algoliaIndex = client.initIndex(indexName);
+                    console.log("Algolia search initialized successfully.");
+                } else {
+                    console.error("Algolia search client library not loaded.");
+                }
+            } catch (e) {
+                console.error("Failed to initialize Algolia search:", e);
+            }
+        }
+
+        function setupCustomSearch() {
+            const input = document.getElementById('zd-custom-search-input');
+            const clearBtn = document.getElementById('zd-custom-search-clear');
+            const resultsContainer = document.getElementById('zd-custom-search-results');
+            
+            if (!input || !resultsContainer) return;
+            
+            const provider = "{{ search_provider }}";
+            
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    input.value = '';
+                    clearBtn.style.display = 'none';
+                    resultsContainer.innerHTML = '';
+                    input.focus();
+                });
+            }
+            
+            let debounceTimeout = null;
+            
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                
+                if (clearBtn) {
+                    clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
+                }
+                
+                if (query.length === 0) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+                
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(async () => {
+                    resultsContainer.innerHTML = '<div class="zd-custom-search-message">Searching...</div>';
+                    
+                    try {
+                        let hits = [];
+                        if (provider === 'lyra' && localSearchEngine) {
+                            hits = await localSearchEngine.search(query);
+                        } else if (provider === 'algolia' && algoliaIndex) {
+                            const searchResults = await algoliaIndex.search(query, { hitsPerPage: 10 });
+                            hits = searchResults.hits.map(hit => {
+                                const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+                                const helper = new ZDSearchLocal([]);
+                                
+                                const title = hit._highlightResult?.title?.value || hit.title || '';
+                                const rawExcerpt = hit._snippetResult?.content?.value || hit.content || hit.description || '';
+                                
+                                const highlightedTitle = title.includes('<em') ? 
+                                    title.replace(/<em>/g, '<mark class="zd-search-highlight">').replace(/<\/em>/g, '</mark>') : 
+                                    helper.highlightText(hit.title || '', terms);
+                                    
+                                const highlightedExcerpt = rawExcerpt.includes('<em') ?
+                                    rawExcerpt.replace(/<em>/g, '<mark class="zd-search-highlight">').replace(/<\/em>/g, '</mark>') :
+                                    helper.generateExcerpt(hit.content || hit.description || '', terms);
+                                    
+                                return {
+                                    title: highlightedTitle,
+                                    url: hit.url || hit.permalink,
+                                    excerpt: highlightedExcerpt
+                                };
+                            });
+                        }
+                        
+                        renderResults(hits, query);
+                    } catch (err) {
+                        console.error("Search execution failed:", err);
+                        resultsContainer.innerHTML = '<div class="zd-custom-search-message">Search error occurred.</div>';
+                    }
+                }, 150);
+            });
+        }
+
+        function renderResults(hits, query) {
+            const resultsContainer = document.getElementById('zd-custom-search-results');
+            if (!resultsContainer) return;
+            
+            if (hits.length === 0) {
+                resultsContainer.innerHTML = `<div class="zd-custom-search-message">No results found for "${query}"</div>`;
+                return;
+            }
+            
+            let html = `<div class="zd-custom-search-message">${hits.length} ${hits.length === 1 ? 'result' : 'results'} found</div>`;
+            
+            hits.forEach(hit => {
+                html += `
+                    <div class="zd-custom-search-result-item">
+                        <a href="${hit.url}" class="zd-custom-search-result-link">${hit.title}</a>
+                        <p class="zd-custom-search-result-excerpt">${hit.excerpt}</p>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
         // 5. Initialization
         window.addEventListener('DOMContentLoaded', () => {
-            // Pagefind
-            if (typeof PagefindUI !== 'undefined') {
-                try {
-                    new PagefindUI({
-                        element: "#zd-search-ui",
-                        showSubResults: true,
-                        showImages: false,
-                        resetStyles: false,
-                        translations: { placeholder: "Search documentation..." }
-                    });
-                } catch (e) { console.warn("Pagefind UI failed:", e); }
+            // Search Provider Initialization
+            const searchProvider = "{{ search_provider }}";
+            if (searchProvider === 'pagefind') {
+                if (typeof PagefindUI !== 'undefined') {
+                    try {
+                        new PagefindUI({
+                            element: "#zd-search-ui",
+                            bundlePath: "{{ '/' | relative_url }}pagefind/",
+                            showSubResults: true,
+                            showImages: false,
+                            resetStyles: false,
+                            translations: { placeholder: "Search documentation..." }
+                        });
+                    } catch (e) { console.warn("Pagefind UI failed:", e); }
+                }
+            } else if (searchProvider === 'lyra') {
+                initLyra().then(() => setupCustomSearch());
+            } else if (searchProvider === 'algolia') {
+                initAlgolia();
+                setupCustomSearch();
             }
 
             // Progress Bar

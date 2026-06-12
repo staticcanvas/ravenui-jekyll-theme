@@ -3,7 +3,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "ZeroDark" }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
+    {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
+    {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.zd_use_cdn | default: true -%}
+    {%- if search_provider == "pagefind" -%}
+      {%- if search_use_cdn -%}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/dist/pagefind-ui.css">
+      {%- else -%}
+        <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
+      {%- endif -%}
+    {%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% if site.theme_settings.typography.google_fonts %}
@@ -24,7 +32,21 @@
         {% endif %}
     {% endif %}
 
-    <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
+    {%- if search_provider == "pagefind" -%}
+      {%- if search_use_cdn -%}
+        <script src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/dist/pagefind-ui.js"></script>
+      {%- else -%}
+        <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
+      {%- endif -%}
+    {%- elsif search_provider == "lyra" -%}
+      <script src="{{ "/assets/js/vendor/zd-search-local.js" | relative_url }}"></script>
+    {%- elsif search_provider == "algolia" -%}
+      {%- if search_use_cdn -%}
+        <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch-lite.umd.js"></script>
+      {%- else -%}
+        <script src="{{ "/assets/js/vendor/algoliasearch-lite.umd.js" | relative_url }}"></script>
+      {%- endif -%}
+    {%- endif -%}
     {% if site.description %}
     <meta name="description" content="{{ site.description }}">
     {% endif %}
