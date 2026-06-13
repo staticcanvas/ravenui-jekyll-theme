@@ -37,6 +37,11 @@
     - text: Search Integration
       url: /search/
       icon: search
+    - text: Jekyll Collections
+      url: /collections/
+      icon: layers
+      is_new_feature: new
+
 
 - type: separator
 
