@@ -10,7 +10,7 @@ logo_subtext: DOCS
 copyright: "© 2026 StaticCanvas. All rights reserved."
 
 # --- Theme Engine ----------------------------------------------------------\
-theme: zero-dark-sp
+theme: jekyll-theme-zero-dark
 
 # --- Navigation & Base -----------------------------------------------------\
 url: "" 
@@ -153,11 +153,11 @@ zd_feedback:
   thank_you: "Thank you for your feedback!"
 
 # --- Documentation Meta (Edit Links) --------------------------------------\
-github_repo: zero-dark-sp
-github_repo_url: https://github.com/staticcanvas/zero-dark-sp
+github_repo: zero-dark-jekyll-theme
+github_repo_url: https://github.com/staticcanvas/zero-dark-jekyll-theme
 github_branch: main
-# gitlab_repo: zero-dark-sp
-# gitlab_repo_url: https://gitlab.com/staticcanvas/zero-dark-sp
+# gitlab_repo: zero-dark-jekyll-theme
+# gitlab_repo_url: https://gitlab.com/staticcanvas/zero-dark-jekyll-theme
 # gitlab_branch: main
 
 # --- Build Settings --------------------------------------------------------\

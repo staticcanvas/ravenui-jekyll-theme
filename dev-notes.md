@@ -2,17 +2,19 @@
 
 ---
 
-**TASKS!** - work through tasks items if task is not a part of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
+**!TASKS!** - work through tasks items if task is not a part of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
     - If a task item has more to it of its incomplete in terms of implimation, is not the best practice but works, its the simple way or advanced way. add a comment after inline with dotpoint `> **After Thought**` or `> **Note!**` comment with notes for developers: possible solutions, alternatives, or other considerations.
+    - Fix grammer and spelling errors, and make sure to use the correct terminology, dot not remove words or change the meaning of words or sentences. 
+    - Add a comment to the task item with the solution or the reason why the task is not complete.
 
-**SKILL!** - Use Skill `fluent-ui` for all tasks, fluent-ui is a modern ui Specialized Agent for web Development for Staticcanvas.
+**!SKILL!** - Use Skill `fluent-ui` for all tasks, fluent-ui is a modern ui Specialized Agent for web Development for Staticcanvas.
 
-**SELF INPROVMENTS!**
+**!SELF INPROVMENTS!**
  * **Use** folder contents-source: this folder is used to store ai related pdr, context, and other files. in this instance we want to keep a `context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md` - a file that contains all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow. this file once it is complete will be used to create a new `context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md` for AI AGENT to use.
  * **If** no file exists read gitlab, read issues/workitems, milestones if any and lastly read context and git repo, backfill the file with all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow.
  * **If** dont be afraid to reflect if new information conflicts with existing information, merge it in, if yelds a better results, also reference this in the file.
 
-**MCP!** - Use `gitlab` for interations with gitlab.
+**!MCP!** - Use `gitlab` for interations with gitlab.
     - main branch is `main`
     - develop branch is `develop`
     - feature branches are `feature/*`
@@ -217,6 +219,19 @@ Live componenents api endpoints fetch and display data, free server ice, make su
 - [ ] components to make info sites like animecharts or warhapper infor/wikki things of that nature
 - [ ] spinners for dynamic components - themed to match - cool fetch animation.
 - [ ] we could put these under extra components.
+
+## Site/Repo/Description Naming conventions
+
+- [x] **Repo Name:** `zero-dark-jekyll-theme`
+- [x] **Ruby Gem Name:** `jekyll-theme-zero-dark` > **Solution:** Renamed gemspec to `jekyll-theme-zero-dark.gemspec` and updated dependencies in `docs/Gemfile` and `.gitlab-ci.yml`.
+- [x] **Repo Owner:** `staticcanvas` > **Solution:** Checked and verified owner settings under `_config.yml` and gemspec author definitions.
+- [x] **Repo URL:** `https://gitlab.com/staticcanvas/zero-dark-jekyll-theme` > **Solution:** Updated repository link pointers inside `_config.yml`, `docs/_config.yml`, and `_includes/core/footer.html`.
+- [x] **Repo Description:** `A professional, high-contrast Jekyll theme for technical documentation.` > **Solution:** Updated gemspec summary/description and README.md header to introduce Zero-Dark as both a production-ready theme framework and component library.
+    - [x] ZeroDark has been evolving at a steady pace; it was a simple theme that was easy to use and customize, but it has been evolving and growing over time, it is now almost surpassed a full-fledged theme and now a component-heavy theme. This is a theme that is designed to be used as a base theme for other themes, and it is also a theme that is designed to be used as a component library, so it can be used to build other themes and components.
+    - Description for readme should be short and concise, and convey the depth of the theme.
+    - Ruby GEM description should be short and concise, and convey the depth of the theme.
+    - Docs Site can go into more detail about the theme fully explaining the depth and scope what it can accomplish etc.
+- [x] **Repo License:** `MIT`
 
 ## Bug Fixes
 - [x] **Ruby 3.4 Compatibility:** Fixed Gemfile to include `csv`, `base64`, and `bigdecimal` gems which were removed from the Ruby 3.4 standard library.

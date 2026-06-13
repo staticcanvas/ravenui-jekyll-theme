@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name          = "zero-dark-sp"
+  spec.name          = "jekyll-theme-zero-dark"
   spec.version       = File.read(File.expand_path("VERSION", __dir__)).strip
   spec.authors       = ["staticcanvas"]
   spec.email         = ["sgkens@gmail.com"]
 
   spec.summary       = "A professional, high-contrast Jekyll theme for technical documentation."
-  spec.description   = "A clean, efficient Jekyll theme optimized for readability and long-form technical content."
-  spec.homepage      = "https://gitlab.com/staticcanvas/zero-dark-sp"
+  spec.description   = "A professional, component-heavy Jekyll theme optimized for technical documentation, featuring three pluggable client search providers, dynamic layouts, and a reusable UI component library."
+  spec.homepage      = "https://gitlab.com/staticcanvas/zero-dark-jekyll-theme"
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.dirname(__FILE__)) do
