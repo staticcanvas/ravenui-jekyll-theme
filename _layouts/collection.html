@@ -1,0 +1,142 @@
+---
+layout: default
+---
+<div class="zd-collection-index-container">
+    {{ content }}
+
+    {% assign collection_docs = site[page.collection_name] %}
+    {% if collection_docs %}
+        {% assign layout_style = page.layout_style | default: "grid" %}
+
+        {% if layout_style == "list" %}
+            <div class="zd-collection-list">
+                {% for doc in collection_docs %}
+                <div class="zd-collection-list-item">
+                    <h3 class="zd-collection-list-title">
+                        <a href="{{ doc.url | relative_url }}">
+                            {% if doc.icon %}
+                                <i data-lucide="{{ doc.icon }}" style="width: 16px; height: 16px; margin-inline-end: 8px; vertical-align: middle; {% if doc.color %}color: {{ doc.color }};{% endif %}"></i>
+                            {% endif %}
+                            {{ doc.title | default: doc.slug }}
+                        </a>
+                    </h3>
+                    {% if doc.description %}
+                    <p class="zd-collection-list-desc">{{ doc.description }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+        {% elsif layout_style == "grid" %}
+            <div class="zd-collection-grid">
+                {% for doc in collection_docs %}
+                <div class="zd-collection-card">
+                    <div class="zd-collection-card-body">
+                        {% if doc.icon %}
+                        <div class="zd-collection-card-icon" style="color: {{ doc.color | default: 'var(--zd-clr-highlight)' }}">
+                            <i data-lucide="{{ doc.icon }}" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        {% endif %}
+                        <h3 class="zd-collection-card-title">
+                            <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
+                        </h3>
+                        {% if doc.description %}
+                        <p class="zd-collection-card-desc">{{ doc.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% elsif layout_style == "cards" %}
+            <div class="zd-collection-cards-detailed">
+                {% for doc in collection_docs %}
+                <div class="zd-collection-detailed-card">
+                    <div class="zd-collection-detailed-header">
+                        {% if doc.icon %}
+                        <span class="zd-collection-detailed-icon" style="color: {{ doc.color | default: 'var(--zd-clr-highlight)' }}">
+                            <i data-lucide="{{ doc.icon }}" style="width: 18px; height: 18px;"></i>
+                        </span>
+                        {% endif %}
+                        <h3 class="zd-collection-detailed-title">
+                            <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
+                        </h3>
+                        {% if doc.group %}
+                        <span class="zd-collection-detailed-group">{{ doc.group }}</span>
+                        {% endif %}
+                    </div>
+                    {% if doc.description %}
+                    <p class="zd-collection-detailed-desc">{{ doc.description }}</p>
+                    {% endif %}
+                    {% if doc.tags %}
+                    <div class="zd-tag-container" style="margin-block-start: 1rem;">
+                        {% for tag in doc.tags %}
+                        <span class="zd-tag">#{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+        {% elsif layout_style == "tree" or layout_style == "index" %}
+            <div class="zd-collection-tree">
+                {% assign grouped = collection_docs | group_by: "group" %}
+                {% for group in grouped %}
+                    <div class="zd-collection-tree-group">
+                        <h3 class="zd-collection-tree-group-title">
+                            <i data-lucide="folder" style="width: 16px; height: 16px; margin-inline-end: 8px; color: var(--zd-clr-highlight); vertical-align: middle;"></i>
+                            <span>{{ group.name | default: "General" }}</span>
+                        </h3>
+                        <ul class="zd-collection-tree-list">
+                            {% for doc in group.items %}
+                            <li class="zd-collection-tree-item">
+                                <a href="{{ doc.url | relative_url }}" class="zd-collection-tree-link">
+                                    {% if doc.icon %}
+                                        <i data-lucide="{{ doc.icon }}" style="width: 14px; height: 14px; margin-inline-end: 6px; vertical-align: middle;"></i>
+                                    {% else %}
+                                        <i data-lucide="file-text" style="width: 14px; height: 14px; margin-inline-end: 6px; vertical-align: middle;"></i>
+                                    {% endif %}
+                                    <span>{{ doc.title | default: doc.slug }}</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% elsif layout_style == "pathways" %}
+            <div class="zd-collection-pathway">
+                {% assign sorted_docs = collection_docs | sort: "order" %}
+                {% for doc in sorted_docs %}
+                <div class="zd-collection-pathway-node">
+                    <div class="zd-collection-pathway-marker">
+                        <span class="zd-collection-pathway-number">{{ forloop.index }}</span>
+                        {% unless forloop.last %}
+                        <span class="zd-collection-pathway-line"></span>
+                        {% endunless %}
+                    </div>
+                    <div class="zd-collection-pathway-content">
+                        <h3 class="zd-collection-pathway-title">
+                            <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
+                        </h3>
+                        {% if doc.description %}
+                        <p class="zd-collection-pathway-desc">{{ doc.description }}</p>
+                        {% endif %}
+                        {% if doc.tags %}
+                        <div class="zd-tag-container" style="margin-block-start: 0.5rem;">
+                            {% for tag in doc.tags %}
+                            <span class="zd-tag">#{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% else %}
+        <p class="text-muted">No documents found for collection "{{ page.collection_name }}". Ensure it is defined in config and has documents.</p>
+    {% endif %}
+</div>
