@@ -120,7 +120,7 @@ zd_icon_size: 16
 zd_toc_levels: ["h2", "h3", "h4"]
 zd_debug: true
 zd_show_version: true
-version: 1.17.0
+version: 1.17.1
 zd_accent_color: "#00ff9d"
 zd_nav_spacing: compact
 zd_show_powered_by: true
