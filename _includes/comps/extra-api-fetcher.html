@@ -1,0 +1,242 @@
+{%- comment -%}
+Component__: Extra API Fetcher
+Purpose____: Fetches media metadata from an API client-side, caches in localStorage, and renders a card/details view.
+Caveats____: Uses a loading spinner and handles rate limiting.
+Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan.moe/v4/anime/1" cache_key="cowboy-bebop" render_type="media-details" %}
+{%- endcomment -%}
+
+{%- assign uid = include.cache_key | default: "api-fetch" | slugify | append: "-" | append: site.time | date: "%s" | append: "-" | append: forloop.index -%}
+{%- assign render_type = include.render_type | default: "media-card" -%}
+{%- assign expiry = include.cache_expiry | default: 3600 -%}
+
+<div class="zd-api-fetcher" 
+     id="zd-fetcher-{{ uid }}" 
+     data-endpoint="{{ include.endpoint }}" 
+     data-cache-key="zd-cache-{{ include.cache_key | default: include.endpoint | slugify }}"
+     data-cache-expiry="{{ expiry }}" 
+     data-render-type="{{ render_type }}"
+     data-glass="{% if include.glass %}true{% else %}false{% endif %}">
+  
+  <!-- Loading State -->
+  <div class="zd-api-fetcher-loading">
+    {% include comps/extra-spinner.html size="large" label="Fetching media from API..." %}
+  </div>
+
+  <!-- Error State (hidden by default) -->
+  <div class="zd-api-fetcher-error zd-hidden">
+    <div class="zd-callout zd-callout--danger">
+      <div class="zd-callout-header">
+        <span class="zd-callout-icon">⚠️</span>
+        <strong class="zd-callout-title">API Fetch Error</strong>
+      </div>
+      <div class="zd-callout-content">
+        <p>Could not retrieve data from <code>{{ include.endpoint | truncate: 60 }}</code>. Check connection or console logs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target Container for Dynamic Rendering -->
+  <div class="zd-api-fetcher-target"></div>
+</div>
+
+{% unless site.zd_api_fetcher_script_loaded %}
+  {% assign site.zd_api_fetcher_script_loaded = true %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const fetchers = document.querySelectorAll(".zd-api-fetcher");
+      fetchers.forEach(fetcher => {
+        const endpoint = fetcher.getAttribute("data-endpoint");
+        const cacheKey = fetcher.getAttribute("data-cache-key");
+        const expirySeconds = parseInt(fetcher.getAttribute("data-cache-expiry"), 10);
+        const renderType = fetcher.getAttribute("data-render-type");
+        const useGlass = fetcher.getAttribute("data-glass") === "true";
+        const target = fetcher.querySelector(".zd-api-fetcher-target");
+        const loading = fetcher.querySelector(".zd-api-fetcher-loading");
+        const errorEl = fetcher.querySelector(".zd-api-fetcher-error");
+
+        if (!endpoint) {
+          showError("No API endpoint specified.");
+          return;
+        }
+
+        // Cache Handler
+        const cached = localStorage.getItem(cacheKey);
+        const now = Math.floor(Date.now() / 1000);
+
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (now - parsed.timestamp < expirySeconds) {
+              // Cache is valid
+              renderData(parsed.data);
+              return;
+            }
+          } catch(e) {
+            console.error("Cache parsing error", e);
+          }
+        }
+
+        // Fetch from API
+        fetchData();
+
+        function fetchData() {
+          fetch(endpoint)
+            .then(res => {
+              if (!res.ok) throw new Error("HTTP error " + res.status);
+              return res.json();
+            })
+            .then(json => {
+              // Cache the result
+              try {
+                localStorage.setItem(cacheKey, JSON.stringify({
+                  timestamp: now,
+                  data: json
+                }));
+              } catch(e) {
+                console.warn("localStorage quota exceeded, skipping caching", e);
+              }
+              renderData(json);
+            })
+            .catch(err => {
+              console.error("Failed to fetch from endpoint " + endpoint, err);
+              // Fallback to expired cache if available
+              if (cached) {
+                try {
+                  const parsed = JSON.parse(cached);
+                  console.log("Serving expired cache as fallback");
+                  renderData(parsed.data);
+                  return;
+                } catch(e) {}
+              }
+              showError(err.message);
+            });
+        }
+
+        function showError(msg) {
+          if (loading) loading.classList.add("zd-hidden");
+          if (errorEl) errorEl.classList.remove("zd-hidden");
+          console.error("API Fetcher Error:", msg);
+        }
+
+        function renderData(rawJson) {
+          if (loading) loading.classList.add("zd-hidden");
+          let data = rawJson;
+          
+          // Auto-detect Jikan (Anime) API v4 response shape
+          if (rawJson.data && (endpoint.includes("jikan.moe") || rawJson.data.title)) {
+            data = rawJson.data;
+          }
+
+          // Normalize values
+          const item = {
+            title: data.title || data.name || "Untitled",
+            image: data.image || (data.images && data.images.jpg ? data.images.jpg.large_image_url || data.images.jpg.image_url : null) || data.poster_path || "",
+            backdrop: data.backdrop || data.backdrop_path || "",
+            type: data.type || "Media",
+            year: data.year || (data.release_date ? new Date(data.release_date).getFullYear() : null) || (data.aired && data.aired.prop && data.aired.prop.from ? data.aired.prop.from.year : null) || "",
+            rating: data.rating || data.score || data.vote_average || "",
+            genres: data.genres ? (Array.isArray(data.genres) ? data.genres.map(g => typeof g === 'object' ? g.name : g) : [data.genres]) : [],
+            overview: data.overview || data.synopsis || "",
+            status: data.status || "",
+            episodes: data.episodes || "",
+            runtime: data.runtime || (data.duration ? data.duration : ""),
+            studio: data.studio || (data.studios && data.studios.length ? data.studios.map(s => s.name).join(", ") : ""),
+            director: data.director || (data.directors && data.directors.length ? data.directors.map(d => d.name).join(", ") : "")
+          };
+
+          let html = "";
+          
+          if (renderType === "media-details") {
+            const genresHtml = item.genres.map(g => `<span class="zd-media-card-genre">${g}</span>`).join("");
+            const ratingHtml = item.rating ? `
+              <div class="zd-media-details-rating">
+                <svg class="zd-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>${item.rating}</span>
+              </div>
+            ` : "";
+
+            html = `
+              <div class="zd-media-details ${useGlass ? 'zd-media-details--glass' : ''}">
+                <div class="zd-media-details-header" style="${item.backdrop ? `background-image: linear-gradient(to bottom, rgba(30, 30, 46, 0.4), rgba(30, 30, 46, 0.95)), url('${item.backdrop}');` : ''}">
+                  <div class="zd-media-details-poster-wrap">
+                    ${item.image ? `<img src="${item.image}" alt="${item.title}" class="zd-media-details-poster" />` : ''}
+                  </div>
+                  <div class="zd-media-details-header-text">
+                    <div class="zd-media-details-meta-row">
+                      ${item.type ? `<span class="zd-tag zd-tag--purple">${item.type}</span>` : ''}
+                      ${item.status ? `<span class="zd-tag zd-tag--blue">${item.status}</span>` : ''}
+                      ${item.year ? `<span class="zd-media-details-year">${item.year}</span>` : ''}
+                    </div>
+                    <h3 class="zd-media-details-title">${item.title}</h3>
+                    ${ratingHtml}
+                  </div>
+                </div>
+                <div class="zd-media-details-body">
+                  <div class="zd-media-details-main">
+                    ${item.overview ? `
+                      <div class="zd-media-details-section">
+                        <h4 class="zd-media-details-section-title">Overview</h4>
+                        <p class="zd-media-details-description">${item.overview}</p>
+                      </div>
+                    ` : ''}
+                  </div>
+                  <div class="zd-media-details-sidebar">
+                    <h4 class="zd-media-details-section-title">Details</h4>
+                    <table class="zd-media-details-table">
+                      <tbody>
+                        ${item.studio ? `<tr><th>Studio</th><td>${item.studio}</td></tr>` : ''}
+                        ${item.director ? `<tr><th>Director</th><td>${item.director}</td></tr>` : ''}
+                        ${item.episodes ? `<tr><th>Episodes</th><td>${item.episodes}</td></tr>` : ''}
+                        ${item.runtime ? `<tr><th>Runtime</th><td>${item.runtime}</td></tr>` : ''}
+                      </tbody>
+                    </table>
+                    ${item.genres.length ? `
+                      <div class="zd-media-details-section">
+                        <h4 class="zd-media-details-section-title">Genres</h4>
+                        <div class="zd-media-details-genres">${genresHtml}</div>
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            // Default: media-card
+            const ratingHtml = item.rating ? `
+              <div class="zd-media-card-rating">
+                <svg class="zd-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>${item.rating}</span>
+              </div>
+            ` : "";
+            const genresHtml = item.genres.map(g => `<span class="zd-media-card-genre">${g}</span>`).join("");
+
+            html = `
+              <div class="zd-media-card ${useGlass ? 'zd-media-card--glass' : ''}">
+                ${item.image ? `
+                  <div class="zd-media-card-image-wrap">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy" class="zd-media-card-img" />
+                    ${ratingHtml}
+                  </div>
+                ` : ''}
+                <div class="zd-media-card-body">
+                  <div class="zd-media-card-meta">
+                    ${item.type ? `<span class="zd-media-card-badge">${item.type}</span>` : ''}
+                    ${item.year ? `<span class="zd-media-card-year">${item.year}</span>` : ''}
+                  </div>
+                  <h4 class="zd-media-card-title">${item.title}</h4>
+                  ${item.genres.length ? `<div class="zd-media-card-genres">${genresHtml}</div>` : ''}
+                  ${item.overview ? `<p class="zd-media-card-overview">${item.overview.substring(0, 120)}...</p>` : ''}
+                </div>
+              </div>
+            `;
+          }
+
+          if (target) {
+            target.innerHTML = html;
+            target.style.display = "block";
+          }
+        }
+      });
+    });
+  </script>
+{% endunless %}

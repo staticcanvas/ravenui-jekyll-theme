@@ -1,0 +1,94 @@
+# Mock data for testing the Extra Components
+warhammer_unit:
+  title: "Ultramarines Primaris Intercessor"
+  subtitle: "Adeptus Astartes Troop Unit"
+  type: "Warhammer 40k Unit"
+  status: "Battle-Ready"
+  year: "999.M41"
+  image: "https://picsum.photos/id/1025/300/450"
+  backdrop: "https://picsum.photos/id/1018/800/400"
+  rating: "10/10"
+  faction: "Imperium"
+  role: "Troops"
+  points: "90 pts"
+  overview: "Primaris Intercessors form the backbone of a Space Marine Chapter's line infantry. They are versatile, resilient fighters capable of laying down withering firepower while holding key battlefield positions."
+  stats:
+    M: "6\""
+    WS: "3+"
+    BS: "3+"
+    S: "4"
+    T: "4"
+    W: "2"
+    A: "2"
+    Ld: "7"
+    Sv: "3+"
+  abilities:
+    - name: "Bolter Discipline"
+      desc: "Models in this unit shooting Bolt weapons double the number of attacks if target is within half range."
+    - name: "Shock Assault"
+      desc: "Add 1 to Attacks characteristic when charging, charged, or performing Heroic Intervention."
+  wargear:
+    - "Bolt rifle and bolt pistol"
+    - "Frag and Krak grenades"
+    - "Astartes chainsword (Sergeant option)"
+
+anime_bebop:
+  title: "Cowboy Bebop"
+  subtitle: "Space Bounty Hunters"
+  type: "Anime"
+  status: "Finished Airing"
+  year: 1998
+  image: "https://picsum.photos/id/103/300/450"
+  backdrop: "https://picsum.photos/id/1043/800/400"
+  rating: "8.75"
+  studio: "Sunrise"
+  director: "Shinichirō Watanabe"
+  episodes: 26
+  runtime: "24 mins"
+  genres:
+    - "Sci-Fi"
+    - "Space"
+    - "Action"
+    - "Adventure"
+  overview: "Enter a world in the year 2071, where humanity has colonized the rocky planets and moons of the solar system. The Bebop crew is a ragtag group of bounty hunters striving to make ends meet in a galaxy full of crime."
+
+game_cyberpunk:
+  title: "Cyberpunk 2077"
+  subtitle: "V's Journey in Night City"
+  type: "Game"
+  status: "Released"
+  year: 2020
+  image: "https://picsum.photos/id/1062/300/450"
+  backdrop: "https://picsum.photos/id/1084/800/400"
+  rating: "9.0"
+  studio: "CD Projekt Red"
+  director: "Gabe Amatangelo"
+  genres:
+    - "RPG"
+    - "Open World"
+    - "Cyberpunk"
+    - "Action"
+  overview: "Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour, and body modification. Play as V, a mercenary outlaw."
+
+related_media:
+  - title: "Cowboy Bebop"
+    type: "Anime"
+    year: 1998
+    image: "https://picsum.photos/id/103/300/450"
+    rating: "8.75"
+    genres: ["Sci-Fi", "Space", "Action"]
+    overview: "A crew of bounty hunters travel the galaxy in search of criminals."
+  - title: "Cyberpunk 2077"
+    type: "Game"
+    year: 2020
+    image: "https://picsum.photos/id/1062/300/450"
+    rating: "9.0"
+    genres: ["RPG", "Cyberpunk", "Action"]
+    overview: "A mercenary outlaw takes on the corrupt corporations of Night City."
+  - title: "Neon Genesis Evangelion"
+    type: "Anime"
+    year: 1995
+    image: "https://picsum.photos/id/1069/300/450"
+    rating: "8.34"
+    genres: ["Sci-Fi", "Mecha", "Drama"]
+    overview: "Young pilots defend Tokyo-3 from mysterious alien threats."

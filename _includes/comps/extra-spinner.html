@@ -1,0 +1,16 @@
+{%- comment -%}
+Component__: Extra Spinner
+Purpose____: Renders a themed loading spinner with various sizes and colors.
+Caveats____: Uses CSS keyframe animations defined in extra-components.scss.
+Usage______: {% include comps/extra-spinner.html size="large" color="accent" label="Loading data..." %}
+{%- endcomment -%}
+{%- assign spinner_size = include.size | default: "medium" -%}
+{%- assign spinner_color = include.color | default: "accent" -%}
+<div class="zd-spinner-container zd-spinner--{{ spinner_size }} zd-spinner-color--{{ spinner_color }} {{ include.class }}">
+  <div class="zd-spinner-ring">
+    <div></div><div></div><div></div><div></div>
+  </div>
+  {%- if include.label -%}
+    <span class="zd-spinner-label">{{ include.label }}</span>
+  {%- endif -%}
+</div>

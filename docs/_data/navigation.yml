@@ -350,6 +350,13 @@
 
 
 
+- title: Extra Components
+  links:
+    - text: Media & Wiki API
+      url: /components/extra-components/
+      icon: globe
+      description: "Dynamic API fetchers, media panels, and wiki stat grids"
+
 - type: separator
 
 - title: Deployment
