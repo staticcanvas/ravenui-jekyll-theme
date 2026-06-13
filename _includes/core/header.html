@@ -47,6 +47,15 @@ Usage______: {% include core/header.html %}
             {% endif %}
           {% endif %}
           {{ link.text }}
+          {% if link.is_new_feature %}
+            <span class="zd-nav-badge zd-nav-badge--{{ link.is_new_feature }}">
+              {% if link.is_new_feature == true or link.is_new_feature == "new" %}
+                new
+              {% else %}
+                {{ link.is_new_feature }}
+              {% endif %}
+            </span>
+          {% endif %}
         </a>
       {% endfor %}
     </nav>

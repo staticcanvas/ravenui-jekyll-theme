@@ -72,6 +72,29 @@ Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They 
  
  **See:** [Zero-Dark Icon Reference](/LuceIcons/)
 
+### **Feature Badges**
+
+You can highlight new, updated, or experimental features directly in your navigation menus (both sidebar and header) by defining the `is_new_feature` attribute on individual link items in `_data/navigation.yml` or `_data/navheader.yml`.
+
+Supported values include:
+- `new`: Renders a green, glowing **NEW** badge.
+- `updated`: Renders a blue, glowing **UPDATED** badge.
+- `beta`: Renders a yellow, glowing **BETA** badge.
+- `hot`: Renders a red, glowing **HOT** badge.
+
+**Configuration Example:**
+```yaml
+- text: Splash Pages
+  url: /splash-pages/
+  icon: monitor
+  color: "#3399ff"
+  is_new_feature: new
+- text: Liquid IRL
+  url: /liquid-irl/
+  icon: code
+  is_new_feature: updated
+```
+
 ---
 
 {% include comps/heading.html tag="h2" text="Header Navigation" icon="compass" size=20 %}

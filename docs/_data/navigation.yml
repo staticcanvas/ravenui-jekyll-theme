@@ -52,12 +52,14 @@
       url: /splash-pages/
       icon: monitor
       color: "#3399ff"
+      is_new_feature: new
     - text: Markdown Overrides
       url: /markdown/
       icon: type
     - text: Liquid IRL
       url: /liquid-irl/
       icon: code
+      is_new_feature: updated
       color: "#ffcc00"
     - text: Theme Colors
       url: /theme-colors/
