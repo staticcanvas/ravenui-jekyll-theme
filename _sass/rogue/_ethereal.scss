@@ -451,6 +451,11 @@ code.highlighter-rouge {
 }
 
 /* ========== SCROLLBAR ========== */
+.highlight pre {
+    scrollbar-width: thin;
+    scrollbar-color: var(--syntax-keyword) rgba(0, 0, 0, 0.2);
+}
+
 .highlight pre::-webkit-scrollbar {
     height: 8px;
 }

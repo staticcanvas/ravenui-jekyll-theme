@@ -217,7 +217,17 @@
                 
                 const link = document.createElement('a');
                 link.href = `#${id}`;
-                link.textContent = heading.textContent.replace(/[^\x00-\x7F]/g, "").trim();
+                
+                // Clone heading to clean up typewriter and interactive elements
+                const clone = heading.cloneNode(true);
+                const typewriter = clone.querySelector('.zd-typewriter-container');
+                if (typewriter) {
+                    const firstWord = typewriter.getAttribute('data-first-word') || '';
+                    typewriter.textContent = firstWord;
+                }
+                clone.querySelectorAll('.zd-typewriter-cursor, .zd-copy-button, .copy-button, .zd-heading-icon').forEach(el => el.remove());
+                
+                link.textContent = clone.textContent.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
                 link.className = `zd-toc-link zd-toc-level-${heading.tagName.toLowerCase()}`;
                 link.addEventListener('click', () => {
                     if (window.innerWidth < 1024) {

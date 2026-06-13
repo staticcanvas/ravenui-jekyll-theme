@@ -3,7 +3,7 @@
 {% assign delay = include.delay | default: 1500 %}
 {% assign id = include.id | default: "zd-typewriter" %}
 
-<span class="zd-typewriter-container {{ include.class }}" id="{{ id }}-container">
+<span class="zd-typewriter-container {{ include.class }}" id="{{ id }}-container" data-first-word="{{ words[0] }}">
     <span class="zd-typewriter-text" id="{{ id }}"></span>
     <span class="zd-typewriter-cursor">|</span>
 </span>

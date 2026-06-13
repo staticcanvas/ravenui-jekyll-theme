@@ -31,9 +31,9 @@ theme_settings:
   # Interface
   scroll_progress: true             # Toggle global reading progress bar
   header:
-    enabled: true
+    enabled: false
     sticky: true
-    align: center
+    align: center                   # Alignment of header links (options: left, center, right)
 
   # Search Configuration
   search:
