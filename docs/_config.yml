@@ -56,6 +56,11 @@ theme_settings:
     enabled: true                   # Enable/disable all animations globally
     page_loads: true                # Enable subtle page load fade-in animations
     hover_effects: true             # Enable hover scale/rotate micro-animations on interactive elements
+  
+  # Collections Configuration
+  collections:
+    enabled: true                   # Toggle dynamic collections in sidebar
+
 
   # Typography Configurations
   typography:
@@ -188,3 +193,12 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+
+# --- Collections Integration --------------------------------------------------
+collections:
+  tutorials:
+    output: true
+    permalink: /tutorials/:path/
+    title: "Tutorials"      # Custom title for sidebar grouping
+    divider: true           # Render divider before this collection
+
