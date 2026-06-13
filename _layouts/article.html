@@ -1,0 +1,121 @@
+---
+layout: default
+---
+<article class="zd-article">
+    {% if page.banner_image %}
+    <div class="zd-article-banner">
+        <img src="{{ page.banner_image | relative_url }}" alt="{{ page.title }}">
+    </div>
+    {% elsif page.banner_gradient %}
+    <div class="zd-article-banner zd-article-banner--gradient" style="background: {{ page.banner_gradient }}"></div>
+    {% endif %}
+
+    <header class="zd-article-header">
+        <div class="zd-article-meta">
+            {% if page.category %}
+            <span class="zd-article-category">
+                {% include comps/icon.html name="folder" size=12 %} {{ page.category }}
+            </span>
+            {% endif %}
+            
+            <time datetime="{{ page.date | date_to_xmlschema }}" class="zd-article-date">
+                {% include comps/icon.html name="calendar" size=12 %} {{ page.date | date: "%B %d, %Y" }}
+            </time>
+            
+            {% assign words = content | number_of_words %}
+            {% assign read_time = words | divided_by: 180 | plus: 1 %}
+            <span class="zd-article-read-time">
+                {% include comps/icon.html name="clock" size=12 %} {{ read_time }} min read
+            </span>
+        </div>
+
+        <h1 class="zd-article-title">{{ page.title }}</h1>
+
+        {% if page.description %}
+        <p class="zd-article-description">{{ page.description }}</p>
+        {% endif %}
+
+        {% if page.author %}
+            {% assign author_id = page.author %}
+            {% assign author = site.data.authors[author_id] %}
+            <div class="zd-article-author-meta">
+                {% if author.avatar %}
+                <img src="{{ author.avatar | relative_url }}" alt="{{ author.name | default: author_id }}" class="zd-article-author-avatar-sm">
+                {% endif %}
+                <div class="zd-article-author-meta-info">
+                    <span class="zd-article-author-name">By {{ author.name | default: author_id }}</span>
+                    {% if author.twitter %}
+                    <a href="https://twitter.com/{{ author.twitter }}" class="zd-article-author-social-link">@{{ author.twitter }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </header>
+
+    <div class="zd-article-content">
+        {{ content }}
+    </div>
+
+    {% if page.tags %}
+    <div class="zd-article-tags">
+        <span class="zd-article-tags-label">{% include comps/icon.html name="tag" size=12 %} Tags:</span>
+        <div class="zd-tag-container" style="display: inline-flex; margin-inline-start: 0.5rem; vertical-align: middle;">
+            {% for tag in page.tags %}
+            <span class="zd-tag">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.author %}
+        {% assign author_id = page.author %}
+        {% assign author = site.data.authors[author_id] %}
+        {% if author %}
+        <div class="zd-author-bio-card">
+            {% if author.avatar %}
+            <img src="{{ author.avatar | relative_url }}" alt="{{ author.name }}" class="zd-author-bio-avatar">
+            {% endif %}
+            <div class="zd-author-bio-details">
+                <h4 class="zd-author-bio-name">{{ author.name }}</h4>
+                <p class="zd-author-bio-text">{{ author.bio }}</p>
+                <div class="zd-author-bio-socials">
+                    {% if author.twitter %}
+                    <a href="https://twitter.com/{{ author.twitter }}" title="Twitter">{% include comps/icon.html name="twitter" size=16 %}</a>
+                    {% endif %}
+                    {% if author.github %}
+                    <a href="https://github.com/{{ author.github }}" title="GitHub">{% include comps/icon.html name="github" size=16 %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    <!-- Next / Prev Pagination -->
+    {% if page.next or page.previous %}
+    <div class="zd-article-pagination">
+        <div class="zd-article-pagination-prev">
+            {% if page.previous %}
+            <span class="zd-article-pagination-label">Previous Article</span>
+            <a href="{{ page.previous.url | relative_url }}" class="zd-article-pagination-link">
+                {% include comps/icon.html name="chevron-left" size=16 %} {{ page.previous.title }}
+            </a>
+            {% endif %}
+        </div>
+        <div class="zd-article-pagination-next">
+            {% if page.next %}
+            <span class="zd-article-pagination-label">Next Article</span>
+            <a href="{{ page.next.url | relative_url }}" class="zd-article-pagination-link">
+                {{ page.next.title }} {% include comps/icon.html name="chevron-right" size=16 %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <footer class="zd-article-footer">
+        <a href="{{ "/blog/" | relative_url }}" class="zd-btn-outline">
+            {% include comps/icon.html name="arrow-left" size=12 %} Back to Blog
+        </a>
+    </footer>
+</article>

@@ -18,12 +18,14 @@
 
 - title: Blog
   links:
-    - text: Blog Index
+    - text: Blog List
       url: /blog/
       icon: book-open
-    - text: Latest Post
-      url: /posts/
-      icon: file-text
+    - text: Blog Grid
+      url: /blog-grid/
+      icon: grid
+      is_new_feature: new
+
 
 - title: Configuration
   links:
@@ -48,11 +50,16 @@
     - text: Core Layouts
       url: /layouts/
       icon: layout
+    - text: Blank Canvas Demo
+      url: /examples/blank/
+      icon: ghost
+      is_new_feature: new
     - text: Splash Pages
       url: /splash-pages/
       icon: monitor
       color: "#3399ff"
       is_new_feature: new
+
     - text: Markdown Overrides
       url: /markdown/
       icon: type
