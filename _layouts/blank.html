@@ -1,0 +1,31 @@
+---
+# Blank Layout for landing pages, dashboards, or presentations
+---
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en" }}">
+
+{% include core/head.html %}
+
+<body class="zd-blank-layout{% if site.theme_settings.animations.enabled != false %} zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
+    <div class="zd-blank-content">
+        {{ content }}
+    </div>
+
+    {% if site.zd_use_cdn != false %}
+        <script>
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        </script>
+    {% else %}
+        <script src="{{ "/assets/js/vendor/lucide.0.400.0.min.js" | relative_url }}"></script>
+        <script>
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        </script>
+    {% endif %}
+
+    {% include core/foot.html %}
+</body>
+</html>

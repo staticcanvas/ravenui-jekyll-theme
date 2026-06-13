@@ -83,3 +83,32 @@
     max-width: 70ch;
 }
 
+/* Additional unified blog styles */
+.zd-blog-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-block: 2rem;
+}
+
+.zd-blog-card-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: var(--zd-border);
+
+    .zd-blog-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+}
+
+.zd-blog-card:hover {
+    .zd-blog-thumb {
+        transform: scale(1.05);
+    }
+}
+
+
