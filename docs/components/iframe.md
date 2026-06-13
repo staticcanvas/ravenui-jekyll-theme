@@ -8,7 +8,7 @@ description: Embed external web content responsively with a built-in skeleton lo
 
 The `iframe.html` component enables secure, responsive embedding of external websites or web apps (e.g. dashboards, maps, interactive widgets) with a beautiful glassmorphic skeleton loader that fades out as soon as the frame loads.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/iframe.html url="https://example.com" title="Example Website Embed" aspect_ratio="21/9" %}
 
@@ -26,7 +26,7 @@ The `iframe.html` component enables secure, responsive embedding of external web
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

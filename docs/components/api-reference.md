@@ -8,7 +8,7 @@ description: A high-density component for documenting web REST API endpoints, HT
 
 The `api-reference.html` component provides a structured, high-density layout designed for documenting web REST APIs (HTTP endpoints, request payloads, response schemas, and header definitions).
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% capture api_headers %}
 <li>
@@ -79,7 +79,7 @@ The `api-reference.html` component provides a structured, high-density layout de
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

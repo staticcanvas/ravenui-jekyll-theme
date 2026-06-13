@@ -8,7 +8,7 @@ description: Embed interactive CodePen front-end playgrounds and code snippets.
 
 The `codepen.html` component makes it simple to embed interactive HTML, CSS, and JavaScript pens from CodePen directly within your documentation pages.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/codepen.html id="XWJjRKO" user="codepen" height=350 theme="dark" tab="result" %}
 
@@ -28,7 +28,7 @@ The `codepen.html` component makes it simple to embed interactive HTML, CSS, and
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

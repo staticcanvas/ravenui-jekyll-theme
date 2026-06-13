@@ -8,7 +8,7 @@ description: Privacy-friendly and responsive YouTube video embedding component.
 
 The `youtube.html` component provides a responsive wrapper for embedding YouTube videos. It uses the privacy-enhanced domain (`youtube-nocookie.com`) by default to protect user data and comply with privacy regulations.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/youtube.html id="dQw4w9WgXcQ" title="Rick Astley - Never Gonna Give You Up" %}
 
@@ -25,7 +25,7 @@ The `youtube.html` component provides a responsive wrapper for embedding YouTube
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

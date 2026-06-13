@@ -6,7 +6,7 @@ tags: [ui, navigation, sidebar]
 description: Configuring the dual-sidebar system and mobile navigation menu.
 ---
 
-ZeroDark SP features a high-density, three-column layout designed for maximum technical clarity.
+Zero-Dark features a high-density, three-column layout designed for maximum technical clarity.
 
 {% include comps/heading.html tag="h2" text="Sidebar Navigation (Site-Wide)" icon="home" size=20 %}
 
@@ -64,13 +64,13 @@ The site-wide navigation is controlled via `_data/navigation.yml`. This system s
 ```
 
 **Icons:**
-Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They will be automatically rendered at 14px in the sidebar, see [ZeroDark SP Icon Reference](/icons/).
+Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They will be automatically rendered at 14px in the sidebar, see [Zero-Dark Icon Reference](/icons/).
 
  - **Colors:** You can specify a color for the icon, or use the default color from the Lucide icon library.
- - **Animations:** ZeroDark SP supports animations for icons
+ - **Animations:** Zero-Dark supports animations for icons
  - **Sizes:** You can specify a size for the icon, or use the default size from the Lucide icon library.
  
- **See:** [ZeroDark SP Icon Reference](/LuceIcons/)
+ **See:** [Zero-Dark Icon Reference](/LuceIcons/)
 
 ---
 
@@ -86,7 +86,7 @@ The "***On This Page***" section appears in the **right sidebar** on desktop vie
 
 {% include comps/heading.html tag="h2" text="Mobile Experience" icon="smartphone" size=20 %}
 
-On smaller screens, ZeroDark SP utilizes a **Dual-Toggle System**:
+On smaller screens, Zero-Dark utilizes a **Dual-Toggle System**:
 
 1. **Navigation Toggle:** Opens the site-wide sidebar as a full-page overlay.
 2. **TOC Toggle:** Opens the current page structure.

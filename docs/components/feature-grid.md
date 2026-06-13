@@ -51,7 +51,7 @@ The `feature-grid.html` component provides the necessary layout structure for di
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 ### **Feature Grid Parameters**
 

@@ -1,4 +1,4 @@
 #!/bin/bash
-# 🌑 ZERODARK SP: Dependency Sync
+# 🌑 ZERO-DARK: Dependency Sync
 echo "🟦 Synchronizing dependencies..."
 bundle install

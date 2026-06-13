@@ -1,4 +1,4 @@
-# 🌑 ZERODARK SP - Configuration Reference
+# 🌑 ZERO-DARK - Configuration Reference
 # This file contains all available configuration settings for the theme.
 # Settings that are optional or not required for the default docs site are commented out.
 
@@ -136,7 +136,7 @@ bluesky_username: staticcanvas
 zd_announcement:
   enabled: true
   id: "welcome-banner-v1"
-  text: "Welcome to ZeroDark SP! Check out the new Keyboard Shortcuts component."
+  text: "Welcome to Zero-Dark! Check out the new Keyboard Shortcuts component."
   icon: "megaphone"
   color: "var(--zd-clr-viridian)"
   link: "/components/kbd/"

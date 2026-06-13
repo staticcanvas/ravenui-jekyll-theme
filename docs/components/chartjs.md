@@ -6,9 +6,9 @@ tags: [ui, elements, data, charts]
 description: Interactive and responsive canvas charts powered by Chart.js.
 ---
 
-The `chartjs.html` component provides interactive data visualization capabilities. It supports bar, line, radar, pie, doughnut, polar area, bubble, and scatter charts, with automatic layout scaling and ZeroDark styling.
+The `chartjs.html` component provides interactive data visualization capabilities. It supports bar, line, radar, pie, doughnut, polar area, bubble, and scatter charts, with automatic layout scaling and Zero-Dark styling.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/chartjs.html id="chartjs-example-1" type="line" labels="Q1, Q2, Q3, Q4" data="12, 19, 3, 5" dataset_label="Active Users" height="250px" %}
 
@@ -126,7 +126,7 @@ Scatter and Bubble charts accept coordinate datasets.
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

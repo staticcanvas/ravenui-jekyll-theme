@@ -88,7 +88,7 @@
         }];
       {% endif %}
 
-      // Add ZeroDark style defaults to datasets
+      // Add Zero-Dark style defaults to datasets
       datasets.forEach(ds => {
         if (!ds.borderColor) ds.borderColor = '{{ include.color | default: "var(--zd-clr-highlight, #00ff9d)" }}';
         if (!ds.backgroundColor) {

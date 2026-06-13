@@ -3,10 +3,10 @@ layout: default
 title: Other Platforms
 output-title: true
 tags: [deployment, web, azure, aws]
-description: Guide for deploying ZeroDark SP to AWS, Azure, Firebase, and more.
+description: Guide for deploying Zero-Dark to AWS, Azure, Firebase, and more.
 ---
 
-ZeroDark SP can be hosted on any platform that supports static files.
+Zero-Dark can be hosted on any platform that supports static files.
 
 {% include comps/heading.html tag="h2" text="AWS S3 & CloudFront" icon="box" size=20 %}
 

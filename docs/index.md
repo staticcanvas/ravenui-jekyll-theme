@@ -3,13 +3,13 @@ layout: default
 title: Introduction
 output-title: true
 tags: [docs, jekyll, technical]
-description: ZeroDark SP is a high-performance Jekyll theme engineered for technical documentation.
+description: Zero-Dark is a high-performance Jekyll theme engineered for technical documentation.
 ---
 
-ZeroDark SP is a professional Jekyll theme optimized for technical documentation and long-form readability.
+Zero-Dark is a professional Jekyll theme optimized for technical documentation and long-form readability.
 
 {% capture collections_notice %}
-Zero Dark is intentionally designed to prioritize structured, hierarchy-driven documentation via curated sidebar navigation (`_data/navigation.yml`). It does not support automatic Jekyll collection siblings (next/previous page lists) by design. For deep collections structures, a separate variant is planned to preserve the simplicity of the core theme.
+Zero-Dark is intentionally designed to prioritize structured, hierarchy-driven documentation via curated sidebar navigation (`_data/navigation.yml`). It does not support automatic Jekyll collection siblings (next/previous page lists) by design. For deep collections structures, a separate variant is planned to preserve the simplicity of the core theme.
 {% endcapture %}
 {% include comps/callout.html type="note" title="Architecture Decision" content=collections_notice %}
 
@@ -52,7 +52,7 @@ Zero Dark is intentionally designed to prioritize structured, hierarchy-driven d
 {% include comps/heading.html tag="h3" text="Ordered Steps" icon="list" size=20 %}
 
 1. Install Ruby and Bundler.
-2. Clone the ZeroDark SP repository.
+2. Clone the Zero-Dark repository.
 3. Run `./bundle.sh` to sync dependencies.
 
 {% include comps/heading.html tag="h3" text="VHS Preview" icon="monitor" size=20 %}

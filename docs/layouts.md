@@ -3,10 +3,10 @@ layout: default
 title: Layouts
 output-title: true
 tags: [ui, layout, architecture]
-description: Understanding the structural foundation and page templates of ZeroDark SP.
+description: Understanding the structural foundation and page templates of Zero-Dark.
 ---
 
-ZeroDark SP is built on a high-density, three-column grid system that prioritizes information hierarchy and technical clarity.
+Zero-Dark is built on a high-density, three-column grid system that prioritizes information hierarchy and technical clarity.
 
 {% include comps/heading.html tag="h2" text="The Main Layout" icon="layout" size=20 %}
 

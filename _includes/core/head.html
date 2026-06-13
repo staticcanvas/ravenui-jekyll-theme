@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "ZeroDark" }}</title>
+    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "Zero-Dark" }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
     {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.zd_use_cdn | default: true -%}

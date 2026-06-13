@@ -8,7 +8,7 @@ description: Displays the last modified timestamp and editor/author information.
 
 The `last-edited.html` component prints a small metadata line showing when a page was last updated and optionally who edited it.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/last-edited.html date="2026-06-10 14:30:00" author="sgkens" %}
 
@@ -25,7 +25,7 @@ The `last-edited.html` component prints a small metadata line showing when a pag
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

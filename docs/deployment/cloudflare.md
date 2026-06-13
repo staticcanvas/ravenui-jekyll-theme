@@ -3,10 +3,10 @@ layout: default
 title: Cloudflare Deployment
 output-title: true
 tags: [deployment, cloud, cloudflare]
-description: Deploying ZeroDark SP directly to Cloudflare Pages for extreme performance.
+description: Deploying Zero-Dark directly to Cloudflare Pages for extreme performance.
 ---
 
-Cloudflare Pages provides a lightning-fast CDN and automated build pipeline for ZeroDark SP.
+Cloudflare Pages provides a lightning-fast CDN and automated build pipeline for Zero-Dark.
 
 {% include comps/heading.html tag="h2" text="Direct Integration" icon="zap" size=20 %}
 

@@ -6,7 +6,7 @@ tags: [blog, posts, articles, meta]
 description: Guidelines for creating long-form content, blog posts, and technical articles.
 ---
 
-ZeroDark SP features a specialized `post` layout optimized for long-form readability and technical articles.
+Zero-Dark features a specialized `post` layout optimized for long-form readability and technical articles.
 
 {% include comps/heading.html tag="h2" text="Frontmatter Configuration" icon="file-text" size=20 %}
 
@@ -39,7 +39,7 @@ The `post` layout automatically renders a meta header with the following element
 
 {% include comps/heading.html tag="h2" text="Readability & Styling" icon="type" size=20 %}
 
-Technical articles in ZeroDark SP are designed with a max-width of **80ch** to ensure optimal line length for reading. 
+Technical articles in Zero-Dark are designed with a max-width of **80ch** to ensure optimal line length for reading. 
 
 - **Typography:** Increased line-height (1.8) for better legibility.
 - **Spacing:** Generous vertical margins between headings and paragraphs.

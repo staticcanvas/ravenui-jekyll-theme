@@ -8,7 +8,7 @@ description: Displays author details, profile avatar, role, bio, and social conn
 
 The `written-by.html` component provides a refined way to display author metadata, ideal for blog posts, documentation contributions, and team showcases.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/written-by.html name="Jane Doe" avatar="/favicon.svg" role="Lead Designer, StaticCanvas" bio="Jane is a veteran interface designer who specializes in systems design and accessibility." twitter="janedoe" github="janedoe" email="jane@staticcanvas.com" color="#00ff9d" %}
 
@@ -31,7 +31,7 @@ The `written-by.html` component provides a refined way to display author metadat
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

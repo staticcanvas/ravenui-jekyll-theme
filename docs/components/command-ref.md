@@ -8,7 +8,7 @@ description: A high-density component for documenting CLI commands, task options
 
 The `command-ref.html` component provides a structured, visually distinct block for documenting CLI commands, arguments, option flags, or task variables.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% capture cmd_params %}
 <li>
@@ -56,7 +56,7 @@ The `command-ref.html` component provides a structured, visually distinct block 
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

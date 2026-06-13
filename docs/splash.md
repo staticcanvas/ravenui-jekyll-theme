@@ -1,7 +1,7 @@
 ---
 layout: splash
 variant: app
-title: Welcome to ZeroDark SP
+title: Welcome to Zero-Dark
 permalink: /splash/
 description: A high-performance, professional Jekyll theme for technical documentation.
 metrics_data:
@@ -52,7 +52,7 @@ metrics_data:
 </style>
 
 <div style="text-align: center; margin-block: 3rem 4rem;">
-  <h1 class="font-heading fz-xxl fw-900" style="margin-block-end: 0.5rem; letter-spacing: -0.03em;">ZeroDark <span class="fg-highlight">SP</span></h1>
+  <h1 class="font-heading fz-xxl fw-900" style="margin-block-end: 0.5rem; letter-spacing: -0.03em;">Zero-Dark <span class="fg-highlight">SP</span></h1>
   <p class="fz-lg fg-muted" style="margin-block-end: 2rem; min-height: 1.8rem;">
     {% include comps/typewriter.html words="A professional documentation engine.|Refined Fluent UI aesthetics.|Highly customizable layout systems.|Sub-second developer feedback loops." speed=60 delay=2500 id="splash-typewriter" %}
   </p>
@@ -65,7 +65,7 @@ metrics_data:
 <div class="zd-splash-showcase-grid">
   <div>
     {% capture term_content %}
-<span class="fg-muted"># Initialize ZeroDark SP in your Jekyll site</span>
+<span class="fg-muted"># Initialize Zero-Dark in your Jekyll site</span>
 <span class="fg-highlight">$</span> bundle init
 <span class="fg-highlight">$</span> echo 'gem "zero-dark-sp"' >> Gemfile
 <span class="fg-highlight">$</span> bundle install

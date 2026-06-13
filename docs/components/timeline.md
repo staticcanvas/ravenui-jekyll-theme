@@ -31,7 +31,7 @@ Structure your timeline items as a list of YAML objects, either in a page's fron
 ```yaml
 - date: "April 2026"
   title: "V1.0.0 Release"
-  body: "The core engine of ZeroDark SP is finalized, introducing high-performance dark layouts and glassmorphism styling."
+  body: "The core engine of Zero-Dark is finalized, introducing high-performance dark layouts and glassmorphism styling."
   icon: "check-circle"
   color: "var(--zd-clr-viridian)"
 - date: "May 2026"

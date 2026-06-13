@@ -8,7 +8,7 @@ description: Embed full interactive sandbox projects (React, Vue, Svelte, Node) 
 
 The `codesandbox.html` component enables embedding full monorepo sandboxes or web apps from CodeSandbox, allowing users to browse, edit, and execute code inline.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/codesandbox.html id="new" height=500 theme="dark" view="editor" %}
 
@@ -27,7 +27,7 @@ The `codesandbox.html` component enables embedding full monorepo sandboxes or we
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

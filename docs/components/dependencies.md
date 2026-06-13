@@ -8,7 +8,7 @@ description: A component for displaying the dependencies of a component, with li
 
 The `dependencies.html` component provides a standard, visual way to list which sub-components a particular component relies upon. Badges automatically link to the corresponding component documentation pages under the `/components/` path.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/dependencies.html deps="icon,button" %}
 
@@ -24,7 +24,7 @@ The `dependencies.html` component provides a standard, visual way to list which 
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 ### **dependencies.html Parameters**
 

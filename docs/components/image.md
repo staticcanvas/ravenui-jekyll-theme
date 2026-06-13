@@ -8,18 +8,18 @@ description: High-performance image component with skeletons, lazy loading, and 
 
 The `image.html` component provides a wrapper for images. It features progressive blur-up loading using low-resolution placeholders (or an animated skeleton loader) to achieve smooth transitions.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
-{% include comps/image.html src="/favicon.svg" alt="ZeroDark Icon Logo" max_width="200px" caption="ZeroDark Icon Logo Example" %}
+{% include comps/image.html src="/favicon.svg" alt="Zero-Dark Icon Logo" max_width="200px" caption="Zero-Dark Icon Logo Example" %}
 
 {% capture img_eg %}
 {% raw %}
 ```liquid
 {% include comps/image.html 
    src="/favicon.svg" 
-   alt="ZeroDark Icon Logo" 
+   alt="Zero-Dark Icon Logo" 
    max_width="200px" 
-   caption="ZeroDark Icon Logo Example" %}
+   caption="Zero-Dark Icon Logo Example" %}
 ```
 {% endraw %}
 {% endcapture %}
@@ -27,7 +27,7 @@ The `image.html` component provides a wrapper for images. It features progressiv
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

@@ -8,7 +8,7 @@ description: A clean grid container for partner, sponsor, or customer logos.
 
 The `sponsored-by.html` component renders a structured grid of sponsor or partner logos/names. It features subtle hover scaling and automatic grayscale filtering for cohesive brand integrations.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% assign test_sponsors = "
 - name: Acme Corp
@@ -44,7 +44,7 @@ The `sponsored-by.html` component renders a structured grid of sponsor or partne
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

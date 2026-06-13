@@ -1,8 +1,8 @@
-title: ZeroDark
+title: Zero-Dark
 description: A high-contrast, professional Jekyll theme optimized for technical documentation.
 logo_text: ZERODARK
 logo_subtext: SP
-copyright: "© 2026 ZeroDark Systems. All rights reserved."
+copyright: "© 2026 Zero-Dark Systems. All rights reserved."
 
 # Repository Settings
 repository:
@@ -121,7 +121,7 @@ font_awesome: false
 zd_announcement:
   enabled: true
   id: "welcome-banner-v1"
-  text: "Welcome to ZeroDark SP! Check out the new Keyboard Shortcuts component."
+  text: "Welcome to Zero-Dark! Check out the new Keyboard Shortcuts component."
   icon: "megaphone"
   color: "var(--zd-clr-viridian)"
   link: "/components/kbd/"

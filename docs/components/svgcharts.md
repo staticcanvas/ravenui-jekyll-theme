@@ -8,7 +8,7 @@ description: Pure SVG (zero-JavaScript) charts for ultra-fast server-side render
 
 The `svgcharts.html` component provides a lightweight, zero-dependency data visualization tool. It renders line, bar, pie, doughnut, polar area, radar, scatter, and bubble charts directly to SVG, ensuring instant load times and complete compatibility with JavaScript-disabled environments.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/svgcharts.html id="svgcharts-example-1" type="bar" labels="Q1, Q2, Q3, Q4" data="40, 60, 25, 95" title="Lightweight SVG Bar Chart" height=220 width=600 %}
 
@@ -143,7 +143,7 @@ Scatter and bubble charts plot coordinates (x, y) to show correlations, with bub
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

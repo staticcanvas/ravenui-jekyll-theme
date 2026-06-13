@@ -3,10 +3,10 @@ layout: default
 title: Configuration
 output-title: true
 tags: [setup, config, yaml]
-description: Global settings and metadata controls for the ZeroDark SP theme.
+description: Global settings and metadata controls for the Zero-Dark theme.
 ---
 
-ZeroDark SP uses a mix of standard Jekyll settings and custom theme-level controls defined in your `_config.yml` and page frontmatter.
+Zero-Dark uses a mix of standard Jekyll settings and custom theme-level controls defined in your `_config.yml` and page frontmatter.
 
 {% include comps/heading.html tag="h2" text="Theme Settings" icon="settings" size=20 %}
 
@@ -101,15 +101,15 @@ zd_toc_default_open: true
 zd_code_copy: true
 zd_code_lang: true
 
-title: ZeroDark Docs
+title: Zero-Dark Docs
 logo_text: ZERODARK
 logo_subtext: SP
-copyright: "© 2026 ZeroDark Systems."
+copyright: "© 2026 Zero-Dark Systems."
 ```
 
 {% include comps/heading.html tag="h2" text="Search Integration (Pagefind)" icon="search" size=20 %}
 
-ZeroDark SP is pre-configured for **Pagefind**, a WASM-based search engine.
+Zero-Dark is pre-configured for **Pagefind**, a WASM-based search engine.
 
 **Setup:**
 1. Build your site: `bundle exec jekyll build`
@@ -127,7 +127,7 @@ For detailed configuration of the search index, see the [Pagefind Documentation]
 
 {% include comps/heading.html tag="h2" text="CDN vs Local Assets" icon="globe" size=20 %}
 
-ZeroDark SP allows you to toggle between using content delivery networks (CDNs) and locally-hosted script files for maximum security, privacy, and offline compatibility.
+Zero-Dark allows you to toggle between using content delivery networks (CDNs) and locally-hosted script files for maximum security, privacy, and offline compatibility.
 
 ### Toggle Switch
 
@@ -140,7 +140,7 @@ zd_use_cdn: true  # Default: Uses high-performance CDNs for asset loading
 
 ### Pinned Script & Asset Versions
 
-Below are the third-party assets integrated into ZeroDark SP:
+Below are the third-party assets integrated into Zero-Dark:
 
 | Asset Library | Version | CDN URL / Source | Local File Location |
 | :--- | :--- | :--- | :--- |
@@ -174,7 +174,7 @@ The theme automatically styles the resulting `.rouge-table` and `.gutter` elemen
 
 ## **Google Analytics Integration**
 
-ZeroDark SP features native integration with Google Analytics 4 (GA4), including automatic outbound link click tracking and file download tracking.
+Zero-Dark features native integration with Google Analytics 4 (GA4), including automatic outbound link click tracking and file download tracking.
 
 ### **Setup**
 

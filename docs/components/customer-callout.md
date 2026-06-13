@@ -8,10 +8,10 @@ description: Elegant testimonial and review cards with star ratings and avatar s
 
 The `customer-callout.html` component renders testimonial cards for customers, users, or reviewers. It features custom borders, optional star ratings, and author avatar support.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/customer-callout.html 
-   quote="ZeroDark has completely transformed our developer documentation. The speed and visual aesthetics are absolutely first class." 
+   quote="Zero-Dark has completely transformed our developer documentation. The speed and visual aesthetics are absolutely first class." 
    author="Alex Rivers" 
    role="CTO, CloudScale Systems" 
    avatar="/favicon.svg" 
@@ -22,7 +22,7 @@ The `customer-callout.html` component renders testimonial cards for customers, u
 {% raw %}
 ```liquid
 {% include comps/customer-callout.html 
-   quote="ZeroDark has completely transformed our developer documentation." 
+   quote="Zero-Dark has completely transformed our developer documentation." 
    author="Alex Rivers" 
    role="CTO, CloudScale Systems" 
    avatar="/favicon.svg" 
@@ -35,7 +35,7 @@ The `customer-callout.html` component renders testimonial cards for customers, u
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

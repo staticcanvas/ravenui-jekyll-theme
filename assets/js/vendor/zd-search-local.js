@@ -1,5 +1,5 @@
 /**
- * 🌑 ZERODARK SP - Zero-Dependency Local Client Search Engine
+ * 🌑 ZERO-DARK - Zero-Dependency Local Client Search Engine
  * Highly optimized client-side full-text search with relevance ranking,
  * text excerpt extraction, and keyword highlighting.
  */

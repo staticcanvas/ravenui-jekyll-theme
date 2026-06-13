@@ -8,7 +8,7 @@ description: A collapsible disclosures block for folding secondary or large cont
 
 The `details.html` component provides a styled disclosures dropdown. It utilizes the native HTML `<details>` and `<summary>` elements under the hood to ensure accessibility and support without requiring JavaScript.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% capture details_content %}
 This is the collapsed content area. You can put any markdown, code blocks, or nested components inside this block, and it will remain hidden until expanded by the user.
@@ -32,7 +32,7 @@ This is the collapsed content area. You can put any markdown, code blocks, or ne
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

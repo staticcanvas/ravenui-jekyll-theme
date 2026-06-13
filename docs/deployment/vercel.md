@@ -3,7 +3,7 @@ layout: default
 title: Vercel Deployment
 output-title: true
 tags: [deployment, web, vercel]
-description: Deploying ZeroDark SP to Vercel with automatic builds and previews.
+description: Deploying Zero-Dark to Vercel with automatic builds and previews.
 ---
 
 Vercel provides a modern platform for static site deployment, including preview environments for every pull request.

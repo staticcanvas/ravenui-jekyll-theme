@@ -10,7 +10,7 @@ The `copy-button.html` component provides a lightweight, stylized button that co
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="copy" size=20 %}
 
-{% include comps/copy-button.html text="Hello from ZeroDark SP!" label="Copy Greeting" %}
+{% include comps/copy-button.html text="Hello from Zero-Dark!" label="Copy Greeting" %}
 <br>
 {% include comps/copy-button.html text="git clone https://gitlab.com/staticcanvas/zero-dark-sp.git" %}
 
@@ -18,7 +18,7 @@ The `copy-button.html` component provides a lightweight, stylized button that co
 {% raw %}
 ```liquid
 <!-- Copy Button with Custom Label -->
-{% include comps/copy-button.html text="Hello from ZeroDark SP!" label="Copy Greeting" %}
+{% include comps/copy-button.html text="Hello from Zero-Dark!" label="Copy Greeting" %}
 
 <!-- Icon-Only Copy Button (Compact) -->
 {% include comps/copy-button.html text="git clone https://gitlab.com/staticcanvas/zero-dark-sp.git" %}

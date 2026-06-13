@@ -6,7 +6,7 @@ permalink: /examples/splash-docs/
 description: Example page demonstrating the docs variant of the splash layout.
 ---
 
-# ZeroDark Documentation Splash
+# Zero-Dark Documentation Splash
 
 A focused, elegant landing layout designed for starting points of documentation portals.
 

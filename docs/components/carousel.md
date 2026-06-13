@@ -8,7 +8,7 @@ description: A responsive sliding deck carousel for showcasing multiple images a
 
 The `carousel.html` component allows users to cycle through a list of images. Each image in the deck supports lazy loading and blur-up placeholder effects.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% assign test_slides = "
 - src: /favicon.svg
@@ -44,7 +44,7 @@ The `carousel.html` component allows users to cycle through a list of images. Ea
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

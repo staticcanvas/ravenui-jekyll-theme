@@ -8,7 +8,7 @@ description: LocalStorage-backed reading history tracker list.
 
 The `previously-read.html` component reads visit history from the client's `localStorage` and displays a list of recently viewed documentation pages, allowing users to trace back their reading path easily.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 Since this component operates on local browser history, it will render live links for pages you have visited during this browsing session.
 
@@ -25,7 +25,7 @@ Since this component operates on local browser history, it will render live link
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

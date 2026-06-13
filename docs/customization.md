@@ -6,7 +6,7 @@ tags: [sass, customization, advanced]
 description: Guide for overriding theme colors, fonts, and core SCSS variables.
 ---
 
-ZeroDark SP is designed to be easily brandable while maintaining its high-performance structural integrity.
+Zero-Dark is designed to be easily brandable while maintaining its high-performance structural integrity.
 
 {% include comps/heading.html tag="h2" text="SCSS Variables" icon="sliders" size=20 %}
 
@@ -39,7 +39,7 @@ To add custom styles without modifying the theme core, you can add them to `asse
 
 {% include comps/heading.html tag="h2" text="Color Theming" icon="palette" size=20 %}
 
-ZeroDark SP supports instant color swapping via the `zd_accent_color` field in `_config.yml`. This color will be applied to the progress bar and secondary highlights.
+Zero-Dark supports instant color swapping via the `zd_accent_color` field in `_config.yml`. This color will be applied to the progress bar and secondary highlights.
 
 ```yaml
 zd_accent_color: "#00ff9d" # Emerald

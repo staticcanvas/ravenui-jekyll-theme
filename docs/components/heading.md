@@ -31,7 +31,7 @@ The `heading.html` component provides a standard way to create section headings 
 
 ## **Heading Anchor Links**
 
-ZeroDark SP automatically generates hoverable anchor links (`#`) next to all section headings (`h1` through `h6`) that have an ID.
+Zero-Dark automatically generates hoverable anchor links (`#`) next to all section headings (`h1` through `h6`) that have an ID.
 
 By default, these links are invisible and fade in when hovering over the heading. You can configure the anchors to be permanently visible (with a subtle opacity) by adding the following setting to your `_config.yml` file:
 

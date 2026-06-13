@@ -8,7 +8,7 @@ description: A clean, technical frame wrapper for showcasing live HTML and UI co
 
 The `rendered-el-showcase.html` component wraps live interactive components or HTML snippets in a professional design frame with technical background grids, slanted lines, titles, and site logos.
 
-## **Live Example**
+{% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% capture button_html %}
 {% include comps/button.html text="Interactive Demo" color="#b79ced" icon="zap" %}
@@ -34,7 +34,7 @@ The `rendered-el-showcase.html` component wraps live interactive components or H
 
 ---
 
-## **API Reference**
+{% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

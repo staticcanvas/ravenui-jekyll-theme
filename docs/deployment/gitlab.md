@@ -3,10 +3,10 @@ layout: default
 title: GitLab Deployment
 output-title: true
 tags: [deployment, git, gitlab]
-description: Guide for deploying ZeroDark SP to GitLab Pages with custom domain support.
+description: Guide for deploying Zero-Dark to GitLab Pages with custom domain support.
 ---
 
-ZeroDark SP is optimized for GitLab CI/CD and Pages.
+Zero-Dark is optimized for GitLab CI/CD and Pages.
 
 {% include comps/heading.html tag="h2" text="CI/CD Configuration" icon="refresh-cw" size=20 %}
 

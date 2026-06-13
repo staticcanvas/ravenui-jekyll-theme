@@ -2,10 +2,10 @@
 layout: default
 title: Installation
 parent: /
-description: Instructions for installing and configuring the ZeroDark SP theme.
+description: Instructions for installing and configuring the Zero-Dark theme.
 ---
 
-ZeroDark SP is designed for rapid deployment with minimal configuration. Follow these steps to integrate the theme into your Jekyll project.
+Zero-Dark is designed for rapid deployment with minimal configuration. Follow these steps to integrate the theme into your Jekyll project.
 
 {% include comps/heading.html tag="h2" text="1. Add to Gemfile" icon="package" size=20 %}
 
@@ -20,7 +20,7 @@ gem "zero-dark-sp"
 
 {% include comps/heading.html tag="h2" text="2. Configure _config.yml" icon="settings" size=20 %}
 
-Specify the theme in your `_config.yml` file. This tells Jekyll to use ZeroDark SP as the layout engine.
+Specify the theme in your `_config.yml` file. This tells Jekyll to use Zero-Dark as the layout engine.
 
 {% capture config_code %}
 ```yaml

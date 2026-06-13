@@ -6,7 +6,7 @@ tags: [ui, layout, splash, landing]
 description: Specialized components and layouts for building high-impact landing pages.
 ---
 
-ZeroDark SP provides a suite of advanced components specifically designed for the `splash` layout, allowing you to create professional product landing pages and entry points.
+Zero-Dark provides a suite of advanced components specifically designed for the `splash` layout, allowing you to create professional product landing pages and entry points.
 
 {% include comps/heading.html tag="h2" text="Splash Components" icon="box" size=24 %}
 
@@ -30,7 +30,7 @@ A high-impact centered block for primary calls-to-action.
 {% endcapture %}
 
 {% include comps/hero-card.html 
-   title="ZeroDark SP" 
+   title="Zero-Dark" 
    description="A professional, high-performance Jekyll theme engineered for technical documentation and long-form readability." 
    cta_text="View Installation" 
    cta_url="/installation/" 

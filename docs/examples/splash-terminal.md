@@ -11,7 +11,7 @@ description: Example page demonstrating the terminal variant of the splash layou
 {% capture term_output %}
 <span class="fg-muted">></span> boot --verbose<br>
 <span class="fg-highlight">✓</span> Loading kernel: 100% complete.<br>
-<span class="fg-info">i</span> Initializing ZeroDark SP interface...<br>
+<span class="fg-info">i</span> Initializing Zero-Dark interface...<br>
 <span class="fg-highlight">✓</span> System online. All subsystems nominal.
 {% endcapture %}
 
