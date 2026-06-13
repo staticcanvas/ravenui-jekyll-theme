@@ -14,3 +14,7 @@ node_modules/
 # Local configuration & cache
 .DS_Store
 *.log
+
+# Dev Notes (Local only)
+dev-notes.md
+dev-notes-tracker.md
