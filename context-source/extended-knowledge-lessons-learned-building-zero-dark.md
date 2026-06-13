@@ -46,6 +46,10 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Problem:** Implementing smooth animations on the dynamic Table of Contents (TOC) can cause layout shifting, visual lag, or accessibility conflicts (specifically for users with motion sensitivity).
 - **Resolution:** Implemented TOC animations using pure CSS transitions and keyframes gated by a body configuration attribute `data-toc-animations`. Added a transition wrapper around `.zd-toc-link` and optimized performance using `transform: translateX` instead of animating layout properties like `margin-left` or `padding-left`. Used a CSS media query target for `prefers-reduced-motion: reduce` to disable transitions automatically when requested by the OS.
 
+### **2.7. Flexible Carousel Component (Images and Custom HTML Content)**
+- **Problem:** Dynamic carousels typically limit builders to standard image slide collections. If users want to slide arbitrary components (e.g., custom cards, feedback elements, or text blocks), they are forced to write bespoke markup or load a heavy JavaScript slider library.
+- **Resolution:** Upgraded the standard Jekyll carousel include (`_includes/comps/carousel.html`) to support a dual-mode layout. If a slide item contains a `content` property, the carousel renders it as a custom content viewport using CSS flex centering; otherwise, it falls back to the high-performance lazy-loaded, blur-up image layout. This avoids adding new JS dependencies and maintains a consistent, lightweight layout.
+
 ---
 
 ## **3. Quality of Life (QOL) & Aesthetic Guidelines**

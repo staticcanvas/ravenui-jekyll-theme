@@ -8,23 +8,31 @@
     <div class="zd-carousel-track">
       {% for item in items %}
       <div class="zd-carousel-slide {% if forloop.first %}active{% endif %}">
-        <div class="zd-image-container" style="--image-radius: 0; max-width: 100%;">
-          <div class="zd-image-wrapper" style="height: {{ height }};">
-            {% if item.low_res_src %}
-              <img src="{{ item.low_res_src | relative_url }}" class="zd-image-blur" alt="" aria-hidden="true" />
-            {% else %}
-              <div class="zd-image-skeleton"></div>
-            {% endif %}
-            <img src="{{ item.src | relative_url }}" 
-                 alt="{{ item.alt | default: '' | escape }}" 
-                 class="zd-image-main" 
-                 loading="lazy" 
-                 onload="this.classList.add('loaded'); if(this.previousElementSibling) this.previousElementSibling.classList.add('fade-out');" />
+        {% if item.content %}
+          <div class="zd-carousel-custom-content">
+            {{ item.content }}
           </div>
-          {% if item.caption %}
-            <span class="zd-image-caption">{{ item.caption }}</span>
-          {% endif %}
-        </div>
+        {% else %}
+          <div class="zd-image-container" style="--image-radius: 0; max-width: 100%;">
+            <div class="zd-image-wrapper" style="height: {{ height }};">
+              {% if item.low_res_src %}
+                <img src="{{ item.low_res_src | relative_url }}" class="zd-image-blur" alt="" aria-hidden="true" />
+              {% elsif item.src %}
+                <div class="zd-image-skeleton"></div>
+              {% endif %}
+              {% if item.src %}
+              <img src="{{ item.src | relative_url }}" 
+                   alt="{{ item.alt | default: '' | escape }}" 
+                   class="zd-image-main" 
+                   loading="lazy" 
+                   onload="this.classList.add('loaded'); if(this.previousElementSibling) this.previousElementSibling.classList.add('fade-out');" />
+              {% endif %}
+            </div>
+            {% if item.caption %}
+              <span class="zd-image-caption">{{ item.caption }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

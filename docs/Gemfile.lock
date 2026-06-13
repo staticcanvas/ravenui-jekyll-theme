@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    jekyll-theme-zero-dark (1.16.6)
+    jekyll-theme-zero-dark (1.17.0)
       jekyll (~> 4.3)
       jekyll-feed (~> 0.17)
       jekyll-seo-tag (~> 2.8)
