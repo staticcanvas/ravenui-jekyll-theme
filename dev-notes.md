@@ -2,10 +2,15 @@
 
 ---
 
-**TASKS!** - work through tasks items if task is not apart of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
-    - If a task item has more to it of is incomplete of implimation is not the best or its the simple way or advance way add a `> **After Thought**` or `> **Note!**` comment with notes
+**TASKS!** - work through tasks items if task is not a part of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
+    - If a task item has more to it of its incomplete in terms of implimation, is not the best practice but works, its the simple way or advanced way. add a comment after inline with dotpoint `> **After Thought**` or `> **Note!**` comment with notes for developers: possible solutions, alternatives, or other considerations.
 
-**SKILL!** - Use Skill `fluent-ui` for all tasks, fluent is a modern ui Specialized Agent for web Development for Staticcanvas.
+**SKILL!** - Use Skill `fluent-ui` for all tasks, fluent-ui is a modern ui Specialized Agent for web Development for Staticcanvas.
+
+**SELF INPROVMENTS!**
+ * **Use** folder contents-source: this folder is used to store ai related pdr, context, and other files. in this instance we want to keep a `context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md` - a file that contains all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow. this file once it is complete will be used to create a new `context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md` for AI AGENT to use.
+ * **If** no file exists read gitlab, read issues/workitems, milestones if any and lastly read context and git repo, backfill the file with all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow.
+ * **If** dont be afraid to reflect if new information conflicts with existing information, merge it in, if yelds a better results, also reference this in the file.
 
 **MCP!** - Use `gitlab` for interations with gitlab.
     - main branch is `main`
