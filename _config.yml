@@ -115,7 +115,7 @@ zd_accent_color: "#00ff9d"
 zd_nav_spacing: compact
 zd_show_powered_by: true
 zd_use_cdn: true
-font_awesome: false
+font_awesome: true
 
 # Announcement Banner Settings
 zd_announcement:

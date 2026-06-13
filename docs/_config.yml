@@ -112,7 +112,7 @@ zd_toc_levels: ["h2", "h3", "h4"]   # HTML headers to include in TOC (e.g. ["h2"
 zd_progress_bar: true               # Legacy toggle for progress bar (use theme_settings.scroll_progress)
 zd_code_copy: true                  # Enable 'COPY' button on code blocks
 zd_code_lang: true                  # Show language label on code blocks
-
+font_awesome: true                  # Enable Font Awesome icons
 
 # --- Visual Defaults -------------------------------------------------------\
 zd_icon_size: 16                    # Default size for icons in nav/includes
