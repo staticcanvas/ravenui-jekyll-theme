@@ -26,6 +26,8 @@ theme_settings:
   toc:
     style: nodes                   # TOC style design: simple, lines, nodes
     density: default               # TOC density: compact, default, relaxed
+  code:
+    lang_style: header             # Code block language style: badge, header
   
   # Animations Controls
   animations:
@@ -62,6 +64,7 @@ theme_settings:
 | `header.align` | String | `center` | Navigation link alignment: `left`, `center`, `right`. |
 | `toc.style` | String | `simple` | Layout style for TOC links (`simple`, `lines`, `nodes`). |
 | `toc.density` | String | `default` | Font size density (`compact`, `default`, `relaxed`). |
+| `code.lang_style` | String | `badge` | Display layout for code block language tag (`badge`, `header`). |
 | `animations.enabled` | Boolean | `true` | Global switch for all animations. |
 | `animations.page_loads` | Boolean | `true` | Enables fade-in and slide animations on load. |
 | `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |

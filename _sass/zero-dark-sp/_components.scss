@@ -190,6 +190,54 @@ div.highlight::before {
 .zd-copy-btn:hover { background: var(--zd-bg-elevated); color: var(--zd-clr-highlight); }
 .zd-copy-btn.copied { color: var(--zd-clr-highlight); }
 
+/* --- CODE BLOCK LANGUAGE STYLE MODES --- */
+body[data-code-lang-style="header"] {
+  div.highlight {
+    padding: 3.25rem 1.25rem 1.25rem;
+  }
+
+  div.highlight::before {
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 2.25rem;
+    line-height: 2.25rem;
+    padding-inline: 1rem;
+    background: color-mix(in srgb, var(--syntax-bg) 93%, white 7%);
+    border-inline-end: none;
+    border-block-end: var(--zd-border);
+    border-radius: var(--zd-radius) var(--zd-radius) 0 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .zd-copy-btn {
+    height: 2.25rem;
+    line-height: 1.55rem;
+    border-radius: 0 var(--zd-radius) 0 0;
+    border-inline-start: var(--zd-border);
+    border-block-end: var(--zd-border);
+    background: transparent;
+    padding: 0.35rem 0.75rem;
+
+    &:hover {
+      background: var(--zd-bg-elevated);
+    }
+  }
+}
+
+@media (max-width: 48rem) {
+  body[data-code-lang-style="header"] {
+    div.highlight::before {
+      border-radius: 0;
+    }
+    .zd-copy-btn {
+      border-radius: 0;
+    }
+  }
+}
+
 /* TAGS */
 .zd-tag-container {
   display: flex;
