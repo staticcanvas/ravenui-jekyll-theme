@@ -4,8 +4,8 @@ title: Site Stats
 output-title: true
 tags: [ui, data, widgets]
 description: A metrics component that auto-calculates and displays site-wide statistics like posts, tags, categories, words, and reading time.
+enable_search: true
 ---
-
 The `site-stats.html` component provides a dashboard metrics grid that auto-calculates statistics for all Jekyll posts, tags, and categories in the site. It uses word counts to calculate total vocabulary size and average reading time, presenting them in a responsive, glassmorphic grid.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="bar-chart-2" size=20 %}

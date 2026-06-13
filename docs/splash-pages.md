@@ -4,8 +4,8 @@ title: Splash Pages
 output-title: true
 tags: [ui, layout, splash, landing]
 description: Specialized components and layouts for building high-impact landing pages.
+enable_search: true
 ---
-
 Zero-Dark provides a suite of advanced components specifically designed for the `splash` layout, allowing you to create professional product landing pages and entry points.
 
 {% include comps/heading.html tag="h2" text="Splash Components" icon="box" size=24 %}

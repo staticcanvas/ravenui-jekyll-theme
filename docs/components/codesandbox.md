@@ -4,8 +4,8 @@ title: CodeSandbox Embed
 output-title: true
 tags: [ui, elements, interactive, embed]
 description: Embed full interactive sandbox projects (React, Vue, Svelte, Node) from CodeSandbox.
+enable_search: true
 ---
-
 The `codesandbox.html` component enables embedding full monorepo sandboxes or web apps from CodeSandbox, allowing users to browse, edit, and execute code inline.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

@@ -4,8 +4,8 @@ title: Font Awesome
 output-title: true
 tags: [ui, elements, icons]
 description: Integration with Font Awesome icons. Requires configuration flag to enable.
+enable_search: true
 ---
-
 The `font-awesome.html` component provides integration with [Font Awesome](https://fontawesome.com/) icons. Because Font Awesome is a heavy dependency, it is disabled by default to optimize loading speed and performance.
 
 {% include comps/heading.html tag="h2" text="Configuration" icon="settings" size=20 %}

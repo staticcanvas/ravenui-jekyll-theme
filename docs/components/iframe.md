@@ -4,8 +4,8 @@ title: Responsive Iframe
 output-title: true
 tags: [ui, elements, media, embed]
 description: Embed external web content responsively with a built-in skeleton loader.
+enable_search: true
 ---
-
 The `iframe.html` component enables secure, responsive embedding of external websites or web apps (e.g. dashboards, maps, interactive widgets) with a beautiful glassmorphic skeleton loader that fades out as soon as the frame loads.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

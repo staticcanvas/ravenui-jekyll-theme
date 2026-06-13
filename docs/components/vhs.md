@@ -4,8 +4,8 @@ title: VHS Effect
 output-title: true
 tags: [ui, effects, retro, vhs]
 description: A cinematic, retro-styled container with scanlines and glitch effects.
+enable_search: true
 ---
-
 The `vhs.html` component provides a stylized background effect inspired by vintage VHS tapes. It's perfect for high-impact callouts or "glitchy" technical summaries.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="monitor" size=20 %}

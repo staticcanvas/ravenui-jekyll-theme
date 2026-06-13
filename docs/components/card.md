@@ -4,8 +4,8 @@ title: Standard Card
 output-title: true
 tags: [ui, components, cards]
 description: A flexible container for grouping content with optional icons and glass effects.
+enable_search: true
 ---
-
 The `card.html` component is a versatile surface for displaying grouped content. It supports optional icons, titles, and a modern glassmorphism effect.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="square" size=20 %}

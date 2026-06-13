@@ -4,8 +4,8 @@ title: Color Block
 output-title: true
 tags: [ui, elements, color]
 description: A small, stylized indicator for showcasing colors or status.
+enable_search: true
 ---
-
 The `color-block.html` component is a simple utility for displaying color swatches or status indicators in a circular or square format.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="palette" size=20 %}

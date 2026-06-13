@@ -4,8 +4,8 @@ title: Typewriter Component
 output-title: true
 tags: [ui, elements, animations, interactive]
 description: A typing text effect for showcase headings or intro blocks.
+enable_search: true
 ---
-
 The `typewriter.html` component provides a polished, dynamic typing effect that cycles through a set of configured strings.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="type" size=20 %}

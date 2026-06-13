@@ -4,8 +4,8 @@ title: Search Integration
 output-title: true
 tags: [search, pagefind, lyra, algolia]
 description: Blazing fast search integrations supporting Pagefind WASM, Lyra/Orama client-side search, and Algolia hosted search.
+enable_search: true
 ---
-
 Zero-Dark provides native integration for three distinct search paths, allowing you to choose the perfect search solution for your documentation footprint.
 
 🟦 **Search Providers At A Glance**
@@ -107,3 +107,24 @@ Loads assets locally from your own domain. This is essential for:
 - Self-hosted offline sites
 - Intranets behind strict firewalls
 - Compliance with corporate data governance policies
+
+---
+
+## **Page-Level Search Configuration**
+
+By default, search indexing in Zero-Dark is **opt-in** to prevent utility pages, templates, layouts, and index files from polluting search results.
+
+To make a page, post, or document searchable, you must explicitly set `enable_search: true` in its YAML front matter:
+
+```yaml
+---
+layout: default
+title: My Documentation Page
+enable_search: true
+---
+```
+
+This property is automatically evaluated:
+- **Local/Lyra/Algolia Search**: Only documents with `enable_search: true` are compiled into `/search-index.json`.
+- **Pagefind WASM Search**: Layouts will automatically append the `data-pagefind-ignore` attribute to the `<body>` tag of any document where `enable_search` is not `true`, preventing Pagefind from indexing the page content.
+

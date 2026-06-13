@@ -4,8 +4,8 @@ title: Releases
 output-title: true
 tags: [ui, git, history]
 description: A vertical timeline for displaying project release notes.
+enable_search: true
 ---
-
 The `releases.html` component renders a structured timeline of release notes, perfect for project history or changelogs.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="github" size=20 %}

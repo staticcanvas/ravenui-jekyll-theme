@@ -4,8 +4,8 @@ title: Data Table
 output-title: true
 tags: [ui, data, tables, interactive]
 description: A responsive, accessible, interactive table component supporting search, sorting, and pagination.
+enable_search: true
 ---
-
 The `datatable.html` component provides a professional interface for displaying structured data. It features progressive enhancement (renders standard HTML tables initially for SEO and accessibility, then enhances with sorting, search, and pagination via lightweight, zero-dependency JavaScript).
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="table" size=20 %}

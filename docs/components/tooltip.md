@@ -4,8 +4,8 @@ title: Context Tooltip
 output-title: true
 tags: [ui, elements, accessibility, text]
 description: A pure-CSS context tooltip component for definitions, annotations, and abbreviations.
+enable_search: true
 ---
-
 The `tooltip.html` component provides a lightweight, pure-CSS tooltip popup for words, abbreviations, or definitions. Because it relies entirely on CSS attributes and pseudo-elements, it requires zero JavaScript to run and works instantly.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="info" size=20 %}

@@ -3,8 +3,8 @@ layout: default
 title: Components
 output-title: true
 description: A comprehensive library of high-impact Liquid components for documentation.
+enable_search: true
 ---
-
 Zero-Dark includes a wide range of custom components to help you build professional documentation quickly.
 
 {% include comps/heading.html tag="h2" text="Display & Layout" icon="layout" size=20 %}

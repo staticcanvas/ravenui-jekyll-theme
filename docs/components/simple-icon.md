@@ -4,8 +4,8 @@ title: Simple Icon
 output-title: true
 tags: [ui, elements, simple-icons]
 description: Integration with Simple Icons for displaying logos of popular brands and services.
+enable_search: true
 ---
-
 The `simple-icon.html` component provides a lightweight wrapper around [Simple Icons](https://simpleicons.org/), allowing you to easily add custom brand and service icons to your documentation.
 
 {% include comps/heading.html tag="h2" text="Basic Usage" icon="star" size=20 %}

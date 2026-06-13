@@ -4,8 +4,8 @@ title: FAQ Accordion
 output-title: true
 tags: [ui, interactive, structures, details]
 description: Collapsible question-and-answer panels for common guidelines.
+enable_search: true
 ---
-
 The `faq.html` and `faq-item.html` components work together to build collapsible, animated question-and-answer groups.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="help-circle" size=20 %}

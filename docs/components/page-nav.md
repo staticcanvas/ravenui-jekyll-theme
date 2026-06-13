@@ -4,8 +4,8 @@ title: Page Navigation
 output-title: true
 tags: [ui, navigation]
 description: Footer navigation links for 'Back to Top' and 'Next Page' functionality.
+enable_search: true
 ---
-
 The `page-nav.html` component provides standard footer controls for moving between pages and returning to the top of the current page.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="navigation" size=20 %}

@@ -4,8 +4,8 @@ title: Introduction
 output-title: true
 tags: [docs, jekyll, technical]
 description: Zero-Dark is a high-performance Jekyll theme engineered for technical documentation.
+enable_search: true
 ---
-
 Zero-Dark is a professional Jekyll theme optimized for technical documentation and long-form readability.
 
 {% capture collections_notice %}

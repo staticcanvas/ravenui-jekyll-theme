@@ -6,7 +6,7 @@ permalink: /search-index.json
   {%- assign documents = site.pages | concat: site.posts -%}
   {%- assign count = 0 -%}
   {%- for doc in documents -%}
-    {%- if doc.title and doc.layout != nil and doc.layout != "none" -%}
+    {%- if doc.title and doc.layout != nil and doc.layout != "none" and doc.enable_search == true -%}
       {%- unless doc.url contains '.json' or doc.url contains '.xml' or doc.url contains '.css' or doc.url contains 'assets/' -%}
         {%- if count > 0 -%},{%- endif -%}
         {

@@ -4,8 +4,8 @@ title: Image Component
 output-title: true
 tags: [ui, elements, media, image]
 description: High-performance image component with skeletons, lazy loading, and blur-up loading.
+enable_search: true
 ---
-
 The `image.html` component provides a wrapper for images. It features progressive blur-up loading using low-resolution placeholders (or an animated skeleton loader) to achieve smooth transitions.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

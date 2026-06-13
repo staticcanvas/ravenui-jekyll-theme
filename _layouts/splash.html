@@ -3,7 +3,7 @@
 
 {% include core/head.html %}
 
-<body class="zd-splash-variant-{{ page.variant | default: 'generic' }}{% if site.theme_settings.animations.enabled != false %} zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}{% endif %}">
+<body class="zd-splash-variant-{{ page.variant | default: 'generic' }}{% if site.theme_settings.animations.enabled != false %} zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
 
     <div class="zd-splash-container">
         <main class="zd-splash-main">

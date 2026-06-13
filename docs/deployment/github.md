@@ -4,8 +4,8 @@ title: GitHub Deployment
 output-title: true
 tags: [deployment, git, github]
 description: Guide for deploying Zero-Dark to GitHub Pages with Cloudflare integration.
+enable_search: true
 ---
-
 Deploying Zero-Dark to GitHub Pages is straightforward and highly efficient.
 
 {% include comps/heading.html tag="h2" text="Quick Start" icon="rocket" size=20 %}

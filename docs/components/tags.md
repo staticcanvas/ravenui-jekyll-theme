@@ -4,8 +4,8 @@ title: Tags
 output-title: true
 tags: [ui, elements, metadata]
 description: Subtle, stylized tags for metadata, categories, and labels.
+enable_search: true
 ---
-
 The theme includes a versatile tag system used for blog categories, project metadata, and labels.
 
 {% include comps/heading.html tag="h2" text="Standard Tags" icon="tag" size=20 %}

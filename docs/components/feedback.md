@@ -4,8 +4,8 @@ title: Dynamic Feedback Widget
 output-title: true
 tags: [ui, interactive, analytics, utilities]
 description: A feedback widget to collect page helpfulness scores, integrated with Google Analytics and localStorage.
+enable_search: true
 ---
-
 The `feedback.html` component provides a subtle, conversion-optimized widget for collecting user feedback on whether a documentation page was helpful. By default, it is included globally above the footer, but it can also be manually integrated into any layout or page.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="message-square" size=20 %}

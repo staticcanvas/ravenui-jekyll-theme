@@ -4,8 +4,8 @@ title: Button
 output-title: true
 tags: [ui, interactive, navigation]
 description: Refined, high-impact buttons with support for icons, colors, and variants.
+enable_search: true
 ---
-
 The `button.html` component provides a flexible way to add call-to-action elements throughout your documentation.
 
 {% include comps/heading.html tag="h2" text="Live Examples" icon="mouse-pointer" size=20 %}

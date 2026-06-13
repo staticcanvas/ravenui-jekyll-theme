@@ -21,8 +21,8 @@ metrics_data:
     value: "67"
     icon: "cpu"
     color: "var(--zd-clr-purple)"
+enable_search: true
 ---
-
 <style>
   .zd-splash-showcase-grid {
     display: grid;

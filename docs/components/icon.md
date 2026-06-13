@@ -4,8 +4,8 @@ title: Icon
 output-title: true
 tags: [ui, elements, lucide]
 description: Advanced Lucide icon integration with custom animations and interactive states.
+enable_search: true
 ---
-
 The `icon.html` component provides a robust way to include [Lucide](https://lucide.dev/) icons in your documentation with support for colors, sizes, and a sophisticated animation engine.
 
 {% include comps/heading.html tag="h2" text="Basic Usage" icon="star" size=20 %}

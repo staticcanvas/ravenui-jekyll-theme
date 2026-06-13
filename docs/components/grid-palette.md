@@ -4,8 +4,8 @@ title: Grid Palette
 output-title: true
 tags: [ui, branding, colors]
 description: A stylized grid for displaying color palettes and hex codes.
+enable_search: true
 ---
-
 The `grid-palette.html` component provides a professional way to showcase theme colors or project-specific branding.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="grid" size=20 %}

@@ -4,8 +4,8 @@ title: Standalone Copy Button
 output-title: true
 tags: [ui, elements, interactive, utilities]
 description: A standalone button component to copy arbitrary text to the clipboard with visual success feedback.
+enable_search: true
 ---
-
 The `copy-button.html` component provides a lightweight, stylized button that copies a specified string to the user's clipboard. It features instant visual feedback by temporarily updating the Lucide icon and applying success styling.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="copy" size=20 %}

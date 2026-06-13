@@ -4,8 +4,8 @@ title: Breadcrumbs
 output-title: true
 tags: [ui, navigation, breadcrumbs]
 description: Automatic breadcrumb navigation based on the page URL structure.
+enable_search: true
 ---
-
 The `breadcrumbs.html` component provides a standard way to display the user's current location within the site hierarchy. It automatically parses the page URL to generate a clickable trail.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="map" size=20 %}

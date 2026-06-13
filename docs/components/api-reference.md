@@ -4,8 +4,8 @@ title: API Reference
 output-title: true
 tags: [ui, documentation, api]
 description: A high-density component for documenting web REST API endpoints, HTTP methods, headers, and payloads.
+enable_search: true
 ---
-
 The `api-reference.html` component provides a structured, high-density layout designed for documenting web REST APIs (HTTP endpoints, request payloads, response schemas, and header definitions).
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

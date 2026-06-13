@@ -4,8 +4,8 @@ variant: terminal
 title: System Boot Sequence
 permalink: /examples/splash-terminal/
 description: Example page demonstrating the terminal variant of the splash layout.
+enable_search: true
 ---
-
 # ZERODARK SYSTEM OPERATIONAL
 
 {% capture term_output %}

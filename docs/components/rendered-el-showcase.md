@@ -4,8 +4,8 @@ title: Rendered Element Showcase
 output-title: true
 tags: [ui, elements, display, container]
 description: A clean, technical frame wrapper for showcasing live HTML and UI component renderings.
+enable_search: true
 ---
-
 The `rendered-el-showcase.html` component wraps live interactive components or HTML snippets in a professional design frame with technical background grids, slanted lines, titles, and site logos.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

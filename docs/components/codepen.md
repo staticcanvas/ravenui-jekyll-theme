@@ -4,8 +4,8 @@ title: CodePen Embed
 output-title: true
 tags: [ui, elements, interactive, embed]
 description: Embed interactive CodePen front-end playgrounds and code snippets.
+enable_search: true
 ---
-
 The `codepen.html` component makes it simple to embed interactive HTML, CSS, and JavaScript pens from CodePen directly within your documentation pages.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

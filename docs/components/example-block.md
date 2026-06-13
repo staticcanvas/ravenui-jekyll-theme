@@ -4,8 +4,8 @@ title: Example Block
 output-title: true
 tags: [ui, documentation, liquid]
 description: A collapsible 'details' container for live HTML or Liquid examples.
+enable_search: true
 ---
-
 The `example-block.html` component provides a general-purpose collapsible container. It does **not** automatically markdownify its content, making it perfect for live HTML examples or pre-rendered liquid.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="box" size=20 %}

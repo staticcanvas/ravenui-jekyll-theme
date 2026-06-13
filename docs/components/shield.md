@@ -4,8 +4,8 @@ title: Shield Component
 output-title: true
 tags: [ui, elements, badges, status]
 description: Pre-formatted metadata shields and status badges.
+enable_search: true
 ---
-
 The `shield.html` component acts as a wrapper around the Shields.io API, allowing you to easily embed SVG status badges for builds, downloads, versions, and social profiles.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="tag" size=20 %}

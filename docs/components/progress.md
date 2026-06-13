@@ -4,8 +4,8 @@ title: Progress Bar
 output-title: true
 tags: [ui, elements, status, progress]
 description: Stylized bar indicators for tracking tasks, projects, or completion percentages.
+enable_search: true
 ---
-
 The `progress.html` component provides a clean way to show completion percentages for tasks, features, or project metrics.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="activity" size=20 %}

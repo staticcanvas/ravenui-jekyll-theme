@@ -4,8 +4,8 @@ title: Image Carousel
 output-title: true
 tags: [ui, elements, media, image, interactive]
 description: A responsive sliding deck carousel for showcasing multiple images and slides.
+enable_search: true
 ---
-
 The `carousel.html` component allows users to cycle through a list of images. Each image in the deck supports lazy loading and blur-up placeholder effects.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

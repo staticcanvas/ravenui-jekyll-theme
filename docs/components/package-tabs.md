@@ -4,8 +4,8 @@ title: Package Tabs
 output-title: true
 tags: [ui, components, npm, yarn, pnpm]
 description: Interactive tab component for displaying package manager installation commands.
+enable_search: true
 ---
-
 The `package-tabs.html` component provides a standard way to display installation commands for `npm`, `yarn`, and `pnpm` using an interactive tab interface.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="package" size=20 %}

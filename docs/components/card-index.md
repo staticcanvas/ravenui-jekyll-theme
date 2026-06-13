@@ -4,8 +4,8 @@ title: Card Index
 output-title: true
 tags: [ui, navigation, cards]
 description: A high-density grid of visual navigation cards based on data files.
+enable_search: true
 ---
-
 The `card-index.html` component generates a grid of visual cards based on a specific section from your `site.data.navigation`. It's ideal for directory pages or component indexes.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="grid" size=20 %}

@@ -4,8 +4,8 @@ title: Announcement Banner
 output-title: true
 tags: [ui, interactive, layout, alerts]
 description: A responsive, dismissible full-width viewport alert/announcement banner component for site-wide or page-specific notifications.
+enable_search: true
 ---
-
 The `announcement.html` component provides a prominent, customizable alert banner that sits at the top of the viewport. It supports built-in localStorage tracking to persist dismissal, custom actions, icon overlays, and multiple theme-specific visual variants.
 
 {% include comps/heading.html tag="h2" text="Live Examples" icon="megaphone" size=20 %}

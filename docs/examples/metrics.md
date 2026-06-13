@@ -3,8 +3,8 @@ layout: metrics
 title: Metrics & Stats Layout Example
 permalink: /examples/metrics/
 description: Example page demonstrating the data-driven metrics layout.
+enable_search: true
 ---
-
 <div style="grid-column: 1 / -1; margin-bottom: 2rem; display: flex; justify-content: flex-start;">
   {% include comps/button.html url="/layouts/" text="Back to Layouts" icon="arrow-left" %}
 </div>

@@ -4,8 +4,8 @@ title: SVG Charts Component
 output-title: true
 tags: [ui, elements, data, charts]
 description: Pure SVG (zero-JavaScript) charts for ultra-fast server-side rendering.
+enable_search: true
 ---
-
 The `svgcharts.html` component provides a lightweight, zero-dependency data visualization tool. It renders line, bar, pie, doughnut, polar area, radar, scatter, and bubble charts directly to SVG, ensuring instant load times and complete compatibility with JavaScript-disabled environments.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

@@ -4,8 +4,8 @@ title: Navigation
 output-title: true
 tags: [ui, navigation, sidebar]
 description: Configuring the dual-sidebar system and mobile navigation menu.
+enable_search: true
 ---
-
 Zero-Dark features a high-density, three-column layout designed for maximum technical clarity.
 
 {% include comps/heading.html tag="h2" text="Sidebar Navigation (Site-Wide)" icon="home" size=20 %}

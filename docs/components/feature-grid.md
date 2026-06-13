@@ -4,8 +4,8 @@ title: Feature Grid
 output-title: true
 tags: [ui, layout, grid]
 description: A responsive wrapper for organizing feature cards and other highlights.
+enable_search: true
 ---
-
 The `feature-grid.html` component provides the necessary layout structure for displaying a collection of feature cards. It supports standard manual card layout injection (via `content`) and dynamic data-driven rendering (via `data_source` or `items`), with customizable grid column sizing.
 
 ## **Live Example (Captured Content)**

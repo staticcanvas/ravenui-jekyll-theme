@@ -4,8 +4,8 @@ title: Keyboard Shortcuts
 output-title: true
 tags: [ui, elements, accessibility, keyboard]
 description: A component for rendering keyboard shortcut keys and shortcut groups side by side.
+enable_search: true
 ---
-
 The `kbd.html` and `kbd-group.html` components provide a styled representation of keyboard shortcuts conforming to modern Fluent UI design standards.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="keyboard" size=20 %}

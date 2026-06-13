@@ -4,8 +4,8 @@ title: Articles
 output-title: true
 tags: [blog, posts, articles, meta]
 description: Guidelines for creating long-form content, blog posts, and technical articles.
+enable_search: true
 ---
-
 Zero-Dark features a specialized `post` layout optimized for long-form readability and technical articles.
 
 {% include comps/heading.html tag="h2" text="Frontmatter Configuration" icon="file-text" size=20 %}

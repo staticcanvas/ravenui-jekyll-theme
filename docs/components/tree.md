@@ -4,8 +4,8 @@ title: Directory Tree
 output-title: true
 tags: [ui, layout, elements, code]
 description: A CSS-based folder and file structure tree diagram component to showcase project directories.
+enable_search: true
 ---
-
 The `tree.html` component renders a clean, CSS-styled directory structure map complete with visual lines and folder/file icons. It parses a simple space-indented list of files and folders, eliminating the need to write complex nested HTML lists.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="folder-git" size=20 %}

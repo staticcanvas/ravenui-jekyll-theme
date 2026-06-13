@@ -3,8 +3,8 @@ layout: default
 title: Footer Components
 parent: /components/
 description: Renders configurable footer grids with multi-column layouts and discrete item blocks.
+enable_search: true
 ---
-
 Zero-Dark supports building modular, responsive footers using grid components. You can construct footers in 2-column or 3-column layouts using individual, highly configurable footer items.
 
 {% include comps/heading.html tag="h2" text="Footer Item" icon="package" size=20 %}

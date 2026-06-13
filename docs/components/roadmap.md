@@ -4,8 +4,8 @@ title: Roadmap Component
 output-title: true
 tags: [ui, components, tracking, progress]
 description: Tracking project milestones and task completion with the advanced Roadmap system.
+enable_search: true
 ---
-
 The Roadmap component is a powerful tool for visualising project progress, release schedules, or multi-step processes.
 
 {% include comps/heading.html tag="h2" text="Basic Usage" icon="map" size=20 %}

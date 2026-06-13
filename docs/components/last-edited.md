@@ -4,8 +4,8 @@ title: Last Edited
 output-title: true
 tags: [ui, elements, display, metadata]
 description: Displays the last modified timestamp and editor/author information.
+enable_search: true
 ---
-
 The `last-edited.html` component prints a small metadata line showing when a page was last updated and optionally who edited it.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

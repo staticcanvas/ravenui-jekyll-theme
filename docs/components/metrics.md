@@ -29,8 +29,8 @@ metrics_data:
     trend: "+0.02%"
     trend_type: up
     color: "var(--zd-clr-viridian)"
+enable_search: true
 ---
-
 The `metrics.html` component provides a high-density, highly responsive grid container designed specifically to showcase KPIs, system performance counters, and application metrics. Each card supports a color-coded vertical highlight bar, custom Lucide icons, status trends, and hover elevations.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="cpu" size=20 %}

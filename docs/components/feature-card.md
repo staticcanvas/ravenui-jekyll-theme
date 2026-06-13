@@ -4,8 +4,8 @@ title: Feature Card
 output-title: true
 tags: [ui, components, landing]
 description: A compact card variant optimized for showcasing features or selling points.
+enable_search: true
 ---
-
 The `feature-card.html` component is designed for landing pages and "Key Features" sections. It emphasizes a large icon and clear, concise text.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="zap" size=20 %}

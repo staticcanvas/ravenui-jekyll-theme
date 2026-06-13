@@ -4,8 +4,8 @@ title: Git Tags
 output-title: true
 tags: [ui, git, versions]
 description: A compact grid for displaying version tags and download links.
+enable_search: true
 ---
-
 The `git-tags.html` component provides a quick way to list project version tags with direct links to their source code or commit history. This is specifically designed for technical project documentation and version tracking.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="tag" size=20 %}

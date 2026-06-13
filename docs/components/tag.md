@@ -4,8 +4,8 @@ title: Tag Component
 output-title: true
 tags: [ui, elements, badges, versions]
 description: A customizable component for rendering tags, badges, and version numbers.
+enable_search: true
 ---
-
 The `tag.html` component offers a dynamic way to render labels, metadata tags, badges, and releases/versions with special pre-built color styles.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="tag" size=20 %}

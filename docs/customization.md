@@ -4,8 +4,8 @@ title: Customization
 output-title: true
 tags: [sass, customization, advanced]
 description: Guide for overriding theme colors, fonts, and core SCSS variables.
+enable_search: true
 ---
-
 Zero-Dark is designed to be easily brandable while maintaining its high-performance structural integrity.
 
 {% include comps/heading.html tag="h2" text="SCSS Variables" icon="sliders" size=20 %}

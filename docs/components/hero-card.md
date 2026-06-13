@@ -4,8 +4,8 @@ title: Hero Card
 output-title: true
 tags: [ui, components, splash]
 description: A high-impact surface for landing pages or section introductions.
+enable_search: true
 ---
-
 The `hero-card.html` component is a large, centered container designed for primary call-to-actions (CTAs) and value propositions.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="monitor" size=20 %}

@@ -4,8 +4,8 @@ title: Timeline
 output-title: true
 tags: [ui, data, timeline, interactive]
 description: A professional vertical chronological timeline component supporting custom icons and accent colors.
+enable_search: true
 ---
-
 The `timeline.html` component provides a structured chronological vertical flow. It is ideal for showing project milestones, changelogs, or onboarding steps.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="activity" size=20 %}

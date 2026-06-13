@@ -3,8 +3,8 @@ layout: default
 title: Advanced Installation
 permalink: /installation/advanced/
 description: In-depth guide for building Zero-Dark from source and customizing the workspace folder layout.
+enable_search: true
 ---
-
 Zero-Dark offers flexibility for advanced workflows, including custom directory structures, building directly from the source repository, or using the theme's default doc site structure as a standalone template.
 
 {% include comps/heading.html tag="h2" text="Building from Source" icon="package" size=20 %}

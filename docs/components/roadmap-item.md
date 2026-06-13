@@ -4,8 +4,8 @@ title: Roadmap Item
 output-title: true
 tags: [ui, components, tracking]
 description: Individual milestone or task entry for the Roadmap component.
+enable_search: true
 ---
-
 The `roadmap-item.html` component represents a single entry within a `roadmap.html` container. It supports status indicators, progress bars, and task lists.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="map-pin" size=20 %}

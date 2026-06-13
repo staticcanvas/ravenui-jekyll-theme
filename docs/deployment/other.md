@@ -4,8 +4,8 @@ title: Other Platforms
 output-title: true
 tags: [deployment, web, azure, aws]
 description: Guide for deploying Zero-Dark to AWS, Azure, Firebase, and more.
+enable_search: true
 ---
-
 Zero-Dark can be hosted on any platform that supports static files.
 
 {% include comps/heading.html tag="h2" text="AWS S3 & CloudFront" icon="box" size=20 %}

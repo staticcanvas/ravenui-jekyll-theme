@@ -4,8 +4,8 @@ title: Inline Callout
 output-title: true
 tags: [ui, elements, callouts, inline]
 description: Contextual inline alerts and status indicators.
+enable_search: true
 ---
-
 The `inline-callout.html` component provides a compact, inline layout version of our standard callout, ideal for embedding warning dots, minor tips, or statuses directly within lists or tables.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="alert-circle" size=20 %}

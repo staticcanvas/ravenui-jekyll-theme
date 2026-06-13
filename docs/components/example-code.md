@@ -4,8 +4,8 @@ title: Example Code
 output-title: true
 tags: [ui, documentation, markdown]
 description: A collapsible 'details' container optimized for markdown code blocks.
+enable_search: true
 ---
-
 The `example-code.html` component is designed to hold markdown code blocks. It automatically applies `markdownify` to the provided content.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="code" size=20 %}

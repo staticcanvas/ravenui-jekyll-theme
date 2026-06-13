@@ -4,8 +4,8 @@ title: Details Component
 output-title: true
 tags: [ui, elements, collapsible]
 description: A collapsible disclosures block for folding secondary or large content sections.
+enable_search: true
 ---
-
 The `details.html` component provides a styled disclosures dropdown. It utilizes the native HTML `<details>` and `<summary>` elements under the hood to ensure accessibility and support without requiring JavaScript.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

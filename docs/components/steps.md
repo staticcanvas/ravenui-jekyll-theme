@@ -4,8 +4,8 @@ title: Progress / Steps Bar
 output-title: true
 tags: [ui, navigation, progress]
 description: A step progress bar component for multi-part tutorials or onboarding checklists.
+enable_search: true
 ---
-
 The `steps.html` component provides a visual, responsive step progress indicator designed for onboarding flows, tutorial series, or multi-step configuration procedures. It automatically formats active, complete, and upcoming states.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="activity" size=20 %}

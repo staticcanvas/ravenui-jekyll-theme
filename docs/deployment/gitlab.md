@@ -4,8 +4,8 @@ title: GitLab Deployment
 output-title: true
 tags: [deployment, git, gitlab]
 description: Guide for deploying Zero-Dark to GitLab Pages with custom domain support.
+enable_search: true
 ---
-
 Zero-Dark is optimized for GitLab CI/CD and Pages.
 
 {% include comps/heading.html tag="h2" text="CI/CD Configuration" icon="refresh-cw" size=20 %}

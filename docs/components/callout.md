@@ -4,8 +4,8 @@ title: Callout
 output-title: true
 tags: [ui, elements, callouts]
 description: Contextual alerts and notifications with multiple styles (note, tip, warning, danger).
+enable_search: true
 ---
-
 The `callout.html` component provides visually distinct blocks for important information, tips, warnings, and error messages.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="alert-circle" size=20 %}

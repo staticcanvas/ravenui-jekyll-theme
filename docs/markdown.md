@@ -4,8 +4,8 @@ title: Markdown Overrides
 output-title: true
 tags: [markdown, style, syntax]
 description: Zero-Dark enhances standard markdown with high-contrast, technical styling.
+enable_search: true
 ---
-
 We have extended the default Jekyll/Kramdown rendering to match the theme's professional aesthetic.
 
 {% include comps/heading.html tag="h2" text="Typography" icon="type" size=20 %}

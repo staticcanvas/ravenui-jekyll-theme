@@ -4,8 +4,8 @@ title: Heading
 output-title: true
 tags: [ui, elements, typography]
 description: Stylized headings with Lucide icon integration and custom colors.
+enable_search: true
 ---
-
 The `heading.html` component provides a standard way to create section headings with integrated icons, ensuring a consistent visual hierarchy across your documentation.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="type" size=20 %}

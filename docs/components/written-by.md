@@ -4,8 +4,8 @@ title: Written By
 output-title: true
 tags: [ui, elements, display, metadata]
 description: Displays author details, profile avatar, role, bio, and social connections.
+enable_search: true
 ---
-
 The `written-by.html` component provides a refined way to display author metadata, ideal for blog posts, documentation contributions, and team showcases.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

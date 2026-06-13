@@ -4,8 +4,8 @@ title: YouTube Embed
 output-title: true
 tags: [ui, elements, media, video]
 description: Privacy-friendly and responsive YouTube video embedding component.
+enable_search: true
 ---
-
 The `youtube.html` component provides a responsive wrapper for embedding YouTube videos. It uses the privacy-enhanced domain (`youtube-nocookie.com`) by default to protect user data and comply with privacy regulations.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

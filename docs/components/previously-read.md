@@ -4,8 +4,8 @@ title: Previously Read Tracker
 output-title: true
 tags: [ui, elements, display, interactive, utility]
 description: LocalStorage-backed reading history tracker list.
+enable_search: true
 ---
-
 The `previously-read.html` component reads visit history from the client's `localStorage` and displays a list of recently viewed documentation pages, allowing users to trace back their reading path easily.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

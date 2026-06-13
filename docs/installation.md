@@ -3,8 +3,8 @@ layout: default
 title: Installation
 parent: /
 description: Instructions for installing and configuring the Zero-Dark theme.
+enable_search: true
 ---
-
 Zero-Dark is designed for rapid deployment with minimal configuration. Follow these steps to integrate the theme into your Jekyll project.
 
 {% include comps/heading.html tag="h2" text="1. Add to Gemfile" icon="package" size=20 %}

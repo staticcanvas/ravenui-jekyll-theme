@@ -4,8 +4,8 @@ title: Configuration
 output-title: true
 tags: [setup, config, yaml]
 description: Global settings and metadata controls for the Zero-Dark theme.
+enable_search: true
 ---
-
 Zero-Dark uses a mix of standard Jekyll settings and custom theme-level controls defined in your `_config.yml` and page frontmatter.
 
 {% include comps/heading.html tag="h2" text="Theme Settings" icon="settings" size=20 %}

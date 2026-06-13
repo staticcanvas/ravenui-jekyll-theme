@@ -4,8 +4,8 @@ title: Command Reference
 output-title: true
 tags: [ui, documentation, CLI]
 description: A high-density component for documenting CLI commands, task options, and parameters.
+enable_search: true
 ---
-
 The `command-ref.html` component provides a structured, visually distinct block for documenting CLI commands, arguments, option flags, or task variables.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}

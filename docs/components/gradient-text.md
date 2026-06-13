@@ -4,8 +4,8 @@ title: Gradient Text
 output-title: true
 tags: [ui, elements, typography, gradient]
 description: Render headings or text with stylized CSS gradients.
+enable_search: true
 ---
-
 The `gradient-text.html` component renders headings or text styled with linear CSS gradients.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="type" size=20 %}
