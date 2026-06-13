@@ -74,13 +74,61 @@ Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They 
 
 ---
 
+{% include comps/heading.html tag="h2" text="Header Navigation" icon="compass" size=20 %}
+
+Zero-Dark supports an optional **Top Header Bar** layout that displays a glassmorphism navigation bar across the top of the viewport.
+
+### **Header Data Structure**
+
+Header links are defined in `_data/navheader.yml`. The data structure supports **Lucide Icons** and external links:
+
+```yaml
+- text: Docs
+  url: /
+  icon: book-open
+- text: Components
+  url: /components/
+  icon: package
+- text: Blog
+  url: /blog/
+  icon: file-text
+- text: GitHub
+  url: https://github.com/staticcanvas/zero-dark-jekyll-theme
+  icon: github
+  external: true
+```
+
+### **Automatic Layout Adjustments**
+
+When active, the theme automatically:
+- Hides the redundant logo/brand section from the sidebar on desktop screens.
+- Offsets the sidebars' sticky positions and heights by `56px` to prevent layout clipping.
+- Re-binds search and social icon triggers seamlessly.
+
+---
+
 {% include comps/heading.html tag="h2" text="Table of Contents (TOC)" icon="menu" size=20 color="cyan" %}
 
-The "***On This Page***" section appears in the **right sidebar** on desktop viewports. It is dynamic and automatically parses your content for `h2` and `h3` tags.
+The "***On This Page***" section appears in the **right sidebar** on desktop viewports. It is dynamic and automatically parses your content for headings.
 
 - **Desktop:** Configurable default state via `zd_toc_default_open`.
 - **Mobile:** Accessible via the floating utility toggle button.
 - **Sync:** The TOC remains sticky as you scroll, highlighting your progress through the page.
+
+### **Custom TOC Styles**
+
+You can configure different TOC designs and font size densities inside your `_config.yml` under `theme_settings.toc`:
+
+```yaml
+theme_settings:
+  toc:
+    style: nodes              # Layout style: simple, lines, nodes
+    density: default          # Font sizing density: compact, default, relaxed
+```
+
+- **`simple`**: A clean, border-left layout where active links draw a highlighting line.
+- **`lines`**: Renders a vertical line on the left side of the TOC, marking active links with matching vertical segments.
+- **`nodes`**: A timeline/stepper layout rendering circular indicators on the left line, which dynamically fill when active.
 
 ---
 

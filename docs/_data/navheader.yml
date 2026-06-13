@@ -1,0 +1,13 @@
+- text: Docs
+  url: /
+  icon: book-open
+- text: Components
+  url: /components/
+  icon: package
+- text: Blog
+  url: /blog/
+  icon: file-text
+- text: GitHub
+  url: https://github.com/staticcanvas/zero-dark-jekyll-theme
+  icon: github
+  external: true

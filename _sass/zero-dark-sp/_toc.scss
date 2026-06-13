@@ -69,7 +69,8 @@
   font-weight: 600;
 }
 
-.zd-toc-link.active::before {
+/* Legacy default indicator style if style classes are not used */
+.zd-page-toc:not([class*="zd-page-toc--"]) .zd-toc-link.active::before {
   content: "";
   position: absolute;
   left: -1rem;
@@ -100,4 +101,100 @@
     letter-spacing: 0.05em;
     color: #444 !important;
     &:hover { color: var(--zd-clr-highlight) !important; }
+}
+
+/* --- TOC CUSTOM DESIGNS --- */
+
+/* 1. SIMPLE (Flat active state border-left) */
+.zd-page-toc--simple {
+  .zd-toc-link {
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    margin-left: 0;
+
+    &.active {
+      border-left-color: var(--zd-clr-highlight);
+      font-weight: 600;
+    }
+  }
+}
+
+/* 2. LINES (Continuous line with active indicator) */
+.zd-page-toc--lines {
+  position: relative;
+  border-left: 1px solid color-mix(in srgb, var(--zd-border-color) 40%, transparent);
+  padding-left: 0.75rem;
+  margin-left: 0.25rem;
+
+  .zd-toc-link {
+    &.active::after {
+      content: "";
+      position: absolute;
+      left: calc(-0.75rem - 1px);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--zd-clr-highlight);
+      box-shadow: 0 0 8px var(--zd-clr-highlight);
+    }
+  }
+}
+
+/* 3. NODES (Timeline nodes on left border line) */
+.zd-page-toc--nodes {
+  position: relative;
+  border-left: 1px solid color-mix(in srgb, var(--zd-border-color) 40%, transparent);
+  padding-left: 1.25rem;
+  margin-left: 0.5rem;
+
+  .zd-toc-link {
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(-1.25rem - 4px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--zd-bg-base);
+      border: 1px solid color-mix(in srgb, var(--zd-border-color) 60%, transparent);
+      transition: all 0.2s var(--zd-transition-curve);
+    }
+
+    &.active::before {
+      background: var(--zd-clr-highlight);
+      border-color: var(--zd-clr-highlight);
+      box-shadow: 0 0 6px var(--zd-clr-highlight);
+      transform: translateY(-50%) scale(1.25);
+    }
+  }
+}
+
+/* --- TOC DENSITIES --- */
+.zd-page-toc--compact {
+  .zd-toc-link {
+    font-size: 0.78rem !important;
+    padding: 0.2rem 0;
+  }
+  .zd-toc-level-h3 { font-size: 0.74rem !important; }
+  .zd-toc-level-h4 { font-size: 0.7rem !important; }
+}
+
+.zd-page-toc--default {
+  .zd-toc-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+  }
+  .zd-toc-level-h3 { font-size: 0.8rem; }
+  .zd-toc-level-h4 { font-size: 0.75rem; }
+}
+
+.zd-page-toc--relaxed {
+  .zd-toc-link {
+    font-size: 0.92rem !important;
+    padding: 0.4rem 0;
+  }
+  .zd-toc-level-h3 { font-size: 0.86rem !important; }
+  .zd-toc-level-h4 { font-size: 0.8rem !important; }
 }

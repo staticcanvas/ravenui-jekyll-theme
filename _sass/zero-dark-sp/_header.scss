@@ -1,0 +1,227 @@
+/* HEADER BAR styling */
+.zd-header {
+  height: 56px;
+  background: color-mix(in srgb, var(--zd-bg-base) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-block-end: var(--zd-border);
+  width: 100%;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  transition: background-color 0.3s var(--zd-transition-curve);
+}
+
+.zd-header--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.zd-header-inner {
+  max-width: 1600px;
+  margin-inline: auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.zd-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.zd-header-logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.zd-header-logo-img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.zd-header-title-link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-family: var(--zd-font-sans);
+}
+
+.zd-header-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--zd-clr-platinum);
+  letter-spacing: -0.01em;
+}
+
+.zd-header-subtext {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--zd-clr-highlight);
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+/* Nav Links */
+.zd-header-nav {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+@media (min-width: 48rem) {
+  .zd-header-nav {
+    display: flex;
+  }
+}
+
+.zd-header-nav--left {
+  margin-right: auto;
+}
+
+.zd-header-nav--center {
+  margin-inline: auto;
+}
+
+.zd-header-nav--right {
+  margin-left: auto;
+}
+
+.zd-header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--zd-clr-slate);
+  text-decoration: none;
+  height: 100%;
+  position: relative;
+  transition: color 0.2s var(--zd-transition-curve);
+  padding-block: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--zd-clr-highlight);
+    transform: scaleX(0);
+    transition: transform 0.2s var(--zd-transition-curve);
+    transform-origin: right;
+  }
+
+  &:hover {
+    color: var(--zd-clr-platinum);
+    &::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  &[aria-current="page"] {
+    color: var(--zd-clr-highlight);
+    &::after {
+      transform: scaleX(1);
+      background-color: var(--zd-clr-highlight);
+    }
+  }
+}
+
+/* Header Actions */
+.zd-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.zd-header-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: color-mix(in srgb, var(--zd-clr-slate) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--zd-border-color) 40%, transparent);
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  color: var(--zd-clr-slate);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s var(--zd-transition-curve);
+
+  &:hover {
+    background: color-mix(in srgb, var(--zd-clr-slate) 25%, transparent);
+    color: var(--zd-clr-platinum);
+    border-color: var(--zd-clr-highlight);
+  }
+
+  kbd {
+    background: var(--zd-bg-base);
+    border: var(--zd-border);
+    border-radius: 3px;
+    padding: 0.05rem 0.25rem;
+    font-size: 0.65rem;
+    color: var(--zd-clr-platinum);
+  }
+}
+
+.zd-header-socials {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .zd-header-socials {
+    display: flex;
+  }
+}
+
+.zd-header-social-link {
+  color: var(--zd-clr-slate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s var(--zd-transition-curve), transform 0.2s var(--zd-transition-curve);
+
+  &:hover {
+    color: var(--zd-clr-platinum);
+    transform: scale(1.05);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Page Layout Adjustments when sticky header is present */
+@media (min-width: 64rem) {
+  body:has(.zd-header--sticky) {
+    --zd-header-height: 56px;
+
+    .zd-container {
+      padding-block-start: 1rem;
+    }
+
+    .zd-sidebar-left {
+      top: var(--zd-header-height);
+      max-height: calc(100vh - var(--zd-header-height));
+      height: calc(100vh - var(--zd-header-height));
+      padding-block-start: 1.5rem;
+    }
+
+    .zd-sidebar-right {
+      top: var(--zd-header-height);
+      max-height: calc(100vh - var(--zd-header-height));
+      height: calc(100vh - var(--zd-header-height));
+      padding-block-start: 1.5rem;
+    }
+  }
+}

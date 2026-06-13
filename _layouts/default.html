@@ -19,6 +19,10 @@
     <div class="zd-progress-container"><div id="zd-progress-bar" class="zd-progress-bar"></div></div>
     {% endif %}
 
+    {% if site.theme_settings.header.enabled %}
+        {% include core/header.html %}
+    {% endif %}
+
     <div class="zd-container">
         <aside class="zd-sidebar-left">
             {% include core/sidebar.html %}
@@ -71,9 +75,11 @@
             {% include core/footer.html %}
         </main>
 
+        {% assign toc_style = site.theme_settings.toc.style | default: "simple" %}
+        {% assign toc_density = site.theme_settings.toc.density | default: "default" %}
         <div id="zd-page-toc-container" class="zd-page-toc-container" style="display: none;">
             <h4 class="zd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
-            <nav id="zd-page-toc" class="zd-page-toc"></nav>
+            <nav id="zd-page-toc" class="zd-page-toc zd-page-toc--{{ toc_style }} zd-page-toc--{{ toc_density }}"></nav>
         </div>
 
         <aside class="zd-sidebar-right">
@@ -119,7 +125,7 @@
         // 0. Global State & Elements
         const searchModal = document.getElementById('zd-search-modal');
         const searchBackdrop = document.getElementById('zd-search-backdrop');
-        const searchTrigger = document.getElementById('zd-search-trigger');
+        const searchTriggers = document.querySelectorAll('.zd-search-trigger, .zd-header-search-trigger');
         const navToggle = document.getElementById('zd-nav-toggle');
         const sidebarLeft = document.querySelector('.zd-sidebar-left');
         const contentArea = document.querySelector('.zd-content');
@@ -147,7 +153,7 @@
             document.body.style.overflow = '';
         }
 
-        if (searchTrigger) searchTrigger.addEventListener('click', openSearch);
+        searchTriggers.forEach(trigger => trigger.addEventListener('click', openSearch));
         if (searchBackdrop) searchBackdrop.addEventListener('click', closeSearch);
 
         window.addEventListener('keydown', (e) => {

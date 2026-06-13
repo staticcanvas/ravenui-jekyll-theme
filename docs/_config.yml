@@ -30,6 +30,10 @@ theme_settings:
 
   # Interface
   scroll_progress: true             # Toggle global reading progress bar
+  header:
+    enabled: true
+    sticky: true
+    align: center
 
   # Search Configuration
   search:

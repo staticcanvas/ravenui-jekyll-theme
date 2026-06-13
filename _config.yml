@@ -18,6 +18,10 @@ theme_settings:
     height: 32px
     layout: inline # options: inline, stacked, split
   scroll_progress: true
+  header:
+    enabled: true
+    sticky: true
+    align: center
 
   # Search Configuration
   search:

@@ -19,6 +19,13 @@ theme_settings:
     height: 32px
     layout: inline # options: inline, stacked, split
   scroll_progress: true
+  header:
+    enabled: true                  # Enable the top header bar layout
+    sticky: true                   # Enable sticky header positioning
+    align: center                  # Navigation link alignment: left, center, right
+  toc:
+    style: nodes                   # TOC style design: simple, lines, nodes
+    density: default               # TOC density: compact, default, relaxed
   
   # Animations Controls
   animations:
@@ -50,6 +57,11 @@ theme_settings:
 | `logo.height` | String | `32px` | Visual height of the sidebar logo. |
 | `logo.layout` | String | `inline` | Layout style for sidebar branding (`inline`, `stacked`, `split`). |
 | `scroll_progress` | Boolean | `true` | Global toggle for the reading progress bar. |
+| `header.enabled` | Boolean | `false` | Enable the top header bar layout. |
+| `header.sticky` | Boolean | `false` | Sticky header position on scroll. |
+| `header.align` | String | `center` | Navigation link alignment: `left`, `center`, `right`. |
+| `toc.style` | String | `simple` | Layout style for TOC links (`simple`, `lines`, `nodes`). |
+| `toc.density` | String | `default` | Font size density (`compact`, `default`, `relaxed`). |
 | `animations.enabled` | Boolean | `true` | Global switch for all animations. |
 | `animations.page_loads` | Boolean | `true` | Enables fade-in and slide animations on load. |
 | `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |

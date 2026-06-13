@@ -1,4 +1,5 @@
 <aside class="zd-sidebar">
+    {% unless site.theme_settings.header.enabled %}
     {% assign brand_layout = site.theme_settings.logo.layout | default: "inline" %}
     <div class="zd-brand zd-brand--{{ brand_layout }}{% if site.theme_settings.logo.path %} zd-brand--has-logo{% endif %}"
          style="--zd-logo-width: {{ site.theme_settings.logo.height | default: '32px' }};">
@@ -24,6 +25,7 @@
             {% endif %}
         </div>
     </div>
+    {% endunless %}
 
     <div class="zd-search-trigger" id="zd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>
