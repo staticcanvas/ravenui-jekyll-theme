@@ -3,4 +3,43 @@ Component: Dynamic Feedback Widget
 Purpose: Renders a user feedback prompt ("Was this page helpful?") that pushes events to Google Analytics.
 Caveats: Output must remain collapsed on a single line to prevent Kramdown paragraph wrapping. Includes inline JS.
 Usage: {% include comps/feedback.html question="Helpful?" yes_label="Yes" no_label="No" %}
-{%- endcomment -%}{% assign question = include.question | default: site.zd_feedback.question | default: "Was this page helpful?" %}{% assign yes_label = include.yes_label | default: site.zd_feedback.yes_label | default: "Yes" %}{% assign no_label = include.no_label | default: site.zd_feedback.no_label | default: "No" %}{% assign thank_you = include.thank_you | default: site.zd_feedback.thank_you | default: "Thank you for your feedback!" %}<div class="zd-feedback-widget {{ include.class }}" id="zd-feedback-container"><div class="zd-feedback-prompt" id="zd-feedback-prompt"><span class="zd-feedback-question">{{ question }}</span><button class="zd-feedback-btn zd-feedback-btn--yes" onclick="submitFeedback('yes')" aria-label="Yes, this page was helpful">{% include comps/icon.html name="thumbs-up" size=12 %}{{ yes_label }}</button><button class="zd-feedback-btn zd-feedback-btn--no" onclick="submitFeedback('no')" aria-label="No, this page was not helpful">{% include comps/icon.html name="thumbs-down" size=12 %}{{ no_label }}</button></div><div class="zd-feedback-thanks" id="zd-feedback-thanks" style="display: none;">{% include comps/icon.html name="check" size=14 color="var(--zd-clr-viridian)" %}<span class="zd-feedback-thanks-text">{{ thank_you }}</span></div></div><script>(function(){const url=window.location.pathname;if(localStorage.getItem('zd_feedback_'+url)){document.getElementById('zd-feedback-container').style.display='none';}})();if(typeof submitFeedback==='undefined'){window.submitFeedback=function(val){const url=window.location.pathname;localStorage.setItem('zd_feedback_'+url,val);document.getElementById('zd-feedback-prompt').style.display='none';const thanks=document.getElementById('zd-feedback-thanks');thanks.style.display='flex';thanks.style.opacity='0';thanks.style.transform='translateY(5px)';thanks.style.transition='all var(--zd-transition-base)';setTimeout(()=>{thanks.style.opacity='1';thanks.style.transform='translateY(0)';},50);if(typeof gtag!=='undefined'){gtag('event','feedback',{'event_category':'Documentation','event_label':url,'value':val==='yes'?1:0});}else if(typeof ga!=='undefined'&&typeof ga.send==='function'){ga('send','event','Documentation','feedback',url,val==='yes'?1:0);}}}</script>
+{%- endcomment -%}{% assign question = include.question | default: site.zd_feedback.question | default: "Was this page helpful?" %}{% assign yes_label = include.yes_label | default: site.zd_feedback.yes_label | default: "Yes" %}{% assign no_label = include.no_label | default: site.zd_feedback.no_label | default: "No" %}{% assign thank_you = include.thank_you | default: site.zd_feedback.thank_you | default: "Thank you for your feedback!" %}<div class="zd-feedback-widget {{ include.class }}" id="zd-feedback-container"><div class="zd-feedback-prompt" id="zd-feedback-prompt"><span class="zd-feedback-question">{{ question }}</span><button class="zd-feedback-btn zd-feedback-btn--yes" onclick="submitFeedback('yes')" aria-label="Yes, this page was helpful">{% include comps/icon.html name="thumbs-up" size=12 %}{{ yes_label }}</button><button class="zd-feedback-btn zd-feedback-btn--no" onclick="submitFeedback('no')" aria-label="No, this page was not helpful">{% include comps/icon.html name="thumbs-down" size=12 %}{{ no_label }}</button></div><div class="zd-feedback-thanks" id="zd-feedback-thanks" style="display: none;">{% include comps/icon.html name="check" size=14 color="var(--zd-clr-viridian)" %}<span class="zd-feedback-thanks-text">{{ thank_you }}</span></div></div><script>
+(function(){
+  const url = window.location.pathname;
+  if(localStorage.getItem('zd_feedback_'+url)){
+    document.getElementById('zd-feedback-container').style.display='none';
+  }
+})();
+if(typeof submitFeedback==='undefined'){
+  window.submitFeedback = function(val) {
+    const url = window.location.pathname;
+    localStorage.setItem('zd_feedback_'+url, val);
+    document.getElementById('zd-feedback-prompt').style.display='none';
+    const thanks = document.getElementById('zd-feedback-thanks');
+    thanks.style.display='flex';
+    thanks.style.opacity='0';
+    thanks.style.transform='translateY(5px)';
+    thanks.style.transition='all var(--zd-transition-base)';
+    setTimeout(() => {
+      thanks.style.opacity='1';
+      thanks.style.transform='translateY(0)';
+    }, 50);
+
+    // Dispatch feedback event to active tracking providers
+    if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
+      posthog.capture('page_feedback', { url: url, helpful: val === 'yes' });
+    }
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'feedback', { 'event_category': 'Documentation', 'event_label': url, 'value': val === 'yes' ? 1 : 0 });
+    } else if (typeof ga !== 'undefined' && typeof ga.send === 'function') {
+      ga('send', 'event', 'Documentation', 'feedback', url, val === 'yes' ? 1 : 0);
+    }
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+      umami.track('page_feedback', { url: url, helpful: val });
+    }
+    if (typeof plausible !== 'undefined') {
+      plausible('Page Feedback', { props: { url: url, helpful: val } });
+    }
+  }
+}
+</script>

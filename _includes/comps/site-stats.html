@@ -88,3 +88,59 @@ Usage______: {% include comps/site-stats.html grid_size="160px" %}
   </div>
   {%- endif -%}
 </div>
+
+{%- if include.show_charts == true -%}
+  {%- assign chart_engine = include.chart_engine | default: "chartjs" -%}
+  
+  {%- assign category_names = "" -%}
+  {%- assign category_counts = "" -%}
+  {%- for category in site.categories -%}
+    {%- assign name = category[0] -%}
+    {%- assign count = category[1].size -%}
+    {%- if forloop.first -%}
+      {%- assign category_names = name -%}
+      {%- assign category_counts = count | string -%}
+    {%- else -%}
+      {%- capture category_names -%}{{ category_names }},{{ name }}{%- endcapture -%}
+      {%- capture category_counts -%}{{ category_counts }},{{ count }}{%- endcapture -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- assign tag_names = "" -%}
+  {%- assign tag_counts = "" -%}
+  {%- for tag in site.tags -%}
+    {%- assign name = tag[0] -%}
+    {%- assign count = tag[1].size -%}
+    {%- if forloop.first -%}
+      {%- assign tag_names = name -%}
+      {%- assign tag_counts = count | string -%}
+    {%- else -%}
+      {%- capture tag_names -%}{{ tag_names }},{{ name }}{%- endcapture -%}
+      {%- capture tag_counts -%}{{ tag_counts }},{{ count }}{%- endcapture -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="zd-site-stats-charts" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-block-start: 1.5rem;">
+    {%- if category_names != "" -%}
+    <div class="zd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--zd-bg-surface); border: var(--zd-border); border-radius: var(--zd-radius);">
+      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--zd-clr-slate); letter-spacing: 0.05em;">Posts by Category</h4>
+      {%- if chart_engine == "chartjs" -%}
+        {%- include comps/chartjs.html id="site-stats-cat-chart" type="doughnut" labels=category_names data=category_counts dataset_label="Category Count" height="200px" -%}
+      {%- else -%}
+        {%- include comps/svgcharts.html id="site-stats-cat-chart-svg" type="doughnut" labels=category_names data=category_counts height="200px" -%}
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    {%- if tag_names != "" -%}
+    <div class="zd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--zd-bg-surface); border: var(--zd-border); border-radius: var(--zd-radius);">
+      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--zd-clr-slate); letter-spacing: 0.05em;">Posts by Tag</h4>
+      {%- if chart_engine == "chartjs" -%}
+        {%- include comps/chartjs.html id="site-stats-tag-chart" type="bar" labels=tag_names data=tag_counts dataset_label="Tag Count" height="200px" -%}
+      {%- else -%}
+        {%- include comps/svgcharts.html id="site-stats-tag-chart-svg" type="bar" labels=tag_names data=tag_counts height="200px" -%}
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

@@ -25,6 +25,23 @@ The `site-stats.html` component provides a dashboard metrics grid that auto-calc
 {% endcapture %}
 {% include comps/example-code.html content=site_stats_eg %}
 
+{% include comps/heading.html tag="h3" text="Visual Charts Layout" icon="pie-chart" size=16 %}
+
+You can render visual representations of tag and category distribution by enabling the `show_charts` parameter. You can choose between interactive canvas charts (powered by Chart.js) and static/responsive vector charts (powered by the SVG chart engine).
+
+{% include comps/site-stats.html show_charts=true chart_engine="chartjs" %}
+
+{% capture site_stats_charts_eg %}
+```liquid
+<!-- Site Stats with Chart.js charts -->
+{% include comps/site-stats.html show_charts=true chart_engine="chartjs" %}
+
+<!-- Site Stats with SVG vector charts -->
+{% include comps/site-stats.html show_charts=true chart_engine="svg" %}
+```
+{% endcapture %}
+{% include comps/example-code.html content=site_stats_charts_eg %}
+
 ---
 
 {% include comps/heading.html tag="h2" text="API Reference" icon="code" size=20 %}
@@ -36,4 +53,6 @@ The `site-stats.html` component provides a dashboard metrics grid that auto-calc
 | `grid_size` | String | `150px` | The minimum width of each card in the responsive grid. |
 | `show_words` | Boolean | `true` | Toggle total word count visibility. |
 | `show_reading_time` | Boolean | `true` | Toggle reading time visibility. |
+| `show_charts` | Boolean | `false` | Toggle tag and category distribution charts. |
+| `chart_engine` | String | `chartjs` | Charting library to use: `chartjs` (interactive canvas) or `svg` (vector path). |
 | `class` | String | | Optional custom CSS class. |

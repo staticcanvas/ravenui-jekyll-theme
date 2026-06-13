@@ -194,6 +194,24 @@
   }
 }
 
+// 3.5. Pneumatic (Neumorphic Soft-Press) Effects
+.zd-pneumatic {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45), 0 0 12px rgba(0, 255, 157, 0.08);
+  }
+  
+  &:active, &.zd-pneumatic--pressed {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.02);
+  }
+}
+
 // 4. Accessibility Fallback (Reduced Motion)
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

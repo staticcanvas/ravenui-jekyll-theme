@@ -54,6 +54,10 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Problem:** Data-driven presentation components like `git-tags` or `roadmap-item` often require presentation variety (e.g., switching from card grids to compact item lists, or displaying optional progress indicators) depending on layout density. Hardcoding dedicated templates or duplicating loops leads to structural drift and maintenance fatigue.
 - **Resolution:** Parameterized presentation structures inside single include files. For `git-tags.html`, the check `include.layout == "list"` switches between wrapping structures (`.zd-git-tags-grid` vs. `.zd-git-tags-list`) and internal flex children. For `roadmap-item.html`, progress bars are disabled by default unless `show_progress=true` is explicitly passed, preserving clean, minimalistic default cards.
 
+### **2.9. Pluggable Analytics and Dynamic Event Dispatching (PostHog Default)**
+- **Problem:** Dynamic interactive components (like page feedback widgets) typically hardcode event dispatching logic against a single client-side tracker API (e.g. Google Analytics). Swapping to a self-hosted alternative (Umami, Plausible) or product analytics tool (PostHog) requires rewriting event dispatch loops or components.
+- **Resolution:** Abstracted analytics loading to a single unified configuration block in `head.html` and implemented dynamic client-side runtime API checks in `feedback.html`. When clicked, the submission handler checks for the existence of `posthog`, `gtag`, `ga`, `umami`, or `plausible` globally and logs the page helpfulness payload to all active tracker instances safely.
+
 ---
 
 ## **3. Quality of Life (QOL) & Aesthetic Guidelines**

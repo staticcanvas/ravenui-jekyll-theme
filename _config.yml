@@ -29,6 +29,22 @@ theme_settings:
   code:
     lang_style: header
 
+  # Analytics Configuration
+  analytics:
+    provider: posthog            # options: posthog, google_analytics, umami, plausible, none
+    enable_in_dev: false         # Set to true to track stats during local development
+    posthog:
+      api_key: "phc_your_posthog_api_key"
+      host: "https://us.i.posthog.com"
+    google_analytics:
+      id: "G-your_ga_id"
+    umami:
+      website_id: "your-umami-website-id"
+      src: "https://cloud.umami.is/script.js"
+    plausible:
+      domain: "yourdomain.com"
+      src: "https://plausible.io/js/script.js"
+
   # Search Configuration
   search:
     provider: pagefind            # options: pagefind, lyra, algolia

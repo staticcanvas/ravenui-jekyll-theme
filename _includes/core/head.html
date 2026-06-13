@@ -129,37 +129,57 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.4/dist/mermaid.min.js"></script>
     {% endif %}
 
-    {% if jekyll.environment == "production" and site.google_analytics %}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ site.google_analytics }}');
+    {% if jekyll.environment == "production" or site.theme_settings.analytics.enable_in_dev %}
+      {% assign analytics = site.theme_settings.analytics %}
+      {% assign provider = analytics.provider | default: "posthog" %}
+      
+      {% if provider == "posthog" and analytics.posthog.api_key %}
+        <!-- PostHog -->
+        <script>
+          !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+".people"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment active_experiments".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+          posthog.init('{{ analytics.posthog.api_key }}', {
+            api_host: '{{ analytics.posthog.host | default: "https://us.i.posthog.com" }}'
+          });
+        </script>
+      {% elsif provider == "google_analytics" or site.google_analytics %}
+        <!-- Google Tag (gtag.js) -->
+        {% assign ga_id = analytics.google_analytics.id | default: site.google_analytics %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ ga_id }}');
 
-      // Auto-event listener for links
-      window.addEventListener('DOMContentLoaded', () => {
-        document.body.addEventListener('click', (e) => {
-          const a = e.target.closest('a');
-          if (a && a.href) {
-            try {
-              const url = new URL(a.href, window.location.href);
-              const isOutbound = url.hostname !== window.location.hostname;
-              const isDownload = /\.(zip|tar|gz|pdf|gemspec|gem)$/i.test(url.pathname);
+          // Auto-event listener for outbound links and downloads
+          window.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('click', (e) => {
+              const a = e.target.closest('a');
+              if (a && a.href) {
+                try {
+                  const url = new URL(a.href, window.location.href);
+                  const isOutbound = url.hostname !== window.location.hostname;
+                  const isDownload = /\.(zip|tar|gz|pdf|gemspec|gem)$/i.test(url.pathname);
 
-              if (isOutbound || isDownload) {
-                gtag('event', 'click', {
-                  'event_category': isOutbound ? 'outbound_link' : 'download',
-                  'event_label': a.href,
-                  'transport_type': 'beacon'
-                });
+                  if (isOutbound || isDownload) {
+                    gtag('event', 'click', {
+                      'event_category': isOutbound ? 'outbound_link' : 'download',
+                      'event_label': a.href,
+                      'transport_type': 'beacon'
+                    });
+                  }
+                } catch (err) { /* invalid URL */ }
               }
-            } catch (err) { /* invalid URL */ }
-          }
-        });
-      });
-    </script>
+            });
+          });
+        </script>
+      {% elsif provider == "umami" and analytics.umami.website_id %}
+        <!-- Umami -->
+        <script defer src="{{ analytics.umami.src | default: 'https://cloud.umami.is/script.js' }}" data-website-id="{{ analytics.umami.website_id }}"></script>
+      {% elsif provider == "plausible" and analytics.plausible.domain %}
+        <!-- Plausible -->
+        <script defer data-domain="{{ analytics.plausible.domain }}" src="{{ analytics.plausible.src | default: 'https://plausible.io/js/script.js' }}"></script>
+      {% endif %}
     {% endif %}
 
     {% if site.theme_settings.animations.enabled == false %}

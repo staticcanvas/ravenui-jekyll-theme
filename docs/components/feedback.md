@@ -31,11 +31,35 @@ The `feedback.html` component provides a subtle, conversion-optimized widget for
 
 When a user submits feedback, the widget automatically:
 1. Saves the response status to `localStorage` under the key `zd_feedback_<page_path>` to ensure they only submit feedback once per page (and hides the widget on subsequent page loads).
-2. Attempts to push a custom event to **Google Analytics** (supports both newer `gtag` and legacy `ga` tracking libraries) to log engagement statistics:
-   * **Event Name:** `feedback`
-   * **Event Category:** `Documentation`
-   * **Event Label:** `<page_path>`
-   * **Value:** `1` (for Yes) or `0` (for No)
+2. Dispatches a capture event to the active tracking provider configured in `_config.yml`:
+   * **PostHog:** Captures a `page_feedback` event with the properties `{ url: <page_path>, helpful: true/false }`.
+   * **Google Analytics:** Pushes a custom `feedback` event with Category `Documentation`, Label `<page_path>`, and Value `1` (Yes) or `0` (No).
+   * **Umami:** Tracks a `page_feedback` event with details `{ url: <page_path>, helpful: "yes"/"no" }`.
+   * **Plausible:** Tracks a `Page Feedback` event with props `{ url: <page_path>, helpful: "yes"/"no" }`.
+
+---
+
+{% include comps/heading.html tag="h2" text="Analytics Configuration" icon="sliders" size=20 %}
+
+Configure your preferred analytics platform in `_config.yml` under the `theme_settings.analytics` block:
+
+```yaml
+theme_settings:
+  analytics:
+    provider: posthog            # Options: posthog, google_analytics, umami, plausible, none
+    enable_in_dev: false         # Set to true to track during local jekyll development
+    posthog:
+      api_key: "phc_your_posthog_key"
+      host: "https://us.i.posthog.com" # Or your self-hosted instance URL
+    google_analytics:
+      id: "G-XXXXXXXXXX"
+    umami:
+      website_id: "your-website-id"
+      src: "https://cloud.umami.is/script.js"
+    plausible:
+      domain: "yourdomain.com"
+      src: "https://plausible.io/js/script.js"
+```
 
 ---
 
