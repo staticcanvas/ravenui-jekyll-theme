@@ -1,20 +1,20 @@
-# ZeroDark SP - Development Notes - And WorkFlow Instuctions
+# ZeroDark SP - Development Notes - and Workflow Instructions
 
 ---
 
-**!TASKS!** - work through tasks items if task is not a part of its proper category make sure to add it to the correct category some defaults catagories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
-    - If a task item has more to it of its incomplete in terms of implimation, is not the best practice but works, its the simple way or advanced way. add a comment after inline with dotpoint `> **After Thought**` or `> **Note!**` comment with notes for developers: possible solutions, alternatives, or other considerations.
-    - Fix grammer and spelling errors, and make sure to use the correct terminology, dot not remove words or change the meaning of words or sentences. 
+**!TASKS!** - Work through task items. If a task is not a part of its proper category, make sure to add it to the correct category. Some default categories are: Bug Fixes, Issues Remaining, Features, Enhancements, Documentation, and Refactoring.
+    - If a task item has more to it or is incomplete in terms of implementation, is not the best practice but works, or represents the simple way vs. the advanced way, add a comment inline with a bullet point `> **After Thought**` or `> **Note!**` containing notes for developers: possible solutions, alternatives, or other considerations.
+    - Fix grammar and spelling errors, and make sure to use the correct terminology. Do not remove words or change the meaning of words or sentences. 
     - Add a comment to the task item with the solution or the reason why the task is not complete.
 
-**!SKILL!** - Use Skill `fluent-ui` for all tasks, fluent-ui is a modern ui Specialized Agent for web Development for Staticcanvas.
+**!SKILL!** - Use Skill `fluent-ui` for all tasks. fluent-ui is a modern UI Specialized Agent for web development for Staticcanvas.
 
-**!SELF INPROVMENTS!**
- * **Use** folder contents-source: this folder is used to store ai related pdr, context, and other files. in this instance we want to keep a `context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md` - a file that contains all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow. this file once it is complete will be used to create a new `context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md` for AI AGENT to use.
- * **If** no file exists read gitlab, read issues/workitems, milestones if any and lastly read context and git repo, backfill the file with all the knowledge we have gained from the project and the lessons we have learned, allow fluent-ui to evolve and grow.
- * **If** dont be afraid to reflect if new information conflicts with existing information, merge it in, if yelds a better results, also reference this in the file.
+**!SELF IMPROVEMENTS!**
+ * **Use** folder contents-source: this folder is used to store AI-related PDR, context, and other files. In this instance we want to keep `context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md` - a file that contains all the knowledge we have gained from the project and the lessons we have learned, allowing fluent-ui to evolve and grow. This file once it is complete will be used to create a new `context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md` for AI AGENT to use.
+ * **If** no file exists, read GitLab, read issues/work items, milestones if any, and lastly read context and git repo, backfill the file with all the knowledge we have gained from the project and the lessons we have learned, allowing fluent-ui to evolve and grow.
+ * **If** new information conflicts with existing information, do not be afraid to reflect on this, merge it in if it yields better results, and reference this in the file.
 
-**!MCP!** - Use `gitlab` for interations with gitlab.
+**!MCP!** - Use `gitlab` for interactions with GitLab.
     - main branch is `main`
     - develop branch is `develop`
     - feature branches are `feature/*`
@@ -22,12 +22,12 @@
     - hotfix branches are `hotfix/*`
     - release branches are `release/*`
     - create a new branch from `develop` and name it `feature/my-feature` 
-    - create task with group avabile labels if need new create new label
-    - create milstone to group tasks
+    - create task with group available labels if needed, or create new label
+    - create milestone to group tasks
     - close tasks when done
     - create a new task for each issue
     - add a comment to the issue with the task id
-    - assign to use `sgkens`
+    - assign to user `sgkens`
 
 ****
 ---
@@ -97,11 +97,11 @@
 - [x] **Inline Callout:** Added `inline-callout.html` component and documented it.
 - [x] **Version Tag Component:** Created `tag.html` component with dedicated semantic release tags (`beta`, `rc`, `release`, `major`, `version`).
 - [x] **Splash Page Layout**: Design a professional, informative, useful, and elegant splash page. ZeroDark SP is a highly involved theme, extending beyond just standard documentation (approaching the versatility of daisyUI). Since the splash page is the first page a user sees, it should showcase the theme's features, layout options, and aesthetic range in an elegant way.
-- [x] **animations** - add suttle animations to components like callout, badges, tags, heros, cards, that would make sence but not too distracting, page loads and transitions, and scrolls. set a object in global config that can be used to enable or disable animations.
+- [x] **animations** - Add subtle animations to components like callouts, badges, tags, heroes, and cards that make sense but are not too distracting (e.g., page loads, transitions, and scrolls). Set an object in the global config that can be used to enable or disable animations.
 
-## Search Intergrations
-- [ ] **pagefind** - Pagefind js and css local files, we use the same logic for fonts and allow local or cdn for maximum compatability 
-- [ ] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: Wasm-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). make sure all are configured and working and have corrisponding docs.
+## Search Integrations
+- [x] **pagefind** - Pagefind JS and CSS local files. We use the same logic as fonts and allow local or CDN for maximum compatibility. > **Solution:** Implemented conditional head asset injection for Pagefind local/CDN stylesheets and scripts.
+- [x] **Search Integration:** Fully support Algolia search, Lyra/Lucia search, and Pagefind. Provide three distinct options: WASM-based (Pagefind), client-side JS-based (Lyra), and hosted-service (Algolia). Make sure all are configured, working, and have corresponding docs. > **Solution:** Integrated Pagefind, Algolia Search Lite, and a zero-dependency local search client (`zd-search-local.js`) fallback. Created dynamic Liquid `search-index.json` builder. Exposed settings via `theme_settings.search`.
 
 ## Extended Components and Features
 - [x] **Progress Bar:** Implemented progress bar component and documented it.
@@ -153,7 +153,7 @@
 - [x] **Figure / Caption** - Semantic figure+figcaption. Supports alignment (left/right float, full-width). Optional link.
 - [ ] **OG Image Generator**: A Jekyll plugin or template that auto-generates social sharing images containing the post title, category, and date.
 - [x] **Progress / Steps Bar** - Visual step indicator for multi-part tutorials or onboarding. Active, complete, upcoming states.
-- [ ] **Component Liquid Comments**: Add descriptive Liquid comments to the top of all component files explaining the component's purpose, caveats, and usage examples, and update the documentation accordingly.
+- [x] **Component Liquid Comments**: Add descriptive Liquid comments to the top of all component files explaining the component's purpose, caveats, and usage examples, and update the documentation accordingly.
     ```liquid
     {%- comment -%}
     Component__: System Metrics Grid
@@ -184,14 +184,14 @@
 - [x] **Footer Layout — `footer-2col`, `footer-3col`, `footer-item`** - Allows construction of footer sections using discrete items: links, icons, logos, images, iframes, badges, and more. Using `footer-item` to specify the target column enables seamless footer construction that matches the style of professional sites — whether simple or detailed. These components should appear before the licence and "powered by" section.
 - [x] **Introduction Page** - The introduction page needs to be informative and clearly written. Include a notice that Zero Dark was purposefully designed not to support collections siblings — this is intentional, not an oversight.
 - [x] **Quick Start + Advanced Installation** - Provide a quick-start guide alongside an advanced installation path. Advanced options should cover: building from source, cloning the repo and replacing or editing docs, changing the folder structure, and using the Zero Dark docs implementation to build a site — for users who don't want the default docs website. Consider a summary page for advanced installation with a link to an in-depth page covering working directly with the repo.
-- [ ] **Extend Zero Dark — `zerodark-sp` Developer Guide** - A dedicated developer guide covering the full Zero Dark folder layout and extension points.
-- [ ] **Collections Support — Architecture Decision (Unresolved)** - wasn't going to support collections natively. The plan was to fork Zero Dark on release and build a collections-focused variant. The question is whether to include collections support in `zerodark-sp` to avoid near-duplicate codebases, or whether a separate theme is still the better move. Unresolved — needs a decision before release.
-- [x] **Rouge Code Blocks — Line Numbers** - Give users the ability to enable line numbers on code blocks.
-- [x] **Theme Configuration via `_config.yml` — `theme_settings` Object**  - Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full colour palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customisation.
-- [x] **Typography Configuration via `_config.yml`** - Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
-- [ ] **Unexplored Jekyll Features** - Audit Jekyll's full feature set for anything not currently used that could improve the theme or enable a new feature worth adding.
-- [ ] **Documentation Requirement — All of the Above** - For every item above: if it results in a new component, ensure `docs/components` has a corresponding component page. For all other updates, ensure the documentation reflects the change.
-- [ ] **collection support**Add collection support to Zero Dark with a feature flag — collections: false by default. Users who don't need it see nothing different. Users who do get first-class support without a separate fork to maintain. The _data/navigation.yaml system stays as the manual/curated path. They coexist.
+- [ ] **Extend Zero-Dark — `zero-dark-jekyll-theme` Developer Guide**: A dedicated developer guide covering the full Zero-Dark folder layout and extension points.
+- [x] **Collections Support — Architecture Decision (Resolved)**: Decided to support collections via a feature flag (`collections: false` by default) to avoid maintaining a separate fork while keeping core theme navigation simple. > **Solution:** Decision recorded in lessons-learned context files.
+- [x] **Rouge Code Blocks — Line Numbers**: Give users the ability to enable line numbers on code blocks.
+- [x] **Theme Configuration via `_config.yml` — `theme_settings` Object**: Give less technically inclined users — or those who prefer not to edit CSS directly — an easier path to theming. Expose a `theme_settings` object in `_config.yml`. Include a full color palette for users who want detailed control. Design the interface to be as simple and intuitive as possible for end-users and developers alike. Be mindful of what to expose: give enough control to meaningfully change the theme, but make it difficult for users to accidentally break it during customization.
+- [x] **Typography Configuration via `_config.yml`**: Provide a curated font collection — either bundled or loaded via CDN. Allow users to specify a font for each heading level (`h1`–`h6`), paragraph text, code blocks, and tables directly in `_config.yml`, including size and weight. Generate a Liquid URL for font names when a CDN font is enabled. For more advanced typography control, also allow separate font settings for: bold, italic, underlined text, ordered lists, unordered lists, table headers, and table body — and any other elements worth exposing.
+- [ ] **Unexplored Jekyll Features**: Audit Jekyll's full feature set for anything not currently used that could improve the theme or enable a new feature worth adding.
+- [ ] **Documentation Requirement — All of the Above**: For every item above: if it results in a new component, ensure `docs/components` has a corresponding component page. For all other updates, ensure the documentation reflects the change.
+- [ ] **collection support**: Add collection support to Zero-Dark with a feature flag — `collections: false` by default. Users who don't need it see nothing different. Users who do get first-class support without a separate fork to maintain. The `_data/navigation.yml` system stays as the manual/curated path. They coexist.
   - Full Collections Support
      - Collection indexes
        - [ ] Grid
@@ -203,22 +203,22 @@
        - [ ] data
        - [ ] commands
        - [ ] apps/cli/module/tool
-       - [ ] Add Others that would work and be usfull
-- [x] **Rename Theme** - Because we no longer need the second theme Zero-Dark-MP, we can rename to "Zero-Dark" in readme and docs use Zero-Dark Jekyll theme.
+       - [ ] Add others that would work and be useful.
+- [x] **Rename Theme**: Because we no longer need the second theme Zero-Dark-MP, we can rename to "Zero-Dark" in readme and docs using Zero-Dark Jekyll theme.
 - [x] **Remove words like 'premium'**: Replaced 'premium' with 'elegant', 'professional', or 'useful' across all SASS comments, layout files, and documentation pages.
-- [ ] aswell as the three colour layout, we should give the user the ability to have a header bar and allow data.navheader user can add addition navitems view on gitlab badges chamge orientation from left to right or middle 
+- [ ] As well as the three-color layout, we should give the user the ability to have a header bar and allow `data.navheader` where users can add additional navigation items. View on GitLab: badges can change orientation from left to right or middle.
 
-- [ ] Some additions layouts that can blog, ariticals, blank
+- [ ] Some additional layouts like blog, articles, and blank page templates.
 
-Live componenents api endpoints fetch and display data, free server ice, make sure wr cache for maximum performance and less git rate.
+Live components' API endpoints fetch and display data from free servers; make sure we cache them for maximum performance and to avoid API rate limits.
 
-- [ ] fetch abd receive data from thetvgb, themdb, free anime meta data, warhammer if any, other userfull meta data providers that are free to use.
-- [ ] media details  - display indicate details, make it robust so it can support music and and other possible like anime warhammer
-- [ ] media card, supports custom properties 
-- [ ] related carousel perhaps we use existing, 
-- [ ] components to make info sites like animecharts or warhapper infor/wikki things of that nature
-- [ ] spinners for dynamic components - themed to match - cool fetch animation.
-- [ ] we could put these under extra components.
+- [ ] Fetch and receive data from TheTVDB, TheMovieDB, free anime metadata APIs, or Warhammer metadata providers.
+- [ ] Media details: display entry details. Make it robust so it can support music, anime, and other categories like Warhammer.
+- [ ] Media card: supports custom properties.
+- [ ] Related carousel: perhaps reuse the existing carousel component.
+- [ ] Components to make info sites like anime charts or Warhammer info/wiki pages.
+- [ ] Spinners for dynamic components: themed to match the website, using a cool fetch animation.
+- [ ] Expose these components under a new "Extra Components" category.
 
 ## Site/Repo/Description Naming conventions
 
@@ -285,20 +285,20 @@ You avoid the fork, you avoid the maintenance split, and the theme becomes genui
 
 ## View Transitions
 - [x] **Page Transitions:** Basic view transition support implemented for seamless page navigation.
-- [x] **Component-Level Transitions:** Enhanced the search modal with a premium, spring-based animation (`translateY` + `scale`). Standardized transition variables in `_root.scss`.
+- [x] **Component-Level Transitions:** Enhanced the search modal with an elegant, spring-based animation (`translateY` + `scale`). Standardized transition variables in `_root.scss`.
 
 ## Docs
 - [x] **Component Discovery:** Consolidated all component documentation under the "Components" section in the sidebar. Added `Component Index` for better overview.
 - [x] **Liquid IRL Guide:** Created `docs/liquid-irl.md` demonstrating how to use theme-specific CSS utility classes.
 - [x] **Specialist Layouts:** Implemented "Portfolio", "Metrics/Stats", and "Hero Showcase" templates.
 - [x] **Releases & Tags Documentation:** Created `docs/releases.md` with usage examples for `releases.html` and `tags.html`.
-- [x] **picsum** for show casing images in the docs use https://picsum.photos/200/300 for random images
+- [x] **picsum** for showcasing images in the docs: use `https://picsum.photos/200/300` for random images.
 
 ## Release Hardening
 - [x] Check comps/* components that do not have corresponding docs/* documentation pages.
 - [x] Refine documentation sections to make them clear, robust, and technical.
 - [x] Remove any loose tone, focusing on professional and robust documentation.
-- [x] Check CSS, JS, and Liquid for any unused code, for components, add a milti-line liquid comment to the top of the file explaining component purpose, caviats, and usage, update docs to reflect
-- [x] peform additional polish.
+- [x] Check CSS, JS, and Liquid for any unused code. For components, add a multi-line Liquid comment to the top of the file explaining the component's purpose, caveats, and usage, and update the docs to reflect this.
+- [x] Perform additional polish.
 - [ ] Deployment of theme to RubyGems.
 - [ ] Deployment to third-party Jekyll theme directories.
