@@ -26,6 +26,7 @@
   align-items: center;
   position: relative;
   text-align: center;
+  min-width: 0; // Prevent content from stretching flex container width
 
   @media (max-width: 768px) {
     flex-direction: row;
@@ -116,6 +117,10 @@
     flex-direction: column;
     gap: 0.25rem;
     padding-inline: 0.5rem;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
     
     @media (max-width: 768px) {
       padding-inline: 0;

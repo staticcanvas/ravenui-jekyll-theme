@@ -50,6 +50,10 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Problem:** Dynamic carousels typically limit builders to standard image slide collections. If users want to slide arbitrary components (e.g., custom cards, feedback elements, or text blocks), they are forced to write bespoke markup or load a heavy JavaScript slider library.
 - **Resolution:** Upgraded the standard Jekyll carousel include (`_includes/comps/carousel.html`) to support a dual-mode layout. If a slide item contains a `content` property, the carousel renders it as a custom content viewport using CSS flex centering; otherwise, it falls back to the high-performance lazy-loaded, blur-up image layout. This avoids adding new JS dependencies and maintains a consistent, lightweight layout.
 
+### **2.8. Modular Layout Parameters for Presentation Elements (Git Tags & Roadmap)**
+- **Problem:** Data-driven presentation components like `git-tags` or `roadmap-item` often require presentation variety (e.g., switching from card grids to compact item lists, or displaying optional progress indicators) depending on layout density. Hardcoding dedicated templates or duplicating loops leads to structural drift and maintenance fatigue.
+- **Resolution:** Parameterized presentation structures inside single include files. For `git-tags.html`, the check `include.layout == "list"` switches between wrapping structures (`.zd-git-tags-grid` vs. `.zd-git-tags-list`) and internal flex children. For `roadmap-item.html`, progress bars are disabled by default unless `show_progress=true` is explicitly passed, preserving clean, minimalistic default cards.
+
 ---
 
 ## **3. Quality of Life (QOL) & Aesthetic Guidelines**

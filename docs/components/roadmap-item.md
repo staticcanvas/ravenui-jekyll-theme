@@ -14,6 +14,7 @@ The `roadmap-item.html` component represents a single entry within a `roadmap.ht
    status="active" 
    title="Beta Phase" 
    description="Finalizing the iconography system."
+   show_progress=true
    percent=75
    tasks="Fix SVG alignment | Add spin animation | Document icons"
    milestone_url="#"
@@ -26,6 +27,7 @@ The `roadmap-item.html` component represents a single entry within a `roadmap.ht
    status="active" 
    title="Beta Phase" 
    description="Finalizing the iconography system."
+   show_progress=true
    percent=75
    tasks="Fix SVG alignment | Add spin animation | Document icons"
    milestone_url="https://github.com/..."
@@ -44,7 +46,8 @@ The `roadmap-item.html` component represents a single entry within a `roadmap.ht
 | `title` | String | The heading for this roadmap entry. |
 | `description` | String | A brief summary of the milestone. |
 | `status` | String | `completed`, `active`, or `Planned`. |
-| `percent` | Number | A percentage (0-100) to render a progress bar. |
+| `show_progress` | Boolean | Whether to render the progress bar (defaults to `false`). |
+| `percent` | Number | A percentage (0-100) to render if `show_progress` is enabled. |
 | `tasks` | String | A pipe-separated (`|`) list of sub-tasks. |
 | `milestone_url` | URL | Link to an external issue or milestone. |
 

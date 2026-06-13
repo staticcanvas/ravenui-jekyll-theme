@@ -22,6 +22,24 @@ The `git-tags.html` component provides a quick way to list project version tags 
 {% assign tag_data = my_tags | from_yaml %}
 {% include comps/git-tags.html data=tag_data %}
 
+{% capture card_code %}
+```liquid
+{% include comps/git-tags.html data=tag_data %}
+```
+{% endcapture %}
+{% include comps/example-code.html content=card_code %}
+
+{% include comps/heading.html tag="h3" text="List Layout Example" icon="list" size=16 %}
+
+{% include comps/git-tags.html data=tag_data layout="list" %}
+
+{% capture list_code %}
+```liquid
+{% include comps/git-tags.html data=tag_data layout="list" %}
+```
+{% endcapture %}
+{% include comps/example-code.html content=list_code %}
+
 ---
 
 {% include comps/heading.html tag="h2" text="Automatic Site Data" icon="database" size=20 %}
@@ -45,3 +63,4 @@ If no `data` parameter is passed, the component automatically attempts to pull f
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `data` | Array | | An array of tag objects containing `name`, `commit.sha`, and `zipball_url`. |
+| `layout` | String | `"cards"` | Layout style: `"cards"` (grid of cards) or `"list"` (compact list view). |

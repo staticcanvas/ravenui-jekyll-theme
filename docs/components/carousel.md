@@ -10,28 +10,28 @@ The `carousel.html` component allows users to cycle through a list of images or 
 
 {% include comps/heading.html tag="h2" text="Image Carousel Example" icon="image" size=20 %}
 
-{% assign img_slides = "
+{% assign img_slides = '
 - src: https://picsum.photos/id/10/800/400
   alt: Forest landscape
-  caption: A beautiful misty forest landscape (Lorem Picsum ID: 10)
+  caption: "A beautiful misty forest landscape (Lorem Picsum ID: 10)"
 - src: https://picsum.photos/id/28/800/400
   alt: Forest road
-  caption: An empty road curving through pine woods (Lorem Picsum ID: 28)
-" | from_yaml %}
+  caption: "An empty road curving through pine woods (Lorem Picsum ID: 28)"
+' | from_yaml %}
 
 {% include comps/carousel.html id="img-example-carousel" items=img_slides height="300px" %}
 
 {% capture img_eg %}
 {% raw %}
 ```liquid
-{% assign slides = "
+{% assign slides = '
 - src: https://picsum.photos/id/10/800/400
   alt: Forest landscape
-  caption: A beautiful misty forest landscape (Lorem Picsum ID: 10)
+  caption: "A beautiful misty forest landscape (Lorem Picsum ID: 10)"
 - src: https://picsum.photos/id/28/800/400
   alt: Forest road
-  caption: An empty road curving through pine woods (Lorem Picsum ID: 28)
-" | from_yaml %}
+  caption: "An empty road curving through pine woods (Lorem Picsum ID: 28)"
+' | from_yaml %}
 
 {% include comps/carousel.html 
    id="img-carousel" 

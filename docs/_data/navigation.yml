@@ -264,12 +264,14 @@
     - text: CodePen Embed
       url: /components/codepen/
       icon: codepen
-      source: simple
+      source: fa
+      style: fab
       description: "Embed interactive pens from CodePen"
     - text: CodeSandbox Embed
       url: /components/codesandbox/
       icon: codesandbox
-      source: simple
+      source: fa
+      style: fab
       description: "Embed sandbox web environments from CodeSandbox"
     - text: Modal / Dialog
       url: /components/modal/

@@ -1,3 +1,10 @@
+{%- comment -%}
+Component__: CodePen Embed
+Purpose____: Embeds an interactive HTML/CSS/JS playground from CodePen.
+Caveats____: Validates ID parameters and performs client-side oEmbed diagnostic checks to handle 404 errors elegantly.
+Usage______: {% include comps/codepen.html id="XWJjRKO" user="codepen" height=350 %}
+{%- endcomment -%}
+
 {% assign id = include.id %}
 {% assign user = include.user | default: site.codepen_username | default: "pen" %}
 {% assign height = include.height | default: 350 %}
@@ -6,19 +13,74 @@
 {% assign title = include.title | default: "CodePen Embed" %}
 
 {% if id %}
-<div class="zd-codepen-container {{ include.class }}" style="height: {{ height }}px;">
-  <iframe 
-    height="{{ height }}" 
-    style="width: 100%; border: none;" 
-    scrolling="no" 
-    title="{{ title | escape }}" 
-    src="https://codepen.io/{{ user }}/embed/{{ id }}?height={{ height }}&theme-id={{ theme }}&default-tab={{ tab }}" 
-    frameborder="no" 
-    loading="lazy" 
-    allowtransparency="true" 
-    allowfullscreen="true">
-    See the Pen <a href="https://codepen.io/{{ user }}/pen/{{ id }}">{{ id }}</a> by {{ user }}
-    on <a href="https://codepen.io">CodePen</a>.
-  </iframe>
-</div>
+  {% capture count %}{% increment codepen_counter %}{% endcapture %}
+  {% capture unique_id %}zd-codepen-{{ id }}-{{ count }}{% endcapture %}
+
+  <div class="zd-codepen-container {{ include.class }}" id="{{ unique_id }}" style="height: {{ height }}px; position: relative;">
+    <iframe 
+      id="{{ unique_id }}-iframe"
+      height="{{ height }}" 
+      style="width: 100%; border: none; display: block;" 
+      scrolling="no" 
+      title="{{ title | escape }}" 
+      src="https://codepen.io/{{ user }}/embed/{{ id }}?height={{ height }}&theme-id={{ theme }}&default-tab={{ tab }}" 
+      frameborder="no" 
+      loading="lazy" 
+      allowtransparency="true" 
+      allowfullscreen="true">
+      See the Pen <a href="https://codepen.io/{{ user }}/pen/{{ id }}">{{ id }}</a> by {{ user }}
+      on <a href="https://codepen.io">CodePen</a>.
+    </iframe>
+
+    <div class="zd-codepen-error-overlay" id="{{ unique_id }}-error" style="display: none; position: absolute; inset: 0; background: var(--zd-clr-void, #080c10); border: 1px solid var(--zd-clr-red, #ff5555); border-radius: var(--zd-radius, 4px); padding: 1.5rem; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 5;">
+      <div style="color: var(--zd-clr-red, #ff5555); margin-bottom: 0.75rem;">
+        <i data-lucide="alert-triangle" style="width: 32px; height: 32px;"></i>
+      </div>
+      <h4 style="margin: 0 0 0.5rem 0; color: var(--zd-clr-platinum, #edf1f5); font-weight: 600;">CodePen Not Found (404)</h4>
+      <p style="margin: 0 0 1.25rem 0; font-size: 0.85rem; color: var(--zd-clr-ash, #8a99a8); max-width: 400px; line-height: 1.4;">
+        The Pen <code>{{ id }}</code> by user <code>{{ user }}</code> could not be loaded. It may be deleted, private, or the credentials might be incorrect.
+      </p>
+      <a href="https://codepen.io/{{ user }}/pen/{{ id }}" target="_blank" rel="noopener noreferrer" class="zd-btn zd-btn--compact" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #25303d; color: #edf1f5; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;">
+        <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+        <span>Verify on CodePen</span>
+      </a>
+    </div>
+
+    <script>
+      (function() {
+        const containerId = "{{ unique_id }}";
+        const iframe = document.getElementById(containerId + "-iframe");
+        const errorOverlay = document.getElementById(containerId + "-error");
+        
+        // Query the public oEmbed API which supports CORS
+        const oEmbedUrl = `https://codepen.io/api/oembed?url=https://codepen.io/{{ user }}/pen/{{ id }}&format=json`;
+        
+        fetch(oEmbedUrl)
+          .then(response => {
+            if (response.status === 404) {
+              iframe.style.display = "none";
+              errorOverlay.style.display = "flex";
+              if (window.lucide) {
+                window.lucide.createIcons({
+                  attrs: { class: 'zd-icon' }
+                });
+              }
+            }
+          })
+          .catch(err => {
+            console.warn("CodePen availability check failed, defaulting to iframe load:", err);
+          });
+      })();
+    </script>
+  </div>
+{% else %}
+  <div class="zd-codepen-error-overlay" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--zd-clr-void, #080c10); border: 1px dashed #25303d; border-radius: var(--zd-radius, 4px); padding: 1.5rem; height: {{ height }}px; box-sizing: border-box;">
+    <div style="color: var(--zd-clr-red, #ff5555); margin-bottom: 0.75rem;">
+      <i data-lucide="alert-octagon" style="width: 32px; height: 32px;"></i>
+    </div>
+    <h4 style="margin: 0 0 0.5rem 0; color: var(--zd-clr-platinum, #edf1f5); font-weight: 600;">CodePen Parameter Error</h4>
+    <p style="margin: 0; font-size: 0.85rem; color: var(--zd-clr-ash, #8a99a8); max-width: 400px; line-height: 1.4;">
+      A valid CodePen <strong>id</strong> is required to render the interactive playground. Please verify your component parameters.
+    </p>
+  </div>
 {% endif %}

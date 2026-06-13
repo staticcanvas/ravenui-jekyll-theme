@@ -38,7 +38,7 @@ Usage______: {% include core/header.html %}
               {% include comps/simple-icon.html name=link.icon size=14 color=link.color %}
               <span style="margin-inline-start: 6px;"></span>
             {% elsif link.source == "fa" %}
-              {% include comps/font-awesome.html name=link.icon size=14 color=link.color %}
+              {% include comps/font-awesome.html name=link.icon style=link.style size=14 color=link.color %}
               <span style="margin-inline-start: 6px;"></span>
             {% else %}
               <i data-lucide="{{ link.icon }}" 
