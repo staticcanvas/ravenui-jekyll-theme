@@ -489,7 +489,7 @@
             // Search Provider Initialization
             const searchProvider = "{{ search_provider }}";
             if (searchProvider === 'pagefind') {
-                if (typeof PagefindUI !== 'undefined') {
+                const initPagefind = () => {
                     try {
                         new PagefindUI({
                             element: "#zd-search-ui",
@@ -500,6 +500,18 @@
                             translations: { placeholder: "Search documentation..." }
                         });
                     } catch (e) { console.warn("Pagefind UI failed:", e); }
+                };
+
+                if (typeof PagefindUI !== 'undefined') {
+                    initPagefind();
+                } else {
+                    const checkPagefind = setInterval(() => {
+                        if (typeof PagefindUI !== 'undefined') {
+                            clearInterval(checkPagefind);
+                            initPagefind();
+                        }
+                    }, 50);
+                    setTimeout(() => clearInterval(checkPagefind), 5000);
                 }
             } else if (searchProvider === 'lyra') {
                 initLyra().then(() => setupCustomSearch());
