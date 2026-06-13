@@ -22,6 +22,10 @@ theme_settings:
     enabled: true
     sticky: true
     align: center
+  toc:
+    style: simple                  # options: simple, lines, nodes
+    density: default               # options: compact, default, relaxed
+    animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header
 

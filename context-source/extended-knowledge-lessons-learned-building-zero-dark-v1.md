@@ -42,6 +42,10 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Problem:** Clicking sidebar navigation items caused the scroll position of the sidebar to jump back to top before restoring, creating a visual flicker.
 - **Resolution:** Implemented an inline script executing immediately after the sidebar element definition to restore scroll position *before* the first layout paint.
 
+### **2.6. Table of Contents (TOC) Custom Animations & Layouts**
+- **Problem:** Implementing smooth animations on the dynamic Table of Contents (TOC) can cause layout shifting, visual lag, or accessibility conflicts (specifically for users with motion sensitivity).
+- **Resolution:** Implemented TOC animations using pure CSS transitions and keyframes gated by a body configuration attribute `data-toc-animations`. Added a transition wrapper around `.zd-toc-link` and optimized performance using `transform: translateX` instead of animating layout properties like `margin-left` or `padding-left`. Used a CSS media query target for `prefers-reduced-motion: reduce` to disable transitions automatically when requested by the OS.
+
 ---
 
 ## **3. Quality of Life (QOL) & Aesthetic Guidelines**

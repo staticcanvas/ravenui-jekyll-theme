@@ -110,8 +110,30 @@
   }
 }
 
+.zd-animations-enabled.zd-anim-page-loads:not([data-toc-animations="false"]) {
+  .zd-page-toc-container {
+    animation: zd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.12s;
+  }
+}
+
 // 2. Interactive Hover Micro-Animations
 .zd-animations-enabled.zd-anim-hover-effects {
+  // TOC links
+  &:not([data-toc-animations="false"]) {
+    .zd-toc-link {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease, font-weight 0.15s ease, padding 0.15s ease;
+      
+      &:hover {
+        transform: translateX(4px);
+      }
+      
+      &.active {
+        transform: translateX(2px);
+      }
+    }
+  }
+
   // Cards
   .zd-card {
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;

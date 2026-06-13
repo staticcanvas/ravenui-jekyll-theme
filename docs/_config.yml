@@ -34,6 +34,10 @@ theme_settings:
     enabled: false
     sticky: true
     align: center                   # Alignment of header links (options: left, center, right)
+  toc:
+    style: nodes                   # TOC style design: simple, lines, nodes
+    density: default               # TOC density: compact, default, relaxed
+    animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header              # Code block language style: badge, header
 

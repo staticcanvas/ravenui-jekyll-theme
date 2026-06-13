@@ -117,18 +117,22 @@ The "***On This Page***" section appears in the **right sidebar** on desktop vie
 
 ### **Custom TOC Styles**
 
-You can configure different TOC designs and font size densities inside your `_config.yml` under `theme_settings.toc`:
+You can configure different TOC designs, font size densities, and animations inside your `_config.yml` under `theme_settings.toc`:
 
 ```yaml
 theme_settings:
   toc:
     style: nodes              # Layout style: simple, lines, nodes
     density: default          # Font sizing density: compact, default, relaxed
+    animations: true          # Enable/disable TOC specific animations (page load, hover)
 ```
 
-- **`simple`**: A clean, border-left layout where active links draw a highlighting line.
-- **`lines`**: Renders a vertical line on the left side of the TOC, marking active links with matching vertical segments.
-- **`nodes`**: A timeline/stepper layout rendering circular indicators on the left line, which dynamically fill when active.
+- **`style`**: Layout style for TOC links.
+  - **`simple`**: A clean, border-left layout where active links draw a highlighting line.
+  - **`lines`**: Renders a vertical line on the left side of the TOC, marking active links with matching vertical segments.
+  - **`nodes`**: A timeline/stepper layout rendering circular indicators on the left line, which dynamically fill when active.
+- **`density`**: Controls font size density (`compact`, `default`, `relaxed`).
+- **`animations`**: When set to `true`, enables dedicated CSS animations on the TOC, such as sliding up on page load and sliding links horizontally on hover. Respects user system reduced motion preference.
 
 ---
 
