@@ -1,0 +1,13 @@
+staticcanvas:
+  name: "StaticCanvas Team"
+  avatar: "https://picsum.photos/id/1025/150/150"
+  bio: "Lead developers of the Zero-Dark Jekyll theme framework. Building elegant, technical, and high-performance developer experiences."
+  twitter: "staticcanvas"
+  github: "staticcanvas"
+
+sgkens:
+  name: "sgkens"
+  avatar: "https://picsum.photos/id/64/150/150"
+  bio: "Senior UI/UX Engineer at StaticCanvas. Focuses on design systems, typography, and TUI companion development."
+  twitter: "sgkens"
+  github: "sgkens"
