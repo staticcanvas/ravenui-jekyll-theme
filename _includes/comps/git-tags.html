@@ -1,3 +1,9 @@
+{%- comment -%}
+Component__: GitTags
+Purpose____: Renders Git tag releases in either card grid or list layouts.
+Caveats____: Requires the custom Ruby plugin 'from_yaml' to parse string-based data inputs.
+Usage______: {% include comps/git-tags.html data=site.data.tags layout="grid" %}
+{%- endcomment -%}
 {% assign tag_source = include.data | default: site.data.tags %}
 {% if tag_source %}
     {% assign test_first = tag_source | slice: 0 %}

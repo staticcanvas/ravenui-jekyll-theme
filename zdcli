@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Zero-Dark CLI Unix Entry Shortcut
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+pwsh -File "$SCRIPT_DIR/zdcli.ps1" "$@"

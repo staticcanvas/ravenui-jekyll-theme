@@ -95,5 +95,51 @@
             </div>
         {% endif %}
         {% endfor %}
+
+        {% if site.theme_settings.collections.enabled %}
+            {% for collection in site.collections %}
+                {% assign label = collection.label %}
+                {% unless label == "posts" or label == "pages" %}
+                    {% if collection.sidebar != false %}
+                        {% if collection.divider %}
+                            <hr class="zd-nav-separator">
+                        {% endif %}
+                        <div class="zd-nav-group-title" style="margin-block-start: 1.25rem;">{{ collection.title | default: label | capitalize }}</div>
+                        <div>
+                            {% assign sorted_docs = collection.docs | sort: "order" %}
+                            {% assign current_group = nil %}
+                            {% for doc in sorted_docs %}
+                                {% if doc.group != current_group %}
+                                    {% assign current_group = doc.group %}
+                                    {% if current_group %}
+                                        <div class="zd-nav-subgroup-title" style="font-size: 0.65rem; text-transform: uppercase; color: #555; margin-block: 0.75rem 0.25rem; font-weight: 600; letter-spacing: 0.05em; padding-inline-start: 4px;">{{ current_group }}</div>
+                                    {% endif %}
+                                {% endif %}
+                                {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                                {% assign doc_url = doc.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                                <a href="{{ doc.url | relative_url }}" class="zd-nav-link" {% if page_url == doc_url %}aria-current="page"{% endif %} style="padding-inline-start: {% if current_group %}12px{% else %}4px{% endif %};">
+                                    {% if doc.icon %}
+                                        <i data-lucide="{{ doc.icon }}" 
+                                           style="width: 14px; height: 14px; margin-inline-end: 8px; vertical-align: middle; {% if doc.color %}color: {{ doc.color }};{% endif %}">
+                                        </i>
+                                    {% endif %}
+                                    {{ doc.title | default: doc.slug }}
+                                    {% if doc.is_new_feature %}
+                                        <span class="zd-nav-badge zd-nav-badge--{{ doc.is_new_feature }}">
+                                            {% if doc.is_new_feature == true or doc.is_new_feature == "new" %}
+                                                new
+                                            {% else %}
+                                                {{ doc.is_new_feature }}
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endunless %}
+            {% endfor %}
+        {% endif %}
     </nav>
 </aside>
+
