@@ -3,19 +3,19 @@
 
 {% include core/head.html %}
 
-<body class="zd-splash-variant-{{ page.variant | default: 'generic' }}{% if site.theme_settings.animations.enabled != false %} zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
+<body class="rd-splash-variant-{{ page.variant | default: 'generic' }}{% if site.theme_settings.animations.enabled != false %} rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
 
-    <div class="zd-splash-container">
-        <main class="zd-splash-main">
-            <header class="zd-splash-header">
-                <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "SP" }}</span></a>
+    <div class="rd-splash-container">
+        <main class="rd-splash-main">
+            <header class="rd-splash-header">
+                <a href="{{ "/" | relative_url }}" class="rd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "SP" }}</span></a>
             </header>
 
-            <section class="zd-splash-hero">
+            <section class="rd-splash-hero">
                 {{ content }}
             </section>
 
-            <footer class="zd-splash-footer">
+            <footer class="rd-splash-footer">
                 {{ site.copyright }}
             </footer>
         </main>

@@ -3,7 +3,7 @@ layout: default
 title: Markdown Overrides
 output-title: true
 tags: [markdown, style, syntax]
-description: Zero-Dark enhances standard markdown with high-contrast, technical styling.
+description: RavenUI enhances standard markdown with high-contrast, technical styling.
 enable_search: true
 ---
 We have extended the default Jekyll/Kramdown rendering to match the theme's professional aesthetic.
@@ -11,7 +11,7 @@ We have extended the default Jekyll/Kramdown rendering to match the theme's prof
 {% include comps/heading.html tag="h2" text="Typography" icon="type" size=20 %}
 
 #### Blockquotes
-> Zero-Dark blockquotes feature a subtle accent border and muted text, perfect for secondary information or context.
+> RavenUI blockquotes feature a subtle accent border and muted text, perfect for secondary information or context.
 
 #### Inline Code
 Use backticks for `inline code snippets`. These use the font family configured for mono text with a subtle background highlight.
@@ -27,9 +27,9 @@ You can render styled keys like <kbd>Ctrl</kbd> + <kbd>/</kbd> to document short
 Syntax highlighting is powered by **Rouge** with our custom **Ethereal Rouge** theme.
 
 ```javascript
-// Zero-Dark Code Block
+// RavenUI Code Block
 const theme = {
-  name: "Zero-Dark",
+  name: "RavenUI",
   version: "1.3.4",
   status: "stable"
 };

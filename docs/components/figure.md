@@ -6,7 +6,7 @@ tags: [ui, media]
 description: A semantic HTML figure and caption wrapper component supporting alignments (left, right, center, full) and borders.
 enable_search: true
 ---
-The `figure.html` component provides a semantic wrapper for images (`<figure>` and `<figcaption>`), fully integrated with the Zero-Dark design language. It supports subtle borders, link wrapping, and multiple alignment states (floated left, floated right, centered, or full-width page blocks).
+The `figure.html` component provides a semantic wrapper for images (`<figure>` and `<figcaption>`), fully integrated with the RavenUI design language. It supports subtle borders, link wrapping, and multiple alignment states (floated left, floated right, centered, or full-width page blocks).
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="image" size=20 %}
 

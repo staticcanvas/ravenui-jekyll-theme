@@ -29,8 +29,8 @@ The `last-edited.html` component prints a small metadata line showing when a pag
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `enabled` | Boolean | `site.zd_last_edited` or `true` | Set to `false` to explicitly hide this component instance. |
+| `enabled` | Boolean | `site.rd_last_edited` or `true` | Set to `false` to explicitly hide this component instance. |
 | `date` | String | `page.last_modified_at` or `page.last_edited` or `page.date` | Timestamp or date string to display. |
 | `author` | String | `page.last_edited_by` or `page.author` or `site.author.name` | Editor's name. |
 | `format` | String | `"%B %d, %Y at %I:%M %p"` | Liquid date format string. |
-| `color` | String | `var(--zd-clr-slate)` | CSS color variable or hex code for the text. |
+| `color` | String | `var(--rd-clr-slate)` | CSS color variable or hex code for the text. |

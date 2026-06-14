@@ -1,0 +1,83 @@
+// Pure-CSS Context Tooltip Component
+// Compliance: [Fluent UI Integration]
+
+.rd-tooltip-trigger {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dashed var(--rd-clr-viridian);
+  color: var(--rd-clr-white);
+  display: inline-block;
+
+  // Tooltip container (pseudo-element)
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    background: var(--rd-clr-black);
+    border: 1px solid var(--rd-border-strong);
+    color: var(--rd-clr-white);
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: var(--rd-font-sans);
+    border-radius: var(--rd-radius);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all var(--rd-transition-fast);
+    box-shadow: var(--rd-elevation-surface);
+    z-index: var(--z-fixed);
+  }
+
+  // Position: top (default)
+  &.rd-tooltip--top::after {
+    bottom: 120%;
+    left: 50%;
+    transform: translate(-50%, 5px);
+  }
+
+  &.rd-tooltip--top:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  // Position: bottom
+  &.rd-tooltip--bottom::after {
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -5px);
+  }
+
+  &.rd-tooltip--bottom:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  // Position: left
+  &.rd-tooltip--left::after {
+    right: 120%;
+    top: 50%;
+    transform: translate(5px, -50%);
+  }
+
+  &.rd-tooltip--left:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, -50%);
+  }
+
+  // Position: right
+  &.rd-tooltip--right::after {
+    left: 120%;
+    top: 50%;
+    transform: translate(-5px, -50%);
+  }
+
+  &.rd-tooltip--right:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, -50%);
+  }
+}

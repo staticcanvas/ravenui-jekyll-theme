@@ -1,0 +1,138 @@
+/* WEB API REFERENCE */
+.rd-api-reference {
+  margin-block: 3.5rem;
+  background: var(--rd-bg-surface);
+  border: var(--rd-border);
+  border-radius: var(--rd-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.rd-api-ref-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: var(--rd-border);
+}
+
+.rd-api-ref-method {
+  font-family: var(--rd-font-mono, monospace);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rd-api-ref-path {
+  font-family: var(--rd-font-mono, monospace);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--rd-clr-platinum, #edf1f5);
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.rd-api-ref-title-text {
+  font-size: 0.85rem;
+  color: var(--rd-clr-slate, #8a99ad);
+  margin-inline-start: auto;
+  font-family: var(--rd-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rd-api-ref-body {
+  padding: 2rem;
+}
+
+.rd-api-ref-description {
+  margin-bottom: 2rem;
+  color: #bbb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.rd-api-ref-section {
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.rd-api-ref-sec-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #444;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::after {
+    content: "";
+    height: 1px;
+    flex-grow: 1;
+    background: #1a1a1a;
+  }
+}
+
+.rd-api-ref-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding-block: 0.75rem;
+    border-bottom: 1px solid #1a1a1a;
+    display: grid;
+    grid-template-columns: 140px 90px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+
+    &:last-child {
+      border: none;
+    }
+
+    &::before {
+      display: none !important;
+    }
+  }
+}
+
+.rd-api-ref-param-name {
+  font-family: var(--rd-font-mono);
+  color: var(--rd-clr-platinum);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.rd-api-ref-param-type {
+  font-family: var(--rd-font-mono);
+  color: var(--rd-clr-highlight);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.rd-api-ref-param-desc {
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.rd-api-ref-body-content {
+  font-size: 0.9rem;
+  color: #bbb;
+
+  .highlight {
+    margin-top: 0.5rem;
+  }
+}

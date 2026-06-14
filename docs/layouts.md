@@ -3,10 +3,10 @@ layout: default
 title: Layouts
 output-title: true
 tags: [ui, layout, architecture]
-description: Understanding the structural foundation and page templates of Zero-Dark.
+description: Understanding the structural foundation and page templates of RavenUI.
 enable_search: true
 ---
-Zero-Dark is built on a high-density, three-column grid system that prioritizes information hierarchy and technical clarity.
+RavenUI is built on a high-density, three-column grid system that prioritizes information hierarchy and technical clarity.
 
 {% include comps/heading.html tag="h2" text="The Main Layout" icon="layout" size=20 %}
 
@@ -106,7 +106,7 @@ A premium layout for deep-dive technical articles, tutorials, or research docs. 
 ```yaml
 ---
 layout: article
-title: "Zero-Dark Architecture Overview"
+title: "RavenUI Architecture Overview"
 author: staticcanvas
 banner_gradient: "linear-gradient(135deg, #093325 0%, #061f17 100%)"
 ---

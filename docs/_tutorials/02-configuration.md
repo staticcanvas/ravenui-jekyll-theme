@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Theme Configuration"
-description: "How to configure collections in your Zero-Dark settings."
+description: "How to configure collections in your RavenUI settings."
 order: 2
 group: "Getting Started"
 icon: "settings"

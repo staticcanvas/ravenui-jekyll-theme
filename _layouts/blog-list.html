@@ -2,16 +2,16 @@
 layout: default
 ---
 
-<div class="zd-blog-list">
+<div class="rd-blog-list">
     {{ content }}
     <div style="margin-block-end: 3rem;">
-        <h2 class="zd-section-title">Latest Articles</h2>
+        <h2 class="rd-section-title">Latest Articles</h2>
         <p class="text-muted">Technical updates, design shifts, and engineering logs.</p>
     </div>
 
     {% for post in site.posts %}
-    <article class="zd-blog-list-item">
-        <div class="zd-blog-list-meta">
+    <article class="rd-blog-list-item">
+        <div class="rd-blog-list-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">
                 {% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}
             </time>
@@ -23,17 +23,17 @@ layout: default
             {% endif %}
         </div>
 
-        <h3 class="zd-blog-list-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <h3 class="rd-blog-list-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
         
         {% if post.description %}
-        <p class="zd-blog-list-desc">{{ post.description }}</p>
+        <p class="rd-blog-list-desc">{{ post.description }}</p>
         {% endif %}
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
             {% if post.tags %}
-            <div class="zd-tag-container" style="margin: 0;">
+            <div class="rd-tag-container" style="margin: 0;">
                 {% for tag in post.tags %}
-                <span class="zd-tag">#{{ tag }}</span>
+                <span class="rd-tag">#{{ tag }}</span>
                 {% endfor %}
             </div>
             {% endif %}

@@ -6,14 +6,14 @@ tags: [ui, components, terminal, cli]
 description: A high-fidelity terminal component for showcasing command-line interactions.
 enable_search: true
 ---
-Zero-Dark includes a professional `terminal.html` component that simulates a modern command-line interface with support for multiple tabs, status indicators, and syntax-highlighted commands.
+RavenUI includes a professional `terminal.html` component that simulates a modern command-line interface with support for multiple tabs, status indicators, and syntax-highlighted commands.
 
 {% include comps/heading.html tag="h2" text="Basic Usage" icon="terminal" size=20 %}
 
 The terminal component is perfect for installation steps or demonstrating CLI tools.
 
 {% capture terminal_content %}
-<span class="fg-highlight">$</span> npm install zero-dark-sp
+<span class="fg-highlight">$</span> npm install ravenui-sp
 <span class="fg-muted">... downloading dependencies</span>
 <span class="fg-success">DONE</span> Installed version 1.3.4
 {% endcapture %}
@@ -22,21 +22,21 @@ The terminal component is perfect for installation steps or demonstrating CLI to
     title="bash" 
     content=terminal_content 
     user="gsnow" 
-    host="zero-dark" 
+    host="ravenui" 
 %}
 
 {% capture terminal_code %}
 {% raw %}
 ```liquid
 {% capture terminal_content %}
-<span class="fg-highlight">$</span> npm install zero-dark-sp
+<span class="fg-highlight">$</span> npm install ravenui-sp
 {% endcapture %}
 
 {% include comps/terminal.html 
     title="bash" 
     content=terminal_content 
     user="gsnow" 
-    host="zero-dark" 
+    host="ravenui" 
 %}
 ```
 {% endraw %}

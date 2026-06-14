@@ -1,4 +1,4 @@
-<footer class="zd-footer" id="footer" style="margin-top: 5rem; padding-top: 2rem; border-top: var(--zd-border); font-size: 0.8rem;">
+<footer class="rd-footer" id="footer" style="margin-top: 5rem; padding-top: 2rem; border-top: var(--rd-border); font-size: 0.8rem;">
     {% if site.theme_settings.footer.columns %}
         {% assign cols_count = site.theme_settings.footer.columns | size %}
         {% if cols_count == 2 %}
@@ -20,10 +20,10 @@
 
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
         <div>
-            <p style="opacity: 0.4;">{{ site.copyright | default: "© 2026 Zero-Dark Systems. All rights reserved." }}</p>
-            {% if site.zd_show_powered_by %}
+            <p style="opacity: 0.4;">{{ site.copyright | default: "© 2026 RavenUI Systems. All rights reserved." }}</p>
+            {% if site.rd_show_powered_by %}
             <p style="margin-top: 0.5rem; font-size: 0.65rem; opacity: 0.3; text-transform: uppercase; letter-spacing: 0.05em;">
-                Powered by <a href="https://github.com/staticcanvas/zero-dark-jekyll-theme" target="_blank" style="color: inherit; border-bottom: 1px dashed rgba(255,255,255,0.2);">Zero-Dark</a>
+                Powered by <a href="https://github.com/staticcanvas/ravenui-jekyll-theme" target="_blank" style="color: inherit; border-bottom: 1px dashed rgba(255,255,255,0.2);">RavenUI</a>
             </p>
             {% endif %}
         </div>
@@ -65,14 +65,14 @@
                 {% endif %}
 
                 {% if edit_url %}
-                <a href="{{ edit_url }}" class="zd-edit-link" target="_blank" rel="noopener noreferrer">
+                <a href="{{ edit_url }}" class="rd-edit-link" target="_blank" rel="noopener noreferrer">
                     {% include comps/icon.html name=icon size=14 %} {{ platform_name }}
                     Edit this page
                 </a>
                 {% endif %}
             {% endif %}
 
-            <div style="font-family: var(--zd-font-mono); font-size: 0.65rem; color: #444; text-transform: uppercase;">
+            <div style="font-family: var(--rd-font-mono); font-size: 0.65rem; color: #444; text-transform: uppercase;">
                 {% if page.date %}
                 <span>Updated: {{ page.date | date: "%B %d, %Y" }}</span>
                 {% endif %}

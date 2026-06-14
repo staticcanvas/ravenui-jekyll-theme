@@ -2,23 +2,23 @@
 layout: default
 ---
 
-<div class="zd-blog-grid">
+<div class="rd-blog-grid">
     {% for post in site.posts %}
-    <div class="zd-blog-card">
+    <div class="rd-blog-card">
         {% if post.thumbnail %}
-        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="zd-blog-thumb">
+        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="rd-blog-thumb">
         {% endif %}
-        <div class="zd-blog-card-content">
-            <h3 class="zd-blog-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <div class="zd-blog-card-meta">
+        <div class="rd-blog-card-content">
+            <h3 class="rd-blog-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <div class="rd-blog-card-meta">
                 <span>{% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}</span>
                 <span>{% include comps/icon.html name="user" size=12 %} {{ post.author }}</span>
             </div>
-            <p class="zd-blog-card-desc">{{ post.description }}</p>
+            <p class="rd-blog-card-desc">{{ post.description }}</p>
             {% if post.tags %}
-            <div class="zd-tag-container">
+            <div class="rd-tag-container">
                 {% for tag in post.tags %}
-                <span class="zd-tag">{{ tag }}</span>
+                <span class="rd-tag">{{ tag }}</span>
                 {% endfor %}
             </div>
             {% endif %}

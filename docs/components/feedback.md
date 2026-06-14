@@ -30,7 +30,7 @@ The `feedback.html` component provides a subtle, conversion-optimized widget for
 {% include comps/heading.html tag="h2" text="Analytics Integration" icon="activity" size=20 %}
 
 When a user submits feedback, the widget automatically:
-1. Saves the response status to `localStorage` under the key `zd_feedback_<page_path>` to ensure they only submit feedback once per page (and hides the widget on subsequent page loads).
+1. Saves the response status to `localStorage` under the key `rd_feedback_<page_path>` to ensure they only submit feedback once per page (and hides the widget on subsequent page loads).
 2. Dispatches a capture event to the active tracking provider configured in `_config.yml`:
    * **PostHog:** Captures a `page_feedback` event with the properties `{ url: <page_path>, helpful: true/false }`.
    * **Google Analytics:** Pushes a custom `feedback` event with Category `Documentation`, Label `<page_path>`, and Value `1` (Yes) or `0` (No).
@@ -68,7 +68,7 @@ theme_settings:
 To enable the feedback widget globally at the bottom of every page layout, configure it in your `_config.yml`:
 
 ```yaml
-zd_feedback:
+rd_feedback:
   enabled: true
   question: "Was this page helpful?"
   yes_label: "Yes"

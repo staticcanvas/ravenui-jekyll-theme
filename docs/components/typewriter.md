@@ -36,5 +36,5 @@ The `typewriter.html` component provides a polished, dynamic typing effect that 
 | `words` | String | `Hello\|World` | Pipe-separated (`\|`) list of phrases to cycle through. |
 | `speed` | Integer | `100` | Typing speed in milliseconds per character. |
 | `delay` | Integer | `1500` | Pause duration in milliseconds before deleting a typed phrase. |
-| `id` | String | `zd-typewriter` | Unique HTML element ID (required if using multiple typewriters on one page). |
+| `id` | String | `rd-typewriter` | Unique HTML element ID (required if using multiple typewriters on one page). |
 | `class` | String | | Optional CSS class to append to the container span. |

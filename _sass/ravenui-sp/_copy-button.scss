@@ -1,0 +1,41 @@
+// Standalone Copy-to-Clipboard Button
+// Compliance: [Fluent UI Integration]
+
+.rd-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: var(--rd-clr-slate);
+  border: 1px solid var(--rd-border-default);
+  border-radius: var(--rd-radius);
+  color: var(--rd-clr-silver);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--rd-font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--rd-transition-fast);
+  user-select: none;
+  vertical-align: middle;
+
+  &:hover {
+    color: var(--rd-clr-white);
+    background-color: var(--rd-bg-hover);
+    border-color: var(--rd-border-strong);
+  }
+
+  &:active {
+    background-color: var(--rd-bg-active);
+  }
+
+  &.copied {
+    color: var(--rd-clr-viridian);
+    border-color: var(--rd-clr-viridian);
+    background-color: color-mix(in srgb, var(--rd-clr-viridian) 8%, transparent);
+  }
+}
+
+.rd-copy-button-label {
+  font-size: 0.75rem;
+}

@@ -12,15 +12,15 @@ The `button.html` component provides a flexible way to add call-to-action elemen
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
     {% include comps/button.html text="Getting Started" icon="rocket" url="/installation/" %}
-    {% include comps/button.html text="View Source" icon="github" color="var(--zd-clr-platinum)" url="#" %}
+    {% include comps/button.html text="View Source" icon="github" color="var(--rd-clr-platinum)" url="#" %}
     {% include comps/button.html text="Changelog" icon="package" color="#3399ff" url="/components/releases/" %}
-    {% include comps/button.html text="Deprecated" icon="alert-octagon" color="var(--zd-clr-danger)" url="#" %}
+    {% include comps/button.html text="Deprecated" icon="alert-octagon" color="var(--rd-clr-danger)" url="#" %}
 </div>
 
 {% capture btn_code %}
 ```liquid
 {% include comps/button.html text="Getting Started" icon="rocket" url="/installation/" %}
-{% include comps/button.html text="View Source" icon="github" color="var(--zd-clr-platinum)" url="#" %}
+{% include comps/button.html text="View Source" icon="github" color="var(--rd-clr-platinum)" url="#" %}
 ```
 {% endcapture %}
 {% include comps/example-code.html content=btn_code %}
@@ -33,14 +33,14 @@ The `button.html` component provides a flexible way to add call-to-action elemen
 Use the `class` parameter to apply built-in variants for secondary or tertiary actions.
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-block: 2rem;">
-    {% include comps/button.html text="Outline Button" class="zd-btn--outline" icon="external-link" %}
-    {% include comps/button.html text="Ghost Button" class="zd-btn--ghost" icon="search" %}
+    {% include comps/button.html text="Outline Button" class="rd-btn--outline" icon="external-link" %}
+    {% include comps/button.html text="Ghost Button" class="rd-btn--ghost" icon="search" %}
 </div>
 
 {% capture variant_code %}
 ```liquid
-{% include comps/button.html text="Outline Button" class="zd-btn--outline" icon="external-link" %}
-{% include comps/button.html text="Ghost Button" class="zd-btn--ghost" icon="search" %}
+{% include comps/button.html text="Outline Button" class="rd-btn--outline" icon="external-link" %}
+{% include comps/button.html text="Ghost Button" class="rd-btn--ghost" icon="search" %}
 ```
 {% endcapture %}
 {% include comps/example-code.html content=variant_code %}
@@ -54,11 +54,11 @@ Use the `class` parameter to apply built-in variants for secondary or tertiary a
 | `text` | String | "Button" | The button label. |
 | `url` | String | | Destination URL. |
 | `icon` | String | | Lucide icon name. |
-| `color` | String | `--zd-clr-highlight` | Background color (or text color for outline). |
+| `color` | String | `--rd-clr-highlight` | Background color (or text color for outline). |
 | `size` | String | `0.85rem` | Font size. |
-| `radius` | String | `--zd-radius` | Border radius. |
+| `radius` | String | `--rd-radius` | Border radius. |
 | `border-size` | String | `1px` | Border width. |
 | `border-color` | String | `transparent` | Border color. |
-| `class` | String | | Additional CSS classes (`zd-btn--outline`, `zd-btn--ghost`). |
+| `class` | String | | Additional CSS classes (`rd-btn--outline`, `rd-btn--ghost`). |
 | `target` | String | | Anchor target (e.g., `_blank`). |
 | `rel` | String | | Anchor rel (e.g., `noopener`). |

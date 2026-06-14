@@ -6,7 +6,7 @@ tags: [ui, layout, splash, landing]
 description: Specialized components and layouts for building high-impact landing pages.
 enable_search: true
 ---
-Zero-Dark provides a suite of advanced components specifically designed for the `splash` layout, allowing you to create professional product landing pages and entry points.
+RavenUI provides a suite of advanced components specifically designed for the `splash` layout, allowing you to create professional product landing pages and entry points.
 
 {% include comps/heading.html tag="h2" text="Splash Components" icon="box" size=24 %}
 
@@ -30,7 +30,7 @@ A high-impact centered block for primary calls-to-action.
 {% endcapture %}
 
 {% include comps/hero-card.html 
-   title="Zero-Dark" 
+   title="RavenUI" 
    description="A professional, high-performance Jekyll theme engineered for technical documentation and long-form readability." 
    cta_text="View Installation" 
    cta_url="/installation/" 
@@ -43,7 +43,7 @@ A high-impact centered block for primary calls-to-action.
 An emulated terminal window with stylized controls and monospaced output.
 
 {% capture term_content %}
-<span class="fg-muted">></span> npm install zero-dark-sp<br>
+<span class="fg-muted">></span> npm install ravenui-sp<br>
 <span class="fg-highlight">✓</span> Package installed successfully.<br>
 <span class="fg-muted">></span> jekyll serve<br>
 <span class="fg-info">i</span> Server running at http://localhost:4000
@@ -98,4 +98,4 @@ A modern, translucent card style with backdrop blur.
 
 A tabbed interface for displaying installation commands across different package managers.
 
-{% include comps/package-tabs.html package="zero-dark-sp" %}
+{% include comps/package-tabs.html package="ravenui-sp" %}

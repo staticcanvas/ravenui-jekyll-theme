@@ -8,4 +8,4 @@ Usage______: {% include comps/tooltip.html term="API" definition="Application Pr
 {%- assign definition = include.definition -%}
 {%- assign position = include.position | default: "top" -%}
 {%- assign unique_id = include.id | default: term | slugify | append: "-" | append: term.size -%}
-<span class="zd-tooltip-trigger zd-tooltip--{{ position }} {{ include.class }}" aria-describedby="tooltip-{{ unique_id }}" tabindex="0" data-tooltip="{{ definition | escape }}">{{ term }}</span><span id="tooltip-{{ unique_id }}" class="zd-sr-only" role="tooltip">{{ definition }}</span>
+<span class="rd-tooltip-trigger rd-tooltip--{{ position }} {{ include.class }}" aria-describedby="tooltip-{{ unique_id }}" tabindex="0" data-tooltip="{{ definition | escape }}">{{ term }}</span><span id="tooltip-{{ unique_id }}" class="rd-sr-only" role="tooltip">{{ definition }}</span>

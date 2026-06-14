@@ -3,10 +3,10 @@ layout: default
 title: Theme Colors
 output-title: true
 tags: [branding, styling, design-system]
-description: Showcase of the Zero-Dark color palette and UI surface system.
+description: Showcase of the RavenUI color palette and UI surface system.
 enable_search: true
 ---
-Zero-Dark features a high-density, professional dark palette designed for technical documentation. Below is the canonical list of brand colors and interface surface specifications.
+RavenUI features a high-density, professional dark palette designed for technical documentation. Below is the canonical list of brand colors and interface surface specifications.
 
 {% include comps/heading.html tag="h2" text="Brand Colors" icon="palette" size=20 %}
 

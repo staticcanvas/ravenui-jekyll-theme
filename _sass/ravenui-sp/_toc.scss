@@ -1,0 +1,200 @@
+/* PAGE TOC */
+.rd-page-toc-container {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: var(--z-fixed);
+}
+
+.rd-page-toc-container.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+@media (max-width: 63.98rem) {
+    .rd-page-toc-container {
+        position: fixed;
+        top: 5.5rem;
+        left: 1rem;
+        right: 1rem;
+        max-height: calc(100vh - 7rem);
+        overflow-y: auto;
+        background: color-mix(in srgb, var(--rd-bg-base) 90%, transparent);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        border: var(--rd-border);
+        border-radius: var(--rd-radius-lg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+}
+
+@media (min-width: 64rem) {
+    .rd-page-toc-container {
+        position: sticky;
+        top: 2.5rem;
+        display: block !important;
+        opacity: 1;
+        transform: none;
+        pointer-events: all;
+    }
+}
+
+
+.rd-toc-heading {
+  font-size: 0.65rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-block-end: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rd-toc-link {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  padding: 0.3rem 0;
+  border: none;
+  transition: 0.15s;
+  position: relative;
+}
+
+.rd-toc-link:hover { color: var(--rd-clr-highlight); }
+.rd-toc-link.active {
+  color: var(--rd-clr-highlight);
+  font-weight: 600;
+}
+
+/* Legacy default indicator style if style classes are not used */
+.rd-page-toc:not([class*="rd-page-toc--"]) .rd-toc-link.active::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 2px;
+  background: var(--rd-clr-highlight);
+  box-shadow: 0 0 8px var(--rd-clr-highlight);
+}
+
+.rd-toc-level-h2 { padding-inline-start: 0; }
+.rd-toc-level-h3 { padding-inline-start: 1rem; font-size: 0.8rem; }
+.rd-toc-level-h4 { padding-inline-start: 2rem; font-size: 0.75rem; }
+.rd-toc-level-h5 { padding-inline-start: 3rem; font-size: 0.7rem; }
+.rd-toc-level-h6 { padding-inline-start: 4rem; font-size: 0.65rem; }
+
+.rd-toc-extra {
+    padding-block: 0.5rem;
+    border-block: 1px solid transparent;
+}
+
+.rd-toc-extra--top { border-block-end: 1px solid #111; margin-block-end: 0.5rem; }
+.rd-toc-extra--bottom { border-block-start: 1px solid #111; margin-block-start: 0.5rem; }
+
+.rd-toc-nav-link {
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #444 !important;
+    &:hover { color: var(--rd-clr-highlight) !important; }
+}
+
+/* --- TOC CUSTOM DESIGNS --- */
+
+/* 1. SIMPLE (Flat active state border-left) */
+.rd-page-toc--simple {
+  .rd-toc-link {
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    margin-left: 0;
+
+    &.active {
+      border-left-color: var(--rd-clr-highlight);
+      font-weight: 600;
+    }
+  }
+}
+
+/* 2. LINES (Continuous line with active indicator) */
+.rd-page-toc--lines {
+  position: relative;
+  border-left: 1px solid color-mix(in srgb, var(--rd-border-color) 40%, transparent);
+  padding-left: 0.75rem;
+  margin-left: 0.25rem;
+
+  .rd-toc-link {
+    &.active::after {
+      content: "";
+      position: absolute;
+      left: calc(-0.75rem - 1px);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--rd-clr-highlight);
+      box-shadow: 0 0 8px var(--rd-clr-highlight);
+    }
+  }
+}
+
+/* 3. NODES (Timeline nodes on left border line) */
+.rd-page-toc--nodes {
+  position: relative;
+  border-left: 1px solid color-mix(in srgb, var(--rd-border-color) 40%, transparent);
+  padding-left: 1.25rem;
+  margin-left: 0.5rem;
+
+  .rd-toc-link {
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(-1.25rem - 4px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rd-bg-base);
+      border: 1px solid color-mix(in srgb, var(--rd-border-color) 60%, transparent);
+      transition: all 0.2s var(--rd-transition-curve);
+    }
+
+    &.active::before {
+      background: var(--rd-clr-highlight);
+      border-color: var(--rd-clr-highlight);
+      box-shadow: 0 0 6px var(--rd-clr-highlight);
+      transform: translateY(-50%) scale(1.25);
+    }
+  }
+}
+
+/* --- TOC DENSITIES --- */
+.rd-page-toc--compact {
+  .rd-toc-link {
+    font-size: 0.78rem !important;
+    padding: 0.2rem 0;
+  }
+  .rd-toc-level-h3 { font-size: 0.74rem !important; }
+  .rd-toc-level-h4 { font-size: 0.7rem !important; }
+}
+
+.rd-page-toc--default {
+  .rd-toc-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+  }
+  .rd-toc-level-h3 { font-size: 0.8rem; }
+  .rd-toc-level-h4 { font-size: 0.75rem; }
+}
+
+.rd-page-toc--relaxed {
+  .rd-toc-link {
+    font-size: 0.92rem !important;
+    padding: 0.4rem 0;
+  }
+  .rd-toc-level-h3 { font-size: 0.86rem !important; }
+  .rd-toc-level-h4 { font-size: 0.8rem !important; }
+}

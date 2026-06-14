@@ -33,12 +33,12 @@ The `shield.html` component acts as a wrapper around the Shields.io API, allowin
 
 You can pass a `link` parameter to automatically wrap the badge inside a secure hyperlink:
 
-{% include comps/shield.html label="docs" message="latest" color="00ff9d" logo="read-the-docs" link="https://gitlab.com/staticcanvas/zero-dark-sp" %}
+{% include comps/shield.html label="docs" message="latest" color="00ff9d" logo="read-the-docs" link="https://gitlab.com/staticcanvas/ravenui-sp" %}
 
 {% capture sh_link_eg %}
 {% raw %}
 ```liquid
-{% include comps/shield.html label="docs" message="latest" color="00ff9d" logo="read-the-docs" link="https://gitlab.com/staticcanvas/zero-dark-sp" %}
+{% include comps/shield.html label="docs" message="latest" color="00ff9d" logo="read-the-docs" link="https://gitlab.com/staticcanvas/ravenui-sp" %}
 ```
 {% endraw %}
 {% endcapture %}

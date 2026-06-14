@@ -1,17 +1,17 @@
 {%- assign tag = include.tag | default: "h2" -%}
 {%- assign text = include.text -%}
-{%- assign text_color = include.text_color | default: "var(--zd-clr-platinum)" -%}
+{%- assign text_color = include.text_color | default: "var(--rd-clr-platinum)" -%}
 {%- assign icon_name = include.icon -%}
-{%- assign icon_color = include.color | default: "var(--zd-clr-platinum)" -%}
+{%- assign icon_color = include.color | default: "var(--rd-clr-platinum)" -%}
 {%- assign icon_size = include.size | default: "20" -%}
 
-<{{ tag }} class="zd-heading">
+<{{ tag }} class="rd-heading">
   {% if icon_name %}
-    <span class="zd-heading-icon" style="color: {{ icon_color }};">
+    <span class="rd-heading-icon" style="color: {{ icon_color }};">
       {% include comps/icon.html name=icon_name size=icon_size %}
     </span>
   {% endif %}
-  <span class="zd-heading-text" style="color: {{ text_color }};">
+  <span class="rd-heading-text" style="color: {{ text_color }};">
     {{ text }}
   </span>
 </{{ tag }}>

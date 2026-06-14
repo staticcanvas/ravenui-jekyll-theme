@@ -10,25 +10,25 @@ metrics_data:
     icon: cpu
     trend: "+1.2%"
     trend_type: up
-    color: "var(--zd-clr-viridian)"
+    color: "var(--rd-clr-viridian)"
   - title: Memory Heap
     value: 256MB
     icon: hard-drive
     trend: "-12%"
     trend_type: down
-    color: "var(--zd-clr-info-alt)"
+    color: "var(--rd-clr-info-alt)"
   - title: Network In
     value: 4.8MB/s
     icon: activity
     trend: "Stable"
     trend_type: neutral
-    color: "var(--zd-clr-warning-alt)"
+    color: "var(--rd-clr-warning-alt)"
   - title: API Success
     value: 99.98%
     icon: check-circle
     trend: "+0.02%"
     trend_type: up
-    color: "var(--zd-clr-viridian)"
+    color: "var(--rd-clr-viridian)"
 enable_search: true
 ---
 The `metrics.html` component provides a high-density, highly responsive grid container designed specifically to showcase KPIs, system performance counters, and application metrics. Each card supports a color-coded vertical highlight bar, custom Lucide icons, status trends, and hover elevations.
@@ -60,13 +60,13 @@ metrics_data:
     icon: cpu
     trend: "+1.2%"
     trend_type: up
-    color: "var(--zd-clr-viridian)"
+    color: "var(--rd-clr-viridian)"
   - title: Memory Heap
     value: 256MB
     icon: hard-drive
     trend: "-12%"
     trend_type: down
-    color: "var(--zd-clr-info-alt)"
+    color: "var(--rd-clr-info-alt)"
 ```
 
 ---

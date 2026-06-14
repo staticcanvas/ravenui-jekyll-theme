@@ -1,0 +1,118 @@
+/* API REFERENCE */
+.rd-api-ref {
+  margin-block: 3.5rem;
+  background: var(--rd-bg-surface);
+  border: var(--rd-border);
+  border-radius: var(--rd-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.rd-api-header {
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.015);
+  border-block-end: var(--rd-border);
+}
+
+.rd-api-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 0.75rem;
+}
+
+.rd-api-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--rd-clr-highlight);
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.rd-api-signature {
+  font-family: var(--rd-font-mono);
+  color: #555;
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.rd-api-body {
+  padding: 2rem;
+}
+
+.rd-api-description {
+  margin-block-end: 2.5rem;
+  color: #bbb;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.rd-api-section {
+  margin-block-end: 2rem;
+}
+
+.rd-api-section:last-child { margin-block-end: 0; }
+
+.rd-api-section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #444;
+  letter-spacing: 0.15em;
+  margin-block-end: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rd-api-section-title::after {
+  content: "";
+  height: 1px;
+  flex-grow: 1;
+  background: #1a1a1a;
+}
+
+.rd-api-param-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.rd-api-param-list {
+  list-style: none;
+  padding: 0;
+  padding-inline-start: 1.5rem;
+  min-width: 400px; /* Ensures grid columns remain readable */
+}
+
+.rd-api-param-list li {
+  padding-block: 0.75rem;
+  border-block-end: 1px solid #1a1a1a;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.rd-api-param-list li:last-child { border: none; }
+
+.rd-api-param-name {
+  font-family: var(--rd-font-mono);
+  color: var(--rd-clr-platinum);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.rd-api-param-desc {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.rd-api-returns {
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.rd-api-example .highlight {
+  margin-block: 0.75rem;
+}

@@ -1,0 +1,9 @@
+/* HEADINGS */
+.rd-heading { display: flex; align-items: center; gap: 0.5rem; }
+.rd-heading-icon { display: inline-flex; align-items: center; }
+
+/* ICONS */
+.rd-icon { display: inline-flex; align-items: center; vertical-align: middle; }
+.rd-icon-animated { transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.rd-icon-animated:hover { transform: scale(1.2) rotate(5deg); }
+.rd-icon-spin { animation: icon-spin 4s linear infinite; }

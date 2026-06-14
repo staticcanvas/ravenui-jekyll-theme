@@ -2,10 +2,10 @@
 layout: default
 title: Installation
 parent: /
-description: Instructions for installing and configuring the Zero-Dark theme.
+description: Instructions for installing and configuring the RavenUI theme.
 enable_search: true
 ---
-Zero-Dark is designed for rapid deployment with minimal configuration. Follow these steps to integrate the theme into your Jekyll project.
+RavenUI is designed for rapid deployment with minimal configuration. Follow these steps to integrate the theme into your Jekyll project.
 
 {% include comps/heading.html tag="h2" text="1. Add to Gemfile" icon="package" size=20 %}
 
@@ -13,18 +13,18 @@ Include the following line in your site's `Gemfile` to reference the theme:
 
 {% capture gemfile_code %}
 ```ruby
-gem "zero-dark-sp"
+gem "ravenui-sp"
 ```
 {% endcapture %}
 {% include comps/example-code.html content=gemfile_code %}
 
 {% include comps/heading.html tag="h2" text="2. Configure _config.yml" icon="settings" size=20 %}
 
-Specify the theme in your `_config.yml` file. This tells Jekyll to use Zero-Dark as the layout engine.
+Specify the theme in your `_config.yml` file. This tells Jekyll to use RavenUI as the layout engine.
 
 {% capture config_code %}
 ```yaml
-theme: zero-dark-sp
+theme: ravenui-sp
 ```
 {% endcapture %}
 {% include comps/example-code.html content=config_code %}

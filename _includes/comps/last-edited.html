@@ -1,17 +1,17 @@
-{% assign show_last_edited = include.enabled | default: site.zd_last_edited | default: true %}
+{% assign show_last_edited = include.enabled | default: site.rd_last_edited | default: true %}
 {% if show_last_edited %}
     {% assign last_date = include.date | default: page.last_modified_at | default: page.last_edited | default: page.date %}
     {% assign last_author = include.author | default: page.last_edited_by | default: page.author | default: site.author.name | default: site.author %}
     {% assign date_format = include.format | default: "%B %d, %Y at %I:%M %p" %}
     
     {% if last_date %}
-    <div class="zd-last-edited" style="--last-edited-color: {{ include.color | default: 'var(--zd-clr-slate)' }};">
-        <div class="zd-last-edited-content">
-            {% include comps/icon.html name="clock" size=12 class="zd-last-edited-icon" %}
-            <span class="zd-last-edited-text">
+    <div class="rd-last-edited" style="--last-edited-color: {{ include.color | default: 'var(--rd-clr-slate)' }};">
+        <div class="rd-last-edited-content">
+            {% include comps/icon.html name="clock" size=12 class="rd-last-edited-icon" %}
+            <span class="rd-last-edited-text">
                 Last edited: <time datetime="{{ last_date | date_to_xmlschema }}">{{ last_date | date: date_format }}</time>
                 {% if last_author %}
-                    by <span class="zd-last-edited-author">{{ last_author }}</span>
+                    by <span class="rd-last-edited-author">{{ last_author }}</span>
                 {% endif %}
             </span>
         </div>

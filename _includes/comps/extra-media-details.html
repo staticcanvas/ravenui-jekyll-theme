@@ -5,31 +5,31 @@ Caveats____: Supports layout variations and deep lists.
 Usage______: {% include comps/extra-media-details.html data=item %}
 {%- endcomment -%}
 {%- assign item = include.data -%}
-<div class="zd-media-details {% if include.glass %}zd-media-details--glass{% endif %} {{ include.class }}">
-  <div class="zd-media-details-header" {% if item.backdrop %}style="background-image: linear-gradient(to bottom, rgba(30, 30, 46, 0.4), rgba(30, 30, 46, 0.95)), url('{{ item.backdrop }}');"{% endif %}>
-    <div class="zd-media-details-poster-wrap">
+<div class="rd-media-details {% if include.glass %}rd-media-details--glass{% endif %} {{ include.class }}">
+  <div class="rd-media-details-header" {% if item.backdrop %}style="background-image: linear-gradient(to bottom, rgba(30, 30, 46, 0.4), rgba(30, 30, 46, 0.95)), url('{{ item.backdrop }}');"{% endif %}>
+    <div class="rd-media-details-poster-wrap">
       {%- if item.image -%}
-        <img src="{{ item.image }}" alt="{{ item.title }}" class="zd-media-details-poster" />
+        <img src="{{ item.image }}" alt="{{ item.title }}" class="rd-media-details-poster" />
       {%- endif -%}
     </div>
-    <div class="zd-media-details-header-text">
-      <div class="zd-media-details-meta-row">
+    <div class="rd-media-details-header-text">
+      <div class="rd-media-details-meta-row">
         {%- if item.type -%}
-          <span class="zd-tag zd-tag--purple">{{ item.type }}</span>
+          <span class="rd-tag rd-tag--purple">{{ item.type }}</span>
         {%- endif -%}
         {%- if item.status -%}
-          <span class="zd-tag zd-tag--blue">{{ item.status }}</span>
+          <span class="rd-tag rd-tag--blue">{{ item.status }}</span>
         {%- endif -%}
         {%- if item.year -%}
-          <span class="zd-media-details-year">{{ item.year }}</span>
+          <span class="rd-media-details-year">{{ item.year }}</span>
         {%- endif -%}
       </div>
-      <h3 class="zd-media-details-title">{{ item.title }}</h3>
+      <h3 class="rd-media-details-title">{{ item.title }}</h3>
       {%- if item.subtitle -%}
-        <p class="zd-media-details-subtitle">{{ item.subtitle }}</p>
+        <p class="rd-media-details-subtitle">{{ item.subtitle }}</p>
       {%- endif -%}
       {%- if item.rating -%}
-        <div class="zd-media-details-rating">
+        <div class="rd-media-details-rating">
           {% include comps/icon.html name="star" size=14 color="yellow" %}
           <span>{{ item.rating }}</span>
         </div>
@@ -37,23 +37,23 @@ Usage______: {% include comps/extra-media-details.html data=item %}
     </div>
   </div>
   
-  <div class="zd-media-details-body">
-    <div class="zd-media-details-main">
+  <div class="rd-media-details-body">
+    <div class="rd-media-details-main">
       {%- if item.overview -%}
-        <div class="zd-media-details-section">
-          <h4 class="zd-media-details-section-title">Overview</h4>
-          <p class="zd-media-details-description">{{ item.overview }}</p>
+        <div class="rd-media-details-section">
+          <h4 class="rd-media-details-section-title">Overview</h4>
+          <p class="rd-media-details-description">{{ item.overview }}</p>
         </div>
       {%- endif -%}
       
       {%- if item.abilities or item.wargear -%}
         <!-- Warhammer / Game Details -->
         {%- if item.abilities -%}
-          <div class="zd-media-details-section">
-            <h4 class="zd-media-details-section-title">Abilities</h4>
-            <div class="zd-media-details-abilities">
+          <div class="rd-media-details-section">
+            <h4 class="rd-media-details-section-title">Abilities</h4>
+            <div class="rd-media-details-abilities">
               {%- for ability in item.abilities -%}
-                <div class="zd-media-details-ability">
+                <div class="rd-media-details-ability">
                   <strong>{{ ability.name }}:</strong> <span>{{ ability.desc }}</span>
                 </div>
               {%- endfor -%}
@@ -61,9 +61,9 @@ Usage______: {% include comps/extra-media-details.html data=item %}
           </div>
         {%- endif -%}
         {%- if item.wargear -%}
-          <div class="zd-media-details-section">
-            <h4 class="zd-media-details-section-title">Wargear Options</h4>
-            <ul class="zd-media-details-list">
+          <div class="rd-media-details-section">
+            <h4 class="rd-media-details-section-title">Wargear Options</h4>
+            <ul class="rd-media-details-list">
               {%- for gear in item.wargear -%}
                 <li>{{ gear }}</li>
               {%- endfor -%}
@@ -73,9 +73,9 @@ Usage______: {% include comps/extra-media-details.html data=item %}
       {%- endif -%}
     </div>
     
-    <div class="zd-media-details-sidebar">
-      <h4 class="zd-media-details-section-title">Details</h4>
-      <table class="zd-media-details-table">
+    <div class="rd-media-details-sidebar">
+      <h4 class="rd-media-details-section-title">Details</h4>
+      <table class="rd-media-details-table">
         <tbody>
           {%- if item.faction -%}
             <tr><th>Faction</th><td>{{ item.faction }}</td></tr>
@@ -108,11 +108,11 @@ Usage______: {% include comps/extra-media-details.html data=item %}
       </table>
 
       {%- if item.genres -%}
-        <div class="zd-media-details-section">
-          <h4 class="zd-media-details-section-title">Genres</h4>
-          <div class="zd-media-details-genres">
+        <div class="rd-media-details-section">
+          <h4 class="rd-media-details-section-title">Genres</h4>
+          <div class="rd-media-details-genres">
             {%- for genre in item.genres -%}
-              <span class="zd-media-card-genre">{{ genre }}</span>
+              <span class="rd-media-card-genre">{{ genre }}</span>
             {%- endfor -%}
           </div>
         </div>

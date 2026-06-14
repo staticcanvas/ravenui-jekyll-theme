@@ -7,46 +7,46 @@
 {% assign author_linkedin = include.linkedin | default: site.author.linkedin %}
 {% assign author_email = include.email | default: site.author.email %}
 
-<div class="zd-written-by" style="--author-color: {{ include.color | default: 'var(--zd-clr-highlight)' }};">
+<div class="rd-written-by" style="--author-color: {{ include.color | default: 'var(--rd-clr-highlight)' }};">
     {% if author_avatar %}
-    <div class="zd-written-by-avatar-wrap">
-        <img src="{{ author_avatar | relative_url }}" alt="{{ author_name }}" class="zd-written-by-avatar" loading="lazy" />
+    <div class="rd-written-by-avatar-wrap">
+        <img src="{{ author_avatar | relative_url }}" alt="{{ author_name }}" class="rd-written-by-avatar" loading="lazy" />
     </div>
     {% endif %}
-    <div class="zd-written-by-content">
-        <div class="zd-written-by-header">
-            <div class="zd-written-by-meta">
-                <span class="zd-written-by-label">{{ include.label | default: "Written By" }}</span>
-                <h4 class="zd-written-by-name">{{ author_name }}</h4>
+    <div class="rd-written-by-content">
+        <div class="rd-written-by-header">
+            <div class="rd-written-by-meta">
+                <span class="rd-written-by-label">{{ include.label | default: "Written By" }}</span>
+                <h4 class="rd-written-by-name">{{ author_name }}</h4>
                 {% if author_role %}
-                <span class="zd-written-by-role">{{ author_role }}</span>
+                <span class="rd-written-by-role">{{ author_role }}</span>
                 {% endif %}
             </div>
-            <div class="zd-written-by-socials">
+            <div class="rd-written-by-socials">
                 {% if author_github %}
-                <a href="https://github.com/{{ author_github }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <a href="https://github.com/{{ author_github }}" class="rd-written-by-social" target="_blank" rel="noopener noreferrer" title="GitHub">
                     {% include comps/icon.html name="github" size=14 %}
                 </a>
                 {% endif %}
                 {% if author_twitter %}
-                <a href="https://twitter.com/{{ author_twitter }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="Twitter">
+                <a href="https://twitter.com/{{ author_twitter }}" class="rd-written-by-social" target="_blank" rel="noopener noreferrer" title="Twitter">
                     {% include comps/icon.html name="twitter" size=14 %}
                 </a>
                 {% endif %}
                 {% if author_linkedin %}
-                <a href="https://linkedin.com/in/{{ author_linkedin }}" class="zd-written-by-social" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <a href="https://linkedin.com/in/{{ author_linkedin }}" class="rd-written-by-social" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                     {% include comps/icon.html name="linkedin" size=14 %}
                 </a>
                 {% endif %}
                 {% if author_email %}
-                <a href="mailto:{{ author_email }}" class="zd-written-by-social" title="Email">
+                <a href="mailto:{{ author_email }}" class="rd-written-by-social" title="Email">
                     {% include comps/icon.html name="mail" size=14 %}
                 </a>
                 {% endif %}
             </div>
         </div>
         {% if author_bio %}
-        <p class="zd-written-by-bio">{{ author_bio }}</p>
+        <p class="rd-written-by-bio">{{ author_bio }}</p>
         {% endif %}
     </div>
 </div>

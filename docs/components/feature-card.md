@@ -10,7 +10,7 @@ The `feature-card.html` component is designed for landing pages and "Key Feature
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="zap" size=20 %}
 
-<div class="zd-feature-grid">
+<div class="rd-feature-grid">
 {% include comps/feature-card.html 
     icon="zap" 
     title="High Performance" 
@@ -22,7 +22,7 @@ The `feature-card.html` component is designed for landing pages and "Key Feature
 {% capture feat_code %}
 {% raw %}
 ```liquid
-<div class="zd-feature-grid">
+<div class="rd-feature-grid">
 {% include comps/feature-card.html 
     icon="zap" 
     title="High Performance" 

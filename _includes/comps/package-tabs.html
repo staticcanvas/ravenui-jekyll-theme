@@ -1,17 +1,17 @@
-<div class="zd-tabs" id="{{ include.id | default: 'tabs' }}">
-    <div class="zd-tabs-header">
-        <button class="zd-tab-btn active" data-tab="npm">npm</button>
-        <button class="zd-tab-btn" data-tab="yarn">yarn</button>
-        <button class="zd-tab-btn" data-tab="pnpm">pnpm</button>
+<div class="rd-tabs" id="{{ include.id | default: 'tabs' }}">
+    <div class="rd-tabs-header">
+        <button class="rd-tab-btn active" data-tab="npm">npm</button>
+        <button class="rd-tab-btn" data-tab="yarn">yarn</button>
+        <button class="rd-tab-btn" data-tab="pnpm">pnpm</button>
     </div>
-    <div class="zd-tabs-content">
-        <div class="zd-tab-pane active" data-pane="npm">
+    <div class="rd-tabs-content">
+        <div class="rd-tab-pane active" data-pane="npm">
             <pre><code>npm install {{ include.package }}</code></pre>
         </div>
-        <div class="zd-tab-pane" data-pane="yarn">
+        <div class="rd-tab-pane" data-pane="yarn">
             <pre><code>yarn add {{ include.package }}</code></pre>
         </div>
-        <div class="zd-tab-pane" data-pane="pnpm">
+        <div class="rd-tab-pane" data-pane="pnpm">
             <pre><code>pnpm add {{ include.package }}</code></pre>
         </div>
     </div>
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('{{ include.id | default: "tabs" }}');
     if (!container) return;
     
-    const buttons = container.querySelectorAll('.zd-tab-btn');
-    const panes = container.querySelectorAll('.zd-tab-pane');
+    const buttons = container.querySelectorAll('.rd-tab-btn');
+    const panes = container.querySelectorAll('.rd-tab-pane');
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {

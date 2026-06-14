@@ -10,16 +10,16 @@ The `image.html` component provides a wrapper for images. It features progressiv
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
-{% include comps/image.html src="/favicon.svg" alt="Zero-Dark Icon Logo" max_width="200px" caption="Zero-Dark Icon Logo Example" %}
+{% include comps/image.html src="/favicon.svg" alt="RavenUI Icon Logo" max_width="200px" caption="RavenUI Icon Logo Example" %}
 
 {% capture img_eg %}
 {% raw %}
 ```liquid
 {% include comps/image.html 
    src="/favicon.svg" 
-   alt="Zero-Dark Icon Logo" 
+   alt="RavenUI Icon Logo" 
    max_width="200px" 
-   caption="Zero-Dark Icon Logo Example" %}
+   caption="RavenUI Icon Logo Example" %}
 ```
 {% endraw %}
 {% endcapture %}
@@ -36,5 +36,5 @@ The `image.html` component provides a wrapper for images. It features progressiv
 | `alt` | String | `""` | Alt text description for screen readers and accessibility. |
 | `caption` | String | | Small caption text rendered underneath the image. |
 | `max_width` | String | `"100%"` | Maximum width of the image wrapper container (e.g. `200px`, `50%`, `100%`). |
-| `radius` | String | `var(--zd-radius)` | CSS border-radius value for rounding the image corners. |
+| `radius` | String | `var(--rd-radius)` | CSS border-radius value for rounding the image corners. |
 | `class` | String | | Optional CSS class to append to the container. |

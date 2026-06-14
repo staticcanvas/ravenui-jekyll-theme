@@ -14,7 +14,7 @@ The `announcement.html` component provides a prominent, customizable alert banne
 <br>
 {% include comps/announcement.html id="example-warning" text="Warning: System maintenance scheduled for this weekend." type="warning" dismissible=false %}
 <br>
-{% include comps/announcement.html id="example-success" text="Success: Zero-Dark v1.3.4 has been released!" type="success" link="/components/" link_text="Explore Components" dismissible=false %}
+{% include comps/announcement.html id="example-success" text="Success: RavenUI v1.3.4 has been released!" type="success" link="/components/" link_text="Explore Components" dismissible=false %}
 
 {% capture banner_eg %}
 {% raw %}
@@ -26,7 +26,7 @@ The `announcement.html` component provides a prominent, customizable alert banne
 {% include comps/announcement.html id="maint-banner" text="System maintenance scheduled for this weekend." type="warning" %}
 
 <!-- Success Announcement with Action Link -->
-{% include comps/announcement.html id="release-banner" text="Zero-Dark v1.3.4 has been released!" type="success" link="/components/" link_text="Explore Components" %}
+{% include comps/announcement.html id="release-banner" text="RavenUI v1.3.4 has been released!" type="success" link="/components/" link_text="Explore Components" %}
 ```
 {% endraw %}
 {% endcapture %}
@@ -36,15 +36,15 @@ The `announcement.html` component provides a prominent, customizable alert banne
 
 {% include comps/heading.html tag="h2" text="Site-Wide Configuration" icon="settings" size=20 %}
 
-To enable a permanent, site-wide banner that displays across all pages, configure the `zd_announcement` block in your `_config.yml`:
+To enable a permanent, site-wide banner that displays across all pages, configure the `rd_announcement` block in your `_config.yml`:
 
 ```yaml
-zd_announcement:
+rd_announcement:
   enabled: true
   id: "welcome-banner-v1"
-  text: "Welcome to Zero-Dark! Check out the new Extended Components."
+  text: "Welcome to RavenUI! Check out the new Extended Components."
   icon: "megaphone"
-  color: "var(--zd-clr-viridian)"
+  color: "var(--rd-clr-viridian)"
   link: "/components/kbd/"
   link_text: "View Docs"
   dismissible: true
@@ -59,7 +59,7 @@ zd_announcement:
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `id` | String | `zd-announcement-banner` | Unique ID for tracking dismissal state in `localStorage`. |
+| `id` | String | `rd-announcement-banner` | Unique ID for tracking dismissal state in `localStorage`. |
 | `text` | String | | The alert message or text content to display. |
 | `icon` | String | `megaphone` | Lucide icon name to display beside the text. |
 | `color` | String | | Optional custom CSS color (hex, rgb, var) for the left border/accent highlight. |

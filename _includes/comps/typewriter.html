@@ -1,11 +1,11 @@
 {% assign words = include.words | default: "Hello|World" | split: "|" %}
 {% assign speed = include.speed | default: 100 %}
 {% assign delay = include.delay | default: 1500 %}
-{% assign id = include.id | default: "zd-typewriter" %}
+{% assign id = include.id | default: "rd-typewriter" %}
 
-<span class="zd-typewriter-container {{ include.class }}" id="{{ id }}-container" data-first-word="{{ words[0] }}">
-    <span class="zd-typewriter-text" id="{{ id }}"></span>
-    <span class="zd-typewriter-cursor">|</span>
+<span class="rd-typewriter-container {{ include.class }}" id="{{ id }}-container" data-first-word="{{ words[0] }}">
+    <span class="rd-typewriter-text" id="{{ id }}"></span>
+    <span class="rd-typewriter-cursor">|</span>
 </span>
 
 <script>

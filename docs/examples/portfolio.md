@@ -10,31 +10,31 @@ enable_search: true
 </div>
 
 {% capture project1 %}
-<img src="https://picsum.photos/600/400?random=1" alt="Telemetry Pipeline" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--zd-border);">
+<img src="https://picsum.photos/600/400?random=1" alt="Telemetry Pipeline" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--rd-border);">
 A high-throughput visualization framework for real-time telemetry streaming and analysis.
 <div style="margin-top: 1rem;">
-  <span class="zd-tag">Rust</span>
-  <span class="zd-tag">WASM</span>
+  <span class="rd-tag">Rust</span>
+  <span class="rd-tag">WASM</span>
 </div>
 {% endcapture %}
 {% include comps/card.html title="Project Hyperion" content=project1 glass=true %}
 
 {% capture project2 %}
-<img src="https://picsum.photos/600/400?random=2" alt="Neural Architecture" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--zd-border);">
+<img src="https://picsum.photos/600/400?random=2" alt="Neural Architecture" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--rd-border);">
 Deep neural network model architectures designed for embedded device inference.
 <div style="margin-top: 1rem;">
-  <span class="zd-tag">Python</span>
-  <span class="zd-tag">PyTorch</span>
+  <span class="rd-tag">Python</span>
+  <span class="rd-tag">PyTorch</span>
 </div>
 {% endcapture %}
 {% include comps/card.html title="Aether Neural Engine" content=project2 glass=true %}
 
 {% capture project3 %}
-<img src="https://picsum.photos/600/400?random=3" alt="Cloud Infrastructure" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--zd-border);">
+<img src="https://picsum.photos/600/400?random=3" alt="Cloud Infrastructure" style="width: 100%; border-radius: 4px; margin-bottom: 1rem; border: var(--rd-border);">
 A declarative infrastructure orchestration tool targeting zero-trust multi-cloud grids.
 <div style="margin-top: 1rem;">
-  <span class="zd-tag">Go</span>
-  <span class="zd-tag">gRPC</span>
+  <span class="rd-tag">Go</span>
+  <span class="rd-tag">gRPC</span>
 </div>
 {% endcapture %}
 {% include comps/card.html title="Gridlock Orchestrator" content=project3 glass=true %}

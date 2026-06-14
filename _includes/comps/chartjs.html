@@ -20,16 +20,16 @@
   {% assign data = data_source.data %}
 {% endif %}
 
-<div class="zd-chartjs-container {{ include.class }}" id="zd-chartjs-{{ id }}" style="position: relative; height: {{ height }}; width: 100%; margin-block: 2rem;">
+<div class="rd-chartjs-container {{ include.class }}" id="rd-chartjs-{{ id }}" style="position: relative; height: {{ height }}; width: 100%; margin-block: 2rem;">
   {% if title %}
-    <h5 class="zd-chartjs-title" style="margin-bottom: 0.5rem; font-family: var(--zd-font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--zd-clr-slate);">{{ title }}</h5>
+    <h5 class="rd-chartjs-title" style="margin-bottom: 0.5rem; font-family: var(--rd-font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--rd-clr-slate);">{{ title }}</h5>
   {% endif %}
   <canvas id="{{ id }}"></canvas>
 </div>
 
 <!-- Load Chart.js CDN -->
-{% unless site.zd_chartjs_script_loaded %}
-  {% assign site.zd_chartjs_script_loaded = true %}
+{% unless site.rd_chartjs_script_loaded %}
+  {% assign site.rd_chartjs_script_loaded = true %}
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endunless %}
 
@@ -88,11 +88,11 @@
         }];
       {% endif %}
 
-      // Add Zero-Dark style defaults to datasets
+      // Add RavenUI style defaults to datasets
       datasets.forEach(ds => {
-        if (!ds.borderColor) ds.borderColor = '{{ include.color | default: "var(--zd-clr-highlight, #00ff9d)" }}';
+        if (!ds.borderColor) ds.borderColor = '{{ include.color | default: "var(--rd-clr-highlight, #00ff9d)" }}';
         if (!ds.backgroundColor) {
-          if (ds.borderColor === '#00ff9d' || ds.borderColor === 'var(--zd-clr-highlight, #00ff9d)') {
+          if (ds.borderColor === '#00ff9d' || ds.borderColor === 'var(--rd-clr-highlight, #00ff9d)') {
             ds.backgroundColor = 'rgba(0, 255, 157, 0.08)';
           } else {
             ds.backgroundColor = 'rgba(255, 255, 255, 0.05)';
@@ -116,18 +116,18 @@
               display: {{ include.legend | default: true }},
               labels: {
                 color: '#8a99ad',
-                font: { family: 'var(--zd-font-mono, monospace)', size: 10 }
+                font: { family: 'var(--rd-font-mono, monospace)', size: 10 }
               }
             }
           },
           scales: {
             x: {
               grid: { color: 'rgba(255, 255, 255, 0.04)' },
-              ticks: { color: '#8a99ad', font: { family: 'var(--zd-font-mono, monospace)', size: 9 } }
+              ticks: { color: '#8a99ad', font: { family: 'var(--rd-font-mono, monospace)', size: 9 } }
             },
             y: {
               grid: { color: 'rgba(255, 255, 255, 0.04)' },
-              ticks: { color: '#8a99ad', font: { family: 'var(--zd-font-mono, monospace)', size: 9 } }
+              ticks: { color: '#8a99ad', font: { family: 'var(--rd-font-mono, monospace)', size: 9 } }
             }
           }
         }

@@ -10,12 +10,12 @@ The `package-tabs.html` component provides a standard way to display installatio
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="package" size=20 %}
 
-{% include comps/package-tabs.html package="zero-dark-sp" %}
+{% include comps/package-tabs.html package="ravenui-sp" %}
 
 {% capture tabs_code %}
 {% raw %}
 ```liquid
-{% include comps/package-tabs.html package="zero-dark-sp" %}
+{% include comps/package-tabs.html package="ravenui-sp" %}
 ```
 {% endraw %}
 {% endcapture %}

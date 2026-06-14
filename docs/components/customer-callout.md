@@ -11,7 +11,7 @@ The `customer-callout.html` component renders testimonial cards for customers, u
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 
 {% include comps/customer-callout.html 
-   quote="Zero-Dark has completely transformed our developer documentation. The speed and visual aesthetics are absolutely first class." 
+   quote="RavenUI has completely transformed our developer documentation. The speed and visual aesthetics are absolutely first class." 
    author="Alex Rivers" 
    role="CTO, CloudScale Systems" 
    avatar="/favicon.svg" 
@@ -22,7 +22,7 @@ The `customer-callout.html` component renders testimonial cards for customers, u
 {% raw %}
 ```liquid
 {% include comps/customer-callout.html 
-   quote="Zero-Dark has completely transformed our developer documentation." 
+   quote="RavenUI has completely transformed our developer documentation." 
    author="Alex Rivers" 
    role="CTO, CloudScale Systems" 
    avatar="/favicon.svg" 
@@ -44,5 +44,5 @@ The `customer-callout.html` component renders testimonial cards for customers, u
 | `role` | String | | The job title, company, or credentials of the author. |
 | `avatar` | String | | URL or path to the author's avatar picture. |
 | `rating` | Integer | `0` | Star rating out of 5 (values `1` to `5`). Displays stars above the quote. |
-| `color` | String | `var(--zd-clr-highlight)` | Accent color used for the left border and filled stars. |
+| `color` | String | `var(--rd-clr-highlight)` | Accent color used for the left border and filled stars. |
 | `class` | String | | Optional CSS class to append to the container. |

@@ -5,7 +5,7 @@ parent: /components/
 description: Renders configurable footer grids with multi-column layouts and discrete item blocks.
 enable_search: true
 ---
-Zero-Dark supports building modular, responsive footers using grid components. You can construct footers in 2-column or 3-column layouts using individual, highly configurable footer items.
+RavenUI supports building modular, responsive footers using grid components. You can construct footers in 2-column or 3-column layouts using individual, highly configurable footer items.
 
 {% include comps/heading.html tag="h2" text="Footer Item" icon="package" size=20 %}
 
@@ -77,14 +77,14 @@ theme_settings:
             url: "/blog"
           - type: badge
             text: "v1.16.2"
-            color: "var(--zd-clr-viridian)"
+            color: "var(--rd-clr-viridian)"
       - title: "Connect"
         items:
           - type: icon
             icon: "github"
             url: "https://github.com/staticcanvas"
           - type: text
-            text: "Zero-Dark theme for Jekyll."
+            text: "RavenUI theme for Jekyll."
 ```
 {% endcapture %}
 {% include comps/example-code.html content=config_example %}

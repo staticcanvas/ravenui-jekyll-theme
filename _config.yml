@@ -1,14 +1,14 @@
-title: Zero-Dark
+title: RavenUI
 description: A high-contrast, professional Jekyll theme optimized for technical documentation.
 logo_text: ZERODARK
 logo_subtext: SP
-copyright: "© 2026 Zero-Dark Systems. All rights reserved."
+copyright: "© 2026 RavenUI Systems. All rights reserved."
 
 # Repository Settings
 repository:
   platform: github # options: github, gitlab, bitbucket, codeberg
   user: staticcanvas
-  repo: zero-dark-jekyll-theme
+  repo: ravenui-jekyll-theme
   branch: main
   edit_mode: standard # options: standard, vscode
 
@@ -38,7 +38,7 @@ theme_settings:
       enable: false               # toggle premium gradient borders
       type: linear                # options: linear, radial
       direction: 135deg           # direction for linear gradients
-      colors: ["var(--zd-clr-viridian)", "var(--zd-clr-info-alt)"]
+      colors: ["var(--rd-clr-viridian)", "var(--rd-clr-info-alt)"]
 
   # Analytics Configuration
   analytics:
@@ -127,7 +127,7 @@ theme_settings:
       - title: "Project"
         items:
           - type: text
-            text: "Zero-Dark is an elegant Jekyll theme designed for technical documentations and developers."
+            text: "RavenUI is an elegant Jekyll theme designed for technical documentations and developers."
           - type: icon
             icon: "github"
             url: "https://github.com/staticcanvas"
@@ -141,38 +141,38 @@ twitter_username: staticcanvas
 linkedin_username: staticcanvas
 
 # Theme Features
-zd_output_title_default: true
-zd_toc_default_open: true
-zd_progress_bar: true
-zd_code_copy: true
-zd_code_lang: true
+rd_output_title_default: true
+rd_toc_default_open: true
+rd_progress_bar: true
+rd_code_copy: true
+rd_code_lang: true
 
 # Defaults
-zd_icon_size: 16
-zd_toc_levels: ["h2", "h3", "h4"]
-zd_debug: true
-zd_show_version: true
+rd_icon_size: 16
+rd_toc_levels: ["h2", "h3", "h4"]
+rd_debug: true
+rd_show_version: true
 version: 1.17.1
-zd_accent_color: "#00ff9d"
-zd_nav_spacing: compact
-zd_show_powered_by: true
-zd_use_cdn: true
+rd_accent_color: "#00ff9d"
+rd_nav_spacing: compact
+rd_show_powered_by: true
+rd_use_cdn: true
 font_awesome: true
 
 # Announcement Banner Settings
-zd_announcement:
+rd_announcement:
   enabled: true
   id: "welcome-banner-v1"
-  text: "Welcome to Zero-Dark! Check out the new Keyboard Shortcuts component."
+  text: "Welcome to RavenUI! Check out the new Keyboard Shortcuts component."
   icon: "megaphone"
-  color: "var(--zd-clr-viridian)"
+  color: "var(--rd-clr-viridian)"
   link: "/components/kbd/"
   link_text: "View Docs"
   dismissible: true
   type: "success"
 
 # Feedback Widget Settings
-zd_feedback:
+rd_feedback:
   enabled: true
   question: "Was this page helpful?"
   yes_label: "Yes"

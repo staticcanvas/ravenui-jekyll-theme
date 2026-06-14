@@ -7,22 +7,22 @@ Usage______: {% include comps/timeline.html data_source="history" %}
 
 {%- assign items = include.items | default: site.data[include.data_source] -%}
 
-<div class="zd-timeline-wrapper {{ include.class }}">
-  <div class="zd-timeline">
+<div class="rd-timeline-wrapper {{ include.class }}">
+  <div class="rd-timeline">
     {%- for item in items -%}
-      <div class="zd-timeline-item" {% if item.color %}style="--zd-timeline-accent: {{ item.color }};"{% endif %}>
-        <div class="zd-timeline-badge">
+      <div class="rd-timeline-item" {% if item.color %}style="--rd-timeline-accent: {{ item.color }};"{% endif %}>
+        <div class="rd-timeline-badge">
           {%- if item.icon -%}
             {%- include comps/icon.html name=item.icon size=12 -%}
           {%- endif -%}
         </div>
-        <div class="zd-timeline-content">
-          <div class="zd-timeline-header">
-            <h4 class="zd-timeline-title">{{ item.title }}</h4>
-            <span class="zd-timeline-date">{{ item.date }}</span>
+        <div class="rd-timeline-content">
+          <div class="rd-timeline-header">
+            <h4 class="rd-timeline-title">{{ item.title }}</h4>
+            <span class="rd-timeline-date">{{ item.date }}</span>
           </div>
           {%- if item.body -%}
-            <div class="zd-timeline-body">
+            <div class="rd-timeline-body">
               {{ item.body | markdownify }}
             </div>
           {%- endif -%}

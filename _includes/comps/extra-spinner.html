@@ -6,11 +6,11 @@ Usage______: {% include comps/extra-spinner.html size="large" color="accent" lab
 {%- endcomment -%}
 {%- assign spinner_size = include.size | default: "medium" -%}
 {%- assign spinner_color = include.color | default: "accent" -%}
-<div class="zd-spinner-container zd-spinner--{{ spinner_size }} zd-spinner-color--{{ spinner_color }} {{ include.class }}">
-  <div class="zd-spinner-ring">
+<div class="rd-spinner-container rd-spinner--{{ spinner_size }} rd-spinner-color--{{ spinner_color }} {{ include.class }}">
+  <div class="rd-spinner-ring">
     <div></div><div></div><div></div><div></div>
   </div>
   {%- if include.label -%}
-    <span class="zd-spinner-label">{{ include.label }}</span>
+    <span class="rd-spinner-label">{{ include.label }}</span>
   {%- endif -%}
 </div>

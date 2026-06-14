@@ -1,10 +1,10 @@
 {% assign tag = include.tag | default: "span" %}
-{% assign from = include.from | default: "var(--zd-clr-viridian)" %}
+{% assign from = include.from | default: "var(--rd-clr-viridian)" %}
 {% assign to = include.to | default: "#00b3ff" %}
 {% assign weight = include.weight | default: "bold" %}
 {% assign size = include.size %}
 
-<{{ tag }} class="zd-gradient-text {{ include.class }}" 
+<{{ tag }} class="rd-gradient-text {{ include.class }}" 
            style="background: linear-gradient(135deg, {{ from }}, {{ to }});
                   -webkit-background-clip: text;
                   -webkit-text-fill-color: transparent;

@@ -1,0 +1,93 @@
+/* UTILITIES */
+.fg-highlight { color: var(--rd-clr-highlight) !important; }
+.fg-platinum { color: var(--rd-clr-platinum) !important; }
+.fg-info { color: var(--rd-clr-info) !important; }
+.fg-warning { color: var(--rd-clr-warning) !important; }
+.fg-danger { color: var(--rd-clr-danger) !important; }
+.fg-muted { color: #555 !important; }
+
+/* BRAND COLORS */
+.fg-viridian { color: var(--rd-clr-viridian) !important; }
+.fg-note { color: var(--rd-clr-note) !important; }
+.fg-slate { color: var(--rd-clr-slate) !important; }
+.fg-mist { color: var(--rd-clr-mist) !important; }
+.fg-ash { color: var(--rd-clr-ash) !important; }
+.fg-silver { color: var(--rd-clr-silver) !important; }
+
+/* GRADIENTS */
+.bg-gradient-highlight { 
+    background: linear-gradient(135deg, var(--rd-clr-highlight), #00d4ff) !important; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+/* BORDERS */
+.border-highlight { border: 1px solid var(--rd-clr-highlight) !important; }
+.border-dim { border: 1px solid #222 !important; }
+.border-dashed { border-style: dashed !important; }
+
+/* TYPOGRAPHY */
+.font-heading { font-family: 'Fraunces', serif !important; }
+.font-mono { font-family: var(--rd-font-mono) !important; }
+
+.fz-xs { font-size: 0.75rem !important; }
+.fz-sm { font-size: 0.875rem !important; }
+.fz-lg { font-size: 1.25rem !important; }
+.fz-xl { font-size: 1.5rem !important; }
+.fz-xxl { font-size: 2.5rem !important; }
+
+.fw-400 { font-weight: 400 !important; }
+.fw-500 { font-weight: 500 !important; }
+.fw-600 { font-weight: 600 !important; }
+.fw-700 { font-weight: 700 !important; }
+.fw-800 { font-weight: 800 !important; }
+.fw-900 { font-weight: 900 !important; }
+
+.robost { font-weight: 900 !important; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* SPACING & LAYOUT */
+.m-0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.p-0 { padding: 0 !important; }
+
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-left { text-align: left !important; }
+
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.gap-1 { gap: 1rem !important; }
+.gap-2 { gap: 2rem !important; }
+
+/* SYSTEM COLORS */
+.bg-panel { background-color: var(--rd-bg-panel) !important; }
+.bg-card { background-color: var(--rd-bg-card) !important; }
+.bg-hover:hover { background-color: var(--rd-bg-hover) !important; }
+
+.border-subtle { border: 1px solid var(--rd-border-subtle) !important; }
+.border-default { border: 1px solid var(--rd-border-default) !important; }
+.border-strong { border: 1px solid var(--rd-border-strong) !important; }
+.border-accent { border: 1px solid var(--rd-border-accent) !important; }
+
+/* TERMINAL COLORS */
+.fg-term-green { color: var(--rd-clr-terminal-green) !important; }
+.fg-term-blue { color: var(--rd-clr-terminal-blue) !important; }
+.fg-term-purple { color: var(--rd-clr-terminal-purple) !important; }
+.fg-term-orange { color: var(--rd-clr-terminal-orange) !important; }
+.fg-term-red { color: var(--rd-clr-terminal-red) !important; }
+
+/* ACCESSIBILITY */
+.rd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+

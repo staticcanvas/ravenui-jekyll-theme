@@ -3,25 +3,25 @@
 
 {% include core/head.html %}
 
-<body class="zd-layout-portfolio">
+<body class="rd-layout-portfolio">
 
-    <div class="zd-portfolio-container">
-        <header class="zd-portfolio-header">
-            <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "PORTFOLIO" }}</span></a>
+    <div class="rd-portfolio-container">
+        <header class="rd-portfolio-header">
+            <a href="{{ "/" | relative_url }}" class="rd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "PORTFOLIO" }}</span></a>
         </header>
 
-        <main class="zd-portfolio-main">
-            <div class="zd-portfolio-hero">
-                <h1 class="zd-portfolio-title">{{ page.title }}</h1>
-                <p class="zd-portfolio-description">{{ page.description }}</p>
+        <main class="rd-portfolio-main">
+            <div class="rd-portfolio-hero">
+                <h1 class="rd-portfolio-title">{{ page.title }}</h1>
+                <p class="rd-portfolio-description">{{ page.description }}</p>
             </div>
 
-            <div class="zd-portfolio-grid">
+            <div class="rd-portfolio-grid">
                 {{ content }}
             </div>
         </main>
 
-        <footer class="zd-portfolio-footer">
+        <footer class="rd-portfolio-footer">
             {{ site.copyright }}
         </footer>
     </div>

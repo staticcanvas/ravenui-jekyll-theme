@@ -1,5 +1,5 @@
-<div class="zd-callout zd-callout--{{ include.type | default: 'note' }} {% if include.inline %}zd-callout--inline{% endif %}">
-    <span class="zd-callout-title">
+<div class="rd-callout rd-callout--{{ include.type | default: 'note' }} {% if include.inline %}rd-callout--inline{% endif %}">
+    <span class="rd-callout-title">
         {% case include.type %}
             {% when 'success' %}
                 <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
@@ -12,7 +12,7 @@
         {% endcase %}
         {{ include.title | default: include.type | capitalize }}
     </span>
-    <div class="zd-callout-content">
+    <div class="rd-callout-content">
         {{ include.content }}
     </div>
 </div>

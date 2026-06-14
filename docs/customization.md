@@ -6,17 +6,17 @@ tags: [sass, customization, advanced]
 description: Guide for overriding theme colors, fonts, and core SCSS variables.
 enable_search: true
 ---
-Zero-Dark is designed to be easily brandable while maintaining its high-performance structural integrity.
+RavenUI is designed to be easily brandable while maintaining its high-performance structural integrity.
 
 {% include comps/heading.html tag="h2" text="SCSS Variables" icon="sliders" size=20 %}
 
 The theme uses a centralized variable system. To override these, create a `_sass/custom-variables.scss` file (or similar) and import it before the theme.
 
 **Key Variables:**
-- `--zd-bg-base`: The primary background color.
-- `--zd-clr-highlight`: The main accent color (used for icons, borders, progress bar).
-- `--zd-font-sans`: Primary UI font stack.
-- `--zd-font-mono`: Technical/code font stack.
+- `--rd-bg-base`: The primary background color.
+- `--rd-clr-highlight`: The main accent color (used for icons, borders, progress bar).
+- `--rd-font-sans`: Primary UI font stack.
+- `--rd-font-mono`: Technical/code font stack.
 
 ---
 
@@ -27,10 +27,10 @@ To add custom styles without modifying the theme core, you can add them to `asse
 ```scss
 ---
 ---
-@import "zero-dark-sp";
+@import "ravenui-sp";
 
 // Your custom overrides here
-.zd-logo {
+.rd-logo {
   font-family: "Custom Font", sans-serif;
 }
 ```
@@ -39,12 +39,12 @@ To add custom styles without modifying the theme core, you can add them to `asse
 
 {% include comps/heading.html tag="h2" text="Color Theming" icon="palette" size=20 %}
 
-Zero-Dark supports instant color swapping via the `zd_accent_color` field in `_config.yml`. This color will be applied to the progress bar and secondary highlights.
+RavenUI supports instant color swapping via the `rd_accent_color` field in `_config.yml`. This color will be applied to the progress bar and secondary highlights.
 
 ```yaml
-zd_accent_color: "#00ff9d" # Emerald
+rd_accent_color: "#00ff9d" # Emerald
 # or
-zd_accent_color: "#3399ff" # Sky Blue
+rd_accent_color: "#3399ff" # Sky Blue
 ```
 
 ---

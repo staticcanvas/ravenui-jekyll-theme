@@ -1,11 +1,11 @@
-<div class="zd-card {% if include.glass %}zd-card--glass{% endif %} {{ include.class }}">
+<div class="rd-card {% if include.glass %}rd-card--glass{% endif %} {{ include.class }}">
     {% if include.icon %}
-    <div class="zd-card-icon">{% include comps/icon.html name=include.icon size=24 color=include.icon_color %}</div>
+    <div class="rd-card-icon">{% include comps/icon.html name=include.icon size=24 color=include.icon_color %}</div>
     {% endif %}
     {% if include.title %}
-    <h4 class="zd-card-title">{{ include.title }}</h4>
+    <h4 class="rd-card-title">{{ include.title }}</h4>
     {% endif %}
-    <div class="zd-card-content">
+    <div class="rd-card-content">
         {{ include.content }}
     </div>
 </div>

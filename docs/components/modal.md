@@ -13,7 +13,7 @@ The `modal.html` component implements an overlay dialog adhering to modern acces
 {% capture test_modal_content %}
 <h4>Accessible Dialog Content</h4>
 <p>This modal container restricts tab focus to elements inside this dialog box. Pressing <kbd>Esc</kbd> or clicking the backdrop overlay will dismiss this modal.</p>
-<button class="zd-btn zd-btn--secondary" data-zd-modal-close>Close Dialogue</button>
+<button class="rd-btn rd-btn--secondary" data-rd-modal-close>Close Dialogue</button>
 {% endcapture %}
 
 {% include comps/modal.html id="demo-modal" title="System Settings Overlay" content=test_modal_content trigger_text="Open Dialog" %}
@@ -25,7 +25,7 @@ The `modal.html` component implements an overlay dialog adhering to modern acces
 {% capture modal_body %}
   <h4>Accessible Dialog Content</h4>
   <p>This modal container restricts tab focus to elements inside this dialog box.</p>
-  <button class="zd-btn zd-btn--secondary" data-zd-modal-close>Close Dialogue</button>
+  <button class="rd-btn rd-btn--secondary" data-rd-modal-close>Close Dialogue</button>
 {% endcapture %}
 
 <!-- Render the modal trigger button and container -->
@@ -39,10 +39,10 @@ The `modal.html` component implements an overlay dialog adhering to modern acces
 
 {% include comps/heading.html tag="h2" text="Manual Triggers" icon="terminal" size=20 %}
 
-If you prefer to trigger the modal from a custom button element instead of using the built-in trigger button, simply omit the `trigger_text` parameter and add `data-zd-modal-trigger="YOUR_MODAL_ID"` to any HTML element:
+If you prefer to trigger the modal from a custom button element instead of using the built-in trigger button, simply omit the `trigger_text` parameter and add `data-rd-modal-trigger="YOUR_MODAL_ID"` to any HTML element:
 
 ```html
-<button class="my-custom-btn" data-zd-modal-trigger="demo-modal">
+<button class="my-custom-btn" data-rd-modal-trigger="demo-modal">
   Launch Dialogue Custom
 </button>
 ```
@@ -55,7 +55,7 @@ If you prefer to trigger the modal from a custom button element instead of using
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `id` | String | `zd-modal` | The unique ID of the modal dialogue (used for targeting triggers). |
+| `id` | String | `rd-modal` | The unique ID of the modal dialogue (used for targeting triggers). |
 | `title` | String | | The title text displayed in the header. |
 | `content` | HTML/String | | The body content of the modal, typically captured in Liquid. |
 | `trigger_text` | String | | Optional. If provided, renders a default theme button to trigger the modal. |

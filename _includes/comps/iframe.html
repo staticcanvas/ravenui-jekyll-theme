@@ -5,10 +5,10 @@
 {% assign height = include.height | default: "auto" %}
 
 {% if url %}
-  <div class="zd-iframe-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }}; --max-width: {{ max_width }}; --height: {{ height }};">
-    <div class="zd-iframe-placeholder">
-      <div class="zd-iframe-spinner"></div>
-      <span class="zd-iframe-loading-text">Loading secure frame...</span>
+  <div class="rd-iframe-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }}; --max-width: {{ max_width }}; --height: {{ height }};">
+    <div class="rd-iframe-placeholder">
+      <div class="rd-iframe-spinner"></div>
+      <span class="rd-iframe-loading-text">Loading secure frame...</span>
     </div>
     <iframe
       src="{{ url }}"

@@ -31,7 +31,7 @@ The `tag.html` component offers a dynamic way to render labels, metadata tags, b
 
 Use predefined variant names inside the `type` parameter to style version tags according to semantic release guidelines.
 
-<div class="zd-tag-container">
+<div class="rd-tag-container">
     {% include comps/tag.html text="v1.0.0-beta" type="beta" icon="activity" %}
     {% include comps/tag.html text="v1.0.0-rc1" type="rc" icon="git-pull-request" %}
     {% include comps/tag.html text="v1.0.0" type="release" icon="check" %}
@@ -41,7 +41,7 @@ Use predefined variant names inside the `type` parameter to style version tags a
 {% capture version_eg %}
 {% raw %}
 ```liquid
-<div class="zd-tag-container">
+<div class="rd-tag-container">
     {% include comps/tag.html text="v1.0.0-beta" type="beta" icon="activity" %}
     {% include comps/tag.html text="v1.0.0-rc1" type="rc" icon="git-pull-request" %}
     {% include comps/tag.html text="v1.0.0" type="release" icon="check" %}

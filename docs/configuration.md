@@ -3,10 +3,10 @@ layout: default
 title: Configuration
 output-title: true
 tags: [setup, config, yaml]
-description: Global settings and metadata controls for the Zero-Dark theme.
+description: Global settings and metadata controls for the RavenUI theme.
 enable_search: true
 ---
-Zero-Dark uses a mix of standard Jekyll settings and custom theme-level controls defined in your `_config.yml` and page frontmatter.
+RavenUI uses a mix of standard Jekyll settings and custom theme-level controls defined in your `_config.yml` and page frontmatter.
 
 {% include comps/heading.html tag="h2" text="Theme Settings" icon="settings" size=20 %}
 
@@ -37,7 +37,7 @@ theme_settings:
       enable: false                # toggle premium gradient borders
       type: linear                 # gradient type: linear, radial
       direction: 135deg            # direction for linear gradients
-      colors: ["var(--zd-clr-viridian)", "var(--zd-clr-info-alt)"]
+      colors: ["var(--rd-clr-viridian)", "var(--rd-clr-info-alt)"]
   
   # Animations Controls
   animations:
@@ -104,7 +104,7 @@ Every page can control its own visibility and header output via the following YA
 | `scroll_progress`| Boolean | `site default`| Per-page override for the reading progress bar. |
 | `tags` | Array | `[]` | A list of strings to be displayed as highlighted pills. |
 | `description` | String | `""` | Subtext appearing directly under the title. |
-| `zd_nav_spacing` | String | `compact` | Global density: `compact`, `tight`, `comfy`, `spacy`. |
+| `rd_nav_spacing` | String | `compact` | Global density: `compact`, `tight`, `comfy`, `spacy`. |
 
 <br>
 
@@ -129,20 +129,20 @@ Define these in your root `_config.yml` to customize the identity of your docume
 
 ```yaml
 # Theme Features
-zd_output_title_default: true
-zd_toc_default_open: true
-zd_code_copy: true
-zd_code_lang: true
+rd_output_title_default: true
+rd_toc_default_open: true
+rd_code_copy: true
+rd_code_lang: true
 
-title: Zero-Dark Docs
+title: RavenUI Docs
 logo_text: ZERODARK
 logo_subtext: SP
-copyright: "© 2026 Zero-Dark Systems."
+copyright: "© 2026 RavenUI Systems."
 ```
 
 {% include comps/heading.html tag="h2" text="Search Integration (Pagefind)" icon="search" size=20 %}
 
-Zero-Dark is pre-configured for **Pagefind**, a WASM-based search engine.
+RavenUI is pre-configured for **Pagefind**, a WASM-based search engine.
 
 **Setup:**
 1. Build your site: `bundle exec jekyll build`
@@ -160,20 +160,20 @@ For detailed configuration of the search index, see the [Pagefind Documentation]
 
 {% include comps/heading.html tag="h2" text="CDN vs Local Assets" icon="globe" size=20 %}
 
-Zero-Dark allows you to toggle between using content delivery networks (CDNs) and locally-hosted script files for maximum security, privacy, and offline compatibility.
+RavenUI allows you to toggle between using content delivery networks (CDNs) and locally-hosted script files for maximum security, privacy, and offline compatibility.
 
 ### Toggle Switch
 
-You can control this globally in your `_config.yml` via the `zd_use_cdn` setting:
+You can control this globally in your `_config.yml` via the `rd_use_cdn` setting:
 
 ```yaml
-zd_use_cdn: true  # Default: Uses high-performance CDNs for asset loading
+rd_use_cdn: true  # Default: Uses high-performance CDNs for asset loading
 # Set to false to load local vendor assets from the theme's assets directory
 ```
 
 ### Pinned Script & Asset Versions
 
-Below are the third-party assets integrated into Zero-Dark:
+Below are the third-party assets integrated into RavenUI:
 
 | Asset Library | Version | CDN URL / Source | Local File Location |
 | :--- | :--- | :--- | :--- |
@@ -185,7 +185,7 @@ Below are the third-party assets integrated into Zero-Dark:
 | **SnailTrail** | `1.0.0` | `https://esm.sh/@staticcanvas/snailtrail@1.0.0` | *Dynamic ESM CDN import* |
 
 > [!NOTE]
-> If `zd_use_cdn` is set to `false`, make sure the corresponding vendor files are present in your site's local assets.
+> If `rd_use_cdn` is set to `false`, make sure the corresponding vendor files are present in your site's local assets.
 
 ---
 
@@ -207,7 +207,7 @@ The theme automatically styles the resulting `.rouge-table` and `.gutter` elemen
 
 ## **Google Analytics Integration**
 
-Zero-Dark features native integration with Google Analytics 4 (GA4), including automatic outbound link click tracking and file download tracking.
+RavenUI features native integration with Google Analytics 4 (GA4), including automatic outbound link click tracking and file download tracking.
 
 ### **Setup**
 

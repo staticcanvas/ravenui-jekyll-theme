@@ -11,7 +11,7 @@ enable_search: true
 {% capture term_output %}
 <span class="fg-muted">></span> boot --verbose<br>
 <span class="fg-highlight">✓</span> Loading kernel: 100% complete.<br>
-<span class="fg-info">i</span> Initializing Zero-Dark interface...<br>
+<span class="fg-info">i</span> Initializing RavenUI interface...<br>
 <span class="fg-highlight">✓</span> System online. All subsystems nominal.
 {% endcapture %}
 

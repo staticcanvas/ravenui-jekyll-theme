@@ -6,7 +6,7 @@ output-title: true
 tags: [style, custom, liquid]
 enable_search: true
 ---
-Zero-Dark provides a set of utility classes that can be applied directly to Markdown elements using the Liquid Inline Attribute Syntax (`{: .class-name }`). This allows for high-precision styling without leaving your Markdown files.
+RavenUI provides a set of utility classes that can be applied directly to Markdown elements using the Liquid Inline Attribute Syntax (`{: .class-name }`). This allows for high-precision styling without leaving your Markdown files.
 
 {% include comps/heading.html tag="h2" text="Text Colors" icon="type" size=20 %}
 

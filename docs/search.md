@@ -6,7 +6,7 @@ tags: [search, pagefind, lyra, algolia]
 description: Blazing fast search integrations supporting Pagefind WASM, Lyra/Orama client-side search, and Algolia hosted search.
 enable_search: true
 ---
-Zero-Dark provides native integration for three distinct search paths, allowing you to choose the perfect search solution for your documentation footprint.
+RavenUI provides native integration for three distinct search paths, allowing you to choose the perfect search solution for your documentation footprint.
 
 🟦 **Search Providers At A Glance**
 - **Pagefind WASM (Default):** Indexes your static build locally and queries it using a client-side WebAssembly engine.
@@ -75,7 +75,7 @@ For environments where WebAssembly is not available or you want a lightweight cl
 
 ### **Asset Delivery**
 - **CDN Mode (`use_cdn: true`):** Dynamically imports `@orama/orama` from the jsDelivr CDN.
-- **Local Mode (`use_cdn: false`):** Runs the lightweight `zd-search-local.js` client offline with zero external network requests.
+- **Local Mode (`use_cdn: false`):** Runs the lightweight `rd-search-local.js` client offline with zero external network requests.
 
 ---
 
@@ -97,7 +97,7 @@ You can use a Jekyll plugin (such as `jekyll-algolia`) or a script to push your 
 
 ## **Asset Delivery Modes**
 
-Zero-Dark allows you to control how search library assets (JS and CSS) are fetched.
+RavenUI allows you to control how search library assets (JS and CSS) are fetched.
 
 ### **CDN Mode (`use_cdn: true`)**
 Loads the latest vendor libraries from high-speed global CDNs. This is recommended for production environments to minimize your host's bandwidth.
@@ -112,7 +112,7 @@ Loads assets locally from your own domain. This is essential for:
 
 ## **Page-Level Search Configuration**
 
-By default, search indexing in Zero-Dark is **opt-in** to prevent utility pages, templates, layouts, and index files from polluting search results.
+By default, search indexing in RavenUI is **opt-in** to prevent utility pages, templates, layouts, and index files from polluting search results.
 
 To make a page, post, or document searchable, you must explicitly set `enable_search: true` in its YAML front matter:
 

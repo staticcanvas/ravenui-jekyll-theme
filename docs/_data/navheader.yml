@@ -8,6 +8,6 @@
   url: /blog/
   icon: file-text
 - text: GitHub
-  url: https://github.com/staticcanvas/zero-dark-jekyll-theme
+  url: https://github.com/staticcanvas/ravenui-jekyll-theme
   icon: github
   external: true

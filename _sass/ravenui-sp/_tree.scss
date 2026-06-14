@@ -1,0 +1,86 @@
+// CSS-based File Directory Tree
+// Compliance: [Fluent UI Integration]
+
+.rd-tree-container {
+  background: var(--rd-bg-surface);
+  border: 1px solid var(--rd-border-default);
+  border-radius: var(--rd-radius-lg);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  font-family: var(--rd-font-mono);
+  font-size: 0.85rem;
+  color: var(--rd-clr-silver);
+  overflow-x: auto;
+}
+
+ul.rd-tree,
+ul.rd-tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+ul.rd-tree ul {
+  margin-left: 1.25rem; // spacing for child nodes
+}
+
+ul.rd-tree li {
+  margin: 0;
+  padding: 0.35rem 0;
+  position: relative;
+}
+
+// Connector lines
+ul.rd-tree li::before {
+  content: "";
+  position: absolute;
+  top: 0.95rem;
+  left: -0.75rem;
+  width: 0.65rem;
+  height: 1px;
+  border-top: 1px dashed var(--rd-border-strong);
+}
+
+ul.rd-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -0.75rem;
+  width: 1px;
+  height: 100%;
+  border-left: 1px dashed var(--rd-border-strong);
+}
+
+ul.rd-tree li:last-child::after {
+  height: 0.95rem; // stops at the horizontal branch
+}
+
+ul.rd-tree > li::after,
+ul.rd-tree > li::before {
+  display: none; // hide connectors on root nodes
+}
+
+.rd-tree-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--rd-clr-white);
+  padding: 0.15rem 0.35rem;
+  border-radius: var(--rd-radius);
+  transition: background var(--rd-transition-fast);
+  cursor: default;
+
+  &:hover {
+    background: var(--rd-bg-hover);
+  }
+}
+
+.rd-tree-icon {
+  color: var(--rd-clr-viridian);
+  flex-shrink: 0;
+}
+
+.rd-tree-text {
+  font-weight: 500;
+}

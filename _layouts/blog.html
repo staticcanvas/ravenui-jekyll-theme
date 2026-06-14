@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<div class="zd-blog-container">
+<div class="rd-blog-container">
     {{ content }}
     
     {% if page.category_filter %}
@@ -19,29 +19,29 @@ layout: default
     {% assign blog_style = page.blog_layout | default: site.theme_settings.blog.layout | default: "list" %}
     
     {% if blog_style == "grid" or blog_style == "card" %}
-        <div class="zd-blog-grid">
+        <div class="rd-blog-grid">
             {% for post in filtered_posts %}
-            <div class="zd-blog-card">
+            <div class="rd-blog-card">
                 {% if post.thumbnail %}
-                <div class="zd-blog-card-image-wrapper">
-                    <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="zd-blog-thumb">
+                <div class="rd-blog-card-image-wrapper">
+                    <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="rd-blog-thumb">
                 </div>
                 {% endif %}
-                <div class="zd-blog-card-content">
-                    <div class="zd-blog-card-meta">
+                <div class="rd-blog-card-content">
+                    <div class="rd-blog-card-meta">
                         <span>{% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}</span>
                         {% if post.author %}
                         <span>{% include comps/icon.html name="user" size=12 %} {{ post.author }}</span>
                         {% endif %}
                     </div>
-                    <h3 class="zd-blog-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                    <h3 class="rd-blog-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                     {% if post.description %}
-                    <p class="zd-blog-card-desc">{{ post.description }}</p>
+                    <p class="rd-blog-card-desc">{{ post.description }}</p>
                     {% endif %}
                     {% if post.tags %}
-                    <div class="zd-tag-container">
+                    <div class="rd-tag-container">
                         {% for tag in post.tags %}
-                        <span class="zd-tag">#{{ tag }}</span>
+                        <span class="rd-tag">#{{ tag }}</span>
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -50,10 +50,10 @@ layout: default
             {% endfor %}
         </div>
     {% else %}
-        <div class="zd-blog-list">
+        <div class="rd-blog-list">
             {% for post in filtered_posts %}
-            <article class="zd-blog-list-item">
-                <div class="zd-blog-list-meta">
+            <article class="rd-blog-list-item">
+                <div class="rd-blog-list-meta">
                     <time datetime="{{ post.date | date_to_xmlschema }}">
                         {% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}
                     </time>
@@ -65,17 +65,17 @@ layout: default
                     {% endif %}
                 </div>
 
-                <h3 class="zd-blog-list-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                <h3 class="rd-blog-list-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 
                 {% if post.description %}
-                <p class="zd-blog-list-desc">{{ post.description }}</p>
+                <p class="rd-blog-list-desc">{{ post.description }}</p>
                 {% endif %}
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
                     {% if post.tags %}
-                    <div class="zd-tag-container" style="margin: 0;">
+                    <div class="rd-tag-container" style="margin: 0;">
                         {% for tag in post.tags %}
-                        <span class="zd-tag">#{{ tag }}</span>
+                        <span class="rd-tag">#{{ tag }}</span>
                         {% endfor %}
                     </div>
                     {% endif %}

@@ -15,7 +15,7 @@ The `hero-card.html` component is a large, centered container designed for prima
 {% endcapture %}
 
 {% include comps/hero-card.html 
-    title="Zero-Dark Systems" 
+    title="RavenUI Systems" 
     description="The next generation of technical documentation." 
     content=hero_demo 
     cta_text="Get Started" 
@@ -26,7 +26,7 @@ The `hero-card.html` component is a large, centered container designed for prima
 {% raw %}
 ```liquid
 {% include comps/hero-card.html 
-    title="Zero-Dark Systems" 
+    title="RavenUI Systems" 
     description="..." 
     content="..."
     cta_text="Get Started" 

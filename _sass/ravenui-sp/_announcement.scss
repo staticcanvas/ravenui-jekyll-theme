@@ -1,0 +1,110 @@
+// Announcement Banner Component
+// Compliance: [Fluent UI Integration]
+
+.rd-announcement-banner {
+  width: 100%;
+  background: var(--rd-clr-ink);
+  border-bottom: 1px solid var(--rd-border-default);
+  box-shadow: var(--rd-elevation-depth);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: var(--rd-clr-white);
+  transition: opacity var(--rd-transition-base), transform var(--rd-transition-base);
+  box-sizing: border-box;
+  z-index: var(--z-fixed);
+  position: relative;
+
+  // Accents and variants
+  --rd-announcement-accent: var(--rd-clr-viridian);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--rd-announcement-accent);
+  }
+
+  // Type variants
+  &.rd-announcement--info {
+    --rd-announcement-accent: var(--rd-clr-info-alt);
+  }
+  
+  &.rd-announcement--warning {
+    --rd-announcement-accent: var(--rd-clr-warning-alt);
+  }
+  
+  &.rd-announcement--danger {
+    --rd-announcement-accent: var(--rd-clr-danger-alt);
+  }
+  
+  &.rd-announcement--success {
+    --rd-announcement-accent: var(--rd-clr-viridian);
+  }
+}
+
+.rd-announcement-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.rd-announcement-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--rd-announcement-accent);
+}
+
+.rd-announcement-text {
+  font-weight: 500;
+}
+
+.rd-announcement-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--rd-announcement-accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--rd-transition-fast);
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &:hover {
+    border-color: var(--rd-announcement-accent);
+  }
+}
+
+.rd-announcement-dismiss {
+  background: transparent;
+  border: none;
+  color: var(--rd-clr-smoke);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: var(--rd-radius);
+  transition: color var(--rd-transition-fast), background-color var(--rd-transition-fast);
+  margin-left: 1rem;
+
+  &:hover {
+    color: var(--rd-clr-white);
+    background-color: var(--rd-bg-hover);
+  }
+
+  &:active {
+    background-color: var(--rd-bg-active);
+  }
+}

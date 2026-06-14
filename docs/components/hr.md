@@ -31,12 +31,12 @@ The `hr.html` component replaces default browser horizontal rules with professio
 
 Use `style="gradient"` to render separators utilizing CSS linear gradients.
 
-{% include comps/hr.html text="Gradient Separator" style="gradient" from="var(--zd-clr-viridian)" to="#00b3ff" %}
+{% include comps/hr.html text="Gradient Separator" style="gradient" from="var(--rd-clr-viridian)" to="#00b3ff" %}
 
 {% capture hr_grad_eg %}
 {% raw %}
 ```liquid
-{% include comps/hr.html text="Gradient Separator" style="gradient" from="var(--zd-clr-viridian)" to="#00b3ff" %}
+{% include comps/hr.html text="Gradient Separator" style="gradient" from="var(--rd-clr-viridian)" to="#00b3ff" %}
 ```
 {% endraw %}
 {% endcapture %}
@@ -52,6 +52,6 @@ Use `style="gradient"` to render separators utilizing CSS linear gradients.
 | `icon` | String | | Optional Lucide icon to render next to the text. |
 | `style` | String | `solid` | Separator line style (`solid`, `gradient`). |
 | `align` | String | `center` | Text alignment (`center`, `left`, `right`). |
-| `from` | String | `var(--zd-clr-viridian)` | The gradient starting color (only for `style="gradient"`). |
+| `from` | String | `var(--rd-clr-viridian)` | The gradient starting color (only for `style="gradient"`). |
 | `to` | String | `#00b3ff` | The gradient ending color (only for `style="gradient"`). |
 | `class` | String | | Optional CSS class to append to the container. |

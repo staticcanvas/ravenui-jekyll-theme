@@ -1,0 +1,61 @@
+/* * 🌑 ZERO-DARK v1.3.3
+ * A professional, high-performance Jekyll theme.
+ * Refactored: Modular SCSS Architecture
+ * Compliance: [Fluent UI Integration] [Source of Truth Architecture]
+ */
+
+// 1. Foundation & Variables
+@use "ravenui-sp/root";
+@use "ravenui-sp/animations";
+
+// 2. Base Styles
+@use "ravenui-sp/base";
+@use "ravenui-sp/typography";
+@use "ravenui-sp/layout";
+@use "ravenui-sp/utilities";
+
+// 3. Navigation & Sidebars
+@use "ravenui-sp/navigation";
+@use "ravenui-sp/sidebar";
+@use "ravenui-sp/toc";
+@use "ravenui-sp/search";
+@use "ravenui-sp/footer";
+@use "ravenui-sp/header";
+
+// 4. Components
+@use "ravenui-sp/components";
+@use "ravenui-sp/color-blocks";
+@use "ravenui-sp/callouts";
+@use "ravenui-sp/command-ref";
+@use "ravenui-sp/api-reference";
+@use "ravenui-sp/roadmap";
+@use "ravenui-sp/vhs";
+@use "ravenui-sp/releases";
+@use "ravenui-sp/breadcrumbs";
+@use "ravenui-sp/details";
+@use "ravenui-sp/blog";
+@use "ravenui-sp/posts";
+@use "ravenui-sp/splash-components";
+@use "ravenui-sp/specialist-layouts";
+@use "ravenui-sp/space";
+@use "ravenui-sp/iconography";
+@use "ravenui-sp/kbd";
+@use "ravenui-sp/announcement";
+@use "ravenui-sp/copy-button";
+@use "ravenui-sp/icon-grid";
+@use "ravenui-sp/feedback";
+@use "ravenui-sp/tree";
+@use "ravenui-sp/tooltip";
+@use "ravenui-sp/metrics";
+@use "ravenui-sp/datatable";
+@use "ravenui-sp/timeline";
+@use "ravenui-sp/tag-cloud";
+@use "ravenui-sp/modal";
+@use "ravenui-sp/figure";
+@use "ravenui-sp/steps";
+@use "ravenui-sp/dependencies";
+@use "ravenui-sp/extra-components";
+
+
+// 5. Third Party / Syntax Highlighting
+@use "rogue/ethereal";
