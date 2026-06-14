@@ -1,13 +1,22 @@
 /* HEADER BAR styling */
 .zd-header {
-  height: 56px;
+  --zd-header-height: 56px;
+  height: var(--zd-header-height);
   background: color-mix(in srgb, var(--zd-bg-base) 85%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-block-end: var(--zd-border);
   width: 100%;
   padding-inline: clamp(1rem, 5vw, 2rem);
-  transition: background-color 0.3s var(--zd-transition-curve);
+  transition: background-color 0.3s var(--zd-transition-curve), height 0.2s var(--zd-transition-curve);
+
+  &.zd-header--compact {
+    --zd-header-height: 44px;
+  }
+
+  &.zd-header--relaxed {
+    --zd-header-height: 68px;
+  }
 }
 
 .zd-header--sticky {
@@ -71,8 +80,22 @@
 .zd-header-nav {
   display: none;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--zd-header-nav-gap, 1.5rem);
   height: 100%;
+
+  &.zd-header-nav--compact {
+    --zd-header-nav-gap: 0.75rem;
+    .zd-header-nav-link {
+      font-size: 0.75rem;
+    }
+  }
+
+  &.zd-header-nav--relaxed {
+    --zd-header-nav-gap: 2.25rem;
+    .zd-header-nav-link {
+      font-size: 0.85rem;
+    }
+  }
 }
 
 @media (min-width: 48rem) {
@@ -205,6 +228,14 @@
 @media (min-width: 64rem) {
   body:has(.zd-header--sticky) {
     --zd-header-height: 56px;
+
+    &:has(.zd-header--compact) {
+      --zd-header-height: 44px;
+    }
+
+    &:has(.zd-header--relaxed) {
+      --zd-header-height: 68px;
+    }
 
     .zd-container {
       padding-block-start: 1rem;

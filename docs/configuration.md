@@ -29,6 +29,15 @@ theme_settings:
     animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header             # Code block language style: badge, header
+  borders:
+    style: solid                   # border style: solid, dotted, dashed, double, none
+    width: 1px                     # border width (e.g. 1px, 2px)
+    color: default                 # border color: default, subtle, strong, accent, or custom CSS color
+    gradient:
+      enable: false                # toggle premium gradient borders
+      type: linear                 # gradient type: linear, radial
+      direction: 135deg            # direction for linear gradients
+      colors: ["var(--zd-clr-viridian)", "var(--zd-clr-info-alt)"]
   
   # Animations Controls
   animations:
@@ -63,10 +72,17 @@ theme_settings:
 | `header.enabled` | Boolean | `false` | Enable the top header bar layout. |
 | `header.sticky` | Boolean | `false` | Sticky header position on scroll. |
 | `header.align` | String | `center` | Navigation link alignment: `left`, `center`, `right`. |
+| `header.density` | String | `default` | Layout density for header size and link gaps (`compact`, `default`, `relaxed`). |
 | `toc.style` | String | `simple` | Layout style for TOC links (`simple`, `lines`, `nodes`). |
 | `toc.density` | String | `default` | Font size density (`compact`, `default`, `relaxed`). |
 | `toc.animations` | Boolean | `true` | Enable/disable TOC specific animations (page load fade-in, hover slide). |
 | `code.lang_style` | String | `badge` | Display layout for code block language tag (`badge`, `header`). |
+| `borders.style` | String | `solid` | Style pattern for borders (`solid`, `dotted`, `dashed`, `double`, `none`). |
+| `borders.width` | String | `1px` | Border thickness (e.g. `1px`, `2px`, `0.1rem`). |
+| `borders.color` | String | `default` | Color category (`default`, `subtle`, `strong`, `accent`) or custom CSS color. |
+| `borders.gradient.enable` | Boolean | `false` | Enables premium gradient borders on container components. |
+| `borders.gradient.type` | String | `linear` | Gradient configuration shape (`linear`, `radial`). |
+| `borders.gradient.colors` | Array | Viridian & Blue | Array of CSS color stops for gradient borders. |
 | `animations.enabled` | Boolean | `true` | Global switch for all animations. |
 | `animations.page_loads` | Boolean | `true` | Enables fade-in and slide animations on load. |
 | `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |

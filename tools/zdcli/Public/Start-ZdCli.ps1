@@ -55,6 +55,15 @@ function Start-ZdCli {
         $global:ZdDeveloperMode = $false
     }
 
+    # Intercept Command Help requests
+    if ($command -eq "help" -and $cmdArgs.Count -gt 0) {
+        Show-ZdCommandHelp -Command $cmdArgs[0]
+        return
+    } elseif ($command -and ($cmdArgs -contains "-h" -or $cmdArgs -contains "--help")) {
+        Show-ZdCommandHelp -Command $command
+        return
+    }
+
     if (-not $command -or $command -eq "help") {
         Show-ZdHelp
         return

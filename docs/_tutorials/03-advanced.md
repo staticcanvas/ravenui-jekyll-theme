@@ -8,4 +8,5 @@ icon: "zap"
 color: "#ffcc00"
 tags: [advanced, templates]
 ---
+
 Take absolute control of your layout structures. Group collections by metadata headers and sort them sequentially using the `order` and `group` variables.

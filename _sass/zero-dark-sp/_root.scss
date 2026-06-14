@@ -16,7 +16,10 @@
   --zd-radius: 4px;
   --zd-radius-lg: 8px;
   --zd-radius-xl: 12px;
-  --zd-border: 1px solid #222;
+  --zd-border-style: solid;
+  --zd-border-width: 1px;
+  --zd-border-color: var(--zd-border-default);
+  --zd-border: var(--zd-border-width) var(--zd-border-style) var(--zd-border-color);
   --z-sticky: 200;
   --z-fixed: 5000;
 

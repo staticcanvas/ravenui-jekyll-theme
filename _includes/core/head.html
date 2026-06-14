@@ -88,7 +88,52 @@
             {% if site.theme_settings.typography.font_mono %}
                 --zd-font-mono: {{ site.theme_settings.typography.font_mono }};
             {% endif %}
+
+            /* Borders Customization */
+            {% if site.theme_settings.borders %}
+                {% assign borders = site.theme_settings.borders %}
+                {% if borders.style %}
+                    --zd-border-style: {{ borders.style }};
+                {% endif %}
+                {% if borders.width %}
+                    --zd-border-width: {{ borders.width }};
+                {% endif %}
+                {% if borders.color %}
+                    {% if borders.color == 'subtle' %}
+                        --zd-border-color: var(--zd-border-subtle);
+                    {% elsif borders.color == 'strong' %}
+                        --zd-border-color: var(--zd-border-strong);
+                    {% elsif borders.color == 'accent' %}
+                        --zd-border-color: var(--zd-border-accent);
+                    {% elsif borders.color == 'default' %}
+                        --zd-border-color: var(--zd-border-default);
+                    {% else %}
+                        --zd-border-color: {{ borders.color }};
+                    {% endif %}
+                {% endif %}
+                
+                {% if borders.gradient.enable and borders.gradient.colors %}
+                    {% if borders.gradient.type == 'radial' %}
+                        --zd-border-gradient-bg: radial-gradient(circle at center, {{ borders.gradient.colors | join: ', ' }});
+                    {% else %}
+                        --zd-border-gradient-bg: linear-gradient({{ borders.gradient.direction | default: '135deg' }}, {{ borders.gradient.colors | join: ', ' }});
+                    {% endif %}
+                {% endif %}
+            {% endif %}
         }
+
+        {% if site.theme_settings.borders.gradient.enable and site.theme_settings.borders.gradient.colors %}
+        /* Apply premium gradient borders to container elements */
+        .zd-card, .zd-codeblock, .zd-sidebar, .zd-btn, .zd-btn-primary, .zd-modal-content, .zd-step-bar, .zd-callout, div.highlight, .zd-terminal, .zd-feature-card, .zd-tabs {
+            border: var(--zd-border-width, 1px) solid transparent !important;
+            background: linear-gradient(var(--zd-bg-card, var(--zd-clr-ink)), var(--zd-bg-card, var(--zd-clr-ink))) padding-box,
+                        var(--zd-border-gradient-bg) border-box !important;
+        }
+        .zd-sidebar {
+            background: linear-gradient(var(--zd-clr-void), var(--zd-clr-void)) padding-box,
+                        var(--zd-border-gradient-bg) border-box !important;
+        }
+        {% endif %}
 
         {% if site.theme_settings.typography.h1 %}
             h1 {

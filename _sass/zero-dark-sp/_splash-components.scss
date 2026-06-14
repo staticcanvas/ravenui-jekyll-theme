@@ -2,7 +2,7 @@
 
 .zd-terminal {
     background: #050505;
-    border: 1px solid #222;
+    border: var(--zd-border);
     border-radius: var(--zd-radius-lg);
     overflow: hidden;
     box-shadow: var(--zd-elevation-high);
@@ -16,7 +16,7 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    border-block-end: 1px solid #222;
+    border-block-end: var(--zd-border);
 }
 
 .zd-terminal-dots {
@@ -155,7 +155,7 @@
 /* HERO CARD */
 .zd-hero-card {
     background: radial-gradient(circle at top left, #111 0%, #050505 100%);
-    border: 1px solid #222;
+    border: var(--zd-border);
     border-radius: var(--zd-radius-xl);
     padding: 4rem 2rem;
     text-align: center;

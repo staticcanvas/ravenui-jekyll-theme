@@ -28,6 +28,17 @@ theme_settings:
     animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header
+  
+  # Borders Settings
+  borders:
+    style: solid                  # options: solid, dotted, dashed, double, none
+    width: 1px                    # border width (e.g. 1px, 2px, 0.1rem)
+    color: default                # options: default, subtle, strong, accent, or custom CSS color
+    gradient:
+      enable: false               # toggle premium gradient borders
+      type: linear                # options: linear, radial
+      direction: 135deg           # direction for linear gradients
+      colors: ["var(--zd-clr-viridian)", "var(--zd-clr-info-alt)"]
 
   # Analytics Configuration
   analytics:
