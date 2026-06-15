@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Find the gem root directory (parent of bin/)
+gem_root = File.expand_path("..", __dir__)
+ps1_script = File.join(gem_root, "rvcli.ps1")
+
+# Build the command array to run pwsh
+cmd = ["pwsh", "-File", ps1_script] + ARGV
+
+# Execute the powershell script, replacing the current process
+exec(*cmd)

@@ -12,8 +12,10 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.dirname(__FILE__)) do
-    `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_sass|assets|LICENSE|README|VERSION)}) }
+    `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_sass|assets|bin|tools|LICENSE|README|VERSION|rvcli\.ps1)}) }
   end
+  spec.bindir        = "bin"
+  spec.executables   = ["rvcli"]
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "jekyll", "~> 4.3"

@@ -11,7 +11,7 @@ function Start-RvCli {
     )
 
     # Initialize dynamic theme variables
-    $workspaceRoot = $PSScriptRoot
+    $workspaceRoot = [System.IO.Directory]::GetCurrentDirectory()
     # Traverse up to find root of repo
     while ($workspaceRoot -and -not [System.IO.File]::Exists([System.IO.Path]::Combine($workspaceRoot, "_config.yml"))) {
         $parent = [System.IO.Path]::GetDirectoryName($workspaceRoot)
