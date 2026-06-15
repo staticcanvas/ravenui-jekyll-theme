@@ -3,7 +3,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body {
   background-color: var(--rd-bg-base);
-  color: #888;
+  color: var(--rd-clr-text-secondary);
   font-family: var(--rd-font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

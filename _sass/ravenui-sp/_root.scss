@@ -86,4 +86,82 @@
   --rd-clr-terminal-purple:#B06CF7;
   --rd-clr-terminal-orange:#FF9E57;
   --rd-clr-terminal-red:   #FF6B6B;
+
+  /* Text and Headings */
+  --rd-clr-text-primary: var(--rd-clr-platinum);
+  --rd-clr-text-secondary: #888;
+  --rd-clr-text-muted: #555;
+  --rd-clr-text-h3: #ccc;
+  --rd-clr-text-h4: #444;
+
+  /* Components Overrides */
+  --rd-bg-code: rgba(255, 255, 255, 0.04);
+  --rd-border-code: rgba(255, 255, 255, 0.05);
+  --rd-bg-kbd: #111;
+  --rd-border-kbd: #333;
+  --rd-bg-blockquote: rgba(255, 255, 255, 0.015);
+  --rd-clr-blockquote: #bbb;
+  --rd-bg-table-header: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] {
+  --rd-bg-base: #f8f9fa; 
+  --rd-bg-surface: #ffffff;
+  --rd-bg-elevated: #f1f3f5;
+  --rd-clr-platinum: #1a212b;
+  --rd-clr-highlight: #008f58; /* slightly darker green for readability on white */
+  --rd-clr-warning: #b45309;
+  --rd-clr-danger: #dc2626;
+  --rd-clr-info: #1d4ed8;
+
+  /* UI SYSTEM COLORS */
+  --rd-border-subtle:      #e9ecef;
+  --rd-border-default:     #dee2e6;
+  --rd-border-strong:      #ced4da;
+  --rd-border-accent:      #008f58;
+  --rd-bg-panel:           #f8f9fa;
+  --rd-bg-card:            #ffffff;
+  --rd-bg-hover:           #f1f3f5;
+  --rd-bg-active:          #e9ecef;
+
+  /* Text and Headings */
+  --rd-clr-text-primary: #1a212b;
+  --rd-clr-text-secondary: #495057;
+  --rd-clr-text-muted: #868e96;
+  --rd-clr-text-h3: #212529;
+  --rd-clr-text-h4: #868e96;
+
+  /* Components Overrides */
+  --rd-bg-code: #f1f3f5;
+  --rd-border-code: #dee2e6;
+  --rd-bg-kbd: #e9ecef;
+  --rd-border-kbd: #ced4da;
+  --rd-bg-blockquote: #f8f9fa;
+  --rd-clr-blockquote: #495057;
+  --rd-bg-table-header: #f1f3f5;
+
+  /* TERMINAL PALETTE */
+  --rd-clr-terminal-green: #059669;
+  --rd-clr-terminal-blue:  #2563eb;
+  --rd-clr-terminal-purple:#7c3aed;
+  --rd-clr-terminal-orange:#d97706;
+  --rd-clr-terminal-red:   #dc2626;
+
+  /* Ethereal Rouge syntax highlighting light overrides */
+  --syntax-bg: #f8f9fa;
+  --syntax-text: #24292f;
+  --syntax-comment: #57606a;
+  --syntax-keyword: #cf222e;
+  --syntax-function: #8250df;
+  --syntax-string: #0a3069;
+  --syntax-number: #0550ae;
+  --syntax-operator: #bc4c00;
+  --syntax-variable: #24292f;
+  --syntax-class: #953800;
+  --syntax-constant: #0550ae;
+  --syntax-tag: #116329;
+  --syntax-attribute: #0550ae;
+  --syntax-error: #cf222e;
+  --syntax-success: #116329;
+  --syntax-selection: rgba(130, 80, 223, 0.2);
 }

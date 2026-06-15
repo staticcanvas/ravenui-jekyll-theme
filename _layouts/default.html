@@ -119,6 +119,21 @@
         </button>
     </div>
 
+    {% if site.animation_libraries.aos.enable %}
+    <script src="{{ site.animation_libraries.aos.cdn_js | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js' }}"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            AOS.init();
+        });
+    </script>
+    {% endif %}
+    {% if site.animation_libraries.gsap.enable %}
+    <script src="{{ site.animation_libraries.gsap.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js' }}"></script>
+    {% endif %}
+    {% if site.animation_libraries.animejs.enable %}
+    <script src="{{ site.animation_libraries.animejs.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js' }}"></script>
+    {% endif %}
+
     <script type="module">
         /* 🌑 ZERO-DARK Core Utilities v1.3.4 */
         
@@ -607,6 +622,30 @@
             setupCodeBlocks();
             setupHeadingAnchors();
             setupNumericTickers();
+
+            // Setup GSAP & AnimeJS animations on annotated elements
+            if (typeof gsap !== 'undefined') {
+                document.querySelectorAll('[data-rd-gsap]').forEach(el => {
+                    const effect = el.getAttribute('data-rd-gsap');
+                    const delay = parseFloat(el.getAttribute('data-rd-gsap-delay') || 0);
+                    const duration = parseFloat(el.getAttribute('data-rd-gsap-duration') || 1);
+                    if (effect === 'fade') gsap.from(el, { opacity: 0, delay: delay, duration: duration });
+                    else if (effect === 'fade-up') gsap.from(el, { opacity: 0, y: 30, delay: delay, duration: duration });
+                    else if (effect === 'scale') gsap.from(el, { opacity: 0, scale: 0.8, delay: delay, duration: duration });
+                    else if (effect === 'bounce') gsap.from(el, { y: -50, ease: "bounce.out", delay: delay, duration: duration });
+                });
+            }
+            if (typeof anime !== 'undefined') {
+                document.querySelectorAll('[data-rd-anime]').forEach(el => {
+                    const effect = el.getAttribute('data-rd-anime');
+                    const delay = parseFloat(el.getAttribute('data-rd-anime-delay') || 0) * 1000;
+                    const duration = parseFloat(el.getAttribute('data-rd-anime-duration') || 1) * 1000;
+                    if (effect === 'fade') anime({ targets: el, opacity: [0, 1], delay: delay, duration: duration, easing: 'easeInOutQuad' });
+                    else if (effect === 'fade-up') anime({ targets: el, opacity: [0, 1], translateY: [30, 0], delay: delay, duration: duration, easing: 'easeOutQuad' });
+                    else if (effect === 'scale') anime({ targets: el, opacity: [0, 1], scale: [0.8, 1], delay: delay, duration: duration, easing: 'easeOutElastic(1, .8)' });
+                    else if (effect === 'rotate') anime({ targets: el, rotate: '1turn', delay: delay, duration: duration, easing: 'easeInOutSine' });
+                });
+            }
 
             // Visited pages tracker for local history
             try {

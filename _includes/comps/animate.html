@@ -1,0 +1,34 @@
+{%- comment -%}
+Component__: Animate Helper
+Purpose____: Generates classes/attributes/styles for animation libraries (Animate.css, AOS, GSAP, Anime.js).
+Caveats____: Requires the corresponding library to be enabled in _config.yml.
+Usage______:
+  <div {% include comps/animate.html library="aos" effect="fade-up" delay="100" %}>...</div>
+  <div class="{% include comps/animate.html library="animate_css" effect="bounce" delay="0.5s" %}">...</div>
+{%- endcomment -%}
+
+{%- assign library = include.library | default: 'animate_css' -%}
+{%- assign effect = include.effect | default: 'fade-in' -%}
+{%- assign delay = include.delay -%}
+{%- assign duration = include.duration -%}
+
+{%- if library == 'animate_css' and site.animation_libraries.animate_css.enable -%}
+  animate__animated animate__{{ effect }}
+  {%- if delay or duration -%}
+    " style="
+    {%- if delay -%}animation-delay: {{ delay }};{%- endif -%}
+    {%- if duration -%}animation-duration: {{ duration }};{%- endif -%}
+  {%- endif -%}
+{%- elsif library == 'aos' and site.animation_libraries.aos.enable -%}
+  data-aos="{{ effect }}"
+  {%- if delay -%} data-aos-delay="{{ delay }}"{%- endif -%}
+  {%- if duration -%} data-aos-duration="{{ duration }}"{%- endif -%}
+{%- elsif library == 'gsap' and site.animation_libraries.gsap.enable -%}
+  data-rd-gsap="{{ effect }}"
+  {%- if delay -%} data-rd-gsap-delay="{{ delay }}"{%- endif -%}
+  {%- if duration -%} data-rd-gsap-duration="{{ duration }}"{%- endif -%}
+{%- elsif library == 'animejs' and site.animation_libraries.animejs.enable -%}
+  data-rd-anime="{{ effect }}"
+  {%- if delay -%} data-rd-anime-delay="{{ delay }}"{%- endif -%}
+  {%- if duration -%} data-rd-anime-duration="{{ duration }}"{%- endif -%}
+{%- endif -%}

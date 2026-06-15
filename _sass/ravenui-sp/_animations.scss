@@ -97,11 +97,11 @@
 // 1. Page Load Animations
 .rd-animations-enabled.rd-anim-page-loads {
   .rd-hero {
-    animation: rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both);
   }
   
   .rd-content > :not(.rd-hero) {
-    animation: rd-fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both);
     animation-delay: 0.08s;
   }
   
@@ -112,7 +112,7 @@
 
 .rd-animations-enabled.rd-anim-page-loads:not([data-toc-animations="false"]) {
   .rd-page-toc-container {
-    animation: rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both);
     animation-delay: 0.12s;
   }
 }
@@ -210,6 +210,34 @@
     transform: translateY(1px) scale(0.99);
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.02);
   }
+}
+
+// Background & Backdrop Animations
+@keyframes rd-backdrop-pan {
+  from { background-position: 0 0; }
+  to { background-position: 120px 120px; }
+}
+
+@keyframes rd-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Configurable Page-Load Animations
+@keyframes rd-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rd-slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rd-zoom-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 // 4. Accessibility Fallback (Reduced Motion)

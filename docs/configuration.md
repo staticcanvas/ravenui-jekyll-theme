@@ -84,8 +84,10 @@ theme_settings:
 | `borders.gradient.type` | String | `linear` | Gradient configuration shape (`linear`, `radial`). |
 | `borders.gradient.colors` | Array | Viridian & Blue | Array of CSS color stops for gradient borders. |
 | `animations.enabled` | Boolean | `true` | Global switch for all animations. |
-| `animations.page_loads` | Boolean | `true` | Enables fade-in and slide animations on load. |
+| `animations.page_loads` | Boolean | `true` | Enables page load transition animations. |
+| `animations.page_load_style` | String | `fade-in-up` | Page load animation style: `fade-in`, `fade-in-up`, `slide-in-left`, `zoom-in`, `none`. |
 | `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |
+| `animations.view_transitions` | Boolean | `true` | Enables browser-native cross-document View Transitions. |
 | `typography.google_fonts` | String | *Fraunces & IBM Plex* | Custom Google Font query string to load from CDN. |
 | `typography.font_sans` | String | System default | Font stack for body text. |
 | `typography.font_mono` | String | System default | Font stack for monospace code blocks. |
@@ -224,4 +226,78 @@ Once defined, the theme will automatically load the global tag script (`gtag.js`
 The theme automatically listens for click events on links and logs the following events:
 - **Outbound Link Clicks**: Clicks to external domains are tracked with the event category `outbound_link`.
 - **File Downloads**: Clicks to download files (matching `.zip`, `.tar`, `.gz`, `.pdf`, `.gem`, `.gemspec`) are logged with the event category `download`.
+
+---
+
+## **Animations & Transitions**
+
+RavenUI features an advanced, performance-optimized animation system that spans from subtle CSS keyframes to native page view transitions and integrations with industry-standard external libraries.
+
+### **Background & Backdrop Animations**
+
+You can enable subtle background movement that animates either the gradient colors or the backdrop grid/dots pattern. Add this to your `_config.yml`:
+
+```yaml
+theme_settings:
+  background:
+    animation:
+      enable: true               # Enable background animations
+      speed: slow                # Animation speed: slow, normal, fast
+```
+
+### **Page-Load Styles & View Transitions**
+
+You can configure the entrance style for page components on load and toggle native cross-document View Transitions:
+
+```yaml
+theme_settings:
+  animations:
+    enabled: true
+    page_loads: true
+    page_load_style: zoom-in    # Options: fade-in, fade-in-up, slide-in-left, zoom-in, none
+    view_transitions: true      # Toggle browser-native cross-page Transitions
+```
+
+### **External Animation Libraries**
+
+Support for popular external CSS and JS animation libraries can be toggled via feature flags. Enable them at the root level of your `_config.yml`:
+
+```yaml
+# External Animation Libraries
+animation_libraries:
+  animate_css:
+    enable: true
+  aos:
+    enable: true
+  gsap:
+    enable: true
+  animejs:
+    enable: true
+```
+
+#### **Usage Include Component**
+
+To apply these external library animations to any HTML element or markdown block, use the helper include component:
+
+```html
+<!-- Animate.css Example -->
+<div class="{% include comps/animate.html library="animate_css" effect="bounce" delay="0.5s" %}">
+  animated box
+</div>
+
+<!-- AOS Example -->
+<div {% include comps/animate.html library="aos" effect="fade-up" delay="100" %}>
+  scroll animation box
+</div>
+
+<!-- GSAP Example -->
+<div {% include comps/animate.html library="gsap" effect="bounce" delay="0.5" %}>
+  GSAP animated box
+</div>
+
+<!-- Anime.js Example -->
+<div {% include comps/animate.html library="animejs" effect="rotate" duration="2" %}>
+  AnimeJS rotated box
+</div>
+```
 

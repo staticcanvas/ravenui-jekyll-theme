@@ -40,6 +40,21 @@ theme_settings:
       direction: 135deg           # direction for linear gradients
       colors: ["var(--rd-clr-viridian)", "var(--rd-clr-info-alt)"]
 
+  # Background Settings
+  background:
+    gradient:
+      enable: false               # toggle background linear/radial gradient
+      type: linear                # options: linear, radial
+      direction: 135deg           # direction for linear gradient
+      colors: ["var(--rd-clr-void)", "var(--rd-bg-base)"]
+    backdrop:
+      enable: false               # backdrop pattern layer in front of background
+      opacity: 0.05               # backdrop pattern opacity
+      pattern: grid               # options: grid, dots, diagonal
+    animation:
+      enable: true                # toggle background panning/color-shifting animations
+      speed: slow                 # options: slow, normal, fast
+
   # Analytics Configuration
   analytics:
     provider: posthog            # options: posthog, google_analytics, umami, plausible, none
@@ -69,7 +84,9 @@ theme_settings:
   animations:
     enabled: true                   # Enable/disable all animations globally
     page_loads: true                # Enable subtle page load fade-in animations
+    page_load_style: fade-in-up     # options: fade-in, fade-in-up, slide-in-left, zoom-in, none
     hover_effects: true             # Enable hover scale/rotate micro-animations on interactive elements
+    view_transitions: true          # Enable View Transitions API for navigation transitions (exit/entry)
   
   # Collections Configuration
   collections:
@@ -146,6 +163,22 @@ rd_toc_default_open: true
 rd_progress_bar: true
 rd_code_copy: true
 rd_code_lang: true
+
+# External Animation Libraries
+animation_libraries:
+  animate_css:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  aos:
+    enable: false
+    cdn_css: "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    cdn_js: "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+  gsap:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+  animejs:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
 
 # Defaults
 rd_icon_size: 16

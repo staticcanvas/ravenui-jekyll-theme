@@ -54,6 +54,11 @@
         {% endif %}
     </div>
 
+    <div class="rd-sidebar-theme-container" style="padding: 0 1.5rem; margin-block-end: 1.5rem; display: flex; justify-content: flex-start;">
+        {% include comps/theme-toggle.html %}
+        <span style="font-size: 0.85rem; color: var(--rd-clr-text-secondary); margin-inline-start: 0.5rem; align-self: center;">Theme</span>
+    </div>
+
     <nav class="rd-nav" aria-label="Documentation Navigation">
         {% for section in site.data.navigation %}
         {% if section.type == "separator" %}

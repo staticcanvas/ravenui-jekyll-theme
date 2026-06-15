@@ -1,6 +1,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('rd-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "RavenUI" }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
@@ -30,6 +36,13 @@
         {% if site.font_awesome %}
         <link rel="stylesheet" href="{{ "/assets/css/vendor/fontawesome.6.5.2.min.css" | relative_url }}">
         {% endif %}
+    {% endif %}
+
+    {% if site.animation_libraries.animate_css.enable %}
+    <link rel="stylesheet" href="{{ site.animation_libraries.animate_css.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' }}">
+    {% endif %}
+    {% if site.animation_libraries.aos.enable %}
+    <link rel="stylesheet" href="{{ site.animation_libraries.aos.cdn_css | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css' }}">
     {% endif %}
 
     {%- if search_provider == "pagefind" -%}
@@ -120,7 +133,69 @@
                     {% endif %}
                 {% endif %}
             {% endif %}
+
+            {% if site.theme_settings.animations.enabled != false %}
+                {% assign load_style = site.theme_settings.animations.page_load_style | default: 'fade-in-up' %}
+                {% if load_style == 'fade-in' %}
+                    --rd-page-load-anim: rd-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% elsif load_style == 'slide-in-left' %}
+                    --rd-page-load-anim: rd-slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% elsif load_style == 'zoom-in' %}
+                    --rd-page-load-anim: rd-zoom-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% else %}
+                    --rd-page-load-anim: rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% endif %}
+            {% endif %}
         }
+
+        {% if site.theme_settings.animations.view_transitions %}
+        @view-transition {
+            navigation: auto;
+        }
+        {% endif %}
+
+        {% if site.theme_settings.background.gradient.enable and site.theme_settings.background.gradient.colors %}
+        body {
+            {% if site.theme_settings.background.gradient.type == 'radial' %}
+            background: radial-gradient(circle at center, {{ site.theme_settings.background.gradient.colors | join: ', ' }}) !important;
+            {% else %}
+            background: linear-gradient({{ site.theme_settings.background.gradient.direction | default: '135deg' }}, {{ site.theme_settings.background.gradient.colors | join: ', ' }}) !important;
+            {% endif %}
+            background-attachment: fixed !important;
+            
+            {% if site.theme_settings.background.animation.enable %}
+            background-size: 400% 400% !important;
+            animation: rd-gradient-shift {% if site.theme_settings.background.animation.speed == 'fast' %}15s{% elsif site.theme_settings.background.animation.speed == 'normal' %}30s{% else %}60s{% endif %} ease infinite !important;
+            {% endif %}
+        }
+        {% endif %}
+
+        {% if site.theme_settings.background.backdrop.enable %}
+        body::before {
+            content: "" !important;
+            position: fixed !important;
+            inset: 0 !important;
+            pointer-events: none !important;
+            z-index: -1 !important;
+            opacity: {{ site.theme_settings.background.backdrop.opacity | default: 0.05 }} !important;
+            {% if site.theme_settings.background.backdrop.pattern == 'grid' %}
+            background-size: 40px 40px !important;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px) !important;
+            {% elsif site.theme_settings.background.backdrop.pattern == 'dots' %}
+            background-size: 24px 24px !important;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) !important;
+            {% elsif site.theme_settings.background.backdrop.pattern == 'diagonal' %}
+            background-size: 20px 20px !important;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)) !important;
+            {% endif %}
+            
+            {% if site.theme_settings.background.animation.enable %}
+            animation: rd-backdrop-pan {% if site.theme_settings.background.animation.speed == 'fast' %}30s{% elsif site.theme_settings.background.animation.speed == 'normal' %}60s{% else %}120s{% endif %} linear infinite !important;
+            {% endif %}
+        }
+        {% endif %}
 
         {% if site.theme_settings.borders.gradient.enable and site.theme_settings.borders.gradient.colors %}
         /* Apply premium gradient borders to container elements */
@@ -132,6 +207,11 @@
         .rd-sidebar {
             background: linear-gradient(var(--rd-clr-void), var(--rd-clr-void)) padding-box,
                         var(--rd-border-gradient-bg) border-box !important;
+        }
+        {% elsif site.theme_settings.borders %}
+        /* Apply custom border styles (color, style, width) to container elements */
+        .rd-card, .rd-codeblock, .rd-sidebar, .rd-btn, .rd-btn-primary, .rd-modal-content, .rd-step-bar, .rd-callout, div.highlight, .rd-terminal, .rd-feature-card, .rd-tabs {
+            border: var(--rd-border-width, 1px) var(--rd-border-style, solid) var(--rd-border-color, var(--rd-border-default)) !important;
         }
         {% endif %}
 
