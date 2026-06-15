@@ -1,10 +1,10 @@
 <div class="rd-hero-card">
     <div class="rd-hero-card-header">
-        <h2 class="rd-hero-card-title">{{ include.title }}</h2>
-        <p class="rd-hero-card-tagline">{{ include.description }}</p>
+        <h2 class="rd-hero-card-title">{{ include.title | default: page.hero_title | default: "Hero Section Title" }}</h2>
+        <p class="rd-hero-card-tagline">{{ include.description | default: page.hero_description | default: "Welcome to our documentation site. Set title and description in the include parameters." }}</p>
     </div>
     <div class="rd-hero-card-body">
-        {{ include.content }}
+        {{ include.content | default: page.hero_content | default: "Define your main content, features, or links inside the hero section block." }}
     </div>
     {% if include.cta_text %}
     <div class="rd-hero-card-footer">

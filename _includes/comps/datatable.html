@@ -5,14 +5,25 @@ Caveats____: Output is enhanced via Vanilla JS. Table headers can be passed as a
 Usage______: {% include comps/datatable.html data_source="table1" headers="name:Name,role:Role,loc:Location" %}
 {%- endcomment -%}
 
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign items = include.items | default: page.table_items | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "table1" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.table_items | default: site.theme_settings.table_items -%}
 
-{%- if include.headers[0].key -%}
+{%- assign raw_headers = include.headers | default: page.table_headers | default: site.theme_settings.table_headers -%}
+{%- if raw_headers[0].key -%}
   {%- assign headers_type = "array" -%}
-  {%- assign table_headers = include.headers -%}
+  {%- assign table_headers = raw_headers -%}
 {%- else -%}
   {%- assign headers_type = "string" -%}
-  {%- assign table_headers = include.headers | split: "," -%}
+  {%- assign table_headers = raw_headers | split: "," -%}
 {%- endif -%}
 
 {%- capture temp_random -%}

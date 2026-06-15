@@ -1,11 +1,21 @@
 {%- comment -%}
 Component__: Timeline
 Purpose____: Displays chronological timeline of events from list items or YAML data.
-Caveats____: Events can be defined in page front-matter or in site data.
+Caveats____: Events can be defined in page front-matter or in site data. Supports dot-separated nested data sources.
 Usage______: {% include comps/timeline.html data_source="history" %}
 {%- endcomment -%}
 
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign items = include.items | default: page.timeline_items | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "timeline" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.timeline_items | default: site.theme_settings.timeline_items -%}
 
 <div class="rd-timeline-wrapper {{ include.class }}">
   <div class="rd-timeline">

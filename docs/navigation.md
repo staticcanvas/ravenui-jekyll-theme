@@ -159,6 +159,16 @@ theme_settings:
 
 ---
 
+{% include comps/heading.html tag="h2" text="Flat-File Site Structure Support" icon="folder-open" size=20 %}
+
+RavenUI is designed to support a **Flat-File Site Structure** out of the box, meaning developers are not forced to place pages inside nested directories (e.g. `docs/installation/index.md`) or use Jekyll Collections.
+
+If you prefer to organize all your files in a single flat directory:
+* **Automatic Active Link Resolution**: The sidebar and header navigation automatically normalizes page and link URLs (e.g., removing `.html` and `index`, appending trailing slashes) before performing active comparisons. This guarantees that links like `url: /installation.html` and `url: /installation/` both resolve correctly and highlight the active page.
+* **Breadcrumbs Compatibility**: The breadcrumb generator dynamically splits flat paths and displays the page title for the active node without requiring parent index files.
+
+---
+
 {% include comps/heading.html tag="h2" text="Mobile Experience" icon="smartphone" size=20 %}
 
 On smaller screens, RavenUI utilizes a **Dual-Toggle System**:

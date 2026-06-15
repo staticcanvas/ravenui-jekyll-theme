@@ -5,7 +5,17 @@ Caveats____: Connects with custom YAML data or takes items and current step inde
 Usage______: {% include comps/steps.html items=page.steps current=2 %}
 {%- endcomment -%}
 
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign items = include.items | default: page.step_items | default: page.steps | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "steps" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.step_items | default: site.theme_settings.step_items -%}
 {%- assign current_step = include.current | plus: 0 | default: 0 -%}
 
 <div class="rd-steps-wrapper {{ include.class }}">

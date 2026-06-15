@@ -25,6 +25,11 @@
     {% else %}
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
     {% endif %}
+    {% if site.theme_settings.typography.custom_font_stylesheets %}
+        {% for stylesheet in site.theme_settings.typography.custom_font_stylesheets %}
+        <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+        {% endfor %}
+    {% endif %}
     
     {% if site.rd_use_cdn != false %}
         <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.min.js"></script>
@@ -64,6 +69,24 @@
     <meta name="description" content="{{ site.description }}">
     {% endif %}
     {% seo %}
+
+    {% if site.theme_settings.custom_stylesheets %}
+    <!-- Custom Theme Stylesheets -->
+    {% for stylesheet in site.theme_settings.custom_stylesheets %}
+    <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+    {% endfor %}
+    {% endif %}
+
+    {% if site.theme_settings.custom_scripts_head %}
+    <!-- Custom Head Scripts -->
+    {% for script in site.theme_settings.custom_scripts_head %}
+      {% if script.src %}
+    <script src="{{ script.src | relative_url }}" {% if script.async %}async{% endif %} {% if script.defer %}defer{% endif %} {% if script.type %}type="{{ script.type }}"{% endif %}></script>
+      {% else %}
+    <script src="{{ script | relative_url }}"></script>
+      {% endif %}
+    {% endfor %}
+    {% endif %}
 
     <style>
         :root {

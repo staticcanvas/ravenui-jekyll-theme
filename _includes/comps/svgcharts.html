@@ -4,8 +4,14 @@
 {% assign width = include.width | default: 600 | plus: 0 %}
 {% assign title = include.title %}
 
-{% if include.source %}
-  {% assign data_source = site.data[include.source] %}
+{% assign source_name = include.source | default: page.chart_source | default: site.theme_settings.chart_source %}
+{% if source_name %}
+  {% assign path_parts = source_name | split: "." %}
+  {% assign data_source = site.data %}
+  {% for part in path_parts %}
+    {% assign data_source = data_source[part] %}
+  {% endfor %}
+  {% assign data_source = data_source | default: page[source_name] | default: site[source_name] | default: site.theme_settings[source_name] %}
   {% if include.key %}
     {% assign data_source = data_source[include.key] %}
   {% endif %}

@@ -9,8 +9,18 @@ Usage______:
             {% include comps/feature-grid.html content=grid_content %}
 {%- endcomment -%}
 
-{%- assign columns = include.columns | default: 3 | plus: 0 -%}
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign columns = include.columns | default: page.grid_columns | default: site.theme_settings.grid_columns | default: 3 | plus: 0 -%}
+{%- assign items = include.items | default: page.features | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "features" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.features | default: site.theme_settings.features -%}
 
 <div class="rd-feature-grid {{ include.class }}" style="--rd-grid-cols: {{ columns }};">
   {%- if include.content -%}

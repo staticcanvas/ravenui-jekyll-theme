@@ -83,16 +83,22 @@ theme_settings:
 | `borders.gradient.enable` | Boolean | `false` | Enables premium gradient borders on container components. |
 | `borders.gradient.type` | String | `linear` | Gradient configuration shape (`linear`, `radial`). |
 | `borders.gradient.colors` | Array | Viridian & Blue | Array of CSS color stops for gradient borders. |
+| `compatibility.disable_custom_plugins` | Boolean | `false` | Force safe-mode behavior locally (disables custom Ruby plugins). |
 | `animations.enabled` | Boolean | `true` | Global switch for all animations. |
 | `animations.page_loads` | Boolean | `true` | Enables page load transition animations. |
 | `animations.page_load_style` | String | `fade-in-up` | Page load animation style: `fade-in`, `fade-in-up`, `slide-in-left`, `zoom-in`, `none`. |
 | `animations.hover_effects` | Boolean | `true` | Enables hover scales, lifts, and shifts. |
 | `animations.view_transitions` | Boolean | `true` | Enables browser-native cross-document View Transitions. |
 | `typography.google_fonts` | String | *Fraunces & IBM Plex* | Custom Google Font query string to load from CDN. |
+| `typography.custom_font_stylesheets` | Array | `null` | Custom font stylesheet URLs (e.g. self-hosted fonts or Fontsource CDNs) to load in `<head>`. |
 | `typography.font_sans` | String | System default | Font stack for body text. |
 | `typography.font_mono` | String | System default | Font stack for monospace code blocks. |
 | `typography.h1`, `h2`, `h3`, `body` | Object | `null` | Typography overrides including `font_family`, `size`, and `weight`. |
+| `custom_stylesheets` | Array | `null` | Custom stylesheets to load in `<head>`. Can be absolute/relative URLs. |
+| `custom_scripts_head` | Array | `null` | Custom scripts to load in `<head>`. Can be URLs or objects with `src`, `async`, `defer`, `type`. |
+| `custom_scripts_foot` | Array | `null` | Custom scripts to load in the footer. Can be URLs or objects with `src`, `async`, `defer`, `type`. |
 | `footer.columns` | Array | `null` | Dynamic footer multi-column layouts configuration. |
+
 
 ---
 
