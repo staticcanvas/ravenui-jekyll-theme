@@ -15,8 +15,8 @@ Building the theme gem locally is useful when you want to customize core layouts
 
 1. **Clone the repository:**
    ```bash
-   git clone https://gitlab.com/staticcanvas/ravenui.git
-   cd ravenui
+   git clone https://gitlab.com/staticcanvas/ravenui-jekyll-theme.git
+   cd ravenui-jekyll-theme
    ```
 
 2. **Install development gems:**
@@ -27,17 +27,17 @@ Building the theme gem locally is useful when you want to customize core layouts
 3. **Build the Gem package:**
    Use the gemspec file to package the theme assets:
    ```bash
-   gem build ravenui.gemspec
+   gem build jekyll-theme-ravenui.gemspec
    ```
 
 4. **Install the compiled gem:**
    ```bash
-   gem install ./ravenui-*.gem
+   gem install ./jekyll-theme-ravenui-*.gem
    ```
 
 5. **Reference the local gem in your project's Gemfile:**
    ```ruby
-   gem "ravenui", path: "/path/to/cloned/ravenui"
+   gem "jekyll-theme-ravenui", path: "/path/to/cloned/ravenui-jekyll-theme"
    ```
 
 ---
@@ -70,3 +70,16 @@ sass:
 ```
 
 By customizing these paths, you can organize your markdown documentation separately from your core layouts and style assets.
+
+---
+
+## **Platform Compatibility & Safe Mode**
+
+RavenUI is compatible with GitHub Pages, GitLab Pages, and self-hosted static environments.
+
+* **GitHub Pages Default Builder**:
+  GitHub Pages builds sites in **Safe Mode** (`site.safe: true`), which disables custom Ruby plugins.
+  Because RavenUI includes a custom `from_yaml` Ruby filter (used optionally by the `git-tags` and `releases` components to parse inline YAML strings), these inline configurations will fallback to a warning in Safe Mode.
+  To deploy successfully on GitHub Pages default builder, ensure you load tag and release data using standard Jekyll data files (e.g., `_data/tags.yml` or `_data/releases.yml`) instead of inline captured YAML strings.
+* **GitHub Actions / GitLab CI**:
+  If you use GitHub Actions or GitLab CI/CD to build your Jekyll site before deploying, Safe Mode is disabled and custom plugins (including `from_yaml`) are fully supported.

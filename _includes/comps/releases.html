@@ -9,7 +9,14 @@ Usage______: {% include comps/releases.html data=site.data.releases %}
     {% if release_source %}
         {% assign test_first = release_source | slice: 0 %}
         {% if release_source.first == nil and test_first != nil %}
-            {% assign release_source = release_source | from_yaml %}
+            {% if site.safe %}
+                {% assign release_source = nil %}
+                <p class="rd-compatibility-warning" style="color: var(--rd-clr-danger); font-size: 0.85rem; padding: 0.5rem; border: 1px dashed var(--rd-clr-danger); border-radius: 4px; margin-block-end: 1rem;">
+                    <strong>Branding/Compatibility Warning:</strong> Inline YAML strings require the <code>from_yaml</code> filter, which is disabled in Safe Mode (e.g. GitHub Pages default builder). Please use <code>site.data</code> files instead.
+                </p>
+            {% else %}
+                {% assign release_source = release_source | from_yaml %}
+            {% endif %}
         {% endif %}
         {% for release in release_source %}
         <div class="rd-release-item">

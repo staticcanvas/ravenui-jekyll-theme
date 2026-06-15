@@ -8,7 +8,14 @@ Usage______: {% include comps/git-tags.html data=site.data.tags layout="grid" %}
 {% if tag_source %}
     {% assign test_first = tag_source | slice: 0 %}
     {% if tag_source.first == nil and test_first != nil %}
-        {% assign tag_source = tag_source | from_yaml %}
+        {% if site.safe %}
+            {% assign tag_source = nil %}
+            <p class="rd-compatibility-warning" style="color: var(--rd-clr-danger); font-size: 0.85rem; padding: 0.5rem; border: 1px dashed var(--rd-clr-danger); border-radius: 4px; margin-block-end: 1rem;">
+                <strong>Branding/Compatibility Warning:</strong> Inline YAML strings require the <code>from_yaml</code> filter, which is disabled in Safe Mode (e.g. GitHub Pages default builder). Please use <code>site.data</code> files instead.
+            </p>
+        {% else %}
+            {% assign tag_source = tag_source | from_yaml %}
+        {% endif %}
     {% endif %}
     {% if include.layout == "list" %}
     <div class="rd-git-tags-list">

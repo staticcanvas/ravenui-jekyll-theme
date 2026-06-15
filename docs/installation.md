@@ -13,7 +13,7 @@ Include the following line in your site's `Gemfile` to reference the theme:
 
 {% capture gemfile_code %}
 ```ruby
-gem "ravenui-sp"
+gem "jekyll-theme-ravenui"
 ```
 {% endcapture %}
 {% include comps/example-code.html content=gemfile_code %}
@@ -24,7 +24,7 @@ Specify the theme in your `_config.yml` file. This tells Jekyll to use RavenUI a
 
 {% capture config_code %}
 ```yaml
-theme: ravenui-sp
+theme: jekyll-theme-ravenui
 ```
 {% endcapture %}
 {% include comps/example-code.html content=config_code %}
