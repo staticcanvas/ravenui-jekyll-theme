@@ -1,0 +1,50 @@
+{%- comment -%}
+Component__: Comments
+Purpose____: Embeds Giscus or Disqus thread elements to support page comments, reviews, and discussions.
+Caveats____: Configured under `theme_settings.feedback.comments` in `_config.yml`.
+Usage______: {% include comps/comments.html %}
+{%- endcomment -%}
+
+{% if site.theme_settings.feedback.comments.enabled %}
+<div class="rd-comments {{ include.class }}" style="margin-block-start: 3rem; border-block-start: 1px solid var(--rd-border-subtle); padding-block-start: 2rem;">
+  <h3 style="margin-block-end: 1.5rem; font-family: var(--rd-font-sans); font-size: 1.25rem;">Discussion & Comments</h3>
+  
+  {% assign comments = site.theme_settings.feedback.comments %}
+  {% assign provider = comments.provider | default: "giscus" %}
+  
+  {% if provider == "giscus" and comments.giscus.repo %}
+    {% assign giscus = comments.giscus %}
+    <div class="giscus"></div>
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ giscus.repo }}"
+            data-repo-id="{{ giscus.repo_id }}"
+            data-category="{{ giscus.category }}"
+            data-category-id="{{ giscus.category_id }}"
+            data-mapping="{{ giscus.mapping | default: 'pathname' }}"
+            data-strict="{{ giscus.strict | default: '0' }}"
+            data-reactions-enabled="{{ giscus.reactions_enabled | default: '1' }}"
+            data-emit-metadata="{{ giscus.emit_metadata | default: '0' }}"
+            data-input-position="{{ giscus.input_position | default: 'bottom' }}"
+            data-theme="{{ giscus.theme | default: 'transparent_dark' }}"
+            data-lang="{{ giscus.lang | default: 'en' }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+  {% elsif provider == "disqus" and comments.disqus.shortname %}
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "{{ page.url | absolute_url }}";
+        this.page.identifier = "{{ page.url }}";
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://{{ comments.disqus.shortname }}.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  {% endif %}
+</div>
+{% endif %}

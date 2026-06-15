@@ -412,3 +412,33 @@
   transition: width 0.1s linear;
 }
 
+/* VERSION SWITCHER */
+.rd-version-switcher-wrapper {
+  margin-block-start: 0.75rem;
+  width: 100%;
+}
+
+.rd-version-switcher {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  background: var(--rd-clr-void);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: var(--rd-radius);
+  color: var(--rd-clr-mist);
+  font-family: var(--rd-font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover, &:focus {
+    border-color: var(--rd-clr-highlight);
+    color: var(--rd-clr-platinum);
+  }
+
+  option {
+    background: var(--rd-clr-void);
+    color: var(--rd-clr-mist);
+  }
+}
+

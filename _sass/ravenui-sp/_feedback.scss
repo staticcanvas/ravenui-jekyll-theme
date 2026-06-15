@@ -71,3 +71,53 @@
 .rd-feedback-thanks-text {
   font-weight: 500;
 }
+
+/* LIKES & REVIEWS WIDGET */
+.rd-likes-widget {
+  margin-block-start: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.rd-likes-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--rd-clr-ink);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: 20px; // Pill shape
+  color: var(--rd-clr-silver);
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--rd-transition-fast);
+  font-weight: 500;
+
+  .rd-likes-icon {
+    transition: transform var(--rd-transition-fast), fill var(--rd-transition-fast);
+    stroke: var(--rd-clr-silver);
+  }
+
+  &:hover {
+    color: var(--rd-clr-danger);
+    border-color: var(--rd-clr-danger);
+    background-color: color-mix(in srgb, var(--rd-clr-danger) 8%, transparent);
+    
+    .rd-likes-icon {
+      transform: scale(1.1);
+      stroke: var(--rd-clr-danger);
+    }
+  }
+
+  &.liked {
+    color: var(--rd-clr-danger);
+    border-color: var(--rd-clr-danger);
+    background-color: color-mix(in srgb, var(--rd-clr-danger) 12%, transparent);
+    
+    .rd-likes-icon {
+      fill: var(--rd-clr-danger);
+      stroke: var(--rd-clr-danger);
+    }
+  }
+}
+

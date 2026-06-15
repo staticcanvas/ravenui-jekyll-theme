@@ -69,7 +69,7 @@ function Invoke-RvLinter {
             # A. Markdown heading bold audit (H2 and H3 only)
             if ($ext -eq '.md') {
                 if ($line -match '^#{2,3}\s+(.*)') {
-                    $headerContent = $Matches[1].Trim()
+                    $headerContent = ($Matches[1] -replace '\{:.*?\}', '').Trim()
                     if (-not ($headerContent -match '^\*\*(.*)\*\*$')) {
                         $cleanLine = $line -replace '\{:.*?\}', ''
                         $headerViolations.Add("'${relPath}:L${lineNum}' -> Heading not bolded: {ct:yellow:$cleanLine}")

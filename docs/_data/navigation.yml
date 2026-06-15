@@ -95,6 +95,10 @@
     - text: Feature Grid
       url: /components/feature-grid/
       icon: grid
+    - text: Layout Grid
+      url: /components/grid/
+      icon: grid
+      description: "Flexible responsive CSS Grid container for layout composition"
     - text: Hero Card
       url: /components/hero-card/
       icon: monitor

@@ -1,0 +1,71 @@
+{%- comment -%}
+Component__: Likes Widget
+Purpose____: Renders a client-side page liking interface storing state in localStorage.
+Caveats____: Simulates likes dynamically and triggers analytics events.
+Usage______: {% include comps/likes.html %}
+{%- endcomment -%}
+
+<div class="rd-likes-widget {{ include.class }}" id="rd-likes-container">
+  <button class="rd-likes-btn" onclick="toggleLikePage()" aria-label="Like this page">
+    {% include comps/icon.html name="heart" size=14 class="rd-likes-icon" %}
+    <span class="rd-likes-label">Like</span>
+    <span class="rd-likes-count" id="rd-likes-count">0</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  const url = window.location.pathname;
+  const liked = localStorage.getItem('rd_like_' + url);
+  const btn = document.querySelector('.rd-likes-btn');
+  const countEl = document.getElementById('rd-likes-count');
+  
+  let baseLikes = parseInt(localStorage.getItem('rd_likes_base_' + url));
+  if (isNaN(baseLikes)) {
+    baseLikes = Math.floor(Math.random() * 40) + 5;
+    localStorage.setItem('rd_likes_base_' + url, baseLikes);
+  }
+  
+  if (liked) {
+    btn.classList.add('liked');
+    countEl.textContent = baseLikes + 1;
+  } else {
+    countEl.textContent = baseLikes;
+  }
+})();
+
+function toggleLikePage() {
+  const url = window.location.pathname;
+  const liked = localStorage.getItem('rd_like_' + url);
+  const btn = document.querySelector('.rd-likes-btn');
+  const countEl = document.getElementById('rd-likes-count');
+  let baseLikes = parseInt(localStorage.getItem('rd_likes_base_' + url)) || 0;
+  
+  if (liked) {
+    localStorage.removeItem('rd_like_' + url);
+    btn.classList.remove('liked');
+    countEl.textContent = baseLikes;
+    
+    if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
+      posthog.capture('page_unlike', { url: url });
+    }
+  } else {
+    localStorage.setItem('rd_like_' + url, 'true');
+    btn.classList.add('liked');
+    countEl.textContent = baseLikes + 1;
+    
+    if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
+      posthog.capture('page_like', { url: url });
+    }
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'like', { 'event_category': 'Documentation', 'event_label': url });
+    }
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+      umami.track('page_like', { url: url });
+    }
+    if (typeof plausible !== 'undefined') {
+      plausible('Page Like', { props: { url: url } });
+    }
+  }
+}
+</script>

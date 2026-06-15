@@ -29,7 +29,7 @@ The `button.html` component provides a flexible way to add call-to-action elemen
 
 {% include comps/heading.html tag="h2" text="Variants" icon="layers" size=20 %}
 
-### Outline & Ghost
+### **Outline & Ghost**
 Use the `class` parameter to apply built-in variants for secondary or tertiary actions.
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-block: 2rem;">

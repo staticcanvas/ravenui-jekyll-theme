@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<article class="rd-collection-doc">
+    <header class="rd-post-header">
+        <h1 class="rd-post-title">{{ page.title }}</h1>
+        {% if page.description %}
+        <p class="rd-post-description">{{ page.description }}</p>
+        {% endif %}
+    </header>
+
+    <div class="rd-post-content">
+        {{ content }}
+    </div>
+
+    <!-- Collection navigation (Prev/Next) -->
+    {% assign col_name = page.collection %}
+    {% if col_name %}
+        {% assign collection_docs = site[col_name] | sort: "weight" | sort: "order" %}
+        {% assign prev_doc = nil %}
+        {% assign next_doc = nil %}
+        {% assign found = false %}
+        
+        {% for doc in collection_docs %}
+            {% if found %}
+                {% assign next_doc = doc %}
+                {% break %}
+            {% endif %}
+            {% if doc.url == page.url %}
+                {% assign found = true %}
+            {% else %}
+                {% assign prev_doc = doc %}
+            {% endif %}
+        {% endfor %}
+
+        {% if prev_doc or next_doc %}
+        <div class="rd-collection-nav" style="display: flex; justify-content: space-between; margin-block-start: 3rem; padding-block-start: 1.5rem; border-block-start: var(--rd-border);">
+            {% if prev_doc %}
+            <a href="{{ prev_doc.url | relative_url }}" class="rd-btn-outline" style="text-align: left;">
+                <span style="font-size: 0.75rem; color: var(--rd-clr-slate); display: block;">Previous</span>
+                {% include comps/icon.html name="arrow-left" size=12 %} {{ prev_doc.title | default: prev_doc.slug }}
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+            
+            {% if next_doc %}
+            <a href="{{ next_doc.url | relative_url }}" class="rd-btn-outline" style="text-align: right; margin-inline-start: auto;">
+                <span style="font-size: 0.75rem; color: var(--rd-clr-slate); display: block;">Next</span>
+                {{ next_doc.title | default: next_doc.slug }} {% include comps/icon.html name="arrow-right" size=12 %}
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% endif %}
+</article>

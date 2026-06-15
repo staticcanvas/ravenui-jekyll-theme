@@ -72,6 +72,14 @@
                 {% include comps/feedback.html %}
             {% endif %}
 
+            {% if site.theme_settings.feedback.likes.enabled and page.likes != false %}
+                {% include comps/likes.html %}
+            {% endif %}
+
+            {% if site.theme_settings.feedback.comments.enabled and page.comments != false %}
+                {% include comps/comments.html %}
+            {% endif %}
+
             {% include core/footer.html %}
         </main>
 
@@ -526,16 +534,18 @@
                         const el = entry.target;
                         obs.unobserve(el);
                         
-                        const text = el.innerText.trim();
-                        const match = text.match(/^([\d.,]+)([a-zA-Z\s]*)$/);
+                        const text = (el.getAttribute('data-ticker-value') || el.innerText).trim();
+                        // Match structure: prefix (any non-digit/dot/minus symbols), numeric core (digits, dots, commas, optional leading minus), and suffix (any remaining characters)
+                        const match = text.match(/^([^0-9.-]*)([0-9.,-]+)(.*)$/);
                         if (!match) return;
 
-                        const rawNum = match[1].replace(/,/g, '');
-                        const suffix = match[2] || '';
+                        const prefix = match[1] || '';
+                        const rawNum = match[2].replace(/,/g, '');
+                        const suffix = match[3] || '';
                         const num = parseFloat(rawNum);
                         if (isNaN(num)) return;
 
-                        const duration = 1000;
+                        const duration = 1200; // 1.2s duration for smooth pneumatic movement
                         const startTime = performance.now();
                         const startVal = 0;
 
@@ -543,6 +553,7 @@
                             const elapsed = currentTime - startTime;
                             const progress = Math.min(elapsed / duration, 1);
                             
+                            // Cubic easeOut: 1 - (1 - x)^3
                             const easeProgress = 1 - Math.pow(1 - progress, 3);
                             const currentVal = startVal + easeProgress * (num - startVal);
                             
@@ -554,12 +565,20 @@
                                 formattedVal = Math.floor(currentVal).toString();
                             }
                             
-                            el.innerText = formattedVal + suffix;
+                            // Format with commas if the original number had commas
+                            if (match[2].includes(',')) {
+                                const parts = formattedVal.split('.');
+                                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                formattedVal = parts.join('.');
+                            }
+
+                            el.innerText = prefix + formattedVal + suffix;
 
                             if (progress < 1) {
                                 requestAnimationFrame(update);
                             } else {
                                 el.innerText = text;
+                                el.classList.add('rd-ticker-complete');
                             }
                         }
                         requestAnimationFrame(update);
@@ -567,7 +586,7 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.rd-metric-value, .rd-counter').forEach(el => {
+            document.querySelectorAll('[data-ticker-value], .rd-metric-value, .rd-counter').forEach(el => {
                 observer.observe(el);
             });
         }

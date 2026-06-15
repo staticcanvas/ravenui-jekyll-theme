@@ -26,11 +26,11 @@ The `icon.html` component provides a robust way to include [Lucide](https://luci
 
 {% include comps/heading.html tag="h2" text="Animations" icon="refresh-cw" size=20 %}
 
-### Continuous
+### **Continuous**
 - **Spin:** {% include comps/icon.html name="settings" continuous="spin" size="24" %}
 - **Pulse:** {% include comps/icon.html name="heart" continuous="pulse" color="#ff4444" size="24" %}
 
-### Interactive (Hover/Click)
+### **Interactive (Hover/Click)**
 - **Hover Shake:** {% include comps/icon.html name="alert-triangle" hover="shake" color="#ffcc00" size="24" %}
 - **Click Pulse:** {% include comps/icon.html name="thumbs-up" click="pulse" color="#00ff9d" size="24" %}
 

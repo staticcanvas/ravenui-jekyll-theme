@@ -70,6 +70,11 @@
     {% endif %}
     {% seo %}
 
+    {% if page.image == nil and page.og_image == nil and site.theme_settings.og_image.default %}
+    <meta property="og:image" content="{{ site.theme_settings.og_image.default | relative_url }}">
+    <meta name="twitter:image" content="{{ site.theme_settings.og_image.default | relative_url }}">
+    {% endif %}
+
     {% if site.theme_settings.custom_stylesheets %}
     <!-- Custom Theme Stylesheets -->
     {% for stylesheet in site.theme_settings.custom_stylesheets %}
