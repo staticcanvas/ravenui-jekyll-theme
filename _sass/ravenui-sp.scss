@@ -5,6 +5,7 @@
  */
 
 // 1. Foundation & Variables
+@use "ravenui-sp/sass-vars";   // SASS variable layer — override before importing
 @use "ravenui-sp/root";
 @use "ravenui-sp/animations";
 

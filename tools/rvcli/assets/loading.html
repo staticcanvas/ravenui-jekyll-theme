@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="2">
+  <title>RavenUI — Restarting Server…</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --elevated: #111;
+      --highlight: #00ff9d;
+      --text-primary: #e5e5e5;
+      --text-secondary: #888;
+      --text-muted: #444;
+      --border: 1px solid #25303d;
+      --font-mono: "JetBrains Mono", "Fira Code", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-brand {
+      color: var(--highlight);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+    }
+
+    .spinner-ring {
+      width: 48px;
+      height: 48px;
+      border: 2px solid #1e2530;
+      border-top-color: var(--highlight);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status-block {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .status-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .status-hint {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .progress-track {
+      width: 220px;
+      height: 2px;
+      background: #1e2530;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--highlight);
+      box-shadow: 0 0 8px var(--highlight);
+      border-radius: 2px;
+      animation: progress 2s ease-in-out infinite;
+    }
+
+    @keyframes progress {
+      0%   { width: 0%;   opacity: 1; }
+      70%  { width: 90%;  opacity: 1; }
+      95%  { width: 100%; opacity: 0.5; }
+      100% { width: 100%; opacity: 0; }
+    }
+
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.6rem 1.5rem;
+      border-top: var(--border);
+      background: var(--surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--highlight);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--highlight);
+      animation: pulse 1.2s ease-in-out infinite;
+      margin-right: 0.4rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <span class="logo-brand">RAVEN</span>
+    <span>// UI</span>
+  </div>
+
+  <div class="spinner-ring"></div>
+
+  <div class="status-block">
+    <span class="status-title">Restarting Dev Server</span>
+    <span class="status-sub">Configuration change detected in <code style="font-family: var(--font-mono); color: var(--highlight); font-size: 0.75rem;">_config.yml</code></span>
+    <span class="status-hint">Page will auto-refresh every 2 seconds</span>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <span><span class="pulse-dot"></span>rvcli hotreload active</span>
+    <span>localhost</span>
+  </footer>
+
+</body>
+</html>

@@ -64,11 +64,22 @@ function Invoke-RvDev {
                 $currentWrite = [System.IO.File]::GetLastWriteTime($configPath)
                 if ($currentWrite -gt $lastWrite) {
                     Write-RvLog -Level "wrn" -Message "Configuration change in _config.yml. Reloading server..." -Context "hotreload"
+
+                    # ── Stop Jekyll ────────────────────────────────────────────
                     Stop-JekyllProcess -Process $process
-                    
+
+                    # ── Serve placeholder during restart gap ──────────────────
+                    $placeholder = Start-RvPlaceholderServer -Port $port -WorkspaceRoot $WorkspaceRoot
+                    Write-RvLog -Level "inf" -Message "Placeholder page active at http://localhost:$port (auto-refreshing)" -Context "hotreload"
+
                     # Re-initialize theme settings in case colors changed
                     Initialize-RvTheme -WorkspaceRoot $WorkspaceRoot
-                    
+
+                    # ── Restart Jekyll ─────────────────────────────────────────
+                    # Stop placeholder before Jekyll reclaims the port
+                    Stop-RvPlaceholderServer -Listener $placeholder
+                    Write-RvLog -Level "inf" -Message "Placeholder server stopped. Starting Jekyll..." -Context "hotreload"
+
                     $process = Start-JekyllProcess -JekyllArgs $jekyllArgs -WorkspaceRoot $WorkspaceRoot
                     $lastWrite = $currentWrite
                     Write-RvLog -Level "suc" -Message "Jekyll server restarted (PID: $($process.Id))" -Context "hotreload"
@@ -88,6 +99,69 @@ function Invoke-RvDev {
         Write-RvLog -Level "suc" -Message "Development server stopped." -Context "dev"
     }
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Placeholder HTTP server — serves loading.html during config restart gaps
+# ─────────────────────────────────────────────────────────────────────────────
+
+function Start-RvPlaceholderServer {
+    param(
+        [int]$Port,
+        [string]$WorkspaceRoot
+    )
+
+    # Resolve the loading page from the rvcli assets directory
+    $scriptDir     = [System.IO.Path]::GetDirectoryName($PSCommandPath)
+    $assetsDir     = [System.IO.Path]::Combine($scriptDir, '..', 'assets')
+    $loadingPage   = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($assetsDir, 'loading.html'))
+    $loadingHtml   = if ([System.IO.File]::Exists($loadingPage)) {
+        [System.IO.File]::ReadAllText($loadingPage, [System.Text.Encoding]::UTF8)
+    } else {
+        '<html><body style="background:#050505;color:#00ff9d;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h2>Restarting server...</h2></body></html>'
+    }
+
+    $listener = [System.Net.HttpListener]::new()
+    $listener.Prefixes.Add("http://localhost:$Port/")
+    try {
+        $listener.Start()
+    } catch {
+        # Port still in use — wait briefly then retry once
+        Start-Sleep -Milliseconds 500
+        try { $listener.Start() } catch { return $null }
+    }
+
+    # Serve requests on a background thread
+    $htmlBytes = [System.Text.Encoding]::UTF8.GetBytes($loadingHtml)
+    $listenerRef = $listener
+    $null = [System.Threading.ThreadPool]::QueueUserWorkItem({
+        while ($listenerRef.IsListening) {
+            try {
+                $ctx = $listenerRef.GetContext()
+                $ctx.Response.ContentType     = 'text/html; charset=utf-8'
+                $ctx.Response.ContentLength64 = $htmlBytes.Length
+                $ctx.Response.OutputStream.Write($htmlBytes, 0, $htmlBytes.Length)
+                $ctx.Response.OutputStream.Close()
+            } catch {
+                # Listener was stopped — exit thread loop silently
+                break
+            }
+        }
+    })
+
+    return $listener
+}
+
+function Stop-RvPlaceholderServer {
+    param($Listener)
+    if ($Listener -and $Listener.IsListening) {
+        try { $Listener.Stop() } catch {}
+        try { $Listener.Close() } catch {}
+    }
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Jekyll process management
+# ─────────────────────────────────────────────────────────────────────────────
 
 function Start-JekyllProcess {
     param(
