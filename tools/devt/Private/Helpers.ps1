@@ -1,0 +1,345 @@
+# RavenUI Task Tracker - Private Helper Functions
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+# Task Item Class definition
+class TaskItem {
+    [string]$RawText
+    [bool]$IsCompleted
+    [System.Collections.Generic.List[string]]$Children
+    [string]$Category
+
+    TaskItem([string]$rawText, [bool]$isCompleted, [string]$category) {
+        $this.RawText = $rawText
+        $this.IsCompleted = $isCompleted
+        $this.Children = [System.Collections.Generic.List[string]]::new()
+        $this.Category = $category
+    }
+}
+
+# Set module/script scope repository root (three levels up from tools/devt/Private/)
+$script:repoRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, "..", "..", ".."))
+
+# Resolve paths relative to the repository root
+function Resolve-RepoPath([string]$path) {
+    if ([System.IO.Path]::IsPathRooted($path)) {
+        return $path
+    }
+    return [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($script:repoRoot, $path))
+}
+
+# Logger interface wrapping Write-LazyLog
+function Write-TrackerLog([string]$level, [string]$message, [string]$context) {
+    $global:__logging = $true
+    Write-LazyLog -Level $level -Message $message -Title "DevTracker" -Context $context
+}
+
+# Emoji resolvers and standard mappings
+function Get-EmojiDifficulty([string]$diff) {
+    switch ($diff) {
+        'very-easy' { return '🟢' }
+        'easy'      { return '🟡' }
+        'moderate'  { return '🟠' }
+        'very'      { return '🔴' }
+        default     { return $diff }
+    }
+}
+
+function Get-EmojiScope([string]$sc) {
+    switch ($sc) {
+        'concept'   { return '💡' }
+        'feature'   { return '🌟' }
+        'bug'       { return '🦀' }
+        'bug-fixed' { return '🪲' }
+        'fix'       { return '🩹' }
+        default     { return $sc }
+    }
+}
+
+function Get-EmojiPriority([string]$pri) {
+    switch ($pri) {
+        '0' { return '0️⃣' }
+        '1' { return '1️⃣' }
+        '2' { return '2️⃣' }
+        '3' { return '3️⃣' }
+        '4' { return '4️⃣' }
+        '5' { return '5️⃣' }
+        '6' { return '6️⃣' }
+        '7' { return '7️⃣' }
+        '8' { return '8️⃣' }
+        '9' { return '9️⃣' }
+        '10' { return '🔟' }
+        default { return $pri }
+    }
+}
+
+function Get-EmojiStatus([string]$st) {
+    switch ($st) {
+        'partially' { return '✔️' }
+        'issues'    { return '❓' }
+        'complete'  { return '✅' }
+        'working'   { return '🌀' }
+        'incomplete'{ return '' }
+        default     { return $st }
+    }
+}
+
+function Format-TaskLine([string]$text, [string]$categoryName, [string]$diff, [string]$sc, [string]$st, [string]$pri, [bool]$completed) {
+    $diffEmoji = if ($diff) { Get-EmojiDifficulty $diff } else { "" }
+    $scopeEmoji = if ($sc) { Get-EmojiScope $sc } else { "" }
+    $statusEmoji = if ($st) { Get-EmojiStatus $st } else { "" }
+    $priEmoji = if ($pri) { Get-EmojiPriority $pri } else { "" }
+
+    $check = if ($completed) { "x" } else { " " }
+    
+    $prefix = "$diffEmoji$scopeEmoji$statusEmoji$priEmoji"
+    if ($prefix -ne "") {
+        $prefix = "$prefix "
+    }
+
+    # Extract clean category code
+    $shortCat = $categoryName -replace '^###\s+\*\*', '' -replace '\*\*.*$', ''
+    $shortCat = $shortCat -replace '\s+\(priority-\d+\)', ''
+    
+    switch ($shortCat.ToLower()) {
+        'issues remaining' { $catCode = 'Issues' }
+        'enhancements'     { $catCode = 'Enhancement' }
+        'features'         { $catCode = 'Features' }
+        'bug fixes'        { $catCode = 'BugFix' }
+        'documentation'    { $catCode = 'Docs' }
+        'refactoring'      { $catCode = 'Refactoring' }
+        'refine features'  { $catCode = 'Refine' }
+        'refine documentation' { $catCode = 'Audit' }
+        default            { $catCode = $shortCat }
+    }
+
+    return "- [$check] $prefix**$catCode** - $text"
+}
+
+# Normalize task description text for lookups
+function Get-NormalizedTaskText([string]$text) {
+    # Remove checkbox
+    $text = $text -replace '^[-*]\s*\[[ xX]\]\s*', ''
+    # Remove prefix emojis and symbols
+    $text = $text -replace '[🟢🔴🟡🟠🟩🟥🟧🪲🌀❓✅✔️💡🌟🦀🩹0-9🔟️]', ''
+    # Remove markdown bold/italic tags
+    $text = $text -replace '\*+', ''
+    $text = $text -replace '_+', ''
+    $text = $text -replace '`+', ''
+    # Trim and normalize spaces
+    $text = $text.Trim() -replace '\s+', ' '
+    return $text.ToLower()
+}
+
+# Normalize category headings for lookups
+function Get-NormalizedCategoryName([string]$cat) {
+    $cat = $cat -replace '\*+', ''
+    $cat = $cat -replace '_+', ''
+    return $cat.Trim().ToLower()
+}
+
+# Parse a markdown task file using stateful streaming
+function Parse-TaskFile([string]$filePath) {
+    if (-not [System.IO.File]::Exists($filePath)) {
+        throw "File not found: $filePath"
+    }
+
+    $lines = [System.IO.File]::ReadAllLines($filePath)
+    
+    $parsed = @{
+        HeaderLines = [System.Collections.Generic.List[string]]::new()
+        CategoryOrder = [System.Collections.Generic.List[string]]::new()
+        TasksByCategory = @{} # Dict of string -> List[TaskItem]
+        InstructionsLines = [System.Collections.Generic.List[string]]::new()
+    }
+
+    $inInstructions = $false
+    $separatorCount = 0
+    $currentCategory = ""
+    $currentTask = $null
+
+    for ($i = 0; $i -lt $lines.Length; $i++) {
+        $line = $lines[$i]
+
+        # Handle instructions block bounded by ---
+        if ($line -eq "---") {
+            $separatorCount++
+            if ($separatorCount -eq 1) {
+                $inInstructions = $true
+                $parsed.InstructionsLines.Add($line)
+                continue
+            } elseif ($separatorCount -eq 2) {
+                $inInstructions = $false
+                $parsed.InstructionsLines.Add($line)
+                continue
+            }
+        }
+
+        if ($inInstructions) {
+            $parsed.InstructionsLines.Add($line)
+            continue
+        }
+
+        # Check for category headings
+        if ($line -match "^##\s+\*\*Tasklist\*\*") {
+            $parsed.HeaderLines.Add($line)
+            continue
+        }
+
+        if ($line -match "^###?\s+(.*)$") {
+            $currentCategory = $line
+            if (-not $parsed.CategoryOrder.Contains($currentCategory)) {
+                $parsed.CategoryOrder.Add($currentCategory)
+                $parsed.TasksByCategory[$currentCategory] = [System.Collections.Generic.List[TaskItem]]::new()
+            }
+            $currentTask = $null
+            continue
+        }
+
+        # Check for a task line
+        if ($line -match "^([-*])\s*\[([ xX])\]\s*(.*)$") {
+            $checkChar = $Matches[2]
+            $isCompleted = ($checkChar -eq 'x' -or $checkChar -eq 'X')
+
+            $currentTask = [TaskItem]::new($line, $isCompleted, $currentCategory)
+            
+            if ($currentCategory -eq "") {
+                $currentCategory = "### **Uncategorized**"
+                if (-not $parsed.CategoryOrder.Contains($currentCategory)) {
+                    $parsed.CategoryOrder.Add($currentCategory)
+                    $parsed.TasksByCategory[$currentCategory] = [System.Collections.Generic.List[TaskItem]]::new()
+                }
+            }
+            $parsed.TasksByCategory[$currentCategory].Add($currentTask)
+            continue
+        }
+
+        # Handle child lines (indented, note blocks, or blank separator lines)
+        if ($currentTask -ne $null -and ($line -match "^\s+" -or $line -match "^>\s*" -or $line -eq "")) {
+            $currentTask.Children.Add($line)
+            continue
+        }
+
+        # Top-level non-task lines before categories are headers
+        if ($currentCategory -eq "") {
+            $parsed.HeaderLines.Add($line)
+        }
+    }
+
+    return $parsed
+}
+
+# Helper to determine if a task should be kept based on filters
+function Should-KeepTask([TaskItem]$task) {
+    if ($task.IsCompleted) {
+        $keep = -not $script:shouldExcludeCompleted
+
+        foreach ($emoji in $script:KeepCompletedWithEmoji) {
+            if ($task.RawText.Contains($emoji)) {
+                $keep = $true
+                break
+            }
+        }
+
+        foreach ($emoji in $script:ExcludeCompletedWithEmoji) {
+            if ($task.RawText.Contains($emoji)) {
+                $keep = $false
+                break
+            }
+        }
+    } else {
+        $keep = $true
+    }
+
+    if ($keep -and $script:FilterEmoji.Length -gt 0) {
+        $found = $false
+        foreach ($emoji in $script:FilterEmoji) {
+            if ($task.RawText.Contains($emoji)) {
+                $found = $true
+                break
+            }
+        }
+        if (-not $found) {
+            $keep = $false
+        }
+    }
+
+    if ($keep -and $script:ExcludeEmoji.Length -gt 0) {
+        foreach ($emoji in $script:ExcludeEmoji) {
+            if ($task.RawText.Contains($emoji)) {
+                $keep = $false
+                break
+            }
+        }
+    }
+
+    return $keep
+}
+
+# Helper to determine if a completed task should be pruned
+function Should-PruneTask([TaskItem]$task) {
+    if (-not $task.IsCompleted) {
+        return $false
+    }
+
+    $prune = $true
+
+    foreach ($emoji in $script:KeepCompletedWithEmoji) {
+        if ($task.RawText.Contains($emoji)) {
+            $prune = $false
+            break
+        }
+    }
+
+    foreach ($emoji in $script:ExcludeCompletedWithEmoji) {
+        if ($task.RawText.Contains($emoji)) {
+            $prune = $true
+            break
+        }
+    }
+
+    return $prune
+}
+
+# Helper to resolve CLI category inputs into full category strings
+function Resolve-SourceCategory([string]$catInput, [System.Collections.IList]$existingCategories) {
+    if (-not $catInput) {
+        return "### **Backlog**"
+    }
+    
+    $normInput = Get-NormalizedCategoryName $catInput
+    
+    # Exact match
+    foreach ($cat in $existingCategories) {
+        if ((Get-NormalizedCategoryName $cat) -eq $normInput) {
+            return $cat
+        }
+    }
+
+    # Partial match
+    foreach ($cat in $existingCategories) {
+        if ((Get-NormalizedCategoryName $cat).Contains($normInput)) {
+            return $cat
+        }
+    }
+
+    # Prefix mapping
+    switch ($normInput) {
+        'bug' { $target = 'bug fixes' }
+        'feature' { $target = 'features' }
+        'enhancement' { $target = 'enhancements' }
+        'doc' { $target = 'documentation' }
+        'refactor' { $target = 'refactoring' }
+        'issue' { $target = 'issues remaining' }
+        default { $target = $normInput }
+    }
+    foreach ($cat in $existingCategories) {
+        if ((Get-NormalizedCategoryName $cat).Contains($target)) {
+            return $cat
+        }
+    }
+
+    # Dynamic creation
+    return "### **$catInput**"
+}

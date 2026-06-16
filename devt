@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# RavenUI Task Tracker Unix Shortcut
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+pwsh -File "$SCRIPT_DIR/devt.ps1" "$@"
