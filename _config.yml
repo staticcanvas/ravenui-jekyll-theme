@@ -71,6 +71,27 @@ theme_settings:
       domain: "yourdomain.com"
       src: "https://plausible.io/js/script.js"
 
+  # Feedback, Likes & Comments Settings
+  feedback:
+    likes:
+      enabled: false             # Enable static page likes widget
+    comments:
+      enabled: false            # Enable comments discussion thread
+      provider: giscus           # options: giscus, disqus
+      giscus:
+        repo: "staticcanvas/ravenui-jekyll-theme"
+        repo_id: "R_kgDOLD..."
+        category: "Announcements"
+        category_id: "DIC_kwDOLD..."
+        mapping: "pathname"
+        reactions_enabled: "1"
+        emit_metadata: "0"
+        input_position: "bottom"
+        theme: "transparent_dark"
+        lang: "en"
+      disqus:
+        shortname: "ravenui"
+
   # Search Configuration
   search:
     provider: pagefind            # options: pagefind, lyra, algolia
@@ -91,6 +112,16 @@ theme_settings:
   # Collections Configuration
   collections:
     enabled: false                  # Toggle dynamic collections in sidebar
+
+  # Version Switcher
+  versions:
+    enabled: false                  # Toggle dynamic version switcher dropdown in sidebar
+    current: "v1.17"
+    list:
+      - text: "v1.17 (Latest)"
+        url: "/"
+      - text: "v1.16"
+        url: "https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/tree/v1.16"
 
   
   # Typography Configurations

@@ -1,0 +1,101 @@
+---
+layout: default
+---
+<div class="rd-collection-api-container">
+    {{ content }}
+
+    {% assign col_name = page.collection_name | default: page.collection %}
+    {% assign collection_docs = site[col_name] %}
+    
+    {% if collection_docs %}
+        {% if page.filter_tag %}
+            {% assign temp_docs = "" | split: "" %}
+            {% for doc in collection_docs %}
+                {% if doc.tags contains page.filter_tag %}
+                    {% assign temp_docs = temp_docs | push: doc %}
+                {% endif %}
+            {% endfor %}
+            {% assign collection_docs = temp_docs %}
+        {% endif %}
+
+        {% assign sort_by = page.sort_by | default: "order" %}
+        {% if sort_by == "date" %}
+            {% assign sorted_docs = collection_docs | sort: "date" | reverse %}
+        {% elsif sort_by == "title" %}
+            {% assign sorted_docs = collection_docs | sort: "title" %}
+        {% else %}
+            {% assign sorted_docs = collection_docs | sort: "weight" | sort: "order" %}
+        {% endif %}
+
+        <div class="rd-collection-api-list" style="display: flex; flex-direction: column; gap: 3rem; margin-block-start: 2rem;">
+            {% for doc in sorted_docs %}
+            <div id="{{ doc.slug }}" class="rd-api-endpoint" style="scroll-margin-top: 5rem; padding-block-end: 2rem; border-block-end: var(--rd-border);">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-block-end: 1rem; flex-wrap: wrap;">
+                    {% if doc.method %}
+                        {% assign method_upper = doc.method | upcase %}
+                        {% assign badge_color = "var(--rd-clr-slate)" %}
+                        {% if method_upper == "GET" %}{% assign badge_color = "var(--rd-clr-success)" %}
+                        {% elsif method_upper == "POST" %}{% assign badge_color = "var(--rd-clr-info)" %}
+                        {% elsif method_upper == "PUT" or method_upper == "PATCH" %}{% assign badge_color = "var(--rd-clr-warning)" %}
+                        {% elsif method_upper == "DELETE" %}{% assign badge_color = "var(--rd-clr-danger)" %}
+                        {% endif %}
+                        <span class="rd-badge" style="background: color-mix(in srgb, {{ badge_color }} 15%, transparent); border-color: color-mix(in srgb, {{ badge_color }} 30%, transparent); color: {{ badge_color }}; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: var(--rd-font-mono); font-size: 0.75rem;">{{ method_upper }}</span>
+                    {% endif %}
+                    <code style="font-size: 1.1rem; font-weight: 600; color: var(--rd-clr-white); background: transparent; padding: 0;">{{ doc.route | default: doc.title }}</code>
+                </div>
+                
+                <h3 style="font-size: 1.25rem; margin-block-end: 0.5rem;">{{ doc.title }}</h3>
+                
+                {% if doc.description %}
+                <p style="color: var(--rd-clr-silver); margin-block-end: 1rem;">{{ doc.description }}</p>
+                {% endif %}
+                
+                {% if doc.parameters %}
+                <div style="margin-block-end: 1rem;">
+                    <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--rd-clr-slate); letter-spacing: 0.05em; margin-block-end: 0.5rem;">Parameters</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--rd-border-color); text-align: left;">
+                                <th style="padding: 0.5rem; color: var(--rd-clr-slate);">Name</th>
+                                <th style="padding: 0.5rem; color: var(--rd-clr-slate);">Type</th>
+                                <th style="padding: 0.5rem; color: var(--rd-clr-slate);">Required</th>
+                                <th style="padding: 0.5rem; color: var(--rd-clr-slate);">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for param in doc.parameters %}
+                            <tr style="border-bottom: 1px solid var(--rd-border-color);">
+                                <td style="padding: 0.5rem; font-family: var(--rd-font-mono); font-weight: 600; color: var(--rd-clr-highlight);">{{ param.name }}</td>
+                                <td style="padding: 0.5rem; font-family: var(--rd-font-mono); color: var(--rd-clr-slate); font-size: 0.8rem;">{{ param.type }}</td>
+                                <td style="padding: 0.5rem; font-size: 0.8rem;">
+                                    {% if param.required == true or param.required == "true" %}
+                                    <span style="color: var(--rd-clr-danger);">required</span>
+                                    {% else %}
+                                    <span style="color: var(--rd-clr-slate);">optional</span>
+                                    {% endif %}
+                                </td>
+                                <td style="padding: 0.5rem; color: var(--rd-clr-silver);">{{ param.description }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+
+                {% if doc.response_example %}
+                <div style="margin-block-start: 1rem;">
+                    <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--rd-clr-slate); letter-spacing: 0.05em; margin-block-end: 0.5rem;">Response Example</h4>
+                    <pre><code class="language-json">{{ doc.response_example }}</code></pre>
+                </div>
+                {% endif %}
+                
+                <div style="margin-block-start: 1rem;">
+                    <a href="{{ doc.url | relative_url }}" style="font-size: 0.85rem; color: var(--rd-clr-highlight); font-weight: 500;">View Full Documentation {% include comps/icon.html name="arrow-right" size=10 %}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No API endpoints found for collection "{{ col_name }}".</p>
+    {% endif %}
+</div>

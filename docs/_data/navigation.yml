@@ -95,6 +95,10 @@
     - text: Feature Grid
       url: /components/feature-grid/
       icon: grid
+    - text: Layout Grid
+      url: /components/grid/
+      icon: grid
+      description: "Flexible responsive CSS Grid container for layout composition"
     - text: Hero Card
       url: /components/hero-card/
       icon: monitor
@@ -138,6 +142,14 @@
       url: /components/dependencies/
       icon: link-2
       description: "Display component dependency badges linked to documentation"
+    - text: Platform Support
+      url: /components/platform-support/
+      icon: globe
+      description: "Hosting deployment platform compatibility indicators"
+    - text: Browser Support
+      url: /components/browser-support/
+      icon: monitor
+      description: "Browser engine compatibility matrix and version indicators"
 
 
 

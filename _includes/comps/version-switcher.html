@@ -1,0 +1,18 @@
+{%- comment -%}
+Component__: Version Switcher
+Purpose____: Renders a dropdown menu to switch between different versions of documentation.
+Caveats____: Configured under `theme_settings.versions` in `_config.yml`. Disabled by default.
+Usage______: {% include comps/version-switcher.html %}
+{%- endcomment -%}
+
+{% if site.theme_settings.versions.enabled %}
+<div class="rd-version-switcher-wrapper">
+  <select class="rd-version-switcher" onchange="window.location.href=this.value;" aria-label="Select documentation version">
+    {% for ver in site.theme_settings.versions.list %}
+      <option value="{{ ver.url | relative_url }}" {% if ver.url == page.url or ver.current or ver.text contains site.theme_settings.versions.current %}selected{% endif %}>
+        {{ ver.text }}
+      </option>
+    {% endfor %}
+  </select>
+</div>
+{% endif %}

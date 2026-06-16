@@ -28,6 +28,16 @@ theme_settings:
   #   path: /favicon.ico
   #   height: 32px
 
+  # Version Switcher
+  versions:
+    enabled: true
+    current: "v1.17"
+    list:
+      - text: "v1.17 (Latest)"
+        url: "/"
+      - text: "v1.16"
+        url: "https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/tree/v1.16"
+
   # Interface
   scroll_progress: true             # Toggle global reading progress bar
   header:
@@ -40,6 +50,25 @@ theme_settings:
     animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header              # Code block language style: badge, header
+
+  # Feedback, Likes & Comments Settings
+  feedback:
+    likes:
+      enabled: true             # Enable static page likes widget
+    comments:
+      enabled: true             # Enable comments discussion thread
+      provider: giscus           # options: giscus, disqus
+      giscus:
+        repo: "staticcanvas/zero-dark-jekyll-theme"
+        repo_id: "R_kgDOMMabcd"
+        category: "Announcements"
+        category_id: "DIC_kwDOMMabcd"
+        mapping: "pathname"
+        reactions_enabled: "1"
+        emit_metadata: "0"
+        input_position: "bottom"
+        theme: "transparent_dark"
+        lang: "en"
 
   # Search Configuration
   search:

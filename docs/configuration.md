@@ -97,6 +97,16 @@ theme_settings:
 | `custom_stylesheets` | Array | `null` | Custom stylesheets to load in `<head>`. Can be absolute/relative URLs. |
 | `custom_scripts_head` | Array | `null` | Custom scripts to load in `<head>`. Can be URLs or objects with `src`, `async`, `defer`, `type`. |
 | `custom_scripts_foot` | Array | `null` | Custom scripts to load in the footer. Can be URLs or objects with `src`, `async`, `defer`, `type`. |
+| `versions.enabled` | Boolean | `false` | Enable/disable multi-version switcher dropdown in sidebar branding. |
+| `versions.current` | String | `null` | Current documentation version name (e.g. `v1.17`). |
+| `versions.list` | Array | `null` | List of version objects (holding `text` and `url` keys) to render in switcher. |
+| `og_image.enabled` | Boolean | `true` | Enable/disable auto-generation of SVG social sharing images in local builds. |
+| `og_image.default` | String | `null` | Default/fallback social sharing image URL for Safe Mode or missing titles. |
+| `feedback.likes.enabled` | Boolean | `false` | Enable/disable static client-side page likes widget. |
+| `feedback.comments.enabled` | Boolean | `false` | Enable/disable Disqus or Giscus comment threads on pages/posts. |
+| `feedback.comments.provider` | String | `giscus` | Comments provider: `giscus` or `disqus`. |
+| `feedback.comments.giscus` | Object | `null` | Giscus repository, mapping, theme, and category details. |
+| `feedback.comments.disqus` | Object | `null` | Disqus shortname identifier. |
 | `footer.columns` | Array | `null` | Dynamic footer multi-column layouts configuration. |
 
 
@@ -170,7 +180,7 @@ For detailed configuration of the search index, see the [Pagefind Documentation]
 
 RavenUI allows you to toggle between using content delivery networks (CDNs) and locally-hosted script files for maximum security, privacy, and offline compatibility.
 
-### Toggle Switch
+### **Toggle Switch**
 
 You can control this globally in your `_config.yml` via the `rd_use_cdn` setting:
 
@@ -179,7 +189,7 @@ rd_use_cdn: true  # Default: Uses high-performance CDNs for asset loading
 # Set to false to load local vendor assets from the theme's assets directory
 ```
 
-### Pinned Script & Asset Versions
+### **Pinned Script & Asset Versions**
 
 Below are the third-party assets integrated into RavenUI:
 

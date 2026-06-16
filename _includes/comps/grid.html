@@ -1,0 +1,12 @@
+{%- comment -%}
+Component__: Layout Grid
+Purpose____: Renders a flexible, responsive CSS grid container for arbitrary layout composition.
+Caveats____: Output must remain collapsed on a single line to prevent Kramdown paragraph wrapping.
+Usage______: 
+            {% capture grid_items %}
+              <div>Col 1</div>
+              <div>Col 2</div>
+            {% endcapture %}
+            {% include comps/grid.html content=grid_items cols=2 gap="lg" mobile_cols=1 %}
+{%- endcomment -%}
+{%- assign cols = include.cols | default: 3 -%}{%- assign tablet_cols = include.tablet_cols | default: 2 -%}{%- assign mobile_cols = include.mobile_cols | default: 1 -%}{%- assign gap_size = include.gap | default: "md" -%}{%- case gap_size -%}{%- when "xs" -%}{%- assign gap_css = "0.5rem" -%}{%- when "sm" -%}{%- assign gap_css = "1rem" -%}{%- when "md" -%}{%- assign gap_css = "1.5rem" -%}{%- when "lg" -%}{%- assign gap_css = "2rem" -%}{%- when "xl" -%}{%- assign gap_css = "3rem" -%}{%- else -%}{%- assign gap_css = gap_size -%}{%- endcase -%}<div class="rd-layout-grid {{ include.class }}" style="--rd-cols: {{ cols }}; --rd-cols-tablet: {{ tablet_cols }}; --rd-cols-mobile: {{ mobile_cols }}; --rd-grid-gap: {{ gap_css }}; {{ include.style }}">{{ include.content }}</div>

@@ -78,6 +78,7 @@ test_build:
   <<: *test_build
   script:
     - echo "🔍 Starting RavenUI Diagnostic..."
+    - pwsh -File ./rvcli.ps1 lint
     - bundle exec jekyll build --strict_front_matter --future
     - echo "✅ Build Verification Complete."
 
@@ -106,6 +107,7 @@ cloudflare_pages:
     - echo "🌑 Deploying Platinum Master to Cloudflare Static Pages..."
     - echo "🌑 bundle exec jekyll build -d public"
     - bundle exec jekyll build -d public
+    - pwsh -File ./tools/minify.ps1 -TargetDir public
     - echo "🌑 wrangler pages publish ./public --branch main"
     - npm install -g wrangler
     - npx wrangler pages publish ./public --branch main

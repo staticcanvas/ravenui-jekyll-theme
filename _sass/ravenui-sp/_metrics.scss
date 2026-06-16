@@ -111,3 +111,19 @@
     background: color-mix(in srgb, var(--rd-clr-silver) 8%, transparent);
   }
 }
+
+/* STATS TICKERS & ANIMATIONS */
+[data-ticker-value] {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rd-ticker-complete {
+  animation: rd-ticker-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes rd-ticker-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); filter: brightness(1.2); }
+  100% { transform: scale(1); }
+}

@@ -23,3 +23,19 @@
   justify-self: stretch;
   min-width: 0; /* Prevents grid blowout from large code blocks */
 }
+
+/* RESPONSIVE LAYOUT GRID */
+.rd-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--rd-cols, 3), minmax(0, 1fr));
+  gap: var(--rd-grid-gap, 1.5rem);
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(var(--rd-cols-tablet, 2), minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(var(--rd-cols-mobile, 1), minmax(0, 1fr));
+  }
+}

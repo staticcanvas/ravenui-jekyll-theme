@@ -21,7 +21,7 @@ Apply theme colors to any text element.
 | `.fg-danger` | <span class="fg-danger">Danger/Error</span> |
 | `.fg-muted` | <span class="fg-muted">De-emphasized</span> |
 
-### Brand Palette
+### **Brand Palette**
 | Class | Example |
 | :--- | :--- |
 | `.fg-viridian` | <span class="fg-viridian">Viridian Brand</span> |
@@ -68,7 +68,7 @@ Control font size, weight, and family.
 
 **Usage:**
 ```markdown
-### SYSTEM ONLINE{: .fz-xxl .bg-gradient-highlight .robost }
+### **SYSTEM ONLINE**{: .fz-xxl .bg-gradient-highlight .robost }
 ```
 
 ---
@@ -92,9 +92,9 @@ Adjust margins and alignment for individual elements.
 You can chain multiple classes together to achieve complex styles.
 
 ```markdown
-### Pro Tip{: .text-highlight .mb-0 }
+### **Pro Tip**{: .text-highlight .mb-0 }
 This is a high-density note with no bottom margin.{: .fz-sm }
 ```
 
-### Pro Tip{: .text-highlight .mb-0 }
+### **Pro Tip**{: .text-highlight .mb-0 }
 This is a high-density note with no bottom margin.{: .fz-sm }
