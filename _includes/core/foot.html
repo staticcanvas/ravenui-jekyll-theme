@@ -1,1 +1,12 @@
 <!-- Custom footer content placeholder (override this file in your site to add custom scripts, links, or styles to the foot of the page) -->
+
+{% if site.theme_settings.custom_scripts_foot %}
+<!-- Custom Foot Scripts -->
+{% for script in site.theme_settings.custom_scripts_foot %}
+  {% if script.src %}
+<script src="{{ script.src | relative_url }}" {% if script.async %}async{% endif %} {% if script.defer %}defer{% endif %} {% if script.type %}type="{{ script.type }}"{% endif %}></script>
+  {% else %}
+<script src="{{ script | relative_url }}"></script>
+  {% endif %}
+{% endfor %}
+{% endif %}

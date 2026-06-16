@@ -7,30 +7,31 @@ Usage______: {% include core/header.html %}
 {% assign logo_layout = site.theme_settings.logo.layout | default: "inline" %}
 {% assign header_sticky = site.theme_settings.header.sticky | default: false %}
 {% assign header_align = site.theme_settings.header.align | default: "center" %}
+{% assign header_density = site.theme_settings.header.density | default: "default" %}
 
-<header class="zd-header{% if header_sticky %} zd-header--sticky{% endif %}">
-  <div class="zd-header-inner">
-    <div class="zd-header-brand">
+<header class="rd-header{% if header_sticky %} rd-header--sticky{% endif %} rd-header--{{ header_density }}">
+  <div class="rd-header-inner">
+    <div class="rd-header-brand">
       {% if site.theme_settings.logo.path %}
-      <a href="{{ "/" | relative_url }}" class="zd-header-logo-link">
+      <a href="{{ "/" | relative_url }}" class="rd-header-logo-link">
         <img src="{{ site.theme_settings.logo.path | relative_url }}" 
              alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
-             class="zd-header-logo-img"
+             class="rd-header-logo-img"
              style="height: {{ site.theme_settings.logo.height | default: '24px' }};">
       </a>
       {% endif %}
-      <a href="{{ "/" | relative_url }}" class="zd-header-title-link">
-        <span class="zd-header-title">{{ site.logo_text | default: "ZERODARK" }}</span>
-        <span class="zd-header-subtext">// {{ site.logo_subtext | default: "SP" }}</span>
+      <a href="{{ "/" | relative_url }}" class="rd-header-title-link">
+        <span class="rd-header-title">{{ site.logo_text | default: "ZERODARK" }}</span>
+        <span class="rd-header-subtext">// {{ site.logo_subtext | default: "SP" }}</span>
       </a>
     </div>
 
-    <nav class="zd-header-nav zd-header-nav--{{ header_align }}" aria-label="Header Navigation">
+    <nav class="rd-header-nav rd-header-nav--{{ header_align }} rd-header-nav--{{ header_density }}" aria-label="Header Navigation">
       {% for link in site.data.navheader %}
         {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
         {% assign link_url = link.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
         <a href="{{ link.url | relative_url }}" 
-           class="zd-header-nav-link" 
+           class="rd-header-nav-link" 
            {% if page_url == link_url %}aria-current="page"{% endif %}
            {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
           {% if link.icon %}
@@ -48,7 +49,7 @@ Usage______: {% include core/header.html %}
           {% endif %}
           {{ link.text }}
           {% if link.is_new_feature %}
-            <span class="zd-nav-badge zd-nav-badge--{{ link.is_new_feature }}">
+            <span class="rd-nav-badge rd-nav-badge--{{ link.is_new_feature }}">
               {% if link.is_new_feature == true or link.is_new_feature == "new" %}
                 new
               {% else %}
@@ -60,26 +61,28 @@ Usage______: {% include core/header.html %}
       {% endfor %}
     </nav>
 
-    <div class="zd-header-actions">
-      <div class="zd-header-search-trigger zd-search-trigger">
+    <div class="rd-header-actions">
+      <div class="rd-header-search-trigger rd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>
         <span>Search...</span>
         <kbd>/</kbd>
       </div>
 
-      <div class="zd-header-socials">
+      {% include comps/theme-toggle.html %}
+
+      <div class="rd-header-socials">
         {% if site.github_username %}
-        <a href="https://github.com/{{ site.github_username }}" class="zd-header-social-link" aria-label="GitHub">
+        <a href="https://github.com/{{ site.github_username }}" class="rd-header-social-link" aria-label="GitHub">
           <i data-lucide="github" style="width: 18px; height: 18px;"></i>
         </a>
         {% endif %}
         {% if site.twitter_username %}
-        <a href="https://twitter.com/{{ site.twitter_username }}" class="zd-header-social-link" aria-label="Twitter">
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="rd-header-social-link" aria-label="Twitter">
           <i data-lucide="twitter" style="width: 18px; height: 18px;"></i>
         </a>
         {% endif %}
         {% if site.linkedin_username %}
-        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="zd-header-social-link" aria-label="LinkedIn">
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="rd-header-social-link" aria-label="LinkedIn">
           <i data-lucide="linkedin" style="width: 18px; height: 18px;"></i>
         </a>
         {% endif %}

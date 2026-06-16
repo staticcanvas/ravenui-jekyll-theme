@@ -9,11 +9,11 @@ Usage______: {% include comps/extra-related-carousel.html items=site.data.relate
 {%- assign height = include.height | default: "auto" -%}
 
 {%- if items -%}
-<div class="zd-related-carousel-container {{ include.class }}" id="{{ id }}" style="--carousel-height: {{ height }};">
-  <div class="zd-carousel-track-viewport">
-    <div class="zd-carousel-track">
+<div class="rd-related-carousel-container {{ include.class }}" id="{{ id }}" style="--carousel-height: {{ height }};">
+  <div class="rd-carousel-track-viewport">
+    <div class="rd-carousel-track">
       {%- for item in items -%}
-        <div class="zd-carousel-slide {% if forloop.first %}active{% endif %}">
+        <div class="rd-carousel-slide {% if forloop.first %}active{% endif %}">
           {%- include comps/extra-media-card.html data=item glass=include.glass -%}
         </div>
       {%- endfor -%}
@@ -21,16 +21,16 @@ Usage______: {% include comps/extra-related-carousel.html items=site.data.relate
   </div>
 
   {%- if items.size > 1 -%}
-  <button class="zd-carousel-btn zd-carousel-btn--prev" aria-label="Previous slide" onclick="moveCarousel('{{ id }}', -1)">
+  <button class="rd-carousel-btn rd-carousel-btn--prev" aria-label="Previous slide" onclick="moveCarousel('{{ id }}', -1)">
     {% include comps/icon.html name="chevron-left" size=20 %}
   </button>
-  <button class="zd-carousel-btn zd-carousel-btn--next" aria-label="Next slide" onclick="moveCarousel('{{ id }}', 1)">
+  <button class="rd-carousel-btn rd-carousel-btn--next" aria-label="Next slide" onclick="moveCarousel('{{ id }}', 1)">
     {% include comps/icon.html name="chevron-right" size=20 %}
   </button>
 
-  <div class="zd-carousel-indicators">
+  <div class="rd-carousel-indicators">
     {%- for item in items -%}
-    <button class="zd-carousel-indicator {% if forloop.first %}active{% endif %}" 
+    <button class="rd-carousel-indicator {% if forloop.first %}active{% endif %}" 
             aria-label="Go to slide {{ forloop.index }}" 
             onclick="setCarouselSlide('{{ id }}', {{ forloop.index0 }})"></button>
     {%- endfor -%}
@@ -38,14 +38,14 @@ Usage______: {% include comps/extra-related-carousel.html items=site.data.relate
   {%- endif -%}
 </div>
 
-{% unless site.zd_carousel_script_loaded %}
-  {% assign site.zd_carousel_script_loaded = true %}
+{% unless site.rd_carousel_script_loaded %}
+  {% assign site.rd_carousel_script_loaded = true %}
   <script>
     function moveCarousel(id, direction) {
       const container = document.getElementById(id);
       if (!container) return;
-      const track = container.querySelector('.zd-carousel-track');
-      const slides = Array.from(track.querySelectorAll('.zd-carousel-slide'));
+      const track = container.querySelector('.rd-carousel-track');
+      const slides = Array.from(track.querySelectorAll('.rd-carousel-slide'));
       const activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
       let nextIndex = activeIndex + direction;
       if (nextIndex < 0) nextIndex = slides.length - 1;
@@ -56,9 +56,9 @@ Usage______: {% include comps/extra-related-carousel.html items=site.data.relate
     function setCarouselSlide(id, index) {
       const container = document.getElementById(id);
       if (!container) return;
-      const track = container.querySelector('.zd-carousel-track');
-      const slides = Array.from(track.querySelectorAll('.zd-carousel-slide'));
-      const indicators = Array.from(container.querySelectorAll('.zd-carousel-indicator'));
+      const track = container.querySelector('.rd-carousel-track');
+      const slides = Array.from(track.querySelectorAll('.rd-carousel-slide'));
+      const indicators = Array.from(container.querySelectorAll('.rd-carousel-indicator'));
       
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);

@@ -1,10 +1,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "Zero-Dark" }}</title>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('rd-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "RavenUI" }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
-    {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.zd_use_cdn | default: true -%}
+    {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.rd_use_cdn | default: true -%}
     {%- if search_provider == "pagefind" -%}
       {%- if search_use_cdn -%}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/css/ui.css">
@@ -19,8 +25,13 @@
     {% else %}
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
     {% endif %}
+    {% if site.theme_settings.typography.custom_font_stylesheets %}
+        {% for stylesheet in site.theme_settings.typography.custom_font_stylesheets %}
+        <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+        {% endfor %}
+    {% endif %}
     
-    {% if site.zd_use_cdn != false %}
+    {% if site.rd_use_cdn != false %}
         <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.min.js"></script>
         {% if site.font_awesome %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -32,6 +43,13 @@
         {% endif %}
     {% endif %}
 
+    {% if site.animation_libraries.animate_css.enable %}
+    <link rel="stylesheet" href="{{ site.animation_libraries.animate_css.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' }}">
+    {% endif %}
+    {% if site.animation_libraries.aos.enable %}
+    <link rel="stylesheet" href="{{ site.animation_libraries.aos.cdn_css | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css' }}">
+    {% endif %}
+
     {%- if search_provider == "pagefind" -%}
       {%- if search_use_cdn -%}
         <script type="module" src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/ui.js"></script>
@@ -39,7 +57,7 @@
         <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
       {%- endif -%}
     {%- elsif search_provider == "lyra" -%}
-      <script src="{{ "/assets/js/vendor/zd-search-local.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/vendor/rd-search-local.js" | relative_url }}"></script>
     {%- elsif search_provider == "algolia" -%}
       {%- if search_use_cdn -%}
         <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch-lite.umd.js"></script>
@@ -52,43 +70,178 @@
     {% endif %}
     {% seo %}
 
+    {% if page.image == nil and page.og_image == nil and site.theme_settings.og_image.default %}
+    <meta property="og:image" content="{{ site.theme_settings.og_image.default | relative_url }}">
+    <meta name="twitter:image" content="{{ site.theme_settings.og_image.default | relative_url }}">
+    {% endif %}
+
+    {% if site.theme_settings.custom_stylesheets %}
+    <!-- Custom Theme Stylesheets -->
+    {% for stylesheet in site.theme_settings.custom_stylesheets %}
+    <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+    {% endfor %}
+    {% endif %}
+
+    {% if site.theme_settings.custom_scripts_head %}
+    <!-- Custom Head Scripts -->
+    {% for script in site.theme_settings.custom_scripts_head %}
+      {% if script.src %}
+    <script src="{{ script.src | relative_url }}" {% if script.async %}async{% endif %} {% if script.defer %}defer{% endif %} {% if script.type %}type="{{ script.type }}"{% endif %}></script>
+      {% else %}
+    <script src="{{ script | relative_url }}"></script>
+      {% endif %}
+    {% endfor %}
+    {% endif %}
+
     <style>
         :root {
-            {% assign spacing = site.zd_nav_spacing | default: "compact" %}
+            {% assign spacing = site.rd_nav_spacing | default: "compact" %}
             {% if spacing == "compact" %}
-                --zd-nav-padding: 0rem;
-                --zd-heading-margin: 0.5rem;
-                --zd-hero-padding: 0.5rem;
-                --zd-content-margin: 0.75rem;
+                --rd-nav-padding: 0rem;
+                --rd-heading-margin: 0.5rem;
+                --rd-hero-padding: 0.5rem;
+                --rd-content-margin: 0.75rem;
             {% elsif spacing == "tight" %}
-                --zd-nav-padding: 0.25rem;
-                --zd-heading-margin: 0.75rem;
-                --zd-hero-padding: 1rem;
-                --zd-content-margin: 1rem;
+                --rd-nav-padding: 0.25rem;
+                --rd-heading-margin: 0.75rem;
+                --rd-hero-padding: 1rem;
+                --rd-content-margin: 1rem;
             {% elsif spacing == "comfy" %}
-                --zd-nav-padding: 0.3rem;
-                --zd-heading-margin: 1.5rem;
-                --zd-hero-padding: 2rem;
-                --zd-content-margin: 1.5rem;
+                --rd-nav-padding: 0.3rem;
+                --rd-heading-margin: 1.5rem;
+                --rd-hero-padding: 2rem;
+                --rd-content-margin: 1.5rem;
             {% elsif spacing == "spacy" %}
-                --zd-nav-padding: 0.5rem;
-                --zd-heading-margin: 2.5rem;
-                --zd-hero-padding: 4rem;
-                --zd-content-margin: 2rem;
+                --rd-nav-padding: 0.5rem;
+                --rd-heading-margin: 2.5rem;
+                --rd-hero-padding: 4rem;
+                --rd-content-margin: 2rem;
             {% else %}
-                --zd-nav-padding: 0rem;
-                --zd-heading-margin: 1rem;
-                --zd-hero-padding: 1rem;
-                --zd-content-margin: 1.5rem;
+                --rd-nav-padding: 0rem;
+                --rd-heading-margin: 1rem;
+                --rd-hero-padding: 1rem;
+                --rd-content-margin: 1.5rem;
             {% endif %}
 
             {% if site.theme_settings.typography.font_sans %}
-                --zd-font-sans: {{ site.theme_settings.typography.font_sans }};
+                --rd-font-sans: {{ site.theme_settings.typography.font_sans }};
             {% endif %}
             {% if site.theme_settings.typography.font_mono %}
-                --zd-font-mono: {{ site.theme_settings.typography.font_mono }};
+                --rd-font-mono: {{ site.theme_settings.typography.font_mono }};
+            {% endif %}
+
+            /* Borders Customization */
+            {% if site.theme_settings.borders %}
+                {% assign borders = site.theme_settings.borders %}
+                {% if borders.style %}
+                    --rd-border-style: {{ borders.style }};
+                {% endif %}
+                {% if borders.width %}
+                    --rd-border-width: {{ borders.width }};
+                {% endif %}
+                {% if borders.color %}
+                    {% if borders.color == 'subtle' %}
+                        --rd-border-color: var(--rd-border-subtle);
+                    {% elsif borders.color == 'strong' %}
+                        --rd-border-color: var(--rd-border-strong);
+                    {% elsif borders.color == 'accent' %}
+                        --rd-border-color: var(--rd-border-accent);
+                    {% elsif borders.color == 'default' %}
+                        --rd-border-color: var(--rd-border-default);
+                    {% else %}
+                        --rd-border-color: {{ borders.color }};
+                    {% endif %}
+                {% endif %}
+                
+                {% if borders.gradient.enable and borders.gradient.colors %}
+                    {% if borders.gradient.type == 'radial' %}
+                        --rd-border-gradient-bg: radial-gradient(circle at center, {{ borders.gradient.colors | join: ', ' }});
+                    {% else %}
+                        --rd-border-gradient-bg: linear-gradient({{ borders.gradient.direction | default: '135deg' }}, {{ borders.gradient.colors | join: ', ' }});
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            {% if site.theme_settings.animations.enabled != false %}
+                {% assign load_style = site.theme_settings.animations.page_load_style | default: 'fade-in-up' %}
+                {% if load_style == 'fade-in' %}
+                    --rd-page-load-anim: rd-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% elsif load_style == 'slide-in-left' %}
+                    --rd-page-load-anim: rd-slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% elsif load_style == 'zoom-in' %}
+                    --rd-page-load-anim: rd-zoom-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% else %}
+                    --rd-page-load-anim: rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+                {% endif %}
             {% endif %}
         }
+
+        {% if site.theme_settings.animations.view_transitions %}
+        @view-transition {
+            navigation: auto;
+        }
+        {% endif %}
+
+        {% if site.theme_settings.background.gradient.enable and site.theme_settings.background.gradient.colors %}
+        body {
+            {% if site.theme_settings.background.gradient.type == 'radial' %}
+            background: radial-gradient(circle at center, {{ site.theme_settings.background.gradient.colors | join: ', ' }}) !important;
+            {% else %}
+            background: linear-gradient({{ site.theme_settings.background.gradient.direction | default: '135deg' }}, {{ site.theme_settings.background.gradient.colors | join: ', ' }}) !important;
+            {% endif %}
+            background-attachment: fixed !important;
+            
+            {% if site.theme_settings.background.animation.enable %}
+            background-size: 400% 400% !important;
+            animation: rd-gradient-shift {% if site.theme_settings.background.animation.speed == 'fast' %}15s{% elsif site.theme_settings.background.animation.speed == 'normal' %}30s{% else %}60s{% endif %} ease infinite !important;
+            {% endif %}
+        }
+        {% endif %}
+
+        {% if site.theme_settings.background.backdrop.enable %}
+        body::before {
+            content: "" !important;
+            position: fixed !important;
+            inset: 0 !important;
+            pointer-events: none !important;
+            z-index: -1 !important;
+            opacity: {{ site.theme_settings.background.backdrop.opacity | default: 0.05 }} !important;
+            {% if site.theme_settings.background.backdrop.pattern == 'grid' %}
+            background-size: 40px 40px !important;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px) !important;
+            {% elsif site.theme_settings.background.backdrop.pattern == 'dots' %}
+            background-size: 24px 24px !important;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) !important;
+            {% elsif site.theme_settings.background.backdrop.pattern == 'diagonal' %}
+            background-size: 20px 20px !important;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)) !important;
+            {% endif %}
+            
+            {% if site.theme_settings.background.animation.enable %}
+            animation: rd-backdrop-pan {% if site.theme_settings.background.animation.speed == 'fast' %}30s{% elsif site.theme_settings.background.animation.speed == 'normal' %}60s{% else %}120s{% endif %} linear infinite !important;
+            {% endif %}
+        }
+        {% endif %}
+
+        {% if site.theme_settings.borders.gradient.enable and site.theme_settings.borders.gradient.colors %}
+        /* Apply premium gradient borders to container elements */
+        .rd-card, .rd-codeblock, .rd-sidebar, .rd-btn, .rd-btn-primary, .rd-modal-content, .rd-step-bar, .rd-callout, div.highlight, .rd-terminal, .rd-feature-card, .rd-tabs {
+            border: var(--rd-border-width, 1px) solid transparent !important;
+            background: linear-gradient(var(--rd-bg-card, var(--rd-clr-ink)), var(--rd-bg-card, var(--rd-clr-ink))) padding-box,
+                        var(--rd-border-gradient-bg) border-box !important;
+        }
+        .rd-sidebar {
+            background: linear-gradient(var(--rd-clr-void), var(--rd-clr-void)) padding-box,
+                        var(--rd-border-gradient-bg) border-box !important;
+        }
+        {% elsif site.theme_settings.borders %}
+        /* Apply custom border styles (color, style, width) to container elements */
+        .rd-card, .rd-codeblock, .rd-sidebar, .rd-btn, .rd-btn-primary, .rd-modal-content, .rd-step-bar, .rd-callout, div.highlight, .rd-terminal, .rd-feature-card, .rd-tabs {
+            border: var(--rd-border-width, 1px) var(--rd-border-style, solid) var(--rd-border-color, var(--rd-border-default)) !important;
+        }
+        {% endif %}
 
         {% if site.theme_settings.typography.h1 %}
             h1 {

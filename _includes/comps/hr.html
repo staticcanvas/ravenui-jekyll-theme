@@ -1,22 +1,22 @@
 {% assign style = include.style | default: "solid" %}
 {% assign align = include.align | default: "center" %}
-{% assign from = include.from | default: "var(--zd-clr-viridian)" %}
+{% assign from = include.from | default: "var(--rd-clr-viridian)" %}
 {% assign to = include.to | default: "#00b3ff" %}
 {% assign text = include.text %}
 {% assign icon = include.icon %}
 
-<div class="zd-hr-container zd-hr--{{ style }} zd-hr-align--{{ align }} {{ include.class }}"
-     style="--zd-hr-from: {{ from }}; --zd-hr-to: {{ to }};">
+<div class="rd-hr-container rd-hr--{{ style }} rd-hr-align--{{ align }} {{ include.class }}"
+     style="--rd-hr-from: {{ from }}; --rd-hr-to: {{ to }};">
     {% if text or icon %}
-        <span class="zd-hr-line zd-hr-line--left"></span>
-        <span class="zd-hr-content">
+        <span class="rd-hr-line rd-hr-line--left"></span>
+        <span class="rd-hr-content">
             {% if icon %}
                 {% include comps/icon.html name=icon size=14 %}
             {% endif %}
             {% if text %}{{ text }}{% endif %}
         </span>
-        <span class="zd-hr-line zd-hr-line--right"></span>
+        <span class="rd-hr-line rd-hr-line--right"></span>
     {% else %}
-        <span class="zd-hr-line zd-hr-line--full"></span>
+        <span class="rd-hr-line rd-hr-line--full"></span>
     {% endif %}
 </div>

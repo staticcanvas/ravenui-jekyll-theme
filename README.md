@@ -1,6 +1,6 @@
-# Zero-Dark
+# RavenUI
 
-A professional, component-heavy Jekyll theme optimized for high-contrast technical documentation. Zero-Dark has evolved from a clean documentation template into a robust framework, serving both as a production-ready theme and a comprehensive UI component library for technical websites.
+A professional, component-heavy Jekyll theme optimized for high-contrast technical documentation. RavenUI has evolved from a clean documentation template into a robust framework, serving both as a production-ready theme and a comprehensive UI component library for technical websites.
 
 ---
 
@@ -56,7 +56,7 @@ Once deployed, the master documentation is hosted via GitLab Pages.
 
 If you do not wish to use the Ruby Gem or clone the repository, pre-packaged releases are available as direct ZIP downloads. 
 
-You can download `jekyll-theme-zero-dark-v[VERSION].zip` directly from the **GitLab Release page** for your chosen version and extract it to use it as a standalone template.
+You can download `jekyll-theme-ravenui-v[VERSION].zip` directly from the **GitLab Release page** for your chosen version and extract it to use it as a standalone template.
 
 ---
 

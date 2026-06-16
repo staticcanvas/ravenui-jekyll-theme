@@ -1,10 +1,10 @@
-<details class="zd-faq-item {{ include.class }}">
-    <summary class="zd-faq-question">
-        <span class="zd-faq-icon">{% include comps/icon.html name="help-circle" size=14 %}</span>
+<details class="rd-faq-item {{ include.class }}">
+    <summary class="rd-faq-question">
+        <span class="rd-faq-icon">{% include comps/icon.html name="help-circle" size=14 %}</span>
         {{ include.question | default: "Question?" }}
-        <span class="zd-faq-arrow">{% include comps/icon.html name="chevron-down" size=12 %}</span>
+        <span class="rd-faq-arrow">{% include comps/icon.html name="chevron-down" size=12 %}</span>
     </summary>
-    <div class="zd-faq-answer">
+    <div class="rd-faq-answer">
         {{ include.answer | default: include.content }}
     </div>
 </details>

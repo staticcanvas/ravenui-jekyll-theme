@@ -1,0 +1,123 @@
+// Dynamic Feedback Widget Component
+// Compliance: [Fluent UI Integration]
+
+.rd-feedback-widget {
+  margin: 3rem 0 2rem 0;
+  padding: 1.25rem;
+  background: var(--rd-bg-surface);
+  border: 1px solid var(--rd-border-default);
+  border-radius: var(--rd-radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rd-feedback-prompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rd-feedback-question {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--rd-clr-white);
+}
+
+.rd-feedback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--rd-clr-ink);
+  border: 1px solid var(--rd-border-strong);
+  border-radius: var(--rd-radius);
+  color: var(--rd-clr-silver);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--rd-transition-fast);
+  font-weight: 500;
+
+  &:hover {
+    color: var(--rd-clr-white);
+    background-color: var(--rd-bg-hover);
+    border-color: var(--rd-border-strong);
+  }
+
+  &.rd-feedback-btn--yes:hover {
+    color: var(--rd-clr-viridian);
+    border-color: var(--rd-clr-viridian);
+    background-color: color-mix(in srgb, var(--rd-clr-viridian) 8%, transparent);
+  }
+
+  &.rd-feedback-btn--no:hover {
+    color: var(--rd-clr-danger);
+    border-color: var(--rd-clr-danger);
+    background-color: color-mix(in srgb, var(--rd-clr-danger) 8%, transparent);
+  }
+}
+
+.rd-feedback-thanks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--rd-clr-white);
+}
+
+.rd-feedback-thanks-text {
+  font-weight: 500;
+}
+
+/* LIKES & REVIEWS WIDGET */
+.rd-likes-widget {
+  margin-block-start: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.rd-likes-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--rd-clr-ink);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: 20px; // Pill shape
+  color: var(--rd-clr-silver);
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--rd-transition-fast);
+  font-weight: 500;
+
+  .rd-likes-icon {
+    transition: transform var(--rd-transition-fast), fill var(--rd-transition-fast);
+    stroke: var(--rd-clr-silver);
+  }
+
+  &:hover {
+    color: var(--rd-clr-danger);
+    border-color: var(--rd-clr-danger);
+    background-color: color-mix(in srgb, var(--rd-clr-danger) 8%, transparent);
+    
+    .rd-likes-icon {
+      transform: scale(1.1);
+      stroke: var(--rd-clr-danger);
+    }
+  }
+
+  &.liked {
+    color: var(--rd-clr-danger);
+    border-color: var(--rd-clr-danger);
+    background-color: color-mix(in srgb, var(--rd-clr-danger) 12%, transparent);
+    
+    .rd-likes-icon {
+      fill: var(--rd-clr-danger);
+      stroke: var(--rd-clr-danger);
+    }
+  }
+}
+

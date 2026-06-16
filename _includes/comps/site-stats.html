@@ -22,68 +22,67 @@ Usage______: {% include comps/site-stats.html grid_size="160px" %}
 
 {%- assign grid_size = include.grid_size | default: "150px" -%}
 
-<div class="zd-metrics-grid {{ include.class }}" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
+<div class="rd-metrics-grid {{ include.class }}" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
   <!-- Posts Stat -->
-  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-viridian); border-color: color-mix(in srgb, var(--zd-clr-viridian) 20%, transparent);">
-    <div class="zd-metric-header">
-      <span class="zd-metric-icon">{%- include comps/icon.html name="book-open" size=14 -%}</span>
-      <span class="zd-metric-title">Total Posts</span>
+  <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-viridian); border-color: color-mix(in srgb, var(--rd-clr-viridian) 20%, transparent);">
+    <div class="rd-metric-header">
+      <span class="rd-metric-icon">{%- include comps/icon.html name="book-open" size=14 -%}</span>
+      <span class="rd-metric-title">Total Posts</span>
     </div>
-    <div class="zd-metric-body">
-      <span class="zd-metric-value">{{ site.posts.size }}</span>
+    <div class="rd-metric-body">
+      <span class="rd-metric-value" data-ticker-value="{{ site.posts.size }}">{{ site.posts.size }}</span>
     </div>
   </div>
 
   <!-- Tags Stat -->
-  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-info); border-color: color-mix(in srgb, var(--zd-clr-info) 20%, transparent);">
-    <div class="zd-metric-header">
-      <span class="zd-metric-icon">{%- include comps/icon.html name="tag" size=14 -%}</span>
-      <span class="zd-metric-title">Total Tags</span>
+  <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-info); border-color: color-mix(in srgb, var(--rd-clr-info) 20%, transparent);">
+    <div class="rd-metric-header">
+      <span class="rd-metric-icon">{%- include comps/icon.html name="tag" size=14 -%}</span>
+      <span class="rd-metric-title">Total Tags</span>
     </div>
-    <div class="zd-metric-body">
-      <span class="zd-metric-value">{{ site.tags.size }}</span>
+    <div class="rd-metric-body">
+      <span class="rd-metric-value" data-ticker-value="{{ site.tags.size }}">{{ site.tags.size }}</span>
     </div>
   </div>
 
   <!-- Categories Stat -->
-  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-warning); border-color: color-mix(in srgb, var(--zd-clr-warning) 20%, transparent);">
-    <div class="zd-metric-header">
-      <span class="zd-metric-icon">{%- include comps/icon.html name="folder" size=14 -%}</span>
-      <span class="zd-metric-title">Categories</span>
+  <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-warning); border-color: color-mix(in srgb, var(--rd-clr-warning) 20%, transparent);">
+    <div class="rd-metric-header">
+      <span class="rd-metric-icon">{%- include comps/icon.html name="folder" size=14 -%}</span>
+      <span class="rd-metric-title">Categories</span>
     </div>
-    <div class="zd-metric-body">
-      <span class="zd-metric-value">{{ site.categories.size }}</span>
+    <div class="rd-metric-body">
+      <span class="rd-metric-value" data-ticker-value="{{ site.categories.size }}">{{ site.categories.size }}</span>
     </div>
   </div>
 
   {%- if include.show_words != false -%}
   <!-- Words Stat -->
-  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-platinum); border-color: color-mix(in srgb, var(--zd-clr-platinum) 20%, transparent);">
-    <div class="zd-metric-header">
-      <span class="zd-metric-icon">{%- include comps/icon.html name="file-text" size=14 -%}</span>
-      <span class="zd-metric-title">Word Count</span>
+  <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-platinum); border-color: color-mix(in srgb, var(--rd-clr-platinum) 20%, transparent);">
+    <div class="rd-metric-header">
+      <span class="rd-metric-icon">{%- include comps/icon.html name="file-text" size=14 -%}</span>
+      <span class="rd-metric-title">Word Count</span>
     </div>
-    <div class="zd-metric-body">
-      <span class="zd-metric-value">
-        {%- if total_words >= 1000 -%}
-          {{ total_words | divided_by: 1000.0 | round: 1 }}k
-        {%- else -%}
-          {{ total_words }}
-        {%- endif -%}
-      </span>
+    <div class="rd-metric-body">
+      {%- if total_words >= 1000 -%}
+        {%- capture word_val -%}{{ total_words | divided_by: 1000.0 | round: 1 }}k{%- endcapture -%}
+      {%- else -%}
+        {%- capture word_val -%}{{ total_words }}{%- endcapture -%}
+      {%- endif -%}
+      <span class="rd-metric-value" data-ticker-value="{{ word_val }}">{{ word_val }}</span>
     </div>
   </div>
   {%- endif -%}
 
   {%- if include.show_reading_time != false -%}
   <!-- Reading Time Stat -->
-  <div class="zd-metric-card" style="--zd-metric-accent: var(--zd-clr-viridian); border-color: color-mix(in srgb, var(--zd-clr-viridian) 20%, transparent);">
-    <div class="zd-metric-header">
-      <span class="zd-metric-icon">{%- include comps/icon.html name="clock" size=14 -%}</span>
-      <span class="zd-metric-title">Reading Time</span>
+  <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-viridian); border-color: color-mix(in srgb, var(--rd-clr-viridian) 20%, transparent);">
+    <div class="rd-metric-header">
+      <span class="rd-metric-icon">{%- include comps/icon.html name="clock" size=14 -%}</span>
+      <span class="rd-metric-title">Reading Time</span>
     </div>
-    <div class="zd-metric-body">
-      <span class="zd-metric-value">{{ reading_time_str }}</span>
+    <div class="rd-metric-body">
+      <span class="rd-metric-value" data-ticker-value="{{ reading_time_str }}">{{ reading_time_str }}</span>
     </div>
   </div>
   {%- endif -%}
@@ -120,10 +119,10 @@ Usage______: {% include comps/site-stats.html grid_size="160px" %}
     {%- endif -%}
   {%- endfor -%}
 
-  <div class="zd-site-stats-charts" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-block-start: 1.5rem;">
+  <div class="rd-site-stats-charts" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-block-start: 1.5rem;">
     {%- if category_names != "" -%}
-    <div class="zd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--zd-bg-surface); border: var(--zd-border); border-radius: var(--zd-radius);">
-      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--zd-clr-slate); letter-spacing: 0.05em;">Posts by Category</h4>
+    <div class="rd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--rd-bg-surface); border: var(--rd-border); border-radius: var(--rd-radius);">
+      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--rd-clr-slate); letter-spacing: 0.05em;">Posts by Category</h4>
       {%- if chart_engine == "chartjs" -%}
         {%- include comps/chartjs.html id="site-stats-cat-chart" type="doughnut" labels=category_names data=category_counts dataset_label="Category Count" height="200px" -%}
       {%- else -%}
@@ -133,8 +132,8 @@ Usage______: {% include comps/site-stats.html grid_size="160px" %}
     {%- endif -%}
 
     {%- if tag_names != "" -%}
-    <div class="zd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--zd-bg-surface); border: var(--zd-border); border-radius: var(--zd-radius);">
-      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--zd-clr-slate); letter-spacing: 0.05em;">Posts by Tag</h4>
+    <div class="rd-site-stats-chart-wrapper" style="padding: 1.5rem; background: var(--rd-bg-surface); border: var(--rd-border); border-radius: var(--rd-radius);">
+      <h4 style="margin-block-end: 1rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--rd-clr-slate); letter-spacing: 0.05em;">Posts by Tag</h4>
       {%- if chart_engine == "chartjs" -%}
         {%- include comps/chartjs.html id="site-stats-tag-chart" type="bar" labels=tag_names data=tag_counts dataset_label="Tag Count" height="200px" -%}
       {%- else -%}

@@ -5,31 +5,42 @@ Caveats____: Output is enhanced via Vanilla JS. Table headers can be passed as a
 Usage______: {% include comps/datatable.html data_source="table1" headers="name:Name,role:Role,loc:Location" %}
 {%- endcomment -%}
 
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign items = include.items | default: page.table_items | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "table1" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.table_items | default: site.theme_settings.table_items -%}
 
-{%- if include.headers[0].key -%}
+{%- assign raw_headers = include.headers | default: page.table_headers | default: site.theme_settings.table_headers -%}
+{%- if raw_headers[0].key -%}
   {%- assign headers_type = "array" -%}
-  {%- assign table_headers = include.headers -%}
+  {%- assign table_headers = raw_headers -%}
 {%- else -%}
   {%- assign headers_type = "string" -%}
-  {%- assign table_headers = include.headers | split: "," -%}
+  {%- assign table_headers = raw_headers | split: "," -%}
 {%- endif -%}
 
 {%- capture temp_random -%}
-  {%- increment zd_table_counter -%}
+  {%- increment rd_table_counter -%}
 {%- endcapture -%}
 
-{%- assign table_id = include.id | default: "zd-table-" | append: temp_random -%}
+{%- assign table_id = include.id | default: "rd-table-" | append: temp_random -%}
 
-<div class="zd-datatable-container" id="{{ table_id }}" class="{{ include.class }}">
+<div class="rd-datatable-container" id="{{ table_id }}" class="{{ include.class }}">
   <!-- Controls -->
-  <div class="zd-datatable-controls">
-    <div class="zd-datatable-search-wrapper">
-      <input type="text" class="zd-datatable-search" placeholder="Search table..." aria-label="Search table">
+  <div class="rd-datatable-controls">
+    <div class="rd-datatable-search-wrapper">
+      <input type="text" class="rd-datatable-search" placeholder="Search table..." aria-label="Search table">
     </div>
-    <div class="zd-datatable-length-wrapper">
+    <div class="rd-datatable-length-wrapper">
       <label>Show 
-        <select class="zd-datatable-length">
+        <select class="rd-datatable-length">
           <option value="5">5</option>
           <option value="10" selected>10</option>
           <option value="25">25</option>
@@ -40,8 +51,8 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
   </div>
 
   <!-- Table Scroll Container -->
-  <div class="zd-datatable-scroll">
-    <table class="zd-datatable">
+  <div class="rd-datatable-scroll">
+    <table class="rd-datatable">
       <thead>
         <tr>
           {%- for header in table_headers -%}
@@ -53,10 +64,10 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
               {%- assign key = parts[0] | strip -%}
               {%- assign label = parts[1] | default: key | strip -%}
             {%- endif -%}
-            <th class="zd-sortable" data-column="{{ key }}" tabindex="0" role="columnheader" aria-sort="none">
-              <span class="zd-th-content">
+            <th class="rd-sortable" data-column="{{ key }}" tabindex="0" role="columnheader" aria-sort="none">
+              <span class="rd-th-content">
                 {{ label }}
-                <span class="zd-sort-icon">↕</span>
+                <span class="rd-sort-icon">↕</span>
               </span>
             </th>
           {%- endfor -%}
@@ -64,7 +75,7 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
       </thead>
       <tbody>
         {%- for row in items -%}
-          <tr class="zd-datatable-tr">
+          <tr class="rd-datatable-tr">
             {%- for header in table_headers -%}
               {%- if headers_type == "array" -%}
                 {%- assign key = header.key -%}
@@ -72,7 +83,7 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
                 {%- assign parts = header | split: ":" -%}
                 {%- assign key = parts[0] | strip -%}
               {%- endif -%}
-              <td class="zd-datatable-td" data-col="{{ key }}">{{ row[key] }}</td>
+              <td class="rd-datatable-td" data-col="{{ key }}">{{ row[key] }}</td>
             {%- endfor -%}
           </tr>
         {%- endfor -%}
@@ -81,11 +92,11 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
   </div>
 
   <!-- Pagination Info and Buttons -->
-  <div class="zd-datatable-pagination-wrapper">
-    <div class="zd-datatable-info">
-      Showing <span class="zd-datatable-start">1</span> to <span class="zd-datatable-end">10</span> of <span class="zd-datatable-total">10</span> entries
+  <div class="rd-datatable-pagination-wrapper">
+    <div class="rd-datatable-info">
+      Showing <span class="rd-datatable-start">1</span> to <span class="rd-datatable-end">10</span> of <span class="rd-datatable-total">10</span> entries
     </div>
-    <div class="zd-datatable-pagination">
+    <div class="rd-datatable-pagination">
       <!-- Generated via JS -->
     </div>
   </div>
@@ -96,18 +107,18 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
   const container = document.getElementById('{{ table_id }}');
   if (!container) return;
 
-  const table = container.querySelector('.zd-datatable');
+  const table = container.querySelector('.rd-datatable');
   const tbody = table.querySelector('tbody');
-  const searchInput = container.querySelector('.zd-datatable-search');
-  const lengthSelect = container.querySelector('.zd-datatable-length');
-  const headers = table.querySelectorAll('.zd-sortable');
+  const searchInput = container.querySelector('.rd-datatable-search');
+  const lengthSelect = container.querySelector('.rd-datatable-length');
+  const headers = table.querySelectorAll('.rd-sortable');
   
   // Extract all rows initially rendered for JS manipulation
   let originalData = [];
-  const rows = tbody.querySelectorAll('.zd-datatable-tr');
+  const rows = tbody.querySelectorAll('.rd-datatable-tr');
   rows.forEach(row => {
     let rowData = {};
-    const cells = row.querySelectorAll('.zd-datatable-td');
+    const cells = row.querySelectorAll('.rd-datatable-td');
     cells.forEach(cell => {
       const col = cell.getAttribute('data-col');
       rowData[col] = cell.innerHTML;
@@ -164,7 +175,7 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
     tbody.innerHTML = '';
     if (totalEntries === 0) {
       const colCount = table.querySelectorAll('th').length;
-      tbody.innerHTML = `<tr class="zd-datatable-tr"><td class="zd-datatable-td text-center" colspan="${colCount}">No matching records found</td></tr>`;
+      tbody.innerHTML = `<tr class="rd-datatable-tr"><td class="rd-datatable-td text-center" colspan="${colCount}">No matching records found</td></tr>`;
     } else {
       for (let i = startIdx; i < endIdx; i++) {
         tbody.appendChild(filteredData[i].element);
@@ -172,20 +183,20 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
     }
 
     // Update info elements
-    container.querySelector('.zd-datatable-start').textContent = totalEntries === 0 ? 0 : startIdx + 1;
-    container.querySelector('.zd-datatable-end').textContent = endIdx;
-    container.querySelector('.zd-datatable-total').textContent = totalEntries;
+    container.querySelector('.rd-datatable-start').textContent = totalEntries === 0 ? 0 : startIdx + 1;
+    container.querySelector('.rd-datatable-end').textContent = endIdx;
+    container.querySelector('.rd-datatable-total').textContent = totalEntries;
 
     renderPagination(totalPages);
   }
 
   function renderPagination(totalPages) {
-    const pagContainer = container.querySelector('.zd-datatable-pagination');
+    const pagContainer = container.querySelector('.rd-datatable-pagination');
     pagContainer.innerHTML = '';
 
     // Previous Button
     const prevBtn = document.createElement('button');
-    prevBtn.className = `zd-page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+    prevBtn.className = `rd-page-btn ${currentPage === 1 ? 'disabled' : ''}`;
     prevBtn.textContent = 'Prev';
     prevBtn.disabled = currentPage === 1;
     prevBtn.addEventListener('click', () => {
@@ -206,7 +217,7 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
 
     for (let p = startPage; p <= endPage; p++) {
       const pageBtn = document.createElement('button');
-      pageBtn.className = `zd-page-btn ${p === currentPage ? 'active' : ''}`;
+      pageBtn.className = `rd-page-btn ${p === currentPage ? 'active' : ''}`;
       pageBtn.textContent = p;
       pageBtn.addEventListener('click', () => {
         currentPage = p;
@@ -217,7 +228,7 @@ Usage______: {% include comps/datatable.html data_source="table1" headers="name:
 
     // Next Button
     const nextBtn = document.createElement('button');
-    nextBtn.className = `zd-page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextBtn.className = `rd-page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
     nextBtn.textContent = 'Next';
     nextBtn.disabled = currentPage === totalPages;
     nextBtn.addEventListener('click', () => {

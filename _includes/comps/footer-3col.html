@@ -4,26 +4,26 @@ Purpose____: Renders a three-column responsive grid of footer items.
 Caveats____: Layout aligns automatically on mobile screens.
 Usage______: {% include comps/footer-3col.html col1=page.footer_col1 col2=page.footer_col2 col3=page.footer_col3 %}
 {%- endcomment -%}
-<div class="zd-footer-cols zd-footer-cols--3">
-  <div class="zd-footer-col zd-footer-col--1">
+<div class="rd-footer-cols rd-footer-cols--3">
+  <div class="rd-footer-col rd-footer-col--1">
     {%- if include.col1_title -%}
-      <div class="zd-footer-col-title">{{ include.col1_title }}</div>
+      <div class="rd-footer-col-title">{{ include.col1_title }}</div>
     {%- endif -%}
     {%- for item in include.col1 -%}
       {% include comps/footer-item.html type=item.type text=item.text url=item.url icon=item.icon color=item.color src=item.src alt=item.alt subtext=item.subtext style=item.style %}
     {%- endfor -%}
   </div>
-  <div class="zd-footer-col zd-footer-col--2">
+  <div class="rd-footer-col rd-footer-col--2">
     {%- if include.col2_title -%}
-      <div class="zd-footer-col-title">{{ include.col2_title }}</div>
+      <div class="rd-footer-col-title">{{ include.col2_title }}</div>
     {%- endif -%}
     {%- for item in include.col2 -%}
       {% include comps/footer-item.html type=item.type text=item.text url=item.url icon=item.icon color=item.color src=item.src alt=item.alt subtext=item.subtext style=item.style %}
     {%- endfor -%}
   </div>
-  <div class="zd-footer-col zd-footer-col--3">
+  <div class="rd-footer-col rd-footer-col--3">
     {%- if include.col3_title -%}
-      <div class="zd-footer-col-title">{{ include.col3_title }}</div>
+      <div class="rd-footer-col-title">{{ include.col3_title }}</div>
     {%- endif -%}
     {%- for item in include.col3 -%}
       {% include comps/footer-item.html type=item.type text=item.text url=item.url icon=item.icon color=item.color src=item.src alt=item.alt subtext=item.subtext style=item.style %}

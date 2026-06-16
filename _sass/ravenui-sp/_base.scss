@@ -1,0 +1,53 @@
+/* RESET & BASE */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body {
+  background-color: var(--rd-bg-base);
+  color: var(--rd-clr-text-secondary);
+  font-family: var(--rd-font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* CUSTOM SCROLLBARS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--rd-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rd-clr-highlight);
+  box-shadow: 0 0 10px var(--rd-clr-highlight);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #222 var(--rd-bg-base);
+}
+
+/* ACCESSIBILITY */
+:focus-visible {
+  outline: 2px solid var(--rd-clr-highlight);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Ensure buttons and links have visible focus */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+textarea:focus-visible {
+  outline: 2px solid var(--rd-clr-highlight);
+  outline-offset: 4px;
+}

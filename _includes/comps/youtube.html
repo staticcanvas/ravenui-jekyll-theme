@@ -23,7 +23,7 @@
     {% assign embed_url = embed_url | append: "?" | append: query_params %}
   {% endif %}
 
-  <div class="zd-youtube-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }};">
+  <div class="rd-youtube-container {{ include.class }}" style="--aspect-ratio: {{ aspect_ratio }};">
     <iframe
       src="{{ embed_url }}"
       title="{{ title | escape }}"

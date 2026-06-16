@@ -1,35 +1,46 @@
 {% assign id = include.id | default: "carousel-1" %}
-{% assign items = include.items | default: page.carousel_images %}
-{% assign height = include.height | default: "400px" %}
+{% assign height = include.height | default: page.carousel_height | default: site.theme_settings.carousel_height | default: "400px" %}
+
+{% assign items = include.items | default: page.carousel_items | default: page.carousel_images | default: page.items %}
+{% if items == nil %}
+  {% assign ds = include.data_source | default: page.data_source | default: "carousel" %}
+  {% assign path_parts = ds | split: "." %}
+  {% assign resolved_data = site.data %}
+  {% for part in path_parts %}
+    {% assign resolved_data = resolved_data[part] %}
+  {% endfor %}
+  {% assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] %}
+{% endif %}
+{% assign items = items | default: site.carousel_items | default: site.theme_settings.carousel_items %}
 
 {% if items %}
-<div class="zd-carousel-container {{ include.class }}" id="{{ id }}" style="--carousel-height: {{ height }};">
-  <div class="zd-carousel-track-viewport">
-    <div class="zd-carousel-track">
+<div class="rd-carousel-container {{ include.class }}" id="{{ id }}" style="--carousel-height: {{ height }};">
+  <div class="rd-carousel-track-viewport">
+    <div class="rd-carousel-track">
       {% for item in items %}
-      <div class="zd-carousel-slide {% if forloop.first %}active{% endif %}">
+      <div class="rd-carousel-slide {% if forloop.first %}active{% endif %}">
         {% if item.content %}
-          <div class="zd-carousel-custom-content">
+          <div class="rd-carousel-custom-content">
             {{ item.content }}
           </div>
         {% else %}
-          <div class="zd-image-container" style="--image-radius: 0; max-width: 100%;">
-            <div class="zd-image-wrapper" style="height: {{ height }};">
+          <div class="rd-image-container" style="--image-radius: 0; max-width: 100%;">
+            <div class="rd-image-wrapper" style="height: {{ height }};">
               {% if item.low_res_src %}
-                <img src="{{ item.low_res_src | relative_url }}" class="zd-image-blur" alt="" aria-hidden="true" />
+                <img src="{{ item.low_res_src | relative_url }}" class="rd-image-blur" alt="" aria-hidden="true" />
               {% elsif item.src %}
-                <div class="zd-image-skeleton"></div>
+                <div class="rd-image-skeleton"></div>
               {% endif %}
               {% if item.src %}
               <img src="{{ item.src | relative_url }}" 
                    alt="{{ item.alt | default: '' | escape }}" 
-                   class="zd-image-main" 
+                   class="rd-image-main" 
                    loading="lazy" 
                    onload="this.classList.add('loaded'); if(this.previousElementSibling) this.previousElementSibling.classList.add('fade-out');" />
               {% endif %}
             </div>
             {% if item.caption %}
-              <span class="zd-image-caption">{{ item.caption }}</span>
+              <span class="rd-image-caption">{{ item.caption }}</span>
             {% endif %}
           </div>
         {% endif %}
@@ -39,16 +50,16 @@
   </div>
 
   {% if items.size > 1 %}
-  <button class="zd-carousel-btn zd-carousel-btn--prev" aria-label="Previous slide" onclick="moveCarousel('{{ id }}', -1)">
+  <button class="rd-carousel-btn rd-carousel-btn--prev" aria-label="Previous slide" onclick="moveCarousel('{{ id }}', -1)">
     {% include comps/icon.html name="chevron-left" size=20 %}
   </button>
-  <button class="zd-carousel-btn zd-carousel-btn--next" aria-label="Next slide" onclick="moveCarousel('{{ id }}', 1)">
+  <button class="rd-carousel-btn rd-carousel-btn--next" aria-label="Next slide" onclick="moveCarousel('{{ id }}', 1)">
     {% include comps/icon.html name="chevron-right" size=20 %}
   </button>
 
-  <div class="zd-carousel-indicators">
+  <div class="rd-carousel-indicators">
     {% for item in items %}
-    <button class="zd-carousel-indicator {% if forloop.first %}active{% endif %}" 
+    <button class="rd-carousel-indicator {% if forloop.first %}active{% endif %}" 
             aria-label="Go to slide {{ forloop.index }}" 
             onclick="setCarouselSlide('{{ id }}', {{ forloop.index0 }})"></button>
     {% endfor %}
@@ -56,14 +67,14 @@
   {% endif %}
 </div>
 
-{% unless site.zd_carousel_script_loaded %}
-  {% assign site.zd_carousel_script_loaded = true %}
+{% unless site.rd_carousel_script_loaded %}
+  {% assign site.rd_carousel_script_loaded = true %}
   <script>
     function moveCarousel(id, direction) {
       const container = document.getElementById(id);
       if (!container) return;
-      const track = container.querySelector('.zd-carousel-track');
-      const slides = Array.from(track.querySelectorAll('.zd-carousel-slide'));
+      const track = container.querySelector('.rd-carousel-track');
+      const slides = Array.from(track.querySelectorAll('.rd-carousel-slide'));
       const activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
       let nextIndex = activeIndex + direction;
       if (nextIndex < 0) nextIndex = slides.length - 1;
@@ -74,9 +85,9 @@
     function setCarouselSlide(id, index) {
       const container = document.getElementById(id);
       if (!container) return;
-      const track = container.querySelector('.zd-carousel-track');
-      const slides = Array.from(track.querySelectorAll('.zd-carousel-slide'));
-      const indicators = Array.from(container.querySelectorAll('.zd-carousel-indicator'));
+      const track = container.querySelector('.rd-carousel-track');
+      const slides = Array.from(track.querySelectorAll('.rd-carousel-slide'));
+      const indicators = Array.from(container.querySelectorAll('.rd-carousel-indicator'));
       
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);

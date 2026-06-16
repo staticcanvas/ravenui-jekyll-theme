@@ -1,0 +1,122 @@
+// Elegant Timeline component styling
+// Compliance: [Visual & UI Elegance (Handcrafted)]
+
+.rd-timeline-wrapper {
+  margin-block: 2rem;
+  position: relative;
+}
+
+.rd-timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin-left: 0.5rem;
+
+  // Vertical trace line
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--rd-border-strong, rgba(255, 255, 255, 0.08));
+  }
+}
+
+.rd-timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // Accent color mapping
+  --rd-item-accent: var(--rd-timeline-accent, var(--rd-clr-viridian, #2ec4b6));
+
+  // The indicator node
+  .rd-timeline-badge {
+    position: absolute;
+    left: -2rem;
+    top: 0.35rem;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--rd-bg-card, #1e1e28);
+    border: 2px solid var(--rd-item-accent);
+    box-shadow: 0 0 0 4px var(--rd-bg-card, #1e1e28);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--rd-transition-fast, 0.2s);
+
+    svg {
+      width: 12px;
+      height: 12px;
+      color: var(--rd-item-accent);
+    }
+
+    // Larger badge size when containing an icon
+    &:has(svg) {
+      width: 24px;
+      height: 24px;
+      left: -2rem;
+      top: 0.1rem;
+    }
+  }
+
+  .rd-timeline-content {
+    background: var(--rd-bg-card, rgba(30, 30, 40, 0.4));
+    border: 1px solid var(--rd-border-default, rgba(255, 255, 255, 0.05));
+    border-radius: var(--rd-radius, 8px);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--rd-elevation-surface, 0 4px 10px rgba(0, 0, 0, 0.2));
+    transition: transform var(--rd-transition-fast, 0.2s), border-color var(--rd-transition-fast, 0.2s);
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--rd-item-accent) 40%, var(--rd-border-default));
+      transform: translateY(-2px);
+    }
+  }
+
+  .rd-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .rd-timeline-date {
+    font-size: 0.8rem;
+    font-family: var(--rd-font-mono, monospace);
+    color: var(--rd-item-accent);
+    font-weight: 600;
+  }
+
+  .rd-timeline-title {
+    margin: 0;
+    font-family: var(--rd-font-sans, inherit);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--rd-clr-platinum, #e2e8f0);
+  }
+
+  .rd-timeline-body {
+    font-size: 0.875rem;
+    color: var(--rd-clr-mist, #94a3b8);
+    line-height: 1.5;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

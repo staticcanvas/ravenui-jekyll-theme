@@ -5,7 +5,7 @@
 {% assign title = include.title | default: "CodeSandbox Embed" %}
 
 {% if id %}
-<div class="zd-codesandbox-container {{ include.class }}" style="height: {{ height }}px;">
+<div class="rd-codesandbox-container {{ include.class }}" style="height: {{ height }}px;">
   <iframe 
     src="https://codesandbox.io/embed/{{ id }}?fontsize=14&hidenavigation=1&theme={{ theme }}&view={{ view }}"
     style="width: 100%; height: {{ height }}px; border: none; overflow: hidden;"

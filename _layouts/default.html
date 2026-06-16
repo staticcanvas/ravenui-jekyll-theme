@@ -3,8 +3,8 @@
 
 {% include core/head.html %}
 
-<body{% if site.theme_settings.animations.enabled != false %} class="zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}">
-    {% if site.zd_announcement.enabled %}
+<body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}">
+    {% if site.rd_announcement.enabled %}
         {% include comps/announcement.html %}
     {% endif %}
 
@@ -16,21 +16,21 @@
     {% endif %}
 
     {% if show_progress %}
-    <div class="zd-progress-container"><div id="zd-progress-bar" class="zd-progress-bar"></div></div>
+    <div class="rd-progress-container"><div id="rd-progress-bar" class="rd-progress-bar"></div></div>
     {% endif %}
 
     {% if site.theme_settings.header.enabled %}
         {% include core/header.html %}
     {% endif %}
 
-    <div class="zd-container">
-        <aside class="zd-sidebar-left">
+    <div class="rd-container">
+        <aside class="rd-sidebar-left">
             {% include core/sidebar.html %}
         </aside>
         <script>
             // Seamless Sidebar Scroll Persistence (Early Execution)
             (function() {
-                const sidebar = document.querySelector('.zd-sidebar-left');
+                const sidebar = document.querySelector('.rd-sidebar-left');
                 const storedScroll = localStorage.getItem('sidebarScroll');
                 if (sidebar && storedScroll) {
                     sidebar.scrollTop = parseInt(storedScroll);
@@ -38,9 +38,9 @@
             })();
         </script>
 
-        <main class="zd-content">
+        <main class="rd-content">
             {% include comps/breadcrumbs.html %}
-            {% assign output_title = site.zd_output_title_default | default: true %}
+            {% assign output_title = site.rd_output_title_default | default: true %}
             {% if page.output-title == false %}
                 {% assign output_title = false %}
             {% elsif page.output-title == true %}
@@ -48,16 +48,16 @@
             {% endif %}
 
             {% if output_title %}
-            <section class="zd-hero">
+            <section class="rd-hero">
                 <h1>{{ page.title }}</h1>
                 {% if page.description %}
                 <p>{{ page.description }}</p>
                 {% endif %}
                 
                 {% if page.tags %}
-                <div class="zd-tag-container">
+                <div class="rd-tag-container">
                     {% for tag in page.tags %}
-                    <span class="zd-tag">{% include comps/icon.html name="tag" size="10" %} {{ tag }}</span>
+                    <span class="rd-tag">{% include comps/icon.html name="tag" size="10" %} {{ tag }}</span>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -68,8 +68,16 @@
             
             {% include comps/page-nav.html %}
 
-            {% if site.zd_feedback.enabled and page.feedback != false %}
+            {% if site.rd_feedback.enabled and page.feedback != false %}
                 {% include comps/feedback.html %}
+            {% endif %}
+
+            {% if site.theme_settings.feedback.likes.enabled and page.likes != false %}
+                {% include comps/likes.html %}
+            {% endif %}
+
+            {% if site.theme_settings.feedback.comments.enabled and page.comments != false %}
+                {% include comps/comments.html %}
             {% endif %}
 
             {% include core/footer.html %}
@@ -77,62 +85,77 @@
 
         {% assign toc_style = site.theme_settings.toc.style | default: "simple" %}
         {% assign toc_density = site.theme_settings.toc.density | default: "default" %}
-        <div id="zd-page-toc-container" class="zd-page-toc-container" style="display: none;">
-            <h4 class="zd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
-            <nav id="zd-page-toc" class="zd-page-toc zd-page-toc--{{ toc_style }} zd-page-toc--{{ toc_density }}"></nav>
+        <div id="rd-page-toc-container" class="rd-page-toc-container" style="display: none;">
+            <h4 class="rd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
+            <nav id="rd-page-toc" class="rd-page-toc rd-page-toc--{{ toc_style }} rd-page-toc--{{ toc_density }}"></nav>
         </div>
 
-        <aside class="zd-sidebar-right">
+        <aside class="rd-sidebar-right">
             <!-- TOC content is moved to a top-level container to support mobile visibility -->
         </aside>
     </div>
 
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
-    <div id="zd-search-modal" class="zd-search-modal">
-        <div class="zd-search-modal-backdrop" id="zd-search-backdrop"></div>
-        <div class="zd-search-modal-content">
-            <header class="zd-search-modal-header">
+    <div id="rd-search-modal" class="rd-search-modal">
+        <div class="rd-search-modal-backdrop" id="rd-search-backdrop"></div>
+        <div class="rd-search-modal-content">
+            <header class="rd-search-modal-header">
                 {%- if search_provider == "pagefind" -%}
-                    <div id="zd-search-ui"></div>
+                    <div id="rd-search-ui"></div>
                 {%- else -%}
-                    <div class="zd-custom-search-container">
-                        <div class="zd-custom-search-input-wrapper">
-                            <span class="zd-custom-search-icon">{% include comps/icon.html name="search" size="18" %}</span>
-                            <input type="text" id="zd-custom-search-input" class="zd-custom-search-input" placeholder="Search documentation..." autocomplete="off">
-                            <button id="zd-custom-search-clear" class="zd-custom-search-clear" style="display: none;">
+                    <div class="rd-custom-search-container">
+                        <div class="rd-custom-search-input-wrapper">
+                            <span class="rd-custom-search-icon">{% include comps/icon.html name="search" size="18" %}</span>
+                            <input type="text" id="rd-custom-search-input" class="rd-custom-search-input" placeholder="Search documentation..." autocomplete="off">
+                            <button id="rd-custom-search-clear" class="rd-custom-search-clear" style="display: none;">
                                 {% include comps/icon.html name="x" size="16" %}
                             </button>
                         </div>
-                        <div id="zd-custom-search-results" class="zd-custom-search-results"></div>
+                        <div id="rd-custom-search-results" class="rd-custom-search-results"></div>
                     </div>
                 {%- endif -%}
             </header>
         </div>
     </div>
 
-    <div class="zd-mobile-controls">
-        <button id="zd-nav-toggle" class="zd-mobile-btn" aria-label="Toggle Navigation">
+    <div class="rd-mobile-controls">
+        <button id="rd-nav-toggle" class="rd-mobile-btn" aria-label="Toggle Navigation">
             {% include comps/icon.html name="menu" size="20" %}
         </button>
-        <button id="zd-toc-toggle" class="zd-toc-toggle zd-mobile-btn" aria-label="Toggle Table of Contents">
-            <span class="zd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
+        <button id="rd-toc-toggle" class="rd-toc-toggle rd-mobile-btn" aria-label="Toggle Table of Contents">
+            <span class="rd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
         </button>
     </div>
+
+    {% if site.animation_libraries.aos.enable %}
+    <script src="{{ site.animation_libraries.aos.cdn_js | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js' }}"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            AOS.init();
+        });
+    </script>
+    {% endif %}
+    {% if site.animation_libraries.gsap.enable %}
+    <script src="{{ site.animation_libraries.gsap.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js' }}"></script>
+    {% endif %}
+    {% if site.animation_libraries.animejs.enable %}
+    <script src="{{ site.animation_libraries.animejs.cdn | default: 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js' }}"></script>
+    {% endif %}
 
     <script type="module">
         /* 🌑 ZERO-DARK Core Utilities v1.3.4 */
         
         // 0. Global State & Elements
-        const searchModal = document.getElementById('zd-search-modal');
-        const searchBackdrop = document.getElementById('zd-search-backdrop');
-        const searchTriggers = document.querySelectorAll('.zd-search-trigger, .zd-header-search-trigger');
-        const navToggle = document.getElementById('zd-nav-toggle');
-        const sidebarLeft = document.querySelector('.zd-sidebar-left');
-        const contentArea = document.querySelector('.zd-content');
-        const tocContainer = document.getElementById('zd-page-toc-container');
-        const tocNav = document.getElementById('zd-page-toc');
-        const tocToggle = document.getElementById('zd-toc-toggle');
-        const progressBar = document.getElementById('zd-progress-bar');
+        const searchModal = document.getElementById('rd-search-modal');
+        const searchBackdrop = document.getElementById('rd-search-backdrop');
+        const searchTriggers = document.querySelectorAll('.rd-search-trigger, .rd-header-search-trigger');
+        const navToggle = document.getElementById('rd-nav-toggle');
+        const sidebarLeft = document.querySelector('.rd-sidebar-left');
+        const contentArea = document.querySelector('.rd-content');
+        const tocContainer = document.getElementById('rd-page-toc-container');
+        const tocNav = document.getElementById('rd-page-toc');
+        const tocToggle = document.getElementById('rd-toc-toggle');
+        const progressBar = document.getElementById('rd-progress-bar');
 
         // 1. Search Logic
         function openSearch() {
@@ -141,7 +164,7 @@
             document.body.style.overflow = 'hidden';
             setTimeout(() => {
                 const pagefindInput = document.querySelector('.pagefind-ui__search-input');
-                const customInput = document.getElementById('zd-custom-search-input');
+                const customInput = document.getElementById('rd-custom-search-input');
                 if (pagefindInput) pagefindInput.focus();
                 else if (customInput) customInput.focus();
             }, 100);
@@ -179,14 +202,14 @@
         // 3. TOC Generation & Scroll-Spy
         function generateTOC() {
             if (!contentArea || !tocNav) return;
-            const tocLevels = {{ site.zd_toc_levels | jsonify }} || ["h2", "h3"];
+            const tocLevels = {{ site.rd_toc_levels | jsonify }} || ["h2", "h3"];
             const selector = tocLevels.join(', ');
             const allHeadings = contentArea.querySelectorAll(selector);
             const headings = Array.from(allHeadings).filter(heading => {
                 let parent = heading.parentElement;
                 while (parent && parent !== contentArea) {
                     const classes = parent.classList ? Array.from(parent.classList) : [];
-                    const isComponent = classes.some(c => c.startsWith('zd-') && c !== 'zd-content' && c !== 'zd-hero' && c !== 'zd-container');
+                    const isComponent = classes.some(c => c.startsWith('rd-') && c !== 'rd-content' && c !== 'rd-hero' && c !== 'rd-container');
                     if (isComponent) return false;
                     parent = parent.parentElement;
                 }
@@ -204,7 +227,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.id;
-                        document.querySelectorAll('.zd-toc-link').forEach(link => {
+                        document.querySelectorAll('.rd-toc-link').forEach(link => {
                             link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
                         });
                     }
@@ -220,15 +243,15 @@
                 
                 // Clone heading to clean up typewriter and interactive elements
                 const clone = heading.cloneNode(true);
-                const typewriter = clone.querySelector('.zd-typewriter-container');
+                const typewriter = clone.querySelector('.rd-typewriter-container');
                 if (typewriter) {
                     const firstWord = typewriter.getAttribute('data-first-word') || '';
                     typewriter.textContent = firstWord;
                 }
-                clone.querySelectorAll('.zd-typewriter-cursor, .zd-copy-button, .copy-button, .zd-heading-icon').forEach(el => el.remove());
+                clone.querySelectorAll('.rd-typewriter-cursor, .rd-copy-button, .copy-button, .rd-heading-icon').forEach(el => el.remove());
                 
                 link.textContent = clone.textContent.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
-                link.className = `zd-toc-link zd-toc-level-${heading.tagName.toLowerCase()}`;
+                link.className = `rd-toc-link rd-toc-level-${heading.tagName.toLowerCase()}`;
                 link.addEventListener('click', () => {
                     if (window.innerWidth < 1024) {
                         tocContainer.classList.remove('active');
@@ -241,7 +264,7 @@
             
             tocContainer.style.display = 'block';
             if (window.innerWidth >= 1024) {
-                {% if site.zd_toc_default_open %}
+                {% if site.rd_toc_default_open %}
                 tocContainer.classList.add('active'); 
                 if (tocToggle) tocToggle.classList.add('active');
                 {% endif %}
@@ -262,11 +285,11 @@
         // 4. Code Block Utilities
         function setupCodeBlocks() {
             document.querySelectorAll('div.highlight').forEach(block => {
-                if (block.querySelector('.zd-copy-btn')) return;
+                if (block.querySelector('.rd-copy-btn')) return;
 
-                {% if site.zd_code_copy %}
+                {% if site.rd_code_copy %}
                 const btn = document.createElement('button');
-                btn.className = 'zd-copy-btn';
+                btn.className = 'rd-copy-btn';
                 btn.textContent = 'COPY';
                 
                 btn.addEventListener('click', () => {
@@ -284,7 +307,7 @@
                 block.appendChild(btn);
                 {% endif %}
                 
-                {% if site.zd_code_lang %}
+                {% if site.rd_code_lang %}
                 if (!block.getAttribute('data-lang') || block.getAttribute('data-lang') === 'code') {
                     const parent = block.closest('.highlighter-rouge');
                     const langClass = parent ? Array.from(parent.classList).find(c => c.startsWith('language-')) : null;
@@ -307,15 +330,15 @@
         // 4.5. Heading Anchor Links
         function setupHeadingAnchors() {
             if (!contentArea) return;
-            const alwaysVisible = {% if site.zd_headings_always_visible %}true{% else %}false{% endif %};
+            const alwaysVisible = {% if site.rd_headings_always_visible %}true{% else %}false{% endif %};
             const headings = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
             headings.forEach(heading => {
                 if (!heading.id) return;
-                if (heading.tagName === 'H1' && heading.closest('.zd-hero')) return;
-                if (heading.querySelector('.zd-heading-anchor')) return;
+                if (heading.tagName === 'H1' && heading.closest('.rd-hero')) return;
+                if (heading.querySelector('.rd-heading-anchor')) return;
                 
                 const anchor = document.createElement('a');
-                anchor.className = 'zd-heading-anchor';
+                anchor.className = 'rd-heading-anchor';
                 if (alwaysVisible) {
                     anchor.classList.add('always-visible');
                 }
@@ -352,7 +375,7 @@
                             const results = await search(db, { term: q, properties: ['title', 'description', 'content'] });
                             return results.hits.map(hit => {
                                 const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-                                const helper = new ZDSearchLocal([]);
+                                const helper = new RDSearchLocal([]);
                                 return {
                                     title: helper.highlightText(hit.document.title || '', terms),
                                     url: hit.document.url,
@@ -364,16 +387,16 @@
                     console.log("Lyra (Orama CDN) initialized successfully.");
                     return;
                 } catch (err) {
-                    console.warn("Failed to load Orama from CDN. Falling back to local ZDSearchLocal:", err);
+                    console.warn("Failed to load Orama from CDN. Falling back to local RDSearchLocal:", err);
                 }
                 {% endif %}
                 
-                if (typeof ZDSearchLocal !== 'undefined') {
-                    const engine = new ZDSearchLocal(documents);
+                if (typeof RDSearchLocal !== 'undefined') {
+                    const engine = new RDSearchLocal(documents);
                     localSearchEngine = {
                         search: async (q) => engine.search(q)
                     };
-                    console.log("ZDSearchLocal initialized successfully.");
+                    console.log("RDSearchLocal initialized successfully.");
                 }
             } catch (e) {
                 console.error("Failed to initialize Lyra/Local search:", e);
@@ -404,9 +427,9 @@
         }
 
         function setupCustomSearch() {
-            const input = document.getElementById('zd-custom-search-input');
-            const clearBtn = document.getElementById('zd-custom-search-clear');
-            const resultsContainer = document.getElementById('zd-custom-search-results');
+            const input = document.getElementById('rd-custom-search-input');
+            const clearBtn = document.getElementById('rd-custom-search-clear');
+            const resultsContainer = document.getElementById('rd-custom-search-results');
             
             if (!input || !resultsContainer) return;
             
@@ -437,7 +460,7 @@
                 
                 clearTimeout(debounceTimeout);
                 debounceTimeout = setTimeout(async () => {
-                    resultsContainer.innerHTML = '<div class="zd-custom-search-message">Searching...</div>';
+                    resultsContainer.innerHTML = '<div class="rd-custom-search-message">Searching...</div>';
                     
                     try {
                         let hits = [];
@@ -447,17 +470,17 @@
                             const searchResults = await algoliaIndex.search(query, { hitsPerPage: 10 });
                             hits = searchResults.hits.map(hit => {
                                 const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-                                const helper = new ZDSearchLocal([]);
+                                const helper = new RDSearchLocal([]);
                                 
                                 const title = hit._highlightResult?.title?.value || hit.title || '';
                                 const rawExcerpt = hit._snippetResult?.content?.value || hit.content || hit.description || '';
                                 
                                 const highlightedTitle = title.includes('<em') ? 
-                                    title.replace(/<em>/g, '<mark class="zd-search-highlight">').replace(/<\/em>/g, '</mark>') : 
+                                    title.replace(/<em>/g, '<mark class="rd-search-highlight">').replace(/<\/em>/g, '</mark>') : 
                                     helper.highlightText(hit.title || '', terms);
                                     
                                 const highlightedExcerpt = rawExcerpt.includes('<em') ?
-                                    rawExcerpt.replace(/<em>/g, '<mark class="zd-search-highlight">').replace(/<\/em>/g, '</mark>') :
+                                    rawExcerpt.replace(/<em>/g, '<mark class="rd-search-highlight">').replace(/<\/em>/g, '</mark>') :
                                     helper.generateExcerpt(hit.content || hit.description || '', terms);
                                     
                                 return {
@@ -471,28 +494,28 @@
                         renderResults(hits, query);
                     } catch (err) {
                         console.error("Search execution failed:", err);
-                        resultsContainer.innerHTML = '<div class="zd-custom-search-message">Search error occurred.</div>';
+                        resultsContainer.innerHTML = '<div class="rd-custom-search-message">Search error occurred.</div>';
                     }
                 }, 150);
             });
         }
 
         function renderResults(hits, query) {
-            const resultsContainer = document.getElementById('zd-custom-search-results');
+            const resultsContainer = document.getElementById('rd-custom-search-results');
             if (!resultsContainer) return;
             
             if (hits.length === 0) {
-                resultsContainer.innerHTML = `<div class="zd-custom-search-message">No results found for "${query}"</div>`;
+                resultsContainer.innerHTML = `<div class="rd-custom-search-message">No results found for "${query}"</div>`;
                 return;
             }
             
-            let html = `<div class="zd-custom-search-message">${hits.length} ${hits.length === 1 ? 'result' : 'results'} found</div>`;
+            let html = `<div class="rd-custom-search-message">${hits.length} ${hits.length === 1 ? 'result' : 'results'} found</div>`;
             
             hits.forEach(hit => {
                 html += `
-                    <div class="zd-custom-search-result-item">
-                        <a href="${hit.url}" class="zd-custom-search-result-link">${hit.title}</a>
-                        <p class="zd-custom-search-result-excerpt">${hit.excerpt}</p>
+                    <div class="rd-custom-search-result-item">
+                        <a href="${hit.url}" class="rd-custom-search-result-link">${hit.title}</a>
+                        <p class="rd-custom-search-result-excerpt">${hit.excerpt}</p>
                     </div>
                 `;
             });
@@ -511,16 +534,18 @@
                         const el = entry.target;
                         obs.unobserve(el);
                         
-                        const text = el.innerText.trim();
-                        const match = text.match(/^([\d.,]+)([a-zA-Z\s]*)$/);
+                        const text = (el.getAttribute('data-ticker-value') || el.innerText).trim();
+                        // Match structure: prefix (any non-digit/dot/minus symbols), numeric core (digits, dots, commas, optional leading minus), and suffix (any remaining characters)
+                        const match = text.match(/^([^0-9.-]*)([0-9.,-]+)(.*)$/);
                         if (!match) return;
 
-                        const rawNum = match[1].replace(/,/g, '');
-                        const suffix = match[2] || '';
+                        const prefix = match[1] || '';
+                        const rawNum = match[2].replace(/,/g, '');
+                        const suffix = match[3] || '';
                         const num = parseFloat(rawNum);
                         if (isNaN(num)) return;
 
-                        const duration = 1000;
+                        const duration = 1200; // 1.2s duration for smooth pneumatic movement
                         const startTime = performance.now();
                         const startVal = 0;
 
@@ -528,6 +553,7 @@
                             const elapsed = currentTime - startTime;
                             const progress = Math.min(elapsed / duration, 1);
                             
+                            // Cubic easeOut: 1 - (1 - x)^3
                             const easeProgress = 1 - Math.pow(1 - progress, 3);
                             const currentVal = startVal + easeProgress * (num - startVal);
                             
@@ -539,12 +565,20 @@
                                 formattedVal = Math.floor(currentVal).toString();
                             }
                             
-                            el.innerText = formattedVal + suffix;
+                            // Format with commas if the original number had commas
+                            if (match[2].includes(',')) {
+                                const parts = formattedVal.split('.');
+                                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                formattedVal = parts.join('.');
+                            }
+
+                            el.innerText = prefix + formattedVal + suffix;
 
                             if (progress < 1) {
                                 requestAnimationFrame(update);
                             } else {
                                 el.innerText = text;
+                                el.classList.add('rd-ticker-complete');
                             }
                         }
                         requestAnimationFrame(update);
@@ -552,7 +586,7 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.zd-metric-value, .zd-counter').forEach(el => {
+            document.querySelectorAll('[data-ticker-value], .rd-metric-value, .rd-counter').forEach(el => {
                 observer.observe(el);
             });
         }
@@ -565,7 +599,7 @@
                 const initPagefind = () => {
                     try {
                         new PagefindUI({
-                            element: "#zd-search-ui",
+                            element: "#rd-search-ui",
                             bundlePath: "{{ '/' | relative_url }}pagefind/",
                             showSubResults: true,
                             showImages: false,
@@ -608,19 +642,43 @@
             setupHeadingAnchors();
             setupNumericTickers();
 
+            // Setup GSAP & AnimeJS animations on annotated elements
+            if (typeof gsap !== 'undefined') {
+                document.querySelectorAll('[data-rd-gsap]').forEach(el => {
+                    const effect = el.getAttribute('data-rd-gsap');
+                    const delay = parseFloat(el.getAttribute('data-rd-gsap-delay') || 0);
+                    const duration = parseFloat(el.getAttribute('data-rd-gsap-duration') || 1);
+                    if (effect === 'fade') gsap.from(el, { opacity: 0, delay: delay, duration: duration });
+                    else if (effect === 'fade-up') gsap.from(el, { opacity: 0, y: 30, delay: delay, duration: duration });
+                    else if (effect === 'scale') gsap.from(el, { opacity: 0, scale: 0.8, delay: delay, duration: duration });
+                    else if (effect === 'bounce') gsap.from(el, { y: -50, ease: "bounce.out", delay: delay, duration: duration });
+                });
+            }
+            if (typeof anime !== 'undefined') {
+                document.querySelectorAll('[data-rd-anime]').forEach(el => {
+                    const effect = el.getAttribute('data-rd-anime');
+                    const delay = parseFloat(el.getAttribute('data-rd-anime-delay') || 0) * 1000;
+                    const duration = parseFloat(el.getAttribute('data-rd-anime-duration') || 1) * 1000;
+                    if (effect === 'fade') anime({ targets: el, opacity: [0, 1], delay: delay, duration: duration, easing: 'easeInOutQuad' });
+                    else if (effect === 'fade-up') anime({ targets: el, opacity: [0, 1], translateY: [30, 0], delay: delay, duration: duration, easing: 'easeOutQuad' });
+                    else if (effect === 'scale') anime({ targets: el, opacity: [0, 1], scale: [0.8, 1], delay: delay, duration: duration, easing: 'easeOutElastic(1, .8)' });
+                    else if (effect === 'rotate') anime({ targets: el, rotate: '1turn', delay: delay, duration: duration, easing: 'easeInOutSine' });
+                });
+            }
+
             // Visited pages tracker for local history
             try {
                 const currentUrl = window.location.pathname;
                 const currentTitle = document.title || 'Untitled Page';
                 if (currentUrl && currentUrl !== '/' && !currentUrl.includes('/search') && !currentUrl.includes('/blog')) {
-                    let visited = JSON.parse(localStorage.getItem('zd_visited_pages') || '[]');
+                    let visited = JSON.parse(localStorage.getItem('rd_visited_pages') || '[]');
                     visited = visited.filter(item => item.url !== currentUrl);
                     visited.unshift({
                         url: currentUrl,
                         title: currentTitle,
                         timestamp: Date.now()
                     });
-                    localStorage.setItem('zd_visited_pages', JSON.stringify(visited.slice(0, 20)));
+                    localStorage.setItem('rd_visited_pages', JSON.stringify(visited.slice(0, 20)));
                 }
             } catch (e) { console.warn("Failed to record visited page:", e); }
 
@@ -648,7 +706,7 @@
 
             // Sidebar Active Link Visibility & Persistence
             if (sidebarLeft) {
-                const activeLink = document.querySelector('.zd-nav-link[aria-current="page"]');
+                const activeLink = document.querySelector('.rd-nav-link[aria-current="page"]');
                 
                 // Fallback: Ensure active link is visible if not already in viewport
                 if (activeLink) {
@@ -661,13 +719,13 @@
                 }, { passive: true });
             }
 
-            // {% if site.zd_debug %}
+            // {% if site.rd_debug %}
             // // 6. Debug Utilities (LogCAD & SnailTrail)
             // try {
             //     const { LogCAD } = await import('https://esm.sh/@staticcanvas/logcad');
             //     const { SnailTrail } = await import('https://esm.sh/@staticcanvas/snailtrail');
 
-            //     const logger = new LogCAD({ tag: 'Zero-Dark' });
+            //     const logger = new LogCAD({ tag: 'RavenUI' });
             //     logger.info('System Online', { version: '1.3.4' });
 
             //     new SnailTrail({

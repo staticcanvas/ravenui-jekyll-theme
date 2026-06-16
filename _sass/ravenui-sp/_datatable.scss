@@ -1,0 +1,207 @@
+// Elegant DataTable component styling
+// Compliance: [Visual & UI Elegance (Handcrafted)]
+
+.rd-datatable-container {
+  margin-block: 2rem;
+  background: var(--rd-bg-card, rgba(30, 30, 40, 0.4));
+  border: 1px solid var(--rd-border-default, rgba(255, 255, 255, 0.05));
+  border-radius: var(--rd-radius, 8px);
+  padding: 1.25rem;
+  box-shadow: var(--rd-elevation-surface, 0 4px 20px rgba(0, 0, 0, 0.35));
+  backdrop-filter: blur(10px);
+}
+
+.rd-datatable-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+
+  .rd-datatable-search-wrapper {
+    flex: 1;
+    min-width: 200px;
+    max-width: 350px;
+
+    input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--rd-border-subtle, rgba(255, 255, 255, 0.08));
+      color: var(--rd-clr-white, #fff);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--rd-radius, 6px);
+      font-size: 0.85rem;
+      transition: all var(--rd-transition-fast, 0.2s);
+
+      &:focus {
+        outline: none;
+        border-color: var(--rd-clr-viridian, #2ec4b6);
+        box-shadow: 0 0 0 2px rgba(46, 196, 182, 0.15);
+      }
+    }
+  }
+
+  .rd-datatable-length-wrapper {
+    font-size: 0.85rem;
+    color: var(--rd-clr-mist, #bbb);
+
+    select {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--rd-border-subtle, rgba(255, 255, 255, 0.08));
+      color: var(--rd-clr-white, #fff);
+      padding: 0.35rem 1.5rem 0.35rem 0.5rem;
+      border-radius: var(--rd-radius, 4px);
+      margin-inline: 0.25rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      background-size: 0.75rem;
+
+      &:focus {
+        outline: none;
+        border-color: var(--rd-clr-viridian, #2ec4b6);
+      }
+    }
+  }
+}
+
+.rd-datatable-scroll {
+  overflow-x: auto;
+  border-radius: var(--rd-radius, 6px);
+  border: 1px solid var(--rd-border-subtle, rgba(255, 255, 255, 0.05));
+  background: rgba(0, 0, 0, 0.15);
+}
+
+table.rd-datatable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  th, td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+  }
+
+  th {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--rd-clr-platinum, #e2e8f0);
+    font-weight: 600;
+    font-family: var(--rd-font-sans, inherit);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    user-select: none;
+
+    &.rd-sortable {
+      cursor: pointer;
+      transition: background var(--rd-transition-fast, 0.2s);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--rd-clr-viridian, #2ec4b6);
+        outline-offset: -2px;
+      }
+    }
+
+    .rd-th-content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rd-sort-icon {
+      font-size: 0.75rem;
+      opacity: 0.4;
+      transition: opacity var(--rd-transition-fast, 0.2s);
+    }
+
+    &[aria-sort="ascending"] {
+      color: var(--rd-clr-viridian, #2ec4b6);
+      .rd-sort-icon {
+        opacity: 1;
+      }
+    }
+
+    &[aria-sort="descending"] {
+      color: var(--rd-clr-viridian, #2ec4b6);
+      .rd-sort-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  tr.rd-datatable-tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background var(--rd-transition-fast, 0.2s);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  td.rd-datatable-td {
+    color: var(--rd-clr-mist, #cbd5e1);
+  }
+}
+
+.rd-datatable-pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--rd-clr-mist, #bbb);
+
+  .rd-datatable-pagination {
+    display: flex;
+    gap: 0.25rem;
+
+    .rd-page-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--rd-border-subtle, rgba(255, 255, 255, 0.08));
+      color: var(--rd-clr-white, #fff);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--rd-radius, 4px);
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--rd-transition-fast, 0.2s);
+      min-width: 1.8rem;
+      text-align: center;
+
+      &:hover:not(.disabled):not(.active) {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--rd-border-default, rgba(255, 255, 255, 0.15));
+      }
+
+      &.active {
+        background: var(--rd-clr-viridian, #2ec4b6);
+        border-color: var(--rd-clr-viridian, #2ec4b6);
+        color: var(--rd-clr-black, #000);
+        font-weight: 600;
+      }
+
+      &.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--rd-clr-viridian, #2ec4b6);
+      }
+    }
+  }
+}

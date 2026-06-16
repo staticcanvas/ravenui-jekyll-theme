@@ -1,0 +1,83 @@
+{%- comment -%}
+Component__: Theme Toggle / Selector
+Purpose____: Renders a theme toggle button or a select dropdown based on site.theme_settings.themes.
+Caveats____: Uses Lucide icons. Persists selection in localStorage as 'rd-theme'.
+Usage______: {% include comps/theme-toggle.html %}
+{%- endcomment -%}
+
+{% assign themes = site.theme_settings.background.themes | default: site.theme_settings.themes %}
+{% if themes %}
+  {% assign themes_count = themes | size %}
+{% else %}
+  {% assign themes_count = 2 %}
+{% endif %}
+
+<div class="rd-theme-manager" id="rd-theme-manager">
+  {% if themes_count > 2 %}
+    <select id="rd-theme-select" class="rd-theme-select" aria-label="Select Theme">
+      {% if themes %}
+        {% for t in themes %}
+          <option value="{{ t.name }}">{{ t.label }}</option>
+        {% endfor %}
+      {% else %}
+        <option value="dark">Zero-Dark</option>
+        <option value="light">DarkZero</option>
+      {% endif %}
+    </select>
+  {% else %}
+    <button id="rd-theme-toggle" class="rd-theme-toggle" aria-label="Toggle Light/Dark Theme">
+      <i data-lucide="sun" class="rd-theme-icon-light" style="display: none; width: 16px; height: 16px;"></i>
+      <i data-lucide="moon" class="rd-theme-icon-dark" style="display: none; width: 16px; height: 16px;"></i>
+    </button>
+  {% endif %}
+</div>
+
+<script>
+  (function() {
+    const manager = document.getElementById('rd-theme-manager');
+    if (!manager) return;
+
+    const select = document.getElementById('rd-theme-select');
+    const toggle = document.getElementById('rd-theme-toggle');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('rd-theme', theme);
+      
+      // Update icons if toggle exists
+      if (toggle) {
+        const lightIcon = toggle.querySelector('.rd-theme-icon-light');
+        const darkIcon = toggle.querySelector('.rd-theme-icon-dark');
+        if (theme === 'light') {
+          if (lightIcon) lightIcon.style.display = 'inline-block';
+          if (darkIcon) darkIcon.style.display = 'none';
+        } else {
+          if (lightIcon) lightIcon.style.display = 'none';
+          if (darkIcon) darkIcon.style.display = 'inline-block';
+        }
+      }
+      
+      // Update select if select exists
+      if (select) {
+        select.value = theme;
+      }
+    }
+
+    const currentTheme = localStorage.getItem('rd-theme') || 'dark';
+    applyTheme(currentTheme);
+
+    if (toggle) {
+      toggle.addEventListener('click', function() {
+        const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      });
+    }
+
+    if (select) {
+      select.addEventListener('change', function(e) {
+        applyTheme(e.target.value);
+      });
+    }
+  })();
+</script>

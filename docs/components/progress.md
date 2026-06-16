@@ -31,7 +31,7 @@ The `progress.html` component provides a clean way to show completion percentage
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `percent` | Integer | `0` | The completion percentage (0-100) driving the progress bar. |
-| `color` | String | `var(--zd-clr-highlight)` | The color of the filled progress bar. |
+| `color` | String | `var(--rd-clr-highlight)` | The color of the filled progress bar. |
 | `size` | String | `8px` | The vertical height of the progress track. |
 | `show_label` | Boolean | `false` | If set to `true`, displays the title and percentage text above the track. |
 | `title` | String | | The label text displayed on the left side (only if `show_label=true`). |

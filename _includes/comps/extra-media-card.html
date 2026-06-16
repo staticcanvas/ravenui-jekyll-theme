@@ -5,37 +5,37 @@ Caveats____: Supports both static and dynamic rendering.
 Usage______: {% include comps/extra-media-card.html data=item %}
 {%- endcomment -%}
 {%- assign item = include.data -%}
-<div class="zd-media-card {% if include.glass %}zd-media-card--glass{% endif %} {{ include.class }}">
+<div class="rd-media-card {% if include.glass %}rd-media-card--glass{% endif %} {{ include.class }}">
   {%- if item.image -%}
-    <div class="zd-media-card-image-wrap">
-      <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" class="zd-media-card-img" />
+    <div class="rd-media-card-image-wrap">
+      <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" class="rd-media-card-img" />
       {%- if item.rating -%}
-        <div class="zd-media-card-rating">
+        <div class="rd-media-card-rating">
           {% include comps/icon.html name="star" size=12 color="yellow" %}
           <span>{{ item.rating }}</span>
         </div>
       {%- endif -%}
     </div>
   {%- endif -%}
-  <div class="zd-media-card-body">
-    <div class="zd-media-card-meta">
+  <div class="rd-media-card-body">
+    <div class="rd-media-card-meta">
       {%- if item.type -%}
-        <span class="zd-media-card-badge">{{ item.type }}</span>
+        <span class="rd-media-card-badge">{{ item.type }}</span>
       {%- endif -%}
       {%- if item.year -%}
-        <span class="zd-media-card-year">{{ item.year }}</span>
+        <span class="rd-media-card-year">{{ item.year }}</span>
       {%- endif -%}
     </div>
-    <h4 class="zd-media-card-title">{{ item.title }}</h4>
+    <h4 class="rd-media-card-title">{{ item.title }}</h4>
     {%- if item.genres -%}
-      <div class="zd-media-card-genres">
+      <div class="rd-media-card-genres">
         {%- for genre in item.genres -%}
-          <span class="zd-media-card-genre">{{ genre }}</span>
+          <span class="rd-media-card-genre">{{ genre }}</span>
         {%- endfor -%}
       </div>
     {%- endif -%}
     {%- if item.overview -%}
-      <p class="zd-media-card-overview">{{ item.overview | truncate: 120 }}</p>
+      <p class="rd-media-card-overview">{{ item.overview | truncate: 120 }}</p>
     {%- endif -%}
   </div>
 </div>

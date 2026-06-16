@@ -10,7 +10,7 @@
     ### Fixes
     - Resolved JS error when TOC levels were undefined.
     - Cleaned up trailing junk in default layout.
-  html_url: "https://github.com/staticcanvas/zero-dark-sp/releases/tag/v1.3.4"
+  html_url: "https://github.com/staticcanvas/ravenui-sp/releases/tag/v1.3.4"
 
 - tag_name: "v1.3.0"
   published_at: "2026-05-20T14:30:00Z"
@@ -19,4 +19,4 @@
     - Initial implementation of the Roadmap component.
     - Added API Reference block for technical documentation.
     - Integrated Pagefind WASM search.
-  html_url: "https://github.com/staticcanvas/zero-dark-sp/releases/tag/v1.3.0"
+  html_url: "https://github.com/staticcanvas/ravenui-sp/releases/tag/v1.3.0"

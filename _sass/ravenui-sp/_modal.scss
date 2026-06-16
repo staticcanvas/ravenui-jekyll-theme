@@ -1,0 +1,96 @@
+// Elegant Accessible Modal styling
+// Compliance: [Visual & UI Elegance (Handcrafted)]
+
+.rd-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--rd-transition-normal, 0.25s) ease, visibility var(--rd-transition-normal, 0.25s) ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.rd-modal-container {
+  background: var(--rd-bg-card, #1e1e28);
+  border: 1px solid var(--rd-border-strong, rgba(255, 255, 255, 0.08));
+  border-radius: var(--rd-radius, 8px);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--rd-elevation-surface, 0 10px 30px rgba(0, 0, 0, 0.5));
+  transform: translateY(-20px);
+  transition: transform var(--rd-transition-normal, 0.25s) cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+
+  .rd-modal-overlay.active & {
+    transform: translateY(0);
+  }
+}
+
+.rd-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--rd-border-subtle, rgba(255, 255, 255, 0.05));
+
+  .rd-modal-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--rd-clr-platinum, #e2e8f0);
+    font-family: var(--rd-font-sans, inherit);
+  }
+
+  .rd-modal-close {
+    background: none;
+    border: none;
+    color: var(--rd-clr-mist, #94a3b8);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+    transition: color var(--rd-transition-fast, 0.15s);
+
+    &:hover {
+      color: var(--rd-clr-white, #fff);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--rd-clr-viridian, #2ec4b6);
+      border-radius: 4px;
+    }
+  }
+}
+
+.rd-modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: var(--rd-clr-mist, #cbd5e1);
+  line-height: 1.6;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

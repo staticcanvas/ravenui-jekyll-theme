@@ -11,7 +11,7 @@ The `faq.html` and `faq-item.html` components work together to build collapsible
 {% include comps/heading.html tag="h2" text="Live Example" icon="help-circle" size=20 %}
 
 {% capture faq_eg_run %}
-{% include comps/faq-item.html question="How do I override theme variables?" answer="Create a file at _sass/custom-variables.scss and import it before zero-dark-sp in main.scss." %}
+{% include comps/faq-item.html question="How do I override theme variables?" answer="Create a file at _sass/custom-variables.scss and import it before ravenui-sp in main.scss." %}
 {% include comps/faq-item.html question="Is Mermaid.js loaded locally?" answer="No, Mermaid.js is loaded dynamically from the CDN only if you enable 'mermaid: true' on your page or site configuration." %}
 {% endcapture %}
 

@@ -5,11 +5,21 @@ Caveats____: Connects with custom YAML data or takes items and current step inde
 Usage______: {% include comps/steps.html items=page.steps current=2 %}
 {%- endcomment -%}
 
-{%- assign items = include.items | default: site.data[include.data_source] -%}
+{%- assign items = include.items | default: page.step_items | default: page.steps | default: page.items -%}
+{%- if items == nil -%}
+  {%- assign ds = include.data_source | default: page.data_source | default: "steps" -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] -%}
+{%- endif -%}
+{%- assign items = items | default: site.step_items | default: site.theme_settings.step_items -%}
 {%- assign current_step = include.current | plus: 0 | default: 0 -%}
 
-<div class="zd-steps-wrapper {{ include.class }}">
-  <div class="zd-steps">
+<div class="rd-steps-wrapper {{ include.class }}">
+  <div class="rd-steps">
     {%- for item in items -%}
       {%- assign step_status = item.status -%}
       {%- if current_step > 0 -%}
@@ -23,19 +33,19 @@ Usage______: {% include comps/steps.html items=page.steps current=2 %}
       {%- endif -%}
       {%- assign step_status = step_status | default: "upcoming" -%}
 
-      <div class="zd-step zd-step--{{ step_status }}">
-        <div class="zd-step-connector"></div>
-        <div class="zd-step-badge">
+      <div class="rd-step rd-step--{{ step_status }}">
+        <div class="rd-step-connector"></div>
+        <div class="rd-step-badge">
           {%- if step_status == "complete" -%}
             {%- include comps/icon.html name="check" size=12 -%}
           {%- else -%}
             {{ forloop.index }}
           {%- endif -%}
         </div>
-        <div class="zd-step-content">
-          <div class="zd-step-title">{{ item.title | default: item }}</div>
+        <div class="rd-step-content">
+          <div class="rd-step-title">{{ item.title | default: item }}</div>
           {%- if item.description -%}
-            <div class="zd-step-description">{{ item.description }}</div>
+            <div class="rd-step-description">{{ item.description }}</div>
           {%- endif -%}
         </div>
       </div>

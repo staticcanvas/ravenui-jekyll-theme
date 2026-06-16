@@ -9,21 +9,21 @@ Usage______:
 {% include comps/modal.html id="my-modal" title="Modal Title" content=modal_body trigger_text="Launch Modal" %}
 {%- endcomment -%}
 
-{%- assign modal_id = include.id | default: "zd-modal" -%}
+{%- assign modal_id = include.id | default: "rd-modal" -%}
 {%- assign trigger_text = include.trigger_text -%}
 
-<div class="zd-modal-component">
+<div class="rd-modal-component">
   {%- if trigger_text -%}
-    <button class="zd-btn zd-btn--primary {{ include.trigger_class }}" data-zd-modal-trigger="{{ modal_id }}">{{ trigger_text }}</button>
+    <button class="rd-btn rd-btn--primary {{ include.trigger_class }}" data-rd-modal-trigger="{{ modal_id }}">{{ trigger_text }}</button>
   {%- endif -%}
 
-  <div id="{{ modal_id }}" class="zd-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="{{ modal_id }}-title">
-    <div class="zd-modal-container {{ include.class }}">
-      <div class="zd-modal-header">
-        <h3 id="{{ modal_id }}-title" class="zd-modal-title">{{ include.title }}</h3>
-        <button class="zd-modal-close" aria-label="Close modal" data-zd-modal-close>&times;</button>
+  <div id="{{ modal_id }}" class="rd-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="{{ modal_id }}-title">
+    <div class="rd-modal-container {{ include.class }}">
+      <div class="rd-modal-header">
+        <h3 id="{{ modal_id }}-title" class="rd-modal-title">{{ include.title }}</h3>
+        <button class="rd-modal-close" aria-label="Close modal" data-rd-modal-close>&times;</button>
       </div>
-      <div class="zd-modal-body">
+      <div class="rd-modal-body">
         {{ include.content }}
       </div>
     </div>
@@ -32,8 +32,8 @@ Usage______:
 
 <script>
 (function() {
-  if (window.zdModalManagerRegistered) return;
-  window.zdModalManagerRegistered = true;
+  if (window.rdModalManagerRegistered) return;
+  window.rdModalManagerRegistered = true;
 
   let activeModal = null;
   let triggerElement = null;
@@ -52,7 +52,7 @@ Usage______:
 
     const focusable = modal.querySelectorAll(focusableSelectors);
     if (focusable.length > 0) {
-      const closeBtn = modal.querySelector('[data-zd-modal-close]');
+      const closeBtn = modal.querySelector('[data-rd-modal-close]');
       if (closeBtn) {
         closeBtn.focus();
       } else {
@@ -77,14 +77,14 @@ Usage______:
   }
 
   document.addEventListener('click', function(e) {
-    const trigger = e.target.closest('[data-zd-modal-trigger]');
+    const trigger = e.target.closest('[data-rd-modal-trigger]');
     if (trigger) {
-      const targetId = trigger.getAttribute('data-zd-modal-trigger');
+      const targetId = trigger.getAttribute('data-rd-modal-trigger');
       openModal(targetId, trigger);
       return;
     }
 
-    if (e.target.closest('[data-zd-modal-close]')) {
+    if (e.target.closest('[data-rd-modal-close]')) {
       closeModal();
       return;
     }

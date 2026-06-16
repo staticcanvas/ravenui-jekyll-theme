@@ -1,0 +1,60 @@
+/* ADMONITIONS (CALLOUTS) */
+.rd-callout { 
+  padding: 1.25rem 1.5rem; 
+  border-radius: var(--rd-radius); 
+  margin-block: 2.5rem; 
+  border-inline-start: 4px solid; 
+  background: var(--rd-bg-surface);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.rd-callout::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.rd-callout--note { border-color: var(--rd-clr-info); }
+.rd-callout--note::before { background: var(--rd-clr-info); }
+.rd-callout--note .rd-callout-title { color: var(--rd-clr-info); }
+
+.rd-callout--warn { border-color: var(--rd-clr-warning); }
+.rd-callout--warn::before { background: var(--rd-clr-warning); }
+.rd-callout--warn .rd-callout-title { color: var(--rd-clr-warning); }
+
+.rd-callout--danger { border-color: var(--rd-clr-danger); }
+.rd-callout--danger::before { background: var(--rd-clr-danger); }
+.rd-callout--danger .rd-callout-title { color: var(--rd-clr-danger); }
+
+.rd-callout--success { border-color: var(--rd-clr-highlight); }
+.rd-callout--success::before { background: var(--rd-clr-highlight); }
+.rd-callout--success .rd-callout-title { color: var(--rd-clr-highlight); }
+
+.rd-callout-title { 
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800; 
+  text-transform: uppercase; 
+  font-size: 0.75rem; 
+  margin-block-end: 0.75rem; 
+  letter-spacing: 0.12em; 
+}
+
+.rd-callout--inline {
+  display: inline-flex;
+  align-items: center;
+  margin-block: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-inline-start-width: 3px;
+  box-shadow: var(--rd-elevation-surface);
+  
+  .rd-callout-title { margin-block-end: 0; margin-inline-end: 1rem; flex-shrink: 0; }
+  .rd-callout-content { margin: 0; line-height: 1.2; }
+}
+
+.rd-callout-content { color: #bbb; font-size: 0.95rem; position: relative; z-index: 1; }

@@ -3,24 +3,24 @@
 {% assign size = include.size | default: "14" %}
 {% assign content = include.content %}
 
-<div class="zd-el-showcase {{ include.class }}">
-  <div class="zd-el-showcase-header">
-    <div class="zd-el-showcase-title">
+<div class="rd-el-showcase {{ include.class }}">
+  <div class="rd-el-showcase-header">
+    <div class="rd-el-showcase-title">
       {% include comps/icon.html name=icon size=size %}
       <span>{{ title }}</span>
     </div>
-    <div class="zd-el-showcase-decor">
-      <svg class="zd-el-showcase-lines" width="60" height="20" viewBox="0 0 60 20" aria-hidden="true">
+    <div class="rd-el-showcase-decor">
+      <svg class="rd-el-showcase-lines" width="60" height="20" viewBox="0 0 60 20" aria-hidden="true">
         <line x1="15" y1="0" x2="5" y2="20" stroke="currentColor" stroke-width="1.5" />
         <line x1="25" y1="0" x2="15" y2="20" stroke="currentColor" stroke-width="1.5" />
         <line x1="35" y1="0" x2="25" y2="20" stroke="currentColor" stroke-width="1.5" />
         <line x1="45" y1="0" x2="35" y2="20" stroke="currentColor" stroke-width="1.5" />
         <line x1="55" y1="0" x2="45" y2="20" stroke="currentColor" stroke-width="1.5" />
       </svg>
-      <span class="zd-el-showcase-logo-text">{{ site.logo_text | default: "Zero-Dark" }}</span>
+      <span class="rd-el-showcase-logo-text">{{ site.logo_text | default: "RavenUI" }}</span>
     </div>
   </div>
-  <div class="zd-el-showcase-body">
+  <div class="rd-el-showcase-body">
     {{ content }}
   </div>
 </div>

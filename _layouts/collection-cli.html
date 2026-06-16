@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<div class="rd-collection-cli-container">
+    {{ content }}
+
+    {% assign col_name = page.collection_name | default: page.collection %}
+    {% assign collection_docs = site[col_name] %}
+    
+    {% if collection_docs %}
+        {% if page.filter_tag %}
+            {% assign temp_docs = "" | split: "" %}
+            {% for doc in collection_docs %}
+                {% if doc.tags contains page.filter_tag %}
+                    {% assign temp_docs = temp_docs | push: doc %}
+                {% endif %}
+            {% endfor %}
+            {% assign collection_docs = temp_docs %}
+        {% endif %}
+
+        {% assign sorted_docs = collection_docs | sort: "weight" | sort: "order" %}
+
+        <div class="rd-collection-cli-list" style="display: flex; flex-direction: column; gap: 2rem; margin-block-start: 2rem;">
+            {% for doc in sorted_docs %}
+            <div class="rd-cli-card" style="background: var(--rd-bg-surface); border: var(--rd-border); border-radius: var(--rd-radius); padding: 1.5rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-block-end: 1rem; border-block-end: 1px solid var(--rd-border-color); padding-block-end: 0.5rem;">
+                    <h3 style="font-size: 1.3rem; margin: 0;">
+                        <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
+                    </h3>
+                    {% if doc.version %}
+                    <span class="rd-badge" style="background: color-mix(in srgb, var(--rd-clr-highlight) 15%, transparent); border-color: color-mix(in srgb, var(--rd-clr-highlight) 30%, transparent); color: var(--rd-clr-highlight); font-weight: 600; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">v{{ doc.version }}</span>
+                    {% endif %}
+                </div>
+                
+                {% if doc.description %}
+                <p style="font-size: 0.95rem; color: var(--rd-clr-silver); margin-block-end: 1.25rem;">{{ doc.description }}</p>
+                {% endif %}
+
+                {% if doc.options %}
+                <div style="margin-block-end: 1rem;">
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--rd-clr-slate); letter-spacing: 0.05em; margin-block-end: 0.5rem;">Options & Flags</h4>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        {% for option in doc.options %}
+                        <div style="display: flex; flex-direction: column; padding: 0.5rem; background: var(--rd-bg-code); border: var(--rd-border); border-radius: 4px;">
+                            <div style="display: flex; justify-content: space-between; font-family: var(--rd-font-mono); font-size: 0.85rem; margin-block-end: 0.25rem;">
+                                <strong style="color: var(--rd-clr-highlight);">{{ option.flag }}</strong>
+                                <span style="color: var(--rd-clr-slate);">{{ option.type }}</span>
+                            </div>
+                            <span style="font-size: 0.85rem; color: var(--rd-clr-silver);">{{ option.description }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No CLI utilities found for collection "{{ col_name }}".</p>
+    {% endif %}
+</div>

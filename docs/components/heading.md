@@ -31,12 +31,12 @@ The `heading.html` component provides a standard way to create section headings 
 
 ## **Heading Anchor Links**
 
-Zero-Dark automatically generates hoverable anchor links (`#`) next to all section headings (`h1` through `h6`) that have an ID.
+RavenUI automatically generates hoverable anchor links (`#`) next to all section headings (`h1` through `h6`) that have an ID.
 
 By default, these links are invisible and fade in when hovering over the heading. You can configure the anchors to be permanently visible (with a subtle opacity) by adding the following setting to your `_config.yml` file:
 
 ```yaml
-zd_headings_always_visible: true
+rd_headings_always_visible: true
 ```
 
 ---

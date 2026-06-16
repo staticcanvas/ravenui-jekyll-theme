@@ -8,7 +8,7 @@ Usage______: {% include comps/figure.html src="/assets/img/test.jpg" caption="An
 {%- assign align = include.align | default: "center" -%}
 {%- assign has_border = include.border | default: true -%}
 
-<figure class="zd-figure zd-figure--{{ align }} {% if has_border %}zd-figure--border{% endif %} {{ include.class }}">
+<figure class="rd-figure rd-figure--{{ align }} {% if has_border %}rd-figure--border{% endif %} {{ include.class }}">
   {%- if include.link -%}
     <a href="{{ include.link | relative_url }}" {% if include.link_target -%}target="{{ include.link_target }}"{%- endif -%}>
   {%- endif -%}
@@ -20,7 +20,7 @@ Usage______: {% include comps/figure.html src="/assets/img/test.jpg" caption="An
   {%- endif -%}
   
   {%- if include.caption -%}
-    <figcaption class="zd-figcaption {{ include.caption_class }}">
+    <figcaption class="rd-figcaption {{ include.caption_class }}">
       {{ include.caption }}
     </figcaption>
   {%- endif -%}

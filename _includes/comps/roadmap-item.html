@@ -1,13 +1,13 @@
-<div class="zd-roadmap-item {% if include.status == 'completed' %}completed{% elsif include.status == 'active' %}active{% endif %}">
-    <div class="zd-roadmap-dot"></div>
-    <div class="zd-roadmap-content">
+<div class="rd-roadmap-item {% if include.status == 'completed' %}completed{% elsif include.status == 'active' %}active{% endif %}">
+    <div class="rd-roadmap-dot"></div>
+    <div class="rd-roadmap-content">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-block-end: 0.5rem;">
             <div>
-                <span class="zd-roadmap-status">{{ include.status | default: "Planned" }}</span>
+                <span class="rd-roadmap-status">{{ include.status | default: "Planned" }}</span>
                 <h4 style="margin:0;">{{ include.title }}</h4>
             </div>
             {% if include.milestone_url %}
-            <a href="{{ include.milestone_url }}" class="zd-roadmap-milestone" title="View Milestone">
+            <a href="{{ include.milestone_url }}" class="rd-roadmap-milestone" title="View Milestone">
                 {% include comps/icon.html name="milestone" size=12 %}
             </a>
             {% endif %}
@@ -18,13 +18,13 @@
         {% endif %}
 
         {% if include.show_progress == true or include.show_progress == "true" %}
-        <div class="zd-roadmap-progress-container" title="{{ include.percent | default: 0 }}% Complete">
-            <div class="zd-roadmap-progress-bar" style="width: {{ include.percent | default: 0 }}%;"></div>
+        <div class="rd-roadmap-progress-container" title="{{ include.percent | default: 0 }}% Complete">
+            <div class="rd-roadmap-progress-bar" style="width: {{ include.percent | default: 0 }}%;"></div>
         </div>
         {% endif %}
 
         {% if include.tasks %}
-        <ul class="zd-roadmap-tasks">
+        <ul class="rd-roadmap-tasks">
             {% assign tasks = include.tasks | split: "|" %}
             {% for task in tasks %}
             <li>{{ task | strip }}</li>

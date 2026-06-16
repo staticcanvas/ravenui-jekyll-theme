@@ -13,16 +13,16 @@ The `api-reference.html` component provides a structured, high-density layout de
 {% capture api_headers %}
 <li>
     <code>Authorization</code>
-    <span class="zd-api-ref-param-type">String</span>
-    <span class="zd-api-ref-param-desc">Bearer token for user authentication (Required).</span>
+    <span class="rd-api-ref-param-type">String</span>
+    <span class="rd-api-ref-param-desc">Bearer token for user authentication (Required).</span>
 </li>
 {% endcapture %}
 
 {% capture api_query %}
 <li>
     <code>limit</code>
-    <span class="zd-api-ref-param-type">Integer</span>
-    <span class="zd-api-ref-param-desc">Number of records to retrieve (Default: 20).</span>
+    <span class="rd-api-ref-param-type">Integer</span>
+    <span class="rd-api-ref-param-desc">Number of records to retrieve (Default: 20).</span>
 </li>
 {% endcapture %}
 
@@ -62,8 +62,8 @@ The `api-reference.html` component provides a structured, high-density layout de
 {% capture my_headers %}
 <li>
     <code>Authorization</code>
-    <span class="zd-api-ref-param-type">String</span>
-    <span class="zd-api-ref-param-desc">Bearer token.</span>
+    <span class="rd-api-ref-param-type">String</span>
+    <span class="rd-api-ref-param-desc">Bearer token.</span>
 </li>
 {% endcapture %}
 

@@ -3,25 +3,32 @@
 {% assign alt = include.alt | default: "" %}
 {% assign caption = include.caption %}
 {% assign max_width = include.max_width | default: "100%" %}
-{% assign border_radius = include.radius | default: "var(--zd-radius)" %}
+{% assign border_radius = include.radius | default: "var(--rd-radius)" %}
 
 {% if src %}
-<div class="zd-image-container {{ include.class }}" style="max-width: {{ max_width }}; --image-radius: {{ border_radius }};">
-  <div class="zd-image-wrapper">
+<div class="rd-image-container {{ include.class }}" style="max-width: {{ max_width }}; --image-radius: {{ border_radius }};">
+  <div class="rd-image-wrapper">
     {% if low_res_src %}
-      <img src="{{ low_res_src | relative_url }}" class="zd-image-blur" alt="" aria-hidden="true" />
+      <img src="{{ low_res_src | relative_url }}" class="rd-image-blur" alt="" aria-hidden="true" />
     {% else %}
-      <div class="zd-image-skeleton"></div>
+      <div class="rd-image-skeleton"></div>
     {% endif %}
     
     <img src="{{ src | relative_url }}" 
          alt="{{ alt | escape }}" 
-         class="zd-image-main" 
+         class="rd-image-main" 
          loading="lazy" 
          onload="this.classList.add('loaded'); if(this.previousElementSibling) this.previousElementSibling.classList.add('fade-out');" />
   </div>
   {% if caption %}
-    <span class="zd-image-caption">{{ caption }}</span>
+    <span class="rd-image-caption">{{ caption }}</span>
   {% endif %}
+</div>
+{% else %}
+<div class="rd-image-container rd-image-placeholder {{ include.class }}" style="max-width: {{ max_width }}; --image-radius: {{ border_radius }};">
+  <div class="rd-image-wrapper" style="border: 1px dashed var(--rd-border-subtle); background: var(--rd-clr-void); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; border-radius: {{ border_radius }};">
+    {% include comps/icon.html name="image" size=32 color="var(--rd-clr-mist)" %}
+    <span style="font-family: var(--rd-font-mono); font-size: 0.8rem; color: var(--rd-clr-mist);">{{ alt | default: "Image Placeholder" }}</span>
+  </div>
 </div>
 {% endif %}

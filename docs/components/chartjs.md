@@ -6,7 +6,7 @@ tags: [ui, elements, data, charts]
 description: Interactive and responsive canvas charts powered by Chart.js.
 enable_search: true
 ---
-The `chartjs.html` component provides interactive data visualization capabilities. It supports bar, line, radar, pie, doughnut, polar area, bubble, and scatter charts, with automatic layout scaling and Zero-Dark styling.
+The `chartjs.html` component provides interactive data visualization capabilities. It supports bar, line, radar, pie, doughnut, polar area, bubble, and scatter charts, with automatic layout scaling and RavenUI styling.
 
 {% include comps/heading.html tag="h2" text="Live Example" icon="play" size=20 %}
 

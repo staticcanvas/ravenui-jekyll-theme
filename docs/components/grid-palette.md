@@ -13,7 +13,7 @@ The `grid-palette.html` component provides a professional way to showcase theme 
 {% assign visual_palette = "
 - title: Viridian
   subtext: Primary Brand
-  color: 'var(--zd-clr-viridian)'
+  color: 'var(--rd-clr-viridian)'
 - title: Info
   subtext: Primary UI Info
   color: '#4A9EE8'

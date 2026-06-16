@@ -6,12 +6,12 @@
 
 {% include core/head.html %}
 
-<body class="zd-blank-layout{% if site.theme_settings.animations.enabled != false %} zd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} zd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} zd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
-    <div class="zd-blank-content">
+<body class="rd-blank-layout{% if site.theme_settings.animations.enabled != false %} rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}{% endif %}"{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %}>
+    <div class="rd-blank-content">
         {{ content }}
     </div>
 
-    {% if site.zd_use_cdn != false %}
+    {% if site.rd_use_cdn != false %}
         <script>
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();

@@ -1,0 +1,56 @@
+// Keyboard Shortcut Component Styles
+// Compliance: [Fluent UI Integration]
+
+.rd-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--rd-font-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--rd-clr-white);
+  background: var(--rd-clr-ink);
+  border: 1px solid var(--rd-border-strong);
+  border-bottom-width: 2.5px;
+  border-radius: var(--rd-radius);
+  padding: 0.2em 0.5em;
+  min-width: 1.5em;
+  text-align: center;
+  box-shadow: var(--rd-elevation-depth);
+  white-space: nowrap;
+  vertical-align: middle;
+  margin: 0 0.1em;
+  user-select: none;
+
+  // Variants/Sizes
+  &.rd-kbd--sm {
+    font-size: 0.7em;
+    padding: 0.15em 0.4em;
+  }
+
+  &.rd-kbd--md {
+    font-size: 0.8em;
+    padding: 0.2em 0.5em;
+  }
+
+  &.rd-kbd--lg {
+    font-size: 0.95em;
+    padding: 0.25em 0.6em;
+  }
+}
+
+.rd-kbd-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  vertical-align: middle;
+}
+
+.rd-kbd-separator {
+  color: var(--rd-clr-smoke);
+  font-family: var(--rd-font-sans);
+  font-size: 0.8em;
+  font-weight: 600;
+  user-select: none;
+}

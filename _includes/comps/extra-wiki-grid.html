@@ -5,17 +5,17 @@ Caveats____: Uses CSS flex grids for layout density.
 Usage______: {% include comps/extra-wiki-grid.html stats=item.stats title="Unit Profile" %}
 {%- endcomment -%}
 {%- assign stats = include.stats -%}
-<div class="zd-wiki-grid-container {{ include.class }}">
+<div class="rd-wiki-grid-container {{ include.class }}">
   {%- if include.title -%}
-    <h5 class="zd-wiki-grid-title">{{ include.title }}</h5>
+    <h5 class="rd-wiki-grid-title">{{ include.title }}</h5>
   {%- endif -%}
-  <div class="zd-wiki-grid">
+  <div class="rd-wiki-grid">
     {%- for stat in stats -%}
       {%- assign key = stat[0] -%}
       {%- assign val = stat[1] -%}
-      <div class="zd-wiki-grid-item">
-        <span class="zd-wiki-grid-label">{{ key }}</span>
-        <span class="zd-wiki-grid-value">{{ val }}</span>
+      <div class="rd-wiki-grid-item">
+        <span class="rd-wiki-grid-label">{{ key }}</span>
+        <span class="rd-wiki-grid-value">{{ val }}</span>
       </div>
     {%- endfor -%}
   </div>

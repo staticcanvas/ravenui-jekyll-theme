@@ -1,22 +1,34 @@
-{% assign grid_size = include.size | default: "200px" %}
-{% assign swatch_height = include.height | default: "100px" %}
-{% assign swatch_size = include.swatch_size | default: "12px" %}
-{% assign mode = include.mode | default: "card" %}
+{% assign grid_size = include.size | default: page.palette_grid_size | default: site.theme_settings.palette_grid_size | default: "200px" %}
+{% assign swatch_height = include.height | default: page.palette_swatch_height | default: site.theme_settings.palette_swatch_height | default: "100px" %}
+{% assign swatch_size = include.swatch_size | default: page.palette_swatch_size | default: site.theme_settings.palette_swatch_size | default: "12px" %}
+{% assign mode = include.mode | default: page.palette_mode | default: site.theme_settings.palette_mode | default: "card" %}
+
+{% assign items = include.items | default: page.palette_items | default: page.items %}
+{% if items == nil %}
+  {% assign ds = include.data_source | default: page.data_source | default: "palette" %}
+  {% assign path_parts = ds | split: "." %}
+  {% assign resolved_data = site.data %}
+  {% for part in path_parts %}
+    {% assign resolved_data = resolved_data[part] %}
+  {% endfor %}
+  {% assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] %}
+{% endif %}
+{% assign items = items | default: site.palette_items | default: site.theme_settings.palette_items %}
 
 {% if mode == "swatch" %}
-<div class="zd-grid-palette-swatches">
-    {% for item in include.items %}
-    <div class="zd-palette-swatch-only" 
-         style="background-color: {{ item.color }}; --zd-swatch-size: {{ swatch_size }};"
+<div class="rd-grid-palette-swatches">
+    {% for item in items %}
+    <div class="rd-palette-swatch-only" 
+         style="background-color: {{ item.color }}; --rd-swatch-size: {{ swatch_size }};"
          title="{{ item.title | escape }}{% if item.subtext %} - {{ item.subtext | escape }}{% endif %} ({{ item.color | escape }})">
     </div>
     {% endfor %}
 </div>
 {% else %}
-<div class="zd-grid-palette" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
-    {% for item in include.items %}
-    <div class="zd-palette-card">
-        <div class="zd-palette-swatch" 
+<div class="rd-grid-palette" style="grid-template-columns: repeat(auto-fill, minmax({{ grid_size }}, 1fr));">
+    {% for item in items %}
+    <div class="rd-palette-card">
+        <div class="rd-palette-swatch" 
              style="background-color: {{ item.color }}; height: {{ swatch_height }}; display: flex; align-items: center; justify-content: center; position: relative;">
             {% if item.icon %}
                 {% if item.icon_type == "simple" %}
@@ -28,11 +40,11 @@
                 {% endif %}
             {% endif %}
         </div>
-        <div class="zd-palette-info">
-            <h4 class="zd-palette-title">{{ item.title }}</h4>
-            <p class="zd-palette-subtext">{{ item.subtext }}</p>
+        <div class="rd-palette-info">
+            <h4 class="rd-palette-title">{{ item.title }}</h4>
+            <p class="rd-palette-subtext">{{ item.subtext }}</p>
             {% if item.color %}
-            <code class="zd-palette-code">{{ item.color }}</code>
+            <code class="rd-palette-code">{{ item.color }}</code>
             {% endif %}
         </div>
     </div>

@@ -1,31 +1,31 @@
-<div class="zd-api-ref" id="{{ include.name | slugify }}">
-    <header class="zd-api-header">
-        <div class="zd-api-title-row">
-            <code class="zd-api-name">{{ include.name }}</code>
+<div class="rd-api-ref" id="{{ include.name | slugify }}">
+    <header class="rd-api-header">
+        <div class="rd-api-title-row">
+            <code class="rd-api-name">{{ include.name }}</code>
             {% if include.badge %}
             <span class="badge">{{ include.badge }}</span>
             {% endif %}
         </div>
         {% if include.signature %}
-        <div class="zd-api-signature">
+        <div class="rd-api-signature">
             <code>{{ include.signature }}</code>
         </div>
         {% endif %}
     </header>
 
-    <div class="zd-api-body">
+    <div class="rd-api-body">
         {% if include.description %}
-        <div class="zd-api-description">{{ include.description | markdownify }}</div>
+        <div class="rd-api-description">{{ include.description | markdownify }}</div>
         {% endif %}
 
         {% if include.params %}
-        <div class="zd-api-section">
-            <h5 class="zd-api-section-title">
+        <div class="rd-api-section">
+            <h5 class="rd-api-section-title">
                 {% include comps/icon.html name="list" size="14" color="#444" %}
                 Parameters
             </h5>
-            <div class="zd-api-param-container">
-                <ul class="zd-api-param-list">
+            <div class="rd-api-param-container">
+                <ul class="rd-api-param-list">
                     {{ include.params }}
                 </ul>
             </div>
@@ -33,24 +33,24 @@
         {% endif %}
 
         {% if include.returns %}
-        <div class="zd-api-section">
-            <h5 class="zd-api-section-title">
+        <div class="rd-api-section">
+            <h5 class="rd-api-section-title">
                 {% include comps/icon.html name="corner-down-right" size="14" color="#444" %}
                 Returns
             </h5>
-            <div class="zd-api-returns">
+            <div class="rd-api-returns">
                 {{ include.returns | markdownify }}
             </div>
         </div>
         {% endif %}
 
         {% if include.example %}
-        <div class="zd-api-section">
-            <h5 class="zd-api-section-title">
+        <div class="rd-api-section">
+            <h5 class="rd-api-section-title">
                 {% include comps/icon.html name="terminal" size="14" color="#444" %}
                 Example
             </h5>
-            <div class="zd-api-example">
+            <div class="rd-api-example">
                 {{ include.example | markdownify }}
             </div>
         </div>

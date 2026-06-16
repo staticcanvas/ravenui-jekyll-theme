@@ -9,50 +9,50 @@ Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan
 {%- assign render_type = include.render_type | default: "media-card" -%}
 {%- assign expiry = include.cache_expiry | default: 3600 -%}
 
-<div class="zd-api-fetcher" 
-     id="zd-fetcher-{{ uid }}" 
+<div class="rd-api-fetcher" 
+     id="rd-fetcher-{{ uid }}" 
      data-endpoint="{{ include.endpoint }}" 
-     data-cache-key="zd-cache-{{ include.cache_key | default: include.endpoint | slugify }}"
+     data-cache-key="rd-cache-{{ include.cache_key | default: include.endpoint | slugify }}"
      data-cache-expiry="{{ expiry }}" 
      data-render-type="{{ render_type }}"
      data-glass="{% if include.glass %}true{% else %}false{% endif %}">
   
   <!-- Loading State -->
-  <div class="zd-api-fetcher-loading">
+  <div class="rd-api-fetcher-loading">
     {% include comps/extra-spinner.html size="large" label="Fetching media from API..." %}
   </div>
 
   <!-- Error State (hidden by default) -->
-  <div class="zd-api-fetcher-error zd-hidden">
-    <div class="zd-callout zd-callout--danger">
-      <div class="zd-callout-header">
-        <span class="zd-callout-icon">⚠️</span>
-        <strong class="zd-callout-title">API Fetch Error</strong>
+  <div class="rd-api-fetcher-error rd-hidden">
+    <div class="rd-callout rd-callout--danger">
+      <div class="rd-callout-header">
+        <span class="rd-callout-icon">⚠️</span>
+        <strong class="rd-callout-title">API Fetch Error</strong>
       </div>
-      <div class="zd-callout-content">
+      <div class="rd-callout-content">
         <p>Could not retrieve data from <code>{{ include.endpoint | truncate: 60 }}</code>. Check connection or console logs.</p>
       </div>
     </div>
   </div>
 
   <!-- Target Container for Dynamic Rendering -->
-  <div class="zd-api-fetcher-target"></div>
+  <div class="rd-api-fetcher-target"></div>
 </div>
 
-{% unless site.zd_api_fetcher_script_loaded %}
-  {% assign site.zd_api_fetcher_script_loaded = true %}
+{% unless site.rd_api_fetcher_script_loaded %}
+  {% assign site.rd_api_fetcher_script_loaded = true %}
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const fetchers = document.querySelectorAll(".zd-api-fetcher");
+      const fetchers = document.querySelectorAll(".rd-api-fetcher");
       fetchers.forEach(fetcher => {
         const endpoint = fetcher.getAttribute("data-endpoint");
         const cacheKey = fetcher.getAttribute("data-cache-key");
         const expirySeconds = parseInt(fetcher.getAttribute("data-cache-expiry"), 10);
         const renderType = fetcher.getAttribute("data-render-type");
         const useGlass = fetcher.getAttribute("data-glass") === "true";
-        const target = fetcher.querySelector(".zd-api-fetcher-target");
-        const loading = fetcher.querySelector(".zd-api-fetcher-loading");
-        const errorEl = fetcher.querySelector(".zd-api-fetcher-error");
+        const target = fetcher.querySelector(".rd-api-fetcher-target");
+        const loading = fetcher.querySelector(".rd-api-fetcher-loading");
+        const errorEl = fetcher.querySelector(".rd-api-fetcher-error");
 
         if (!endpoint) {
           showError("No API endpoint specified.");
@@ -113,13 +113,13 @@ Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan
         }
 
         function showError(msg) {
-          if (loading) loading.classList.add("zd-hidden");
-          if (errorEl) errorEl.classList.remove("zd-hidden");
+          if (loading) loading.classList.add("rd-hidden");
+          if (errorEl) errorEl.classList.remove("rd-hidden");
           console.error("API Fetcher Error:", msg);
         }
 
         function renderData(rawJson) {
-          if (loading) loading.classList.add("zd-hidden");
+          if (loading) loading.classList.add("rd-hidden");
           let data = rawJson;
           
           // Auto-detect Jikan (Anime) API v4 response shape
@@ -147,42 +147,42 @@ Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan
           let html = "";
           
           if (renderType === "media-details") {
-            const genresHtml = item.genres.map(g => `<span class="zd-media-card-genre">${g}</span>`).join("");
+            const genresHtml = item.genres.map(g => `<span class="rd-media-card-genre">${g}</span>`).join("");
             const ratingHtml = item.rating ? `
-              <div class="zd-media-details-rating">
-                <svg class="zd-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <div class="rd-media-details-rating">
+                <svg class="rd-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 <span>${item.rating}</span>
               </div>
             ` : "";
 
             html = `
-              <div class="zd-media-details ${useGlass ? 'zd-media-details--glass' : ''}">
-                <div class="zd-media-details-header" style="${item.backdrop ? `background-image: linear-gradient(to bottom, rgba(30, 30, 46, 0.4), rgba(30, 30, 46, 0.95)), url('${item.backdrop}');` : ''}">
-                  <div class="zd-media-details-poster-wrap">
-                    ${item.image ? `<img src="${item.image}" alt="${item.title}" class="zd-media-details-poster" />` : ''}
+              <div class="rd-media-details ${useGlass ? 'rd-media-details--glass' : ''}">
+                <div class="rd-media-details-header" style="${item.backdrop ? `background-image: linear-gradient(to bottom, rgba(30, 30, 46, 0.4), rgba(30, 30, 46, 0.95)), url('${item.backdrop}');` : ''}">
+                  <div class="rd-media-details-poster-wrap">
+                    ${item.image ? `<img src="${item.image}" alt="${item.title}" class="rd-media-details-poster" />` : ''}
                   </div>
-                  <div class="zd-media-details-header-text">
-                    <div class="zd-media-details-meta-row">
-                      ${item.type ? `<span class="zd-tag zd-tag--purple">${item.type}</span>` : ''}
-                      ${item.status ? `<span class="zd-tag zd-tag--blue">${item.status}</span>` : ''}
-                      ${item.year ? `<span class="zd-media-details-year">${item.year}</span>` : ''}
+                  <div class="rd-media-details-header-text">
+                    <div class="rd-media-details-meta-row">
+                      ${item.type ? `<span class="rd-tag rd-tag--purple">${item.type}</span>` : ''}
+                      ${item.status ? `<span class="rd-tag rd-tag--blue">${item.status}</span>` : ''}
+                      ${item.year ? `<span class="rd-media-details-year">${item.year}</span>` : ''}
                     </div>
-                    <h3 class="zd-media-details-title">${item.title}</h3>
+                    <h3 class="rd-media-details-title">${item.title}</h3>
                     ${ratingHtml}
                   </div>
                 </div>
-                <div class="zd-media-details-body">
-                  <div class="zd-media-details-main">
+                <div class="rd-media-details-body">
+                  <div class="rd-media-details-main">
                     ${item.overview ? `
-                      <div class="zd-media-details-section">
-                        <h4 class="zd-media-details-section-title">Overview</h4>
-                        <p class="zd-media-details-description">${item.overview}</p>
+                      <div class="rd-media-details-section">
+                        <h4 class="rd-media-details-section-title">Overview</h4>
+                        <p class="rd-media-details-description">${item.overview}</p>
                       </div>
                     ` : ''}
                   </div>
-                  <div class="zd-media-details-sidebar">
-                    <h4 class="zd-media-details-section-title">Details</h4>
-                    <table class="zd-media-details-table">
+                  <div class="rd-media-details-sidebar">
+                    <h4 class="rd-media-details-section-title">Details</h4>
+                    <table class="rd-media-details-table">
                       <tbody>
                         ${item.studio ? `<tr><th>Studio</th><td>${item.studio}</td></tr>` : ''}
                         ${item.director ? `<tr><th>Director</th><td>${item.director}</td></tr>` : ''}
@@ -191,9 +191,9 @@ Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan
                       </tbody>
                     </table>
                     ${item.genres.length ? `
-                      <div class="zd-media-details-section">
-                        <h4 class="zd-media-details-section-title">Genres</h4>
-                        <div class="zd-media-details-genres">${genresHtml}</div>
+                      <div class="rd-media-details-section">
+                        <h4 class="rd-media-details-section-title">Genres</h4>
+                        <div class="rd-media-details-genres">${genresHtml}</div>
                       </div>
                     ` : ''}
                   </div>
@@ -203,29 +203,29 @@ Usage______: {% include comps/extra-api-fetcher.html endpoint="https://api.jikan
           } else {
             // Default: media-card
             const ratingHtml = item.rating ? `
-              <div class="zd-media-card-rating">
-                <svg class="zd-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <div class="rd-media-card-rating">
+                <svg class="rd-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 <span>${item.rating}</span>
               </div>
             ` : "";
-            const genresHtml = item.genres.map(g => `<span class="zd-media-card-genre">${g}</span>`).join("");
+            const genresHtml = item.genres.map(g => `<span class="rd-media-card-genre">${g}</span>`).join("");
 
             html = `
-              <div class="zd-media-card ${useGlass ? 'zd-media-card--glass' : ''}">
+              <div class="rd-media-card ${useGlass ? 'rd-media-card--glass' : ''}">
                 ${item.image ? `
-                  <div class="zd-media-card-image-wrap">
-                    <img src="${item.image}" alt="${item.title}" loading="lazy" class="zd-media-card-img" />
+                  <div class="rd-media-card-image-wrap">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy" class="rd-media-card-img" />
                     ${ratingHtml}
                   </div>
                 ` : ''}
-                <div class="zd-media-card-body">
-                  <div class="zd-media-card-meta">
-                    ${item.type ? `<span class="zd-media-card-badge">${item.type}</span>` : ''}
-                    ${item.year ? `<span class="zd-media-card-year">${item.year}</span>` : ''}
+                <div class="rd-media-card-body">
+                  <div class="rd-media-card-meta">
+                    ${item.type ? `<span class="rd-media-card-badge">${item.type}</span>` : ''}
+                    ${item.year ? `<span class="rd-media-card-year">${item.year}</span>` : ''}
                   </div>
-                  <h4 class="zd-media-card-title">${item.title}</h4>
-                  ${item.genres.length ? `<div class="zd-media-card-genres">${genresHtml}</div>` : ''}
-                  ${item.overview ? `<p class="zd-media-card-overview">${item.overview.substring(0, 120)}...</p>` : ''}
+                  <h4 class="rd-media-card-title">${item.title}</h4>
+                  ${item.genres.length ? `<div class="rd-media-card-genres">${genresHtml}</div>` : ''}
+                  ${item.overview ? `<p class="rd-media-card-overview">${item.overview.substring(0, 120)}...</p>` : ''}
                 </div>
               </div>
             `;

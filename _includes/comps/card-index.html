@@ -1,4 +1,4 @@
-<div class="zd-card-index">
+<div class="rd-card-index">
     {% if include.items %}
         {% assign links = include.items %}
     {% else %}
@@ -7,10 +7,10 @@
     {% endif %}
 
     {% if links %}
-        <div class="zd-card-grid">
+        <div class="rd-card-grid">
         {% for link in links %}
-            <a href="{{ link.url | relative_url }}" class="zd-card zd-card--glass">
-                <div class="zd-card-icon">
+            <a href="{{ link.url | relative_url }}" class="rd-card rd-card--glass">
+                <div class="rd-card-icon">
                     {% if link.source == "simple" %}
                         {% include comps/simple-icon.html name=link.icon size=24 color=link.color %}
                     {% elsif link.source == "fa" %}
@@ -19,8 +19,8 @@
                         {% include comps/icon.html name=link.icon size=24 color=link.color %}
                     {% endif %}
                 </div>
-                <h4 class="zd-card-title">{{ link.text | default: link.title }}</h4>
-                <p class="zd-card-content">{{ link.description | default: "No description available." }}</p>
+                <h4 class="rd-card-title">{{ link.text | default: link.title }}</h4>
+                <p class="rd-card-content">{{ link.description | default: "No description available." }}</p>
             </a>
         {% endfor %}
         </div>

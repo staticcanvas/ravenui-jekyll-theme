@@ -4,25 +4,32 @@ Purpose____: Displays a list of release tags parsed from site.data or a custom a
 Caveats____: Requires the custom Ruby plugin 'from_yaml' to parse string-based data inputs.
 Usage______: {% include comps/releases.html data=site.data.releases %}
 {%- endcomment -%}
-<div class="zd-releases">
+<div class="rd-releases">
     {% assign release_source = include.data | default: site.data.releases %}
     {% if release_source %}
         {% assign test_first = release_source | slice: 0 %}
         {% if release_source.first == nil and test_first != nil %}
-            {% assign release_source = release_source | from_yaml %}
+            {% if site.safe or site.theme_settings.compatibility.disable_custom_plugins %}
+                {% assign release_source = nil %}
+                <p class="rd-compatibility-warning" style="color: var(--rd-clr-danger); font-size: 0.85rem; padding: 0.5rem; border: 1px dashed var(--rd-clr-danger); border-radius: 4px; margin-block-end: 1rem;">
+                    <strong>Branding/Compatibility Warning:</strong> Inline YAML strings require the <code>from_yaml</code> filter, which is disabled in Safe Mode (e.g. GitHub Pages default builder). Please use <code>site.data</code> files instead.
+                </p>
+            {% else %}
+                {% assign release_source = release_source | from_yaml %}
+            {% endif %}
         {% endif %}
         {% for release in release_source %}
-        <div class="zd-release-item">
-            <div class="zd-release-header">
-                <span class="zd-tag zd-tag--release">{{ release.tag_name }}</span>
-                <span class="zd-release-date">{{ release.published_at | date: "%B %d, %Y" }}</span>
+        <div class="rd-release-item">
+            <div class="rd-release-header">
+                <span class="rd-tag rd-tag--release">{{ release.tag_name }}</span>
+                <span class="rd-release-date">{{ release.published_at | date: "%B %d, %Y" }}</span>
             </div>
-            <h4 class="zd-release-title">{{ release.name }}</h4>
-            <div class="zd-release-body">
+            <h4 class="rd-release-title">{{ release.name }}</h4>
+            <div class="rd-release-body">
                 {{ release.body | markdownify }}
             </div>
             {% if release.html_url %}
-            <a href="{{ release.html_url }}" class="zd-release-link" target="_blank" rel="noopener noreferrer">
+            <a href="{{ release.html_url }}" class="rd-release-link" target="_blank" rel="noopener noreferrer">
                 {% if release.html_url contains 'github.com' %}
                     {% include comps/icon.html name="github" size=12 %} View on GitHub
                 {% elsif release.html_url contains 'gitlab.com' %}

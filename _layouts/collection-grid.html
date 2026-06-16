@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<div class="rd-collection-index-container">
+    {{ content }}
+
+    {% assign col_name = page.collection_name | default: page.collection %}
+    {% assign collection_docs = site[col_name] %}
+    
+    {% if collection_docs %}
+        {% if page.filter_tag %}
+            {% assign temp_docs = "" | split: "" %}
+            {% for doc in collection_docs %}
+                {% if doc.tags contains page.filter_tag %}
+                    {% assign temp_docs = temp_docs | push: doc %}
+                {% endif %}
+            {% endfor %}
+            {% assign collection_docs = temp_docs %}
+        {% endif %}
+
+        {% assign sort_by = page.sort_by | default: "order" %}
+        {% if sort_by == "date" %}
+            {% assign sorted_docs = collection_docs | sort: "date" | reverse %}
+        {% elsif sort_by == "title" %}
+            {% assign sorted_docs = collection_docs | sort: "title" %}
+        {% else %}
+            {% assign sorted_docs = collection_docs | sort: "weight" | sort: "order" %}
+        {% endif %}
+
+        <div class="rd-collection-grid">
+            {% for doc in sorted_docs %}
+            <div class="rd-collection-card">
+                <div class="rd-collection-card-body">
+                    {% if doc.icon %}
+                    <div class="rd-collection-card-icon" style="color: {{ doc.color | default: 'var(--rd-clr-highlight)' }}">
+                        {% include comps/icon.html name=doc.icon size=24 %}
+                    </div>
+                    {% endif %}
+                    <h3 class="rd-collection-card-title">
+                        <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
+                    </h3>
+                    {% if doc.description %}
+                    <p class="rd-collection-card-desc">{{ doc.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No documents found for collection "{{ col_name }}".</p>
+    {% endif %}
+</div>

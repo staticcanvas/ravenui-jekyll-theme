@@ -1,0 +1,36 @@
+/* VHS COMPONENT */
+.rd-vhs {
+  position: relative;
+  background: #000;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  overflow: hidden;
+  border-radius: var(--rd-radius);
+  border: 1px solid #111;
+  margin-block: 2rem;
+}
+
+.rd-vhs::after {
+  content: "PLAY";
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-family: var(--rd-font-mono);
+  font-size: 0.8rem;
+  color: #fff;
+  opacity: 0.5;
+  animation: vhs-flicker 2s infinite;
+}
+
+.rd-vhs-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.rd-vhs-content {
+  position: relative;
+  z-index: 5;
+  animation: vhs-distort 8s infinite;
+}

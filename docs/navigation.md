@@ -6,7 +6,7 @@ tags: [ui, navigation, sidebar]
 description: Configuring the dual-sidebar system and mobile navigation menu.
 enable_search: true
 ---
-Zero-Dark features a high-density, three-column layout designed for maximum technical clarity.
+RavenUI features a high-density, three-column layout designed for maximum technical clarity.
 
 {% include comps/heading.html tag="h2" text="Sidebar Navigation (Site-Wide)" icon="home" size=20 %}
 
@@ -64,13 +64,13 @@ The site-wide navigation is controlled via `_data/navigation.yml`. This system s
 ```
 
 **Icons:**
-Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They will be automatically rendered at 14px in the sidebar, see [Zero-Dark Icon Reference](/icons/).
+Specify any name from the [Lucide Icon Library](https://lucide.dev/icons). They will be automatically rendered at 14px in the sidebar, see [RavenUI Icon Reference](/icons/).
 
  - **Colors:** You can specify a color for the icon, or use the default color from the Lucide icon library.
- - **Animations:** Zero-Dark supports animations for icons
+ - **Animations:** RavenUI supports animations for icons
  - **Sizes:** You can specify a size for the icon, or use the default size from the Lucide icon library.
  
- **See:** [Zero-Dark Icon Reference](/LuceIcons/)
+ **See:** [RavenUI Icon Reference](/LuceIcons/)
 
 ### **Feature Badges**
 
@@ -99,7 +99,7 @@ Supported values include:
 
 {% include comps/heading.html tag="h2" text="Header Navigation" icon="compass" size=20 %}
 
-Zero-Dark supports an optional **Top Header Bar** layout that displays a glassmorphism navigation bar across the top of the viewport.
+RavenUI supports an optional **Top Header Bar** layout that displays a glassmorphism navigation bar across the top of the viewport.
 
 ### **Header Data Structure**
 
@@ -116,7 +116,7 @@ Header links are defined in `_data/navheader.yml`. The data structure supports *
   url: /blog/
   icon: file-text
 - text: GitHub
-  url: https://github.com/staticcanvas/zero-dark-jekyll-theme
+  url: https://github.com/staticcanvas/ravenui-jekyll-theme
   icon: github
   external: true
 ```
@@ -134,7 +134,7 @@ When active, the theme automatically:
 
 The "***On This Page***" section appears in the **right sidebar** on desktop viewports. It is dynamic and automatically parses your content for headings.
 
-- **Desktop:** Configurable default state via `zd_toc_default_open`.
+- **Desktop:** Configurable default state via `rd_toc_default_open`.
 - **Mobile:** Accessible via the floating utility toggle button.
 - **Sync:** The TOC remains sticky as you scroll, highlighting your progress through the page.
 
@@ -159,9 +159,19 @@ theme_settings:
 
 ---
 
+{% include comps/heading.html tag="h2" text="Flat-File Site Structure Support" icon="folder-open" size=20 %}
+
+RavenUI is designed to support a **Flat-File Site Structure** out of the box, meaning developers are not forced to place pages inside nested directories (e.g. `docs/installation/index.md`) or use Jekyll Collections.
+
+If you prefer to organize all your files in a single flat directory:
+* **Automatic Active Link Resolution**: The sidebar and header navigation automatically normalizes page and link URLs (e.g., removing `.html` and `index`, appending trailing slashes) before performing active comparisons. This guarantees that links like `url: /installation.html` and `url: /installation/` both resolve correctly and highlight the active page.
+* **Breadcrumbs Compatibility**: The breadcrumb generator dynamically splits flat paths and displays the page title for the active node without requiring parent index files.
+
+---
+
 {% include comps/heading.html tag="h2" text="Mobile Experience" icon="smartphone" size=20 %}
 
-On smaller screens, Zero-Dark utilizes a **Dual-Toggle System**:
+On smaller screens, RavenUI utilizes a **Dual-Toggle System**:
 
 1. **Navigation Toggle:** Opens the site-wide sidebar as a full-page overlay.
 2. **TOC Toggle:** Opens the current page structure.

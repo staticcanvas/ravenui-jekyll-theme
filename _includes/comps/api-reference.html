@@ -16,55 +16,55 @@
   {% assign method_color = "#f87171" %}
   {% assign method_bg = "rgba(248, 113, 113, 0.1)" %}
 {% else %}
-  {% assign method_color = "var(--zd-clr-highlight, #00ff9d)" %}
+  {% assign method_color = "var(--rd-clr-highlight, #00ff9d)" %}
   {% assign method_bg = "rgba(0, 255, 157, 0.1)" %}
 {% endif %}
 
-<div class="zd-api-reference" id="{{ id }}">
-  <div class="zd-api-ref-header">
-    <span class="zd-api-ref-method" style="color: {{ method_color }}; background: {{ method_bg }}; border: 1px solid color-mix(in srgb, {{ method_color }} 30%, transparent);">{{ method }}</span>
-    <code class="zd-api-ref-path">{{ path }}</code>
+<div class="rd-api-reference" id="{{ id }}">
+  <div class="rd-api-ref-header">
+    <span class="rd-api-ref-method" style="color: {{ method_color }}; background: {{ method_bg }}; border: 1px solid color-mix(in srgb, {{ method_color }} 30%, transparent);">{{ method }}</span>
+    <code class="rd-api-ref-path">{{ path }}</code>
     {% if title %}
-      <span class="zd-api-ref-title-text">{{ title }}</span>
+      <span class="rd-api-ref-title-text">{{ title }}</span>
     {% endif %}
   </div>
   
-  <div class="zd-api-ref-body">
+  <div class="rd-api-ref-body">
     {% if include.description %}
-      <div class="zd-api-ref-description">{{ include.description | markdownify }}</div>
+      <div class="rd-api-ref-description">{{ include.description | markdownify }}</div>
     {% endif %}
     
     {% if include.headers %}
-      <div class="zd-api-ref-section">
-        <h6 class="zd-api-ref-sec-title">Headers</h6>
-        <ul class="zd-api-ref-list">
+      <div class="rd-api-ref-section">
+        <h6 class="rd-api-ref-sec-title">Headers</h6>
+        <ul class="rd-api-ref-list">
           {{ include.headers }}
         </ul>
       </div>
     {% endif %}
 
     {% if include.params %}
-      <div class="zd-api-ref-section">
-        <h6 class="zd-api-ref-sec-title">Query Parameters</h6>
-        <ul class="zd-api-ref-list">
+      <div class="rd-api-ref-section">
+        <h6 class="rd-api-ref-sec-title">Query Parameters</h6>
+        <ul class="rd-api-ref-list">
           {{ include.params }}
         </ul>
       </div>
     {% endif %}
 
     {% if include.body %}
-      <div class="zd-api-ref-section">
-        <h6 class="zd-api-ref-sec-title">Request Body</h6>
-        <div class="zd-api-ref-body-content">
+      <div class="rd-api-ref-section">
+        <h6 class="rd-api-ref-sec-title">Request Body</h6>
+        <div class="rd-api-ref-body-content">
           {{ include.body | markdownify }}
         </div>
       </div>
     {% endif %}
 
     {% if include.response %}
-      <div class="zd-api-ref-section">
-        <h6 class="zd-api-ref-sec-title">Response Schema</h6>
-        <div class="zd-api-ref-body-content">
+      <div class="rd-api-ref-section">
+        <h6 class="rd-api-ref-sec-title">Response Schema</h6>
+        <div class="rd-api-ref-body-content">
           {{ include.response | markdownify }}
         </div>
       </div>

@@ -1,0 +1,395 @@
+/* 🏆 ZERO-DARK Specialist Layouts */
+
+/* PORTFOLIO */
+.rd-layout-portfolio {
+    background: var(--rd-bg-base);
+    color: var(--rd-clr-platinum);
+}
+
+.rd-portfolio-container {
+    max-width: 1400px;
+    margin-inline: auto;
+    padding: 2rem;
+}
+
+.rd-portfolio-header { margin-block-end: 4rem; }
+
+.rd-portfolio-hero {
+    text-align: center;
+    margin-block-end: 6rem;
+}
+
+.rd-portfolio-title { font-size: clamp(2.5rem, 6vw, 4rem); margin-block-end: 1rem; }
+.rd-portfolio-description { font-size: 1.25rem; color: #666; max-width: 60ch; margin-inline: auto; }
+
+.rd-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.rd-portfolio-footer {
+    margin-block-start: 8rem;
+    padding-block: 2rem;
+    border-block-start: var(--rd-border);
+    text-align: center;
+    font-size: 0.8rem;
+    color: #444;
+}
+
+/* METRICS */
+.rd-layout-metrics {
+    background: #050505;
+}
+
+.rd-metrics-container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 4rem 2rem;
+}
+
+.rd-metrics-hero { margin-block-end: 4rem; }
+.rd-metrics-title { font-size: 2rem; color: var(--rd-clr-highlight); }
+.rd-metrics-description { color: #555; }
+
+.rd-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.rd-metric-card {
+    background: #0a0a0a;
+    border: 1px solid #111;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: 0.2s;
+
+    &:hover { border-color: var(--rd-clr-highlight); background: #0d0d0d; }
+}
+
+.rd-metric-value { font-size: 3rem; font-weight: 900; color: var(--rd-clr-platinum); line-height: 1; margin-block-end: 0.5rem; font-family: var(--rd-font-mono); }
+.rd-metric-label { font-size: 0.7rem; text-transform: uppercase; color: #444; letter-spacing: 0.1em; }
+
+/* --------------------------------------------------------------------------
+   🏆 ZERO-DARK Jekyll Collections Integration Layouts
+   -------------------------------------------------------------------------- */
+
+/* 1. Linear List (.rd-collection-list) */
+.rd-collection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-block: 2rem;
+
+    .rd-collection-list-item {
+        padding-block-end: 1.5rem;
+        border-bottom: var(--rd-border);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .rd-collection-list-title {
+        font-size: 1.25rem;
+        margin-block-end: 0.5rem;
+        
+        a {
+            color: var(--rd-clr-platinum);
+            text-decoration: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            
+            &:hover {
+                color: var(--rd-clr-highlight);
+            }
+        }
+    }
+
+    .rd-collection-list-desc {
+        font-size: 0.95rem;
+        color: #777;
+        margin: 0;
+    }
+}
+
+/* 2. Grid (.rd-collection-grid) */
+.rd-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-block: 2rem;
+
+    .rd-collection-card {
+        background: var(--rd-bg-surface);
+        border: var(--rd-border);
+        border-radius: var(--rd-radius);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+
+        &:hover {
+            border-color: var(--rd-clr-highlight);
+            transform: translateY(-2px);
+            background: rgba(10, 10, 10, 0.8);
+        }
+    }
+
+    .rd-collection-card-body {
+        padding: 1.5rem;
+    }
+
+    .rd-collection-card-icon {
+        margin-block-end: 1rem;
+        display: inline-flex;
+    }
+
+    .rd-collection-card-title {
+        font-size: 1.15rem;
+        margin-block-end: 0.5rem;
+        font-weight: 600;
+
+        a {
+            color: var(--rd-clr-platinum);
+            text-decoration: none;
+            border: none;
+
+            &:hover {
+                color: var(--rd-clr-highlight);
+            }
+        }
+    }
+
+    .rd-collection-card-desc {
+        font-size: 0.9rem;
+        color: #777;
+        margin: 0;
+        line-height: 1.5;
+    }
+}
+
+/* 3. Cards Detailed (.rd-collection-cards-detailed) */
+.rd-collection-cards-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-block: 2rem;
+
+    .rd-collection-detailed-card {
+        background: var(--rd-bg-surface);
+        border: var(--rd-border);
+        border-radius: var(--rd-radius);
+        padding: 1.75rem;
+        transition: border-color 0.2s;
+
+        &:hover {
+            border-color: var(--rd-clr-highlight);
+        }
+    }
+
+    .rd-collection-detailed-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-block-end: 0.75rem;
+    }
+
+    .rd-collection-detailed-icon {
+        display: inline-flex;
+    }
+
+    .rd-collection-detailed-title {
+        font-size: 1.25rem;
+        margin: 0;
+        font-weight: 600;
+
+        a {
+            color: var(--rd-clr-platinum);
+            text-decoration: none;
+            border: none;
+
+            &:hover {
+                color: var(--rd-clr-highlight);
+            }
+        }
+    }
+
+    .rd-collection-detailed-group {
+        font-family: var(--rd-font-mono);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        background: rgba(0, 255, 157, 0.05);
+        color: var(--rd-clr-highlight);
+        border: 1px solid rgba(0, 255, 157, 0.1);
+        margin-inline-start: auto;
+    }
+
+    .rd-collection-detailed-desc {
+        font-size: 0.95rem;
+        color: #888;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+/* 4. Tree Directory Layout (.rd-collection-tree) */
+.rd-collection-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block: 2rem;
+
+    .rd-collection-tree-group {
+        background: rgba(10, 10, 10, 0.3);
+        border: var(--rd-border);
+        border-radius: var(--rd-radius);
+        padding: 1.5rem;
+    }
+
+    .rd-collection-tree-group-title {
+        font-size: 1.1rem;
+        margin-block-end: 1rem;
+        color: var(--rd-clr-platinum);
+        display: flex;
+        align-items: center;
+    }
+
+    .rd-collection-tree-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-inline-start: 1.5rem;
+        border-inline-start: 1px solid #1a1a1a;
+    }
+
+    .rd-collection-tree-item {
+        position: relative;
+        
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -1.5rem;
+            width: 1rem;
+            height: 1px;
+            background: #1a1a1a;
+        }
+    }
+
+    .rd-collection-tree-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        color: #888;
+        text-decoration: none;
+        border: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--rd-clr-highlight);
+        }
+    }
+}
+
+/* 5. Pathway Timeline (.rd-collection-pathway) */
+.rd-collection-pathway {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-inline-start: 2rem;
+    margin-block: 2rem;
+    
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0.75rem;
+        width: 2px;
+        background: #1a1a1a;
+    }
+
+    .rd-collection-pathway-node {
+        display: flex;
+        position: relative;
+        margin-block-end: 2.5rem;
+        
+        &:last-child {
+            margin-block-end: 0;
+        }
+    }
+
+    .rd-collection-pathway-marker {
+        position: absolute;
+        left: -2rem;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rd-collection-pathway-number {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--rd-bg-base);
+        border: 2px solid var(--rd-clr-highlight);
+        color: var(--rd-clr-highlight);
+        font-family: var(--rd-font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
+        z-index: 2;
+    }
+
+    .rd-collection-pathway-content {
+        background: var(--rd-bg-surface);
+        border: var(--rd-border);
+        border-radius: var(--rd-radius);
+        padding: 1.5rem;
+        width: 100%;
+        margin-inline-start: 1rem;
+        transition: border-color 0.2s;
+
+        &:hover {
+            border-color: var(--rd-clr-highlight);
+        }
+    }
+
+    .rd-collection-pathway-title {
+        font-size: 1.15rem;
+        margin-block-end: 0.5rem;
+        font-weight: 600;
+
+        a {
+            color: var(--rd-clr-platinum);
+            text-decoration: none;
+            border: none;
+
+            &:hover {
+                color: var(--rd-clr-highlight);
+            }
+        }
+    }
+
+    .rd-collection-pathway-desc {
+        font-size: 0.9rem;
+        color: #777;
+        margin: 0;
+        line-height: 1.5;
+    }
+}
+

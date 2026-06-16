@@ -19,7 +19,7 @@ my-project/
     core/
       sidebar.html
   _sass/
-    zero-dark-sp/
+    ravenui-sp/
       _tree.scss
   index.md
   LICENSE
@@ -38,7 +38,7 @@ my-project/
     core/
       sidebar.html
   _sass/
-    zero-dark-sp/
+    ravenui-sp/
       _tree.scss
   index.md
   LICENSE

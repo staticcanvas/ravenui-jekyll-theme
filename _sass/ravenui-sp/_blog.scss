@@ -1,0 +1,114 @@
+.rd-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-block: 3rem;
+}
+
+.rd-blog-card {
+    background: var(--rd-bg-surface);
+    border: var(--rd-border);
+    border-radius: var(--rd-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+
+    &:hover {
+        border-color: var(--rd-clr-highlight);
+        transform: translateY(-4px);
+    }
+}
+
+.rd-blog-card-content { padding: 1.5rem; }
+
+.rd-blog-card-title {
+    margin-block-end: 0.5rem;
+    a { border: none; color: var(--rd-clr-platinum); }
+}
+
+.rd-blog-card-meta {
+    font-family: var(--rd-font-mono);
+    font-size: 0.7rem;
+    color: #555;
+    margin-block-end: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.rd-blog-card-desc { font-size: 0.9rem; color: #888; }
+
+/* BLOG LIST (Linear) */
+.rd-blog-list-item {
+    padding-block: 2.5rem;
+    border-block-end: var(--rd-border);
+    transition: var(--rd-transition-base);
+
+    &:last-child { border-block-end: none; }
+    
+    &:hover .rd-blog-list-title a {
+        color: var(--rd-clr-highlight);
+    }
+}
+
+.rd-blog-list-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--rd-font-mono);
+    font-size: 0.7rem;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-block-end: 0.75rem;
+
+    span, time {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}
+
+.rd-blog-list-title {
+    font-size: 1.5rem;
+    margin-block-end: 1rem;
+    font-weight: 700;
+
+    a { border: none; color: var(--rd-clr-platinum); transition: 0.2s; }
+}
+
+.rd-blog-list-desc {
+    color: #777;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 70ch;
+}
+
+/* Additional unified blog styles */
+.rd-blog-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-block: 2rem;
+}
+
+.rd-blog-card-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: var(--rd-border);
+
+    .rd-blog-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+}
+
+.rd-blog-card:hover {
+    .rd-blog-thumb {
+        transform: scale(1.05);
+    }
+}
+
+

@@ -10,17 +10,17 @@ The theme includes a versatile tag system used for blog categories, project meta
 
 {% include comps/heading.html tag="h2" text="Standard Tags" icon="tag" size=20 %}
 
-<div class="zd-tag-container">
-    <span class="zd-tag">Standard Tag</span>
-    <span class="zd-tag">{% include comps/icon.html name="star" size=10 %} Starred</span>
-    <span class="zd-tag">{% include comps/icon.html name="code" size=10 %} Liquid</span>
+<div class="rd-tag-container">
+    <span class="rd-tag">Standard Tag</span>
+    <span class="rd-tag">{% include comps/icon.html name="star" size=10 %} Starred</span>
+    <span class="rd-tag">{% include comps/icon.html name="code" size=10 %} Liquid</span>
 </div>
 
 {% capture tag_code %}
 ```html
-<div class="zd-tag-container">
-    <span class="zd-tag">Standard Tag</span>
-    <span class="zd-tag">{% include comps/icon.html name="star" size=10 %} Starred</span>
+<div class="rd-tag-container">
+    <span class="rd-tag">Standard Tag</span>
+    <span class="rd-tag">{% include comps/icon.html name="star" size=10 %} Starred</span>
 </div>
 ```
 {% endcapture %}
@@ -32,20 +32,20 @@ The theme includes a versatile tag system used for blog categories, project meta
 
 You can apply subtle pastel colors to tags using the built-in modifier classes for improved visual hierarchy.
 
-<div class="zd-tag-container">
-    <span class="zd-tag zd-tag--blue">Blue Tag</span>
-    <span class="zd-tag zd-tag--purple">Purple Tag</span>
-    <span class="zd-tag zd-tag--pink">Pink Tag</span>
-    <span class="zd-tag zd-tag--orange">Orange Tag</span>
+<div class="rd-tag-container">
+    <span class="rd-tag rd-tag--blue">Blue Tag</span>
+    <span class="rd-tag rd-tag--purple">Purple Tag</span>
+    <span class="rd-tag rd-tag--pink">Pink Tag</span>
+    <span class="rd-tag rd-tag--orange">Orange Tag</span>
 </div>
 
 {% capture pastel_code %}
 ```html
-<div class="zd-tag-container">
-    <span class="zd-tag zd-tag--blue">Blue Tag</span>
-    <span class="zd-tag zd-tag--purple">Purple Tag</span>
-    <span class="zd-tag zd-tag--pink">Pink Tag</span>
-    <span class="zd-tag zd-tag--orange">Orange Tag</span>
+<div class="rd-tag-container">
+    <span class="rd-tag rd-tag--blue">Blue Tag</span>
+    <span class="rd-tag rd-tag--purple">Purple Tag</span>
+    <span class="rd-tag rd-tag--pink">Pink Tag</span>
+    <span class="rd-tag rd-tag--orange">Orange Tag</span>
 </div>
 ```
 {% endcapture %}

@@ -1,0 +1,11 @@
+<svg class="logo-mark-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="52" height="52" rx="10" fill="#161B24"></rect>
+          <rect x="0.5" y="0.5" width="51" height="51" rx="9.5" stroke="#2A3340" stroke-width="1"></rect>
+          <rect x="12" y="13" width="28" height="3.5" fill="#00C8A0" opacity="0.95"></rect>
+          <rect x="26" y="16.5" width="3.5" height="7" fill="#00C8A0" opacity="0.55"></rect>
+          <rect x="22.5" y="23.5" width="3.5" height="7" fill="#00C8A0" opacity="0.45"></rect>
+          <rect x="19" y="30.5" width="3.5" height="5" fill="#00C8A0" opacity="0.35"></rect>
+          <rect x="12" y="35.5" width="28" height="3.5" fill="#00C8A0" opacity="0.95"></rect>
+          <rect x="35" y="8" width="8" height="2" rx="1" fill="#2A3340"></rect>
+          <rect x="35" y="11.5" width="5" height="2" rx="1" fill="#2A3340"></rect>
+        </svg>

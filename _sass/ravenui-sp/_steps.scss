@@ -1,0 +1,146 @@
+// Elegant Progress & Steps Bar styling
+// Compliance: [Visual & UI Elegance (Handcrafted)]
+
+.rd-steps-wrapper {
+  margin-block: 2rem;
+  width: 100%;
+}
+
+.rd-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.rd-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  min-width: 0; // Prevent content from stretching flex container width
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+  }
+
+  // Active status accent variables
+  --rd-step-color: var(--rd-clr-slate, #64748b);
+  --rd-step-bg: rgba(255, 255, 255, 0.03);
+  --rd-step-border: var(--rd-border-subtle, rgba(255, 255, 255, 0.08));
+
+  &.rd-step--active {
+    --rd-step-color: var(--rd-clr-viridian, #2ec4b6);
+    --rd-step-bg: rgba(46, 196, 182, 0.1);
+    --rd-step-border: var(--rd-clr-viridian, #2ec4b6);
+  }
+
+  &.rd-step--complete {
+    --rd-step-color: var(--rd-clr-info, #3399ff);
+    --rd-step-bg: rgba(51, 153, 255, 0.1);
+    --rd-step-border: var(--rd-clr-info, #3399ff);
+  }
+
+  // Connector line
+  .rd-step-connector {
+    position: absolute;
+    top: 14px; // half of badge height (28px / 2)
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background: var(--rd-border-subtle, rgba(255, 255, 255, 0.08));
+    z-index: 1;
+    transition: background var(--rd-transition-fast, 0.2s);
+
+    .rd-step--complete & {
+      background: var(--rd-clr-info, #3399ff);
+    }
+
+    .rd-step:last-child & {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      left: 14px;
+      top: 28px;
+      bottom: -28px;
+      height: auto;
+      width: 2px;
+      right: auto;
+      
+      .rd-step:last-child & {
+        display: none;
+      }
+    }
+  }
+
+  // Step Badge / Number Circle
+  .rd-step-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--rd-step-bg);
+    border: 2px solid var(--rd-step-border);
+    color: var(--rd-step-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--rd-font-mono, monospace);
+    z-index: 2;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 0 0 4px var(--rd-bg-card, #1e1e28);
+    transition: all var(--rd-transition-fast, 0.2s);
+
+    svg {
+      width: 12px;
+      height: 12px;
+      color: var(--rd-step-color);
+    }
+  }
+
+  // Step Content
+  .rd-step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-inline: 0.5rem;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    
+    @media (max-width: 768px) {
+      padding-inline: 0;
+      padding-top: 0.15rem;
+    }
+  }
+
+  .rd-step-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--rd-clr-platinum, #e2e8f0);
+    
+    .rd-step--active & {
+      color: var(--rd-clr-white, #fff);
+    }
+  }
+
+  .rd-step-description {
+    font-size: 0.75rem;
+    color: var(--rd-clr-mist, #94a3b8);
+    line-height: 1.3;
+  }
+}

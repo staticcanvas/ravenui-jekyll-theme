@@ -11,14 +11,14 @@ The `gradient-text.html` component renders headings or text styled with linear C
 {% include comps/heading.html tag="h2" text="Live Example" icon="type" size=20 %}
 
 <h1>
-    {% include comps/gradient-text.html text="Beautiful Dynamic Gradients" from="var(--zd-clr-viridian)" to="#00b3ff" %}
+    {% include comps/gradient-text.html text="Beautiful Dynamic Gradients" from="var(--rd-clr-viridian)" to="#00b3ff" %}
 </h1>
 
 {% capture grad_eg %}
 {% raw %}
 ```liquid
 <h1>
-    {% include comps/gradient-text.html text="Beautiful Dynamic Gradients" from="var(--zd-clr-viridian)" to="#00b3ff" %}
+    {% include comps/gradient-text.html text="Beautiful Dynamic Gradients" from="var(--rd-clr-viridian)" to="#00b3ff" %}
 </h1>
 ```
 {% endraw %}
@@ -52,7 +52,7 @@ You can customize the HTML tag, weight, and font-size of the rendered gradient t
 | :--- | :--- | :--- | :--- |
 | `text` | String | | The text content to style. |
 | `tag` | String | `span` | The HTML wrapper tag (e.g. `span`, `p`, `h1`, `h2`). |
-| `from` | String | `var(--zd-clr-viridian)` | The starting color of the linear gradient. |
+| `from` | String | `var(--rd-clr-viridian)` | The starting color of the linear gradient. |
 | `to` | String | `#00b3ff` | The ending color of the linear gradient. |
 | `weight` | String | `bold` | The font-weight CSS value (e.g. `bold`, `normal`, `800`). |
 | `size` | String | | Optional CSS font-size override. |

@@ -1,16 +1,16 @@
 {% assign percent = include.percent | default: 0 %}
-{% assign color = include.color | default: "var(--zd-clr-highlight)" %}
+{% assign color = include.color | default: "var(--rd-clr-highlight)" %}
 {% assign size = include.size | default: "8px" %}
 {% assign show_label = include.show_label | default: false %}
 
-<div class="zd-progress-wrapper {{ include.class }}">
+<div class="rd-progress-wrapper {{ include.class }}">
     {% if show_label %}
-    <div class="zd-progress-header">
-        <span class="zd-progress-title">{{ include.title }}</span>
-        <span class="zd-progress-percent">{{ percent }}%</span>
+    <div class="rd-progress-header">
+        <span class="rd-progress-title">{{ include.title }}</span>
+        <span class="rd-progress-percent">{{ percent }}%</span>
     </div>
     {% endif %}
-    <div class="zd-progress-track" style="height: {{ size }};">
-        <div class="zd-progress-bar" style="width: {{ percent }}%; background-color: {{ color }};"></div>
+    <div class="rd-progress-track" style="height: {{ size }};">
+        <div class="rd-progress-bar" style="width: {{ percent }}%; background-color: {{ color }};"></div>
     </div>
 </div>

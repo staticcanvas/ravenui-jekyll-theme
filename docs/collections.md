@@ -3,10 +3,10 @@ layout: default
 title: Jekyll Collections
 output-title: true
 tags: [collections, architecture, layouts]
-description: Learn how to group content and auto-generate navigation layouts using Zero-Dark's collections system.
+description: Learn how to group content and auto-generate navigation layouts using RavenUI's collections system.
 enable_search: true
 ---
-Zero-Dark features a robust, high-performance Jekyll collections integration that coexists seamlessly with the standard static sidebar navigation. This allows you to manage content-heavy guides, references, or tutorials without duplicating metadata in navigation files.
+RavenUI features a robust, high-performance Jekyll collections integration that coexists seamlessly with the standard static sidebar navigation. This allows you to manage content-heavy guides, references, or tutorials without duplicating metadata in navigation files.
 
 ---
 
@@ -52,7 +52,7 @@ tags: [basics, intro]
 
 {% include comps/heading.html tag="h2" text="Dynamic Layout Styles" icon="layout" size=20 %}
 
-Zero-Dark provides a generic `collection.html` layout that can compile and display collections in 5 different visual styles:
+RavenUI provides a generic `collection.html` layout that can compile and display collections in 5 different visual styles:
 
 | Layout Style | Usage | Live Previews |
 | :--- | :--- | :--- |
@@ -75,4 +75,4 @@ title: "Tutorials Directory"
 
 ---
 
-{% include comps/callout.html type="note" title="GitHub Pages Compatibility" content="Because the entire Zero-Dark collections engine is written in native Liquid and SASS, it is fully compatible with GitHub Pages safe mode execution." %}
+{% include comps/callout.html type="note" title="GitHub Pages Compatibility" content="Because the entire RavenUI collections engine is written in native Liquid and SASS, it is fully compatible with GitHub Pages safe mode execution." %}

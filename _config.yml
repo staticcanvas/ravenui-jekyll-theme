@@ -1,14 +1,14 @@
-title: Zero-Dark
+title: RavenUI
 description: A high-contrast, professional Jekyll theme optimized for technical documentation.
 logo_text: ZERODARK
 logo_subtext: SP
-copyright: "© 2026 Zero-Dark Systems. All rights reserved."
+copyright: "© 2026 RavenUI Systems. All rights reserved."
 
 # Repository Settings
 repository:
   platform: github # options: github, gitlab, bitbucket, codeberg
   user: staticcanvas
-  repo: zero-dark-jekyll-theme
+  repo: ravenui-jekyll-theme
   branch: main
   edit_mode: standard # options: standard, vscode
 
@@ -28,6 +28,32 @@ theme_settings:
     animations: true               # Enable/disable TOC specific animations (page load, hover)
   code:
     lang_style: header
+  
+  # Borders Settings
+  borders:
+    style: solid                  # options: solid, dotted, dashed, double, none
+    width: 1px                    # border width (e.g. 1px, 2px, 0.1rem)
+    color: default                # options: default, subtle, strong, accent, or custom CSS color
+    gradient:
+      enable: false               # toggle premium gradient borders
+      type: linear                # options: linear, radial
+      direction: 135deg           # direction for linear gradients
+      colors: ["var(--rd-clr-viridian)", "var(--rd-clr-info-alt)"]
+
+  # Background Settings
+  background:
+    gradient:
+      enable: false               # toggle background linear/radial gradient
+      type: linear                # options: linear, radial
+      direction: 135deg           # direction for linear gradient
+      colors: ["var(--rd-clr-void)", "var(--rd-bg-base)"]
+    backdrop:
+      enable: false               # backdrop pattern layer in front of background
+      opacity: 0.05               # backdrop pattern opacity
+      pattern: grid               # options: grid, dots, diagonal
+    animation:
+      enable: true                # toggle background panning/color-shifting animations
+      speed: slow                 # options: slow, normal, fast
 
   # Analytics Configuration
   analytics:
@@ -45,6 +71,27 @@ theme_settings:
       domain: "yourdomain.com"
       src: "https://plausible.io/js/script.js"
 
+  # Feedback, Likes & Comments Settings
+  feedback:
+    likes:
+      enabled: false             # Enable static page likes widget
+    comments:
+      enabled: false            # Enable comments discussion thread
+      provider: giscus           # options: giscus, disqus
+      giscus:
+        repo: "staticcanvas/ravenui-jekyll-theme"
+        repo_id: "R_kgDOLD..."
+        category: "Announcements"
+        category_id: "DIC_kwDOLD..."
+        mapping: "pathname"
+        reactions_enabled: "1"
+        emit_metadata: "0"
+        input_position: "bottom"
+        theme: "transparent_dark"
+        lang: "en"
+      disqus:
+        shortname: "ravenui"
+
   # Search Configuration
   search:
     provider: pagefind            # options: pagefind, lyra, algolia
@@ -58,11 +105,23 @@ theme_settings:
   animations:
     enabled: true                   # Enable/disable all animations globally
     page_loads: true                # Enable subtle page load fade-in animations
+    page_load_style: fade-in-up     # options: fade-in, fade-in-up, slide-in-left, zoom-in, none
     hover_effects: true             # Enable hover scale/rotate micro-animations on interactive elements
+    view_transitions: true          # Enable View Transitions API for navigation transitions (exit/entry)
   
   # Collections Configuration
   collections:
     enabled: false                  # Toggle dynamic collections in sidebar
+
+  # Version Switcher
+  versions:
+    enabled: false                  # Toggle dynamic version switcher dropdown in sidebar
+    current: "v1.17"
+    list:
+      - text: "v1.17 (Latest)"
+        url: "/"
+      - text: "v1.16"
+        url: "https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/tree/v1.16"
 
   
   # Typography Configurations
@@ -116,7 +175,7 @@ theme_settings:
       - title: "Project"
         items:
           - type: text
-            text: "Zero-Dark is an elegant Jekyll theme designed for technical documentations and developers."
+            text: "RavenUI is an elegant Jekyll theme designed for technical documentations and developers."
           - type: icon
             icon: "github"
             url: "https://github.com/staticcanvas"
@@ -130,38 +189,54 @@ twitter_username: staticcanvas
 linkedin_username: staticcanvas
 
 # Theme Features
-zd_output_title_default: true
-zd_toc_default_open: true
-zd_progress_bar: true
-zd_code_copy: true
-zd_code_lang: true
+rd_output_title_default: true
+rd_toc_default_open: true
+rd_progress_bar: true
+rd_code_copy: true
+rd_code_lang: true
+
+# External Animation Libraries
+animation_libraries:
+  animate_css:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  aos:
+    enable: false
+    cdn_css: "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    cdn_js: "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+  gsap:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+  animejs:
+    enable: false
+    cdn: "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
 
 # Defaults
-zd_icon_size: 16
-zd_toc_levels: ["h2", "h3", "h4"]
-zd_debug: true
-zd_show_version: true
+rd_icon_size: 16
+rd_toc_levels: ["h2", "h3", "h4"]
+rd_debug: true
+rd_show_version: true
 version: 1.17.1
-zd_accent_color: "#00ff9d"
-zd_nav_spacing: compact
-zd_show_powered_by: true
-zd_use_cdn: true
+rd_accent_color: "#00ff9d"
+rd_nav_spacing: compact
+rd_show_powered_by: true
+rd_use_cdn: true
 font_awesome: true
 
 # Announcement Banner Settings
-zd_announcement:
+rd_announcement:
   enabled: true
   id: "welcome-banner-v1"
-  text: "Welcome to Zero-Dark! Check out the new Keyboard Shortcuts component."
+  text: "Welcome to RavenUI! Check out the new Keyboard Shortcuts component."
   icon: "megaphone"
-  color: "var(--zd-clr-viridian)"
+  color: "var(--rd-clr-viridian)"
   link: "/components/kbd/"
   link_text: "View Docs"
   dismissible: true
   type: "success"
 
 # Feedback Widget Settings
-zd_feedback:
+rd_feedback:
   enabled: true
   question: "Was this page helpful?"
   yes_label: "Yes"

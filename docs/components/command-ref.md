@@ -13,24 +13,24 @@ The `command-ref.html` component provides a structured, visually distinct block 
 {% capture cmd_params %}
 <li>
     <code>--force</code>
-    <span class="zd-api-param-type">Boolean</span>
-    <span class="zd-api-param-desc">Overwrite existing files without prompting.</span>
+    <span class="rd-api-param-type">Boolean</span>
+    <span class="rd-api-param-desc">Overwrite existing files without prompting.</span>
 </li>
 <li>
     <code>--env</code>
-    <span class="zd-api-param-type">String</span>
-    <span class="zd-api-param-desc">Deployment target environment (development, production).</span>
+    <span class="rd-api-param-type">String</span>
+    <span class="rd-api-param-desc">Deployment target environment (development, production).</span>
 </li>
 {% endcapture %}
 
 {% include comps/command-ref.html 
-    name="zero-dark build" 
+    name="ravenui build" 
     badge="v1.0" 
-    signature="zero-dark build [options]"
+    signature="ravenui build [options]"
     description="Compile code bases and optimize site assets."
     params=cmd_params
     returns="Exits with code 0 on success, or non-zero on compilation failure."
-    example="zero-dark build --env production --force"
+    example="ravenui build --env production --force"
 %}
 
 {% capture cmd_code %}
@@ -39,14 +39,14 @@ The `command-ref.html` component provides a structured, visually distinct block 
 {% capture cmd_params %}
 <li>
     <code>--force</code>
-    <span class="zd-api-param-type">Boolean</span>
-    <span class="zd-api-param-desc">Overwrite files.</span>
+    <span class="rd-api-param-type">Boolean</span>
+    <span class="rd-api-param-desc">Overwrite files.</span>
 </li>
 {% endcapture %}
 
 {% include comps/command-ref.html 
-    name="zero-dark build" 
-    signature="zero-dark build [options]"
+    name="ravenui build" 
+    signature="ravenui build [options]"
     params=cmd_params 
 %}
 ```

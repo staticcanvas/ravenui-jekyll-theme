@@ -44,4 +44,4 @@ The `written-by.html` component provides a refined way to display author metadat
 | `linkedin` | String | `site.author.linkedin` | LinkedIn username. |
 | `email` | String | `site.author.email` | Contact email address. |
 | `label` | String | `"Written By"` | Small heading text displayed above the author name. |
-| `color` | String | `var(--zd-clr-highlight)` | Color accent applied to the label and social icons. |
+| `color` | String | `var(--rd-clr-highlight)` | Color accent applied to the label and social icons. |

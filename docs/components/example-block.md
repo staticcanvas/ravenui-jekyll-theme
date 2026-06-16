@@ -11,7 +11,7 @@ The `example-block.html` component provides a general-purpose collapsible contai
 {% include comps/heading.html tag="h2" text="Live Example" icon="box" size=20 %}
 
 {% capture block_demo %}
-<div style="padding: 1rem; border: 1px solid var(--zd-clr-border); border-radius: 4px; background: var(--zd-clr-bg-alt);">
+<div style="padding: 1rem; border: 1px solid var(--rd-clr-border); border-radius: 4px; background: var(--rd-clr-bg-alt);">
     <h4 style="margin:0;">Live Preview</h4>
     <p style="margin:0.5rem 0 0;">This content is rendered inside the example block.</p>
 </div>

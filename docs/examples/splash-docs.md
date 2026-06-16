@@ -6,7 +6,7 @@ permalink: /examples/splash-docs/
 description: Example page demonstrating the docs variant of the splash layout.
 enable_search: true
 ---
-# Zero-Dark Documentation Splash
+# RavenUI Documentation Splash
 
 A focused, elegant landing layout designed for starting points of documentation portals.
 

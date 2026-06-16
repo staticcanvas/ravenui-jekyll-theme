@@ -1,0 +1,252 @@
+/* 🌀 ZERO-DARK Animations
+ * Standardized animation library for UI elements.
+ */
+
+// Continuous Animations
+.rd-anim-continuous {
+  animation-iteration-count: infinite !important;
+}
+
+// 1. Rotation / Spin
+@keyframes rd-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.rd-anim-spin { animation: rd-spin 4s linear infinite; }
+
+// 2. Pulse / Scale
+@keyframes rd-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.rd-anim-pulse { animation: rd-pulse 2s ease-in-out; }
+
+// 3. Shake / Nudge
+@keyframes rd-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+.rd-anim-shake { animation: rd-shake 0.5s ease-in-out; }
+
+// 4. Stroke Draw (Handled via JS for SVG paths usually, but CSS can do basics)
+@keyframes rd-draw {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+.rd-anim-draw {
+  stroke-dasharray: 100;
+  animation: rd-draw 2s ease-out forwards;
+}
+
+// 5. Flap / Toggle
+@keyframes rd-flap {
+  0% { transform: scaleY(1); transform-origin: top; }
+  50% { transform: scaleY(0.5); transform-origin: top; }
+  100% { transform: scaleY(1); transform-origin: top; }
+}
+.rd-anim-flap { animation: rd-flap 1.5s ease-in-out infinite; }
+
+// Hover Triggers
+.rd-hover-pulse:hover { animation: rd-pulse 0.6s ease-in-out infinite; }
+.rd-hover-spin:hover { animation: rd-spin 1s linear infinite; }
+.rd-hover-shake:hover { animation: rd-shake 0.4s ease-in-out infinite; }
+.rd-hover-draw:hover { stroke-dasharray: 100; animation: rd-draw 1s ease-out forwards; }
+
+// Click Triggers (Active state)
+.rd-click-pulse:active { transform: scale(0.9); transition: 0.1s; }
+.rd-click-shake:active { animation: rd-shake 0.2s ease-in-out; }
+
+// VHS Flicker & Distortion (Preserved)
+@keyframes vhs-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.4; } 100% { opacity: 0.1; } }
+@keyframes vhs-distort { 
+  0% { transform: skew(0deg); }
+  1% { transform: skew(3deg); }
+  2% { transform: skew(0deg); }
+  98% { transform: skew(0deg); }
+  99% { transform: skew(-2deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes terminal-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes space-drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+
+/* Scoped Animations & Transition System (Fluent UI Standard) */
+
+// Keyframes
+@keyframes rd-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rd-fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// 1. Page Load Animations
+.rd-animations-enabled.rd-anim-page-loads {
+  .rd-hero {
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both);
+  }
+  
+  .rd-content > :not(.rd-hero) {
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both);
+    animation-delay: 0.08s;
+  }
+  
+  .rd-sidebar-left {
+    animation: rd-fade-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+.rd-animations-enabled.rd-anim-page-loads:not([data-toc-animations="false"]) {
+  .rd-page-toc-container {
+    animation: var(--rd-page-load-anim, rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both);
+    animation-delay: 0.12s;
+  }
+}
+
+// 2. Interactive Hover Micro-Animations
+.rd-animations-enabled.rd-anim-hover-effects {
+  // TOC links
+  &:not([data-toc-animations="false"]) {
+    .rd-toc-link {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease, font-weight 0.15s ease, padding 0.15s ease;
+      
+      &:hover {
+        transform: translateX(4px);
+      }
+      
+      &.active {
+        transform: translateX(2px);
+      }
+    }
+  }
+
+  // Cards
+  .rd-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: var(--rd-elevation-high), 0 0 20px rgba(0, 255, 157, 0.05);
+    }
+    
+    .rd-card-icon {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    &:hover .rd-card-icon {
+      transform: scale(1.1);
+    }
+  }
+  
+  // Callouts
+  .rd-callout {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-inline-start-width 0.2s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateX(4px);
+      border-inline-start-width: 6px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  // Badges & Tags
+  .rd-tag {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 2px 8px rgba(0, 255, 157, 0.1);
+    }
+  }
+  
+  // Buttons
+  .rd-btn, button.rd-mobile-btn, .rd-copy-btn, .rd-feedback-btn {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px) scale(1.02);
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+// 3. Smooth Scrolling
+.rd-animations-enabled {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// 3.5. Pneumatic (Neumorphic Soft-Press) Effects
+.rd-pneumatic {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45), 0 0 12px rgba(0, 255, 157, 0.08);
+  }
+  
+  &:active, &.rd-pneumatic--pressed {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.02);
+  }
+}
+
+// Background & Backdrop Animations
+@keyframes rd-backdrop-pan {
+  from { background-position: 0 0; }
+  to { background-position: 120px 120px; }
+}
+
+@keyframes rd-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Configurable Page-Load Animations
+@keyframes rd-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rd-slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rd-zoom-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+// 4. Accessibility Fallback (Reduced Motion)
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

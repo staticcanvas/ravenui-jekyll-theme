@@ -12,8 +12,8 @@ The `vhs.html` component provides a stylized background effect inspired by vinta
 
 {% capture vhs_demo %}
 <div style="text-align:center; padding: 2rem;">
-    <h3 style="margin:0; color:var(--zd-clr-highlight);">SYSTEM OVERRIDE</h3>
-    <p style="font-family:var(--zd-font-mono); margin-top:0.5rem;">PROTOCOL 7-B INITIATED</p>
+    <h3 style="margin:0; color:var(--rd-clr-highlight);">SYSTEM OVERRIDE</h3>
+    <p style="font-family:var(--rd-font-mono); margin-top:0.5rem;">PROTOCOL 7-B INITIATED</p>
 </div>
 {% endcapture %}
 
@@ -23,7 +23,7 @@ The `vhs.html` component provides a stylized background effect inspired by vinta
 {% raw %}
 ```liquid
 {% capture vhs_content %}
-    <h3 style="color:var(--zd-clr-highlight);">SYSTEM OVERRIDE</h3>
+    <h3 style="color:var(--rd-clr-highlight);">SYSTEM OVERRIDE</h3>
 {% endcapture %}
 
 {% include comps/vhs.html content=vhs_content %}

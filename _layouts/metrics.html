@@ -3,25 +3,25 @@
 
 {% include core/head.html %}
 
-<body class="zd-layout-metrics">
+<body class="rd-layout-metrics">
 
-    <div class="zd-metrics-container">
-        <header class="zd-metrics-header">
-            <a href="{{ "/" | relative_url }}" class="zd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "METRICS" }}</span></a>
+    <div class="rd-metrics-container">
+        <header class="rd-metrics-header">
+            <a href="{{ "/" | relative_url }}" class="rd-logo">{{ site.logo_text | default: "ZERODARK" }} <span style="font-weight:400; color:#666;">// {{ site.logo_subtext | default: "METRICS" }}</span></a>
         </header>
 
-        <main class="zd-metrics-main">
-            <div class="zd-metrics-hero">
-                <h1 class="zd-metrics-title">{{ page.title }}</h1>
-                <p class="zd-metrics-description">{{ page.description }}</p>
+        <main class="rd-metrics-main">
+            <div class="rd-metrics-hero">
+                <h1 class="rd-metrics-title">{{ page.title }}</h1>
+                <p class="rd-metrics-description">{{ page.description }}</p>
             </div>
 
-            <div class="zd-metrics-grid">
+            <div class="rd-metrics-grid">
                 {{ content }}
             </div>
         </main>
 
-        <footer class="zd-metrics-footer">
+        <footer class="rd-metrics-footer">
             {{ site.copyright }}
         </footer>
     </div>

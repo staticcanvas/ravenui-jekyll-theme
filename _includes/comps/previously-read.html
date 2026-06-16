@@ -1,20 +1,20 @@
-<div class="zd-previously-read {{ include.class }}" id="zd-previously-read-container">
-  <div class="zd-previously-read-empty">
+<div class="rd-previously-read {{ include.class }}" id="rd-previously-read-container">
+  <div class="rd-previously-read-empty">
     {% include comps/icon.html name="history" size=14 %}
     <span>No history found. Pages you read will appear here.</span>
   </div>
-  <ul class="zd-previously-read-list" style="display: none;"></ul>
+  <ul class="rd-previously-read-list" style="display: none;"></ul>
 </div>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('zd-previously-read-container');
+    const container = document.getElementById('rd-previously-read-container');
     if (!container) return;
-    const emptyMsg = container.querySelector('.zd-previously-read-empty');
-    const list = container.querySelector('.zd-previously-read-list');
+    const emptyMsg = container.querySelector('.rd-previously-read-empty');
+    const list = container.querySelector('.rd-previously-read-list');
     
     try {
-      const visited = JSON.parse(localStorage.getItem('zd_visited_pages') || '[]');
+      const visited = JSON.parse(localStorage.getItem('rd_visited_pages') || '[]');
       if (visited.length > 0) {
         emptyMsg.style.display = 'none';
         list.style.display = 'flex';
@@ -36,20 +36,20 @@
         // Limit display list to the last 6 read pages
         uniqueVisited.slice(0, 6).forEach(item => {
           const li = document.createElement('li');
-          li.className = 'zd-previously-read-item';
+          li.className = 'rd-previously-read-item';
           
           const a = document.createElement('a');
           a.href = item.url;
-          a.className = 'zd-previously-read-link';
+          a.className = 'rd-previously-read-link';
           
           const titleText = document.createElement('span');
-          titleText.className = 'zd-previously-read-title';
-          // Clean title suffix if standard " - Zero-Dark" is present
-          titleText.textContent = item.title.replace(/\s*-\s*Zero-Dark\s*$/i, '');
+          titleText.className = 'rd-previously-read-title';
+          // Clean title suffix if standard " - RavenUI" is present
+          titleText.textContent = item.title.replace(/\s*-\s*RavenUI\s*$/i, '');
           
           const iconSpan = document.createElement('span');
-          iconSpan.className = 'zd-previously-read-item-icon';
-          iconSpan.innerHTML = '<i data-lucide="check-circle-2" style="width: 12px; height: 12px; color: var(--zd-clr-highlight, #00ff9d);"></i>';
+          iconSpan.className = 'rd-previously-read-item-icon';
+          iconSpan.innerHTML = '<i data-lucide="check-circle-2" style="width: 12px; height: 12px; color: var(--rd-clr-highlight, #00ff9d);"></i>';
           
           a.appendChild(iconSpan);
           a.appendChild(titleText);
