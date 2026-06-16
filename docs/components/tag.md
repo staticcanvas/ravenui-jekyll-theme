@@ -29,12 +29,13 @@ The `tag.html` component offers a dynamic way to render labels, metadata tags, b
 
 {% include comps/heading.html tag="h2" text="Version & Release Variants" icon="package" size=20 %}
 
-Use predefined variant names inside the `type` parameter to style version tags according to semantic release guidelines.
+Use predefined variant names inside the `type` parameter to style version tags according to semantic release guidelines. You can also specify `text="latest"` or `text="latest-version"` to dynamically resolve and display the latest version from `site.data.releases` (falling back to `site.version`).
 
 <div class="rd-tag-container">
     {% include comps/tag.html text="v1.0.0-beta" type="beta" icon="activity" %}
     {% include comps/tag.html text="v1.0.0-rc1" type="rc" icon="git-pull-request" %}
     {% include comps/tag.html text="v1.0.0" type="release" icon="check" %}
+    {% include comps/tag.html text="latest" type="release" icon="tag" %}
     {% include comps/tag.html text="v2.0.0-breaking" type="major" icon="alert-triangle" %}
 </div>
 
@@ -45,6 +46,7 @@ Use predefined variant names inside the `type` parameter to style version tags a
     {% include comps/tag.html text="v1.0.0-beta" type="beta" icon="activity" %}
     {% include comps/tag.html text="v1.0.0-rc1" type="rc" icon="git-pull-request" %}
     {% include comps/tag.html text="v1.0.0" type="release" icon="check" %}
+    {% include comps/tag.html text="latest" type="release" icon="tag" %}
     {% include comps/tag.html text="v2.0.0-breaking" type="major" icon="alert-triangle" %}
 </div>
 ```
@@ -58,7 +60,7 @@ Use predefined variant names inside the `type` parameter to style version tags a
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `text` | String | `tag` | The text label to display. |
+| `text` | String | `tag` | The text label to display. Special values `"latest"` and `"latest-version"` resolve automatically to `site.data.releases.first.tag_name`, falling back to `site.version` then `"v1.0.0"`. |
 | `type` | String | `default` | Variant type (`default`, `beta`, `rc`, `release`, `major`, `version`). |
 | `icon` | String | | Optional Lucide icon name to display before the text. |
 | `color` | String | | Optional custom CSS color (hex, rgb, var) for dynamic borders/backgrounds. |
