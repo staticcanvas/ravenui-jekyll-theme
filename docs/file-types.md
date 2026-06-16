@@ -57,6 +57,7 @@ Kramdown converts this content before it enters the layout.
 
 **Best suited for:** complex layouts, dashboard pages, canvas designs, pages that embed multiple multi-line HTML components, and any page where exact tag control is required.
 
+{% raw %}
 ```html
 ---
 layout: default
@@ -69,6 +70,7 @@ title: My Dashboard Page
   {% include comps/card.html title="Metric C" value="42ms" %}
 </div>
 ```
+{% endraw %}
 
 {% include comps/callout.html type="tip" title="Avoid Paragraph Wrapping" content="If a Liquid include emits block-level HTML and you are in a `.md` file, Kramdown may wrap surrounding text in `<p>` tags that break layout flow. Use `.html` pages when component structure must remain pristine." %}
 
@@ -80,15 +82,17 @@ All RavenUI include components live under `_includes/comps/` and carry a `.html`
 
 A component's `content` parameter can accept either Markdown or raw HTML depending on the calling context:
 
-- When called from a `.md` page, any **Markdown passed via `{% capture %}`** is first rendered by Kramdown, so the component receives HTML.
+- When called from a `.md` page, any **Markdown passed via {% raw %}`{% capture %}`{% endraw %}** is first rendered by Kramdown, so the component receives HTML.
 - When called from a `.html` page, you must pass fully-formed HTML or plain text; Markdown syntax will not be converted.
 
+{% raw %}
 ```liquid
 {% capture my_note %}
 **This Markdown** is rendered by Kramdown first (when in a `.md` page).
 {% endcapture %}
 {% include comps/callout.html type="note" content=my_note %}
 ```
+{% endraw %}
 
 ---
 
@@ -102,7 +106,7 @@ A component's `content` parameter can accept either Markdown or raw HTML dependi
 | Blog post or changelog entry | `.md` |
 | Dashboard or canvas layout | `.html` |
 | Complex multi-component page | `.html` |
-| Page with `{% capture %}` blocks | `.md` with care |
+| Page with {% raw %}`{% capture %}`{% endraw %} blocks | `.md` with care |
 | Precise tag control required | `.html` |
 | SEO-focused prose content | `.md` |
 
@@ -116,6 +120,7 @@ Kramdown wraps bare text blocks in `<p>` tags. When an HTML component is placed 
 
 **Workaround:** Wrap multi-line HTML includes in a block-level `<div>` with a blank line above and below:
 
+{% raw %}
 ```markdown
 Preceding text paragraph.
 
@@ -125,6 +130,7 @@ Preceding text paragraph.
 
 Following text paragraph.
 ```
+{% endraw %}
 
 The `modal.html` component documentation covers this pattern in detail. See [Modal / Dialog](/components/modal/) for a complete example and explanation.
 

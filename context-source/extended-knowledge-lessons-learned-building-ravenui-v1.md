@@ -58,6 +58,11 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Problem:** Dynamic interactive components (like page feedback widgets) typically hardcode event dispatching logic against a single client-side tracker API (e.g. Google Analytics). Swapping to a self-hosted alternative (Umami, Plausible) or product analytics tool (PostHog) requires rewriting event dispatch loops or components.
 - **Resolution:** Abstracted analytics loading to a single unified configuration block in `head.html` and implemented dynamic client-side runtime API checks in `feedback.html`. When clicked, the submission handler checks for the existence of `posthog`, `gtag`, `ga`, `umami`, or `plausible` globally and logs the page helpfulness payload to all active tracker instances safely.
 
+### **2.10. Literal Liquid Tags in Markdown Code Blocks**
+- **Problem:** Writing markdown code blocks containing literal Jekyll Liquid templates (e.g. `{% capture %}` or `{{ site.title }}`) throws Jekyll compiler exceptions (such as `Syntax Error in 'capture' - Valid syntax: capture [var]`) or renders raw HTML elements unintentionally.
+- **Cause:** Jekyll processes Liquid syntax across all file sections, including backtick fenced code blocks, before parsing markdown.
+- **Resolution:** Wrap any code segments containing literal Liquid syntax in `{% raw %}` and `{% endraw %}` block tags.
+
 ---
 
 ## **3. Quality of Life (QOL) & Aesthetic Guidelines**
