@@ -251,6 +251,7 @@ sass:
   style: compressed
 
 plugins:
+  - jekyll-theme-ravenui
   - jekyll-feed
   - jekyll-seo-tag
 

@@ -33,7 +33,8 @@ module Jekyll
     private
 
     def generate_svg(og_dir, item)
-      title = item.data['title'] || item.basename_without_ext.to_s.capitalize
+      basename = item.respond_to?(:basename_without_ext) ? item.basename_without_ext : File.basename(item.path, File.extname(item.path))
+      title = item.data['title'] || basename.to_s.capitalize
       
       # Extract category/tag details
       category = (item.data['categories'] || item.data['tags'] || []).first || 'Documentation'

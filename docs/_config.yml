@@ -264,6 +264,7 @@ sass:
 
 # --- Plugins ---------------------------------------------------------------\
 plugins:
+  - jekyll-theme-ravenui
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
