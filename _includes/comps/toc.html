@@ -1,0 +1,131 @@
+{%- comment -%}
+Component__: Table of Contents (TOC)
+Purpose____: Renders a dynamic client-side Table of Contents with scroll-spy highlighting.
+Parameters_:
+  - content_selector : Query selector for the content area to scan for headings (default: ".rd-content")
+  - style            : TOC style - "simple", "lines", "nodes" (default: site.theme_settings.toc.style | default: "simple")
+  - density          : TOC density - "compact", "default", "relaxed" (default: site.theme_settings.toc.density | default: "default")
+  - levels           : Array or comma-separated list of heading tags to parse (default: ["h2", "h3"])
+  - inline           : Boolean. If true, disables fixed/sticky positioning (default: false)
+  - id               : String. Unique identifier to prevent collisions if multiple TOCs are present (default: "main")
+Usage______: {% include comps/toc.html content_selector="main" inline=true %}
+{%- endcomment -%}
+
+{% assign toc_style = include.style | default: site.theme_settings.toc.style | default: "simple" %}
+{% assign toc_density = include.density | default: site.theme_settings.toc.density | default: "default" %}
+{% assign toc_levels = include.levels | default: site.rd_toc_levels | default: "h2,h3" %}
+{% if toc_levels.first %}
+  {% assign toc_levels_str = toc_levels | join: "," %}
+{% else %}
+  {% assign toc_levels_str = toc_levels %}
+{% endif %}
+{% if include.id %}
+  {% assign container_id = "-" | append: include.id %}
+{% else %}
+  {% assign container_id = "" %}
+{% endif %}
+
+<div id="rd-page-toc-container{{ container_id }}" 
+     class="rd-page-toc-container{% if include.inline %} rd-page-toc-container--inline{% endif %}" 
+     style="display: none;"
+     data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}">
+  <h4 class="rd-toc-heading">
+    {% include comps/icon.html name="list" size="12" %} On This Page
+  </h4>
+  <nav id="rd-page-toc{{ container_id }}" 
+       class="rd-page-toc rd-page-toc--{{ toc_style }} rd-page-toc--{{ toc_density }}">
+  </nav>
+</div>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const selector = "{{ include.content_selector | default: '.rd-content' }}";
+    const contentArea = document.querySelector(selector);
+    const tocContainer = document.getElementById("rd-page-toc-container{{ container_id }}");
+    const tocNav = document.getElementById("rd-page-toc{{ container_id }}");
+    const tocToggle = document.getElementById('rd-toc-toggle');
+
+    if (!contentArea || !tocNav || !tocContainer) return;
+
+    const tocLevelsStr = "{{ toc_levels_str }}";
+    const tocLevels = tocLevelsStr.split(',');
+    const querySelector = tocLevels.join(', ');
+    const allHeadings = contentArea.querySelectorAll(querySelector);
+    
+    const headings = Array.from(allHeadings).filter(heading => {
+      let parent = heading.parentElement;
+      while (parent && parent !== contentArea) {
+        const classes = parent.classList ? Array.from(parent.classList) : [];
+        const isComponent = classes.some(c => c.startsWith('rd-') && c !== 'rd-content' && c !== 'rd-hero' && c !== 'rd-container');
+        if (isComponent) return false;
+        parent = parent.parentElement;
+      }
+      return true;
+    });
+
+    if (headings.length === 0) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-5% 0px -75% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocNav.querySelectorAll('.rd-toc-link').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading, index) => {
+      const id = heading.id || 'heading-' + index;
+      heading.id = id;
+      
+      const link = document.createElement('a');
+      link.href = '#' + id;
+      
+      // Clone heading to clean up typewriter and interactive elements
+      const clone = heading.cloneNode(true);
+      const typewriter = clone.querySelector('.rd-typewriter-container');
+      if (typewriter) {
+        const firstWord = typewriter.getAttribute('data-first-word') || '';
+        typewriter.textContent = firstWord;
+      }
+      clone.querySelectorAll('.rd-typewriter-cursor, .rd-copy-button, .copy-button, .rd-heading-icon').forEach(el => el.remove());
+      
+      link.textContent = clone.textContent.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
+      link.className = 'rd-toc-link rd-toc-level-' + heading.tagName.toLowerCase();
+      
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024 && tocToggle) {
+          tocContainer.classList.remove('active');
+          tocToggle.classList.remove('active');
+        }
+      });
+      tocNav.appendChild(link);
+      observer.observe(heading);
+    });
+
+    tocContainer.style.display = 'block';
+
+    const defaultOpen = {% if include.default_open == true or site.rd_toc_default_open %}true{% else %}false{% endif %};
+    if (window.innerWidth >= 1024 && defaultOpen) {
+      tocContainer.classList.add('active');
+      if (tocToggle) tocToggle.classList.add('active');
+    }
+
+    if (tocToggle) {
+      tocToggle.addEventListener('click', () => {
+        tocContainer.classList.toggle('active');
+        tocToggle.classList.toggle('active');
+      });
+    }
+  });
+})();
+</script>

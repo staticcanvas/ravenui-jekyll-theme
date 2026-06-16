@@ -1,0 +1,164 @@
+{%- comment -%}
+Component__: Sidebar Navigation
+Purpose____: Renders a collapsible sidebar navigation tree with search triggers, social links, theme selector, and page paths.
+Parameters_:
+  - inline           : Boolean. If true, disables fixed/sticky positioning for embedding inline.
+  - force_brand      : Boolean. Force rendering logo/branding even if header navigation is globally enabled.
+Caveats____: Populated dynamically from _data/navigation.yml and active collections data.
+Usage______: {% include comps/sidebar.html inline=true %}
+{%- endcomment -%}
+
+<aside class="rd-sidebar{% if include.inline %} rd-sidebar--inline{% endif %}">
+    {% if site.theme_settings.header.enabled == false or include.inline == true or include.force_brand == true %}
+    {% assign brand_layout = site.theme_settings.logo.layout | default: "inline" %}
+    <div class="rd-brand rd-brand--{{ brand_layout }}{% if site.theme_settings.logo.path %} rd-brand--has-logo{% endif %}"
+         style="--rd-logo-width: {{ site.theme_settings.logo.height | default: '32px' }};">
+        <div class="rd-brand-top-row">
+            {% if site.theme_settings.logo.path %}
+            <a href="{{ "/" | relative_url }}" class="rd-brand-logo-link">
+                <img src="{{ site.theme_settings.logo.path | relative_url }}" 
+                     alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
+                     class="rd-brand-logo-img"
+                     style="height: {{ site.theme_settings.logo.height | default: '32px' }};">
+            </a>
+            {% endif %}
+            <a href="{{ "/" | relative_url }}" class="rd-brand-title-link">
+                <span class="rd-brand-title">{{ site.logo_text | default: "RAVEN" }}</span>
+            </a>
+        </div>
+        <div class="rd-brand-bottom-row">
+            <span class="rd-brand-subtext">// {{ site.logo_subtext | default: "DOCS" }}</span>
+            {% if site.rd_show_version and site.version %}
+                <span class="rd-brand-badge-wrapper">
+                    {% include comps/tag.html type="version" text=site.version icon="tag" color="var(--rd-clr-highlight)" class="rd-logo-badge" %}
+                </span>
+            {% endif %}
+        </div>
+        {% include comps/version-switcher.html %}
+    </div>
+    {% endif %}
+
+    <div class="rd-search-trigger" id="rd-search-trigger">
+      <i data-lucide="search" style="width: 14px; height: 14px;"></i>
+      <span>Search Docs...</span>
+      <kbd>/</kbd>
+    </div>
+
+    <div class="rd-socials">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" class="rd-social-link" aria-label="GitHub">
+            <span class="rd-social-text">GH</span>
+            <span class="rd-social-icon"><i data-lucide="github"></i></span>
+        </a>
+        {% endif %}
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="rd-social-link" aria-label="Twitter">
+            <span class="rd-social-text">X</span>
+            <span class="rd-social-icon"><i data-lucide="twitter"></i></span>
+        </a>
+        {% endif %}
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="rd-social-link" aria-label="LinkedIn">
+            <span class="rd-social-text">LI</span>
+            <span class="rd-social-icon"><i data-lucide="linkedin"></i></span>
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="rd-sidebar-theme-container" style="padding: 0 1.5rem; margin-block-end: 1.5rem; display: flex; justify-content: flex-start;">
+        {% include comps/theme-toggle.html %}
+        <span style="font-size: 0.85rem; color: var(--rd-clr-text-secondary); margin-inline-start: 0.5rem; align-self: center;">Theme</span>
+    </div>
+
+    <nav class="rd-nav" aria-label="Documentation Navigation">
+        {% for section in site.data.navigation %}
+        {% if section.type == "separator" %}
+            <hr class="rd-nav-separator">
+        {% elsif section.type == "title" %}
+            <div class="rd-nav-group-title">{{ section.title }}</div>
+        {% else %}
+            <div {% if forloop.index > 1 %}style="margin-block-start: 1.25rem;"{% endif %}>
+                <h4 style="font-size:0.7rem; text-transform:uppercase; color:#444; margin-bottom:0.35rem;">{{ section.title }}</h4>
+                {% for link in section.links %}
+                {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                {% assign link_url = link.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                <a href="{{ link.url | relative_url }}" class="rd-nav-link" {% if page_url == link_url %}aria-current="page"{% endif %}>
+                    {% if link.icon %}
+                        {% if link.source == "simple" %}
+                            {% include comps/simple-icon.html name=link.icon size=14 color=link.color %}
+                            <span style="margin-inline-start: 8px;"></span>
+                        {% elsif link.source == "fa" %}
+                            {% include comps/font-awesome.html name=link.icon style=link.style size=14 color=link.color %}
+                            <span style="margin-inline-start: 8px;"></span>
+                        {% else %}
+                            <i data-lucide="{{ link.icon }}" 
+                               style="width: 14px; height: 14px; margin-inline-end: 8px; vertical-align: middle; {% if link.color %}color: {{ link.color }};{% endif %}">
+                            </i>
+                        {% endif %}
+                    {% endif %}
+                    {{ link.text }}
+                    {% if link.is_new_feature %}
+                        <span class="rd-nav-badge rd-nav-badge--{{ link.is_new_feature }}">
+                            {% if link.is_new_feature == true or link.is_new_feature == "new" %}
+                                new
+                            {% else %}
+                                {{ link.is_new_feature }}
+                            {% endif %}
+                        </span>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endfor %}
+
+        {% if site.theme_settings.collections.enabled %}
+            {% for collection in site.collections %}
+                {% assign label = collection.label %}
+                {% unless label == "posts" or label == "pages" %}
+                    {% if collection.sidebar != false %}
+                        {% if collection.divider %}
+                            <hr class="rd-nav-separator">
+                        {% endif %}
+                        <div class="rd-nav-group-title" style="margin-block-start: 1.25rem;">{{ collection.title | default: label | capitalize }}</div>
+                        <div>
+                            {% assign sorted_docs = collection.docs | sort: "order" %}
+                            {% assign current_group = nil %}
+                            {% for doc in sorted_docs %}
+                                {% if doc.group != current_group %}
+                                    {% assign current_group = doc.group %}
+                                    {% if current_group %}
+                                        <div class="rd-nav-subgroup-title" style="font-size: 0.65rem; text-transform: uppercase; color: #555; margin-block: 0.75rem 0.25rem; font-weight: 600; letter-spacing: 0.05em; padding-inline-start: 4px;">{{ current_group }}</div>
+                                    {% endif %}
+                                {% endif %}
+                                {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                                {% assign doc_url = doc.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+                                <a href="{{ doc.url | relative_url }}" class="rd-nav-link" {% if page_url == doc_url %}aria-current="page"{% endif %} style="padding-inline-start: {% if current_group %}12px{% else %}4px{% endif %};">
+                                    {% if doc.icon %}
+                                        <i data-lucide="{{ doc.icon }}" 
+                                           style="width: 14px; height: 14px; margin-inline-end: 8px; vertical-align: middle; {% if doc.color %}color: {{ doc.color }};{% endif %}">
+                                        </i>
+                                    {% endif %}
+                                    {{ doc.title | default: doc.slug }}
+                                    {% assign env = site.theme_settings.environment | default: jekyll.environment | default: "development" %}
+                                    {% if env == "development" and doc.draft == true %}
+                                        <span class="rd-nav-badge rd-nav-badge--warn">draft</span>
+                                    {% endif %}
+                                    {% if doc.is_new_feature %}
+                                        <span class="rd-nav-badge rd-nav-badge--{{ doc.is_new_feature }}">
+                                            {% if doc.is_new_feature == true or doc.is_new_feature == "new" %}
+                                                new
+                                            {% else %}
+                                                {{ doc.is_new_feature }}
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endunless %}
+            {% endfor %}
+        {% endif %}
+    </nav>
+</aside>

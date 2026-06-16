@@ -84,3 +84,25 @@
     padding-inline-start: 0.25rem;
     border-inline-start: 3px solid var(--rd-clr-highlight);
 }
+
+.rd-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  background: var(--rd-bg-base);
+  border: var(--rd-border);
+  border-radius: var(--rd-radius-md, 8px);
+}
+
+.rd-sidebar--inline {
+  position: static !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  border-radius: var(--rd-radius-md, 8px);
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+}

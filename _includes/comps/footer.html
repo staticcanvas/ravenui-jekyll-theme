@@ -1,0 +1,94 @@
+{%- comment -%}
+Component__: Footer
+Purpose____: Renders the footer columns, licensing, copyright, edit page buttons, and page scripts.
+Parameters_:
+  - inline           : Boolean. If true, disables container spacing and avoids double-including core/foot.html scripts.
+Caveats____: Sourced dynamically from site.theme_settings.footer.columns.
+Usage______: {% include comps/footer.html inline=true %}
+{%- endcomment -%}
+
+<footer class="rd-footer{% if include.inline %} rd-footer--inline{% endif %}" id="footer" style="{% unless include.inline %}margin-top: 5rem;{% endunless %} padding-top: 2rem; border-top: var(--rd-border); font-size: 0.8rem;">
+    {% if site.theme_settings.footer.columns %}
+        {% assign cols_count = site.theme_settings.footer.columns | size %}
+        {% if cols_count == 2 %}
+            {% assign c1_items = site.theme_settings.footer.columns[0].items %}
+            {% assign c1_title = site.theme_settings.footer.columns[0].title %}
+            {% assign c2_items = site.theme_settings.footer.columns[1].items %}
+            {% assign c2_title = site.theme_settings.footer.columns[1].title %}
+            {% include comps/footer-2col.html col1=c1_items col1_title=c1_title col2=c2_items col2_title=c2_title %}
+        {% elsif cols_count == 3 %}
+            {% assign c1_items = site.theme_settings.footer.columns[0].items %}
+            {% assign c1_title = site.theme_settings.footer.columns[0].title %}
+            {% assign c2_items = site.theme_settings.footer.columns[1].items %}
+            {% assign c2_title = site.theme_settings.footer.columns[1].title %}
+            {% assign c3_items = site.theme_settings.footer.columns[2].items %}
+            {% assign c3_title = site.theme_settings.footer.columns[2].title %}
+            {% include comps/footer-3col.html col1=c1_items col1_title=c1_title col2=c2_items col2_title=c2_title col3=c3_items col3_title=c3_title %}
+        {% endif %}
+    {% endif %}
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
+        <div>
+            <p style="opacity: 0.4;">{{ site.copyright | default: "© 2026 RavenUI Systems. All rights reserved." }}</p>
+            {% if site.rd_show_powered_by %}
+            <p style="margin-top: 0.5rem; font-size: 0.65rem; opacity: 0.3; text-transform: uppercase; letter-spacing: 0.05em;">
+                Powered by <a href="https://github.com/staticcanvas/ravenui-jekyll-theme" target="_blank" style="color: inherit; border-bottom: 1px dashed rgba(255,255,255,0.2);">RavenUI</a>
+            </p>
+            {% endif %}
+        </div>
+        
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+            {% assign repo = site.repository %}
+            {% if repo %}
+                {% assign platform = repo.platform | downcase %}
+                {% assign user = repo.user %}
+                {% assign project = repo.repo %}
+                {% assign branch = repo.branch | default: "main" %}
+                {% assign file_path = page.path %}
+                {% assign mode = repo.edit_mode | default: "standard" %}
+
+                {% if platform == "github" %}
+                    {% if mode == "vscode" %}
+                        {% assign edit_url = "https://github.dev/" | append: user | append: "/" | append: project | append: "/blob/" | append: branch | append: "/" | append: file_path %}
+                    {% else %}
+                        {% assign edit_url = "https://github.com/" | append: user | append: "/" | append: project | append: "/edit/" | append: branch | append: "/" | append: file_path %}
+                    {% endif %}
+                    {% assign icon = "github" %}
+                    {% assign platform_name = "GitHub" %}
+                {% elsif platform == "gitlab" %}
+                    {% if mode == "vscode" %}
+                        {% assign edit_url = "https://gitlab.com/-/ide/project/" | append: user | append: "/" | append: project | append: "/edit/" | append: branch | append: "/-/" | append: file_path %}
+                    {% else %}
+                        {% assign edit_url = "https://gitlab.com/" | append: user | append: "/" | append: project | append: "/-/edit/" | append: branch | append: "/" | append: file_path %}
+                    {% endif %}
+                    {% assign icon = "gitlab" %}
+                    {% assign platform_name = "GitLab" %}
+                {% elsif platform == "bitbucket" %}
+                    {% assign edit_url = "https://bitbucket.org/" | append: user | append: "/" | append: project | append: "/src/" | append: branch | append: "/" | append: file_path | append: "?mode=edit" %}
+                    {% assign icon = "bitbucket" %}
+                    {% assign platform_name = "Bitbucket" %}
+                {% elsif platform == "codeberg" %}
+                    {% assign edit_url = "https://codeberg.org/" | append: user | append: "/" | append: project | append: "/_edit/" | append: branch | append: "/" | append: file_path %}
+                    {% assign icon = "code" %}
+                    {% assign platform_name = "Codeberg" %}
+                {% endif %}
+
+                {% if edit_url %}
+                <a href="{{ edit_url }}" class="rd-edit-link" target="_blank" rel="noopener noreferrer">
+                    {% include comps/icon.html name=icon size=14 %} {{ platform_name }}
+                    Edit this page
+                </a>
+                {% endif %}
+            {% endif %}
+
+            <div style="font-family: var(--rd-font-mono); font-size: 0.65rem; color: #444; text-transform: uppercase;">
+                {% if page.date %}
+                <span>Updated: {{ page.date | date: "%B %d, %Y" }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% unless include.inline %}
+        {% include core/foot.html %}
+    {% endunless %}
+</footer>

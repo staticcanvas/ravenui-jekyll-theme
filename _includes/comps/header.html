@@ -1,0 +1,96 @@
+{%- comment -%}
+Component__: Top Header Bar
+Purpose____: Renders a top navigation bar populated from navheader.yml with dynamic links and search modal trigger.
+Parameters_:
+  - inline           : Boolean. If true, disables fixed/sticky positioning for inline canvas layouts.
+  - align            : Header link alignment - "left", "center", "right" (default: site.theme_settings.header.align | default: "center")
+  - density          : Density spacing - "compact", "default", "relaxed" (default: site.theme_settings.header.density | default: "default")
+Caveats____: Auto-adjusts page layouts and offsets when sticky. Requires data in _data/navheader.yml.
+Usage______: {% include comps/header.html inline=true %}
+{%- endcomment -%}
+
+{% assign header_sticky = site.theme_settings.header.sticky | default: false %}
+{% assign header_align = include.align | default: site.theme_settings.header.align | default: "center" %}
+{% assign header_density = include.density | default: site.theme_settings.header.density | default: "default" %}
+
+<header class="rd-header{% if header_sticky and include.inline != true %} rd-header--sticky{% endif %} rd-header--{{ header_density }}{% if include.inline %} rd-header--inline{% endif %}">
+  <div class="rd-header-inner">
+    <div class="rd-header-brand">
+      {% if site.theme_settings.logo.path %}
+      <a href="{{ "/" | relative_url }}" class="rd-header-logo-link">
+        <img src="{{ site.theme_settings.logo.path | relative_url }}" 
+             alt="{{ site.theme_settings.logo.alt | default: site.title }}" 
+             class="rd-header-logo-img"
+             style="height: {{ site.theme_settings.logo.height | default: '24px' }};">
+      </a>
+      {% endif %}
+      <a href="{{ "/" | relative_url }}" class="rd-header-title-link">
+        <span class="rd-header-title">{{ site.logo_text | default: "RAVEN" }}</span>
+        <span class="rd-header-subtext">// {{ site.logo_subtext | default: "SP" }}</span>
+      </a>
+    </div>
+
+    <nav class="rd-header-nav rd-header-nav--{{ header_align }} rd-header-nav--{{ header_density }}" aria-label="Header Navigation">
+      {% for link in site.data.navheader %}
+        {% assign page_url = page.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+        {% assign link_url = link.url | replace: '.html', '' | replace: 'index', '' | append: '/' | replace: '//', '/' %}
+        <a href="{{ link.url | relative_url }}" 
+           class="rd-header-nav-link" 
+           {% if page_url == link_url %}aria-current="page"{% endif %}
+           {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {% if link.icon %}
+            {% if link.source == "simple" %}
+              {% include comps/simple-icon.html name=link.icon size=14 color=link.color %}
+              <span style="margin-inline-start: 6px;"></span>
+            {% elsif link.source == "fa" %}
+              {% include comps/font-awesome.html name=link.icon style=link.style size=14 color=link.color %}
+              <span style="margin-inline-start: 6px;"></span>
+            {% else %}
+              <i data-lucide="{{ link.icon }}" 
+                 style="width: 14px; height: 14px; margin-inline-end: 6px; vertical-align: middle; {% if link.color %}color: {{ link.color }};{% endif %}">
+              </i>
+            {% endif %}
+          {% endif %}
+          {{ link.text }}
+          {% if link.is_new_feature %}
+            <span class="rd-nav-badge rd-nav-badge--{{ link.is_new_feature }}">
+              {% if link.is_new_feature == true or link.is_new_feature == "new" %}
+                new
+              {% else %}
+                {{ link.is_new_feature }}
+              {% endif %}
+            </span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <div class="rd-header-actions">
+      <div class="rd-header-search-trigger rd-search-trigger">
+        <i data-lucide="search" style="width: 14px; height: 14px;"></i>
+        <span>Search...</span>
+        <kbd>/</kbd>
+      </div>
+
+      {% include comps/theme-toggle.html %}
+
+      <div class="rd-header-socials">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" class="rd-header-social-link" aria-label="GitHub">
+          <i data-lucide="github" style="width: 18px; height: 18px;"></i>
+        </a>
+        {% endif %}
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="rd-header-social-link" aria-label="Twitter">
+          <i data-lucide="twitter" style="width: 18px; height: 18px;"></i>
+        </a>
+        {% endif %}
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="rd-header-social-link" aria-label="LinkedIn">
+          <i data-lucide="linkedin" style="width: 18px; height: 18px;"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>

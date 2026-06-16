@@ -20,12 +20,12 @@
     {% endif %}
 
     {% if site.theme_settings.header.enabled %}
-        {% include core/header.html %}
+        {% include comps/header.html %}
     {% endif %}
 
     <div class="rd-container">
         <aside class="rd-sidebar-left">
-            {% include core/sidebar.html %}
+            {% include comps/sidebar.html %}
         </aside>
         <script>
             // Seamless Sidebar Scroll Persistence (Early Execution)
@@ -86,15 +86,10 @@
                 {% include comps/comments.html %}
             {% endif %}
 
-            {% include core/footer.html %}
+            {% include comps/footer.html %}
         </main>
 
-        {% assign toc_style = site.theme_settings.toc.style | default: "simple" %}
-        {% assign toc_density = site.theme_settings.toc.density | default: "default" %}
-        <div id="rd-page-toc-container" class="rd-page-toc-container" style="display: none;">
-            <h4 class="rd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
-            <nav id="rd-page-toc" class="rd-page-toc rd-page-toc--{{ toc_style }} rd-page-toc--{{ toc_density }}"></nav>
-        </div>
+        {% include comps/toc.html %}
 
         <aside class="rd-sidebar-right">
             <!-- TOC content is moved to a top-level container to support mobile visibility -->
@@ -205,88 +200,7 @@
             });
         }
 
-        // 3. TOC Generation & Scroll-Spy
-        function generateTOC() {
-            if (!contentArea || !tocNav) return;
-            const tocLevels = {{ site.rd_toc_levels | jsonify }} || ["h2", "h3"];
-            const selector = tocLevels.join(', ');
-            const allHeadings = contentArea.querySelectorAll(selector);
-            const headings = Array.from(allHeadings).filter(heading => {
-                let parent = heading.parentElement;
-                while (parent && parent !== contentArea) {
-                    const classes = parent.classList ? Array.from(parent.classList) : [];
-                    const isComponent = classes.some(c => c.startsWith('rd-') && c !== 'rd-content' && c !== 'rd-hero' && c !== 'rd-container');
-                    if (isComponent) return false;
-                    parent = parent.parentElement;
-                }
-                return true;
-            });
-            if (headings.length === 0) return;
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '-5% 0px -75% 0px',
-                threshold: 0
-            };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.id;
-                        document.querySelectorAll('.rd-toc-link').forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            headings.forEach((heading, index) => {
-                const id = heading.id || `heading-${index}`;
-                heading.id = id;
-                
-                const link = document.createElement('a');
-                link.href = `#${id}`;
-                
-                // Clone heading to clean up typewriter and interactive elements
-                const clone = heading.cloneNode(true);
-                const typewriter = clone.querySelector('.rd-typewriter-container');
-                if (typewriter) {
-                    const firstWord = typewriter.getAttribute('data-first-word') || '';
-                    typewriter.textContent = firstWord;
-                }
-                clone.querySelectorAll('.rd-typewriter-cursor, .rd-copy-button, .copy-button, .rd-heading-icon').forEach(el => el.remove());
-                
-                link.textContent = clone.textContent.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
-                link.className = `rd-toc-link rd-toc-level-${heading.tagName.toLowerCase()}`;
-                link.addEventListener('click', () => {
-                    if (window.innerWidth < 1024) {
-                        tocContainer.classList.remove('active');
-                        tocToggle.classList.remove('active');
-                    }
-                });
-                tocNav.appendChild(link);
-                observer.observe(heading);
-            });
-            
-            tocContainer.style.display = 'block';
-            if (window.innerWidth >= 1024) {
-                {% if site.rd_toc_default_open %}
-                tocContainer.classList.add('active'); 
-                if (tocToggle) tocToggle.classList.add('active');
-                {% endif %}
-            }
-        }
-
-        if (tocToggle) {
-            tocToggle.addEventListener('click', () => {
-                tocContainer.classList.toggle('active');
-                tocToggle.classList.toggle('active');
-                if (window.innerWidth < 1024) {
-                    sidebarLeft.classList.remove('active');
-                    if (navToggle) navToggle.classList.remove('active');
-                }
-            });
-        }
 
         // 4. Code Block Utilities
         function setupCodeBlocks() {
@@ -643,7 +557,6 @@
                 });
             }
 
-            generateTOC();
             setupCodeBlocks();
             setupHeadingAnchors();
             setupNumericTickers();

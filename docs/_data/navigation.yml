@@ -128,10 +128,22 @@
     - text: Card Index
       url: /components/card-index/
       icon: layers
+    - text: Header Component
+      url: /components/header/
+      icon: layout
+      description: "Modular top navigation bar with dynamic links and trigger"
+    - text: Sidebar Component
+      url: /components/sidebar/
+      icon: layout
+      description: "Collapsible navigation sidebar tree with search trigger"
     - text: Footer Components
       url: /components/footer/
       icon: layout
       description: "Modular footer grid layout and columns components"
+    - text: Table of Contents
+      url: /components/toc/
+      icon: list
+      description: "Dynamic Table of Contents with scroll-spy highlighting"
     - text: Heading
       url: /components/heading/
       icon: type
