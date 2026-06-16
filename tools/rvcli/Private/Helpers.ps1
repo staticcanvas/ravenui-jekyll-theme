@@ -137,3 +137,32 @@ function Write-RvBox {
     $bottomStr = "$cBorder$($ui.BottomLeft)$($ui.Horizontal * ($Width - 2))$($ui.BottomRight)$cReset"
     Write-Host (New-CTString $bottomStr)
 }
+
+# Internal helper: run a git command, capture and return stdout.
+# Used by Invoke-RvGitTags and Invoke-RvReleases.
+function Invoke-RvGitCmd {
+    param(
+        [string[]]$Arguments,
+        [string]$WorkspaceRoot
+    )
+
+    $psi = [System.Diagnostics.ProcessStartInfo]::new()
+    $psi.FileName               = 'git'
+    $psi.WorkingDirectory       = $WorkspaceRoot
+    $psi.UseShellExecute        = $false
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError  = $true
+
+    foreach ($a in $Arguments) {
+        $psi.ArgumentList.Add($a)
+    }
+
+    $proc = [System.Diagnostics.Process]::new()
+    $proc.StartInfo = $psi
+    $proc.Start() | Out-Null
+
+    $stdout = $proc.StandardOutput.ReadToEnd()
+    $proc.WaitForExit()
+
+    return $stdout
+}

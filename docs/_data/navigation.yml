@@ -43,6 +43,18 @@
       url: /collections/
       icon: layers
       is_new_feature: new
+    - text: File Types
+      url: /file-types/
+      icon: file-text
+    - text: Data Files
+      url: /data-config/
+      icon: database
+    - text: Data Subfolders
+      url: /data-subfolders/
+      icon: folder
+    - text: JSON Data
+      url: /data-json/
+      icon: braces
 
 
 - type: separator
