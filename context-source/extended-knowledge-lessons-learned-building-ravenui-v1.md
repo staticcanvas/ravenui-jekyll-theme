@@ -71,3 +71,22 @@ This document serves as the canonical repository of technical knowledge, structu
 
 ### **3.3. Tone and Terminology**
 - **Rule:** Avoid sales or marketing terminology (specifically "premium"). Code comments, SASS layouts, and docs must use neutral, descriptive language (e.g., "elegant", "professional", "useful").
+
+---
+
+## **4. CLI & Tooling Lessons**
+
+### **4.1. PowerShell RegexOptions Bitwise Flag Operator**
+- **Problem:** The HTML block-preservation logic in `tools/minify.ps1` was not correctly capturing `<pre>`, `<code>`, `<script>`, and `<style>` blocks before whitespace collapse. This caused code blocks to be mangled in minified output.
+- **Cause:** The `RegexOptions` combination used the PowerShell arithmetic `-or` operator instead of the bitwise `-bor` operator. Since `RegexOptions::Singleline` (16) and `RegexOptions::IgnoreCase` (1) are flag enums, `-or` performs logical OR (returning True/False), not bitwise OR (returning the combined flag integer). The regex engine received an invalid options value and fell back to default mode, breaking the Singleline dot-matching required to span `<pre>` blocks across multiple lines.
+- **Resolution:** Always use `-bor` when combining `[System.Text.RegularExpressions.RegexOptions]` enum values: `$optSLIC = [System.Text.RegularExpressions.RegexOptions]::Singleline -bor [System.Text.RegularExpressions.RegexOptions]::IgnoreCase`.
+
+### **4.2. JS Minifier String and Template Literal Protection**
+- **Problem:** A naive regex-based JS minifier strips `// line comments` from source files. However, URL strings containing `://` (e.g., `"https://api.example.com"`) were being truncated at the `//`, breaking runtime fetch calls.
+- **Cause:** The comment-stripping regex `//.*$` matched the double-slash inside URL strings.
+- **Resolution:** Before stripping comments, extract all string literals (single-quoted, double-quoted, and backtick template literals) into a placeholder array. After comment-stripping and whitespace collapsing, restore the originals. The lookbehind `(?<![:/])` is a partial guard but is insufficient for all edge cases inside strings.
+
+### **4.3. rvcli Cmdlet Architecture**
+- **Pattern:** All rvcli public commands follow a file-per-cmdlet structure under `tools/rvcli/Public/`. Each file defines a single `Invoke-Rv<Name>` function. The root module `rvcli.psm1` auto-discovers and dot-sources all files in `Public/` and `Private/`. The `Start-RvCli.ps1` `switch` router dispatches to the correct cmdlet by command name.
+- **Adding a command requires four changes:** (1) Create `Public/Invoke-Rv<Name>.ps1`, (2) add a `switch` case in `Start-RvCli.ps1`, (3) add a `Show-RvCommandHelp` case in `Private/Show-RvCommandHelp.ps1`, (4) add the command to the help display text in `Show-RvHelp` inside `Start-RvCli.ps1`.
+

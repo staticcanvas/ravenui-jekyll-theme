@@ -110,6 +110,15 @@ function Start-RvCli {
         "minify" {
             Invoke-RvMinify -Args $cmdArgs -WorkspaceRoot $workspaceRoot
         }
+        "git-tags" {
+            Invoke-RvGitTags -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "releases" {
+            Invoke-RvReleases -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        { $_ -eq 'version' -or $_ -eq 'ver' } {
+            Invoke-RvVersion -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
         default {
             Write-RvLog -Level "fail" -Message "Unknown command '$command'. Run 'rvcli --help' for details." -Context "router"
         }
@@ -153,6 +162,11 @@ function Show-RvHelp {
         "    {ct:accent:search-index} Compile Pagefind / Lyra indices using a single command.",
         "    {ct:accent:variant}      Automate packaging of site distributions (e.g. Minimalist layout).",
         "    {ct:accent:minify}       Minify HTML, CSS, and JS in a compiled site directory.",
+        "",
+        "{ct:header:b:DATA & VERSIONING}",
+        "    {ct:accent:git-tags}     Generate _data/git-tags.yml from sorted git tag history.",
+        "    {ct:accent:releases}     Generate / append a _data/releases.yml entry from commit log.",
+        "    {ct:accent:version, ver} Read, set, bump (major/minor/patch), or sync the site version.",
         "",
         "{ct:header:b:OPTIONS}",
         "    {ct:primary:-d, --developer}  Enable developer mode targeting theme repo root (instead of site starter).",
