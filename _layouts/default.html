@@ -3,7 +3,7 @@
 
 {% include core/head.html %}
 
-<body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}">
+<body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}" data-code-copy="{{ site.rd_code_copy | default: false }}" data-code-lang="{{ site.rd_code_lang | default: false }}" data-headings-always-visible="{{ site.rd_headings_always_visible | default: false }}">
     {% if site.rd_announcement.enabled %}
         {% include comps/announcement.html %}
     {% endif %}
@@ -144,8 +144,11 @@
     {% endif %}
 
     <script type="module">
-        /* 🌑 ZERO-DARK Core Utilities v1.3.4 */
-        
+        /* 🌑 ZERO-DARK Core Utilities v1.4.0 */
+        import { setupCodeBlocks }     from '{{ "/assets/js/rd-code-utils.mjs"     | relative_url }}';
+        import { setupHeadingAnchors } from '{{ "/assets/js/rd-heading-anchors.mjs" | relative_url }}';
+        import { setupNumericTickers } from '{{ "/assets/js/rd-ticker.mjs"          | relative_url }}';
+
         // 0. Global State & Elements
         const searchModal = document.getElementById('rd-search-modal');
         const searchBackdrop = document.getElementById('rd-search-backdrop');
@@ -202,73 +205,9 @@
 
 
 
-        // 4. Code Block Utilities
-        function setupCodeBlocks() {
-            document.querySelectorAll('div.highlight').forEach(block => {
-                if (block.querySelector('.rd-copy-btn')) return;
+        // 4. Code Block Utilities — see assets/js/rd-code-utils.mjs
 
-                {% if site.rd_code_copy %}
-                const btn = document.createElement('button');
-                btn.className = 'rd-copy-btn';
-                btn.textContent = 'COPY';
-                
-                btn.addEventListener('click', () => {
-                    const codeElement = block.querySelector('code');
-                    const code = codeElement ? codeElement.innerText : block.innerText;
-                    navigator.clipboard.writeText(code).then(() => {
-                        btn.textContent = 'COPIED';
-                        btn.classList.add('copied');
-                        setTimeout(() => {
-                            btn.textContent = 'COPY';
-                            btn.classList.remove('copied');
-                        }, 2000);
-                    });
-                });
-                block.appendChild(btn);
-                {% endif %}
-                
-                {% if site.rd_code_lang %}
-                if (!block.getAttribute('data-lang') || block.getAttribute('data-lang') === 'code') {
-                    const parent = block.closest('.highlighter-rouge');
-                    const langClass = parent ? Array.from(parent.classList).find(c => c.startsWith('language-')) : null;
-                    if (langClass) {
-                        block.setAttribute('data-lang', langClass.replace('language-', ''));
-                    } else {
-                        const pre = block.querySelector('pre');
-                        const preLangClass = pre ? Array.from(pre.classList).find(c => c.startsWith('language-')) : null;
-                        if (preLangClass) {
-                            block.setAttribute('data-lang', preLangClass.replace('language-', ''));
-                        } else {
-                            block.setAttribute('data-lang', 'text');
-                        }
-                    }
-                }
-                {% endif %}
-            });
-        }
-
-        // 4.5. Heading Anchor Links
-        function setupHeadingAnchors() {
-            if (!contentArea) return;
-            const alwaysVisible = {% if site.rd_headings_always_visible %}true{% else %}false{% endif %};
-            const headings = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            headings.forEach(heading => {
-                if (!heading.id) return;
-                if (heading.tagName === 'H1' && heading.closest('.rd-hero')) return;
-                if (heading.querySelector('.rd-heading-anchor')) return;
-                
-                const anchor = document.createElement('a');
-                anchor.className = 'rd-heading-anchor';
-                if (alwaysVisible) {
-                    anchor.classList.add('always-visible');
-                }
-                anchor.href = `#${heading.id}`;
-                anchor.ariaLabel = `Link to this section`;
-                anchor.textContent = '#';
-                
-                heading.appendChild(anchor);
-            });
-        }
+        // 4.5. Heading Anchor Links — see assets/js/rd-heading-anchors.mjs
 
         // 4.75. Custom Search (Lyra / Algolia) Logic
         let localSearchEngine = null;
@@ -443,73 +382,7 @@
             resultsContainer.innerHTML = html;
         }
 
-        // 4.9. Numeric Tickers / Count Up
-        function setupNumericTickers() {
-            if (!('IntersectionObserver' in window)) {
-                return;
-            }
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        obs.unobserve(el);
-                        
-                        const text = (el.getAttribute('data-ticker-value') || el.innerText).trim();
-                        // Match structure: prefix (any non-digit/dot/minus symbols), numeric core (digits, dots, commas, optional leading minus), and suffix (any remaining characters)
-                        const match = text.match(/^([^0-9.-]*)([0-9.,-]+)(.*)$/);
-                        if (!match) return;
-
-                        const prefix = match[1] || '';
-                        const rawNum = match[2].replace(/,/g, '');
-                        const suffix = match[3] || '';
-                        const num = parseFloat(rawNum);
-                        if (isNaN(num)) return;
-
-                        const duration = 1200; // 1.2s duration for smooth pneumatic movement
-                        const startTime = performance.now();
-                        const startVal = 0;
-
-                        function update(currentTime) {
-                            const elapsed = currentTime - startTime;
-                            const progress = Math.min(elapsed / duration, 1);
-                            
-                            // Cubic easeOut: 1 - (1 - x)^3
-                            const easeProgress = 1 - Math.pow(1 - progress, 3);
-                            const currentVal = startVal + easeProgress * (num - startVal);
-                            
-                            let formattedVal = "";
-                            if (rawNum.includes('.')) {
-                                const decimals = rawNum.split('.')[1].length;
-                                formattedVal = currentVal.toFixed(decimals);
-                            } else {
-                                formattedVal = Math.floor(currentVal).toString();
-                            }
-                            
-                            // Format with commas if the original number had commas
-                            if (match[2].includes(',')) {
-                                const parts = formattedVal.split('.');
-                                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                formattedVal = parts.join('.');
-                            }
-
-                            el.innerText = prefix + formattedVal + suffix;
-
-                            if (progress < 1) {
-                                requestAnimationFrame(update);
-                            } else {
-                                el.innerText = text;
-                                el.classList.add('rd-ticker-complete');
-                            }
-                        }
-                        requestAnimationFrame(update);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('[data-ticker-value], .rd-metric-value, .rd-counter').forEach(el => {
-                observer.observe(el);
-            });
-        }
+        // 4.9. Numeric Tickers / Count Up — see assets/js/rd-ticker.mjs
 
         // 5. Initialization
         window.addEventListener('DOMContentLoaded', () => {
@@ -558,7 +431,7 @@
             }
 
             setupCodeBlocks();
-            setupHeadingAnchors();
+            setupHeadingAnchors(contentArea);
             setupNumericTickers();
 
             // Setup GSAP & AnimeJS animations on annotated elements
