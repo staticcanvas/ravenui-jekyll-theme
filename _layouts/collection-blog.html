@@ -33,8 +33,9 @@ layout: default
                     <h3 style="font-size: 1.2rem; margin-block-end: 0.5rem; line-height: 1.3;">
                         <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
                     </h3>
-                    {% if doc.description %}
-                    <p style="font-size: 0.9rem; color: var(--rd-clr-silver); margin-block-end: 1rem; line-height: 1.5; flex-grow: 1;">{{ doc.description | truncate: 120 }}</p>
+                    {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncate: 120 %}
+                    {% if desc and desc != "" %}
+                    <p style="font-size: 0.9rem; color: var(--rd-clr-silver); margin-block-end: 1rem; line-height: 1.5; flex-grow: 1;">{{ desc }}</p>
                     {% endif %}
                     <a href="{{ doc.url | relative_url }}" style="font-size: 0.85rem; color: var(--rd-clr-highlight); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; margin-block-start: auto;">
                         Read Post {% include comps/icon.html name="arrow-right" size=10 %}

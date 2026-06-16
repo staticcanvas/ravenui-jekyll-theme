@@ -20,8 +20,9 @@ layout: default
                             {{ doc.title | default: doc.slug }}
                         </a>
                     </h3>
-                    {% if doc.description %}
-                    <p class="rd-collection-list-desc">{{ doc.description }}</p>
+                    {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                    {% if desc and desc != "" %}
+                    <p class="rd-collection-list-desc">{{ desc }}</p>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -40,8 +41,9 @@ layout: default
                         <h3 class="rd-collection-card-title">
                             <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
                         </h3>
-                        {% if doc.description %}
-                        <p class="rd-collection-card-desc">{{ doc.description }}</p>
+                        {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 20 %}
+                        {% if desc and desc != "" %}
+                        <p class="rd-collection-card-desc">{{ desc }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -65,8 +67,9 @@ layout: default
                         <span class="rd-collection-detailed-group">{{ doc.group }}</span>
                         {% endif %}
                     </div>
-                    {% if doc.description %}
-                    <p class="rd-collection-detailed-desc">{{ doc.description }}</p>
+                    {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                    {% if desc and desc != "" %}
+                    <p class="rd-collection-detailed-desc">{{ desc }}</p>
                     {% endif %}
                     {% if doc.tags %}
                     <div class="rd-tag-container" style="margin-block-start: 1rem;">
@@ -121,8 +124,9 @@ layout: default
                         <h3 class="rd-collection-pathway-title">
                             <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
                         </h3>
-                        {% if doc.description %}
-                        <p class="rd-collection-pathway-desc">{{ doc.description }}</p>
+                        {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                        {% if desc and desc != "" %}
+                        <p class="rd-collection-pathway-desc">{{ desc }}</p>
                         {% endif %}
                         {% if doc.tags %}
                         <div class="rd-tag-container" style="margin-block-start: 0.5rem;">

@@ -75,4 +75,34 @@ title: "Tutorials Directory"
 
 ---
 
+{% include comps/heading.html tag="h2" text="Sorting, Tag Filtering, and Ordering" icon="filter" size=20 %}
+
+### **Tag Filtering**
+You can filter a collection index to show only documents matching a specific tag by setting `filter_tag` in the index page front-matter:
+
+```yaml
+layout: collection
+collection_name: tutorials
+layout_style: grid
+filter_tag: basics
+```
+
+### **Sorting & Ordering**
+By default, collection layouts sort documents by `weight` or `order` front-matter parameters. You can customize the sorting key using the `sort_by` front-matter parameter:
+* `order` / `weight` (default): Ascending numeric order.
+* `date`: Sorts documents by their `date` front-matter parameter (descending/newest first).
+* `title`: Sorts alphabetically by title.
+
+Example configuration:
+
+```yaml
+layout: collection
+collection_name: tutorials
+layout_style: list
+sort_by: date
+```
+
+---
+
 {% include comps/callout.html type="note" title="GitHub Pages Compatibility" content="Because the entire RavenUI collections engine is written in native Liquid and SASS, it is fully compatible with GitHub Pages safe mode execution." %}
+
