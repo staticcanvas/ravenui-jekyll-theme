@@ -107,6 +107,9 @@ function Start-RvCli {
         "variants" {
             Invoke-RvVariant -Args $cmdArgs -WorkspaceRoot $workspaceRoot
         }
+        "minify" {
+            Invoke-RvMinify -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
         default {
             Write-RvLog -Level "fail" -Message "Unknown command '$command'. Run 'rvcli --help' for details." -Context "router"
         }
@@ -149,6 +152,7 @@ function Show-RvHelp {
         "    {ct:accent:metadata}     Generate a hierarchical visual dependency tree from component comments.",
         "    {ct:accent:search-index} Compile Pagefind / Lyra indices using a single command.",
         "    {ct:accent:variant}      Automate packaging of site distributions (e.g. Minimalist layout).",
+        "    {ct:accent:minify}       Minify HTML, CSS, and JS in a compiled site directory.",
         "",
         "{ct:header:b:OPTIONS}",
         "    {ct:primary:-d, --developer}  Enable developer mode targeting theme repo root (instead of site starter).",

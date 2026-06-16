@@ -1,0 +1,129 @@
+{%- comment -%}
+Component__: Runtime Metadata
+Purpose____: Displays environment versions and active plugins for development debugging.
+Caveats____: Relies on runtime_metadata.rb plugin being loaded.
+Usage______: {% include comps/runtime-metadata.html layout="table" %}
+{%- endcomment -%}
+
+{%- assign metadata = site.runtime_metadata -%}
+
+<div class="rd-runtime-metadata-container {{ include.class }}">
+  {%- if metadata -%}
+    {%- assign layout = include.layout | default: "table" -%}
+    
+    {%- if layout == "table" -%}
+      <div class="rd-table-wrapper" style="overflow-x: auto; margin-block-start: 1rem; border: var(--rd-border); border-radius: var(--rd-radius); background: var(--rd-bg-surface);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; font-family: var(--rd-font-mono);">
+          <thead>
+            <tr style="border-block-end: var(--rd-border); background: var(--rd-bg-body-secondary);">
+              <th style="padding: 0.75rem 1rem; font-weight: 600; color: var(--rd-clr-slate);">Environment Component</th>
+              <th style="padding: 0.75rem 1rem; font-weight: 600; color: var(--rd-clr-slate);">Active Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-block-end: var(--rd-border);">
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-silver); display: flex; align-items: center; gap: 8px;">
+                💠 Jekyll
+              </td>
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-highlight); font-weight: 600;">v{{ metadata.jekyll }}</td>
+            </tr>
+            <tr style="border-block-end: var(--rd-border);">
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-silver);">
+                💠 Ruby
+              </td>
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-highlight); font-weight: 600;">v{{ metadata.ruby }} ({{ metadata.ruby_platform }})</td>
+            </tr>
+            {%- if metadata.bundler -%}
+            <tr style="border-block-end: var(--rd-border);">
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-silver);">
+                💠 Bundler
+              </td>
+              <td style="padding: 0.75rem 1rem; color: var(--rd-clr-highlight); font-weight: 600;">v{{ metadata.bundler }}</td>
+            </tr>
+            {%- endif -%}
+          </tbody>
+        </table>
+      </div>
+
+      {%- if metadata.plugins.size > 0 or metadata.local_plugins.size > 0 -%}
+        <h4 style="margin-block-start: 1.5rem; margin-block-end: 0.75rem; font-size: 0.95rem; font-weight: 600; color: var(--rd-clr-slate); text-transform: uppercase; letter-spacing: 0.05em;">Active Extensions & Plugins</h4>
+        <div class="rd-table-wrapper" style="overflow-x: auto; border: var(--rd-border); border-radius: var(--rd-radius); background: var(--rd-bg-surface);">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; font-family: var(--rd-font-mono);">
+            <thead>
+              <tr style="border-block-end: var(--rd-border); background: var(--rd-bg-body-secondary);">
+                <th style="padding: 0.75rem 1rem; font-weight: 600; color: var(--rd-clr-slate);">Extension / Gem Name</th>
+                <th style="padding: 0.75rem 1rem; font-weight: 600; color: var(--rd-clr-slate);">Type</th>
+                <th style="padding: 0.75rem 1rem; font-weight: 600; color: var(--rd-clr-slate);">Version</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for plugin in metadata.plugins -%}
+                <tr style="border-block-end: var(--rd-border);">
+                  <td style="padding: 0.75rem 1rem; color: var(--rd-clr-silver);">{{ plugin[0] }}</td>
+                  <td style="padding: 0.75rem 1rem;"><span class="rd-tag" style="background: var(--rd-clr-viridian-light, rgba(0, 180, 120, 0.1)); color: var(--rd-clr-viridian);">Gem Plugin</span></td>
+                  <td style="padding: 0.75rem 1rem; color: var(--rd-clr-highlight);">v{{ plugin[1] }}</td>
+                </tr>
+              {%- endfor -%}
+              {%- for lplugin in metadata.local_plugins -%}
+                <tr style="border-block-end: var(--rd-border);">
+                  <td style="padding: 0.75rem 1rem; color: var(--rd-clr-silver);">{{ lplugin }}</td>
+                  <td style="padding: 0.75rem 1rem;"><span class="rd-tag" style="background: var(--rd-clr-info-light, rgba(0, 120, 200, 0.1)); color: var(--rd-clr-info);">Local Filter / Hook</span></td>
+                  <td style="padding: 0.75rem 1rem; color: var(--rd-clr-slate);">Local File</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      {%- endif -%}
+
+    {%- elsif layout == "cards" -%}
+      <div class="rd-metrics-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-block-start: 1rem;">
+        <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-viridian); border-color: color-mix(in srgb, var(--rd-clr-viridian) 20%, transparent);">
+          <div class="rd-metric-header">
+            <span class="rd-metric-icon">💠</span>
+            <span class="rd-metric-title">Jekyll Engine</span>
+          </div>
+          <div class="rd-metric-body">
+            <span class="rd-metric-value" style="font-family: var(--rd-font-mono);">v{{ metadata.jekyll }}</span>
+          </div>
+        </div>
+        <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-warning); border-color: color-mix(in srgb, var(--rd-clr-warning) 20%, transparent);">
+          <div class="rd-metric-header">
+            <span class="rd-metric-icon">💠</span>
+            <span class="rd-metric-title">Ruby Runtime</span>
+          </div>
+          <div class="rd-metric-body">
+            <span class="rd-metric-value" style="font-family: var(--rd-font-mono); font-size: 1.1rem; line-height: 1.2;">v{{ metadata.ruby }}</span>
+            <div style="font-size: 0.7rem; color: var(--rd-clr-slate); margin-block-start: 0.25rem;">{{ metadata.ruby_platform }}</div>
+          </div>
+        </div>
+        {%- if metadata.bundler -%}
+        <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-info); border-color: color-mix(in srgb, var(--rd-clr-info) 20%, transparent);">
+          <div class="rd-metric-header">
+            <span class="rd-metric-icon">💠</span>
+            <span class="rd-metric-title">Bundler</span>
+          </div>
+          <div class="rd-metric-body">
+            <span class="rd-metric-value" style="font-family: var(--rd-font-mono);">v{{ metadata.bundler }}</span>
+          </div>
+        </div>
+        {%- endif -%}
+        <div class="rd-metric-card" style="--rd-metric-accent: var(--rd-clr-purple, #8a2be2); border-color: color-mix(in srgb, var(--rd-clr-purple, #8a2be2) 20%, transparent);">
+          <div class="rd-metric-header">
+            <span class="rd-metric-icon">💠</span>
+            <span class="rd-metric-title">Active Plugins</span>
+          </div>
+          <div class="rd-metric-body">
+            {%- assign plugins_count = metadata.plugins.size | plus: metadata.local_plugins.size -%}
+            <span class="rd-metric-value">{{ plugins_count }}</span>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- else -%}
+    <div class="rd-callout rd-callout--warning">
+      <div class="rd-callout-title">⚠️ Runtime Metadata Warning</div>
+      <p class="rd-callout-content">The runtime metadata provider is not active. Make sure standard/custom plugins are enabled in your Jekyll build command.</p>
+    </div>
+  {%- endif -%}
+</div>

@@ -35,8 +35,9 @@ layout: default
                         {% endif %}
                     </div>
                     <h3 class="rd-blog-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                    {% if post.description %}
-                    <p class="rd-blog-card-desc">{{ post.description }}</p>
+                    {% assign desc = post.description | default: post.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                    {% if desc and desc != "" %}
+                    <p class="rd-blog-card-desc">{{ desc }}</p>
                     {% endif %}
                     {% if post.tags %}
                     <div class="rd-tag-container">
@@ -67,8 +68,9 @@ layout: default
 
                 <h3 class="rd-blog-list-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 
-                {% if post.description %}
-                <p class="rd-blog-list-desc">{{ post.description }}</p>
+                {% assign desc = post.description | default: post.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                {% if desc and desc != "" %}
+                <p class="rd-blog-list-desc">{{ desc }}</p>
                 {% endif %}
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">

@@ -38,8 +38,9 @@ layout: default
                         {{ doc.title | default: doc.slug }}
                     </a>
                 </h3>
-                {% if doc.description %}
-                <p class="rd-collection-list-desc">{{ doc.description }}</p>
+                {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 30 %}
+                {% if desc and desc != "" %}
+                <p class="rd-collection-list-desc">{{ desc }}</p>
                 {% endif %}
             </div>
             {% endfor %}
