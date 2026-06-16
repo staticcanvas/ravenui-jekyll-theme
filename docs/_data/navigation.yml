@@ -55,6 +55,12 @@
     - text: JSON Data
       url: /data-json/
       icon: braces
+    - text: Path Configurations
+      url: /paths/
+      icon: link
+    - text: Variables Reference
+      url: /variables/
+      icon: globe
 
 
 - type: separator
@@ -433,3 +439,6 @@
       url: /customization/
       icon: sliders
       color: "#3399ff"
+    - text: Developer Guide
+      url: /developer-guide/
+      icon: folder
