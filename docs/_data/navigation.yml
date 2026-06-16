@@ -150,6 +150,10 @@
       url: /components/browser-support/
       icon: monitor
       description: "Browser engine compatibility matrix and version indicators"
+    - text: Sitemap
+      url: /components/sitemap/
+      icon: map
+      description: "Dynamic visual sitemap tree listing all pages, posts, and collections"
 
 
 

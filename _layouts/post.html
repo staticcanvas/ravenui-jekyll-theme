@@ -20,7 +20,13 @@ layout: default
             {% endif %}
         </div>
         
-        <h1 class="rd-post-title">{{ page.title }}</h1>
+        <h1 class="rd-post-title">
+            {{ page.title }}
+            {% assign env = site.theme_settings.environment | default: jekyll.environment | default: "development" %}
+            {% if env == "development" and page.draft == true %}
+                <span class="rd-nav-badge rd-nav-badge--warn" style="font-size: 0.85rem; vertical-align: middle; margin-inline-start: 0.5rem; text-transform: uppercase;">Draft</span>
+            {% endif %}
+        </h1>
         
         {% if page.description %}
         <p class="rd-post-description">{{ page.description }}</p>

@@ -282,7 +282,8 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.4/dist/mermaid.min.js"></script>
     {% endif %}
 
-    {% if jekyll.environment == "production" or site.theme_settings.analytics.enable_in_dev %}
+    {% assign env = site.theme_settings.environment | default: jekyll.environment | default: "development" %}
+    {% if env == "production" or site.theme_settings.analytics.enable_in_dev %}
       {% assign analytics = site.theme_settings.analytics %}
       {% assign provider = analytics.provider | default: "posthog" %}
       
