@@ -442,3 +442,9 @@
     - text: Developer Guide
       url: /developer-guide/
       icon: folder
+    - text: Philosophy & Scope
+      url: /scope/
+      icon: heart
+    - text: Reference Directory
+      url: /references/
+      icon: list
