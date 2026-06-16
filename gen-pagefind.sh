@@ -1,5 +1,5 @@
 #!/bin/bash
-# 🌑 ZERODARK SP: Search Index Generation
+# 🌑 RAVENUI: Search Index Generation
 echo "🟦 Building site for indexing..."
 bundle exec jekyll build --trace
 echo "🟩 Generating Pagefind index..."

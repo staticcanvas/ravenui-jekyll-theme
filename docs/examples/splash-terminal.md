@@ -6,7 +6,7 @@ permalink: /examples/splash-terminal/
 description: Example page demonstrating the terminal variant of the splash layout.
 enable_search: true
 ---
-# ZERODARK SYSTEM OPERATIONAL
+# RAVENUI SYSTEM OPERATIONAL
 
 {% capture term_output %}
 <span class="fg-muted">></span> boot --verbose<br>
