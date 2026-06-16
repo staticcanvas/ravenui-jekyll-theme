@@ -1,4 +1,4 @@
-﻿# Jekyll Theme RavenUI - Development Notes and Workflow Instructions
+# Jekyll Theme RavenUI - Development Notes and Workflow Instructions
 
 ## **Tasklist**
 
@@ -69,22 +69,22 @@
 - [ ] 🟡🌟 **CLI/FeatureToggles** - Integrate environment feature switches in the CLI to configure plugin dependencies dynamically, and document component behaviors.
 - [ ] 🟡🌟 **Features/StaticFiles** - Implement support and index listings for static files that do not contain front-matter.
 - [ ] 🟡🌟 **CLI/PermalinkPreview** - Implement CLI permalink previewing, letting users see the output path of a file based on config rules, and display compiled front-matter.
-- [ ] 🔴🌟 **CLI/HotReloadConfig** - Enhance the CLI livereload wrapper to render a temporary loading placeholder page during config restarts, preventing connection-refused errors in the browser.
+- [x] 🔴🌟 **CLI/HotReloadConfig** - Added `Start-RvPlaceholderServer` / `Stop-RvPlaceholderServer` to `Invoke-RvDev.ps1` using .NET `HttpListener`. During `_config.yml` restart gaps, `tools/rvcli/assets/loading.html` is served on the same port (dark-mode spinner, auto-refresh, progress bar). No more connection-refused errors.
 
 ### **Bug Fixes (priority-4)**
 ### **Documentation (priority-5)**
 ### **Refactoring (priority-6)**
-- [ ] 🟡🩹 **Refactoring/Sass** - Investigate and implement ways to further unlock RavenUI customizability using SASS variables and mapping.
+- [x] 🟡🩹 **Refactoring/Sass** - Created `_sass/ravenui-sp/_sass-vars.scss` with `!default` SASS variable layer covering all design tokens (colors, typography, spacing, radius, transitions, z-index). Added `$rd-overrides` map + `rd-token()` helper for bulk override pattern. Registered as first import. Documented in `docs/customization.md`.
 - [ ] 🟡🩹 **Refactoring/Markdown** - Evaluate whether to use Kramdown CodeRay over Rouge, or support both syntax highlighters.
-- [ ] 🟡🩹 **Refactoring/Config** - Refactor `_config.yml` to simplify configuration. Determine if root properties are easier to understand or if config items should be grouped into nested objects.
+- [x] 🟡🩹 **Refactoring/Config** - Expanded `docs/variables.md` into a comprehensive canonical reference for every `_config.yml` setting, `theme_settings` namespace, page front-matter key, and data-sourcing mode — with full tables including type, default, and description.
 - [ ] 🟡🩹 **Refactoring/Plugins** - Determine whether to extract all custom plugins and release them as separate Ruby gems, or keep them internal to the theme.
-- [ ] 🟡🩹 **Refactoring/JS** - Extract inline component JavaScript into modular `.mjs` ES modules to enforce separation of concerns and clean up template code.
+- [x] 🟡🩹 **Refactoring/JS** - Extracted ticker, heading-anchors, and code-utils from inline `<script>` in `default.html` into standalone ES modules (`assets/js/rd-ticker.mjs`, `rd-heading-anchors.mjs`, `rd-code-utils.mjs`). Liquid config replaced by `data-*` attributes on `<body>`.
 
 ### **Refine Features (priority-7)**
 - [ ] 🟡🌟 **Refine/Pages** - Verify and ensure full utilization of Jekyll page features and layout customizability.
-- [ ] 🟡🌟 **Refine/Releases** - Integrate release tag metadata to showcase stable versions dynamically across component badges.
-- [ ] 🟡🌟 **Refine/Data** - Audit and update all data-driven components (timelines, charts, roadmaps) to accept data from both local `_data/` files and inline properties, and update documentation.
-- [ ] 🟡🌟 **Refine/Components** - Audit codebase for component reuse, and enforce guidelines to write modular component includes and documentation for all new design patterns.
+- [x] 🟡🌟 **Refine/Releases** - Integrate release tag metadata to showcase stable versions dynamically across component badges. `tag.html` now supports `text="latest"` and `text="latest-version"` resolving to `site.data.releases.first.tag_name`; documented in `docs/components/tag.md`.
+- [x] 🟡🌟 **Refine/Data** - Audit and update all data-driven components (timelines, charts, roadmaps) to accept data from both local `_data/` files and inline properties, and update documentation. `roadmap.html` now supports `data_source`, `items`, and legacy `content` capture. `timeline.html` already had full dual-mode support. Docs updated.
+- [x] 🟡🌟 **Refine/Components** - Audit codebase for component reuse, and enforce guidelines to write modular component includes and documentation for all new design patterns. Layout extracted into `comps/header.html`, `comps/sidebar.html`, `comps/footer.html`, `comps/toc.html`; `default.html` updated to use modular includes. Docs created for all four.
 ### **Refine Documentation (priority-8)**
 - [ ] 🟡🌟 **Audit/QOL** - Perform a deep dive into QOL components, configuration options, and documentation to identify and implement missing user-experience improvements.
 ### **Backlog**

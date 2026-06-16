@@ -49,117 +49,117 @@
 // -----------------------------------------------------------------------------
 
 // Background ramp
-$rd-bg-base:     #050505  !default
-$rd-bg-surface:  #0a0a0a  !default
-$rd-bg-elevated: #111111  !default
-$rd-bg-panel:    #161B24  !default
-$rd-bg-card:     #1B212B  !default
-$rd-bg-hover:    #242C38  !default
-$rd-bg-active:   #2C3645  !default
+$rd-bg-base:     #050505  !default;
+$rd-bg-surface:  #0a0a0a  !default;
+$rd-bg-elevated: #111111  !default;
+$rd-bg-panel:    #161B24  !default;
+$rd-bg-card:     #1B212B  !default;
+$rd-bg-hover:    #242C38  !default;
+$rd-bg-active:   #2C3645  !default;
 
 // Brand / accent
-$rd-clr-highlight: #00ff9d  !default
-$rd-clr-platinum:  #e5e5e5  !default
-$rd-clr-warning:   #ffcc00  !default
-$rd-clr-danger:    #ff4444  !default
-$rd-clr-info:      #3399ff  !default
-$rd-clr-viridian:  #00ff9d  !default
-$rd-clr-note:      #9B7AE0  !default
+$rd-clr-highlight: #00ff9d  !default;
+$rd-clr-platinum:  #e5e5e5  !default;
+$rd-clr-warning:   #ffcc00  !default;
+$rd-clr-danger:    #ff4444  !default;
+$rd-clr-info:      #3399ff  !default;
+$rd-clr-viridian:  #00ff9d  !default;
+$rd-clr-note:      #9B7AE0  !default;
 
 // Brand palette (neutral ramp)
-$rd-clr-black:  #0A0C0E  !default
-$rd-clr-void:   #10141A  !default
-$rd-clr-ink:    #161B24  !default
-$rd-clr-slate:  #1E2530  !default
-$rd-clr-steel:  #2A3340  !default
-$rd-clr-mist:   #3D4D5E  !default
-$rd-clr-smoke:  #5A6E82  !default
-$rd-clr-ash:    #8A9BAC  !default
-$rd-clr-silver: #B8C5D0  !default
-$rd-clr-ghost:  #D6DFE7  !default
-$rd-clr-white:  #EDF1F5  !default
+$rd-clr-black:  #0A0C0E  !default;
+$rd-clr-void:   #10141A  !default;
+$rd-clr-ink:    #161B24  !default;
+$rd-clr-slate:  #1E2530  !default;
+$rd-clr-steel:  #2A3340  !default;
+$rd-clr-mist:   #3D4D5E  !default;
+$rd-clr-smoke:  #5A6E82  !default;
+$rd-clr-ash:    #8A9BAC  !default;
+$rd-clr-silver: #B8C5D0  !default;
+$rd-clr-ghost:  #D6DFE7  !default;
+$rd-clr-white:  #EDF1F5  !default;
 
 // Text hierarchy
-$rd-clr-text-primary:   $rd-clr-platinum  !default
-$rd-clr-text-secondary: #888              !default
-$rd-clr-text-muted:     #555              !default
-$rd-clr-text-h3:        #ccc              !default
-$rd-clr-text-h4:        #444              !default
+$rd-clr-text-primary:   $rd-clr-platinum  !default;
+$rd-clr-text-secondary: #888              !default;
+$rd-clr-text-muted:     #555              !default;
+$rd-clr-text-h3:        #ccc              !default;
+$rd-clr-text-h4:        #444              !default;
 
 // Terminal palette
-$rd-clr-terminal-green:  #00FF9D  !default
-$rd-clr-terminal-blue:   #4DA3FF  !default
-$rd-clr-terminal-purple: #B06CF7  !default
-$rd-clr-terminal-orange: #FF9E57  !default
-$rd-clr-terminal-red:    #FF6B6B  !default
+$rd-clr-terminal-green:  #00FF9D  !default;
+$rd-clr-terminal-blue:   #4DA3FF  !default;
+$rd-clr-terminal-purple: #B06CF7  !default;
+$rd-clr-terminal-orange: #FF9E57  !default;
+$rd-clr-terminal-red:    #FF6B6B  !default;
 
 // Border tokens
-$rd-border-subtle:  #1A212B  !default
-$rd-border-default: #25303D  !default
-$rd-border-strong:  #344252  !default
-$rd-border-accent:  #00FF9D  !default
-$rd-border-style:   solid    !default
-$rd-border-width:   1px      !default
+$rd-border-subtle:  #1A212B  !default;
+$rd-border-default: #25303D  !default;
+$rd-border-strong:  #344252  !default;
+$rd-border-accent:  #00FF9D  !default;
+$rd-border-style:   solid    !default;
+$rd-border-width:   1px      !default;
 
 
 // -----------------------------------------------------------------------------
 // TYPOGRAPHY
 // -----------------------------------------------------------------------------
 
-$rd-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !default
-$rd-font-mono: "MonaspiceAr Nerd Font Mono", "JetBrains Mono", "Fira Code", monospace !default
-$rd-font-heading: "Fraunces", serif  !default
+$rd-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !default;
+$rd-font-mono: "MonaspiceAr Nerd Font Mono", "JetBrains Mono", "Fira Code", monospace !default;
+$rd-font-heading: "Fraunces", serif  !default;
 
 // Fluid font-size scale (used via fz-* utilities)
-$rd-fz-xs:  0.75rem   !default
-$rd-fz-sm:  0.875rem  !default
-$rd-fz-base: 1rem     !default
-$rd-fz-lg:  1.25rem   !default
-$rd-fz-xl:  1.5rem    !default
-$rd-fz-xxl: 2.5rem    !default
+$rd-fz-xs:  0.75rem   !default;
+$rd-fz-sm:  0.875rem  !default;
+$rd-fz-base: 1rem     !default;
+$rd-fz-lg:  1.25rem   !default;
+$rd-fz-xl:  1.5rem    !default;
+$rd-fz-xxl: 2.5rem    !default;
 
 // Weight scale
-$rd-fw-normal:   400  !default
-$rd-fw-medium:   500  !default
-$rd-fw-semibold: 600  !default
-$rd-fw-bold:     700  !default
-$rd-fw-extrabold: 800 !default
-$rd-fw-black:    900  !default
+$rd-fw-normal:   400  !default;
+$rd-fw-medium:   500  !default;
+$rd-fw-semibold: 600  !default;
+$rd-fw-bold:     700  !default;
+$rd-fw-extrabold: 800 !default;
+$rd-fw-black:    900  !default;
 
 
 // -----------------------------------------------------------------------------
 // SPACING
 // -----------------------------------------------------------------------------
 
-$rd-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem)    !default
-$rd-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem)       !default
-$rd-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem)   !default
+$rd-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem)    !default;
+$rd-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem)       !default;
+$rd-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem)   !default;
 
 
 // -----------------------------------------------------------------------------
 // BORDER RADIUS
 // -----------------------------------------------------------------------------
 
-$rd-radius:    4px   !default
-$rd-radius-lg: 8px   !default
-$rd-radius-xl: 12px  !default
+$rd-radius:    4px   !default;
+$rd-radius-lg: 8px   !default;
+$rd-radius-xl: 12px  !default;
 
 
 // -----------------------------------------------------------------------------
 // TRANSITIONS (Fluent UI easing)
 // -----------------------------------------------------------------------------
 
-$rd-transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1)  !default
-$rd-transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1)  !default
-$rd-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1)  !default
+$rd-transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1)  !default;
+$rd-transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1)  !default;
+$rd-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1)  !default;
 
 
 // -----------------------------------------------------------------------------
 // Z-INDEX LAYERS
 // -----------------------------------------------------------------------------
 
-$rd-z-sticky: 200   !default
-$rd-z-fixed:  5000  !default
+$rd-z-sticky: 200   !default;
+$rd-z-fixed:  5000  !default;
 
 
 // -----------------------------------------------------------------------------
@@ -177,7 +177,7 @@ $rd-z-fixed:  5000  !default
 //   );
 // -----------------------------------------------------------------------------
 
-$rd-overrides: () !default
+$rd-overrides: () !default;
 
 
 // -----------------------------------------------------------------------------
@@ -189,7 +189,9 @@ $rd-overrides: () !default
 // @return {*}    Resolved value
 // -----------------------------------------------------------------------------
 
-@function rd-token($key, $default)
-  @if map-has-key($rd-overrides, $key)
-    @return map-get($rd-overrides, $key)
-  @return $default
+@function rd-token($key, $default) {
+  @if map-has-key($rd-overrides, $key) {
+    @return map-get($rd-overrides, $key);
+  }
+  @return $default;
+}
