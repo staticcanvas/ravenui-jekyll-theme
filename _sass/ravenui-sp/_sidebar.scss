@@ -1,5 +1,6 @@
 /* SIDEBARS */
 .rd-sidebar-left {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
@@ -51,6 +52,7 @@
 }
 
 .rd-sidebar-right {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
   display: none;
 }
 
@@ -86,6 +88,7 @@
 }
 
 .rd-sidebar {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
   display: flex;
   flex-direction: column;
   height: 100%;

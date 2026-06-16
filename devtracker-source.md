@@ -72,6 +72,7 @@
 - [x] 🔴🌟 **CLI/HotReloadConfig** - Added `Start-RvPlaceholderServer` / `Stop-RvPlaceholderServer` to `Invoke-RvDev.ps1` using .NET `HttpListener`. During `_config.yml` restart gaps, `tools/rvcli/assets/loading.html` is served on the same port (dark-mode spinner, auto-refresh, progress bar). No more connection-refused errors.
 
 ### **Bug Fixes (priority-4)**
+- [x] 🟡🪲 **Fix/SidebarBorder** - Adjusted the sidebar menu border color in the dark theme to prevent the light theme border from bleeding through, using a new `--rd-sidebar-border-color` custom property.
 ### **Documentation (priority-5)**
 ### **Refactoring (priority-6)**
 - [x] 🟡🩹 **Refactoring/Sass** - Created `_sass/ravenui-sp/_sass-vars.scss` with `!default` SASS variable layer covering all design tokens (colors, typography, spacing, radius, transitions, z-index). Added `$rd-overrides` map + `rd-token()` helper for bulk override pattern. Registered as first import. Documented in `docs/customization.md`.
