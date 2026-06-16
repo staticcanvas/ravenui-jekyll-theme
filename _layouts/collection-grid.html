@@ -4,6 +4,10 @@ layout: default
 <div class="rd-collection-index-container">
     {{ content }}
 
+    {% if page.enable_tag_filter or site.theme_settings.collections.enable_tag_filter %}
+        {% include comps/tag-filter.html target=".rd-filterable-item" %}
+    {% endif %}
+
     {% assign col_name = page.collection_name | default: page.collection %}
     {% assign collection_docs = site[col_name] %}
     
@@ -29,7 +33,7 @@ layout: default
 
         <div class="rd-collection-grid">
             {% for doc in sorted_docs %}
-            <div class="rd-collection-card">
+            <div class="rd-collection-card rd-filterable-item" data-tags="{{ doc.tags | join: ',' | downcase }}">
                 <div class="rd-collection-card-body">
                     {% if doc.icon %}
                     <div class="rd-collection-card-icon" style="color: {{ doc.color | default: 'var(--rd-clr-highlight)' }}">

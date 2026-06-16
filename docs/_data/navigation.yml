@@ -389,6 +389,26 @@
       url: /components/tag-cloud/
       icon: tag
       description: "Interactive tag cloud sized by post counts"
+    - text: Tag Filter
+      url: /components/tag-filter/
+      icon: filter
+      description: "Client-side interactive tag filter for listings"
+      is_new_feature: true
+    - text: Component Playground
+      url: /components/playground/
+      icon: play
+      description: "Interactive preview and Liquid code generator"
+      is_new_feature: true
+    - text: Layout Visualizer
+      url: /components/layout-visualizer/
+      icon: monitor
+      description: "Interactive visualizer for alternative page layouts"
+      is_new_feature: true
+    - text: Page Converter
+      url: /components/converter/
+      icon: download
+      description: "Download pages as Markdown, HTML, or save as PDF"
+      is_new_feature: true
 
 
 

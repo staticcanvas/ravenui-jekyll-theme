@@ -4,6 +4,10 @@ layout: default
 <div class="rd-blog-container">
     {{ content }}
     
+    {% if page.enable_tag_filter or site.theme_settings.blog.enable_tag_filter %}
+        {% include comps/tag-filter.html target=".rd-filterable-item" %}
+    {% endif %}
+    
     {% if page.category_filter %}
         {% assign filtered_posts = site.posts | where: "category", page.category_filter %}
     {% elsif page.tag_filter %}
@@ -21,7 +25,7 @@ layout: default
     {% if blog_style == "grid" or blog_style == "card" %}
         <div class="rd-blog-grid">
             {% for post in filtered_posts %}
-            <div class="rd-blog-card">
+            <div class="rd-blog-card rd-filterable-item" data-tags="{{ post.tags | join: ',' | downcase }}">
                 {% if post.thumbnail %}
                 <div class="rd-blog-card-image-wrapper">
                     <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="rd-blog-thumb">
@@ -53,7 +57,7 @@ layout: default
     {% else %}
         <div class="rd-blog-list">
             {% for post in filtered_posts %}
-            <article class="rd-blog-list-item">
+            <article class="rd-blog-list-item rd-filterable-item" data-tags="{{ post.tags | join: ',' | downcase }}">
                 <div class="rd-blog-list-meta">
                     <time datetime="{{ post.date | date_to_xmlschema }}">
                         {% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}

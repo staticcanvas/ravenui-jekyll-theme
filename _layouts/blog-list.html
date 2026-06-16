@@ -9,8 +9,12 @@ layout: default
         <p class="text-muted">Technical updates, design shifts, and engineering logs.</p>
     </div>
 
+    {% if page.enable_tag_filter or site.theme_settings.blog.enable_tag_filter %}
+        {% include comps/tag-filter.html target=".rd-filterable-item" %}
+    {% endif %}
+
     {% for post in site.posts %}
-    <article class="rd-blog-list-item">
+    <article class="rd-blog-list-item rd-filterable-item" data-tags="{{ post.tags | join: ',' | downcase }}">
         <div class="rd-blog-list-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">
                 {% include comps/icon.html name="calendar" size=12 %} {{ post.date | date: "%B %d, %Y" }}
