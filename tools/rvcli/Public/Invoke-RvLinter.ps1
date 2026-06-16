@@ -20,6 +20,27 @@ function Invoke-RvLinter {
     $includesDir = [System.IO.Path]::Combine($WorkspaceRoot, "_includes", "comps")
     $docsDir = [System.IO.Path]::Combine($WorkspaceRoot, "docs", "components")
 
+    # Mappings for consolidated components that share documentation pages
+    $mappingExceptions = @{
+        "animate" = "configuration"
+        "comments" = "configuration"
+        "likes" = "configuration"
+        "theme-toggle" = "configuration"
+        "version-switcher" = "configuration"
+        "extra-api-fetcher" = "extra-components"
+        "extra-media-card" = "extra-components"
+        "extra-media-details" = "extra-components"
+        "extra-related-carousel" = "extra-components"
+        "extra-spinner" = "extra-components"
+        "extra-wiki-grid" = "extra-components"
+        "faq-item" = "faq"
+        "footer-2col" = "footer"
+        "footer-3col" = "footer"
+        "footer-item" = "footer"
+        "kbd-group" = "kbd"
+        "tag" = "tags"
+    }
+
     if ([System.IO.Directory]::Exists($includesDir) -and [System.IO.Directory]::Exists($docsDir)) {
         $includeFiles = [System.IO.Directory]::GetFiles($includesDir, "*.html")
         $docFiles = [System.IO.Directory]::GetFiles($docsDir, "*.md")
@@ -36,14 +57,34 @@ function Invoke-RvLinter {
         # Check for HTML missing MD
         foreach ($incName in $includeNames) {
             if ($incName -notin $docNames) {
-                $mismatches.Add("Include '{ct:accent:$incName.html}' has no documentation page in docs/components/")
+                $mappedDoc = $mappingExceptions[$incName]
+                if ($null -ne $mappedDoc) {
+                    if ($mappedDoc -eq "configuration") {
+                        if (-not [System.IO.File]::Exists([System.IO.Path]::Combine($WorkspaceRoot, "docs", "configuration.md"))) {
+                            $mismatches.Add("Include '{ct:accent:$incName.html}' maps to configuration.md, but configuration.md does not exist.")
+                        }
+                    } elseif (-not [System.IO.File]::Exists([System.IO.Path]::Combine($docsDir, "$mappedDoc.md"))) {
+                        $mismatches.Add("Include '{ct:accent:$incName.html}' maps to $mappedDoc.md, but that page does not exist.")
+                    }
+                } else {
+                    $mismatches.Add("Include '{ct:accent:$incName.html}' has no documentation page in docs/components/")
+                }
             }
         }
 
         # Check for MD missing HTML
         foreach ($docName in $docNames) {
             if ($docName -notin $includeNames) {
-                $mismatches.Add("Docs page '{ct:accent:$docName.md}' has no corresponding include file in _includes/comps/")
+                $isMapped = $false
+                foreach ($val in $mappingExceptions.Values) {
+                    if ($val -eq $docName) {
+                        $isMapped = $true
+                        break
+                    }
+                }
+                if (-not $isMapped) {
+                    $mismatches.Add("Docs page '{ct:accent:$docName.md}' has no corresponding include file in _includes/comps/")
+                }
             }
         }
     }
@@ -53,7 +94,7 @@ function Invoke-RvLinter {
     $allFiles = [System.IO.Directory]::GetFiles($searchDir, "*.*", [System.IO.SearchOption]::AllDirectories)
 
     foreach ($file in $allFiles) {
-        $relPath = [System.IO.Path]::GetRelativePath($WorkspaceRoot, $file)
+        $relPath = [System.IO.Path]::GetRelativePath($WorkspaceRoot, $file).Replace("\", "/")
         
         # Skip standard ignore directories
         if ($relPath -match 'node_modules|vendor|_site|\.git|\.jekyll-cache|\.bundle') { continue }
@@ -66,8 +107,8 @@ function Invoke-RvLinter {
             $line = $lines[$li]
             $lineNum = $li + 1
 
-            # A. Markdown heading bold audit (H2 and H3 only)
-            if ($ext -eq '.md') {
+            # A. Markdown heading bold audit (H2 and H3 only) - limit to docs/ and dev-notes-tracker.md
+            if ($ext -eq '.md' -and ($relPath -match '^docs/' -or $relPath -eq 'dev-notes-tracker.md')) {
                 if ($line -match '^#{2,3}\s+(.*)') {
                     $headerContent = ($Matches[1] -replace '\{:.*?\}', '').Trim()
                     if (-not ($headerContent -match '^\*\*(.*)\*\*$')) {

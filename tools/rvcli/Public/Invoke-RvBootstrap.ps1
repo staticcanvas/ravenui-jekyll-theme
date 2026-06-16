@@ -99,7 +99,7 @@ function Scaffold-LocalFolders {
     $configContent = @"
 title: RavenUI Site
 description: Scaffolded documentation site using RavenUI theme.
-logo_text: ZERODARK
+logo_text: RAVEN
 logo_subtext: SITE
 version: 1.0.0
 rd_accent_color: "#00ff9d"

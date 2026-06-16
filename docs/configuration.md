@@ -153,8 +153,8 @@ rd_code_copy: true
 rd_code_lang: true
 
 title: RavenUI Docs
-logo_text: ZERODARK
-logo_subtext: SP
+logo_text: RAVEN
+logo_subtext: UI
 copyright: "© 2026 RavenUI Systems."
 ```
 

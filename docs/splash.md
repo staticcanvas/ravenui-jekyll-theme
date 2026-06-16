@@ -76,7 +76,7 @@ enable_search: true
 <span class="fg-info">i</span> System Online: 67 components compiled successfully.
 <span class="fg-highlight">✓</span> Live server running at http://localhost:4000
     {% endcapture %}
-    {% include comps/terminal.html title="developer@zerodark-sp:~" content=term_content %}
+    {% include comps/terminal.html title="developer@ravenui:~" content=term_content %}
   </div>
   
   <div style="display: flex; flex-direction: column; gap: 1.5rem; justify-content: space-between;">
