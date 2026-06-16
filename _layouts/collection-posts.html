@@ -40,8 +40,9 @@ layout: default
                         <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
                     </h3>
                 </header>
-                {% if doc.description %}
-                <p style="color: var(--rd-clr-silver); margin-block-end: 1rem;">{{ doc.description }}</p>
+                {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 40 %}
+                {% if desc and desc != "" %}
+                <p style="color: var(--rd-clr-silver); margin-block-end: 1rem;">{{ desc }}</p>
                 {% endif %}
                 <a href="{{ doc.url | relative_url }}" class="rd-btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Read More</a>
             </article>

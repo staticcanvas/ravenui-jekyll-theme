@@ -39,8 +39,9 @@ layout: default
                     <h3 class="rd-collection-card-title">
                         <a href="{{ doc.url | relative_url }}">{{ doc.title | default: doc.slug }}</a>
                     </h3>
-                    {% if doc.description %}
-                    <p class="rd-collection-card-desc">{{ doc.description }}</p>
+                    {% assign desc = doc.description | default: doc.excerpt | strip_html | strip_newlines | strip | truncatewords: 20 %}
+                    {% if desc and desc != "" %}
+                    <p class="rd-collection-card-desc">{{ desc }}</p>
                     {% endif %}
                 </div>
             </div>

@@ -338,6 +338,10 @@
       url: /components/metrics/
       icon: cpu
       description: "High-density KPI and system metrics display panel"
+    - text: Runtime Metadata
+      url: /components/runtime-metadata/
+      icon: cpu
+      description: "Expose compiler, engine, platform, and active plugins versions"
     - text: Previously Read
       url: /components/previously-read/
       icon: history
