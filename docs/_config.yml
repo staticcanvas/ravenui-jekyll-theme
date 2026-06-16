@@ -18,6 +18,7 @@ baseurl: "/"
 
 # --- Advanced Theme Settings -----------------------------------------------\
 theme_settings:
+  environment: development        # options: development, production
   # Branding
   logo:
     path: /logo.svg                 # Path to image logo in sidebar

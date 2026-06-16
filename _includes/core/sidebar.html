@@ -130,6 +130,10 @@
                                         </i>
                                     {% endif %}
                                     {{ doc.title | default: doc.slug }}
+                                    {% assign env = site.theme_settings.environment | default: jekyll.environment | default: "development" %}
+                                    {% if env == "development" and doc.draft == true %}
+                                        <span class="rd-nav-badge rd-nav-badge--warn">draft</span>
+                                    {% endif %}
                                     {% if doc.is_new_feature %}
                                         <span class="rd-nav-badge rd-nav-badge--{{ doc.is_new_feature }}">
                                             {% if doc.is_new_feature == true or doc.is_new_feature == "new" %}

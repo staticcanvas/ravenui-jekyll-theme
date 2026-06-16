@@ -13,6 +13,7 @@ repository:
   edit_mode: standard # options: standard, vscode
 
 theme_settings:
+  environment: development        # options: development, production
   logo:
     path: /assets/img/logo.svg
     height: 32px
