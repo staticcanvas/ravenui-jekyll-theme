@@ -1,0 +1,84 @@
+/* SITEMAP COMPONENT */
+
+.rd-sitemap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-block: 2rem;
+}
+
+.rd-sitemap-section {
+  background: var(--rd-bg-surface);
+  border: 1px solid var(--rd-border-color);
+  border-radius: var(--rd-radius-lg);
+  padding: 1.5rem;
+}
+
+.rd-sitemap-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding-block-end: 0.75rem;
+  border-block-end: 1px solid var(--rd-border-color);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rd-clr-white);
+
+  svg {
+    color: var(--rd-clr-highlight);
+  }
+}
+
+.rd-sitemap-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-block-start: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rd-sitemap-item {
+  font-size: 0.9rem;
+}
+
+.rd-sitemap-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--rd-clr-silver);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--rd-radius);
+  transition: var(--rd-transition-fast);
+
+  svg {
+    color: var(--rd-clr-slate);
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--rd-clr-highlight) 8%, transparent);
+    color: var(--rd-clr-highlight);
+
+    svg {
+      color: var(--rd-clr-highlight);
+    }
+
+    .rd-sitemap-url {
+      color: var(--rd-clr-highlight);
+      opacity: 0.8;
+    }
+  }
+}
+
+.rd-sitemap-url,
+.rd-sitemap-date {
+  margin-inline-start: auto;
+  font-family: var(--rd-font-mono);
+  font-size: 0.75rem;
+  color: var(--rd-clr-slate);
+  transition: var(--rd-transition-fast);
+}
