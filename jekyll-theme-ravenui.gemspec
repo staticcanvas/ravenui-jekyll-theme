@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.dirname(__FILE__)) do
-    `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_sass|assets|bin|tools|LICENSE|README|VERSION|rvcli\.ps1)}) }
+    `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_data|_includes|_layouts|_plugins|_sass|assets|bin|lib|tools|LICENSE|README|VERSION|rvcli\.ps1)}) }
   end
   spec.bindir        = "bin"
   spec.executables   = ["rvcli"]

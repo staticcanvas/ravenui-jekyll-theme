@@ -73,6 +73,11 @@
       icon: code
       is_new_feature: updated
       color: "#ffcc00"
+    - text: Custom Component Tags
+      url: /custom-tags/
+      icon: zap
+      is_new_feature: new
+      color: "#ff3366"
     - text: Theme Colors
       url: /theme-colors/
       icon: palette
