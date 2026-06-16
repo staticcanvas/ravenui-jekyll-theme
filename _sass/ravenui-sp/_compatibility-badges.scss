@@ -1,0 +1,60 @@
+/* COMPATIBILITY & SUPPORT BADGES SASS DEFINITIONS */
+
+.rd-platform-support,
+.rd-browser-support {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1.5rem;
+}
+
+.rd-platform-badge,
+.rd-browser-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  background: var(--rd-bg-surface);
+  border: 1px solid var(--rd-border-color);
+  border-radius: var(--rd-radius);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: var(--rd-transition-fast);
+
+  .rd-platform-name,
+  .rd-browser-name {
+    color: var(--rd-clr-white);
+  }
+
+  .rd-platform-status,
+  .rd-browser-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding-inline-start: 0.5rem;
+    border-inline-start: 1px solid var(--rd-border-color);
+  }
+
+  /* Status variants mapping */
+  &.rd-platform--supported,
+  &.rd-browser--supported {
+    border-color: color-mix(in srgb, var(--rd-clr-viridian) 25%, var(--rd-border-color));
+    background: color-mix(in srgb, var(--rd-clr-viridian) 4%, var(--rd-bg-surface));
+  }
+
+  &.rd-platform--partial,
+  &.rd-browser--partial {
+    border-color: color-mix(in srgb, var(--rd-clr-warning) 25%, var(--rd-border-color));
+    background: color-mix(in srgb, var(--rd-clr-warning) 4%, var(--rd-bg-surface));
+  }
+
+  &.rd-platform--unsupported,
+  &.rd-browser--unsupported {
+    opacity: 0.6;
+    background: color-mix(in srgb, var(--rd-clr-slate) 4%, var(--rd-bg-surface));
+  }
+}
