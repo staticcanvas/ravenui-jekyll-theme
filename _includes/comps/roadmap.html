@@ -1,3 +1,42 @@
-<div class="rd-roadmap">
+{%- comment -%}
+Component__: Roadmap Container
+Purpose____: Renders a visual roadmap from inline captured content OR from a structured YAML data source.
+Parameters_:
+  - content     : Captured HTML string of roadmap-item includes (legacy pattern).
+  - data_source : Filename (without .yml) under _data/ containing roadmap item objects.
+  - items       : Inline YAML array of roadmap item objects (alternative to data_source).
+  - class       : Optional extra CSS class on the wrapper.
+Caveats____: When using data_source or items, each object maps directly to roadmap-item.html parameters.
+Usage______:
+  Data-driven: {% include comps/roadmap.html data_source="my-roadmap" %}
+  Inline items: {% include comps/roadmap.html items=page.roadmap_items %}
+  Captured:    {% include comps/roadmap.html content=my_captured_content %}
+{%- endcomment -%}
+
+{%- assign items = include.items | default: page.roadmap_items -%}
+{%- if items == nil and include.data_source -%}
+  {%- assign ds = include.data_source -%}
+  {%- assign path_parts = ds | split: "." -%}
+  {%- assign resolved_data = site.data -%}
+  {%- for part in path_parts -%}
+    {%- assign resolved_data = resolved_data[part] -%}
+  {%- endfor -%}
+  {%- assign items = resolved_data -%}
+{%- endif -%}
+
+<div class="rd-roadmap {{ include.class }}">
+  {%- if items -%}
+    {%- for item in items -%}
+      {%- include comps/roadmap-item.html
+          status=item.status
+          title=item.title
+          description=item.description
+          milestone_url=item.milestone_url
+          show_progress=item.show_progress
+          percent=item.percent
+          tasks=item.tasks -%}
+    {%- endfor -%}
+  {%- elsif include.content -%}
     {{ include.content }}
+  {%- endif -%}
 </div>

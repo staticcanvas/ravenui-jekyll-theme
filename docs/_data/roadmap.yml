@@ -1,0 +1,31 @@
+# Example roadmap data for the RavenUI documentation site.
+# Used in docs/components/roadmap.md to demonstrate data-source driven mode.
+# Mirrors the parameters accepted by roadmap-item.html.
+
+- status: completed
+  title: "Core Layout Engine"
+  description: "The modular SCSS foundation, dark-mode token system, and flex/grid layout scaffolding."
+  show_progress: true
+  percent: 100
+
+- status: completed
+  title: "Atomic Component Library (v1)"
+  description: "Over 60 reusable includes covering data, media, interactive, and navigation patterns."
+  show_progress: true
+  percent: 100
+
+- status: active
+  title: "Dual-Mode Data Components"
+  description: "Timeline, Roadmap, Charts, and Table components now accept YAML from _data/ files or inline front-matter properties."
+  show_progress: true
+  percent: 65
+
+- status: planned
+  title: "RubyGems Release"
+  description: "Package and publish jekyll-theme-ravenui to RubyGems.org with full versioned releases."
+  show_progress: false
+
+- status: planned
+  title: "CLI & Hot-Reload Tooling"
+  description: "Multi-theme generation, permalink previewer, and a loading placeholder page during livereload config restarts."
+  show_progress: false
