@@ -76,7 +76,7 @@
 ### **Documentation (priority-5)**
 ### **Refactoring (priority-6)**
 - [x] 🟡🩹 **Refactoring/Sass** - Created `_sass/ravenui-sp/_sass-vars.scss` with `!default` SASS variable layer covering all design tokens (colors, typography, spacing, radius, transitions, z-index). Added `$rd-overrides` map + `rd-token()` helper for bulk override pattern. Registered as first import. Documented in `docs/customization.md`.
-- [ ] 🟡🩹 **Refactoring/Markdown** - Evaluate whether to use Kramdown CodeRay over Rouge, or support both syntax highlighters.
+- [x] 🟡🩹 **Refactoring/Markdown** - Conducted technical evaluation between Rouge and CodeRay. Formally standardized exclusively on Rouge due to CodeRay's deprecation, limited language support (40 vs 200+), and to prevent CSS stylesheet bloat. Documented in `docs/markdown.md`.
 - [x] 🟡🩹 **Refactoring/Config** - Expanded `docs/variables.md` into a comprehensive canonical reference for every `_config.yml` setting, `theme_settings` namespace, page front-matter key, and data-sourcing mode — with full tables including type, default, and description.
 - [ ] 🟡🩹 **Refactoring/Plugins** - Determine whether to extract all custom plugins and release them as separate Ruby gems, or keep them internal to the theme.
 - [x] 🟡🩹 **Refactoring/JS** - Extracted ticker, heading-anchors, and code-utils from inline `<script>` in `default.html` into standalone ES modules (`assets/js/rd-ticker.mjs`, `rd-heading-anchors.mjs`, `rd-code-utils.mjs`). Liquid config replaced by `data-*` attributes on `<body>`.

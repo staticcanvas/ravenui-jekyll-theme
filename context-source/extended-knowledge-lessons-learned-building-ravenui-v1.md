@@ -14,6 +14,10 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Decision:** Implement a three-way pluggable search provider model (Pagefind WASM, Lyra/Orama Client-side JS, and Algolia Hosted Search) with a global CDN toggle (`theme_settings.search.use_cdn`).
 - **Reasoning:** High-performance documentation sites must be usable in diverse network environments, including strict corporate networks or offline intranets. A dual asset delivery mechanism (CDN for public deployment, local offline scripts for private/local hosting) satisfies both deployment modes.
 
+### **1.3. Syntax Highlighter Standardization (Rouge vs. CodeRay)**
+- **Decision:** Exclusively standardize on **Rouge** as the theme's syntax highlighter, avoiding any legacy CodeRay support.
+- **Reasoning:** Rouge supports over 200+ languages (including modern JS/TS, JSX, Rust, YAML, and TOML) compared to CodeRay's ~40 languages. Additionally, CodeRay is deprecated and has been removed from native kramdown v2.x cores. Standardizing on Rouge prevents CSS bloat by avoiding duplicate syntax styling sheets.
+
 ---
 
 ## **2. Technical Caveats & Resolved Bugs**

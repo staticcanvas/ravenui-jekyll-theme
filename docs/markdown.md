@@ -26,6 +26,13 @@ You can render styled keys like <kbd>Ctrl</kbd> + <kbd>/</kbd> to document short
 
 Syntax highlighting is powered by **Rouge** with our custom **Ethereal Rouge** theme.
 
+> [!NOTE]
+> **Syntax Highlighter Evaluation: Rouge vs CodeRay**
+> During our architectural review, we evaluated whether to support Kramdown's legacy CodeRay highlighter alongside or instead of Rouge. We standardized exclusively on **Rouge** for the following reasons:
+> - **Language Support:** Rouge supports over 200+ languages, including modern frontend/backend languages, configuration files (YAML, TOML), and shells (PowerShell). CodeRay is limited to ~40 languages.
+> - **Maintenance:** CodeRay is deprecated and unmaintained. Kramdown v2.x has removed native support for CodeRay, making it a legacy option. Rouge is actively maintained and is the default highlighter for Jekyll and GitHub Pages.
+> - **Performance & Styling:** Standardizing on Rouge allows the theme to optimize its stylesheet size, avoiding shipping a duplicate stylesheet for CodeRay's HTML output class structure.
+
 ```javascript
 // RavenUI Code Block
 const theme = {
