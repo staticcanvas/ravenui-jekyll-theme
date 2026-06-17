@@ -1,0 +1,136 @@
+{%- comment -%}
+Component__: Depends Upon
+Purpose____: Documents the external and internal dependencies a component or page
+             relies on. Supports inline `items` data or a `data_source` pointing to
+             a `_data/` file. Each item can include a name, type, version, link,
+             description, and optional CDN/npm package info.
+Usage______:
+  Inline items array (capture-assign pattern):
+    {% assign deps = "lucide-icons,pagefind" | split: "," %}
+    {% include comps/depends-upon.html items=deps %}
+
+  Full structured data via front-matter (recommended):
+    ---
+    depends_upon:
+      - name: "Lucide Icons"
+        type: js-cdn
+        version: "0.400.0"
+        link: "https://lucide.dev"
+        description: "Icon SVG library, loaded via CDN or local bundle."
+      - name: "Pagefind"
+        type: js-cdn
+        version: "1.1.0"
+        link: "https://pagefind.app"
+        description: "Static site search engine."
+    ---
+    {% include comps/depends-upon.html items=page.depends_upon %}
+
+  From a _data/ file:
+    {% include comps/depends-upon.html data_source="component-deps.callout" %}
+
+Parameters_:
+  items       (optional) — Array of dependency objects or plain name strings.
+  data_source (optional) — Dot-notation path into site.data (e.g. "deps.callout").
+  title       (optional) — Override the "Dependencies" heading. Set to "" to hide it.
+  compact     (optional) — Set to true for an inline pill-only display (no descriptions).
+{%- endcomment -%}
+
+{%- comment -%} Resolve data source {%- endcomment -%}
+{%- assign _items = include.items -%}
+{%- if include.data_source and _items == nil -%}
+  {%- assign _ds_parts = include.data_source | split: "." -%}
+  {%- assign _ds_root  = _ds_parts[0] -%}
+  {%- assign _ds_key   = _ds_parts[1] -%}
+  {%- assign _items = site.data[_ds_root][_ds_key] -%}
+{%- endif -%}
+
+{%- if _items == nil or _items.size == 0 -%}
+  {%- comment -%} Nothing to render {%- endcomment -%}
+{%- else -%}
+
+{%- assign _compact = include.compact | default: false -%}
+{%- assign _title   = include.title -%}
+{%- unless include.title == "" -%}
+  {%- assign _title = include.title | default: "Dependencies" -%}
+{%- endunless -%}
+
+<div class="rd-depends-upon {% if _compact %}rd-depends-upon--compact{% endif %} {{ include.class }}">
+
+  {%- if _title != "" -%}
+  <div class="rd-depends-upon__header">
+    <i data-lucide="package-check" style="width:14px;height:14px;"></i>
+    <span class="rd-depends-upon__title">{{ _title }}</span>
+  </div>
+  {%- endif -%}
+
+  <ul class="rd-depends-upon__list" role="list">
+    {%- for dep in _items -%}
+
+      {%- comment -%} Support both plain strings and structured objects {%- endcomment -%}
+      {%- if dep.name -%}
+        {%- assign _name    = dep.name -%}
+        {%- assign _type    = dep.type | default: "other" -%}
+        {%- assign _version = dep.version -%}
+        {%- assign _link    = dep.link -%}
+        {%- assign _desc    = dep.description -%}
+        {%- assign _pkg     = dep.package -%}
+      {%- else -%}
+        {%- assign _name    = dep -%}
+        {%- assign _type    = "other" -%}
+        {%- assign _version = nil -%}
+        {%- assign _link    = nil -%}
+        {%- assign _desc    = nil -%}
+        {%- assign _pkg     = nil -%}
+      {%- endif -%}
+
+      {%- comment -%} Resolve type icon + label {%- endcomment -%}
+      {%- case _type -%}
+        {%- when "js-cdn" -%}     {%- assign _type_icon = "globe" -%}   {%- assign _type_label = "CDN" -%}
+        {%- when "js-local" -%}   {%- assign _type_icon = "file-code" -%} {%- assign _type_label = "Local JS" -%}
+        {%- when "ruby-gem" -%}   {%- assign _type_icon = "gem" -%}     {%- assign _type_label = "Ruby Gem" -%}
+        {%- when "css-cdn" -%}    {%- assign _type_icon = "palette" -%} {%- assign _type_label = "CSS CDN" -%}
+        {%- when "component" -%}  {%- assign _type_icon = "box" -%}     {%- assign _type_label = "Component" -%}
+        {%- when "plugin" -%}     {%- assign _type_icon = "plug" -%}    {%- assign _type_label = "Plugin" -%}
+        {%- when "npm" -%}        {%- assign _type_icon = "package" -%} {%- assign _type_label = "npm" -%}
+        {%- else -%}              {%- assign _type_icon = "link" -%}     {%- assign _type_label = "External" -%}
+      {%- endcase -%}
+
+      <li class="rd-depends-upon__item rd-depends-upon__item--{{ _type }}">
+        <div class="rd-depends-upon__item-header">
+
+          {%- comment -%} Type badge {%- endcomment -%}
+          <span class="rd-depends-upon__type-badge rd-depends-upon__type-badge--{{ _type }}" title="{{ _type_label }}">
+            <i data-lucide="{{ _type_icon }}" style="width:10px;height:10px;"></i>
+            {{ _type_label }}
+          </span>
+
+          {%- comment -%} Name — linked if url provided {%- endcomment -%}
+          {%- if _link -%}
+            <a href="{{ _link }}" class="rd-depends-upon__name" target="_blank" rel="noopener noreferrer">
+              {{ _name }}
+              <i data-lucide="external-link" style="width:10px;height:10px;opacity:0.5;"></i>
+            </a>
+          {%- else -%}
+            <span class="rd-depends-upon__name">{{ _name }}</span>
+          {%- endif -%}
+
+          {%- comment -%} Version pill {%- endcomment -%}
+          {%- if _version -%}
+            <span class="rd-depends-upon__version">v{{ _version }}</span>
+          {%- endif -%}
+
+          {%- comment -%} Package identifier {%- endcomment -%}
+          {%- if _pkg -%}
+            <code class="rd-depends-upon__pkg">{{ _pkg }}</code>
+          {%- endif -%}
+        </div>
+
+        {%- if _desc and _compact != true -%}
+        <p class="rd-depends-upon__desc">{{ _desc }}</p>
+        {%- endif -%}
+      </li>
+
+    {%- endfor -%}
+  </ul>
+</div>
+{%- endif -%}
