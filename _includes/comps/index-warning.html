@@ -1,0 +1,120 @@
+{%- comment -%}
+Component__: Index Warning Banner
+Purpose____: Renders a prominent warning when a directory/collection folder lacks an
+             index.md or index.html. Surfaces recommended includes and QOL tips to
+             help developers scaffold the correct file quickly.
+Usage______: {% include comps/index-warning.html %}
+             Or with a custom path hint:
+             {% include comps/index-warning.html path="docs/guides/" %}
+Parameters_:
+  path      (optional) — The directory path shown in the hint. Defaults to page.url.
+  title     (optional) — Override the default warning heading.
+  hide_tips (optional) — Set to true to suppress the QOL tips panel.
+{%- endcomment -%}
+
+{%- assign _path  = include.path  | default: page.url -%}
+{%- assign _title = include.title | default: "Missing Index File" -%}
+
+<div class="rd-index-warning" role="alert" aria-live="polite">
+
+  <!-- Header -->
+  <div class="rd-index-warning__header">
+    <span class="rd-index-warning__icon">
+      <i data-lucide="folder-x" style="width:22px;height:22px;"></i>
+    </span>
+    <div class="rd-index-warning__heading">
+      <span class="rd-index-warning__badge">Directory Warning</span>
+      <h2 class="rd-index-warning__title">{{ _title }}</h2>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="rd-index-warning__body">
+    <p class="rd-index-warning__desc">
+      The directory <code class="rd-index-warning__path">{{ _path }}</code> does not
+      contain an <code>index.md</code> or <code>index.html</code> file. Without one,
+      Jekyll may expose a raw file listing or return a 404.
+    </p>
+
+    <!-- Quick Fix -->
+    <div class="rd-index-warning__section">
+      <h3 class="rd-index-warning__section-title">
+        <i data-lucide="zap" style="width:14px;height:14px;"></i>
+        Quick Fix — create an index page
+      </h3>
+      <p>Create <strong>{{ _path | append: "index.md" }}</strong> with the following
+         minimal front-matter:</p>
+      <div class="rd-index-warning__code">
+        <pre><code>---
+title: "Your Page Title"
+layout: default
+description: "A short description of this section."
+---
+
+{% raw %}{% include comps/card-index.html %}{% endraw %}</code></pre>
+      </div>
+    </div>
+
+    <!-- Recommended Components -->
+    <div class="rd-index-warning__section">
+      <h3 class="rd-index-warning__section-title">
+        <i data-lucide="layout-grid" style="width:14px;height:14px;"></i>
+        Recommended index components
+      </h3>
+      <ul class="rd-index-warning__list">
+        <li>
+          <code>{% raw %}{% include comps/card-index.html %}{% endraw %}</code>
+          <span class="rd-index-warning__hint">— Auto-generates a card grid of child pages</span>
+        </li>
+        <li>
+          <code>{% raw %}{% include comps/sitemap.html %}{% endraw %}</code>
+          <span class="rd-index-warning__hint">— Full site tree listing</span>
+        </li>
+        <li>
+          <code>{% raw %}{% include comps/feature-grid.html %}{% endraw %}</code>
+          <span class="rd-index-warning__hint">— Marketing-style feature cards</span>
+        </li>
+        <li>
+          <code>{% raw %}{% include comps/tag-filter.html %}{% endraw %}</code>
+          <span class="rd-index-warning__hint">— Filterable tag-driven page listing</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- QOL Tips Panel -->
+    {%- unless include.hide_tips == true -%}
+    <details class="rd-index-warning__tips">
+      <summary class="rd-index-warning__tips-toggle">
+        <i data-lucide="lightbulb" style="width:14px;height:14px;"></i>
+        QOL Tips &amp; Best Practices
+      </summary>
+      <ul class="rd-index-warning__tips-list">
+        <li>
+          <strong>Collections:</strong> Every collection folder (e.g.
+          <code>_tutorials/</code>) should have a corresponding output index page
+          at its permalink root (e.g. <code>/tutorials/index.md</code>).
+        </li>
+        <li>
+          <strong>Disable sidebar per-page:</strong> Add <code>sidebar: false</code>
+          to front-matter for landing/index pages that don't need navigation.
+        </li>
+        <li>
+          <strong>Layout variants:</strong> Use <code>layout: splash</code> for
+          marketing-style landing pages with no sidebar or TOC chrome.
+        </li>
+        <li>
+          <strong>Suppress this warning:</strong> Once an index file exists,
+          this component auto-resolves. You can also pass
+          <code>hide_tips: true</code> to suppress the tips panel only.
+        </li>
+        <li>
+          <strong>Permalink tip:</strong> Set <code>permalink: /your-path/</code>
+          in front-matter to ensure the URL resolves cleanly regardless of
+          Jekyll's default permalink strategy.
+        </li>
+      </ul>
+    </details>
+    {%- endunless -%}
+  </div>
+
+</div>

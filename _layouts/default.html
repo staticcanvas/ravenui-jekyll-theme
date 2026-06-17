@@ -72,6 +72,16 @@
             </section>
             {% endif %}
 
+            {%- comment -%}
+            Index Warning: renders when the page explicitly opts-in via `index_warning: true`
+            in front-matter, or when rd_debug is active and the page body is empty — which
+            typically means the directory lacks an index file and Jekyll generated a blank page.
+            {%- endcomment -%}
+            {%- assign _content_stripped = content | strip_html | strip -%}
+            {%- if page.index_warning == true or (site.rd_debug and _content_stripped == "") -%}
+                {% include comps/index-warning.html %}
+            {%- endif -%}
+
             {{ content }}
             
             {% include comps/page-nav.html %}

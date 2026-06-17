@@ -53,8 +53,8 @@
 ---
 ### **Issues Remaining (priority-1)**
 ### **Enhancements (priority-2)**
-- [ ] 🟡🌟 **Enhancements/SidebarWidth** - Resolve sidebar wrapping on long menu item titles by introducing a configurable default sidebar width customizable via `_config.yml` (e.g., `theme_settings.sidebar.width`), and increase the default sidebar width slightly.
-- [ ] 🟡🌟 **Enhancements/IndexWarning** - Prevent raw directory/file listings in folders without index files by rendering a warning banner prompting the user to create an `index.md` or `index.html` file using recommended component includes (applicable to collections and standard directories). Add inline QOL tips, tricks, and best practices throughout the documentation.
+- [x] 🟡🌟 **Enhancements/SidebarWidth** - Introduced `--rd-sidebar-width` CSS custom property (default `280px`, up from `240px`) consumed by `_layout.scss` grid templates. Value is injectable via `theme_settings.sidebar.width` in `_config.yml` (any CSS unit accepted). Both the full-sidebar and no-TOC grid variants updated. Documented inline in `_config.yml`.
+- [x] 🟡🌟 **Enhancements/IndexWarning** - Created `_includes/comps/index-warning.html` + `_sass/ravenui-sp/_index-warning.scss`. Renders a prominent amber warning banner with: directory path hint, minimal front-matter scaffold, recommended component list (`card-index`, `sitemap`, `feature-grid`, `tag-filter`), and a collapsible QOL tips panel. Auto-triggers in `default.html` when `page.index_warning: true` or when `rd_debug` is on and page body is empty. Registered in `ravenui-sp.scss`.
 
 ### **Features (priority-3)**
 - [ ] 🟡🌟 **Features/Liquid** - Explore custom Liquid tags to simplify custom asset or path resolution.

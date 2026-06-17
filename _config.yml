@@ -27,6 +27,11 @@ theme_settings:
     style: simple                  # options: simple, lines, nodes
     density: default               # options: compact, default, relaxed
     animations: true               # Enable/disable TOC specific animations (page load, hover)
+
+  # Sidebar Settings
+  sidebar:
+    width: 280px                   # Left sidebar column width. Accepts any CSS unit (e.g., 260px, 20rem, 18vw)
+                                   # Default: 280px. Increase for long nav item titles to prevent wrapping.
   code:
     lang_style: header
   
