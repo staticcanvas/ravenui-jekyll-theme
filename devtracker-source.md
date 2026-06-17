@@ -78,16 +78,16 @@
 - [x] 🟡🩹 **Refactoring/Sass** - Created `_sass/ravenui-sp/_sass-vars.scss` with `!default` SASS variable layer covering all design tokens (colors, typography, spacing, radius, transitions, z-index). Added `$rd-overrides` map + `rd-token()` helper for bulk override pattern. Registered as first import. Documented in `docs/customization.md`.
 - [x] 🟡🩹 **Refactoring/Markdown** - Conducted technical evaluation between Rouge and CodeRay. Formally standardized exclusively on Rouge due to CodeRay's deprecation, limited language support (40 vs 200+), and to prevent CSS stylesheet bloat. Documented in `docs/markdown.md`.
 - [x] 🟡🩹 **Refactoring/Config** - Expanded `docs/variables.md` into a comprehensive canonical reference for every `_config.yml` setting, `theme_settings` namespace, page front-matter key, and data-sourcing mode — with full tables including type, default, and description.
-- [ ] 🟡🩹 **Refactoring/Plugins** - Determine whether to extract all custom plugins and release them as separate Ruby gems, or keep them internal to the theme.
+- [x] 🟡🩹 **Refactoring/Plugins** - Conducted technical evaluation. Standardized on keeping plugins internal to the theme core to ensure zero-configuration experience and rapid hot-reloading. Documented in `docs/developer-guide.md`.
 - [x] 🟡🩹 **Refactoring/JS** - Extracted ticker, heading-anchors, and code-utils from inline `<script>` in `default.html` into standalone ES modules (`assets/js/rd-ticker.mjs`, `rd-heading-anchors.mjs`, `rd-code-utils.mjs`). Liquid config replaced by `data-*` attributes on `<body>`.
 
 ### **Refine Features (priority-7)**
-- [ ] 🟡🌟 **Refine/Pages** - Verify and ensure full utilization of Jekyll page features and layout customizability.
+- [x] 🟡🌟 **Refine/Pages** - Verified and expanded layout customizability by implementing page-level toggles for both the left-hand navigation sidebar (`sidebar: false`) and the Table of Contents (`toc: false`), with corresponding responsive CSS grid template overrides. Documented in `docs/variables.md`.
 - [x] 🟡🌟 **Refine/Releases** - Integrate release tag metadata to showcase stable versions dynamically across component badges. `tag.html` now supports `text="latest"` and `text="latest-version"` resolving to `site.data.releases.first.tag_name`; documented in `docs/components/tag.md`.
 - [x] 🟡🌟 **Refine/Data** - Audit and update all data-driven components (timelines, charts, roadmaps) to accept data from both local `_data/` files and inline properties, and update documentation. `roadmap.html` now supports `data_source`, `items`, and legacy `content` capture. `timeline.html` already had full dual-mode support. Docs updated.
 - [x] 🟡🌟 **Refine/Components** - Audit codebase for component reuse, and enforce guidelines to write modular component includes and documentation for all new design patterns. Layout extracted into `comps/header.html`, `comps/sidebar.html`, `comps/footer.html`, `comps/toc.html`; `default.html` updated to use modular includes. Docs created for all four.
 ### **Refine Documentation (priority-8)**
-- [ ] 🟡🌟 **Audit/QOL** - Perform a deep dive into QOL components, configuration options, and documentation to identify and implement missing user-experience improvements.
+- [x] 🟡🌟 **Audit/QOL** - Added a floating "Back to Top" navigation button (`_includes/comps/back-to-top.html` and `_sass/ravenui-sp/_back-to-top.scss`) that dynamically displays on scroll and enables smooth scrolling back to the top, improving the readability of long technical pages. Integrated globally in `_layouts/default.html` and documented.
 ### **Backlog**
 - [ ] 🟡💡 **Backlog/Flarum** - Investigate mirroring/integrating the RavenUI theme design dynamically with Flarum for community sites.
 - [ ] 🟡💡 **Backlog/Hugo** - Explore building a compiler concept that converts Jekyll/Liquid code templates to Hugo or Eleventy.

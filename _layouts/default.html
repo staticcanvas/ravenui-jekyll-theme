@@ -23,7 +23,8 @@
         {% include comps/header.html %}
     {% endif %}
 
-    <div class="rd-container">
+    <div class="rd-container{% if page.sidebar == false %} rd-no-sidebar{% endif %}{% if page.toc == false %} rd-no-toc{% endif %}">
+        {% unless page.sidebar == false %}
         <aside class="rd-sidebar-left">
             {% include comps/sidebar.html %}
         </aside>
@@ -37,6 +38,7 @@
                 }
             })();
         </script>
+        {% endunless %}
 
         <main class="rd-content">
             {% include comps/breadcrumbs.html %}
@@ -89,7 +91,9 @@
             {% include comps/footer.html %}
         </main>
 
+        {% unless page.toc == false %}
         {% include comps/toc.html %}
+        {% endunless %}
 
         <aside class="rd-sidebar-right">
             <!-- TOC content is moved to a top-level container to support mobile visibility -->
@@ -119,14 +123,20 @@
         </div>
     </div>
 
+    {% if page.sidebar != false or page.toc != false %}
     <div class="rd-mobile-controls">
+        {% unless page.sidebar == false %}
         <button id="rd-nav-toggle" class="rd-mobile-btn" aria-label="Toggle Navigation">
             {% include comps/icon.html name="menu" size="20" %}
         </button>
+        {% endunless %}
+        {% unless page.toc == false %}
         <button id="rd-toc-toggle" class="rd-toc-toggle rd-mobile-btn" aria-label="Toggle Table of Contents">
             <span class="rd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
         </button>
+        {% endunless %}
     </div>
+    {% endif %}
 
     {% if site.animation_libraries.aos.enable %}
     <script src="{{ site.animation_libraries.aos.cdn_js | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js' }}"></script>
@@ -530,6 +540,7 @@
             // {% endif %}
         });
     </script>
+    {% include comps/back-to-top.html %}
 </body>
 
 </html>

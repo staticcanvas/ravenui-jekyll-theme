@@ -232,6 +232,8 @@ These keys can be set in any page or post's YAML front-matter block:
 | `color` | String | Accent color for the sidebar link icon. |
 | `is_new_feature` | String/Boolean | Badge on sidebar link: `true` / `"new"` / `"updated"` / `"hot"`. |
 | `enable_search` | Boolean | Opt page into the search index. |
+| `sidebar` | Boolean | Show/hide the left-hand navigation sidebar (defaults to `true`). |
+| `toc` | Boolean | Show/hide the Table of Contents (TOC) panel (defaults to `true`). |
 
 ### **Functional Overrides**
 
