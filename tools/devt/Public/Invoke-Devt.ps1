@@ -53,7 +53,7 @@ function Invoke-Devt {
     [Alias('devt')]
     param(
         [Parameter(Mandatory=$false, Position=0)]
-        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "help")]
+        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "help")]
         [string]$Mode = "compile",
 
         [Parameter(Mandatory=$false)]
@@ -552,18 +552,29 @@ function Invoke-Devt {
                 $yellow = 214
                 $gray = 244
 
+                $titleText = " ◆ DEVTRACKER TASK METRICS DASHBOARD ◆ "
+                $metricsLine = "Total Tasks: $totalTasks  |  Completed: $completedTasks ($completedPercent%)  |  Pending: $remainingTasks ($remainingPercent%)"
+                
+                # Draw a nice gradient box without screen tearing
+                $boxWidth = $metricsLine.Length + 4
+                $topLine = "┌" + ("─" * $boxWidth) + "┐"
+                $midLine = "├" + ("─" * $boxWidth) + "┤"
+                $bottomLine = "└" + ("─" * $boxWidth) + "┘"
+                
+                $titlePadding = [Math]::Max(0, [int][Math]::Floor(($boxWidth - $titleText.Length) / 2))
+                $titlePadded = (" " * $titlePadding) + $titleText + (" " * ($boxWidth - $titleText.Length - $titlePadding))
+                
+                $steps = @(51, 93, 201)
+                
                 Write-Host ""
-                Write-Host (New-AsciiColor -string " 💠 DEVTRACKER TASK METRICS DASHBOARD " -color $boldWhite -bgcolor 239 -Format Bold)
-                Write-Host (New-AsciiColor -string " ─────────────────────────────────────" -color $gray)
+                Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $topLine)
                 
-                Write-Host "  " -NoNewline
-                Write-Host "Total Tasks: " -NoNewline
-                Write-Host (New-AsciiColor -string "$totalTasks" -color $cyan -Format Bold) -NoNewline
-                Write-Host "  |  Completed: " -NoNewline
-                Write-Host (New-AsciiColor -string "$completedTasks ($completedPercent%)" -color $green -Format Bold) -NoNewline
-                Write-Host "  |  Pending: " -NoNewline
-                Write-Host (New-AsciiColor -string "$remainingTasks ($remainingPercent%)" -color $yellow -Format Bold)
+                $borderChar = New-AsciiGradient -Type fg -Steps $steps -String "│"
+                Write-Host "$borderChar$titlePadded$borderChar"
                 
+                Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $midLine)
+                Write-Host "$borderChar  $metricsLine  $borderChar"
+                Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $bottomLine)
                 Write-Host ""
                 Write-Host (New-AsciiColor -string " 🔹 PENDING TASKS BY CATEGORY:" -color $boldWhite -Format Bold)
                 foreach ($category in $parsed.CategoryOrder) {
@@ -612,8 +623,9 @@ function Invoke-Devt {
                     $desc = $emojiDescriptions[$emoji]
                     $paddedDesc = "{0,-20}" -f $desc
                     
+                    $countStr = "{0,-4}" -f $count
                     Write-Host "    $emoji $paddedDesc : " -NoNewline
-                    Write-Host (New-AsciiColor -string "$count" -color $cyan -Format Bold) -NoNewline
+                    Write-Host (New-AsciiColor -string $countStr -color $cyan -Format Bold) -NoNewline
                     
                     $counter++
                     if ($counter % 2 -eq 0) {
@@ -838,6 +850,37 @@ function Invoke-Devt {
                 Write-TrackerLog 'suc' "Successfully removed task: $($foundTask.RawText)" "Remove"
             }
 
+            "commit" {
+                Invoke-GitCommitHelper
+            }
+
+            "diff" {
+                Invoke-GitDiffHelper
+            }
+
+            "validate" {
+                Write-TrackerLog 'act' "Validating tasks format in $resolvedSourcePath..." "Validate"
+                $errors = Test-TaskFileFormat $resolvedSourcePath
+                $errCount = @($errors).Count
+                if ($errCount -gt 0) {
+                    Write-TrackerLog 'err' "Found $errCount formatting error(s) in task file:" "Validate"
+                    foreach ($err in $errors) {
+                        Write-Host "⚠️ $err" -ForegroundColor Red
+                    }
+                    exit 1
+                } else {
+                    Write-TrackerLog 'suc' "All tasks format validated successfully!" "Validate"
+                }
+            }
+
+            "sync-gitlab" {
+                Sync-TasksToGitLab $resolvedSourcePath
+            }
+
+            "create-mr" {
+                Create-MergeRequestHelper
+            }
+
             "help" {
                 $boldWhite = 15
                 $cyan = 81
@@ -882,6 +925,11 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "list" -color $cyan) -NoNewline; Write-Host "     : Lists tasks in a clean terminal view with optional filters."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "add" -color $cyan) -NoNewline; Write-Host "      : Appends a new formatted task directly to the source tracker."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "remove" -color $cyan) -NoNewline; Write-Host "   : Deletes a task from the source file matching a TaskKey string."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "commit" -color $cyan) -NoNewline; Write-Host "   : Prompts for a conventional commit formatted message and commits."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "diff" -color $cyan) -NoNewline; Write-Host "     : Renders styled summary of staged/unstaged changes."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "validate" -color $cyan) -NoNewline; Write-Host " : Audits devtracker-source.md format for standard task structures."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "sync-gitlab" -color $cyan) -NoNewline; Write-Host " : Maps and syncs Markdown tasks to GitLab issues and milestones."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "create-mr" -color $cyan) -NoNewline; Write-Host "   : Generates and posts a Draft Merge Request from commit differences."
                 Write-Host ""
                 Write-Host (New-AsciiColor -string "OPTIONS & PARAMETERS" -color $boldWhite -Format Bold)
                 Write-Host "    -TaskText <string>          : The description text of the task to add."

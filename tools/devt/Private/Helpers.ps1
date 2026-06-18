@@ -103,15 +103,20 @@ function Format-TaskLine([string]$text, [string]$categoryName, [string]$diff, [s
     $shortCat = $shortCat -replace '\s+\(priority-\d+\)', ''
     
     switch ($shortCat.ToLower()) {
-        'issues remaining' { $catCode = 'Issues' }
-        'enhancements'     { $catCode = 'Enhancement' }
-        'features'         { $catCode = 'Features' }
-        'bug fixes'        { $catCode = 'BugFix' }
-        'documentation'    { $catCode = 'Docs' }
-        'refactoring'      { $catCode = 'Refactoring' }
-        'refine features'  { $catCode = 'Refine' }
+        'issues remaining'     { $catCode = 'Critical' }
+        'critical path'        { $catCode = 'Critical' }
+        'enhancements'         { $catCode = 'Enhancement' }
+        'active enhancements'  { $catCode = 'Enhancement' }
+        'features'             { $catCode = 'Feature' }
+        'feature development'  { $catCode = 'Feature' }
+        'bug fixes'            { $catCode = 'BugFix' }
+        'refactoring'          { $catCode = 'Refactor' }
+        'refactoring & qol'    { $catCode = 'Refactor' }
+        'documentation'        { $catCode = 'Docs' }
+        'documentation & docs' { $catCode = 'Docs' }
+        'refine features'      { $catCode = 'Refine' }
         'refine documentation' { $catCode = 'Audit' }
-        default            { $catCode = $shortCat }
+        default                { $catCode = $shortCat }
     }
 
     return "- [$check] $prefix**$catCode** - $text"
@@ -342,4 +347,44 @@ function Resolve-SourceCategory([string]$catInput, [System.Collections.IList]$ex
 
     # Dynamic creation
     return "### **$catInput**"
+}
+
+# Validate format of all tasks in the source file
+function Test-TaskFileFormat([string]$filePath) {
+    if (-not [System.IO.File]::Exists($filePath)) {
+        throw "File not found: $filePath"
+    }
+
+    $lines = [System.IO.File]::ReadAllLines($filePath)
+    $errors = [System.Collections.Generic.List[string]]::new()
+    
+    for ($i = 0; $i -lt $lines.Length; $i++) {
+        $line = $lines[$i]
+        $lineNum = $i + 1
+        
+        # Check if it looks like a task line
+        if ($line -match "^[-*]\s*\[([ xX])\]") {
+            # Standard task pattern:
+            # - [ ] <difficulty-emoji><scope-emoji>[optional status][optional priority] **CategoryCode** - Description
+            $pattern = '^[-*]\s*\[([ xX])\]\s*(?:(?:🟢|🔴|🟡|🟠)(?:💡|🌟|🦀|🪲|🩹)(?:✔️|❓|✅|🌀)?(?:0️⃣|1️⃣|2️⃣|3️⃣|4️⃣|5️⃣|6️⃣|7️⃣|8️⃣|9️⃣|🔟)?)\s*\*\*(.*?)\*\*\s*-\s*(.*)$'
+            
+            if ($line -notmatch $pattern) {
+                # Determine what is missing or wrong
+                $reason = "Format mismatch"
+                if ($line -notmatch '\*\*(.*?)\*\*') {
+                    $reason = "Missing bold category name: e.g. **CategoryCode**"
+                } elseif ($line -notmatch '\s+-\s+') {
+                    $reason = "Missing description separator ' - '"
+                } elseif ($line -notmatch '(🟢|🔴|🟡|🟠)') {
+                    $reason = "Missing or invalid difficulty emoji (🟢, 🔴, 🟡, 🟠)"
+                } elseif ($line -notmatch '(💡|🌟|🦀|🪲|🩹)') {
+                    $reason = "Missing or invalid scope emoji (💡, 🌟, 🦀, 🪲, 🩹)"
+                }
+                
+                $errors.Add("Line $($lineNum): $($reason)`n  Raw: $($line)")
+            }
+        }
+    }
+    
+    return $errors
 }

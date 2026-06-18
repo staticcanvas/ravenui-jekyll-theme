@@ -18,5 +18,4 @@ node_modules/
 *.log
 
 # Dev Notes (Local only)
-dev-notes.md
-devtracker-pending.md
+temp.md
