@@ -295,6 +295,7 @@ animation_libraries:
 
 To apply these external library animations to any HTML element or markdown block, use the helper include component:
 
+{% raw %}
 ```html
 <!-- Animate.css Example -->
 <div class="{% include comps/animate.html library="animate_css" effect="bounce" delay="0.5s" %}">
@@ -316,4 +317,5 @@ To apply these external library animations to any HTML element or markdown block
   AnimeJS rotated box
 </div>
 ```
+{% endraw %}
 

@@ -26,15 +26,19 @@ The `converter.html` component renders an interactive dropdown menu, allowing us
 
 Include the component on any documentation page or inside layouts:
 
+{% raw %}
 ```liquid
 {% include comps/converter.html %}
 ```
+{% endraw %}
 
 If you are using a custom container layout and want to limit the HTML export scope to a specific CSS class, pass the `target` selector:
 
+{% raw %}
 ```liquid
 {% include comps/converter.html target=".my-custom-content-area" %}
 ```
+{% endraw %}
 
 ---
 

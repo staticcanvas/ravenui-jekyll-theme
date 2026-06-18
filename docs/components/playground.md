@@ -33,6 +33,7 @@ The `playground.html` component is a powerful developer utility. It generates a 
 
 To render a component playground on your documentation page, simply include it and pass the `component` property name:
 
+{% raw %}
 ```liquid
 <!-- Button Playground -->
 {% include comps/playground.html component="button" %}
@@ -46,6 +47,7 @@ To render a component playground on your documentation page, simply include it a
 <!-- Tag Playground -->
 {% include comps/playground.html component="tag" %}
 ```
+{% endraw %}
 
 ---
 

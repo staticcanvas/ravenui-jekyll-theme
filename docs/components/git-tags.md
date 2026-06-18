@@ -23,9 +23,11 @@ The `git-tags.html` component provides a quick way to list project version tags 
 {% include comps/git-tags.html data=tag_data %}
 
 {% capture card_code %}
+{% raw %}
 ```liquid
 {% include comps/git-tags.html data=tag_data %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=card_code %}
 
@@ -34,9 +36,11 @@ The `git-tags.html` component provides a quick way to list project version tags 
 {% include comps/git-tags.html data=tag_data layout="list" %}
 
 {% capture list_code %}
+{% raw %}
 ```liquid
 {% include comps/git-tags.html data=tag_data layout="list" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=list_code %}
 
@@ -49,10 +53,12 @@ If no `data` parameter is passed, the component automatically attempts to pull f
 {% include comps/git-tags.html %}
 
 {% capture auto_code %}
+{% raw %}
 ```liquid
 <!-- Automatically pulls from _data/tags.yml -->
 {% include comps/git-tags.html %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=auto_code %}
 

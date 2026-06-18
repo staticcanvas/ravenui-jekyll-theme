@@ -22,6 +22,7 @@ The `sidebar.html` component renders the navigation tree of the site. It automat
 To render a static inline sidebar panel within a custom viewport mockup or blank dashboard layout:
 
 {% capture sidebar_example %}
+{% raw %}
 ```liquid
 <div style="display: grid; grid-template-columns: 280px 1fr; gap: 1rem;">
   {% include comps/sidebar.html inline=true force_brand=true %}
@@ -30,6 +31,7 @@ To render a static inline sidebar panel within a custom viewport mockup or blank
   </main>
 </div>
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=sidebar_example %}
 

@@ -30,10 +30,12 @@ If no `data` parameter is passed, the component automatically attempts to pull f
 {% include comps/releases.html %}
 
 {% capture auto_code %}
+{% raw %}
 ```liquid
 <!-- Automatically pulls from _data/releases.yml -->
 {% include comps/releases.html %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=auto_code %}
 

@@ -23,9 +23,11 @@ The `header.html` component provides a modular top header navigation bar. It dyn
 To render the header as an inline component inside a custom landing page or blank layout container:
 
 {% capture header_example %}
+{% raw %}
 ```liquid
 {% include comps/header.html inline=true align="right" density="compact" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=header_example %}
 

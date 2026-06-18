@@ -34,20 +34,24 @@ Each file is accessed independently. There is no automatic merging of sibling fi
 
 Access follows the same dot-notation pattern as top-level files, with the subfolder name inserted between `site.data` and the filename:
 
+{% raw %}
 ```liquid
 {% for item in site.data.products.accessories %}
   <p>{{ item.name }} — {{ item.sku }}</p>
 {% endfor %}
 ```
+{% endraw %}
 
 You can also assign subfolder data to a variable for repeated use on the same page:
 
+{% raw %}
 ```liquid
 {% assign accessories = site.data.products.accessories %}
 {% for item in accessories %}
   {{ item.name }}
 {% endfor %}
 ```
+{% endraw %}
 
 ---
 
@@ -55,18 +59,22 @@ You can also assign subfolder data to a variable for repeated use on the same pa
 
 The `data_source` parameter accepts dot-separated paths that mirror the `site.data` access pattern. Provide the subfolder path and filename (without extension) separated by dots:
 
+{% raw %}
 ```liquid
 {% include comps/datatable.html
   data_source="products.accessories"
   headers="name:Name,sku:SKU,price:Price,status:Status" %}
 ```
+{% endraw %}
 
+{% raw %}
 ```liquid
 {% include comps/timeline.html
   data_source="api.endpoints"
   title_key="method"
   body_key="description" %}
 ```
+{% endraw %}
 
 The component resolves the data identically to a top-level file — the dot-notation simply traverses the `site.data` object one level deeper.
 
@@ -85,17 +93,21 @@ _data/
 
 Access in Liquid:
 
+{% raw %}
 ```liquid
 {% for section in site.data.docs.en.getting_started %}
   <h3>{{ section.title }}</h3>
 {% endfor %}
 ```
+{% endraw %}
 
 And in a RavenUI component:
 
+{% raw %}
 ```liquid
 {% include comps/datatable.html data_source="docs.en.getting_started" headers="title:Section,url:URL" %}
 ```
+{% endraw %}
 
 {% include comps/callout.html type="note" title="Deep Nesting Warning" content="While Jekyll supports arbitrary depth, deeply nested structures can make Liquid templates harder to read and maintain. Prefer two levels of nesting at most for clarity." %}
 

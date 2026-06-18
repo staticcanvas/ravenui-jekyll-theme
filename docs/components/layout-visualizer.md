@@ -26,9 +26,11 @@ The `layout-visualizer.html` component provides a schematic mock browser viewpor
 
 To render a layout visualizer on any page, include the component:
 
+{% raw %}
 ```liquid
 {% include comps/layout-visualizer.html %}
 ```
+{% endraw %}
 
 ---
 

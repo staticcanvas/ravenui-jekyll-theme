@@ -27,9 +27,11 @@ The `toc.html` component generates a dynamic Table of Contents (TOC) client-side
 To render the Table of Contents inline in a documentation page:
 
 {% capture toc_example %}
+{% raw %}
 ```liquid
 {% include comps/toc.html inline=true style="nodes" density="relaxed" content_selector=".my-article-body" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=toc_example %}
 

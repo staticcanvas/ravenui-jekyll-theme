@@ -32,6 +32,7 @@ You can render visual representations of tag and category distribution by enabli
 {% include comps/site-stats.html show_charts=true chart_engine="chartjs" %}
 
 {% capture site_stats_charts_eg %}
+{% raw %}
 ```liquid
 <!-- Site Stats with Chart.js charts -->
 {% include comps/site-stats.html show_charts=true chart_engine="chartjs" %}
@@ -39,6 +40,7 @@ You can render visual representations of tag and category distribution by enabli
 <!-- Site Stats with SVG vector charts -->
 {% include comps/site-stats.html show_charts=true chart_engine="svg" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=site_stats_charts_eg %}
 

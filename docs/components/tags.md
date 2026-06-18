@@ -17,12 +17,14 @@ The theme includes a versatile tag system used for blog categories, project meta
 </div>
 
 {% capture tag_code %}
+{% raw %}
 ```html
 <div class="rd-tag-container">
     <span class="rd-tag">Standard Tag</span>
     <span class="rd-tag">{% include comps/icon.html name="star" size=10 %} Starred</span>
 </div>
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=tag_code %}
 

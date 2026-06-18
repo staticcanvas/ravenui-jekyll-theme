@@ -18,10 +18,12 @@ The `button.html` component provides a flexible way to add call-to-action elemen
 </div>
 
 {% capture btn_code %}
+{% raw %}
 ```liquid
 {% include comps/button.html text="Getting Started" icon="rocket" url="/installation/" %}
 {% include comps/button.html text="View Source" icon="github" color="var(--rd-clr-platinum)" url="#" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=btn_code %}
 
@@ -38,10 +40,12 @@ Use the `class` parameter to apply built-in variants for secondary or tertiary a
 </div>
 
 {% capture variant_code %}
+{% raw %}
 ```liquid
 {% include comps/button.html text="Outline Button" class="rd-btn--outline" icon="external-link" %}
 {% include comps/button.html text="Ghost Button" class="rd-btn--ghost" icon="search" %}
 ```
+{% endraw %}
 {% endcapture %}
 {% include comps/example-code.html content=variant_code %}
 
