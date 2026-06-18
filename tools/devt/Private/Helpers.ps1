@@ -18,8 +18,22 @@ class TaskItem {
     }
 }
 
-# Set module/script scope repository root (three levels up from tools/devt/Private/)
-$script:repoRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, "..", "..", ".."))
+# Find repository root dynamically (walk up to find .git folder, or fallback to three levels up)
+$gitRoot = $null
+$currentDir = [System.IO.DirectoryInfo]::new($PSScriptRoot)
+while ($currentDir -ne $null) {
+    $gitDir = [System.IO.Path]::Combine($currentDir.FullName, ".git")
+    if ([System.IO.Directory]::Exists($gitDir) -or [System.IO.File]::Exists($gitDir)) {
+        $gitRoot = $currentDir.FullName
+        break
+    }
+    $currentDir = $currentDir.Parent
+}
+if ($null -eq $gitRoot) {
+    $gitRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, "..", "..", ".."))
+}
+$script:repoRoot = $gitRoot
+
 
 # Resolve paths relative to the repository root
 function Resolve-RepoPath([string]$path) {

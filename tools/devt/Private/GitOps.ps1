@@ -59,18 +59,35 @@ function Invoke-GitCommitHelper {
     # Calculate new version if increment is not 'none'
     $versionLine = ""
     if ($increment -ne 'none') {
-        # Check if Get-GitAutoVersion exists
-        $autoVerScript = "/home/gsnow/.gemini/scripts/pwsh/Get-GitAutoVersion.ps1"
+        # Resolve Get-ConventionalCommitVersion
         $currentVer = "0.1.0"
-        if ([System.IO.File]::Exists($autoVerScript)) {
-            . $autoVerScript
-            $autoVerObj = Get-GitAutoVersion
+        if (Get-Command Get-ConventionalCommitVersion -ErrorAction SilentlyContinue) {
+            $autoVerObj = Get-ConventionalCommitVersion
             $currentVer = $autoVerObj.Version
         } else {
-            # Fallback to local VERSION file
-            $resolvedVerFile = Resolve-RepoPath "VERSION"
-            if ([System.IO.File]::Exists($resolvedVerFile)) {
-                $currentVer = ([System.IO.File]::ReadAllText($resolvedVerFile)).Trim()
+            # Try to resolve relative to PSScriptRoot
+            $localScript = [System.IO.Path]::Combine($PSScriptRoot, "Get-ConventionalCommitVersion.ps1")
+            if (-not [System.IO.File]::Exists($localScript)) {
+                $localScript = [System.IO.Path]::Combine($PSScriptRoot, "Private", "Get-ConventionalCommitVersion.ps1")
+            }
+            if (-not [System.IO.File]::Exists($localScript)) {
+                # Fallback to global locations
+                $localScript = "/home/gsnow/.gemini/antigravity-cli/scripts/pwsh/Get-ConventionalCommitVersion.ps1"
+                if (-not [System.IO.File]::Exists($localScript)) {
+                    $localScript = "/home/gsnow/.gemini/config/skills/fluent-ui-v1/resources/Get-ConventionalCommitVersion.ps1"
+                }
+            }
+
+            if ([System.IO.File]::Exists($localScript)) {
+                . $localScript
+                $autoVerObj = Get-ConventionalCommitVersion
+                $currentVer = $autoVerObj.Version
+            } else {
+                # Fallback to local VERSION file
+                $resolvedVerFile = Resolve-RepoPath "VERSION"
+                if ([System.IO.File]::Exists($resolvedVerFile)) {
+                    $currentVer = ([System.IO.File]::ReadAllText($resolvedVerFile)).Trim()
+                }
             }
         }
 
