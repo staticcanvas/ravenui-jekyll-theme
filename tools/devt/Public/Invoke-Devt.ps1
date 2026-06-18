@@ -53,7 +53,7 @@ function Invoke-Devt {
     [Alias('devt')]
     param(
         [Parameter(Mandatory=$false, Position=0)]
-        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "help")]
+        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "branches", "gitdiff", "help")]
         [string]$Mode = "compile",
 
         [Parameter(Mandatory=$false)]
@@ -110,6 +110,9 @@ function Invoke-Devt {
         [Parameter(Mandatory=$false)]
         [ValidateSet('incomplete', 'partially', 'issues', 'complete', 'working', '✔️', '❓', '✅', '🌀')]
         [string]$CompleteStatus,
+
+        [Parameter(Mandatory=$false)]
+        [string]$Branch,
 
         [Parameter(Mandatory=$false)]
         [string]$TaskKey
@@ -621,18 +624,31 @@ function Invoke-Devt {
                 foreach ($emoji in $targetEmojis) {
                     $count = $emojiCounts[$emoji]
                     $desc = $emojiDescriptions[$emoji]
-                    $paddedDesc = "{0,-20}" -f $desc
+                    
+                    # Align descriptions and emojis visually using Get-PadRight
+                    $leftPart = "    $emoji $desc"
+                    $paddedLeft = Get-PadRight -str $leftPart -targetWidth 28
                     
                     $countStr = "{0,-4}" -f $count
-                    Write-Host "    $emoji $paddedDesc : " -NoNewline
-                    Write-Host (New-AsciiColor -string $countStr -color $cyan -Format Bold) -NoNewline
                     
-                    $counter++
                     if ($counter % 2 -eq 0) {
-                        Write-Host ""
+                        Write-Host $paddedLeft -NoNewline
+                        Write-Host " : " -NoNewline
+                        Write-Host (New-AsciiColor -string $countStr -color $cyan -Format Bold) -NoNewline
+                        
+                        # Pad the rest of the first column to exactly 38 display columns
+                        $currentColWidth = (Get-StringDisplayWidth $paddedLeft) + 3 + (Get-StringDisplayWidth $countStr)
+                        $colPaddingNeeded = 38 - $currentColWidth
+                        if ($colPaddingNeeded -gt 0) {
+                            Write-Host (" " * $colPaddingNeeded) -NoNewline
+                        }
+                        Write-Host "|  " -NoNewline
                     } else {
-                        Write-Host "    |  " -NoNewline
+                        Write-Host $paddedLeft -NoNewline
+                        Write-Host " : " -NoNewline
+                        Write-Host (New-AsciiColor -string $countStr -color $cyan -Format Bold)
                     }
+                    $counter++
                 }
                 if ($counter % 2 -ne 0) { Write-Host "" }
                 Write-Host ""
@@ -881,6 +897,14 @@ function Invoke-Devt {
                 Create-MergeRequestHelper
             }
 
+            "branches" {
+                Invoke-GitBranchesHelper
+            }
+
+            "gitdiff" {
+                Invoke-GitDiffModeHelper -compareBranch $Branch
+            }
+
             "help" {
                 $boldWhite = 15
                 $cyan = 81
@@ -930,6 +954,8 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "validate" -color $cyan) -NoNewline; Write-Host " : Audits devtracker-source.md format for standard task structures."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "sync-gitlab" -color $cyan) -NoNewline; Write-Host " : Maps and syncs Markdown tasks to GitLab issues and milestones."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "create-mr" -color $cyan) -NoNewline; Write-Host "   : Generates and posts a Draft Merge Request from commit differences."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "branches" -color $cyan) -NoNewline; Write-Host "    : Renders a terminal comparison dashboard of repository branches."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "gitdiff" -color $cyan) -NoNewline; Write-Host "     : Shows structured code differences between the current branch and base/compare branch."
                 Write-Host ""
                 Write-Host (New-AsciiColor -string "OPTIONS & PARAMETERS" -color $boldWhite -Format Bold)
                 Write-Host "    -TaskText <string>          : The description text of the task to add."
@@ -939,6 +965,7 @@ function Invoke-Devt {
                 Write-Host "    -Priority <string>          : Numeric priority level ('0' to '10')."
                 Write-Host "    -CompleteStatus <string>    : Completion status ('incomplete', 'partially', 'issues', etc.)."
                 Write-Host "    -TaskKey <string>           : String query used to identify a task to remove."
+                Write-Host "    -Branch <string>            : Target branch to compare against in branch/diff modes."
                 Write-Host "    -IncludeCompleted           : Force compiled output to keep completed tasks."
                 Write-Host "    -KeepCompletedWithEmoji     : Keep completed tasks with these emojis in compile/prune."
                 Write-Host "    -ExcludeCompletedWithEmoji  : Exclude completed tasks with these emojis in compile/prune."
@@ -949,6 +976,8 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode add -TaskText 'Test hook' -Category 'Features' -Difficulty 'easy' -Scope 'feature' -Priority '3'" -color $green)
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode list -Difficulty 'very' -Scope 'bug'" -color $green)
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode remove -TaskKey 'Test hook'" -color $green)
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode branches" -color $green)
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode gitdiff -Branch develop" -color $green)
                 Write-Host ""
                 Write-Host "================================================================================"
                 Write-Host ""

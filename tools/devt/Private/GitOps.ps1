@@ -189,3 +189,177 @@ function Invoke-GitDiffHelper {
     Write-Host "`nUnstaged Diff Summary:" -ForegroundColor Red
     git diff --stat
 }
+
+function Invoke-GitBranchesHelper {
+    Write-TrackerLog 'act' "Analyzing repository branch status..." "Branches"
+    
+    # Determine base branch
+    $baseBranch = "develop"
+    $hasDevelop = git branch --list "develop"
+    if (-not $hasDevelop) {
+        $baseBranch = "main"
+        $hasMain = git branch --list "main"
+        if (-not $hasMain) {
+            $baseBranch = "master"
+        }
+    }
+    
+    # Get current branch
+    $currentBranch = (git branch --show-current).Trim()
+    
+    # Get all local branches
+    $branches = git for-each-ref --format='%(refname:short)' refs/heads/
+    if ($null -eq $branches -or $branches.Count -eq 0) {
+        Write-TrackerLog 'wrn' "No local branches found." "Branches"
+        return
+    }
+    
+    $boldWhite = 15
+    $cyan = 81
+    $green = 46
+    $yellow = 214
+    $gray = 244
+    
+    # Draw TUI dashboard header
+    $titleText = " ◆ REPOSITORY BRANCH DASHBOARD (Base: $baseBranch) ◆ "
+    $boxWidth = 90
+    $topLine = "┌" + ("─" * $boxWidth) + "┐"
+    $midLine = "├" + ("─" * $boxWidth) + "┤"
+    $bottomLine = "└" + ("─" * $boxWidth) + "┘"
+    
+    $titlePadding = [Math]::Max(0, [int][Math]::Floor(($boxWidth - $titleText.Length) / 2))
+    $titlePadded = (" " * $titlePadding) + $titleText + (" " * ($boxWidth - $titleText.Length - $titlePadding))
+    
+    $steps = @(51, 93, 201)
+    
+    Write-Host ""
+    Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $topLine)
+    $borderChar = New-AsciiGradient -Type fg -Steps $steps -String "│"
+    Write-Host "$borderChar$titlePadded$borderChar"
+    Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $midLine)
+    
+    # Table headers (total display width 88 columns)
+    $hBranch = Get-PadRight -str "Branch Name" -targetWidth 25
+    $hLastCommit = Get-PadRight -str "Last Active" -targetWidth 16
+    $hDiff = Get-PadRight -str "Ahead/Behind" -targetWidth 14
+    $hMsg = Get-PadRight -str "Last Commit Message" -targetWidth 28
+    
+    $headerLine = "  $hBranch $hLastCommit $hDiff $hMsg"
+    $paddedHeader = Get-PadRight -str $headerLine -targetWidth ($boxWidth)
+    Write-Host "$borderChar$paddedHeader$borderChar"
+    Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $midLine)
+    
+    foreach ($b in $branches) {
+        $isCurrent = ($b -eq $currentBranch)
+        $currFlag = "   "
+        if ($isCurrent) { $currFlag = " * " }
+        
+        # Get last commit details
+        $lastCommitTime = (git log -1 --format="%cr" $b 2>$null).Trim()
+        $lastCommitMsg = (git log -1 --format="%s" $b 2>$null).Trim()
+        
+        # Calculate ahead/behind count vs base branch
+        $ahead = 0
+        $behind = 0
+        if ($b -ne $baseBranch) {
+            $aheadStr = (git rev-list --count "$baseBranch..$b" 2>$null).Trim()
+            $behindStr = (git rev-list --count "$b..$baseBranch" 2>$null).Trim()
+            if ($aheadStr -match '^\d+$') { $ahead = [int]$aheadStr }
+            if ($behindStr -match '^\d+$') { $behind = [int]$behindStr }
+        }
+        
+        # Format the line columns
+        $colorBranchName = 81
+        $branchFormat = @()
+        if ($isCurrent) {
+            $colorBranchName = 46
+            $branchFormat = @('Bold')
+        }
+        $formattedBranch = New-AsciiColor -string (Get-PadRight -str $b -targetWidth 25) -color $colorBranchName -Format $branchFormat
+        
+        $formattedLastActive = New-AsciiColor -string (Get-PadRight -str $lastCommitTime -targetWidth 16) -color 244
+        
+        $diffText = "+$ahead / -$behind"
+        $diffColor = 244
+        if ($ahead -gt 0 -and $behind -eq 0) { $diffColor = 46 }
+        elseif ($ahead -eq 0 -and $behind -gt 0) { $diffColor = 196 }
+        elseif ($ahead -gt 0 -and $behind -gt 0) { $diffColor = 214 }
+        $formattedDiff = New-AsciiColor -string (Get-PadRight -str $diffText -targetWidth 14) -color $diffColor
+        
+        $maxMsgLen = 28
+        $truncatedMsg = $lastCommitMsg
+        if ($lastCommitMsg.Length -gt $maxMsgLen) {
+            $truncatedMsg = $lastCommitMsg.Substring(0, $maxMsgLen - 3) + "..."
+        }
+        $formattedMsg = New-AsciiColor -string (Get-PadRight -str $truncatedMsg -targetWidth 28) -color 15
+        
+        # Align line length to $boxWidth exactly
+        $plainLine = "$currFlag" + (Get-PadRight -str $b -targetWidth 25) + " " + (Get-PadRight -str $lastCommitTime -targetWidth 16) + " " + (Get-PadRight -str $diffText -targetWidth 14) + " " + $truncatedMsg
+        $plainWidth = Get-StringDisplayWidth $plainLine
+        $paddingNeeded = $boxWidth - $plainWidth
+        
+        Write-Host $borderChar -NoNewline
+        $flagColor = 244
+        if ($isCurrent) { $flagColor = 46 }
+        Write-Host (New-AsciiColor -string $currFlag -color $flagColor -Format Bold) -NoNewline
+        Write-Host $formattedBranch -NoNewline
+        Write-Host " " -NoNewline
+        Write-Host $formattedLastActive -NoNewline
+        Write-Host " " -NoNewline
+        Write-Host $formattedDiff -NoNewline
+        Write-Host " " -NoNewline
+        Write-Host $formattedMsg -NoNewline
+        
+        if ($paddingNeeded -gt 0) {
+            Write-Host (" " * $paddingNeeded) -NoNewline
+        }
+        Write-Host $borderChar
+    }
+    
+    Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $bottomLine)
+    Write-Host ""
+}
+
+function Invoke-GitDiffModeHelper {
+    param (
+        [string]$compareBranch = $null
+    )
+    
+    # Determine base branch if not specified
+    if (-not $compareBranch) {
+        $compareBranch = "develop"
+        $hasDevelop = git branch --list "develop"
+        if (-not $hasDevelop) {
+            $compareBranch = "main"
+            $hasMain = git branch --list "main"
+            if (-not $hasMain) {
+                $compareBranch = "master"
+            }
+        }
+    }
+    
+    $currentBranch = (git branch --show-current).Trim()
+    Write-TrackerLog 'act' "Comparing branch '$currentBranch' with base '$compareBranch'..." "GitDiff"
+    
+    # Check if there are any commits ahead
+    $commitsAhead = git log "$compareBranch..HEAD" --oneline
+    if ($null -eq $commitsAhead -or @($commitsAhead).Count -eq 0) {
+        Write-Host "No commits on '$currentBranch' ahead of '$compareBranch'." -ForegroundColor Gray
+    } else {
+        Write-Host "`nCommits Ahead of '$compareBranch':" -ForegroundColor Green
+        foreach ($c in $commitsAhead) {
+            Write-Host "  $c" -ForegroundColor Yellow
+        }
+    }
+    
+    # Show diff stat
+    Write-Host "`nChanged Files Summary:" -ForegroundColor Cyan
+    git diff --stat "$compareBranch..HEAD"
+    
+    # Show detailed code diff preview
+    Write-Host "`nDetailed code diff (first 50 lines):" -ForegroundColor Cyan
+    git diff "$compareBranch..HEAD" | Select-Object -First 50
+    
+    Write-Host "`n(Tip: Run 'git diff $compareBranch..HEAD' in your terminal for the full interactive diff.)" -ForegroundColor Gray
+}
+

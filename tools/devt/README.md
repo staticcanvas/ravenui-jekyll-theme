@@ -48,6 +48,8 @@ It is designed to be fully reusable across any Git repository to bridge local fi
     *   Syncs local task comments (lines starting with `>`) as discussion notes in the GitLab issue.
 *   `devt commit`: Prompts for Conventional Commit metadata (type, scope, summary, version impact, additions, fixes) and performs a structured commit adhering to standard versioning schemas.
 *   `devt diff`: Displays a styled summary of staged/unstaged changes.
+*   `devt branches`: Displays a terminal comparison dashboard of local repository branches, listing relative active age, commits ahead/behind compared to the base branch, and the last commit message.
+*   `devt gitdiff` (optionally using `-Branch <compare-branch>`): Shows structured code differences (commits ahead, modified files, diff code preview) between the current branch and a compare branch.
 *   `devt create-mr`: Compiles commits on the current branch that are ahead of `develop` and generates a Draft Merge Request description on GitLab containing Linked Issues, Feature Additions, and Bug Fixes.
 
 ---

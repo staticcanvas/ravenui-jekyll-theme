@@ -402,3 +402,40 @@ function Test-TaskFileFormat([string]$filePath) {
     
     return $errors
 }
+
+# Get display width of a string taking into account emojis, CJK, variation selectors, etc.
+function Get-StringDisplayWidth([string]$str) {
+    if ($null -eq $str) { return 0 }
+    $width = 0
+    $i = 0
+    while ($i -lt $str.Length) {
+        $code = [char]::ConvertToUtf32($str, $i)
+        
+        if ([char]::IsSurrogatePair($str, $i)) {
+            $width += 2
+            $i += 2
+        } else {
+            # Check for BMP emojis and double-width symbols (e.g. U+2600 to U+27BF)
+            if ($code -ge 0x2600 -and $code -le 0x27BF) {
+                $width += 2
+            }
+            elseif ($code -eq 0xFE0F) {
+                # Variation selector has 0 width
+            }
+            else {
+                $width += 1
+            }
+            $i++
+        }
+    }
+    return $width
+}
+
+# Pad a string to the right with spaces based on its visual display width instead of character length
+function Get-PadRight([string]$str, [int]$targetWidth) {
+    $currentWidth = Get-StringDisplayWidth $str
+    $needed = $targetWidth - $currentWidth
+    if ($needed -le 0) { return $str }
+    return $str + (" " * $needed)
+}
+
