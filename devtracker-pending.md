@@ -34,6 +34,9 @@
     - [ ] 🟡🌟 **CLI/Helpers/RequestTag** - Implement `Request-RvTag` to query tags from GitHub.
     - [ ] 🟡🌟 **CLI/Helpers/ModuleWrappers** - Implement private helper functions wrapping `Find-Module`, `Install-Module`, and `Get-Module` to automate workspace dependency validation.
 
+- [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
+- [ ] 🟠🌟3️⃣ **Feature** - Implement automated conventional changelog generator compiling completed tasks
+- [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
 ### **Bug Fixes (priority-4)**
 ### **Refactoring & QOL (priority-5)**
 ### **Documentation & Docs (priority-6)**
@@ -46,3 +49,5 @@
 - [ ] 🟡💡 **Backlog/Mystro** - Integrate `Mystro` media orchestrator to manage and compile media assets.
 - [ ] 🟡💡 **Backlog/PHWriter** - Compare the help manual engine of `PHWriter` with the existing `rvcli` custom help system to determine structural and aesthetic superiority.
 - [ ] 🟡💡 **Backlog/Fluidbar** - Integrate `Fluidbar` (handles spinners, progress bars, and loaders) once released.
+- [ ] 🟠💡4️⃣ **Backlog & Concepts** - Add local task dependency validation supporting parent/child constraints
+- [ ] 🟡💡5️⃣ **Backlog & Concepts** - Investigate lightweight SQLite caching to speed up large task dashboard stats queries

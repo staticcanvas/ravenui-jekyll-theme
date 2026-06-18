@@ -181,7 +181,11 @@ function Invoke-GitDiffHelper {
     git diff --cached --name-status
     
     Write-Host "`nUnstaged Files:" -ForegroundColor Red
-    git status -s | Where-Object { $_ -notmatch '^M|^A|^D' }
+    foreach ($line in (git status -s)) {
+        if ($line -notmatch '^M|^A|^D') {
+            Write-Host $line
+        }
+    }
     
     Write-Host "`nStaged Diff Summary:" -ForegroundColor Green
     git diff --cached --stat
@@ -213,6 +217,71 @@ function Invoke-GitBranchesHelper {
         Write-TrackerLog 'wrn' "No local branches found." "Branches"
         return
     }
+
+    # Calculate max branch name length dynamically (minimum 25)
+    $maxBranchLen = 25
+    foreach ($b in $branches) {
+        $len = Get-StringDisplayWidth $b
+        if ($len -gt $maxBranchLen) {
+            $maxBranchLen = $len
+        }
+    }
+
+    # Dynamic TUI Box width calculation
+    # columns: currFlag(3) + branchName(maxBranchLen) + spaces(3) + lastActive(16) + diffText(14) + lastCommitMsg(28)
+    $boxWidth = 3 + $maxBranchLen + 1 + 16 + 1 + 14 + 1 + 28
+
+    # Parallelize git calls using a RunspacePool for extreme performance
+    $sessionState = [System.Management.Automation.Runspaces.InitialSessionState]::CreateDefault()
+    $pool = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspacePool(1, 8, $sessionState, $Host)
+    $pool.Open()
+    
+    $jobs = [System.Collections.Generic.List[PSCustomObject]]::new()
+    
+    foreach ($b in $branches) {
+        $powershell = [PowerShell]::Create().AddScript({
+            param($b, $baseBranch)
+            $lastCommitTime = (git log -1 --format="%cr" $b 2>$null)
+            $lastCommitTime = if ($lastCommitTime) { $lastCommitTime.Trim() } else { "Unknown" }
+            
+            $lastCommitMsg = (git log -1 --format="%s" $b 2>$null)
+            $lastCommitMsg = if ($lastCommitMsg) { $lastCommitMsg.Trim() } else { "No message" }
+            
+            $ahead = 0
+            $behind = 0
+            if ($b -ne $baseBranch) {
+                $aheadStr = (git rev-list --count "$baseBranch..$b" 2>$null)
+                $behindStr = (git rev-list --count "$b..$baseBranch" 2>$null)
+                if ($aheadStr -and $aheadStr.Trim() -match '^\d+$') { $ahead = [int]($aheadStr.Trim()) }
+                if ($behindStr -and $behindStr.Trim() -match '^\d+$') { $behind = [int]($behindStr.Trim()) }
+            }
+            
+            return [PSCustomObject]@{
+                Branch = $b
+                LastCommitTime = $lastCommitTime
+                LastCommitMsg = $lastCommitMsg
+                Ahead = $ahead
+                Behind = $behind
+            }
+        }).AddArgument($b).AddArgument($baseBranch)
+        
+        $powershell.RunspacePool = $pool
+        $handle = $powershell.BeginInvoke()
+        
+        $jobs.Add([PSCustomObject]@{
+            PowerShell = $powershell
+            Handle = $handle
+        })
+    }
+    
+    # Gather parallel results
+    $branchMetadataList = [System.Collections.Generic.List[PSCustomObject]]::new()
+    foreach ($job in $jobs) {
+        $res = $job.PowerShell.EndInvoke($job.Handle)
+        $branchMetadataList.Add($res)
+        $job.PowerShell.Dispose()
+    }
+    $pool.Close()
     
     $boldWhite = 15
     $cyan = 81
@@ -222,7 +291,6 @@ function Invoke-GitBranchesHelper {
     
     # Draw TUI dashboard header
     $titleText = " ◆ REPOSITORY BRANCH DASHBOARD (Base: $baseBranch) ◆ "
-    $boxWidth = 90
     $topLine = "┌" + ("─" * $boxWidth) + "┐"
     $midLine = "├" + ("─" * $boxWidth) + "┤"
     $bottomLine = "└" + ("─" * $boxWidth) + "┘"
@@ -238,82 +306,51 @@ function Invoke-GitBranchesHelper {
     Write-Host "$borderChar$titlePadded$borderChar"
     Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $midLine)
     
-    # Table headers (total display width 88 columns)
-    $hBranch = Get-PadRight -str "Branch Name" -targetWidth 25
-    $hLastCommit = Get-PadRight -str "Last Active" -targetWidth 16
-    $hDiff = Get-PadRight -str "Ahead/Behind" -targetWidth 14
-    $hMsg = Get-PadRight -str "Last Commit Message" -targetWidth 28
-    
-    $headerLine = "  $hBranch $hLastCommit $hDiff $hMsg"
-    $paddedHeader = Get-PadRight -str $headerLine -targetWidth ($boxWidth)
-    Write-Host "$borderChar$paddedHeader$borderChar"
+    # Render table headers using Format-TuiRow
+    $hCols = @("   ", "Branch Name", "Last Active", "Ahead/Behind", "Last Commit Message")
+    $hWidths = @(3, $maxBranchLen, 16, 14, 28)
+    $hColors = @(244, $boldWhite, $boldWhite, $boldWhite, $boldWhite)
+    $headerRow = Format-TuiRow -Columns $hCols -Widths $hWidths -Colors $hColors -BorderChar $borderChar -BoxWidth $boxWidth
+    Write-Host $headerRow
     Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $midLine)
     
-    foreach ($b in $branches) {
+    foreach ($meta in $branchMetadataList) {
+        $b = $meta.Branch
         $isCurrent = ($b -eq $currentBranch)
-        $currFlag = "   "
-        if ($isCurrent) { $currFlag = " * " }
+        $currFlag = if ($isCurrent) { " * " } else { "   " }
         
-        # Get last commit details
-        $lastCommitTime = (git log -1 --format="%cr" $b 2>$null).Trim()
-        $lastCommitMsg = (git log -1 --format="%s" $b 2>$null).Trim()
+        $ahead = $meta.Ahead
+        $behind = $meta.Behind
         
-        # Calculate ahead/behind count vs base branch
-        $ahead = 0
-        $behind = 0
-        if ($b -ne $baseBranch) {
-            $aheadStr = (git rev-list --count "$baseBranch..$b" 2>$null).Trim()
-            $behindStr = (git rev-list --count "$b..$baseBranch" 2>$null).Trim()
-            if ($aheadStr -match '^\d+$') { $ahead = [int]$aheadStr }
-            if ($behindStr -match '^\d+$') { $behind = [int]$behindStr }
-        }
-        
-        # Format the line columns
+        # Colors
         $colorBranchName = 81
         $branchFormat = @()
         if ($isCurrent) {
             $colorBranchName = 46
             $branchFormat = @('Bold')
         }
-        $formattedBranch = New-AsciiColor -string (Get-PadRight -str $b -targetWidth 25) -color $colorBranchName -Format $branchFormat
-        
-        $formattedLastActive = New-AsciiColor -string (Get-PadRight -str $lastCommitTime -targetWidth 16) -color 244
         
         $diffText = "+$ahead / -$behind"
         $diffColor = 244
         if ($ahead -gt 0 -and $behind -eq 0) { $diffColor = 46 }
         elseif ($ahead -eq 0 -and $behind -gt 0) { $diffColor = 196 }
         elseif ($ahead -gt 0 -and $behind -gt 0) { $diffColor = 214 }
-        $formattedDiff = New-AsciiColor -string (Get-PadRight -str $diffText -targetWidth 14) -color $diffColor
         
         $maxMsgLen = 28
-        $truncatedMsg = $lastCommitMsg
-        if ($lastCommitMsg.Length -gt $maxMsgLen) {
-            $truncatedMsg = $lastCommitMsg.Substring(0, $maxMsgLen - 3) + "..."
+        $truncatedMsg = $meta.LastCommitMsg
+        if ($meta.LastCommitMsg.Length -gt $maxMsgLen) {
+            $truncatedMsg = $meta.LastCommitMsg.Substring(0, $maxMsgLen - 3) + "..."
         }
-        $formattedMsg = New-AsciiColor -string (Get-PadRight -str $truncatedMsg -targetWidth 28) -color 15
         
-        # Align line length to $boxWidth exactly
-        $plainLine = "$currFlag" + (Get-PadRight -str $b -targetWidth 25) + " " + (Get-PadRight -str $lastCommitTime -targetWidth 16) + " " + (Get-PadRight -str $diffText -targetWidth 14) + " " + $truncatedMsg
-        $plainWidth = Get-StringDisplayWidth $plainLine
-        $paddingNeeded = $boxWidth - $plainWidth
+        # Render row using Format-TuiRow
+        $flagColor = if ($isCurrent) { 46 } else { 244 }
         
-        Write-Host $borderChar -NoNewline
-        $flagColor = 244
-        if ($isCurrent) { $flagColor = 46 }
-        Write-Host (New-AsciiColor -string $currFlag -color $flagColor -Format Bold) -NoNewline
-        Write-Host $formattedBranch -NoNewline
-        Write-Host " " -NoNewline
-        Write-Host $formattedLastActive -NoNewline
-        Write-Host " " -NoNewline
-        Write-Host $formattedDiff -NoNewline
-        Write-Host " " -NoNewline
-        Write-Host $formattedMsg -NoNewline
+        $rowCols = @($currFlag, $b, $meta.LastCommitTime, $diffText, $truncatedMsg)
+        $rowWidths = @(3, $maxBranchLen, 16, 14, 28)
+        $rowColors = @($flagColor, $colorBranchName, 244, $diffColor, 15)
         
-        if ($paddingNeeded -gt 0) {
-            Write-Host (" " * $paddingNeeded) -NoNewline
-        }
-        Write-Host $borderChar
+        $row = Format-TuiRow -Columns $rowCols -Widths $rowWidths -Colors $rowColors -BorderChar $borderChar -BoxWidth $boxWidth
+        Write-Host $row
     }
     
     Write-Host (New-AsciiGradient -Type fg -Steps $steps -String $bottomLine)

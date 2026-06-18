@@ -189,7 +189,13 @@ function Sync-TasksToGitLab([string]$sourcePath) {
         }
 
         # Find or create GitLab Milestone for the category
-        $milestone = $milestones | Where-Object { $_.title -eq $cleanCategory } | Select-Object -First 1
+        $milestone = $null
+        foreach ($m in $milestones) {
+            if ($m.title -eq $cleanCategory) {
+                $milestone = $m
+                break
+            }
+        }
         $milestoneId = 0
         if ($milestone) {
             $milestoneId = $milestone.id
@@ -220,7 +226,13 @@ function Sync-TasksToGitLab([string]$sourcePath) {
 
                 if ($issueIid -gt 0) {
                     # Task already synced. Check status mapping
-                    $gitlabIssue = $issues | Where-Object { $_.iid -eq $issueIid } | Select-Object -First 1
+                    $gitlabIssue = $null
+                    foreach ($issue in $issues) {
+                        if ($issue.iid -eq $issueIid) {
+                            $gitlabIssue = $issue
+                            break
+                        }
+                    }
                     if ($gitlabIssue) {
                         # Case A: Local is completed, GitLab is open -> Close GitLab Issue
                         if ($task.IsCompleted -and $gitlabIssue.state -eq "opened") {
@@ -250,7 +262,14 @@ function Sync-TasksToGitLab([string]$sourcePath) {
                     }
                 } else {
                     # No local reference. Search by title
-                    $gitlabIssue = $issues | Where-Object { $_.title -match [regex]::Escape($taskTitle) } | Select-Object -First 1
+                    $gitlabIssue = $null
+                    $titlePattern = [regex]::Escape($taskTitle)
+                    foreach ($issue in $issues) {
+                        if ($issue.title -match $titlePattern) {
+                            $gitlabIssue = $issue
+                            break
+                        }
+                    }
                     
                     if ($gitlabIssue) {
                         $issueIid = $gitlabIssue.iid

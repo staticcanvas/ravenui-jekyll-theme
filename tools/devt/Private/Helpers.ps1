@@ -412,7 +412,12 @@ function Get-StringDisplayWidth([string]$str) {
         $code = [char]::ConvertToUtf32($str, $i)
         
         if ([char]::IsSurrogatePair($str, $i)) {
-            $width += 2
+            # Beetle emoji (🪲, U+1FABC) renders as single-width in some terminal environments
+            if ($code -eq 0x1FABC) {
+                $width += 1
+            } else {
+                $width += 2
+            }
             $i += 2
         } else {
             # Check for BMP emojis and double-width symbols (e.g. U+2600 to U+27BF)
@@ -437,5 +442,48 @@ function Get-PadRight([string]$str, [int]$targetWidth) {
     $needed = $targetWidth - $currentWidth
     if ($needed -le 0) { return $str }
     return $str + (" " * $needed)
+}
+
+# Formats a single row for TUI tables with border alignment
+function Format-TuiRow {
+    param (
+        [string[]]$Columns,
+        [int[]]$Widths,
+        [int[]]$Colors,
+        [string]$BorderChar = "│",
+        [int]$BoxWidth = 90
+    )
+    $plain = ""
+    for ($i = 0; $i -lt $Columns.Count; $i++) {
+        $val = $Columns[$i]
+        $w = $Widths[$i]
+        $plain += (Get-PadRight -str $val -targetWidth $w)
+        if ($i -lt $Columns.Count - 1) {
+            $plain += " "
+        }
+    }
+    $plainWidth = Get-StringDisplayWidth $plain
+    $padding = $BoxWidth - $plainWidth
+
+    $sb = [System.Text.StringBuilder]::new()
+    [void]$sb.Append($BorderChar)
+    for ($i = 0; $i -lt $Columns.Count; $i++) {
+        $val = $Columns[$i]
+        $w = $Widths[$i]
+        $col = $Colors[$i]
+        
+        $paddedVal = Get-PadRight -str $val -targetWidth $w
+        $coloredVal = New-AsciiColor -string $paddedVal -color $col
+        [void]$sb.Append($coloredVal)
+        if ($i -lt $Columns.Count - 1) {
+            [void]$sb.Append(" ")
+        }
+    }
+    
+    if ($padding -gt 0) {
+        [void]$sb.Append(" " * $padding)
+    }
+    [void]$sb.Append($BorderChar)
+    return $sb.ToString()
 }
 
