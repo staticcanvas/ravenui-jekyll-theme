@@ -33,7 +33,6 @@
     - [ ] 🟡🌟 **CLI/Helpers/ModuleWrappers** - Implement private helper functions wrapping `Find-Module`, `Install-Module`, and `Get-Module` to automate workspace dependency validation.
 
 - [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
-- [ ] 🟠🌟3️⃣ **Feature** - Implement automated conventional changelog generator compiling completed tasks
 - [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
 ### **Bug Fixes (priority-4)**
 ### **Refactoring & QOL (priority-5)**

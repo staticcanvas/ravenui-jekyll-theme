@@ -51,6 +51,7 @@ It is designed to be fully reusable across any Git repository to bridge local fi
 *   `devt branches`: Displays a terminal comparison dashboard of local repository branches, listing relative active age, commits ahead/behind compared to the base branch, and the last commit message.
 *   `devt gitdiff` (optionally using `-Branch <compare-branch>`): Shows structured code differences (commits ahead, modified files, diff code preview) between the current branch and a compare branch.
 *   `devt create-mr`: Compiles commits on the current branch that are ahead of `develop` and generates a Draft Merge Request description on GitLab containing Linked Issues, Feature Additions, and Bug Fixes.
+*   `devt changelog`: Automatically parses git conventional commit history and compiles a structured, grouped `CHANGELOG.md` file in the repository root.
 
 ---
 

@@ -400,3 +400,264 @@ function Invoke-GitDiffModeHelper {
     Write-Host "`n(Tip: Run 'git diff $compareBranch..HEAD' in your terminal for the full interactive diff.)" -ForegroundColor Gray
 }
 
+function Invoke-GitChangelogHelper {
+    Write-TrackerLog 'act' "Generating automated conventional changelog..." "Changelog"
+    
+    # Save current location and switch to repo root
+    $oldDir = Get-Location
+    $repoRoot = Resolve-RepoPath "."
+    Write-TrackerLog 'inf' "Resolved Repo Root: $repoRoot" "Changelog"
+    Set-Location $repoRoot
+    
+    # Get git commits line-by-line
+    $gitLogRaw = git log --format="%H%n%aI%n%s%n%b%n---COMMIT_END---" 2>&1
+    
+    # Restore location
+    Set-Location $oldDir
+
+    if ($null -eq $gitLogRaw -or @($gitLogRaw).Count -eq 0 -or ($gitLogRaw -join "`n") -match "fatal:") {
+        Write-TrackerLog 'err' "No git history found or Git is not initialized. Git Output: $gitLogRaw" "Changelog"
+        return
+    }
+
+    $commits = [System.Collections.Generic.List[PSCustomObject]]::new()
+    $currentCommit = $null
+    $lineType = "none"
+
+    foreach ($line in $gitLogRaw) {
+        $lineTrim = $line.Trim()
+        if ($lineTrim -match '^[0-9a-f]{40}$') {
+            $currentCommit = [PSCustomObject]@{
+                Hash = $lineTrim
+                Date = ""
+                Subject = ""
+                BodyLines = [System.Collections.Generic.List[string]]::new()
+            }
+            $commits.Add($currentCommit)
+            $lineType = "hash"
+            continue
+        }
+        
+        if ($null -eq $currentCommit) { continue }
+        
+        if ($lineType -eq "hash") {
+            $currentCommit.Date = $lineTrim
+            $lineType = "date"
+            continue
+        }
+        
+        if ($lineType -eq "date") {
+            $currentCommit.Subject = $lineTrim
+            $lineType = "body"
+            continue
+        }
+        
+        if ($lineTrim -eq "---COMMIT_END---") {
+            $lineType = "none"
+            continue
+        }
+        
+        $currentCommit.BodyLines.Add($line)
+    }
+
+    $changelogData = @{}
+    $versionOrder = [System.Collections.Generic.List[string]]::new()
+    
+    # Get current version from conventional commits version helper or VERSION file as fallback
+    $currentVersion = "Unreleased"
+    if (Get-Command Get-ConventionalCommitVersion -ErrorAction SilentlyContinue) {
+        $autoVerObj = Get-ConventionalCommitVersion
+        $currentVersion = $autoVerObj.Version
+    } else {
+        $localScript = [System.IO.Path]::Combine($PSScriptRoot, "Get-ConventionalCommitVersion.ps1")
+        if (-not [System.IO.File]::Exists($localScript)) {
+            $localScript = [System.IO.Path]::Combine($PSScriptRoot, "Private", "Get-ConventionalCommitVersion.ps1")
+        }
+        if ([System.IO.File]::Exists($localScript)) {
+            . $localScript
+            $autoVerObj = Get-ConventionalCommitVersion
+            $currentVersion = $autoVerObj.Version
+        } else {
+            $resolvedVerFile = Resolve-RepoPath "VERSION"
+            if ([System.IO.File]::Exists($resolvedVerFile)) {
+                $currentVersion = ([System.IO.File]::ReadAllText($resolvedVerFile)).Trim()
+            }
+        }
+    }
+
+    $activeVersion = $currentVersion
+    
+    for ($i = 0; $i -lt $commits.Count; $i++) {
+        $c = $commits[$i]
+        
+        # Check for version in this commit
+        $commitVersion = $null
+        $body = $c.BodyLines -join "`n"
+        if ($body -match '(?i)build:\s*\[(.*?)\]') {
+            $matchedVer = $Matches[1].Trim()
+            if ($matchedVer -ne "none" -and $matchedVer -ne "") {
+                $commitVersion = $matchedVer
+            }
+        }
+
+        if ($null -ne $commitVersion) {
+            $activeVersion = $commitVersion
+        }
+
+        # Format date: YYYY-MM-DD
+        $commitDate = ""
+        if ($c.Date -match '^(\d{4}-\d{2}-\d{2})') {
+            $commitDate = $Matches[1]
+        }
+
+        if (-not $versionOrder.Contains($activeVersion)) {
+            $versionOrder.Add($activeVersion)
+            $changelogData[$activeVersion] = [PSCustomObject]@{
+                Version = $activeVersion
+                Date = $commitDate
+                Features = [System.Collections.Generic.List[string]]::new()
+                Bugs = [System.Collections.Generic.List[string]]::new()
+                Notes = [System.Collections.Generic.List[string]]::new()
+            }
+        }
+
+        # Parse body sections
+        $state = "none"
+        $addedAny = $false
+
+        foreach ($line in $c.BodyLines) {
+            $lineTrim = $line.Trim()
+            if ($lineTrim -eq "") { continue }
+            if ($lineTrim -match '^Notes:') {
+                $state = "notes"
+                continue
+            }
+            if ($lineTrim -match '^Feature Additions:') {
+                $state = "features"
+                continue
+            }
+            if ($lineTrim -match '^Bug Fixes:') {
+                $state = "bugs"
+                continue
+            }
+            if ($lineTrim -match '^(build:|Build:)' -or $lineTrim -match '^====') {
+                $state = "none"
+                continue
+            }
+
+            if ($state -eq "notes") {
+                if ($lineTrim -match '^[-*]\s*(.*)$') {
+                    $val = $Matches[1].Trim()
+                    if ($val -ne "None" -and $val -ne "") {
+                        $changelogData[$activeVersion].Notes.Add($val)
+                        $addedAny = $true
+                    }
+                }
+            }
+            elseif ($state -eq "features") {
+                if ($lineTrim -match '^[-*]\s*(.*)$') {
+                    $val = $Matches[1].Trim()
+                    if ($val -ne "None" -and $val -ne "") {
+                        $changelogData[$activeVersion].Features.Add($val)
+                        $addedAny = $true
+                    }
+                }
+            }
+            elseif ($state -eq "bugs") {
+                if ($lineTrim -match '^[-*]\s*(.*)$') {
+                    $val = $Matches[1].Trim()
+                    if ($val -ne "None" -and $val -ne "") {
+                        $changelogData[$activeVersion].Bugs.Add($val)
+                        $addedAny = $true
+                    }
+                }
+            }
+        }
+
+        # Fallback to subject line parsing if no structured sections were added
+        if (-not $addedAny) {
+            # Skip standard merge commits
+            if ($c.Subject -match '^Merge branch') { continue }
+            
+            if ($c.Subject -match '^(feat|fix|refactor|docs|chore|style|test|ci|build)(?:\((.*?)\))?:\s*(.*)$') {
+                $type = $Matches[1].ToLower()
+                $scope = $Matches[2]
+                $desc = $Matches[3].Trim()
+                $item = if ($scope) { "$desc ($scope)" } else { $desc }
+
+                if ($type -eq "feat") {
+                    $changelogData[$activeVersion].Features.Add($item)
+                }
+                elseif ($type -eq "fix") {
+                    $changelogData[$activeVersion].Bugs.Add($item)
+                }
+                else {
+                    # Group refactor/docs/chore/etc under Notes
+                    $changelogData[$activeVersion].Notes.Add("${type}: $item")
+                }
+            }
+            else {
+                $changelogData[$activeVersion].Notes.Add($c.Subject)
+            }
+        }
+    }
+
+    # Now generate the CHANGELOG.md content
+    $sb = [System.Text.StringBuilder]::new()
+    [void]$sb.AppendLine("# **CHANGELOG**")
+    [void]$sb.AppendLine("")
+
+    foreach ($v in $versionOrder) {
+        $data = $changelogData[$v]
+        $header = "## [$v]"
+        if ($data.Date) {
+            $header += " - $($data.Date)"
+        }
+        [void]$sb.AppendLine($header)
+        [void]$sb.AppendLine("")
+
+        # Deduplicate features, bugs, notes
+        $uniqueFeatures = $data.Features | Select-Object -Unique
+        $uniqueBugs = $data.Bugs | Select-Object -Unique
+        $uniqueNotes = $data.Notes | Select-Object -Unique
+
+        $hasContent = $false
+
+        if ($null -ne $uniqueFeatures -and @($uniqueFeatures).Count -gt 0) {
+            $hasContent = $true
+            [void]$sb.AppendLine("### Feature Additions")
+            foreach ($f in $uniqueFeatures) {
+                [void]$sb.AppendLine("- $f")
+            }
+            [void]$sb.AppendLine("")
+        }
+
+        if ($null -ne $uniqueBugs -and @($uniqueBugs).Count -gt 0) {
+            $hasContent = $true
+            [void]$sb.AppendLine("### Bug Fixes")
+            foreach ($b in $uniqueBugs) {
+                [void]$sb.AppendLine("- $b")
+            }
+            [void]$sb.AppendLine("")
+        }
+
+        if ($null -ne $uniqueNotes -and @($uniqueNotes).Count -gt 0) {
+            $hasContent = $true
+            [void]$sb.AppendLine("### Notes & Improvements")
+            foreach ($n in $uniqueNotes) {
+                [void]$sb.AppendLine("- $n")
+            }
+            [void]$sb.AppendLine("")
+        }
+
+        if (-not $hasContent) {
+            [void]$sb.AppendLine("- Miscellaneous updates and improvements.")
+            [void]$sb.AppendLine("")
+        }
+    }
+
+    $destPath = Resolve-RepoPath "CHANGELOG.md"
+    [System.IO.File]::WriteAllText($destPath, $sb.ToString().Trim() + "`n", [System.Text.Encoding]::UTF8)
+    Write-TrackerLog 'suc' "Changelog successfully compiled to CHANGELOG.md" "Changelog"
+}
+

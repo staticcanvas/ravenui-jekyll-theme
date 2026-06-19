@@ -102,7 +102,7 @@
     - [ ] 🟡🌟 **CLI/Helpers/ModuleWrappers** - Implement private helper functions wrapping `Find-Module`, `Install-Module`, and `Get-Module` to automate workspace dependency validation.
 
 - [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
-- [ ] 🟠🌟3️⃣ **Feature** - Implement automated conventional changelog generator compiling completed tasks
+- [x] 🟠🌟3️⃣ **Feature** - Implement automated conventional changelog generator compiling completed tasks
 - [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
 ### **Bug Fixes (priority-4)**
 - [x] 🟡🪲 **Fix/SidebarBorder** - Adjusted the sidebar menu border color in the dark theme to prevent the light theme border from bleeding through, using a new `--rd-sidebar-border-color` custom property. [#71](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/71)

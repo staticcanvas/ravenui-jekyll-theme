@@ -53,7 +53,7 @@ function Invoke-Devt {
     [Alias('devt')]
     param(
         [Parameter(Mandatory=$false, Position=0)]
-        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "branches", "gitdiff", "help")]
+        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "branches", "gitdiff", "changelog", "help")]
         [string]$Mode = "compile",
 
         [Parameter(Mandatory=$false)]
@@ -870,6 +870,10 @@ function Invoke-Devt {
                 Invoke-GitCommitHelper
             }
 
+            "changelog" {
+                Invoke-GitChangelogHelper
+            }
+
             "diff" {
                 Invoke-GitDiffHelper
             }
@@ -956,6 +960,7 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "create-mr" -color $cyan) -NoNewline; Write-Host "   : Generates and posts a Draft Merge Request from commit differences."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "branches" -color $cyan) -NoNewline; Write-Host "    : Renders a terminal comparison dashboard of repository branches."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "gitdiff" -color $cyan) -NoNewline; Write-Host "     : Shows structured code differences between the current branch and base/compare branch."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "changelog" -color $cyan) -NoNewline; Write-Host "   : Automatically generates CHANGELOG.md from git conventional commit history."
                 Write-Host ""
                 Write-Host (New-AsciiColor -string "OPTIONS & PARAMETERS" -color $boldWhite -Format Bold)
                 Write-Host "    -TaskText <string>          : The description text of the task to add."
