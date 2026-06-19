@@ -119,7 +119,13 @@
             typically means the directory lacks an index file and Jekyll generated a blank page.
             {%- endcomment -%}
             {%- assign _content_stripped = content | strip_html | strip -%}
-            {%- if page.index_warning == true or (site.rd_debug and _content_stripped == "") -%}
+            {%- assign show_index_warning = false -%}
+            {%- if page.index_warning == true -%}
+                {%- assign show_index_warning = true -%}
+            {%- elsif site.rd_debug and _content_stripped == "" -%}
+                {%- assign show_index_warning = true -%}
+            {%- endif -%}
+            {%- if show_index_warning -%}
                 {% include comps/index-warning.html %}
             {%- endif -%}
 
