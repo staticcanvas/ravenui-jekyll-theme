@@ -4,7 +4,46 @@
 {% include core/head.html %}
 
 <body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}" data-code-copy="{{ site.rd_code_copy | default: false }}" data-code-lang="{{ site.rd_code_lang | default: false }}" data-headings-always-visible="{{ site.rd_headings_always_visible | default: false }}">
-    {% if site.rd_announcement.enabled %}
+    {% assign show_sidebar = true %}
+    {% if site.theme_settings.sidebar.enabled == false or page.sidebar == false %}
+        {% assign show_sidebar = false %}
+    {% endif %}
+
+    {% assign show_toc = true %}
+    {% if site.theme_settings.toc.enabled == false or page.toc == false %}
+        {% assign show_toc = false %}
+    {% endif %}
+
+    {% assign show_breadcrumbs = true %}
+    {% if site.theme_settings.breadcrumbs.enabled == false or page.breadcrumbs == false %}
+        {% assign show_breadcrumbs = false %}
+    {% endif %}
+
+    {% assign show_page_nav = true %}
+    {% if site.theme_settings.page_navigation.enabled == false or page.page_navigation == false or page.page-nav == false %}
+        {% assign show_page_nav = false %}
+    {% endif %}
+
+    {% assign show_footer = true %}
+    {% if site.theme_settings.footer.enabled == false or page.footer == false %}
+        {% assign show_footer = false %}
+    {% endif %}
+
+    {% assign show_search = true %}
+    {% if site.theme_settings.search.enabled == false or page.search == false %}
+        {% assign show_search = false %}
+    {% endif %}
+
+    {% assign show_back_to_top = true %}
+    {% if site.theme_settings.back_to_top.enabled == false or site.theme_settings.back_to_top == false or page.back_to_top == false or page.back-to-top == false %}
+        {% assign show_back_to_top = false %}
+    {% endif %}
+
+    {% assign show_announcement = site.rd_announcement.enabled %}
+    {% if page.announcement == false %}
+        {% assign show_announcement = false %}
+    {% endif %}
+    {% if show_announcement %}
         {% include comps/announcement.html %}
     {% endif %}
 
@@ -23,8 +62,8 @@
         {% include comps/header.html %}
     {% endif %}
 
-    <div class="rd-container{% if page.sidebar == false %} rd-no-sidebar{% endif %}{% if page.toc == false %} rd-no-toc{% endif %}">
-        {% unless page.sidebar == false %}
+    <div class="rd-container{% unless show_sidebar %} rd-no-sidebar{% endunless %}{% unless show_toc %} rd-no-toc{% endunless %}">
+        {% if show_sidebar %}
         <aside class="rd-sidebar-left">
             {% include comps/sidebar.html %}
         </aside>
@@ -38,10 +77,12 @@
                 }
             })();
         </script>
-        {% endunless %}
+        {% endif %}
 
         <main class="rd-content">
+            {% if show_breadcrumbs %}
             {% include comps/breadcrumbs.html %}
+            {% endif %}
             {% assign output_title = site.rd_output_title_default | default: true %}
             {% if page.output-title == false %}
                 {% assign output_title = false %}
@@ -84,7 +125,9 @@
 
             {{ content }}
             
+            {% if show_page_nav %}
             {% include comps/page-nav.html %}
+            {% endif %}
 
             {% if site.rd_feedback.enabled and page.feedback != false %}
                 {% include comps/feedback.html %}
@@ -98,18 +141,23 @@
                 {% include comps/comments.html %}
             {% endif %}
 
-            {% include comps/footer.html %}
+            {% if show_footer %}
+                {% include comps/footer.html %}
+            {% else %}
+                {% include core/foot.html %}
+            {% endif %}
         </main>
 
-        {% unless page.toc == false %}
+        {% if show_toc %}
         {% include comps/toc.html %}
-        {% endunless %}
+        {% endif %}
 
         <aside class="rd-sidebar-right">
             <!-- TOC content is moved to a top-level container to support mobile visibility -->
         </aside>
     </div>
 
+    {% if show_search %}
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
     <div id="rd-search-modal" class="rd-search-modal">
         <div class="rd-search-modal-backdrop" id="rd-search-backdrop"></div>
@@ -132,19 +180,20 @@
             </header>
         </div>
     </div>
+    {% endif %}
 
-    {% if page.sidebar != false or page.toc != false %}
+    {% if show_sidebar or show_toc %}
     <div class="rd-mobile-controls">
-        {% unless page.sidebar == false %}
+        {% if show_sidebar %}
         <button id="rd-nav-toggle" class="rd-mobile-btn" aria-label="Toggle Navigation">
             {% include comps/icon.html name="menu" size="20" %}
         </button>
-        {% endunless %}
-        {% unless page.toc == false %}
+        {% endif %}
+        {% if show_toc %}
         <button id="rd-toc-toggle" class="rd-toc-toggle rd-mobile-btn" aria-label="Toggle Table of Contents">
             <span class="rd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
         </button>
-        {% endunless %}
+        {% endif %}
     </div>
     {% endif %}
 
@@ -182,6 +231,7 @@
         const progressBar = document.getElementById('rd-progress-bar');
 
         // 1. Search Logic
+        {% if show_search %}
         function openSearch() {
             if (!searchModal) return;
             searchModal.classList.add('active');
@@ -210,6 +260,7 @@
             }
             if (e.key === 'Escape') closeSearch();
         });
+        {% endif %}
 
         // 2. Mobile Nav Logic
         if (navToggle) {
@@ -407,6 +458,7 @@
         // 5. Initialization
         window.addEventListener('DOMContentLoaded', () => {
             // Search Provider Initialization
+            {% if show_search %}
             const searchProvider = "{{ search_provider }}";
             if (searchProvider === 'pagefind') {
                 const initPagefind = () => {
@@ -439,6 +491,7 @@
                 initAlgolia();
                 setupCustomSearch();
             }
+            {% endif %}
 
             // Progress Bar
             if (progressBar) {
@@ -550,7 +603,9 @@
             // {% endif %}
         });
     </script>
+    {% if show_back_to_top %}
     {% include comps/back-to-top.html %}
+    {% endif %}
 </body>
 
 </html>

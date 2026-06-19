@@ -26,7 +26,6 @@
 - [ ] 🟡🌟 **CLI/PermalinkPreview** - Implement CLI permalink previewing, letting users see the output path of a file based on config rules, and display compiled front-matter. [#62](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/62)
 - [ ] 🟡🌟 **Features/IssueTemplate** - Research and design a "Report Issue" template component where users fill out a form that compiles to a merge request, exploring secure API integrations for static sites to prevent exposure of API keys. [#64](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/64)
 - [ ] 🟡🌟 **Features/TiltedCarousel** - Design and build a "Tilted Lapping Carousel" component featuring overlapping, swiveled, and layered card layouts (where spacing scales dynamically with card density). Implement card-flipping hover animations. [#65](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/65)
-- [ ] 🟡🌟 **Features/MinimalMode** - Ensure full support for a minimalist theme experience by verifying that all features can be disabled via flags in `_config.yml` (feature toggles), leaving a clean, barebones base. [#67](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/67)
 - [ ] 🟡🌟 **Features/FeatureFlagList** - Build a component/page showing a global feature flag status dashboard, dynamically pulling from `_config.yml` or `site.data` to display details of active/inactive features in an elegant card grid or list view. [#68](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/68)
 - [ ] 🟠🌟 **CLI/Helpers** - Build and test standalone utility helpers in `tools/` adhering to the root module loader structure, to be integrated into `rvcli`: [#70](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/70)
     - [ ] 🟡🌟 **CLI/Helpers/RequestRelease** - Implement `Request-RvRelease` using .NET `[System.Net.Http.HttpClient]` (non-API mode) to query and fetch releases from GitLab/GitHub.
@@ -51,3 +50,7 @@
 - [ ] 🟡💡 **Backlog/Fluidbar** - Integrate `Fluidbar` (handles spinners, progress bars, and loaders) once released.
 - [ ] 🟠💡4️⃣ **Backlog & Concepts** - Add local task dependency validation supporting parent/child constraints
 - [ ] 🟡💡5️⃣ **Backlog & Concepts** - Investigate lightweight SQLite caching to speed up large task dashboard stats queries
+
+> unsorted
+> https://remixicon.com/ add
+> giscus add support to ravenui - https://giscus.app/

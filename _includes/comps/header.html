@@ -66,13 +66,21 @@ Usage______: {% include comps/header.html inline=true %}
     </nav>
 
     <div class="rd-header-actions">
+      {% assign show_search = true %}
+      {% if site.theme_settings.search.enabled == false %}
+        {% assign show_search = false %}
+      {% endif %}
+      {% if show_search %}
       <div class="rd-header-search-trigger rd-search-trigger">
         <i data-lucide="search" style="width: 14px; height: 14px;"></i>
         <span>Search...</span>
         <kbd>/</kbd>
       </div>
+      {% endif %}
 
-      {% include comps/theme-toggle.html %}
+      {% if site.theme_settings.theme_toggle.enabled != false %}
+        {% include comps/theme-toggle.html %}
+      {% endif %}
 
       <div class="rd-header-socials">
         {% if site.github_username %}

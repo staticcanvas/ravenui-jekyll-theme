@@ -1,4 +1,4 @@
-﻿# Jekyll Theme RavenUI - Development Notes and Workflow Instructions
+# Jekyll Theme RavenUI - Development Notes and Workflow Instructions
 
 ## **Tasklist**
 
@@ -92,7 +92,7 @@
 - [ ] 🟡🌟 **Features/IssueTemplate** - Research and design a "Report Issue" template component where users fill out a form that compiles to a merge request, exploring secure API integrations for static sites to prevent exposure of API keys. [#64](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/64)
 - [ ] 🟡🌟 **Features/TiltedCarousel** - Design and build a "Tilted Lapping Carousel" component featuring overlapping, swiveled, and layered card layouts (where spacing scales dynamically with card density). Implement card-flipping hover animations. [#65](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/65)
 - [x] 🟡🌟 **Features/SpacerComponent** - Created `_includes/comps/spacer.html` with named size tokens (`xs`→`2xl`), custom `height` prop (any CSS unit), optional visual divider (`subtle` or `gradient` styles), and scroll-anchor `id` support. SCSS registered in `ravenui-sp.scss`. All size defaults overridable via CSS custom properties (`--rd-spacer-*`). Documented in `docs/components/spacer.md`. [#66](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/66)
-- [ ] 🟡🌟 **Features/MinimalMode** - Ensure full support for a minimalist theme experience by verifying that all features can be disabled via flags in `_config.yml` (feature toggles), leaving a clean, barebones base. [#67](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/67)
+- [x] 🟡🌟 **Features/MinimalMode** - Ensure full support for a minimalist theme experience by verifying that all features can be disabled via flags in `_config.yml` (feature toggles), leaving a clean, barebones base. [#67](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/67)
 - [ ] 🟡🌟 **Features/FeatureFlagList** - Build a component/page showing a global feature flag status dashboard, dynamically pulling from `_config.yml` or `site.data` to display details of active/inactive features in an elegant card grid or list view. [#68](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/68)
 - [x] 🟡🌟 **Features/DependencyList** - Created `_includes/comps/depends-upon.html` — structured dependency listing supporting front-matter `depends_upon` arrays, `_data/` file sources, and inline items. Each entry supports `name`, `type` (js-cdn, css-cdn, ruby-gem, npm, component, plugin), `version`, `link`, `description`, and `package` fields. Type-coloured badges use terminal palette. Full and compact (pill-only) display modes. SCSS in `_depends-upon.scss`, registered in `ravenui-sp.scss`. Documented in `docs/components/depends-upon.md`. [#69](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/69)
 - [ ] 🟠🌟 **CLI/Helpers** - Build and test standalone utility helpers in `tools/` adhering to the root module loader structure, to be integrated into `rvcli`: [#70](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/70)
@@ -128,3 +128,7 @@
 - [ ] 🟡💡 **Backlog/Fluidbar** - Integrate `Fluidbar` (handles spinners, progress bars, and loaders) once released.
 - [ ] 🟠💡4️⃣ **Backlog & Concepts** - Add local task dependency validation supporting parent/child constraints
 - [ ] 🟡💡5️⃣ **Backlog & Concepts** - Investigate lightweight SQLite caching to speed up large task dashboard stats queries
+
+> unsorted
+> https://remixicon.com/ add
+> giscus add support to ravenui - https://giscus.app/

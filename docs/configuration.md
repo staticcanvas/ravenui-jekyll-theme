@@ -108,6 +108,14 @@ theme_settings:
 | `feedback.comments.giscus` | Object | `null` | Giscus repository, mapping, theme, and category details. |
 | `feedback.comments.disqus` | Object | `null` | Disqus shortname identifier. |
 | `footer.columns` | Array | `null` | Dynamic footer multi-column layouts configuration. |
+| `sidebar.enabled` | Boolean | `true` | Global switch to enable/disable the left navigation sidebar. |
+| `toc.enabled` | Boolean | `true` | Global switch to enable/disable the right Table of Contents. |
+| `breadcrumbs.enabled` | Boolean | `true` | Global switch to enable/disable breadcrumbs navigation. |
+| `page_navigation.enabled` | Boolean | `true` | Global switch to enable/disable prev/next page navigation links. |
+| `footer.enabled` | Boolean | `true` | Global switch to enable/disable the site footer. |
+| `search.enabled` | Boolean | `true` | Global switch to enable/disable search functionality. |
+| `theme_toggle.enabled` | Boolean | `true` | Global switch to show/hide the theme light/dark switcher. |
+| `back_to_top.enabled` | Boolean | `true` | Global switch to enable/disable the floating Back to Top button. |
 
 
 ---
@@ -123,6 +131,13 @@ Every page can control its own visibility and header output via the following YA
 | `tags` | Array | `[]` | A list of strings to be displayed as highlighted pills. |
 | `description` | String | `""` | Subtext appearing directly under the title. |
 | `rd_nav_spacing` | String | `compact` | Global density: `compact`, `tight`, `comfy`, `spacy`. |
+| `sidebar` | Boolean | `true` | Per-page toggle to show/hide the left navigation sidebar. |
+| `toc` | Boolean | `true` | Per-page toggle to show/hide the Table of Contents. |
+| `breadcrumbs` | Boolean | `true` | Per-page toggle to show/hide breadcrumbs navigation. |
+| `page_navigation` | Boolean | `true` | Per-page toggle to show/hide prev/next page navigation links. |
+| `footer` | Boolean | `true` | Per-page toggle to show/hide the page footer (renders scripts only). |
+| `search` | Boolean | `true` | Per-page toggle to hide/show search modal and triggers on this page. |
+| `back_to_top` | Boolean | `true` | Per-page toggle to show/hide the floating Back to Top button. |
 
 <br>
 

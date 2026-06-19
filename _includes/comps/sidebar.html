@@ -38,11 +38,17 @@ Usage______: {% include comps/sidebar.html inline=true %}
     </div>
     {% endif %}
 
+    {% assign show_search = true %}
+    {% if site.theme_settings.search.enabled == false %}
+      {% assign show_search = false %}
+    {% endif %}
+    {% if show_search %}
     <div class="rd-search-trigger" id="rd-search-trigger">
       <i data-lucide="search" style="width: 14px; height: 14px;"></i>
       <span>Search Docs...</span>
       <kbd>/</kbd>
     </div>
+    {% endif %}
 
     <div class="rd-socials">
         {% if site.github_username %}
@@ -65,10 +71,12 @@ Usage______: {% include comps/sidebar.html inline=true %}
         {% endif %}
     </div>
 
+    {% if site.theme_settings.theme_toggle.enabled != false %}
     <div class="rd-sidebar-theme-container" style="padding: 0 1.5rem; margin-block-end: 1.5rem; display: flex; justify-content: flex-start;">
         {% include comps/theme-toggle.html %}
         <span style="font-size: 0.85rem; color: var(--rd-clr-text-secondary); margin-inline-start: 0.5rem; align-self: center;">Theme</span>
     </div>
+    {% endif %}
 
     <nav class="rd-nav" aria-label="Documentation Navigation">
         {% for section in site.data.navigation %}
