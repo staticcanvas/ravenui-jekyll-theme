@@ -3,12 +3,16 @@
 ## [2.11.1] - 2026-06-19
 
 ### Feature Additions
+- Added changelog Mode to Invoke-Devt parameter set and help manual
+- Added Invoke-GitChangelogHelper function in GitOps.ps1
 - Created feature-flags.html component and feature-flags.md page
 
 ### Bug Fixes
 - Fix liquid syntax warning in default.html layout
 
 ### Notes & Improvements
+- Add changelog mode to devt utility to parse conventional commits
+- Group changes by version, categorizing features, bugs, and notes
 - Add live dashboard component for theme feature flags
 - Add global switches in _config.yml for sidebar, toc, breadcrumbs, search, and footer
 - Add page-level frontmatter overrides for all minimalist components
