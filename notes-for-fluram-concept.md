@@ -143,6 +143,7 @@ To build your Jekyll components, you will target three primary public Flarum API
 
 Instead of embedding a bulky third-party iframe for documentation feedback, you can create a native Liquid component inside your Jekyll theme (`_includes/flarum-comments.html`) that pulls the discussion thread for that specific document page.
 
+{% raw %}
 ```html
 <!-- _includes/flarum-comments.html -->
 <div id="flarum-comments-root" data-discussion-id="{{ page.flarum_discussion_id }}">
@@ -202,6 +203,7 @@ Instead of embedding a bulky third-party iframe for documentation feedback, you 
 </script>
 
 ```
+{% endraw %}
 
 Then, in your Jekyll documentation pages, markdown front-matter acts as the linking mechanism:
 
