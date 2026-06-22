@@ -1,0 +1,250 @@
+{%- comment -%}
+Component__: Feature Flags Dashboard
+Purpose____: Displays global configuration toggles, status, paths, categories and provides real-time search/filters.
+Usage______: {% include comps/feature-flags.html %}
+{%- endcomment -%}
+
+{% assign total_count = 0 %}
+{% assign active_count = 0 %}
+{% assign inactive_count = 0 %}
+
+{% capture cards_html %}
+  {% for flag in site.data.feature_flags %}
+    {% assign status = flag.default %}
+    
+    {% if flag.path == "theme_settings.sidebar.enabled" %}
+      {% if site.theme_settings.sidebar.enabled != nil %}
+        {% assign status = site.theme_settings.sidebar.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.toc.enabled" %}
+      {% if site.theme_settings.toc.enabled != nil %}
+        {% assign status = site.theme_settings.toc.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.breadcrumbs.enabled" %}
+      {% if site.theme_settings.breadcrumbs.enabled != nil %}
+        {% assign status = site.theme_settings.breadcrumbs.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.page_navigation.enabled" %}
+      {% if site.theme_settings.page_navigation.enabled != nil %}
+        {% assign status = site.theme_settings.page_navigation.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.footer.enabled" %}
+      {% if site.theme_settings.footer.enabled != nil %}
+        {% assign status = site.theme_settings.footer.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.search.enabled" %}
+      {% if site.theme_settings.search.enabled != nil %}
+        {% assign status = site.theme_settings.search.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.theme_toggle.enabled" %}
+      {% if site.theme_settings.theme_toggle.enabled != nil %}
+        {% assign status = site.theme_settings.theme_toggle.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.back_to_top.enabled" %}
+      {% if site.theme_settings.back_to_top.enabled != nil %}
+        {% assign status = site.theme_settings.back_to_top.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.scroll_progress" %}
+      {% if site.theme_settings.scroll_progress != nil %}
+        {% assign status = site.theme_settings.scroll_progress %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.header.enabled" %}
+      {% if site.theme_settings.header.enabled != nil %}
+        {% assign status = site.theme_settings.header.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.animations.enabled" %}
+      {% if site.theme_settings.animations.enabled != nil %}
+        {% assign status = site.theme_settings.animations.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.animations.page_loads" %}
+      {% if site.theme_settings.animations.page_loads != nil %}
+        {% assign status = site.theme_settings.animations.page_loads %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.animations.hover_effects" %}
+      {% if site.theme_settings.animations.hover_effects != nil %}
+        {% assign status = site.theme_settings.animations.hover_effects %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.animations.view_transitions" %}
+      {% if site.theme_settings.animations.view_transitions != nil %}
+        {% assign status = site.theme_settings.animations.view_transitions %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.borders.gradient.enable" %}
+      {% if site.theme_settings.borders.gradient.enable != nil %}
+        {% assign status = site.theme_settings.borders.gradient.enable %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.background.gradient.enable" %}
+      {% if site.theme_settings.background.gradient.enable != nil %}
+        {% assign status = site.theme_settings.background.gradient.enable %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.background.backdrop.enable" %}
+      {% if site.theme_settings.background.backdrop.enable != nil %}
+        {% assign status = site.theme_settings.background.backdrop.enable %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.background.animation.enable" %}
+      {% if site.theme_settings.background.animation.enable != nil %}
+        {% assign status = site.theme_settings.background.animation.enable %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.collections.enabled" %}
+      {% if site.theme_settings.collections.enabled != nil %}
+        {% assign status = site.theme_settings.collections.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.versions.enabled" %}
+      {% if site.theme_settings.versions.enabled != nil %}
+        {% assign status = site.theme_settings.versions.enabled %}
+      {% endif %}
+    {% elsif flag.path == "rd_announcement.enabled" %}
+      {% if site.rd_announcement.enabled != nil %}
+        {% assign status = site.rd_announcement.enabled %}
+      {% endif %}
+    {% elsif flag.path == "rd_feedback.enabled" %}
+      {% if site.rd_feedback.enabled != nil %}
+        {% assign status = site.rd_feedback.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.feedback.likes.enabled" %}
+      {% if site.theme_settings.feedback.likes.enabled != nil %}
+        {% assign status = site.theme_settings.feedback.likes.enabled %}
+      {% endif %}
+    {% elsif flag.path == "theme_settings.feedback.comments.enabled" %}
+      {% if site.theme_settings.feedback.comments.enabled != nil %}
+        {% assign status = site.theme_settings.feedback.comments.enabled %}
+      {% endif %}
+    {% endif %}
+
+    {% assign total_count = total_count | plus: 1 %}
+    {% if status == true or status == 'true' %}
+      {% assign active_count = active_count | plus: 1 %}
+      {% assign is_active = true %}
+    {% else %}
+      {% assign inactive_count = inactive_count | plus: 1 %}
+      {% assign is_active = false %}
+    {% endif %}
+
+    <div class="rd-flag-card" 
+         data-category="{{ flag.category | downcase }}" 
+         data-status="{% if is_active %}active{% else %}inactive{% endif %}" 
+         data-name="{{ flag.name | downcase }}" 
+         data-desc="{{ flag.description | downcase }}" 
+         data-path="{{ flag.path | downcase }}">
+      <div>
+        <div class="rd-flag-header">
+          <span class="rd-flag-title">{{ flag.name }}</span>
+          <span class="rd-flag-status {% if is_active %}rd-flag-status--active{% else %}rd-flag-status--inactive{% endif %}">
+            {% if is_active %}active{% else %}inactive{% endif %}
+          </span>
+        </div>
+        <p class="rd-flag-desc">{{ flag.description }}</p>
+      </div>
+      <div class="rd-flag-footer">
+        <span class="rd-flag-path" title="{{ flag.path }}">{{ flag.path }}</span>
+        <span class="rd-flag-category-badge">{{ flag.category }}</span>
+      </div>
+    </div>
+  {% endfor %}
+{% endcapture %}
+
+<div class="rd-flag-dashboard">
+  <!-- Statistics Summary Card Section -->
+  <div class="rd-flag-stats">
+    <div class="rd-flag-stat-item">
+      <span class="rd-flag-stat-num" id="rd-flag-total">{{ total_count }}</span>
+      <span class="rd-flag-stat-label">Total Flags</span>
+    </div>
+    <div class="rd-flag-stat-item">
+      <span class="rd-flag-stat-num rd-flag-stat-num--active" id="rd-flag-active">{{ active_count }}</span>
+      <span class="rd-flag-stat-label">Active</span>
+    </div>
+    <div class="rd-flag-stat-item">
+      <span class="rd-flag-stat-num rd-flag-stat-num--inactive" id="rd-flag-inactive">{{ inactive_count }}</span>
+      <span class="rd-flag-stat-label">Inactive</span>
+    </div>
+  </div>
+
+  <!-- Filter Controls Section -->
+  <div class="rd-flag-filters">
+    <div class="rd-flag-search-wrapper">
+      <i data-lucide="search" style="width: 14px; height: 14px;"></i>
+      <input type="text" id="rd-flag-search-input" placeholder="Filter feature flags..." autocomplete="off">
+    </div>
+    <div class="rd-flag-category-tabs">
+      <button class="rd-flag-tab active" data-category="all">All</button>
+      <button class="rd-flag-tab" data-category="layout">Layout</button>
+      <button class="rd-flag-tab" data-category="navigation">Navigation</button>
+      <button class="rd-flag-tab" data-category="animations">Animations</button>
+      <button class="rd-flag-tab" data-category="styling">Styling</button>
+      <button class="rd-flag-tab" data-category="feedback">Feedback</button>
+    </div>
+  </div>
+
+  <!-- Grid of Flags Section -->
+  <div class="rd-flag-grid" id="rd-flag-grid">
+    {{ cards_html }}
+  </div>
+</div>
+
+<script>
+  (function() {
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('rd-flag-search-input');
+      const tabs = document.querySelectorAll('.rd-flag-tab');
+      const cards = document.querySelectorAll('.rd-flag-card');
+      const totalCounter = document.getElementById('rd-flag-total');
+      const activeCounter = document.getElementById('rd-flag-active');
+      const inactiveCounter = document.getElementById('rd-flag-inactive');
+
+      if (!searchInput || !cards.length) return;
+
+      let currentCategory = 'all';
+      let searchQuery = '';
+
+      function filterFlags() {
+        let visibleCount = 0;
+        let activeCount = 0;
+        let inactiveCount = 0;
+
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          const status = card.getAttribute('data-status');
+          const name = card.getAttribute('data-name');
+          const desc = card.getAttribute('data-desc');
+          const path = card.getAttribute('data-path');
+
+          const categoryMatch = currentCategory === 'all' || cat === currentCategory;
+          const searchMatch = !searchQuery || 
+                              name.includes(searchQuery) || 
+                              desc.includes(searchQuery) || 
+                              path.includes(searchQuery);
+
+          if (categoryMatch && searchMatch) {
+            card.style.display = 'flex';
+            visibleCount++;
+            if (status === 'active') activeCount++;
+            else inactiveCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Update statistics dynamically
+        if (totalCounter) totalCounter.textContent = visibleCount;
+        if (activeCounter) activeCounter.textContent = activeCount;
+        if (inactiveCounter) inactiveCounter.textContent = inactiveCount;
+      }
+
+      // Input listener for search box
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterFlags();
+      });
+
+      // Click listener for Category Tabs
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentCategory = tab.getAttribute('data-category');
+          filterFlags();
+        });
+      });
+    });
+  })();
+</script>

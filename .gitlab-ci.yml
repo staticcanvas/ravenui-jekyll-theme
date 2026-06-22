@@ -101,6 +101,7 @@ build_gem:
 # 3. 🚀 DEPLOY STAGE (Cloudflare Pages) we Will deploy to cloud flare using wrangler
 cloudflare_pages:
   <<: *build_template
+  dependencies: [build_gem]
   script:
     # - echo "🌑 Deploying Platinum Master to Pages..."
     # - bundle exec jekyll build -d public
@@ -122,6 +123,7 @@ cloudflare_pages:
 publish_release:
   <<: *release_template
   image: registry.gitlab.com/gitlab-org/release-cli:latest
+  dependencies: [build_gem]
   before_script:
     - apk add --no-cache ruby ruby-dev build-base zip curl
   script:
@@ -155,6 +157,6 @@ publish_release:
     - echo "📝 Generating Release Notes..."
     - |
       release-cli create --name "RavenUI $CI_COMMIT_TAG" \
-                         --description "Platinum Master Release $CI_COMMIT_TAG" \
+                         --description "Release v$CI_COMMIT_TAG" \
                          --tag-name $CI_COMMIT_TAG \
                          --assets-link "{\"name\":\"Download ZIP\",\"url\":\"${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/jekyll-theme-ravenui/${CI_COMMIT_TAG}/jekyll-theme-ravenui-${CI_COMMIT_TAG}.zip\"}"

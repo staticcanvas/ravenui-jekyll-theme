@@ -198,3 +198,19 @@
   .rd-toc-level-h3 { font-size: 0.86rem !important; }
   .rd-toc-level-h4 { font-size: 0.8rem !important; }
 }
+
+.rd-page-toc-container--inline {
+  position: static !important;
+  display: block !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: all !important;
+  max-height: none !important;
+  overflow-y: visible !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}

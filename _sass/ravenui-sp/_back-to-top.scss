@@ -1,0 +1,34 @@
+/* BACK TO TOP BUTTON */
+.rd-back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rd-bg-surface, #0a0a0f);
+  border: 1px solid var(--rd-border-subtle, #1f1f2e);
+  border-radius: var(--rd-radius, 4px);
+  color: var(--rd-text-muted, #8888a0);
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    color: var(--rd-clr-highlight, #00ff9d);
+    border-color: var(--rd-clr-highlight, #00ff9d);
+    transform: translateY(-4px);
+    box-shadow: 0 0 12px rgba(0, 255, 157, 0.25);
+  }
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}

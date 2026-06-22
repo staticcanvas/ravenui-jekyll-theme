@@ -1,1 +1,8 @@
-{% assign type = include.type | default: "default" %}{% assign text = include.text | default: "tag" %}{% assign icon = include.icon %}{% assign color = include.color %}<span class="rd-tag rd-tag--{{ type }} {{ include.class }}" {% if color %}style="color: {{ color }}; border-color: color-mix(in srgb, {{ color }} 30%, transparent); background: color-mix(in srgb, {{ color }} 6%, transparent);"{% endif %}>{% if icon %}{% include comps/icon.html name=icon size=10 %}{% endif %}{{ text }}</span>
+{% assign type = include.type | default: "default" %}
+{% assign text = include.text | default: "tag" %}
+{% if text == "latest" or text == "latest-version" %}
+  {% assign text = site.data.releases.first.tag_name | default: site.version | default: "v1.0.0" %}
+{% endif %}
+{% assign icon = include.icon %}
+{% assign color = include.color %}
+<span class="rd-tag rd-tag--{{ type }} {{ include.class }}" {% if color %}style="color: {{ color }}; border-color: color-mix(in srgb, {{ color }} 30%, transparent); background: color-mix(in srgb, {{ color }} 6%, transparent);"{% endif %}>{% if icon %}{% include comps/icon.html name=icon size=10 %}{% endif %}{{ text }}</span>

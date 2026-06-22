@@ -14,7 +14,8 @@ Building the theme gem locally is useful when you want to customize core layouts
 🟦 **Steps to Build & Install Locally:**
 
 1. **Clone the repository:**
-   ```bash
+   {% raw %}
+```bash
    git clone https://gitlab.com/staticcanvas/ravenui-jekyll-theme.git
    cd ravenui-jekyll-theme
    ```
@@ -59,7 +60,8 @@ Jekyll allows you to override the default locations of standard directories usin
 
 💠 **Custom Path Configuration:**
 
-```yaml
+```
+{% endraw %}yaml
 # _config.yml
 source:       .
 destination:  ./_site

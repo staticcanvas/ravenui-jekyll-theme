@@ -5,6 +5,7 @@
  */
 
 // 1. Foundation & Variables
+@use "ravenui-sp/sass-vars";   // SASS variable layer — override before importing
 @use "ravenui-sp/root";
 @use "ravenui-sp/animations";
 
@@ -50,6 +51,10 @@
 @use "ravenui-sp/datatable";
 @use "ravenui-sp/timeline";
 @use "ravenui-sp/tag-cloud";
+@use "ravenui-sp/tag-filter";
+@use "ravenui-sp/playground";
+@use "ravenui-sp/layout-visualizer";
+@use "ravenui-sp/converter";
 @use "ravenui-sp/modal";
 @use "ravenui-sp/figure";
 @use "ravenui-sp/steps";
@@ -58,7 +63,11 @@
 @use "ravenui-sp/theme-toggle";
 @use "ravenui-sp/compatibility-badges";
 @use "ravenui-sp/sitemap";
-
+@use "ravenui-sp/back-to-top";
+@use "ravenui-sp/index-warning";
+@use "ravenui-sp/spacer";
+@use "ravenui-sp/depends-upon";
+@use "ravenui-sp/feature-flags";
 
 // 5. Third Party / Syntax Highlighting
 @use "rogue/ethereal";

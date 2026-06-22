@@ -9,13 +9,19 @@
     </script>
     <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title | default: "RavenUI" }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
-    {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.rd_use_cdn | default: true -%}
-    {%- if search_provider == "pagefind" -%}
-      {%- if search_use_cdn -%}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/css/ui.css">
-      {%- else -%}
-        <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
+    {%- assign show_search = true -%}
+    {%- if site.theme_settings.search.enabled == false or page.search == false -%}
+      {%- assign show_search = false -%}
+    {%- endif -%}
+    {%- if show_search -%}
+      {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
+      {%- assign search_use_cdn = site.theme_settings.search.use_cdn | default: site.rd_use_cdn | default: true -%}
+      {%- if search_provider == "pagefind" -%}
+        {%- if search_use_cdn -%}
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/css/ui.css">
+        {%- else -%}
+          <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relative_url }}">
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,19 +56,21 @@
     <link rel="stylesheet" href="{{ site.animation_libraries.aos.cdn_css | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css' }}">
     {% endif %}
 
-    {%- if search_provider == "pagefind" -%}
-      {%- if search_use_cdn -%}
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/ui.js"></script>
-      {%- else -%}
-        <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
-      {%- endif -%}
-    {%- elsif search_provider == "lyra" -%}
-      <script src="{{ "/assets/js/vendor/rd-search-local.js" | relative_url }}"></script>
-    {%- elsif search_provider == "algolia" -%}
-      {%- if search_use_cdn -%}
-        <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch-lite.umd.js"></script>
-      {%- else -%}
-        <script src="{{ "/assets/js/vendor/algoliasearch-lite.umd.js" | relative_url }}"></script>
+    {%- if show_search -%}
+      {%- if search_provider == "pagefind" -%}
+        {%- if search_use_cdn -%}
+          <script type="module" src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1.1.0/ui.js"></script>
+        {%- else -%}
+          <script src="{{ "/pagefind/pagefind-ui.js" | relative_url }}"></script>
+        {%- endif -%}
+      {%- elsif search_provider == "lyra" -%}
+        <script src="{{ "/assets/js/vendor/rd-search-local.js" | relative_url }}"></script>
+      {%- elsif search_provider == "algolia" -%}
+        {%- if search_use_cdn -%}
+          <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch-lite.umd.js"></script>
+        {%- else -%}
+          <script src="{{ "/assets/js/vendor/algoliasearch-lite.umd.js" | relative_url }}"></script>
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
     {% if site.description %}
@@ -173,6 +181,11 @@
                 {% else %}
                     --rd-page-load-anim: rd-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
                 {% endif %}
+            {% endif %}
+
+            /* Sidebar Width — configurable via theme_settings.sidebar.width in _config.yml */
+            {% if site.theme_settings.sidebar.width %}
+                --rd-sidebar-width: {{ site.theme_settings.sidebar.width }};
             {% endif %}
         }
 

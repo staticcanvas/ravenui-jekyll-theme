@@ -1,0 +1,106 @@
+{%- comment -%}
+Component__: Layout Visualizer
+Purpose____: Demonstrates alternative Jekyll layout options (Default, Topbar, Blank Canvas) using interactive CSS grids.
+Caveats____: Pure client-side selector toggles.
+Usage______: {% include comps/layout-visualizer.html %}
+{%- endcomment -%}
+
+{% assign vis_id = include.id | default: "default" %}
+
+<div class="rd-layout-visualizer" id="rd-layout-visualizer-{{ vis_id }}">
+  <!-- Controls -->
+  <div class="rd-layout-visualizer-controls">
+    <button class="rd-layout-visualizer-btn active" data-layout="default">
+      Default Layout
+    </button>
+    <button class="rd-layout-visualizer-btn" data-layout="topbar">
+      Top Header Layout
+    </button>
+    <button class="rd-layout-visualizer-btn" data-layout="blank">
+      Blank Canvas Layout
+    </button>
+  </div>
+
+  <!-- Mock Browser Window -->
+  <div class="rd-layout-visualizer-browser">
+    <div class="rd-layout-visualizer-browser-bar">
+      <div class="rd-layout-visualizer-dot"></div>
+      <div class="rd-layout-visualizer-dot"></div>
+      <div class="rd-layout-visualizer-dot"></div>
+      <div class="rd-layout-visualizer-address" id="browser-address-{{ vis_id }}">
+        https://ravenui.dev/docs/getting-started/
+      </div>
+    </div>
+    
+    <!-- Viewport Grid -->
+    <div class="rd-layout-visualizer-viewport" data-layout="default" id="browser-viewport-{{ vis_id }}">
+      <div class="rd-layout-vis-block rd-layout-vis-header">Header / Nav</div>
+      <div class="rd-layout-vis-block rd-layout-vis-sidebar">Sidebar</div>
+      <div class="rd-layout-vis-block rd-layout-vis-content">Main Content</div>
+      <div class="rd-layout-vis-block rd-layout-vis-toc">TOC</div>
+      <div class="rd-layout-vis-block rd-layout-vis-footer">Footer</div>
+    </div>
+  </div>
+
+  <!-- Description Pane -->
+  <div class="rd-layout-visualizer-info" style="font-size: 0.85rem; line-height: 1.5; color: var(--rd-clr-mist);">
+    <div id="vis-desc-default-{{ vis_id }}">
+      <strong>Default Sidebar Layout:</strong> Perfect for technical documentation. Includes a sticky left sidebar navigation, main content wrapper, and an auto-generated Table of Contents (TOC) on the right.
+    </div>
+    <div id="vis-desc-topbar-{{ vis_id }}" style="display: none;">
+      <strong>Top Header Bar Layout:</strong> Ideal for marketing landing pages or main indexes. Replaces sidebar-only branding with a full-width sticky top header nav, alongside secondary sidebar/toc widgets.
+    </div>
+    <div id="vis-desc-blank-{{ vis_id }}" style="display: none;">
+      <strong>Blank Canvas Layout:</strong> Strips all sidebar, header, and footer chrome. Ideal for landing splashes, custom dashboards, presentation slides, or full-width visualizers.
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const visId = "{{ vis_id }}";
+  const container = document.getElementById(`rd-layout-visualizer-${visId}`);
+  if (!container) return;
+
+  const viewport = container.querySelector(`#browser-viewport-${visId}`);
+  const address = container.querySelector(`#browser-address-${visId}`);
+  const buttons = container.querySelectorAll('.rd-layout-visualizer-btn');
+  
+  // Descriptions
+  const descDefault = container.querySelector(`#vis-desc-default-${visId}`);
+  const descTopbar = container.querySelector(`#vis-desc-topbar-${visId}`);
+  const descBlank = container.querySelector(`#vis-desc-blank-${visId}`);
+
+  container.addEventListener('click', function(e) {
+    const btn = e.target.closest('.rd-layout-visualizer-btn');
+    if (!btn) return;
+
+    const layout = btn.getAttribute('data-layout');
+    
+    // Toggle active button
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update viewport layout
+    viewport.setAttribute('data-layout', layout);
+
+    // Update address bar and description
+    if (layout === 'default') {
+      address.textContent = 'https://ravenui.dev/docs/getting-started/';
+      descDefault.style.display = 'block';
+      descTopbar.style.display = 'none';
+      descBlank.style.display = 'none';
+    } else if (layout === 'topbar') {
+      address.textContent = 'https://ravenui.dev/index-header/';
+      descDefault.style.display = 'none';
+      descTopbar.style.display = 'block';
+      descBlank.style.display = 'none';
+    } else if (layout === 'blank') {
+      address.textContent = 'https://ravenui.dev/dashboard/';
+      descDefault.style.display = 'none';
+      descTopbar.style.display = 'none';
+      descBlank.style.display = 'block';
+    }
+  });
+})();
+</script>

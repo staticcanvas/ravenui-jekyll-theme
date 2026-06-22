@@ -49,9 +49,11 @@ platforms:
   vercel: supported
 ```
 
+{% raw %}
 ```liquid
 {% include comps/platform-support.html platforms=page.platforms %}
 ```
+{% endraw %}
 
 ---
 

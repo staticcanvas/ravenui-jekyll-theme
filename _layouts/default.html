@@ -3,8 +3,47 @@
 
 {% include core/head.html %}
 
-<body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}">
-    {% if site.rd_announcement.enabled %}
+<body{% if site.theme_settings.animations.enabled != false %} class="rd-animations-enabled{% if site.theme_settings.animations.page_loads != false %} rd-anim-page-loads{% endif %}{% if site.theme_settings.animations.hover_effects != false %} rd-anim-hover-effects{% endif %}"{% endif %}{% unless page.enable_search == true %} data-pagefind-ignore{% endunless %} data-code-lang-style="{{ site.theme_settings.code.lang_style | default: 'badge' }}" data-toc-animations="{{ site.theme_settings.toc.animations | default: true }}" data-code-copy="{{ site.rd_code_copy | default: false }}" data-code-lang="{{ site.rd_code_lang | default: false }}" data-headings-always-visible="{{ site.rd_headings_always_visible | default: false }}">
+    {% assign show_sidebar = true %}
+    {% if site.theme_settings.sidebar.enabled == false or page.sidebar == false %}
+        {% assign show_sidebar = false %}
+    {% endif %}
+
+    {% assign show_toc = true %}
+    {% if site.theme_settings.toc.enabled == false or page.toc == false %}
+        {% assign show_toc = false %}
+    {% endif %}
+
+    {% assign show_breadcrumbs = true %}
+    {% if site.theme_settings.breadcrumbs.enabled == false or page.breadcrumbs == false %}
+        {% assign show_breadcrumbs = false %}
+    {% endif %}
+
+    {% assign show_page_nav = true %}
+    {% if site.theme_settings.page_navigation.enabled == false or page.page_navigation == false or page.page-nav == false %}
+        {% assign show_page_nav = false %}
+    {% endif %}
+
+    {% assign show_footer = true %}
+    {% if site.theme_settings.footer.enabled == false or page.footer == false %}
+        {% assign show_footer = false %}
+    {% endif %}
+
+    {% assign show_search = true %}
+    {% if site.theme_settings.search.enabled == false or page.search == false %}
+        {% assign show_search = false %}
+    {% endif %}
+
+    {% assign show_back_to_top = true %}
+    {% if site.theme_settings.back_to_top.enabled == false or site.theme_settings.back_to_top == false or page.back_to_top == false or page.back-to-top == false %}
+        {% assign show_back_to_top = false %}
+    {% endif %}
+
+    {% assign show_announcement = site.rd_announcement.enabled %}
+    {% if page.announcement == false %}
+        {% assign show_announcement = false %}
+    {% endif %}
+    {% if show_announcement %}
         {% include comps/announcement.html %}
     {% endif %}
 
@@ -20,12 +59,13 @@
     {% endif %}
 
     {% if site.theme_settings.header.enabled %}
-        {% include core/header.html %}
+        {% include comps/header.html %}
     {% endif %}
 
-    <div class="rd-container">
+    <div class="rd-container{% unless show_sidebar %} rd-no-sidebar{% endunless %}{% unless show_toc %} rd-no-toc{% endunless %}">
+        {% if show_sidebar %}
         <aside class="rd-sidebar-left">
-            {% include core/sidebar.html %}
+            {% include comps/sidebar.html %}
         </aside>
         <script>
             // Seamless Sidebar Scroll Persistence (Early Execution)
@@ -37,9 +77,12 @@
                 }
             })();
         </script>
+        {% endif %}
 
         <main class="rd-content">
+            {% if show_breadcrumbs %}
             {% include comps/breadcrumbs.html %}
+            {% endif %}
             {% assign output_title = site.rd_output_title_default | default: true %}
             {% if page.output-title == false %}
                 {% assign output_title = false %}
@@ -70,9 +113,27 @@
             </section>
             {% endif %}
 
+            {%- comment -%}
+            Index Warning: renders when the page explicitly opts-in via `index_warning: true`
+            in front-matter, or when rd_debug is active and the page body is empty — which
+            typically means the directory lacks an index file and Jekyll generated a blank page.
+            {%- endcomment -%}
+            {%- assign _content_stripped = content | strip_html | strip -%}
+            {%- assign show_index_warning = false -%}
+            {%- if page.index_warning == true -%}
+                {%- assign show_index_warning = true -%}
+            {%- elsif site.rd_debug and _content_stripped == "" -%}
+                {%- assign show_index_warning = true -%}
+            {%- endif -%}
+            {%- if show_index_warning -%}
+                {% include comps/index-warning.html %}
+            {%- endif -%}
+
             {{ content }}
             
+            {% if show_page_nav %}
             {% include comps/page-nav.html %}
+            {% endif %}
 
             {% if site.rd_feedback.enabled and page.feedback != false %}
                 {% include comps/feedback.html %}
@@ -86,21 +147,23 @@
                 {% include comps/comments.html %}
             {% endif %}
 
-            {% include core/footer.html %}
+            {% if show_footer %}
+                {% include comps/footer.html %}
+            {% else %}
+                {% include core/foot.html %}
+            {% endif %}
         </main>
 
-        {% assign toc_style = site.theme_settings.toc.style | default: "simple" %}
-        {% assign toc_density = site.theme_settings.toc.density | default: "default" %}
-        <div id="rd-page-toc-container" class="rd-page-toc-container" style="display: none;">
-            <h4 class="rd-toc-heading">{% include comps/icon.html name="list" size="12" %} On This Page</h4>
-            <nav id="rd-page-toc" class="rd-page-toc rd-page-toc--{{ toc_style }} rd-page-toc--{{ toc_density }}"></nav>
-        </div>
+        {% if show_toc %}
+        {% include comps/toc.html %}
+        {% endif %}
 
         <aside class="rd-sidebar-right">
             <!-- TOC content is moved to a top-level container to support mobile visibility -->
         </aside>
     </div>
 
+    {% if show_search %}
     {%- assign search_provider = site.theme_settings.search.provider | default: "pagefind" -%}
     <div id="rd-search-modal" class="rd-search-modal">
         <div class="rd-search-modal-backdrop" id="rd-search-backdrop"></div>
@@ -123,15 +186,22 @@
             </header>
         </div>
     </div>
+    {% endif %}
 
+    {% if show_sidebar or show_toc %}
     <div class="rd-mobile-controls">
+        {% if show_sidebar %}
         <button id="rd-nav-toggle" class="rd-mobile-btn" aria-label="Toggle Navigation">
             {% include comps/icon.html name="menu" size="20" %}
         </button>
+        {% endif %}
+        {% if show_toc %}
         <button id="rd-toc-toggle" class="rd-toc-toggle rd-mobile-btn" aria-label="Toggle Table of Contents">
             <span class="rd-toc-toggle-icon">{% include comps/icon.html name="layout-list" size="20" %}</span>
         </button>
+        {% endif %}
     </div>
+    {% endif %}
 
     {% if site.animation_libraries.aos.enable %}
     <script src="{{ site.animation_libraries.aos.cdn_js | default: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js' }}"></script>
@@ -149,8 +219,11 @@
     {% endif %}
 
     <script type="module">
-        /* 🌑 ZERO-DARK Core Utilities v1.3.4 */
-        
+        /* 🌑 ZERO-DARK Core Utilities v1.4.0 */
+        import { setupCodeBlocks }     from '{{ "/assets/js/rd-code-utils.mjs"     | relative_url }}';
+        import { setupHeadingAnchors } from '{{ "/assets/js/rd-heading-anchors.mjs" | relative_url }}';
+        import { setupNumericTickers } from '{{ "/assets/js/rd-ticker.mjs"          | relative_url }}';
+
         // 0. Global State & Elements
         const searchModal = document.getElementById('rd-search-modal');
         const searchBackdrop = document.getElementById('rd-search-backdrop');
@@ -164,6 +237,7 @@
         const progressBar = document.getElementById('rd-progress-bar');
 
         // 1. Search Logic
+        {% if show_search %}
         function openSearch() {
             if (!searchModal) return;
             searchModal.classList.add('active');
@@ -192,6 +266,7 @@
             }
             if (e.key === 'Escape') closeSearch();
         });
+        {% endif %}
 
         // 2. Mobile Nav Logic
         if (navToggle) {
@@ -205,156 +280,11 @@
             });
         }
 
-        // 3. TOC Generation & Scroll-Spy
-        function generateTOC() {
-            if (!contentArea || !tocNav) return;
-            const tocLevels = {{ site.rd_toc_levels | jsonify }} || ["h2", "h3"];
-            const selector = tocLevels.join(', ');
-            const allHeadings = contentArea.querySelectorAll(selector);
-            const headings = Array.from(allHeadings).filter(heading => {
-                let parent = heading.parentElement;
-                while (parent && parent !== contentArea) {
-                    const classes = parent.classList ? Array.from(parent.classList) : [];
-                    const isComponent = classes.some(c => c.startsWith('rd-') && c !== 'rd-content' && c !== 'rd-hero' && c !== 'rd-container');
-                    if (isComponent) return false;
-                    parent = parent.parentElement;
-                }
-                return true;
-            });
-            if (headings.length === 0) return;
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '-5% 0px -75% 0px',
-                threshold: 0
-            };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.id;
-                        document.querySelectorAll('.rd-toc-link').forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                        });
-                    }
-                });
-            }, observerOptions);
 
-            headings.forEach((heading, index) => {
-                const id = heading.id || `heading-${index}`;
-                heading.id = id;
-                
-                const link = document.createElement('a');
-                link.href = `#${id}`;
-                
-                // Clone heading to clean up typewriter and interactive elements
-                const clone = heading.cloneNode(true);
-                const typewriter = clone.querySelector('.rd-typewriter-container');
-                if (typewriter) {
-                    const firstWord = typewriter.getAttribute('data-first-word') || '';
-                    typewriter.textContent = firstWord;
-                }
-                clone.querySelectorAll('.rd-typewriter-cursor, .rd-copy-button, .copy-button, .rd-heading-icon').forEach(el => el.remove());
-                
-                link.textContent = clone.textContent.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
-                link.className = `rd-toc-link rd-toc-level-${heading.tagName.toLowerCase()}`;
-                link.addEventListener('click', () => {
-                    if (window.innerWidth < 1024) {
-                        tocContainer.classList.remove('active');
-                        tocToggle.classList.remove('active');
-                    }
-                });
-                tocNav.appendChild(link);
-                observer.observe(heading);
-            });
-            
-            tocContainer.style.display = 'block';
-            if (window.innerWidth >= 1024) {
-                {% if site.rd_toc_default_open %}
-                tocContainer.classList.add('active'); 
-                if (tocToggle) tocToggle.classList.add('active');
-                {% endif %}
-            }
-        }
+        // 4. Code Block Utilities — see assets/js/rd-code-utils.mjs
 
-        if (tocToggle) {
-            tocToggle.addEventListener('click', () => {
-                tocContainer.classList.toggle('active');
-                tocToggle.classList.toggle('active');
-                if (window.innerWidth < 1024) {
-                    sidebarLeft.classList.remove('active');
-                    if (navToggle) navToggle.classList.remove('active');
-                }
-            });
-        }
-
-        // 4. Code Block Utilities
-        function setupCodeBlocks() {
-            document.querySelectorAll('div.highlight').forEach(block => {
-                if (block.querySelector('.rd-copy-btn')) return;
-
-                {% if site.rd_code_copy %}
-                const btn = document.createElement('button');
-                btn.className = 'rd-copy-btn';
-                btn.textContent = 'COPY';
-                
-                btn.addEventListener('click', () => {
-                    const codeElement = block.querySelector('code');
-                    const code = codeElement ? codeElement.innerText : block.innerText;
-                    navigator.clipboard.writeText(code).then(() => {
-                        btn.textContent = 'COPIED';
-                        btn.classList.add('copied');
-                        setTimeout(() => {
-                            btn.textContent = 'COPY';
-                            btn.classList.remove('copied');
-                        }, 2000);
-                    });
-                });
-                block.appendChild(btn);
-                {% endif %}
-                
-                {% if site.rd_code_lang %}
-                if (!block.getAttribute('data-lang') || block.getAttribute('data-lang') === 'code') {
-                    const parent = block.closest('.highlighter-rouge');
-                    const langClass = parent ? Array.from(parent.classList).find(c => c.startsWith('language-')) : null;
-                    if (langClass) {
-                        block.setAttribute('data-lang', langClass.replace('language-', ''));
-                    } else {
-                        const pre = block.querySelector('pre');
-                        const preLangClass = pre ? Array.from(pre.classList).find(c => c.startsWith('language-')) : null;
-                        if (preLangClass) {
-                            block.setAttribute('data-lang', preLangClass.replace('language-', ''));
-                        } else {
-                            block.setAttribute('data-lang', 'text');
-                        }
-                    }
-                }
-                {% endif %}
-            });
-        }
-
-        // 4.5. Heading Anchor Links
-        function setupHeadingAnchors() {
-            if (!contentArea) return;
-            const alwaysVisible = {% if site.rd_headings_always_visible %}true{% else %}false{% endif %};
-            const headings = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            headings.forEach(heading => {
-                if (!heading.id) return;
-                if (heading.tagName === 'H1' && heading.closest('.rd-hero')) return;
-                if (heading.querySelector('.rd-heading-anchor')) return;
-                
-                const anchor = document.createElement('a');
-                anchor.className = 'rd-heading-anchor';
-                if (alwaysVisible) {
-                    anchor.classList.add('always-visible');
-                }
-                anchor.href = `#${heading.id}`;
-                anchor.ariaLabel = `Link to this section`;
-                anchor.textContent = '#';
-                
-                heading.appendChild(anchor);
-            });
-        }
+        // 4.5. Heading Anchor Links — see assets/js/rd-heading-anchors.mjs
 
         // 4.75. Custom Search (Lyra / Algolia) Logic
         let localSearchEngine = null;
@@ -529,77 +459,12 @@
             resultsContainer.innerHTML = html;
         }
 
-        // 4.9. Numeric Tickers / Count Up
-        function setupNumericTickers() {
-            if (!('IntersectionObserver' in window)) {
-                return;
-            }
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        obs.unobserve(el);
-                        
-                        const text = (el.getAttribute('data-ticker-value') || el.innerText).trim();
-                        // Match structure: prefix (any non-digit/dot/minus symbols), numeric core (digits, dots, commas, optional leading minus), and suffix (any remaining characters)
-                        const match = text.match(/^([^0-9.-]*)([0-9.,-]+)(.*)$/);
-                        if (!match) return;
-
-                        const prefix = match[1] || '';
-                        const rawNum = match[2].replace(/,/g, '');
-                        const suffix = match[3] || '';
-                        const num = parseFloat(rawNum);
-                        if (isNaN(num)) return;
-
-                        const duration = 1200; // 1.2s duration for smooth pneumatic movement
-                        const startTime = performance.now();
-                        const startVal = 0;
-
-                        function update(currentTime) {
-                            const elapsed = currentTime - startTime;
-                            const progress = Math.min(elapsed / duration, 1);
-                            
-                            // Cubic easeOut: 1 - (1 - x)^3
-                            const easeProgress = 1 - Math.pow(1 - progress, 3);
-                            const currentVal = startVal + easeProgress * (num - startVal);
-                            
-                            let formattedVal = "";
-                            if (rawNum.includes('.')) {
-                                const decimals = rawNum.split('.')[1].length;
-                                formattedVal = currentVal.toFixed(decimals);
-                            } else {
-                                formattedVal = Math.floor(currentVal).toString();
-                            }
-                            
-                            // Format with commas if the original number had commas
-                            if (match[2].includes(',')) {
-                                const parts = formattedVal.split('.');
-                                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                formattedVal = parts.join('.');
-                            }
-
-                            el.innerText = prefix + formattedVal + suffix;
-
-                            if (progress < 1) {
-                                requestAnimationFrame(update);
-                            } else {
-                                el.innerText = text;
-                                el.classList.add('rd-ticker-complete');
-                            }
-                        }
-                        requestAnimationFrame(update);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('[data-ticker-value], .rd-metric-value, .rd-counter').forEach(el => {
-                observer.observe(el);
-            });
-        }
+        // 4.9. Numeric Tickers / Count Up — see assets/js/rd-ticker.mjs
 
         // 5. Initialization
         window.addEventListener('DOMContentLoaded', () => {
             // Search Provider Initialization
+            {% if show_search %}
             const searchProvider = "{{ search_provider }}";
             if (searchProvider === 'pagefind') {
                 const initPagefind = () => {
@@ -632,6 +497,7 @@
                 initAlgolia();
                 setupCustomSearch();
             }
+            {% endif %}
 
             // Progress Bar
             if (progressBar) {
@@ -643,9 +509,8 @@
                 });
             }
 
-            generateTOC();
             setupCodeBlocks();
-            setupHeadingAnchors();
+            setupHeadingAnchors(contentArea);
             setupNumericTickers();
 
             // Setup GSAP & AnimeJS animations on annotated elements
@@ -744,6 +609,9 @@
             // {% endif %}
         });
     </script>
+    {% if show_back_to_top %}
+    {% include comps/back-to-top.html %}
+    {% endif %}
 </body>
 
 </html>

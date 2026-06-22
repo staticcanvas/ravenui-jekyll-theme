@@ -25,6 +25,15 @@
   z-index: 1000;
 }
 
+.rd-header--inline {
+  position: static !important;
+  width: 100% !important;
+  border-radius: var(--rd-radius-md, 8px);
+  border: var(--rd-border);
+  box-shadow: none !important;
+  margin-block-end: 1rem;
+}
+
 .rd-header-inner {
   max-width: 1600px;
   margin-inline: auto;

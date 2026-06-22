@@ -128,10 +128,22 @@
     - text: Card Index
       url: /components/card-index/
       icon: layers
+    - text: Header Component
+      url: /components/header/
+      icon: layout
+      description: "Modular top navigation bar with dynamic links and trigger"
+    - text: Sidebar Component
+      url: /components/sidebar/
+      icon: layout
+      description: "Collapsible navigation sidebar tree with search trigger"
     - text: Footer Components
       url: /components/footer/
       icon: layout
       description: "Modular footer grid layout and columns components"
+    - text: Table of Contents
+      url: /components/toc/
+      icon: list
+      description: "Dynamic Table of Contents with scroll-spy highlighting"
     - text: Heading
       url: /components/heading/
       icon: type
@@ -177,6 +189,10 @@
       url: /components/sitemap/
       icon: map
       description: "Dynamic visual sitemap tree listing all pages, posts, and collections"
+    - text: Feature Flags
+      url: /components/feature-flags/
+      icon: toggle-left
+      description: "Live visual dashboard listing active theme settings and configuration toggles"
 
 
 
@@ -389,6 +405,26 @@
       url: /components/tag-cloud/
       icon: tag
       description: "Interactive tag cloud sized by post counts"
+    - text: Tag Filter
+      url: /components/tag-filter/
+      icon: filter
+      description: "Client-side interactive tag filter for listings"
+      is_new_feature: true
+    - text: Component Playground
+      url: /components/playground/
+      icon: play
+      description: "Interactive preview and Liquid code generator"
+      is_new_feature: true
+    - text: Layout Visualizer
+      url: /components/layout-visualizer/
+      icon: monitor
+      description: "Interactive visualizer for alternative page layouts"
+      is_new_feature: true
+    - text: Page Converter
+      url: /components/converter/
+      icon: download
+      description: "Download pages as Markdown, HTML, or save as PDF"
+      is_new_feature: true
 
 
 
@@ -442,3 +478,9 @@
     - text: Developer Guide
       url: /developer-guide/
       icon: folder
+    - text: Philosophy & Scope
+      url: /scope/
+      icon: heart
+    - text: Reference Directory
+      url: /references/
+      icon: list

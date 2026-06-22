@@ -46,9 +46,11 @@ datasets:
 ```
 
 ### **Example Call**
+{% raw %}
 ```liquid
 {% include comps/chartjs.html id="source-chart" type="bar" source="metrics" height="300px" %}
 ```
+{% endraw %}
 
 ---
 

@@ -14,6 +14,14 @@ This document serves as the canonical repository of technical knowledge, structu
 - **Decision:** Implement a three-way pluggable search provider model (Pagefind WASM, Lyra/Orama Client-side JS, and Algolia Hosted Search) with a global CDN toggle (`theme_settings.search.use_cdn`).
 - **Reasoning:** High-performance documentation sites must be usable in diverse network environments, including strict corporate networks or offline intranets. A dual asset delivery mechanism (CDN for public deployment, local offline scripts for private/local hosting) satisfies both deployment modes.
 
+### **1.3. Syntax Highlighter Standardization (Rouge vs. CodeRay)**
+- **Decision:** Exclusively standardize on **Rouge** as the theme's syntax highlighter, avoiding any legacy CodeRay support.
+- **Reasoning:** Rouge supports over 200+ languages (including modern JS/TS, JSX, Rust, YAML, and TOML) compared to CodeRay's ~40 languages. Additionally, CodeRay is deprecated and has been removed from native kramdown v2.x cores. Standardizing on Rouge prevents CSS bloat by avoiding duplicate syntax styling sheets.
+
+### **1.4. Custom Plugin Architecture (Internal vs. External Gems)**
+- **Decision:** Keep custom Jekyll plugins (`component_tag.rb`, `from_yaml.rb`, `og_image_generator.rb`, `runtime_metadata.rb`) internal to the theme within the `_plugins/` directory, rather than extracting and releasing them as independent Ruby gems.
+- **Reasoning:** Keeping plugins internal provides a zero-configuration, out-of-the-box developer experience for theme consumers. Custom tags (like `rd` and `rdi`) are tightly coupled with the theme's modular `_includes` directories (such as `comps/` and `core/`), which would require complex path configuration if split into a separate gem. Furthermore, the lightweight nature of these plugins (ranging from 15 to 132 lines of code) does not justify the packaging and dependency maintenance overhead of multiple separate gems. Lastly, it ensures rapid local development and hot-reloading without the need for gem linking or local path overrides.
+
 ---
 
 ## **2. Technical Caveats & Resolved Bugs**

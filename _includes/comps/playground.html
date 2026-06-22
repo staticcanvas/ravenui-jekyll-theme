@@ -1,0 +1,390 @@
+{%- comment -%}
+Component__: Component Playground
+Purpose____: Interactive client-side playground for custom components (Button, Callout, Alert, Tag).
+Caveats____: Uses inline scripts and CSS layout. Customizes preview state and generates clean copyable Liquid code snippets.
+Usage______: {% include comps/playground.html component="button" %}
+{%- endcomment -%}
+
+{% assign component_name = include.component | default: "button" %}
+{% assign pg_id = include.id | default: component_name %}
+
+<div class="rd-playground" id="rd-playground-{{ pg_id }}">
+  <!-- Preview Pane -->
+  <div class="rd-playground-preview-pane">
+    {% if component_name == "button" %}
+      <a href="#" class="rd-btn rd-btn--primary" id="preview-btn-{{ pg_id }}" style="margin: 0;">
+        <span class="rd-btn-text">Click Me</span>
+        <span class="rd-btn-icon-wrapper" style="display: none; margin-inline-start: 0.5rem; align-items: center;">
+          <i class="rd-btn-icon" style="width: 14px; height: 14px;"></i>
+        </span>
+      </a>
+    {% elsif component_name == "callout" %}
+      <div class="rd-callout rd-callout--note" id="preview-callout-{{ pg_id }}" style="margin: 0; width: 100%; max-width: 500px;">
+        <div class="rd-callout-header" style="display: flex; align-items: center; gap: 0.5rem; margin-block-end: 0.5rem;">
+          <i class="rd-callout-icon" style="width: 16px; height: 16px;"></i>
+          <span class="rd-callout-title" style="font-weight: 700;">Note</span>
+        </div>
+        <div class="rd-callout-content" style="font-size: 0.9rem; line-height: 1.5;">
+          This is a callout note.
+        </div>
+      </div>
+    {% elsif component_name == "alert" %}
+      <div class="rd-alert rd-alert--info" id="preview-alert-{{ pg_id }}" style="margin: 0; width: 100%; max-width: 500px;">
+        <div class="rd-alert-icon-wrapper" style="display: flex; align-items: center;">
+          <i class="rd-alert-icon" style="width: 16px; height: 16px;"></i>
+        </div>
+        <div class="rd-alert-content">
+          <span class="rd-alert-text">Information: The system is running normally.</span>
+        </div>
+      </div>
+    {% elsif component_name == "tag" %}
+      <span class="rd-tag rd-tag--default" id="preview-tag-{{ pg_id }}" style="margin: 0;">
+        <i class="rd-tag-icon" style="display: none; width: 10px; height: 10px; margin-inline-end: 0.25rem;"></i>
+        <span class="rd-tag-text">tag</span>
+      </span>
+    {% endif %}
+  </div>
+
+  <!-- Controls Pane -->
+  <div class="rd-playground-controls-pane">
+    <div class="rd-playground-title">Playground Config</div>
+    
+    {% if component_name == "button" %}
+      <div class="rd-playground-field">
+        <label for="input-text-{{ pg_id }}">Button Text</label>
+        <input type="text" id="input-text-{{ pg_id }}" value="Click Me" placeholder="Button text...">
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-type-{{ pg_id }}">Style Type</label>
+        <select id="input-type-{{ pg_id }}">
+          <option value="primary" selected>Primary</option>
+          <option value="secondary">Secondary</option>
+          <option value="outline">Outline</option>
+          <option value="text">Text Link</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-color-{{ pg_id }}">Theme Color</label>
+        <select id="input-color-{{ pg_id }}">
+          <option value="default" selected>Default Accent</option>
+          <option value="blue">Blue</option>
+          <option value="purple">Purple</option>
+          <option value="pink">Pink</option>
+          <option value="orange">Orange</option>
+          <option value="red">Red</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-size-{{ pg_id }}">Button Size</label>
+        <select id="input-size-{{ pg_id }}">
+          <option value="default" selected>Default</option>
+          <option value="sm">Small</option>
+          <option value="lg">Large</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-icon-{{ pg_id }}">Lucide Icon Name</label>
+        <input type="text" id="input-icon-{{ pg_id }}" value="" placeholder="e.g. arrow-right, star, play...">
+      </div>
+
+    {% elsif component_name == "callout" %}
+      <div class="rd-playground-field">
+        <label for="input-title-{{ pg_id }}">Callout Title</label>
+        <input type="text" id="input-title-{{ pg_id }}" value="Note" placeholder="Title...">
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-content-{{ pg_id }}">Callout Content</label>
+        <input type="text" id="input-content-{{ pg_id }}" value="This is a callout note." placeholder="Content...">
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-type-{{ pg_id }}">Callout Style Type</label>
+        <select id="input-type-{{ pg_id }}">
+          <option value="note" selected>Note (Default)</option>
+          <option value="tip">Tip</option>
+          <option value="warning">Warning</option>
+          <option value="danger">Danger</option>
+          <option value="info">Info</option>
+          <option value="success">Success</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field rd-playground-checkbox-field">
+        <input type="checkbox" id="input-inline-{{ pg_id }}">
+        <label for="input-inline-{{ pg_id }}">Inline Bubble</label>
+      </div>
+
+    {% elsif component_name == "alert" %}
+      <div class="rd-playground-field">
+        <label for="input-text-{{ pg_id }}">Alert Message</label>
+        <input type="text" id="input-text-{{ pg_id }}" value="Information: The system is running normally." placeholder="Alert message...">
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-type-{{ pg_id }}">Alert Type</label>
+        <select id="input-type-{{ pg_id }}">
+          <option value="info" selected>Info (Blue)</option>
+          <option value="success">Success (Green)</option>
+          <option value="warning">Warning (Orange)</option>
+          <option value="danger">Danger (Red)</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-icon-{{ pg_id }}">Lucide Icon</label>
+        <input type="text" id="input-icon-{{ pg_id }}" value="info" placeholder="Icon name...">
+      </div>
+
+    {% elsif component_name == "tag" %}
+      <div class="rd-playground-field">
+        <label for="input-text-{{ pg_id }}">Tag Label</label>
+        <input type="text" id="input-text-{{ pg_id }}" value="tag" placeholder="Tag label...">
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-type-{{ pg_id }}">Tag Style Type</label>
+        <select id="input-type-{{ pg_id }}">
+          <option value="default" selected>Default</option>
+          <option value="blue">Blue</option>
+          <option value="purple">Purple</option>
+          <option value="pink">Pink</option>
+          <option value="orange">Orange</option>
+          <option value="version">Version</option>
+          <option value="beta">Beta Release</option>
+          <option value="rc">Release Candidate</option>
+          <option value="release">Production Release</option>
+          <option value="major">Major Bump</option>
+        </select>
+      </div>
+
+      <div class="rd-playground-field">
+        <label for="input-icon-{{ pg_id }}">Lucide Icon</label>
+        <input type="text" id="input-icon-{{ pg_id }}" value="" placeholder="Optional icon name...">
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Code Block -->
+  <div class="rd-playground-code-block">
+    <button class="rd-playground-copy-btn" id="copy-btn-{{ pg_id }}">Copy Code</button>
+    <pre class="highlight"><code id="code-snippet-{{ pg_id }}">{% raw %}{% include comps/button.html %}{% endraw %}</code></pre>
+  </div>
+</div>
+
+<script>
+(function() {
+  const pgId = "{{ pg_id }}";
+  const compType = "{{ component_name }}";
+  const playground = document.getElementById(`rd-playground-${pgId}`);
+  if (!playground) return;
+
+  const codeSnippet = document.getElementById(`code-snippet-${pgId}`);
+  const copyBtn = document.getElementById(`copy-btn-${pgId}`);
+  
+  // Controls
+  const inputText = document.getElementById(`input-text-${pgId}`);
+  const inputTitle = document.getElementById(`input-title-${pgId}`);
+  const inputContent = document.getElementById(`input-content-${pgId}`);
+  const inputType = document.getElementById(`input-type-${pgId}`);
+  const inputColor = document.getElementById(`input-color-${pgId}`);
+  const inputSize = document.getElementById(`input-size-${pgId}`);
+  const inputIcon = document.getElementById(`input-icon-${pgId}`);
+  const inputInline = document.getElementById(`input-inline-${pgId}`);
+
+  // Previews
+  const previewBtn = document.getElementById(`preview-btn-${pgId}`);
+  const previewCallout = document.getElementById(`preview-callout-${pgId}`);
+  const previewAlert = document.getElementById(`preview-alert-${pgId}`);
+  const previewTag = document.getElementById(`preview-tag-${pgId}`);
+
+  // Re-render Lucide icons dynamically if Lucide library is present
+  function updateIcon(element, iconName) {
+    if (!element) return;
+    if (!iconName) {
+      element.style.display = 'none';
+      element.removeAttribute('data-lucide');
+      element.innerHTML = '';
+      return;
+    }
+
+    element.style.display = 'inline-block';
+    element.setAttribute('data-lucide', iconName);
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons({
+        attrs: { class: element.className },
+        nameAttr: 'data-lucide'
+      });
+    } else {
+      // Fallback text if Lucide is offline
+      element.textContent = `(${iconName})`;
+    }
+  }
+
+  function updatePlayground() {
+    let includeCode = "{" + "% include comps/" + compType + ".html";
+    
+    if (compType === 'button') {
+      const text = inputText.value || 'Button';
+      const type = inputType.value;
+      const color = inputColor.value;
+      const size = inputSize.value;
+      const icon = inputIcon.value.trim().toLowerCase();
+
+      // Update Preview DOM
+      const textNode = previewBtn.querySelector('.rd-btn-text');
+      const iconWrapper = previewBtn.querySelector('.rd-btn-icon-wrapper');
+      const iconNode = previewBtn.querySelector('.rd-btn-icon');
+
+      textNode.textContent = text;
+      
+      // Update Classnames
+      previewBtn.className = 'rd-btn';
+      previewBtn.classList.add(`rd-btn--${type}`);
+      if (color !== 'default') {
+        previewBtn.classList.add(`rd-btn--color-${color}`);
+      }
+      if (size !== 'default') {
+        previewBtn.classList.add(`rd-btn--${size}`);
+      }
+
+      // Update Icon
+      if (icon) {
+        iconWrapper.style.display = 'inline-flex';
+        updateIcon(iconNode, icon);
+      } else {
+        iconWrapper.style.display = 'none';
+        updateIcon(iconNode, null);
+      }
+
+      // Generate Code Snippet
+      includeCode += ` text="${text}"`;
+      if (type !== 'primary') includeCode += ` type="${type}"`;
+      if (color !== 'default') includeCode += ` color="${color}"`;
+      if (size !== 'default') includeCode += ` size="${size}"`;
+      if (icon) includeCode += ` icon="${icon}"`;
+
+    } else if (compType === 'callout') {
+      const title = inputTitle.value || 'Note';
+      const content = inputContent.value || '';
+      const type = inputType.value;
+      const isInline = inputInline.checked;
+
+      // Update Preview DOM
+      const titleNode = previewCallout.querySelector('.rd-callout-title');
+      const contentNode = previewCallout.querySelector('.rd-callout-content');
+      const iconNode = previewCallout.querySelector('.rd-callout-icon');
+
+      titleNode.textContent = title;
+      contentNode.textContent = content;
+
+      // Classnames
+      previewCallout.className = 'rd-callout';
+      previewCallout.classList.add(`rd-callout--${type}`);
+      if (isInline) {
+        previewCallout.classList.add('rd-callout--inline');
+      }
+
+      // Dynamic Icon based on type
+      let defaultIcon = 'info';
+      if (type === 'tip') defaultIcon = 'lightbulb';
+      if (type === 'warning') defaultIcon = 'alert-triangle';
+      if (type === 'danger') defaultIcon = 'alert-octagon';
+      if (type === 'success') defaultIcon = 'check-circle';
+      updateIcon(iconNode, defaultIcon);
+
+      // Generate Code Snippet
+      includeCode += ` title="${title}"`;
+      includeCode += ` content="${content}"`;
+      if (type !== 'note') includeCode += ` type="${type}"`;
+      if (isInline) includeCode += ` inline=true`;
+
+    } else if (compType === 'alert') {
+      const text = inputText.value || '';
+      const type = inputType.value;
+      const icon = inputIcon.value.trim().toLowerCase();
+
+      // Update Preview DOM
+      const textNode = previewAlert.querySelector('.rd-alert-text');
+      const iconNode = previewAlert.querySelector('.rd-alert-icon');
+
+      textNode.textContent = text;
+      
+      // Classnames
+      previewAlert.className = 'rd-alert';
+      previewAlert.classList.add(`rd-alert--${type}`);
+
+      // Icon
+      updateIcon(iconNode, icon || 'info');
+
+      // Generate Code Snippet
+      includeCode += ` text="${text}"`;
+      if (type !== 'info') includeCode += ` type="${type}"`;
+      if (icon && icon !== 'info') includeCode += ` icon="${icon}"`;
+
+    } else if (compType === 'tag') {
+      const text = inputText.value || '';
+      const type = inputType.value;
+      const icon = inputIcon.value.trim().toLowerCase();
+
+      // Update Preview DOM
+      const textNode = previewTag.querySelector('.rd-tag-text');
+      const iconNode = previewTag.querySelector('.rd-tag-icon');
+
+      textNode.textContent = text;
+
+      // Classnames
+      previewTag.className = 'rd-tag';
+      previewTag.classList.add(`rd-tag--${type}`);
+
+      // Icon
+      if (icon) {
+        iconNode.style.display = 'inline-block';
+        updateIcon(iconNode, icon);
+      } else {
+        iconNode.style.display = 'none';
+        updateIcon(iconNode, null);
+      }
+
+      // Generate Code Snippet
+      includeCode += ` text="${text}"`;
+      if (type !== 'default') includeCode += ` type="${type}"`;
+      if (icon) includeCode += ` icon="${icon}"`;
+    }
+
+    includeCode += ' %' + '}';
+    codeSnippet.textContent = includeCode;
+  }
+
+  // Bind Listeners
+  const inputs = [inputText, inputTitle, inputContent, inputType, inputColor, inputSize, inputIcon, inputInline];
+  inputs.forEach(input => {
+    if (input) {
+      input.addEventListener('input', updatePlayground);
+      input.addEventListener('change', updatePlayground);
+    }
+  });
+
+  // Copy button action
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+      const textToCopy = codeSnippet.textContent;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('success');
+        setTimeout(() => {
+          copyBtn.textContent = 'Copy Code';
+          copyBtn.classList.remove('success');
+        }, 2000);
+      });
+    });
+  }
+
+  // Initialize
+  updatePlayground();
+})();
+</script>

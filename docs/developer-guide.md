@@ -104,6 +104,10 @@ Create a corresponding documentation page in `docs/components/your-component.md`
 
 RavenUI ships with several custom Ruby plugins located under `_plugins/` to automate tasks and extend the Liquid engine:
 
+> [!NOTE]
+> **Plugin Integration Strategy**
+> Custom plugins are kept internal to the theme's core within the `_plugins/` directory rather than being extracted into separate Ruby gems. This maintains a zero-configuration, out-of-the-box developer experience, ensures tight coupling with modular layout directories (like `_includes/comps`), and prevents packaging and dependency version mismatch overhead.
+
 * **Block Component Tag (rd):** Allows calling theme components with complex, captured multi-line markdown contents:
   {% raw %}
   ```liquid

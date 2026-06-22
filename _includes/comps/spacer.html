@@ -1,0 +1,58 @@
+{%- comment -%}
+Component__: Spacer
+Purpose____: Adds configurable vertical whitespace between layout elements.
+             Useful when constructing pages with blank or splash layouts
+             where normal markdown paragraph spacing is insufficient.
+Usage______:
+  Basic (named size):
+    {% include comps/spacer.html size="md" %}
+
+  Custom height:
+    {% include comps/spacer.html height="4rem" %}
+
+  With a visual divider line:
+    {% include comps/spacer.html size="lg" divider=true %}
+
+  With a gradient divider:
+    {% include comps/spacer.html size="xl" divider=true divider_style="gradient" %}
+
+Parameters_:
+  size          (optional) — Named size token. Options: xs | sm | md | lg | xl | 2xl
+                             Defaults to "md". Ignored when `height` is set.
+  height        (optional) — Explicit CSS height value (e.g., "3rem", "80px", "10vh").
+                             Takes precedence over `size`.
+  divider       (optional) — Set to true to render a subtle horizontal rule at the
+                             vertical midpoint of the spacer.
+  divider_style (optional) — Style of the divider line. Options: subtle | gradient
+                             Defaults to "subtle".
+  id            (optional) — HTML id attribute for the spacer element (useful for
+                             scroll anchoring).
+  class         (optional) — Additional CSS classes to append.
+{%- endcomment -%}
+
+{%- assign _size   = include.size   | default: "md" -%}
+{%- assign _height = include.height -%}
+{%- assign _div    = include.divider -%}
+{%- assign _dstyle = include.divider_style | default: "subtle" -%}
+{%- assign _id     = include.id -%}
+{%- assign _class  = include.class -%}
+
+{%- if _height -%}
+  {%- assign _style = "height:" | append: _height -%}
+  {%- assign _size_class = "rd-spacer--custom" -%}
+{%- else -%}
+  {%- assign _style = "" -%}
+  {%- assign _size_class = "rd-spacer--" | append: _size -%}
+{%- endif -%}
+
+<div
+  class="rd-spacer {{ _size_class }} {% if _div %}rd-spacer--has-divider rd-spacer--divider-{{ _dstyle }}{% endif %} {{ _class }}"
+  {% if _id %}id="{{ _id }}"{% endif %}
+  {% if _style %}style="{{ _style }}"{% endif %}
+  role="presentation"
+  aria-hidden="true"
+>
+  {%- if _div -%}
+  <span class="rd-spacer__divider"></span>
+  {%- endif -%}
+</div>

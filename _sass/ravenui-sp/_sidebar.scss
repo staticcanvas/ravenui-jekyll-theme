@@ -1,5 +1,6 @@
 /* SIDEBARS */
 .rd-sidebar-left {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
@@ -51,6 +52,7 @@
 }
 
 .rd-sidebar-right {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
   display: none;
 }
 
@@ -83,4 +85,27 @@
     margin-block: 2rem 1rem;
     padding-inline-start: 0.25rem;
     border-inline-start: 3px solid var(--rd-clr-highlight);
+}
+
+.rd-sidebar {
+  --rd-border-color: var(--rd-sidebar-border-color, var(--rd-border-default));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  background: var(--rd-bg-base);
+  border: var(--rd-border);
+  border-radius: var(--rd-radius-md, 8px);
+}
+
+.rd-sidebar--inline {
+  position: static !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  border-radius: var(--rd-radius-md, 8px);
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  margin: 0 !important;
+  width: 100% !important;
 }

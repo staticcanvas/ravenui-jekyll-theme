@@ -4,6 +4,10 @@ layout: default
 <div class="rd-collection-blog-container">
     {{ content }}
 
+    {% if page.enable_tag_filter or site.theme_settings.collections.enable_tag_filter %}
+        {% include comps/tag-filter.html target=".rd-filterable-item" %}
+    {% endif %}
+
     {% assign col_name = page.collection_name | default: page.collection %}
     {% assign collection_docs = site[col_name] %}
     
@@ -22,7 +26,7 @@ layout: default
 
         <div class="rd-collection-blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-block-start: 2rem;">
             {% for doc in sorted_docs %}
-            <div class="rd-collection-blog-card" style="background: var(--rd-bg-surface); border: var(--rd-border); border-radius: var(--rd-radius); display: flex; flex-direction: column; overflow: hidden; transition: border-color 0.2s, transform 0.2s;">
+            <div class="rd-collection-blog-card rd-filterable-item" data-tags="{{ doc.tags | join: ',' | downcase }}" style="background: var(--rd-bg-surface); border: var(--rd-border); border-radius: var(--rd-radius); display: flex; flex-direction: column; overflow: hidden; transition: border-color 0.2s, transform 0.2s;">
                 {% if doc.image %}
                 <div class="rd-collection-blog-card-image" style="height: 160px; background-image: url('{{ doc.image | relative_url }}'); background-size: cover; background-position: center; border-block-end: var(--rd-border);"></div>
                 {% endif %}

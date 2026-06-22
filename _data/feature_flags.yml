@@ -1,0 +1,143 @@
+- name: Sidebar Navigation
+  path: theme_settings.sidebar.enabled
+  category: Layout
+  description: Left-side hierarchical navigation sidebar.
+  default: "true"
+
+- name: Table of Contents
+  path: theme_settings.toc.enabled
+  category: Layout
+  description: Right-side document headers outline panel.
+  default: "true"
+
+- name: Breadcrumbs Navigation
+  path: theme_settings.breadcrumbs.enabled
+  category: Navigation
+  description: Path indicators above document content.
+  default: "true"
+
+- name: Page Pagination
+  path: theme_settings.page_navigation.enabled
+  category: Navigation
+  description: Prev/Next page navigation links below content.
+  default: "true"
+
+- name: Footer Column Layouts
+  path: theme_settings.footer.enabled
+  category: Layout
+  description: Dynamic multi-column site footer block.
+  default: "true"
+
+- name: Search Integration
+  path: theme_settings.search.enabled
+  category: Search
+  description: Search modal overlay supporting Pagefind, Lyra, and Algolia.
+  default: "true"
+
+- name: Light/Dark Theme Switcher
+  path: theme_settings.theme_toggle.enabled
+  category: Layout
+  description: Controls presence of light/dark toggle button.
+  default: "true"
+
+- name: Floating Back to Top Button
+  path: theme_settings.back_to_top.enabled
+  category: Navigation
+  description: Floating button to scroll page back to top.
+  default: "true"
+
+- name: Reading Progress Bar
+  path: theme_settings.scroll_progress
+  category: Navigation
+  description: Linear scroll indicator at the top of the viewport.
+  default: "true"
+
+- name: Top Header Bar
+  path: theme_settings.header.enabled
+  category: Layout
+  description: Horizontal navigation header with brand and social links.
+  default: "true"
+
+- name: Animations Engine
+  path: theme_settings.animations.enabled
+  category: Animations
+  description: Master switch for all animations and transitions.
+  default: "true"
+
+- name: Page Load Animations
+  path: theme_settings.animations.page_loads
+  category: Animations
+  description: Page transitions and entry fade-in effects.
+  default: "true"
+
+- name: Micro-animations
+  path: theme_settings.animations.hover_effects
+  category: Animations
+  description: Hover scales, lifts, and shifts on interactive components.
+  default: "true"
+
+- name: View Transitions API
+  path: theme_settings.animations.view_transitions
+  category: Animations
+  description: Native cross-document View Transitions on page changes.
+  default: "true"
+
+- name: Gradient Borders
+  path: theme_settings.borders.gradient.enable
+  category: Styling
+  description: Premium gradient borders on card/code elements.
+  default: "false"
+
+- name: Background Gradients
+  path: theme_settings.background.gradient.enable
+  category: Styling
+  description: Linear or radial panning background color gradients.
+  default: "false"
+
+- name: Backdrop Pan Pattern
+  path: theme_settings.background.backdrop.enable
+  category: Styling
+  description: Floating patterns (grid, dots, diagonal) behind layout.
+  default: "false"
+
+- name: Background Animation
+  path: theme_settings.background.animation.enable
+  category: Animations
+  description: Background shifts and panning patterns animation.
+  default: "true"
+
+- name: Dynamic Collections
+  path: theme_settings.collections.enabled
+  category: Layout
+  description: Dynamic navigation section listings for custom collections.
+  default: "false"
+
+- name: Multi-version Switcher
+  path: theme_settings.versions.enabled
+  category: Navigation
+  description: Version selection dropdown in sidebar.
+  default: "false"
+
+- name: Announcement Banner
+  path: rd_announcement.enabled
+  category: Marketing
+  description: Dismissible banner for notices at the top of the page.
+  default: "true"
+
+- name: Page Feedback Widget
+  path: rd_feedback.enabled
+  category: Feedback
+  description: Direct feedback yes/no form below document body.
+  default: "true"
+
+- name: Page Likes Widget
+  path: theme_settings.feedback.likes.enabled
+  category: Feedback
+  description: Client-side liking functionality for pages.
+  default: "false"
+
+- name: Discussion Comments
+  path: theme_settings.feedback.comments.enabled
+  category: Feedback
+  description: Giscus/Disqus comments thread embedding.
+  default: "false"

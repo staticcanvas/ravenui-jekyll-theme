@@ -63,26 +63,32 @@ A top-level object is useful for configuration or settings data where you want t
 
 ### **Iterating an Array**
 
+{% raw %}
 ```liquid
 {% for pkg in site.data.packages %}
   <p>{{ pkg.name }} v{{ pkg.version }} — {{ pkg.status }}</p>
 {% endfor %}
 ```
+{% endraw %}
 
 ### **Filtering**
 
+{% raw %}
 ```liquid
 {% assign stable = site.data.packages | where: "status", "stable" %}
 {% for pkg in stable %}
   {{ pkg.name }}
 {% endfor %}
 ```
+{% endraw %}
 
 ### **Accessing a Named Object Key**
 
+{% raw %}
 ```liquid
 {{ site.data.site_config.api.endpoint }}
 ```
+{% endraw %}
 
 ---
 
@@ -90,25 +96,32 @@ A top-level object is useful for configuration or settings data where you want t
 
 Pass the filename (without extension) to `data_source`. The component resolves the data from `site.data` regardless of the underlying file format — YAML, JSON, and CSV are all treated identically at the component level.
 
+{% raw %}
 ```liquid
 {% include comps/datatable.html
   data_source="packages"
   headers="name:Package,version:Version,type:Type,downloads:Downloads,status:Status" %}
 ```
+{% endraw %}
 
 JSON data files work with any data-driven component:
 
+{% raw %}
 ```liquid
 {% include comps/timeline.html
   data_source="changelog"
   title_key="version"
   body_key="summary" %}
 ```
+{% endraw %}
 
+{% raw %}
 ```liquid
 {% include comps/roadmap.html data_source="roadmap" %}
 ```
+{% endraw %}
 
+{% raw %}
 ```liquid
 {% include comps/chartjs.html
   data_source="metrics"
@@ -116,6 +129,7 @@ JSON data files work with any data-driven component:
   label_key="month"
   value_key="downloads" %}
 ```
+{% endraw %}
 
 ---
 
@@ -136,10 +150,12 @@ Nested JSON structures are traversed using standard Liquid dot-notation:
 }
 ```
 
+{% raw %}
 ```liquid
 {{ site.data.config.api.endpoint }}
 {{ site.data.config.api.auth.type }}
 ```
+{% endraw %}
 
 {% include comps/callout.html type="note" title="Array Access in Liquid" content="Liquid does not support index-based access like `site.data.items[0]` directly in most filters. Use `first`, `last`, or `where` filters to extract specific elements from JSON arrays." %}
 

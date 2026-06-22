@@ -1,0 +1,71 @@
+/* SPACER COMPONENT
+ * Configurable vertical whitespace block for layout building.
+ * Usage: {% include comps/spacer.html size="md" %}
+ * Docs:  docs/components/spacer.md
+ */
+
+/* ── Size token scale ────────────────────────────────────── */
+// Sizes map directly to the RavenUI spacing system.
+// Custom heights are applied inline via the `height` param.
+
+.rd-spacer {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.rd-spacer--xs  { height: var(--rd-spacer-xs,  0.5rem);  }
+.rd-spacer--sm  { height: var(--rd-spacer-sm,  1rem);    }
+.rd-spacer--md  { height: var(--rd-spacer-md,  2rem);    }
+.rd-spacer--lg  { height: var(--rd-spacer-lg,  4rem);    }
+.rd-spacer--xl  { height: var(--rd-spacer-xl,  6rem);    }
+.rd-spacer--2xl { height: var(--rd-spacer-2xl, 10rem);   }
+
+// Custom height: set inline, class just ensures block display
+.rd-spacer--custom { height: var(--rd-spacer-custom, 2rem); }
+
+/* ── Divider variants ────────────────────────────────────── */
+.rd-spacer--has-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rd-spacer__divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+}
+
+// Subtle: matches the site's default border token
+.rd-spacer--divider-subtle .rd-spacer__divider {
+  background: var(--rd-border-subtle, #1A212B);
+  opacity: 0.6;
+}
+
+// Gradient: viridian → info-blue fade matching the hr component palette
+.rd-spacer--divider-gradient .rd-spacer__divider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--rd-clr-viridian, #00ff9d) 30%,
+    var(--rd-clr-info-alt, #4A9EE8) 70%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  height: 1px;
+  border-radius: 1px;
+}
+
+/* Light theme: slightly more visible dividers */
+[data-theme="light"] {
+  .rd-spacer--divider-subtle .rd-spacer__divider {
+    background: var(--rd-border-default, #dee2e6);
+    opacity: 0.8;
+  }
+  .rd-spacer--divider-gradient .rd-spacer__divider {
+    opacity: 0.5;
+  }
+}

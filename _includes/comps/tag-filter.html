@@ -1,0 +1,171 @@
+{%- comment -%}
+Component__: Tag Filter
+Purpose____: Client-side interactive tag filtering component for posts and collections.
+Caveats____: Auto-extracts tags from the target elements' "data-tags" attribute if none are specified. Synchronizes selections with URL parameters.
+Usage______: {% include comps/tag-filter.html target=".rd-blog-list-item" %}
+            {% include comps/tag-filter.html target=".rd-collection-card" tags="guides,reference,configuration" %}
+{%- endcomment -%}
+
+{% assign target = include.target | default: ".rd-filterable-item" %}
+{% assign all_label = include.all_label | default: "All" %}
+{% assign class = include.class %}
+{% assign tags_input = include.tags %}
+{% assign filter_id = include.id | default: "default" %}
+
+<div class="rd-tag-filter-container {{ class }}" data-target="{{ target }}" id="rd-tag-filter-{{ filter_id }}">
+  <div class="rd-tag-filter-list">
+    <button class="rd-tag-filter-btn active" data-tag="all">
+      {{ all_label }}
+    </button>
+    
+    {% if tags_input %}
+      {% assign tags_array = tags_input | split: "," %}
+      {% for tag in tags_array %}
+        {% assign cleaned_tag = tag | strip | downcase %}
+        {% if cleaned_tag != "" %}
+          <button class="rd-tag-filter-btn" data-tag="{{ cleaned_tag }}">
+            #{{ cleaned_tag }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<script>
+(function() {
+  const container = document.getElementById('rd-tag-filter-{{ filter_id }}');
+  if (!container) return;
+
+  const targetSelector = container.getAttribute('data-target');
+  const buttonsList = container.querySelector('.rd-tag-filter-list');
+  const allButton = container.querySelector('[data-tag="all"]');
+  
+  let activeTags = new Set();
+  
+  // Get all target elements
+  const items = document.querySelectorAll(targetSelector);
+  if (items.length === 0) {
+    // If target items aren't rendered yet (e.g. dynamic load), wait a moment
+    // or log debug info, but don't break execution.
+    return;
+  }
+  
+  // If no tags were explicitly provided, extract them from target items
+  {% unless tags_input %}
+  const extractedTags = new Set();
+  items.forEach(item => {
+    const tagsAttr = item.getAttribute('data-tags');
+    if (tagsAttr) {
+      tagsAttr.split(',').forEach(tag => {
+        const cleaned = tag.trim().toLowerCase();
+        if (cleaned) extractedTags.add(cleaned);
+      });
+    }
+  });
+  
+  // Sort and render extracted tags
+  Array.from(extractedTags).sort().forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'rd-tag-filter-btn';
+    btn.setAttribute('data-tag', tag);
+    btn.textContent = '#' + tag;
+    buttonsList.appendChild(btn);
+  });
+  {% endunless %}
+
+  // Update item visibility based on active tags (AND logic to refine results)
+  function applyFilter() {
+    items.forEach(item => {
+      const tagsAttr = item.getAttribute('data-tags');
+      if (!tagsAttr) {
+        if (activeTags.size === 0) {
+          item.classList.remove('rd-filtered-out');
+        } else {
+          item.classList.add('rd-filtered-out');
+        }
+        return;
+      }
+      
+      const itemTags = tagsAttr.split(',').map(t => t.trim().toLowerCase());
+      let isVisible = true;
+      
+      for (let activeTag of activeTags) {
+        if (!itemTags.includes(activeTag)) {
+          isVisible = false;
+          break;
+        }
+      }
+      
+      if (isVisible) {
+        item.classList.remove('rd-filtered-out');
+      } else {
+        item.classList.add('rd-filtered-out');
+      }
+    });
+    
+    // Sync URL search params
+    const url = new URL(window.location);
+    if (activeTags.size > 0) {
+      url.searchParams.set('tags', Array.from(activeTags).join(','));
+    } else {
+      url.searchParams.delete('tags');
+    }
+    window.history.replaceState({}, '', url);
+  }
+
+  // Handle button clicks
+  container.addEventListener('click', function(e) {
+    const btn = e.target.closest('.rd-tag-filter-btn');
+    if (!btn) return;
+    
+    const tag = btn.getAttribute('data-tag');
+    
+    if (tag === 'all') {
+      activeTags.clear();
+      container.querySelectorAll('.rd-tag-filter-btn').forEach(b => {
+        b.classList.remove('active');
+      });
+      allButton.classList.add('active');
+    } else {
+      allButton.classList.remove('active');
+      
+      if (activeTags.has(tag)) {
+        activeTags.delete(tag);
+        btn.classList.remove('active');
+      } else {
+        activeTags.add(tag);
+        btn.classList.add('active');
+      }
+      
+      if (activeTags.size === 0) {
+        allButton.classList.add('active');
+      }
+    }
+    
+    applyFilter();
+  });
+
+  // Read initial active tags from URL on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const tagsParam = urlParams.get('tags');
+  if (tagsParam) {
+    const initialTags = tagsParam.split(',').map(t => t.trim().toLowerCase());
+    let hasMatchingTag = false;
+    
+    initialTags.forEach(tag => {
+      const btn = container.querySelector(`[data-tag="${tag}"]`);
+      if (btn) {
+        activeTags.add(tag);
+        btn.classList.add('active');
+        hasMatchingTag = true;
+      }
+    });
+    
+    if (hasMatchingTag) {
+      allButton.classList.remove('active');
+      applyFilter();
+    }
+  }
+})();
+</script>
