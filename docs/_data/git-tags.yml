@@ -1,0 +1,90 @@
+﻿- name: "v2.8.13-snapshot"
+  hash: "6e1590505262381e37bc4b12201e9a938aa7f5ea"
+  date: "2026-06-18"
+  message: "feat(components): spacer + depends-upon components"
+
+- name: "v2.8.12-snapshot"
+  hash: "cbe75f04fc8e6c6bc15c1cbaae3295c26c97da23"
+  date: "2026-06-18"
+  message: "feat(enhancements): configurable sidebar width + index-warning component"
+
+- name: "v2.8.11-snapshot"
+  hash: "674dfdc4507380d9c8d4b365b136ecc51d84bdc0"
+  date: "2026-06-18"
+  message: "chore(tasks): import and structure tasks from temp notes"
+
+- name: "v2.8.10-snapshot"
+  hash: "9304b2a3c2e34ed8674028e8f3675d99b55351ed"
+  date: "2026-06-17"
+  message: "feat(layout): implement page-level layout overrides and back-to-top QOL button"
+
+- name: "v2.8.9-snapshot"
+  hash: "27e789c0d15c6a996417391c519c825229b23167"
+  date: "2026-06-17"
+  message: "refactor(markdown): standardize on Rouge syntax highlighter"
+
+- name: "v2.8.8-snapshot"
+  hash: "afa979380072c8e2e81e12db64c6c49674fe02d4"
+  date: "2026-06-17"
+  message: "fix(sidebar): prevent light theme border bleeding in dark theme"
+
+- name: "v2.8.7-snapshot"
+  hash: "4ee8c8039c1caad227c36eb9017ed7293ced6f5e"
+  date: "2026-06-17"
+  message: "fix(sass): fix missing semicolons and standard SCSS syntax in sass-vars"
+
+- name: "v1.26.0"
+  hash: "3b356ef7ab6f6085bb2deed3e83f31f36f2bd937"
+  date: "2026-06-14"
+  message: "feat(extra-components): Add Extra media, wiki, spinners, API fetcher, and carousel components"
+
+- name: "v1.22.0"
+  hash: "18db44e973a4cda9bedb85311e2ba0c4d9da61c1"
+  date: "2026-06-14"
+  message: "feat(collections): Complete Jekyll collections integration and dynamic layouts"
+
+- name: "v1.20.0"
+  hash: "5c007904d583036d86d5d205d543030f79a9a8b2"
+  date: "2026-06-14"
+  message: "feat(layouts): Implement blog, article, and blank page templates"
+
+- name: "v1.19.0"
+  hash: "518cd699adb6f83b1675432f926c1e1c0abbf63d"
+  date: "2026-06-14"
+  message: "feat(theme): Implement dynamic feedback, visual stats, numeric UI elements, and tracker cleanup"
+
+- name: "v1.18.0"
+  hash: "e5c8f3b741f0e2f07683d8236d61f4d52b04fee1"
+  date: "2026-06-14"
+  message: "feat(navigation): Implement glowing badges for navigation menu links"
+
+- name: "v1.17.2"
+  hash: "daca558c36fefa29e3f6a4c15b2df4efc663d482"
+  date: "2026-06-14"
+  message: "feat(components): Implement list layout for git-tags and configure roadmap progress bar defaults"
+
+- name: "v1.17.1"
+  hash: "bcce513e96dc47be2b98a7c41a0ef5c7a4413102"
+  date: "2026-06-14"
+  message: "chore(release): Bump version numbers in configuration and VERSION files to 1.17.1"
+
+- name: "v1.17.0"
+  hash: "99b0b3191628f217be20f477ed9d2703f48442a3"
+  date: "2026-06-14"
+  message: "chore(release): Bump version numbers in configuration and VERSION files to 1.17.0"
+
+- name: "v1.16.3-snapshot"
+  hash: "518779848d67c48b77cb7d25063bc5ecfa18220d"
+  date: "2026-06-12"
+  message: "fix: ci publish release - removed from tag-snapshots"
+
+- name: "v1.16.2-snapshot"
+  hash: "078607637a7bfe0172d86ba10b776ea278df33e9"
+  date: "2026-06-12"
+  message: "chore(version): sync version configurations to 1.16.2"
+
+- name: "v1.0.0"
+  hash: "fd2aac37c358394b1a6da9915fef2d59c5b23864"
+  date: "2026-06-10"
+  message: "chore(release): release version 1.0.0"
+

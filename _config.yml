@@ -1,4 +1,4 @@
-title: RavenUI
+﻿title: RavenUI
 description: A high-contrast, professional Jekyll theme optimized for technical documentation.
 logo_text: RAVEN
 logo_subtext: UI
@@ -222,7 +222,7 @@ rd_icon_size: 16
 rd_toc_levels: ["h2", "h3", "h4"]
 rd_debug: true
 rd_show_version: true
-version: 1.17.1
+version: 1.18.0
 rd_accent_color: "#00ff9d"
 rd_nav_spacing: compact
 rd_show_powered_by: true

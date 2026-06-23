@@ -348,6 +348,13 @@
       description: "Accessible dialog overlay with focus trap and ESC close"
 
 
+- title: Plugin Components
+  links:
+    - text: Active Plugins
+      url: /components/plugin-components/
+      icon: plug
+      is_new_feature: new
+
 - title: Data & History
   links:
     - text: Roadmap
@@ -381,6 +388,11 @@
       url: /components/runtime-metadata/
       icon: cpu
       description: "Expose compiler, engine, platform, and active plugins versions"
+    - text: Static Files Indexer
+      url: /components/static-files/
+      icon: file-text
+      description: "Lists non-front-matter documents, archives, code scripts, or image resources"
+      is_new_feature: new
     - text: Previously Read
       url: /components/previously-read/
       icon: history
@@ -475,6 +487,9 @@
       url: /customization/
       icon: sliders
       color: "#3399ff"
+    - text: Theme Inheritance
+      url: /theme-inheritance/
+      icon: layers
     - text: Developer Guide
       url: /developer-guide/
       icon: folder

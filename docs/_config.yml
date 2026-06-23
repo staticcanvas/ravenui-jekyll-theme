@@ -71,6 +71,13 @@ theme_settings:
         theme: "transparent_dark"
         lang: "en"
 
+  # Jekyll Hooks Integration Settings
+  hooks:
+    enabled: true                 # Toggle all hooks globally
+    pagefind: true                # Run Pagefind search index compiler post-build
+    minify: false                 # Run HTML/CSS/JS minifier post-build
+    git_tags: true                # Auto-generate git-tags.yml data pre-build
+
   # Search Configuration
   search:
     provider: pagefind            # options: pagefind, lyra, algolia

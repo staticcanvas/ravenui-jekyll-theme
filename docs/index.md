@@ -6,7 +6,18 @@ tags: [docs, jekyll, technical]
 description: RavenUI is a high-performance Jekyll theme engineered for technical documentation.
 enable_search: true
 ---
-RavenUI is a professional Jekyll theme optimized for technical documentation and long-form readability.
+RavenUI is a developer-first, component-heavy Jekyll theme framework and UI library engineered for building premium, high-performance technical documentation sites, API references, developer portals, and product knowledge bases. 
+
+It is designed to serve as a robust base layout engine that supports deep structural customization. With over 70+ modular component includes, built-in search providers (including WASM-powered Pagefind), automated build hooks, and a highly customizable CSS design tokens architecture, RavenUI has evolved beyond a clean template into a comprehensive UI framework for technical sites.
+
+---
+
+{% include comps/heading.html tag="h2" text="Why RavenUI?" icon="zap" size=20 %}
+
+* 🔹 **Component-Driven Architecture**: Over 70+ pre-designed utility and interactive components (like timelines, metrics dashboard cards, interactive tables, roadmaps, and alerts) ready to be embedded via clean tags.
+* 🔹 **Automated Lifecycle Integration**: Leverages pre-build and post-build Jekyll hooks (via `_plugins/hooks.rb`) to automate git history extraction, search indexing, and HTML/CSS/JS minification.
+* 🔹 **Premium Typography & Dark Aesthetics**: Zero-dark layout optimized for readability with modern typography (Fraunces and IBM Plex Sans) and micro-animations.
+* 🔹 **Robust Extension Points**: Supports theme inheritance, allowing developers to build child themes by overriding SASS variables, layout slots, or configuration settings.
 
 {% capture collections_notice %}
 RavenUI is intentionally designed to prioritize structured, hierarchy-driven documentation via curated sidebar navigation (`_data/navigation.yml`). It does not support automatic Jekyll collection siblings (next/previous page lists) by design. For deep collections structures, a separate variant is planned to preserve the simplicity of the core theme.

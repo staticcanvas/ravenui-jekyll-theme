@@ -1,0 +1,19 @@
+feat(CLI/PermalinkPreview): implement permalink previewing and pipeline release helpers
+
+build: [1.18.0]
+Build: minor
+
+Notes:
+- Implemented Invoke-RvPermalinkPreview to calculate and display the output URLs and disk destination paths of processed Jekyll pages, posts, collections, and static files.
+- Integrated Get-AuspexConfig and Set-AuspexConfig to dynamically locate and parse the closest _config.yml to target files.
+- Built Request-RvRelease, Unpack-RvRelease, and Request-RvTag cmdlets using native .NET HttpClient, GZipStream, and TarFile classes.
+- Added Test-RvModuleInstalled, Install-RvModuleSecure, and Assert-RvModuleRequired private wrappers to validate workspace dependencies.
+
+Feature Additions:
+- CLI permalink previewing command with interactive TUI box and --json mode.
+- Natively query, fetch, download, and extract release/tag archives from GitHub/GitLab.
+- Auto-validation and secure silent installation of required PowerShell modules.
+- Checked off CLI/Helpers, CLI/PermalinkPreview, and Features/StaticFiles in tasktracker.
+
+Bug Fixes:
+- None

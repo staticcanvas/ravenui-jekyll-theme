@@ -67,6 +67,16 @@ Nested under `theme_settings:` in `_config.yml`.
 | :--- | :--- | :--- | :--- |
 | `theme_settings.environment` | String | `development`, `production` | Controls draft visibility and dev-only features. |
 
+
+### **Jekyll Hooks Integration**
+
+| Key | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `theme_settings.hooks.enabled` | Boolean | `true` | Toggle all Jekyll hooks globally. |
+| `theme_settings.hooks.git_tags` | Boolean | `false` | Enable automatic generation of git tags history to `_data/git-tags.yml` pre-build. |
+| `theme_settings.hooks.pagefind` | Boolean | `false` | Enable automatic compilation of search indices using Pagefind post-build. |
+| `theme_settings.hooks.minify` | Boolean | `false` | Enable automatic minification of site HTML/CSS/JS assets post-build. |
+
 ### **Logo**
 
 | Key | Type | Default | Description |

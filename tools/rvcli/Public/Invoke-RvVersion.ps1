@@ -68,7 +68,7 @@ function Invoke-RvVersion {
             $currentVer = Read-RvVersionFile -Path $versionFile
             $newVer     = Invoke-RvSemverBump -Version $currentVer -Part $part
 
-            Write-RvLog -Level 'act' -Message "Bumping $part: $currentVer -> $newVer" -Context 'version'
+            Write-RvLog -Level 'act' -Message "Bumping ${part}: $currentVer -> $newVer" -Context 'version'
 
             Write-RvVersionFile   -Path $versionFile -Version $newVer
             Write-RvConfigVersion -Path $configFile  -Version $newVer

@@ -1,0 +1,173 @@
+{%- comment -%}
+Component: Static Files Indexer
+Purpose: Lists non-front-matter static files (PDFs, ZIPs, images) filtered by path and extension.
+Usage: {% include comps/static-files.html path="assets/docs" ext=".pdf,.zip" title="Downloadable Manuals" layout="grid" %}
+{%- endcomment -%}
+
+{% assign path_filter = include.path | default: "" %}
+{% assign ext_filter = include.ext | default: "" | split: "," %}
+{% assign comp_title = include.title | default: "Files & Resources" %}
+{% assign comp_icon = include.icon | default: "download" %}
+{% assign comp_layout = include.layout | default: "list" %}
+
+{% assign show_size = true %}
+{% if include.show_size != nil %}{% assign show_size = include.show_size %}{% endif %}
+
+{% assign show_date = true %}
+{% if include.show_date != nil %}{% assign show_date = include.show_date %}{% endif %}
+
+{%- comment -%} 1. Pre-calculate count of matched files {%- endcomment -%}
+{% assign file_count = 0 %}
+{% for file in site.static_files %}
+  {% assign path_match = false %}
+  {% if path_filter == "" or file.path contains path_filter %}
+    {% assign path_match = true %}
+  {% endif %}
+
+  {% assign ext_match = false %}
+  {% if include.ext == nil or include.ext == "" %}
+    {% assign ext_match = true %}
+  {% else %}
+    {% for ext in ext_filter %}
+      {% if file.extname == ext %}
+        {% assign ext_match = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if path_match and ext_match %}
+    {% assign file_count = file_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="rd-static-files-wrapper">
+  <div class="rd-static-files-header">
+    <div class="rd-static-header-left">
+      {% include comps/icon.html name=comp_icon size=18 %}
+      <h3>{{ comp_title }}</h3>
+    </div>
+    <span class="rd-static-files-badge">{{ file_count }} file{{ file_count | pluralize: '', 's' }}</span>
+  </div>
+
+  {% if file_count > 0 %}
+    <div class="rd-static-files-{{ comp_layout }}">
+      {% for file in site.static_files %}
+        {% assign path_match = false %}
+        {% if path_filter == "" or file.path contains path_filter %}
+          {% assign path_match = true %}
+        {% endif %}
+
+        {% assign ext_match = false %}
+        {% if include.ext == nil or include.ext == "" %}
+          {% assign ext_match = true %}
+        {% else %}
+          {% for ext in ext_filter %}
+            {% if file.extname == ext %}
+              {% assign ext_match = true %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if path_match and ext_match %}
+          {%- comment -%} Resolve Icon & Color based on extension {%- endcomment -%}
+          {% assign file_ext = file.extname | downcase %}
+          {% assign file_icon = "file" %}
+          {% assign icon_style = "--rd-icon-color: var(--rd-clr-ash);" %}
+
+          {% if file_ext == ".pdf" %}
+            {% assign file_icon = "file-text" %}
+            {% assign icon_style = "--rd-icon-color: var(--rd-clr-danger-alt);" %}
+          {% elsif file_ext == ".zip" or file_ext == ".tar" or file_ext == ".gz" or file_ext == ".rar" %}
+            {% assign file_icon = "archive" %}
+            {% assign icon_style = "--rd-icon-color: var(--rd-clr-warning-alt);" %}
+          {% elsif file_ext == ".png" or file_ext == ".jpg" or file_ext == ".jpeg" or file_ext == ".svg" or file_ext == ".gif" %}
+            {% assign file_icon = "image" %}
+            {% assign icon_style = "--rd-icon-color: var(--rd-clr-viridian);" %}
+          {% elsif file_ext == ".js" or file_ext == ".css" or file_ext == ".json" or file_ext == ".yml" or file_ext == ".html" %}
+            {% assign file_icon = "code" %}
+            {% assign icon_style = "--rd-icon-color: var(--rd-clr-info-alt);" %}
+          {% endif %}
+
+          {%- comment -%} Compute File Size {%- endcomment -%}
+          {% assign formatted_size = "" %}
+          {% if show_size %}
+            {% if file.size < 1024 %}
+              {% assign formatted_size = file.size | append: " B" %}
+            {% elsif file.size < 1048576 %}
+              {% assign size_kb = file.size | times: 10 | divided_by: 1024 %}
+              {% assign size_kb_int = size_kb | divided_by: 10 %}
+              {% assign size_kb_dec = size_kb | modulo: 10 %}
+              {% assign formatted_size = size_kb_int | append: "." | append: size_kb_dec | append: " KB" %}
+            {% else %}
+              {% assign size_mb = file.size | times: 10 | divided_by: 1048576 %}
+              {% assign size_mb_int = size_mb | divided_by: 10 %}
+              {% assign size_mb_dec = size_mb | modulo: 10 %}
+              {% assign formatted_size = size_mb_int | append: "." | append: size_mb_dec | append: " MB" %}
+            {% endif %}
+          {% endif %}
+
+          {% if comp_layout == "grid" %}
+            <div class="rd-static-file-card">
+              <div class="rd-static-card-top">
+                <div class="rd-static-icon-container" style="{{ icon_style }}">
+                  {% include comps/icon.html name=file_icon size=20 %}
+                </div>
+                <div class="rd-static-card-details">
+                  <a href="{{ file.path | relative_url }}" class="rd-static-card-title" target="_blank" rel="noopener noreferrer">{{ file.name }}</a>
+                </div>
+              </div>
+              <div class="rd-static-card-bottom">
+                <div class="rd-static-card-meta">
+                  {% if show_size %}
+                    <span class="rd-static-card-size">{{ formatted_size }}</span>
+                  {% endif %}
+                  {% if show_date %}
+                    <span class="rd-static-card-date">{{ file.modified_time | date: "%b %d, %Y" }}</span>
+                  {% endif %}
+                </div>
+                <a href="{{ file.path | relative_url }}" class="rd-static-card-btn" download aria-label="Download {{ file.name }}">
+                  {% include comps/icon.html name="download" size=12 %}
+                </a>
+              </div>
+            </div>
+          {% else %}
+            <div class="rd-static-file-row">
+              <div class="rd-static-row-left">
+                <div class="rd-static-icon-container" style="{{ icon_style }}">
+                  {% include comps/icon.html name=file_icon size=16 %}
+                </div>
+                <div class="rd-static-file-info">
+                  <a href="{{ file.path | relative_url }}" class="rd-static-file-name" target="_blank" rel="noopener noreferrer">{{ file.name }}</a>
+                  <div class="rd-static-file-meta">
+                    {% if show_size %}
+                      <span class="rd-static-file-size">
+                        {% include comps/icon.html name="database" size=10 %}
+                        {{ formatted_size }}
+                      </span>
+                    {% endif %}
+                    {% if show_size and show_date %}
+                      <span class="rd-static-meta-separator">|</span>
+                    {% endif %}
+                    {% if show_date %}
+                      <span class="rd-static-file-date">
+                        {% include comps/icon.html name="calendar" size=10 %}
+                        {{ file.modified_time | date: "%b %d, %Y" }}
+                      </span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <a href="{{ file.path | relative_url }}" class="rd-static-row-action" download aria-label="Download {{ file.name }}">
+                {% include comps/icon.html name="download" size=14 %}
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div style="padding: 1.5rem; text-align: center; color: var(--rd-clr-ash); font-size: 0.9rem;">
+      No static files found matching the criteria.
+    </div>
+  {% endif %}
+</div>
