@@ -71,4 +71,8 @@ param(
 
 $scriptPath = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
 Import-Module ([System.IO.Path]::Combine($scriptPath, "tools/devt/devt.psd1")) -Force
-Invoke-Devt @PSBoundParameters @args
+if ($args) {
+    Invoke-Devt @PSBoundParameters @args
+} else {
+    Invoke-Devt @PSBoundParameters
+}
