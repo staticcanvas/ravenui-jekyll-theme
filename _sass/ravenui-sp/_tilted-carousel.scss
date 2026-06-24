@@ -1,0 +1,394 @@
+/* =============================================================================
+   _tilted-carousel.scss — RavenUI Tilted Carousel Component
+   ============================================================================= */
+
+@layer reset, tokens, base, layout, components, patterns, utilities, overrides;
+
+@layer components {
+  .rd-tilted-carousel-container {
+    --carousel-height: 450px;
+    --card-width: 280px;
+    --card-height: 380px;
+    --total-cards: 5;
+    
+    // Tier 3 Component Variables
+    --carousel-bg: transparent;
+    --carousel-padding: var(--rd-space-lg) 0;
+    --carousel-perspective: 1200px;
+    --carousel-btn-bg: var(--rd-bg-surface, #0a0a0f);
+    --carousel-btn-border: 1px solid var(--rd-border-default, #25303D);
+    --carousel-btn-color: var(--rd-clr-platinum, #e5e5e5);
+    --carousel-btn-hover-color: var(--rd-clr-highlight, #00ff9d);
+    --carousel-btn-hover-border: var(--rd-clr-highlight, #00ff9d);
+    
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--carousel-bg);
+    padding: var(--carousel-padding);
+    overflow: hidden;
+
+    .rd-tilted-carousel-viewport {
+      width: 100%;
+      height: var(--carousel-height);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: var(--carousel-perspective);
+      transform-style: preserve-3d;
+    }
+
+    .rd-tilted-carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+    }
+
+    .rd-tilted-card {
+      position: absolute;
+      width: var(--card-width);
+      height: var(--card-height);
+      transform-style: preserve-3d;
+      
+      --distance: var(--card-distance, 0);
+      --distance-abs: var(--card-distance-abs, 0);
+      
+      // Spacing scales dynamically with card density
+      --spacing-factor: clamp(35px, 350px / var(--total-cards, 5), 100px);
+      
+      // Calculate dynamic coverflow-style transformations
+      transform: 
+        translateX(calc(var(--distance) * var(--spacing-factor))) 
+        translateZ(calc(var(--distance-abs) * -80px)) 
+        rotateY(calc(var(--distance) * -22deg))
+        scale(calc(1 - var(--distance-abs) * 0.06));
+      
+      z-index: calc(10 - var(--distance-abs));
+      opacity: calc(1 - var(--distance-abs) * 0.2);
+      transition: 
+        transform var(--rd-transition-slow, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), 
+        opacity var(--rd-transition-slow, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), 
+        z-index var(--rd-transition-slow, 0.3s cubic-bezier(0.4, 0, 0.2, 1)),
+        filter var(--rd-transition-slow, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+      
+      filter: blur(calc(var(--distance-abs) * 0.75px)) brightness(calc(1 - var(--distance-abs) * 0.15));
+      cursor: pointer;
+
+      &.active {
+        z-index: 20;
+        opacity: 1;
+        filter: none;
+        cursor: default;
+        transform: translateX(0) translateZ(0) rotateY(0) scale(1);
+        
+        &:hover {
+          .rd-tilted-card-inner {
+            transform: rotateY(180deg);
+          }
+        }
+      }
+
+      .rd-tilted-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform var(--rd-transition-slow, 0.3s) cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .rd-tilted-card-front,
+      .rd-tilted-card-back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        border-radius: var(--rd-radius-lg, 8px);
+        border: 1px solid var(--rd-border-default, #25303D);
+        background: var(--rd-bg-card, #1B212B);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--rd-elevation-surface);
+      }
+
+      // Front Face Styles
+      .rd-tilted-card-front {
+        z-index: 2;
+        transform: rotateY(0deg);
+
+        .rd-tilted-card-image {
+          width: 100%;
+          height: 48%;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          border-bottom: 1px solid var(--rd-border-subtle, #1A212B);
+          
+          &:not([style]) {
+            background: linear-gradient(135deg, var(--rd-clr-void, #10141A), var(--rd-clr-slate, #1E2530));
+          }
+        }
+
+        .rd-tilted-card-content {
+          padding: var(--rd-space-md);
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+
+          .rd-tilted-card-badge {
+            align-self: flex-start;
+            font-size: var(--rd-fz-xs, 0.75rem);
+            font-weight: var(--rd-fw-semibold, 600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--rd-clr-highlight, #00ff9d);
+            margin-bottom: var(--rd-space-sm);
+          }
+
+          .rd-tilted-card-title {
+            font-family: var(--rd-font-sans);
+            font-size: var(--rd-fz-lg, 1.25rem);
+            font-weight: var(--rd-fw-bold, 700);
+            color: var(--rd-clr-platinum, #e5e5e5);
+            margin: 0 0 var(--rd-space-sm) 0;
+            line-height: 1.3;
+          }
+
+          .rd-tilted-card-desc {
+            font-size: var(--rd-fz-sm, 0.875rem);
+            color: var(--rd-clr-text-secondary, #888);
+            margin: 0;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
+          .rd-tilted-card-flip-hint {
+            display: flex;
+            align-items: center;
+            gap: var(--rd-space-sm);
+            font-size: var(--rd-fz-xs, 0.75rem);
+            color: var(--rd-clr-text-muted, #555);
+            margin-top: auto;
+            align-self: flex-end;
+            
+            span {
+              font-weight: var(--rd-fw-medium, 500);
+            }
+
+            .rd-icon {
+              transition: transform var(--rd-transition-base);
+            }
+          }
+        }
+      }
+
+      &:hover .rd-tilted-card-flip-hint .rd-icon {
+        transform: rotate(180deg);
+        color: var(--rd-clr-highlight, #00ff9d);
+      }
+
+      // Back Face Styles
+      .rd-tilted-card-back {
+        transform: rotateY(180deg);
+        background: var(--rd-bg-panel, #161B24);
+        border-color: var(--rd-border-strong, #344252);
+        
+        .rd-tilted-card-back-content {
+          padding: var(--rd-space-md);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .rd-tilted-card-back-title {
+            font-family: var(--rd-font-sans);
+            font-size: var(--rd-fz-lg, 1.25rem);
+            font-weight: var(--rd-fw-bold, 700);
+            color: var(--rd-clr-highlight, #00ff9d);
+            margin: 0 0 var(--rd-space-sm) 0;
+          }
+
+          .rd-tilted-card-back-desc {
+            font-size: var(--rd-fz-sm, 0.875rem);
+            color: var(--rd-clr-text-primary, #e5e5e5);
+            margin: 0 0 var(--rd-space-md) 0;
+            line-height: 1.4;
+            flex-grow: 1;
+            overflow-y: auto;
+          }
+
+          .rd-tilted-card-back-details {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 var(--rd-space-md) 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            li {
+              font-size: var(--rd-fz-xs, 0.75rem);
+              color: var(--rd-clr-text-secondary, #888);
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              &::before {
+                content: "💠";
+                font-size: 8px;
+              }
+            }
+          }
+
+          .rd-btn {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            margin-top: auto;
+            transform: none !important;
+          }
+        }
+      }
+    }
+
+    // Controls Section Styles
+    .rd-tilted-carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--rd-space-md);
+      margin-top: var(--rd-space-lg);
+      z-index: 25;
+      
+      .rd-tilted-carousel-btn {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--carousel-btn-bg);
+        border: var(--carousel-btn-border);
+        border-radius: var(--rd-radius, 4px);
+        color: var(--carousel-btn-color);
+        cursor: pointer;
+        transition: 
+          transform var(--rd-transition-fast, 0.1s), 
+          border-color var(--rd-transition-fast, 0.1s), 
+          color var(--rd-transition-fast, 0.1s),
+          box-shadow var(--rd-transition-fast, 0.1s);
+
+        &:hover {
+          color: var(--carousel-btn-hover-color);
+          border-color: var(--carousel-btn-hover-border);
+          transform: translateY(-2px);
+          box-shadow: 0 0 12px rgba(0, 255, 157, 0.2);
+        }
+
+        &:active {
+          transform: scale(0.95) translateY(0);
+        }
+        
+        .rd-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .rd-tilted-carousel-indicators {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        .rd-tilted-carousel-indicator {
+          width: 8px;
+          height: 8px;
+          padding: 0;
+          border: none;
+          background: var(--rd-clr-steel, #2A3340);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color var(--rd-transition-base), transform var(--rd-transition-base);
+
+          &.active {
+            background: var(--rd-clr-highlight, #00ff9d);
+            transform: scale(1.2);
+            box-shadow: 0 0 8px var(--rd-clr-highlight, #00ff9d);
+          }
+
+          &:hover:not(.active) {
+            background: var(--rd-clr-ash, #8A9BAC);
+          }
+        }
+      }
+    }
+  }
+}
+
+// prefers-reduced-motion fallback
+@media (prefers-reduced-motion: reduce) {
+  @layer components {
+    .rd-tilted-carousel-container {
+      padding: var(--rd-space-md) 0;
+      
+      .rd-tilted-carousel-viewport {
+        height: auto !important;
+      }
+      
+      .rd-tilted-carousel-track {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: var(--rd-space-md);
+        height: auto !important;
+        transform: none !important;
+      }
+      
+      .rd-tilted-card {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        
+        &.active:hover {
+          .rd-tilted-card-inner {
+            transform: none !important;
+          }
+        }
+        
+        .rd-tilted-card-inner {
+          transform: none !important;
+          position: static !important;
+          display: flex;
+          flex-direction: column;
+          gap: var(--rd-space-sm);
+        }
+        
+        .rd-tilted-card-front,
+        .rd-tilted-card-back {
+          position: static !important;
+          transform: none !important;
+          backface-visibility: visible !important;
+          box-shadow: none !important;
+          border-color: var(--rd-border-default, #25303D);
+        }
+        
+        .rd-tilted-card-back {
+          margin-top: -1px; // merge border
+        }
+      }
+      
+      .rd-tilted-carousel-controls {
+        display: none !important;
+      }
+    }
+  }
+}

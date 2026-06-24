@@ -1,0 +1,207 @@
+{% assign id = include.id | default: "tilted-carousel-1" %}
+{% assign height = include.height | default: page.tilted_carousel_height | default: site.theme_settings.tilted_carousel_height | default: "450px" %}
+{% assign card_width = include.card_width | default: page.tilted_carousel_card_width | default: "280px" %}
+{% assign card_height = include.card_height | default: page.tilted_carousel_card_height | default: "380px" %}
+
+{% assign items = include.items | default: page.tilted_carousel_items | default: page.items %}
+{% if items == nil %}
+  {% assign ds = include.data_source | default: page.data_source | default: "tilted_carousel" %}
+  {% assign path_parts = ds | split: "." %}
+  {% assign resolved_data = site.data %}
+  {% for part in path_parts %}
+    {% assign resolved_data = resolved_data[part] %}
+  {% endfor %}
+  {% assign items = resolved_data | default: page[ds] | default: site[ds] | default: site.theme_settings[ds] %}
+{% endif %}
+
+{% if items %}
+<div class="rd-tilted-carousel-container {{ include.class }}" 
+     id="{{ id }}" 
+     style="--carousel-height: {{ height }}; --card-width: {{ card_width }}; --card-height: {{ card_height }}; --total-cards: {{ items.size }};"
+     role="region" 
+     aria-label="Tilted Coverflow Carousel">
+  
+  <div class="rd-tilted-carousel-viewport">
+    <div class="rd-tilted-carousel-track">
+      {% for item in items %}
+        {% assign index = forloop.index0 %}
+        <div class="rd-tilted-card" 
+             style="--card-index: {{ index }};" 
+             data-index="{{ index }}"
+             role="group" 
+             aria-roledescription="slide" 
+             id="{{ id }}-card-{{ index }}"
+             aria-label="Card {{ forloop.index }} of {{ items.size }}">
+          
+          <div class="rd-tilted-card-inner">
+            <!-- Front Face -->
+            <div class="rd-tilted-card-front">
+              {% if item.image %}
+                <div class="rd-tilted-card-image" style="background-image: url('{{ item.image | relative_url }}');"></div>
+              {% else %}
+                <div class="rd-tilted-card-image"></div>
+              {% endif %}
+              <div class="rd-tilted-card-content">
+                {% if item.badge %}
+                  <span class="rd-tilted-card-badge">{{ item.badge }}</span>
+                {% endif %}
+                <h3 class="rd-tilted-card-title">{{ item.title }}</h3>
+                {% if item.description %}
+                  <p class="rd-tilted-card-desc">{{ item.description }}</p>
+                {% endif %}
+                
+                <div class="rd-tilted-card-flip-hint" aria-hidden="true">
+                  <span>Hover to flip</span>
+                  {% include comps/icon.html name="refresh-cw" size=12 %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Back Face -->
+            <div class="rd-tilted-card-back">
+              <div class="rd-tilted-card-back-content">
+                <h4 class="rd-tilted-card-back-title">{{ item.back_title | default: item.title }}</h4>
+                {% if item.back_description %}
+                  <p class="rd-tilted-card-back-desc">{{ item.back_description }}</p>
+                {% else %}
+                  <p class="rd-tilted-card-back-desc">{{ item.description }}</p>
+                {% endif %}
+                
+                {% if item.back_details %}
+                  <ul class="rd-tilted-card-back-details">
+                    {% for detail in item.back_details %}
+                      <li>{{ detail }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                
+                {% if item.link %}
+                  <a href="{{ item.link | relative_url }}" 
+                     class="rd-btn" 
+                     style="--btn-color: var(--rd-clr-highlight); --btn-radius: var(--rd-radius);"
+                     {% if item.link_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <span>{{ item.link_text | default: "Learn More" }}</span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Controls & Pagination -->
+  {% if items.size > 1 %}
+  <div class="rd-tilted-carousel-controls">
+    <button class="rd-tilted-carousel-btn rd-tilted-carousel-btn--prev" aria-label="Previous card" onclick="moveTiltedCarousel('{{ id }}', -1)">
+      {% include comps/icon.html name="arrow-left" size=20 %}
+    </button>
+    <div class="rd-tilted-carousel-indicators" role="tablist">
+      {% for item in items %}
+      <button class="rd-tilted-carousel-indicator {% if forloop.first %}active{% endif %}" 
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="{{ id }}-card-{{ forloop.index0 }}"
+              aria-label="Go to card {{ forloop.index }}" 
+              onclick="setTiltedCarouselCard('{{ id }}', {{ forloop.index0 }})"></button>
+      {% endfor %}
+    </div>
+    <button class="rd-tilted-carousel-btn rd-tilted-carousel-btn--next" aria-label="Next card" onclick="moveTiltedCarousel('{{ id }}', 1)">
+      {% include comps/icon.html name="arrow-right" size=20 %}
+    </button>
+  </div>
+  {% endif %}
+
+</div>
+
+{% unless site.rd_tilted_carousel_script_loaded %}
+  {% assign site.rd_tilted_carousel_script_loaded = true %}
+  <script>
+    (function() {
+      window.moveTiltedCarousel = function(id, direction) {
+        const container = document.getElementById(id);
+        if (!container) return;
+        const track = container.querySelector('.rd-tilted-carousel-track');
+        const cards = Array.from(track.querySelectorAll('.rd-tilted-card'));
+        let activeIndex = cards.findIndex(card => card.classList.contains('active'));
+        if (activeIndex === -1) activeIndex = 0;
+        
+        let nextIndex = activeIndex + direction;
+        if (nextIndex < 0) nextIndex = cards.length - 1;
+        if (nextIndex >= cards.length) nextIndex = 0;
+        
+        setTiltedCarouselCard(id, nextIndex);
+      };
+
+      window.setTiltedCarouselCard = function(id, targetIndex) {
+        const container = document.getElementById(id);
+        if (!container) return;
+        
+        const track = container.querySelector('.rd-tilted-carousel-track');
+        const cards = Array.from(track.querySelectorAll('.rd-tilted-card'));
+        const indicators = Array.from(container.querySelectorAll('.rd-tilted-carousel-indicator'));
+        
+        if (targetIndex < 0 || targetIndex >= cards.length) return;
+        
+        cards.forEach((card, index) => {
+          const diff = index - targetIndex;
+          const absDiff = Math.abs(diff);
+          
+          card.classList.toggle('active', index === targetIndex);
+          card.classList.toggle('left', diff < 0);
+          card.classList.toggle('right', diff > 0);
+          
+          card.style.setProperty('--card-distance', diff);
+          card.style.setProperty('--card-distance-abs', absDiff);
+          
+          if (index === targetIndex) {
+            card.removeAttribute('aria-hidden');
+            card.setAttribute('tabindex', '0');
+          } else {
+            card.setAttribute('aria-hidden', 'true');
+            card.setAttribute('tabindex', '-1');
+          }
+        });
+        
+        indicators.forEach((indicator, index) => {
+          const isActive = index === targetIndex;
+          indicator.classList.toggle('active', isActive);
+          indicator.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+      };
+
+      function initTiltedCarousels() {
+        const carousels = document.querySelectorAll('.rd-tilted-carousel-container');
+        carousels.forEach(carousel => {
+          const cards = carousel.querySelectorAll('.rd-tilted-card');
+          if (cards.length > 0) {
+            let activeIdx = Array.from(cards).findIndex(card => card.classList.contains('active'));
+            if (activeIdx === -1) {
+              activeIdx = Math.floor(cards.length / 2);
+            }
+            setTiltedCarouselCard(carousel.id, activeIdx);
+            
+            cards.forEach((card, idx) => {
+              card.addEventListener('click', (e) => {
+                if (!card.classList.contains('active')) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setTiltedCarouselCard(carousel.id, idx);
+                }
+              });
+            });
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTiltedCarousels);
+      } else {
+        initTiltedCarousels();
+      }
+    })();
+  </script>
+{% endunless %}
+{% endif %}
