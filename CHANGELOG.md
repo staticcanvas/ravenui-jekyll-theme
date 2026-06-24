@@ -1,727 +1,773 @@
 ﻿# **CHANGELOG**
 
-## [2.11.0] - 2026-06-23
+## [2.12.0] - 2026-06-24
+
+### Bug Fixes
+- Fixed a syntax error in Invoke-RvSemverBump return statement. ([`e6b71ee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e6b71ee))
 
 ### Notes & Improvements
-- Documented devt execution modes, CLI parameters, and task format conventions.
-- Added detailed section on technical implementation and dynamic git root resolution.
-- Compile changelog for recent commits
+- Added 4 new tasks under Feature Development (priority-3) to track devt utility upgrades. ([`e6b71ee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e6b71ee))
+- New tasks cover: short commit hash links in changelog, merge request checklist footer, GitLab issue ID to devt task ID mapping, and commit count metadata in merge requests. ([`e6b71ee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e6b71ee))
+- Fixed syntax return issue in Invoke-RvSemverBump. ([`e6b71ee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e6b71ee))
+
+## [1.18.0] - 2026-06-24
+
+### Feature Additions
+- CLI permalink previewing command with interactive TUI box and --json mode. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Natively query, fetch, download, and extract release/tag archives from GitHub/GitLab. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Auto-validation and secure silent installation of required PowerShell modules. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Checked off CLI/Helpers, CLI/PermalinkPreview, and Features/StaticFiles in tasktracker. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+
+### Notes & Improvements
+- Implemented Invoke-RvPermalinkPreview to calculate and display the output URLs and disk destination paths of processed Jekyll pages, posts, collections, and static files. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Integrated Get-AuspexConfig and Set-AuspexConfig to dynamically locate and parse the closest _config.yml to target files. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Built Request-RvRelease, Unpack-RvRelease, and Request-RvTag cmdlets using native .NET HttpClient, GZipStream, and TarFile classes. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Added Test-RvModuleInstalled, Install-RvModuleSecure, and Assert-RvModuleRequired private wrappers to validate workspace dependencies. ([`e26b67f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e26b67f))
+- Documented devt execution modes, CLI parameters, and task format conventions. ([`d425b0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d425b0d))
+- Added detailed section on technical implementation and dynamic git root resolution. ([`d425b0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d425b0d))
+- Compile changelog for recent commits ([`929d161`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/929d161))
 
 ## [2.11.1] - 2026-06-19
 
 ### Feature Additions
-- Added changelog Mode to Invoke-Devt parameter set and help manual
-- Added Invoke-GitChangelogHelper function in GitOps.ps1
-- Created feature-flags.html component and feature-flags.md page
+- Added changelog Mode to Invoke-Devt parameter set and help manual ([`47dbd1f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/47dbd1f))
+- Added Invoke-GitChangelogHelper function in GitOps.ps1 ([`47dbd1f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/47dbd1f))
+- Created feature-flags.html component and feature-flags.md page ([`025cea2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/025cea2))
 
 ### Bug Fixes
-- Fix liquid syntax warning in default.html layout
+- Fix liquid syntax warning in default.html layout ([`025cea2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/025cea2))
 
 ### Notes & Improvements
-- Add changelog mode to devt utility to parse conventional commits
-- Group changes by version, categorizing features, bugs, and notes
-- Add live dashboard component for theme feature flags
-- Add global switches in _config.yml for sidebar, toc, breadcrumbs, search, and footer
-- Add page-level frontmatter overrides for all minimalist components
-- Wrap search scripting, assets, and triggers to completely disable search features when turned off
-- wrap liquid code block in notes-for-fluram-concept.md with raw tags
-- wrap liquid code block in blog-plan.md with raw tags
+- Add changelog mode to devt utility to parse conventional commits ([`47dbd1f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/47dbd1f))
+- Group changes by version, categorizing features, bugs, and notes ([`47dbd1f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/47dbd1f))
+- Add live dashboard component for theme feature flags ([`025cea2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/025cea2))
+- Add global switches in _config.yml for sidebar, toc, breadcrumbs, search, and footer ([`f70a7f9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f70a7f9))
+- Add page-level frontmatter overrides for all minimalist components ([`f70a7f9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f70a7f9))
+- Wrap search scripting, assets, and triggers to completely disable search features when turned off ([`f70a7f9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f70a7f9))
+- wrap liquid code block in notes-for-fluram-concept.md with raw tags ([`c64f64f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/c64f64f))
+- wrap liquid code block in blog-plan.md with raw tags ([`68ff6ea`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/68ff6ea))
 
 ## [2.9.4] - 2026-06-19
 
 ### Bug Fixes
-- Prevented Liquid syntax bleeding through inside example code documentation blocks.
+- Prevented Liquid syntax bleeding through inside example code documentation blocks. ([`fed8df5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fed8df5))
 
 ### Notes & Improvements
-- Performed a comprehensive documentation audit across the docs/ directory.
-- Wrapped 42 unescaped Liquid blocks (including include statements, for loops, and variable assigns) inside docs markdown files with {% raw %} and {% endraw %} tags to prevent Jekyll's Liquid engine from executing code blocks during documentation site compilation.
-- Validated correct rendering by successfully running a bundle jekyll build test.
+- Performed a comprehensive documentation audit across the docs/ directory. ([`fed8df5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fed8df5))
+- Wrapped 42 unescaped Liquid blocks (including include statements, for loops, and variable assigns) inside docs markdown files with {% raw %} and {% endraw %} tags to prevent Jekyll's Liquid engine from executing code blocks during documentation site compilation. ([`fed8df5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fed8df5))
+- Validated correct rendering by successfully running a bundle jekyll build test. ([`fed8df5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fed8df5))
 
 ## [2.9.3] - 2026-06-19
 
 ### Feature Additions
-- High-performance multithreaded RunspacePool branch querying.
-- Auto-scaling TUI table layout engine.
-- Beetle emoji width override for perfect visual alignment.
-- Added workflow enhancement tasks to source tracker.
+- High-performance multithreaded RunspacePool branch querying. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Auto-scaling TUI table layout engine. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Beetle emoji width override for perfect visual alignment. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Added workflow enhancement tasks to source tracker. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
 
 ### Notes & Improvements
-- Implemented a dynamic console table layout engine utilizing Format-TuiRow in Helpers.ps1 that dynamically measures branch name display widths and auto-sizes columns/borders to prevent box tearing.
-- Integrated a high-performance RunspacePool inside Invoke-GitBranchesHelper to query git branch metadata concurrently (ahead/behind commits, last commit age, and subject line), decreasing command latency from 5s to <300ms.
-- Optimized GitLabSync.ps1 and GitOps.ps1 by replacing pipeline cmdlets (Where-Object/Select-Object) with fast direct foreach loops.
-- Fixed ≡ƒ¬▓ Beetle emoji (U+1FABC) character display width handling in Get-StringDisplayWidth to treat it as width 1 on standard terminals, eliminating stats dashboard alignment glitches.
-- Expanded the task tracker with five workflow-specific development concepts (capsule exporter, changelog generator, local database constraints, SQLite caching, and CI blockers).
+- Implemented a dynamic console table layout engine utilizing Format-TuiRow in Helpers.ps1 that dynamically measures branch name display widths and auto-sizes columns/borders to prevent box tearing. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Integrated a high-performance RunspacePool inside Invoke-GitBranchesHelper to query git branch metadata concurrently (ahead/behind commits, last commit age, and subject line), decreasing command latency from 5s to <300ms. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Optimized GitLabSync.ps1 and GitOps.ps1 by replacing pipeline cmdlets (Where-Object/Select-Object) with fast direct foreach loops. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Fixed 🪲 Beetle emoji (U+1FABC) character display width handling in Get-StringDisplayWidth to treat it as width 1 on standard terminals, eliminating stats dashboard alignment glitches. ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
+- Expanded the task tracker with five workflow-specific development concepts (capsule exporter, changelog generator, local database constraints, SQLite caching, and CI blockers). ([`5033323`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5033323))
 
 ## [2.9.2] - 2026-06-19
 
 ### Feature Additions
-- Visual repository branch comparison dashboard.
-- Styled gitdiff command comparisons across branches.
-- Unicode/emoji display width calculation helper for visual alignment.
+- Visual repository branch comparison dashboard. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
+- Styled gitdiff command comparisons across branches. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
+- Unicode/emoji display width calculation helper for visual alignment. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
 
 ### Bug Fixes
-- Fixed TUI layout alignment glitches in devt stats caused by emoji string length variations.
+- Fixed TUI layout alignment glitches in devt stats caused by emoji string length variations. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
 
 ### Notes & Improvements
-- Added Get-StringDisplayWidth and Get-PadRight helper functions in Helpers.ps1 to calculate visual string widths and pad terminal layouts safely, preventing TUI alignment glitches with surrogate pairs and BMP double-width emojis.
-- Implemented devt branches command providing a high-fidelity visual dashboard of all local repository branches showing active age, diff status (ahead/behind counts vs base branch), and the latest commit message.
-- Implemented devt gitdiff command permitting code diff comparisons and status stats of the current branch against a base branch (or custom branch specified with -Branch).
-- Updated the devt help manual and README.md documentation to document the new branches and gitdiff modes and parameter configurations.
+- Added Get-StringDisplayWidth and Get-PadRight helper functions in Helpers.ps1 to calculate visual string widths and pad terminal layouts safely, preventing TUI alignment glitches with surrogate pairs and BMP double-width emojis. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
+- Implemented devt branches command providing a high-fidelity visual dashboard of all local repository branches showing active age, diff status (ahead/behind counts vs base branch), and the latest commit message. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
+- Implemented devt gitdiff command permitting code diff comparisons and status stats of the current branch against a base branch (or custom branch specified with -Branch). ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
+- Updated the devt help manual and README.md documentation to document the new branches and gitdiff modes and parameter configurations. ([`4622624`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4622624))
 
 ## [2.9.1] - 2026-06-19
 
 ### Feature Additions
-- Support for dynamic git root resolution.
-- Support for tag-anchored SemVer version calculation via Get-ConventionalCommitVersion.
+- Support for dynamic git root resolution. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
+- Support for tag-anchored SemVer version calculation via Get-ConventionalCommitVersion. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
 
 ### Bug Fixes
-- Fixed hardcoded repository path offsets.
+- Fixed hardcoded repository path offsets. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
 
 ### Notes & Improvements
-- Replaced deprecated Get-GitAutoVersion with Get-ConventionalCommitVersion for tag-anchored SemVer.
-- Resolved Get-ConventionalCommitVersion.ps1 locally within the module's Private folder before falling back to profile/global paths.
-- Implemented dynamic git repository root lookup in Helpers.ps1 by traversing parent directories to detect .git folder.
-- Authored a comprehensive README.md detailing the purpose, architecture, modes, formatting specifications, and setup instructions.
+- Replaced deprecated Get-GitAutoVersion with Get-ConventionalCommitVersion for tag-anchored SemVer. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
+- Resolved Get-ConventionalCommitVersion.ps1 locally within the module's Private folder before falling back to profile/global paths. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
+- Implemented dynamic git repository root lookup in Helpers.ps1 by traversing parent directories to detect .git folder. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
+- Authored a comprehensive README.md detailing the purpose, architecture, modes, formatting specifications, and setup instructions. ([`64c637c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/64c637c))
 
 ## [2.8.13] - 2026-06-18
 
 ### Feature Additions
-- GitLabSync.ps1: added two-way task status sync, child note commenting, and Draft MR creation helper
-- GitOps.ps1: added conventional commit helper and branch diff summaries
-- New-AsciiGradient.ps1: added native ANSI 256-color gradient builder
-- Helpers.ps1: added Test-TaskFileFormat for emoji syntax checks and updated category codes
-- Invoke-Devt.ps1: integrated stats alignment, gradient box, and create-mr mode
-- spacer.html: vertical whitespace component with xs/sm/md/lg/xl/2xl size tokens,
-- _spacer.scss: CSS custom property scale (--rd-spacer-*), all overridable globally
-- depends-upon.html: structured dependency listing with type/version/link/description/package
-- _depends-upon.scss: full dark/light theme support; compact pill layout
-- docs/components/spacer.md: live demos, API table, size token reference
-- docs/components/depends-upon.md: live demo using page own front-matter, full API + schema
-- _layout.scss: replaced hardcoded 240px sidebar width with --rd-sidebar-width CSS custom property (default 280px)
-- head.html: injects --rd-sidebar-width from theme_settings.sidebar.width (_config.yml)
-- _config.yml: added theme_settings.sidebar.width setting (any CSS unit accepted, default 280px)
-- index-warning.html: new component rendering amber warning banner with path hint, scaffold snippet, recommended components, and collapsible QOL tips panel
-- _index-warning.scss: full SCSS module for index-warning, dark/light theme compatible
-- default.html: auto-renders index-warning when page.index_warning:true or rd_debug+empty body
-- ravenui-sp.scss: registered index-warning module
+- GitLabSync.ps1: added two-way task status sync, child note commenting, and Draft MR creation helper ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- GitOps.ps1: added conventional commit helper and branch diff summaries ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- New-AsciiGradient.ps1: added native ANSI 256-color gradient builder ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- Helpers.ps1: added Test-TaskFileFormat for emoji syntax checks and updated category codes ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- Invoke-Devt.ps1: integrated stats alignment, gradient box, and create-mr mode ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- spacer.html: vertical whitespace component with xs/sm/md/lg/xl/2xl size tokens, ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- _spacer.scss: CSS custom property scale (--rd-spacer-*), all overridable globally ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- depends-upon.html: structured dependency listing with type/version/link/description/package ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- _depends-upon.scss: full dark/light theme support; compact pill layout ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- docs/components/spacer.md: live demos, API table, size token reference ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- docs/components/depends-upon.md: live demo using page own front-matter, full API + schema ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- _layout.scss: replaced hardcoded 240px sidebar width with --rd-sidebar-width CSS custom property (default 280px) ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- head.html: injects --rd-sidebar-width from theme_settings.sidebar.width (_config.yml) ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- _config.yml: added theme_settings.sidebar.width setting (any CSS unit accepted, default 280px) ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- index-warning.html: new component rendering amber warning banner with path hint, scaffold snippet, recommended components, and collapsible QOL tips panel ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- _index-warning.scss: full SCSS module for index-warning, dark/light theme compatible ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- default.html: auto-renders index-warning when page.index_warning:true or rd_debug+empty body ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- ravenui-sp.scss: registered index-warning module ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
 
 ### Bug Fixes
-- Stats dashboard: Fixed border width calculation and title spacing to resolve screen tearing
+- Stats dashboard: Fixed border width calculation and title spacing to resolve screen tearing ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
 
 ### Notes & Improvements
-- Replaced Plane/SQLite DB plan with Markdown SOT to avoid hosting overhead
-- Implemented GitLab synchronization for issues, milestones, closed tasks, and comment notes
-- Added Conventional Commits and branch diff TUI tools
-- Configured a gradient-bordered stats metrics box with column alignment
-- SpacerComponent and DependencyList features from priority-3 backlog
-- Both include full documentation pages under docs/components/
-- Resolves sidebar column wrapping issue for long nav item titles
-- Adds developer-facing index-warning component for empty directories
+- Replaced Plane/SQLite DB plan with Markdown SOT to avoid hosting overhead ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- Implemented GitLab synchronization for issues, milestones, closed tasks, and comment notes ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- Added Conventional Commits and branch diff TUI tools ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- Configured a gradient-bordered stats metrics box with column alignment ([`1f494e8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1f494e8))
+- SpacerComponent and DependencyList features from priority-3 backlog ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- Both include full documentation pages under docs/components/ ([`6e15905`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6e15905))
+- Resolves sidebar column wrapping issue for long nav item titles ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
+- Adds developer-facing index-warning component for empty directories ([`cbe75f0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cbe75f0))
 
 ## [2.8.10] - 2026-06-18
 
 ### Notes & Improvements
-- Imported rough notes from temp.md into canonical devtracker-source.md.
-- Split long multi-theme task into discrete sub-tasks incorporating the auspex module.
-- Added new feature tasks for component layout/spacers, tilted carousels, and minimal modes.
-- Added CLI helper tasks incorporating phellams-aa PowerShell module standards.
-- Backfilled awaiting dependencies (Bucman, RubyCommander, Mystro, Fluidbar) into Backlog.
+- Imported rough notes from temp.md into canonical devtracker-source.md. ([`674dfdc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/674dfdc))
+- Split long multi-theme task into discrete sub-tasks incorporating the auspex module. ([`674dfdc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/674dfdc))
+- Added new feature tasks for component layout/spacers, tilted carousels, and minimal modes. ([`674dfdc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/674dfdc))
+- Added CLI helper tasks incorporating phellams-aa PowerShell module standards. ([`674dfdc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/674dfdc))
+- Backfilled awaiting dependencies (Bucman, RubyCommander, Mystro, Fluidbar) into Backlog. ([`674dfdc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/674dfdc))
 
 ## [2.8.9] - 2026-06-17
 
 ### Feature Additions
-- Page-level sidebar and TOC toggle overrides
-- Floating Back to Top scroll utility include and styles
-- Documented decision to keep custom plugins internal
+- Page-level sidebar and TOC toggle overrides ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
+- Floating Back to Top scroll utility include and styles ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
+- Documented decision to keep custom plugins internal ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
 
 ### Notes & Improvements
-- Added page-level toggles for left-hand navigation sidebar (sidebar: false) and Table of Contents (toc: false) with corresponding CSS grid template overrides.
-- Added a floating Back to Top button that appears when scrolling down and enables smooth scroll-to-top behavior.
-- Standardized on keeping custom Ruby plugins internal to the theme core rather than releasing them as external gems.
-- Updated developer-guide.md, variables.md, and lessons learned.
+- Added page-level toggles for left-hand navigation sidebar (sidebar: false) and Table of Contents (toc: false) with corresponding CSS grid template overrides. ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
+- Added a floating Back to Top button that appears when scrolling down and enables smooth scroll-to-top behavior. ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
+- Standardized on keeping custom Ruby plugins internal to the theme core rather than releasing them as external gems. ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
+- Updated developer-guide.md, variables.md, and lessons learned. ([`9304b2a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9304b2a))
 
 ## [2.8.8] - 2026-06-17
 
 ### Notes & Improvements
-- refactor: standardize on Rouge syntax highlighter (markdown)
+- refactor: standardize on Rouge syntax highlighter (markdown) ([`27e789c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/27e789c))
 
 ## [2.8.7] - 2026-06-17
 
 ### Bug Fixes
-- sidebar: Prevented light theme border default color from bleeding through to the dark theme sidebar.
+- sidebar: Prevented light theme border default color from bleeding through to the dark theme sidebar. ([`afa9793`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/afa9793))
 
 ## [2.8.6] - 2026-06-17
 
 ### Bug Fixes
-- _sass-vars.scss: Resolved Sass::CompileError (expected ';') that broke the Jekyll build.
+- _sass-vars.scss: Resolved Sass::CompileError (expected ';') that broke the Jekyll build. ([`4ee8c80`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4ee8c80))
 
 ## [0.0.0] - 2026-06-17
 
 ### Feature Additions
-- Complete rd_* shorthand variables table (25 entries)
-- Full theme_settings namespace coverage: logo, header, TOC, code, borders,
-- Page front-matter overrides: layout/identity, navigation/TOC, functional
-- Component data sourcing modes (data_source vs items/table_items)
-- Quick-lookup callout tip linking to component library
-- add SASS variable layer for theme customization (sass)
-- assets/js/rd-ticker.mjs         - Numeric count-up animation (IntersectionObserver)
-- assets/js/rd-heading-anchors.mjs - Heading anchor '#' link injector
-- assets/js/rd-code-utils.mjs     - Code copy button + language label badge
-- default.html: Added data-code-copy, data-code-lang, data-headings-always-visible
-- default.html: ES module imports replace ~130 lines of inline Liquid-JS
-- roadmap.html: Added data_source (dot-path _data/ lookup) and items
-- docs/_data/roadmap.yml: Example data file used by the live docs demo
-- docs/components/roadmap.md: Full rewrite documenting all three modes
-- tag.html: Resolves 'latest'/'latest-version' text to
-- docs/components/tag.md: API table updated to document the special
-- _includes/comps/header.html  - Top nav bar with align/density/sticky control
-- _includes/comps/sidebar.html - Collapsible nav tree with force_brand param
-- _includes/comps/footer.html  - Footer columns + edit-page link + timestamps
-- _includes/comps/toc.html     - Client-side TOC with scroll-spy and style/density
-- _layouts/default.html        - Updated to use modular comps includes
-- SCSS modifiers for --inline, --sticky, --compact etc. variants
+- Complete rd_* shorthand variables table (25 entries) ([`9345de8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9345de8))
+- Full theme_settings namespace coverage: logo, header, TOC, code, borders, ([`9345de8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9345de8))
+- Page front-matter overrides: layout/identity, navigation/TOC, functional ([`9345de8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9345de8))
+- Component data sourcing modes (data_source vs items/table_items) ([`9345de8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9345de8))
+- Quick-lookup callout tip linking to component library ([`9345de8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9345de8))
+- add SASS variable layer for theme customization (sass) ([`b22676a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b22676a))
+- assets/js/rd-ticker.mjs         - Numeric count-up animation (IntersectionObserver) ([`07f2e59`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/07f2e59))
+- assets/js/rd-heading-anchors.mjs - Heading anchor '#' link injector ([`07f2e59`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/07f2e59))
+- assets/js/rd-code-utils.mjs     - Code copy button + language label badge ([`07f2e59`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/07f2e59))
+- default.html: Added data-code-copy, data-code-lang, data-headings-always-visible ([`07f2e59`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/07f2e59))
+- default.html: ES module imports replace ~130 lines of inline Liquid-JS ([`07f2e59`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/07f2e59))
+- roadmap.html: Added data_source (dot-path _data/ lookup) and items ([`4f2eead`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4f2eead))
+- docs/_data/roadmap.yml: Example data file used by the live docs demo ([`4f2eead`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4f2eead))
+- docs/components/roadmap.md: Full rewrite documenting all three modes ([`4f2eead`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4f2eead))
+- tag.html: Resolves 'latest'/'latest-version' text to ([`124ebb3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/124ebb3))
+- docs/components/tag.md: API table updated to document the special ([`124ebb3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/124ebb3))
+- _includes/comps/header.html  - Top nav bar with align/density/sticky control ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
+- _includes/comps/sidebar.html - Collapsible nav tree with force_brand param ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
+- _includes/comps/footer.html  - Footer columns + edit-page link + timestamps ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
+- _includes/comps/toc.html     - Client-side TOC with scroll-spy and style/density ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
+- _layouts/default.html        - Updated to use modular comps includes ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
+- SCSS modifiers for --inline, --sticky, --compact etc. variants ([`4591fe2`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4591fe2))
 
 ### Bug Fixes
-- Gemfile: Resolved 'could not find gem jekyll-theme-ravenui' error
+- Gemfile: Resolved 'could not find gem jekyll-theme-ravenui' error ([`003ba1f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/003ba1f))
 
 ## [2.8.5] - 2026-06-17
 
 ### Feature Additions
-- Rebranded and modularized devt task management utility.
-- Excluded devtracker-pending.md in gitignore.
-- References page (docs/references.md)
-- Philosophy and Scope page (docs/scope.md)
-- Comprehensive installation guide covering three distribution models in docs/installation.md.
-- Developer Guide reference page (docs/developer-guide.md)
-- Path Configurations reference page (docs/paths.md)
-- Variables Reference page (docs/variables.md)
-- tools/rvcli/Public/Invoke-RvGitTags.ps1: generates _data/git-tags.yml from sorted git tag history via .NET ProcessStartInfo; supports --limit, --output, --dry-run
-- tools/rvcli/Public/Invoke-RvReleases.ps1: generates _data/releases.yml entries from git commit log grouped by Conventional Commit type; supports --append, --tag, --output, --dry-run
-- tools/rvcli/Public/Invoke-RvVersion.ps1: get/set/bump/sync site version across VERSION file and _config.yml; bump supports major|minor|patch with v-prefix preservation
-- tools/rvcli/Private/Helpers.ps1: added shared Invoke-RvGitCmd helper (removed duplicate from both public cmdlets)
-- tools/rvcli/Public/Start-RvCli.ps1: added router cases for git-tags, releases, version/ver commands; added DATA & VERSIONING help section
-- tools/rvcli/Private/Show-RvCommandHelp.ps1: added full help blocks for git-tags, releases, version/ver with all flags and examples
-- docs/file-types.md: new page at /file-types/ covering .md vs .html extension decision, Kramdown pipeline, parsing caveats, collection documents
-- docs/data-config.md: new page at /data-config/ covering YAML/JSON/CSV/TSV formats, data_source parameter, subfolder dot-notation, inline vs file-backed data
-- docs/data-subfolders.md: new page at /data-subfolders/ covering _data/ subfolder organisation, naming conventions, nesting depth, use cases
-- docs/data-json.md: new page at /data-json/ covering JSON file creation, Liquid access, component usage, nested objects, CI generation, JSON vs YAML comparison
-- docs/_data/navigation.yml: added File Types, Data Files, Data Subfolders, JSON Data entries under Configuration section
-- Rewrote tools/minify.ps1 with production-grade .NET/StringBuilder implementation
-- Fixed critical RegexOptions -bor bug (was incorrectly using -or, breaking HTML block capture)
-- Added JS template-literal and string-literal placeholder protection
-- Added <style> and <textarea> block preservation in HTML minifier
-- Added per-file size delta reporting with percentage reduction
-- Added --dry-run mode, --quiet flag, --no-html/--no-css/--no-js selective switches
-- Added --skip <glob> exclusion pattern support
-- Preserved licence-banner comments (/*! */) in CSS and JS passes
-- Added overall summary (original/minified/saved bytes + percentage)
-- Created Invoke-RvMinify.ps1 as a first-class rvcli Public cmdlet
-- Registered 'minify' in Start-RvCli.ps1 command router
-- Added full 'rvcli minify --help' documentation in Show-RvCommandHelp.ps1
-- Custom Liquid block tag `rd` capturing child markup and parsing parameters.
-- Custom Liquid inline tag `rdi` parsing parameters inline.
-- Auto-discovery in comps/, core/, and root _includes/ directories.
-- Custom Component Tags documentation in docs/custom-tags.md.
-- Support for excerpts in blog-card, blog-list, collection-blog, collection-grid, collection-list, and collection-posts layouts.
-- Runtime metadata component (`comps/runtime-metadata.html`) and associated plugin (`_plugins/runtime_metadata.rb`).
-- Expanded collections guide documenting sorting, tag filtering, and manual ordering.
-- Detailed component system audit catalog in dev-notes-tracker.md.
-- Rebranding updates to RavenUI fallback variables and settings.
-- Add _includes/comps/sitemap.html and docs/components/sitemap.md.
-- Add _sass/ravenui-sp/_sitemap.scss and register in stylesheet.
-- Support theme_settings.environment for manual environment overrides.
-- Render Draft label tags in default, post, and sidebar templates.
-- Add _includes/comps/platform-support.html and browser-support.html.
-- Add _sass/ravenui-sp/_compatibility-badges.scss and import it in loader.
-- Add docs/components/platform-support.md and browser-support.md.
-- Add data-ticker-value attributes to site stats and metrics includes.
-- Add _includes/comps/grid.html and docs/components/grid.md.
-- Add collection layout files: grid, list, documents, posts, blog, api, data, commands, cli.
-- Add tools/minify.ps1 HTML/CSS/JS minifier script.
-- Custom stylesheets and scripts (head & foot) loading via theme_settings.
-- Custom font stylesheets loading via typography settings.
-- Nesting support for data sources using dot-separated notation.
-- Elegant visual placeholder card for images and text fallbacks for cards.
-- Added flat-file folder structure and URL normalization details to navigation docs.
-- Documented all new configuration parameters in the settings table.
-- Default Z logo assets packaged in gem files.
-- Platform compatibility documentation detailing safe mode behavior and workarounds.
-- Packaged CLI executable with gem distribution.
-- Enhanced workspace root detection to support running from arbitrary folders or subfolders.
-- Rebranded copies of copy-button, icon-grid, and modal JS triggers.
-- Audited all 78 includes and logged status mappings.
-- Rebranding to RavenUI
-- Integration of the rd- prefix for variables/classes
-- Updated rvcli CLI helper functions
-- extra-spinner.html: CSS keyframe ring spinner with size (small/medium/large)
-- extra-media-card.html: Poster-first media card with rating badge, genre chips,
-- extra-media-details.html: Full expanded media profile with backdrop-banner header,
-- extra-wiki-grid.html: High-density CSS grid stat block for unit/character attributes
-- extra-api-fetcher.html: Client-side JSON API fetcher with localStorage caching,
-- extra-related-carousel.html: Wraps media card instances in reusable carousel
-- _extra-components.scss: Dedicated SASS module imported in zero-dark-sp.scss.
-- docs/_data/extra_media.yml: Sample Warhammer unit, anime, and game data for testing.
-- docs/components/extra-components.md: Full documentation with live previews and API tables.
-- docs/_data/navigation.yml: New Extra Components sidebar category added.
-- Unified collection layout with 5 display variants.
-- Dynamic collection document listing and sorting.
-- Sidebar menu dynamic collection listing integration.
-- Introduce new features. (layout expansion)
-- interation-1 (zdcli-concept)
-- Unified blog index layout with list/grid toggle.
-- Premium technical article layout with metadata and author cards.
-- Minimalist blank page layout for landing pages or full-screen canvases.
-- Interactive feedback widget with multi-provider analytics.
-- Charts engine rendering for tags and categories post counts.
-- Intersection observer-driven numeric tickers.
-- Sidebar & Header Navigation: Support is_new_feature attributes to render new, updated, beta, and hot badges.
-- Navigation Docs: Documented configuration, style variants, and provided examples.
-- Git Tags: Upgraded component to switch between card grid and compact list layout style via layout="list".
-- Roadmap Item: Added show_progress parameter to toggle progress bar display (defaulting to hidden).
-- CodePen: Elegant fallback check for missing config parameters and client-side 404 check via oEmbed API.
-- Custom HTML/Markdown slide layouts inside the carousel.
-- Non-Image Carousel documentation page.
-- Customizable Table of Contents page-load and hover transitions.
-- TOC animations configurations under theme_settings.toc.
-- TOC animations documentation.
-- Add theme_settings.code.lang_style config property in _config.yml.
-- Support full-width header bar layout for code blocks in _sass/zero-dark-sp/_components.scss.
-- Document code block layout styling settings in docs/configuration.md.
-- Add data-first-word fallback text attribute to typewriter.html component.
-- Add top header bar layout option under theme_settings.header.
-- Add docs/_data/navheader.yml for custom header navigation links.
-- Add TOC custom layout designs and sizing density configuration options.
-- Add full navigation documentation for header layouts and custom TOC styles.
+- Rebranded and modularized devt task management utility. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Excluded devtracker-pending.md in gitignore. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- References page (docs/references.md) ([`69be0c0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/69be0c0))
+- Philosophy and Scope page (docs/scope.md) ([`69be0c0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/69be0c0))
+- Comprehensive installation guide covering three distribution models in docs/installation.md. ([`1700aa6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1700aa6))
+- Developer Guide reference page (docs/developer-guide.md) ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Path Configurations reference page (docs/paths.md) ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Variables Reference page (docs/variables.md) ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- tools/rvcli/Public/Invoke-RvGitTags.ps1: generates _data/git-tags.yml from sorted git tag history via .NET ProcessStartInfo; supports --limit, --output, --dry-run ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- tools/rvcli/Public/Invoke-RvReleases.ps1: generates _data/releases.yml entries from git commit log grouped by Conventional Commit type; supports --append, --tag, --output, --dry-run ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- tools/rvcli/Public/Invoke-RvVersion.ps1: get/set/bump/sync site version across VERSION file and _config.yml; bump supports major|minor|patch with v-prefix preservation ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- tools/rvcli/Private/Helpers.ps1: added shared Invoke-RvGitCmd helper (removed duplicate from both public cmdlets) ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- tools/rvcli/Public/Start-RvCli.ps1: added router cases for git-tags, releases, version/ver commands; added DATA & VERSIONING help section ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- tools/rvcli/Private/Show-RvCommandHelp.ps1: added full help blocks for git-tags, releases, version/ver with all flags and examples ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- docs/file-types.md: new page at /file-types/ covering .md vs .html extension decision, Kramdown pipeline, parsing caveats, collection documents ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- docs/data-config.md: new page at /data-config/ covering YAML/JSON/CSV/TSV formats, data_source parameter, subfolder dot-notation, inline vs file-backed data ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- docs/data-subfolders.md: new page at /data-subfolders/ covering _data/ subfolder organisation, naming conventions, nesting depth, use cases ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- docs/data-json.md: new page at /data-json/ covering JSON file creation, Liquid access, component usage, nested objects, CI generation, JSON vs YAML comparison ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- docs/_data/navigation.yml: added File Types, Data Files, Data Subfolders, JSON Data entries under Configuration section ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- Rewrote tools/minify.ps1 with production-grade .NET/StringBuilder implementation ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Fixed critical RegexOptions -bor bug (was incorrectly using -or, breaking HTML block capture) ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added JS template-literal and string-literal placeholder protection ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added <style> and <textarea> block preservation in HTML minifier ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added per-file size delta reporting with percentage reduction ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added --dry-run mode, --quiet flag, --no-html/--no-css/--no-js selective switches ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added --skip <glob> exclusion pattern support ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Preserved licence-banner comments (/*! */) in CSS and JS passes ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added overall summary (original/minified/saved bytes + percentage) ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Created Invoke-RvMinify.ps1 as a first-class rvcli Public cmdlet ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Registered 'minify' in Start-RvCli.ps1 command router ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Added full 'rvcli minify --help' documentation in Show-RvCommandHelp.ps1 ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Custom Liquid block tag `rd` capturing child markup and parsing parameters. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Custom Liquid inline tag `rdi` parsing parameters inline. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Auto-discovery in comps/, core/, and root _includes/ directories. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Custom Component Tags documentation in docs/custom-tags.md. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Support for excerpts in blog-card, blog-list, collection-blog, collection-grid, collection-list, and collection-posts layouts. ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Runtime metadata component (`comps/runtime-metadata.html`) and associated plugin (`_plugins/runtime_metadata.rb`). ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Expanded collections guide documenting sorting, tag filtering, and manual ordering. ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Detailed component system audit catalog in dev-notes-tracker.md. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Rebranding updates to RavenUI fallback variables and settings. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Add _includes/comps/sitemap.html and docs/components/sitemap.md. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Add _sass/ravenui-sp/_sitemap.scss and register in stylesheet. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Support theme_settings.environment for manual environment overrides. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Render Draft label tags in default, post, and sidebar templates. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Add _includes/comps/platform-support.html and browser-support.html. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Add _sass/ravenui-sp/_compatibility-badges.scss and import it in loader. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Add docs/components/platform-support.md and browser-support.md. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Add data-ticker-value attributes to site stats and metrics includes. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Add _includes/comps/grid.html and docs/components/grid.md. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Add collection layout files: grid, list, documents, posts, blog, api, data, commands, cli. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Add tools/minify.ps1 HTML/CSS/JS minifier script. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Custom stylesheets and scripts (head & foot) loading via theme_settings. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Custom font stylesheets loading via typography settings. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Nesting support for data sources using dot-separated notation. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Elegant visual placeholder card for images and text fallbacks for cards. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Added flat-file folder structure and URL normalization details to navigation docs. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Documented all new configuration parameters in the settings table. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Default Z logo assets packaged in gem files. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- Platform compatibility documentation detailing safe mode behavior and workarounds. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- Packaged CLI executable with gem distribution. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- Enhanced workspace root detection to support running from arbitrary folders or subfolders. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- Rebranded copies of copy-button, icon-grid, and modal JS triggers. ([`5346f27`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5346f27))
+- Audited all 78 includes and logged status mappings. ([`5346f27`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5346f27))
+- Rebranding to RavenUI ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Integration of the rd- prefix for variables/classes ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Updated rvcli CLI helper functions ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- extra-spinner.html: CSS keyframe ring spinner with size (small/medium/large) ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- extra-media-card.html: Poster-first media card with rating badge, genre chips, ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- extra-media-details.html: Full expanded media profile with backdrop-banner header, ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- extra-wiki-grid.html: High-density CSS grid stat block for unit/character attributes ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- extra-api-fetcher.html: Client-side JSON API fetcher with localStorage caching, ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- extra-related-carousel.html: Wraps media card instances in reusable carousel ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- _extra-components.scss: Dedicated SASS module imported in zero-dark-sp.scss. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- docs/_data/extra_media.yml: Sample Warhammer unit, anime, and game data for testing. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- docs/components/extra-components.md: Full documentation with live previews and API tables. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- docs/_data/navigation.yml: New Extra Components sidebar category added. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- Unified collection layout with 5 display variants. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Dynamic collection document listing and sorting. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Sidebar menu dynamic collection listing integration. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Introduce new features. (layout expansion) ([`16cd696`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/16cd696))
+- interation-1 (zdcli-concept) ([`441ea6e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/441ea6e))
+- Unified blog index layout with list/grid toggle. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Premium technical article layout with metadata and author cards. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Minimalist blank page layout for landing pages or full-screen canvases. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Interactive feedback widget with multi-provider analytics. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Charts engine rendering for tags and categories post counts. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Intersection observer-driven numeric tickers. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Sidebar & Header Navigation: Support is_new_feature attributes to render new, updated, beta, and hot badges. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Navigation Docs: Documented configuration, style variants, and provided examples. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Git Tags: Upgraded component to switch between card grid and compact list layout style via layout="list". ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Roadmap Item: Added show_progress parameter to toggle progress bar display (defaulting to hidden). ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- CodePen: Elegant fallback check for missing config parameters and client-side 404 check via oEmbed API. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Custom HTML/Markdown slide layouts inside the carousel. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Non-Image Carousel documentation page. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Customizable Table of Contents page-load and hover transitions. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- TOC animations configurations under theme_settings.toc. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- TOC animations documentation. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Add theme_settings.code.lang_style config property in _config.yml. ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Support full-width header bar layout for code blocks in _sass/zero-dark-sp/_components.scss. ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Document code block layout styling settings in docs/configuration.md. ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Add data-first-word fallback text attribute to typewriter.html component. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Add top header bar layout option under theme_settings.header. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
+- Add docs/_data/navheader.yml for custom header navigation links. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
+- Add TOC custom layout designs and sizing density configuration options. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
+- Add full navigation documentation for header layouts and custom TOC styles. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
 
 ### Bug Fixes
-- Added missing TaskItem class declaration to the top of Helpers.ps1 to resolve parser errors.
-- Escape literal liquid blocks in file-types.md to prevent Jekyll compile failures.
-- Handle Jekyll::Page safely in og_image_generator.rb by checking response to basename_without_ext or using File.basename fallback.
-- None.
-- Ignored non-docs root markdown files for heading bolding audits inside rvcli linter.
-- Fix linter false positives by cleaning IAL tags in Invoke-RvLinter.ps1.
-- Fix broken include sample path in static/index.html.
-- Added compatibility guards to prevent site compile crashes when from_yaml filter is missing or ignored.
-- Fixed ZDSearchLocal and zd- startsWith references in layouts
-- Fixed Liquid syntax error in head.html borders customization block.
-- None introduced; carousel JS guard clause prevents double-load.
-- Fixed spelling, formatting, and categorization in dev-notes-tracker.md.
-- Font Awesome: Forwarded icon style attribute in sidebar/header links to resolve brand rendering issues.
-- Steps Bar: Applied CSS text-wrap properties and min-width constraints to prevent TOC overflow.
-- Carousel Docs: Fixed YAML parsing errors from unquoted colon-space patterns in slide captions.
-- Apply dynamic data-code-lang-style attribute to layouts/default.html body tag.
-- Resolve Kramdown escaping and paragraph wrapping bug in modal.html includes.
-- Prevent raw typewriter text and animated cursors from bleeding into generated Table of Contents items.
-- Add standard cross-browser scrollbar support for code blocks on Firefox in _sass/rogue/_ethereal.scss.
-- Bind all search trigger instances on page (header and sidebar) to open search modal.
-- Hide redundant logo/brand section from the left sidebar when the top header bar is active.
+- Added missing TaskItem class declaration to the top of Helpers.ps1 to resolve parser errors. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Escape literal liquid blocks in file-types.md to prevent Jekyll compile failures. ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Handle Jekyll::Page safely in og_image_generator.rb by checking response to basename_without_ext or using File.basename fallback. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- None. ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Ignored non-docs root markdown files for heading bolding audits inside rvcli linter. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Fix linter false positives by cleaning IAL tags in Invoke-RvLinter.ps1. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Fix broken include sample path in static/index.html. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Added compatibility guards to prevent site compile crashes when from_yaml filter is missing or ignored. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- None. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- None. ([`5346f27`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5346f27))
+- Fixed ZDSearchLocal and zd- startsWith references in layouts ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Fixed Liquid syntax error in head.html borders customization block. ([`f60ccc9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f60ccc9))
+- None introduced; carousel JS guard clause prevents double-load. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- Fixed spelling, formatting, and categorization in dev-notes-tracker.md. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Font Awesome: Forwarded icon style attribute in sidebar/header links to resolve brand rendering issues. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Steps Bar: Applied CSS text-wrap properties and min-width constraints to prevent TOC overflow. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Carousel Docs: Fixed YAML parsing errors from unquoted colon-space patterns in slide captions. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Apply dynamic data-code-lang-style attribute to layouts/default.html body tag. ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Resolve Kramdown escaping and paragraph wrapping bug in modal.html includes. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Prevent raw typewriter text and animated cursors from bleeding into generated Table of Contents items. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Add standard cross-browser scrollbar support for code blocks on Firefox in _sass/rogue/_ethereal.scss. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Bind all search trigger instances on page (header and sidebar) to open search modal. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
+- Hide redundant logo/brand section from the left sidebar when the top header bar is active. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
 
 ### Notes & Improvements
-- Refactored the task manager script into a session-loadable PowerShell module called devt under tools/devt.
-- Rebranded tracking files to devtracker-source.md, devtracker-pending.md, and devtracker-archive.md.
-- Replaced the direct pwsh execution model with a module import that maps functions and aliases to the current window.
-- Updated root execution wrappers devt, devt.ps1, and devt.bat to delegate cleanly using pwsh -File.
-- Implemented TagFilter component with URL param sync and auto-extraction.
-- Built ComponentPlayground for live property previews and Liquid code generation.
-- Created LayoutVisualizer showing schematic grid layout for alternative page layouts.
-- Developed PageConverter supporting Markdown download, HTML extraction, and Print/PDF export.
-- Updated blog and collection layouts to integrate tag-filtering.
-- Created documentation pages for all new components and registered them in navigation.
-- Create references.md listing external resource APIs and cheat sheets.
-- Create scope.md documenting design philosophy, performance limits, and framework boundaries.
-- Register routes in navigation.yml.
-- Update installation.md to cover Gem-Based Theme, Remote Theme, and Forking/Copying models.
-- Escape code snippet Liquid blocks using raw/endraw tags.
-- Document lesson about escaping literal Liquid templates (e.g. capture tags) in markdown code blocks to prevent compile exceptions.
-- Escape literal liquid blocks inside code segments in file-types.md to resolve Jekyll compiler exceptions.
-- Add developer guide documenting layout architecture, SASS tokens, custom tags/plugins, and extension points.
-- Add paths reference explaining URL routing, filters, trailing slash normalization, and directory tree layouts.
-- Add variables reference mapping Jekyll global scopes, theme settings configuration switches, and page-level overrides.
-- Closes CLI/PowerShellHelpers task and all sub-tasks in dev-notes-tracker.md
-- Closes Docs/FileTypes, Docs/DataConfig, Docs/DataSubfolders, Docs/JSONData tasks
-- Closes Refactoring/Cleanup (visual-elements.md already removed)
-- Updated context-source/extended-knowledge-lessons-learned-building-ravenui-v1.md
-- Closes Enhancements/Minification task in dev-notes-tracker.md
-- Implement custom block `rd` and inline `rdi` tags to bypass standard include path verbosity.
-- Automatically resolve variables from the current Liquid context for unquoted attributes.
-- Fix bug in og_image_generator.rb where basename_without_ext is called on Jekyll::Page.
-- Fall back to post.excerpt or doc.excerpt when description is omitted across blog and collection layouts.
-- Dynamic runtime metadata plugin and component to expose Ruby, Jekyll, Bundler, and plugins versions.
-- Merge remote-tracking branch 'origin/develop' into develop
-- Completed a full component system audit, listing all 85 components with their descriptions and potential caveats in dev-notes-tracker.md.
-- Updated fallback branding titles and subtitles from ZERODARK to RAVENUI across layouts, includes, static templates, scripts, and bootstrap configurations.
-- Integrated mapping exceptions for consolidated component documentation inside the rvcli linter tool.
-- Verified workspace integrity with both local Jekyll build and rvcli linter diagnostics.
-- Created sitemap.html include rendering pages, posts, and collection hierarchies.
-- Styled sitemap elements using dedicated _sitemap.scss.
-- Implemented site.theme_settings.environment gating for development diagnostics.
-- Added visual 'draft' badges to default layouts and sidebar loops.
-- Added platform-support.html component with Simple Icons mapping.
-- Added browser-support.html component with custom version string indicators.
-- Styled badges using color-mix for supported, partial, and unsupported states.
-- Registered and documented components in docs reference pages.
-- Count-up tickers with IntersectionObserver and cubic easeOut.
-- Modular layout grids component and responsive column styling.
-- 9 custom Jekyll collection layouts with sorting and tags.
-- Integrated PowerShell workspace linter and asset minifier in CI.
-- Resolved workspace linter false positives with header IAL tags.
-- Enabled custom stylesheets, head scripts, foot scripts, and font stylesheets injection directly from site configuration without template modifications.
-- Implemented a dot-separated nested data path resolution system for Jekyll data-driven components.
-- Added support for page-level and site-level variable fallbacks in data-driven and layout components.
-- Added visual and text fallback placeholders for cards, hero sections, and images to prevent layout breakage.
-- Documented flat-file site structure support and new configuration options.
-- Integrated SVG block-based Z-mark as the default logo in assets/images and assets/img.
-- Added site.safe check to git-tags.html and releases.html includes to prevent from_yaml compilation crashes in GitHub Pages Safe Mode.
-- Rebranded installation instructions to jekyll-theme-ravenui.
-- Created bin/rvcli Ruby script to act as wrapper launcher for pwsh entry point.
-- Updated jekyll-theme-ravenui.gemspec to package bin/, tools/, and rvcli.ps1 files and declare rvcli as executable.
-- Modified Start-RvCli.ps1 to resolve workspace root by traversing upwards from the process current working directory.
-- Completed rebranding of component templates and assets from ZeroDark to RavenUI.
-- Renamed internal JS functions to prevent collisions and mapped includes to documentation.
-- Changed all project references and gems to jekyll-theme-ravenui and ravenui-jekyll-theme.
-- Renamed zdcli utility to rvcli.
-- Renamed all CSS variables, utility classes, and custom data attributes to use the rd- prefix (short for raven-data).
-- Verified build is successful.
-- Fixed syntax error in head.html where invalid elif tags were used instead of elsif.
-- Verified successful compilation of the Jekyll site.
-- Restructured dev-notes-tracker.md tasklist to follow the new categorization, scope, and notes structure.
-- Build verified clean via `bundle exec jekyll build` (19s, no errors).
-- All components are GitHub Pages / Jekyll safe-mode compatible (zero Ruby plugins).
-- localStorage caching uses configurable TTL to prevent API rate-limit hits.
-- Implemented collection.html layout supporting list, grid, cards, tree, and pathways view styles.
-- Created sample tutorials collection and index pages showcasing each layout style.
-- Updated documentation and sidebar navigation menu.
-- Created unified blog.html layout with card grid, list style, category/tag filtering, and limit options.
-- Designed premium deep-dive article.html layout featuring reading time, banner gradients, author bio lookup, and pagination.
-- Added blank.html layout providing a clean canvas (no headers, navigation sidebars, or TOCs).
-- Created demonstration pages and updated the Layouts documentation.
-- gitignore: Add / Update a .gitignore file.
-- Integrated PostHog, Google Analytics, Umami, Plausible analytics tracking in the feedback widget.
-- Added visual charts support (chartjs / svg) to the site stats component.
-- Implemented pneumatic micro-animations and scroll-driven numeric tickers.
-- Cleaned up, formatted, and corrected spelling/grammar in dev-notes-tracker.md.
-- Added flexbox alignment and CSS-based glowing badge styles (.zd-nav-badge) to sidebar/header links.
-- Integrated badge rendering in sidebar.html and header.html templates.
-- Supported classifications for 'new', 'updated', 'beta', and 'hot' items in navigation configs.
-- Updated docs/navigation.md to document the badge options and configuration.
-- Added list layout parameter and style support to git-tags component.
-- Made progress bars optional and hidden by default on roadmap-item component.
-- Implemented client-side public CodePen oEmbed checks for graceful 404 embedding fallbacks.
-- Corrected brand icon rendering issues in header and sidebar components.
-- Standardized text-wrapping overflow styles on steps progress bar items.
-- Updated extended engineering lessons learned documentation.
-- Synchronized VERSION, _config.yml, and docs/_config.yml files with the newly released version tag 1.17.1.
-- Upgraded `_includes/comps/carousel.html` to conditionally render custom HTML/Markdown slides when the `content` property is provided.
-- Added SASS rules for `.zd-carousel-custom-content` inside `_sass/zero-dark-sp/_components.scss`.
-- Updated `docs/components/carousel.md` to show live Image and Non-Image Carousel examples.
-- Logged the design decisions in the context-source lessons learned documents.
-- Synchronized `docs/Gemfile.lock` with theme version `1.17.0`.
-- Synchronized VERSION, _config.yml, and docs/_config.yml files with the newly released version tag 1.17.0.
-- Implemented `site.theme_settings.toc.animations` configuration toggle.
-- Added data-toc-animations body attribute for CSS targeting of TOC animations.
-- Implemented page-load fadeInUp transitions for the TOC container.
-- Implemented hover slide-right micro-animations for TOC links.
-- Supported prefers-reduced-motion CSS media query to prevent accessibility issues.
-- Updated documentation in configuration reference and navigation guides.
-- Added customizable language tag display styles for code blocks (badge vs header).
-- Injected user settings via body data attribute for clean CSS-driven styling.
-- Wrapped modal.html contents in a block-level wrapper div to prevent Kramdown from wrapping in <p> and HTML-escaping tags.
-- Cloned heading nodes in the TOC generator script to clean up typewriter cursors and fallback words.
-- Implemented optional top header bar layout with glassmorphism styling and custom link alignments.
-- Implemented three new TOC design modes (simple, lines, nodes) and three density settings (compact, default, relaxed).
+- Refactored the task manager script into a session-loadable PowerShell module called devt under tools/devt. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Rebranded tracking files to devtracker-source.md, devtracker-pending.md, and devtracker-archive.md. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Replaced the direct pwsh execution model with a module import that maps functions and aliases to the current window. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Updated root execution wrappers devt, devt.ps1, and devt.bat to delegate cleanly using pwsh -File. ([`90b2f12`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90b2f12))
+- Implemented TagFilter component with URL param sync and auto-extraction. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Built ComponentPlayground for live property previews and Liquid code generation. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Created LayoutVisualizer showing schematic grid layout for alternative page layouts. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Developed PageConverter supporting Markdown download, HTML extraction, and Print/PDF export. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Updated blog and collection layouts to integrate tag-filtering. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Created documentation pages for all new components and registered them in navigation. ([`46dae10`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/46dae10))
+- Create references.md listing external resource APIs and cheat sheets. ([`69be0c0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/69be0c0))
+- Create scope.md documenting design philosophy, performance limits, and framework boundaries. ([`69be0c0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/69be0c0))
+- Register routes in navigation.yml. ([`69be0c0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/69be0c0))
+- Update installation.md to cover Gem-Based Theme, Remote Theme, and Forking/Copying models. ([`1700aa6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1700aa6))
+- Escape code snippet Liquid blocks using raw/endraw tags. ([`1700aa6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1700aa6))
+- Document lesson about escaping literal Liquid templates (e.g. capture tags) in markdown code blocks to prevent compile exceptions. ([`a601480`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a601480))
+- Escape literal liquid blocks inside code segments in file-types.md to resolve Jekyll compiler exceptions. ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Add developer guide documenting layout architecture, SASS tokens, custom tags/plugins, and extension points. ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Add paths reference explaining URL routing, filters, trailing slash normalization, and directory tree layouts. ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Add variables reference mapping Jekyll global scopes, theme settings configuration switches, and page-level overrides. ([`d0298bb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d0298bb))
+- Closes CLI/PowerShellHelpers task and all sub-tasks in dev-notes-tracker.md ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- Closes Docs/FileTypes, Docs/DataConfig, Docs/DataSubfolders, Docs/JSONData tasks ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- Closes Refactoring/Cleanup (visual-elements.md already removed) ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- Updated context-source/extended-knowledge-lessons-learned-building-ravenui-v1.md ([`01abacf`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/01abacf))
+- Closes Enhancements/Minification task in dev-notes-tracker.md ([`55b304c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/55b304c))
+- Implement custom block `rd` and inline `rdi` tags to bypass standard include path verbosity. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Automatically resolve variables from the current Liquid context for unquoted attributes. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Fix bug in og_image_generator.rb where basename_without_ext is called on Jekyll::Page. ([`0d4634e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0d4634e))
+- Fall back to post.excerpt or doc.excerpt when description is omitted across blog and collection layouts. ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Dynamic runtime metadata plugin and component to expose Ruby, Jekyll, Bundler, and plugins versions. ([`335b649`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/335b649))
+- Merge remote-tracking branch 'origin/develop' into develop ([`fff9965`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fff9965))
+- Completed a full component system audit, listing all 85 components with their descriptions and potential caveats in dev-notes-tracker.md. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Updated fallback branding titles and subtitles from ZERODARK to RAVENUI across layouts, includes, static templates, scripts, and bootstrap configurations. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Integrated mapping exceptions for consolidated component documentation inside the rvcli linter tool. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Verified workspace integrity with both local Jekyll build and rvcli linter diagnostics. ([`11bdf5d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/11bdf5d))
+- Created sitemap.html include rendering pages, posts, and collection hierarchies. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Styled sitemap elements using dedicated _sitemap.scss. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Implemented site.theme_settings.environment gating for development diagnostics. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Added visual 'draft' badges to default layouts and sidebar loops. ([`dad1f33`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dad1f33))
+- Added platform-support.html component with Simple Icons mapping. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Added browser-support.html component with custom version string indicators. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Styled badges using color-mix for supported, partial, and unsupported states. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Registered and documented components in docs reference pages. ([`8d72251`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d72251))
+- Count-up tickers with IntersectionObserver and cubic easeOut. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Modular layout grids component and responsive column styling. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- 9 custom Jekyll collection layouts with sorting and tags. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Integrated PowerShell workspace linter and asset minifier in CI. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Resolved workspace linter false positives with header IAL tags. ([`359f55e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359f55e))
+- Enabled custom stylesheets, head scripts, foot scripts, and font stylesheets injection directly from site configuration without template modifications. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Implemented a dot-separated nested data path resolution system for Jekyll data-driven components. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Added support for page-level and site-level variable fallbacks in data-driven and layout components. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Added visual and text fallback placeholders for cards, hero sections, and images to prevent layout breakage. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Documented flat-file site structure support and new configuration options. ([`e08958c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e08958c))
+- Integrated SVG block-based Z-mark as the default logo in assets/images and assets/img. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- Added site.safe check to git-tags.html and releases.html includes to prevent from_yaml compilation crashes in GitHub Pages Safe Mode. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- Rebranded installation instructions to jekyll-theme-ravenui. ([`23603a4`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/23603a4))
+- Created bin/rvcli Ruby script to act as wrapper launcher for pwsh entry point. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- Updated jekyll-theme-ravenui.gemspec to package bin/, tools/, and rvcli.ps1 files and declare rvcli as executable. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- Modified Start-RvCli.ps1 to resolve workspace root by traversing upwards from the process current working directory. ([`1fe1372`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fe1372))
+- Completed rebranding of component templates and assets from ZeroDark to RavenUI. ([`5346f27`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5346f27))
+- Renamed internal JS functions to prevent collisions and mapped includes to documentation. ([`5346f27`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5346f27))
+- Changed all project references and gems to jekyll-theme-ravenui and ravenui-jekyll-theme. ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Renamed zdcli utility to rvcli. ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Renamed all CSS variables, utility classes, and custom data attributes to use the rd- prefix (short for raven-data). ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Verified build is successful. ([`aa1f8bd`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/aa1f8bd))
+- Fixed syntax error in head.html where invalid elif tags were used instead of elsif. ([`f60ccc9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f60ccc9))
+- Verified successful compilation of the Jekyll site. ([`f60ccc9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f60ccc9))
+- Restructured dev-notes-tracker.md tasklist to follow the new categorization, scope, and notes structure. ([`f60ccc9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f60ccc9))
+- Build verified clean via `bundle exec jekyll build` (19s, no errors). ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- All components are GitHub Pages / Jekyll safe-mode compatible (zero Ruby plugins). ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- localStorage caching uses configurable TTL to prevent API rate-limit hits. ([`3b356ef`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b356ef))
+- Implemented collection.html layout supporting list, grid, cards, tree, and pathways view styles. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Created sample tutorials collection and index pages showcasing each layout style. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Updated documentation and sidebar navigation menu. ([`18db44e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/18db44e))
+- Created unified blog.html layout with card grid, list style, category/tag filtering, and limit options. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Designed premium deep-dive article.html layout featuring reading time, banner gradients, author bio lookup, and pagination. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Added blank.html layout providing a clean canvas (no headers, navigation sidebars, or TOCs). ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- Created demonstration pages and updated the Layouts documentation. ([`5c00790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5c00790))
+- gitignore: Add / Update a .gitignore file. ([`52d504c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/52d504c))
+- Integrated PostHog, Google Analytics, Umami, Plausible analytics tracking in the feedback widget. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Added visual charts support (chartjs / svg) to the site stats component. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Implemented pneumatic micro-animations and scroll-driven numeric tickers. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Cleaned up, formatted, and corrected spelling/grammar in dev-notes-tracker.md. ([`518cd69`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/518cd69))
+- Added flexbox alignment and CSS-based glowing badge styles (.zd-nav-badge) to sidebar/header links. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Integrated badge rendering in sidebar.html and header.html templates. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Supported classifications for 'new', 'updated', 'beta', and 'hot' items in navigation configs. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Updated docs/navigation.md to document the badge options and configuration. ([`e5c8f3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e5c8f3b))
+- Added list layout parameter and style support to git-tags component. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Made progress bars optional and hidden by default on roadmap-item component. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Implemented client-side public CodePen oEmbed checks for graceful 404 embedding fallbacks. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Corrected brand icon rendering issues in header and sidebar components. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Standardized text-wrapping overflow styles on steps progress bar items. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Updated extended engineering lessons learned documentation. ([`daca558`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/daca558))
+- Synchronized VERSION, _config.yml, and docs/_config.yml files with the newly released version tag 1.17.1. ([`bcce513`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bcce513))
+- Upgraded `_includes/comps/carousel.html` to conditionally render custom HTML/Markdown slides when the `content` property is provided. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Added SASS rules for `.zd-carousel-custom-content` inside `_sass/zero-dark-sp/_components.scss`. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Updated `docs/components/carousel.md` to show live Image and Non-Image Carousel examples. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Logged the design decisions in the context-source lessons learned documents. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Synchronized `docs/Gemfile.lock` with theme version `1.17.0`. ([`d74f112`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d74f112))
+- Synchronized VERSION, _config.yml, and docs/_config.yml files with the newly released version tag 1.17.0. ([`99b0b31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/99b0b31))
+- Implemented `site.theme_settings.toc.animations` configuration toggle. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Added data-toc-animations body attribute for CSS targeting of TOC animations. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Implemented page-load fadeInUp transitions for the TOC container. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Implemented hover slide-right micro-animations for TOC links. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Supported prefers-reduced-motion CSS media query to prevent accessibility issues. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Updated documentation in configuration reference and navigation guides. ([`8d80784`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d80784))
+- Added customizable language tag display styles for code blocks (badge vs header). ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Injected user settings via body data attribute for clean CSS-driven styling. ([`749b12d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/749b12d))
+- Wrapped modal.html contents in a block-level wrapper div to prevent Kramdown from wrapping in <p> and HTML-escaping tags. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Cloned heading nodes in the TOC generator script to clean up typewriter cursors and fallback words. ([`9f8de19`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f8de19))
+- Implemented optional top header bar layout with glassmorphism styling and custom link alignments. ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
+- Implemented three new TOC design modes (simple, lines, nodes) and three density settings (compact, default, relaxed). ([`675506b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/675506b))
 
 ## [1.16.6] - 2026-06-13
 
 ### Feature Additions
-- Added page-level opt-in search defaults.
-- None.
-- Enabled Font Awesome config flags.
-- context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md
-- context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md
-- Search providers selection block under theme_settings.search in _config.yml.
-- Dynamic Liquid search index generator (search-index.json).
-- Custom, uniform search interface (modal input and results drawer) for Lyra and Algolia.
-- Complete search configuration guide in docs/search.md.
-- Fixed .gitignore rule that mistakenly ignored assets/js/vendor/ folder.
-- Global animations toggle system in _config.yml.
-- Page load fade-in animations.
-- Hover transition and scale effects on buttons, tags, cards, and callouts.
-- prefers-reduced-motion CSS media query handling.
-- Morphing social icon animation in sidebar.
-- footer-2col, footer-3col, footer-item components.
-- Advanced installation doc.
-- theme_settings typography configuration.
-- Fixed Liquid include syntax error in footer columns.
-- Re-aligned and offset subtext under the title in the inline branding layout when a logo image is present.
-- Improved spacing and rendering of the stacked and split branding layouts.
-- Configurable sidebar branding layouts (inline, stacked, split).
-- High-fidelity interactive landing page layout at docs/splash.md.
-- Ability to toggle line numbers on code blocks with full styling.
-- Dynamic column support and YAML data loading in feature-grid.html.
-- Dynamic JSON endpoint docstats.json compiling counts and tag metrics.
-- Component dependencies.html include displaying linking package badges.
-- Figure/Caption semantic image wrapper component with alignments and link support.
-- Progress/Steps Bar indicator for onboarding or multi-part tutorials.
-- Site Stats metrics component displaying posts, tags, categories, words, and reading time.
-- Automatic developer libraries setup check in CI.
-- DataTable include with sorting, filtering, and pagination support.
-- Timeline vertical chronological event list include.
-- Tag Cloud pill list include scaled dynamically by post count.
-- Modal accessible overlay dialog with full keyboard focus traps.
-- Add icon-grid.html and _icon-grid.scss.
-- Document component in docs/components/icon-grid.md.
-- Add copy-button.html and _copy-button.scss.
-- Document component in docs/components/copy-button.md.
-- Add metrics.html and _metrics.scss.
-- Register System Metrics Grid component in navigation.
-- Document component in docs/components/metrics.md.
-- Add tooltip.html and _tooltip.scss.
-- Register Context Tooltip component in navigation.
-- Document component in docs/components/tooltip.md.
-- Add tree.html and _tree.scss.
-- Register Directory Tree component in navigation.
-- Document component in docs/components/tree.md.
-- Add feedback.html and _feedback.scss.
-- Integrate feedback widget into default layout and site configuration.
-- Document component in docs/components/feedback.md.
-- Add announcement.html and _announcement.scss component.
-- Integrate announcement banner into default layout and site configuration.
-- Document component in docs/components/announcement.md.
-- Add kbd-group.html and kbd.html components.
-- Add _kbd.scss stylesheet.
-- Document components in docs/components/kbd.md.
-- details.html collapsible disclosure component.
-- details.md documentation page and navigation entry.
-- Inline version tag inside the sidebar logo link.
-- Sidebar version badge.
-- Customizable foot.html footer partial.
-- Added list of 10 proposed components to dev-notes.md.
-- Custom pure-SVG charting engine extensions.
-- Comprehensive interactive and static charting documentation.
-- Custom container execution environment for GitLab CI/CD.
-- Checked off picsum, documentation verification, and tone refinement tasks.
-- Live layout example pages in the docs site.
-- google analytics: Integration supporting `google_analytics` measurement ID in site configuration.
-- link tracking: Automatic detection and logging of outbound link clicks and document/source downloads.
-- previously-read: client history tracker storing visited pages in localStorage (capped at last 20 entries) and rendering a check-marked recently read list.
-- image: Blur-up progressive loading, lazy loading, and custom border-radius support.
-- carousel: Responsive sliding carousel viewport with custom height, slide indicators, and manual controls.
-- heading anchor links: Hoverable anchor links next to all content section headings, supporting always-visible styling via `zd_headings_always_visible`.
-- rendered-el-showcase: Visual frame wrapper for live UI elements with customizable title, icon, size, and a technical grid/line background.
-- codepen: Easy inclusion of pens with user, height, theme and tab controls.
-- codesandbox: Inclusion of full sandboxes with editable theme, view, and sandbox security settings.
-- sponsored-by: Grid layout with grayscale hover effect, custom columns and branding.
-- customer-callout: Glassmorphic cards with quote text, author info, avatar, and star rating.
-- youtube: Privacy-respecting YouTube embed using youtube-nocookie.com and aspect ratios.
-- iframe: Secure iframe wrapper with glassmorphic fade-out loader spinner.
-- written-by: author profile card displaying name, avatar, bio, and social connections.
-- last-edited: page edit timestamp tracking with configurable format and author info.
-- Typewriter text component
-- Shields.io badge component
-- FAQ Accordion component
-- Progress Bar component
-- Custom HR divider component
-- Direct ZIP download release package artifact
-- Custom tag component with version styling support
-- Text gradient styling component
-- Inline callout variant component
-- Sizing options and compact swatch mode for grid-palette component
-- Centralized deployment section in navigation
-- Theme Colors showcase page
-- Tag component
-- Gradient Text component
-- Inline Callout component
-- Added LaTeX mathematical expressions support
-- Added Mermaid.js diagrams support
+- Added page-level opt-in search defaults. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- None. ([`22bcfbb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/22bcfbb))
+- Enabled Font Awesome config flags. ([`833bb08`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/833bb08))
+- context-source/extended-knowleadge-lessions-lerned-building-zero-dark.md ([`913d4bc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/913d4bc))
+- context-source/extended-knowleadge-lessions-lerned-building-zero-dark-v1.md ([`913d4bc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/913d4bc))
+- Search providers selection block under theme_settings.search in _config.yml. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Dynamic Liquid search index generator (search-index.json). ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Custom, uniform search interface (modal input and results drawer) for Lyra and Algolia. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Complete search configuration guide in docs/search.md. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Fixed .gitignore rule that mistakenly ignored assets/js/vendor/ folder. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Global animations toggle system in _config.yml. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Page load fade-in animations. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Hover transition and scale effects on buttons, tags, cards, and callouts. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- prefers-reduced-motion CSS media query handling. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Morphing social icon animation in sidebar. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- footer-2col, footer-3col, footer-item components. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Advanced installation doc. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- theme_settings typography configuration. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Fixed Liquid include syntax error in footer columns. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Re-aligned and offset subtext under the title in the inline branding layout when a logo image is present. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Improved spacing and rendering of the stacked and split branding layouts. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Configurable sidebar branding layouts (inline, stacked, split). ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- High-fidelity interactive landing page layout at docs/splash.md. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Ability to toggle line numbers on code blocks with full styling. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- None. ([`0786076`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0786076))
+- None. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- None. ([`684f435`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/684f435))
+- Dynamic column support and YAML data loading in feature-grid.html. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Dynamic JSON endpoint docstats.json compiling counts and tag metrics. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Component dependencies.html include displaying linking package badges. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Figure/Caption semantic image wrapper component with alignments and link support. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Progress/Steps Bar indicator for onboarding or multi-part tutorials. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Site Stats metrics component displaying posts, tags, categories, words, and reading time. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Automatic developer libraries setup check in CI. ([`da47190`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/da47190))
+- DataTable include with sorting, filtering, and pagination support. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Timeline vertical chronological event list include. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Tag Cloud pill list include scaled dynamically by post count. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Modal accessible overlay dialog with full keyboard focus traps. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Add icon-grid.html and _icon-grid.scss. ([closes #24](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/24)) ([`9123163`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9123163))
+- Document component in docs/components/icon-grid.md. ([closes #24](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/24)) ([`9123163`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9123163))
+- Add copy-button.html and _copy-button.scss. ([closes #23](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/23)) ([`a6e4fb6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a6e4fb6))
+- Document component in docs/components/copy-button.md. ([closes #23](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/23)) ([`a6e4fb6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a6e4fb6))
+- Add metrics.html and _metrics.scss. ([closes #28](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/28)) ([`5ce1ad6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5ce1ad6))
+- Register System Metrics Grid component in navigation. ([closes #28](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/28)) ([`5ce1ad6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5ce1ad6))
+- Document component in docs/components/metrics.md. ([closes #28](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/28)) ([`5ce1ad6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5ce1ad6))
+- Add tooltip.html and _tooltip.scss. ([closes #27](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/27)) ([`a5d8a35`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a5d8a35))
+- Register Context Tooltip component in navigation. ([closes #27](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/27)) ([`a5d8a35`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a5d8a35))
+- Document component in docs/components/tooltip.md. ([closes #27](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/27)) ([`a5d8a35`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a5d8a35))
+- Add tree.html and _tree.scss. ([closes #26](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/26)) ([`cf61bd1`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cf61bd1))
+- Register Directory Tree component in navigation. ([closes #26](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/26)) ([`cf61bd1`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cf61bd1))
+- Document component in docs/components/tree.md. ([closes #26](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/26)) ([`cf61bd1`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cf61bd1))
+- Add feedback.html and _feedback.scss. ([closes #25](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/25)) ([`c2f24c9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/c2f24c9))
+- Integrate feedback widget into default layout and site configuration. ([closes #25](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/25)) ([`c2f24c9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/c2f24c9))
+- Document component in docs/components/feedback.md. ([closes #25](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/25)) ([`c2f24c9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/c2f24c9))
+- Add announcement.html and _announcement.scss component. ([closes #22](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/22)) ([`3a4cfee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3a4cfee))
+- Integrate announcement banner into default layout and site configuration. ([closes #22](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/22)) ([`3a4cfee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3a4cfee))
+- Document component in docs/components/announcement.md. ([closes #22](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/22)) ([`3a4cfee`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3a4cfee))
+- Add kbd-group.html and kbd.html components. ([closes #21](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/21)) ([`481c9e9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/481c9e9))
+- Add _kbd.scss stylesheet. ([closes #21](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/21)) ([`481c9e9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/481c9e9))
+- Document components in docs/components/kbd.md. ([closes #21](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/21)) ([`481c9e9`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/481c9e9))
+- details.html collapsible disclosure component. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- details.md documentation page and navigation entry. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Inline version tag inside the sidebar logo link. ([closes #19](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/19)) ([`613b89c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/613b89c))
+- Sidebar version badge. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Customizable foot.html footer partial. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Added list of 10 proposed components to dev-notes.md. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- None. ([closes #17](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/17)) ([`b99e2d6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b99e2d6))
+- Custom pure-SVG charting engine extensions. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Comprehensive interactive and static charting documentation. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Custom container execution environment for GitLab CI/CD. ([closes #15](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/15)) ([`2b3067b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/2b3067b))
+- Checked off picsum, documentation verification, and tone refinement tasks. ([closes #14](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/14)) ([`449879a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/449879a))
+- Live layout example pages in the docs site. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- google analytics: Integration supporting `google_analytics` measurement ID in site configuration. ([`1fad111`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fad111))
+- link tracking: Automatic detection and logging of outbound link clicks and document/source downloads. ([`1fad111`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fad111))
+- previously-read: client history tracker storing visited pages in localStorage (capped at last 20 entries) and rendering a check-marked recently read list. ([`d1bd302`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d1bd302))
+- image: Blur-up progressive loading, lazy loading, and custom border-radius support. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- carousel: Responsive sliding carousel viewport with custom height, slide indicators, and manual controls. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- heading anchor links: Hoverable anchor links next to all content section headings, supporting always-visible styling via `zd_headings_always_visible`. ([`bb10f6f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bb10f6f))
+- rendered-el-showcase: Visual frame wrapper for live UI elements with customizable title, icon, size, and a technical grid/line background. ([`873c460`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/873c460))
+- codepen: Easy inclusion of pens with user, height, theme and tab controls. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- codesandbox: Inclusion of full sandboxes with editable theme, view, and sandbox security settings. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- sponsored-by: Grid layout with grayscale hover effect, custom columns and branding. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- customer-callout: Glassmorphic cards with quote text, author info, avatar, and star rating. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- youtube: Privacy-respecting YouTube embed using youtube-nocookie.com and aspect ratios. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- iframe: Secure iframe wrapper with glassmorphic fade-out loader spinner. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- written-by: author profile card displaying name, avatar, bio, and social connections. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- last-edited: page edit timestamp tracking with configurable format and author info. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- Typewriter text component ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Shields.io badge component ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- FAQ Accordion component ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Progress Bar component ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Custom HR divider component ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Direct ZIP download release package artifact ([`8d073a5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d073a5))
+- Custom tag component with version styling support ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Text gradient styling component ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Inline callout variant component ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Sizing options and compact swatch mode for grid-palette component ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Centralized deployment section in navigation ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Theme Colors showcase page ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- Tag component ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- Gradient Text component ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- Inline Callout component ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- Added LaTeX mathematical expressions support ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
+- Added Mermaid.js diagrams support ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
 
 ### Bug Fixes
-- None.
-- Fixed 404/MIME type mismatch blocks on Pagefind and Google Fonts CDN resources.
-- Fixed mismatched theme lockfile dependency naming in docs Gemfile.lock.
-- Restored Google Analytics script tags closing syntax in head.html.
-- Fixed alignment issue where the branding text layout did not correctly render all three options.
-- Scrubbed non-compliant terminology ('premium') from all documentation and styles.
-- Prevent development GA pageviews from polluting production metrics.
-- ci publish release - removed from tag-snapshots
-- Excluded auxiliary headings inside components (e.g. metrics, tooltips, cards) from the Table of Contents.
-- Renamed case-mismatched Gemfile to prevent Linux environment pipeline failures.
-- Fixed Liquid include syntax evaluation bug inside comment headers.
-- Suppressed Bundler root execution failure confusion and fixed gem native extension compile errors.
-- Added ARIA describedby and screen-reader elements to the CSS tooltip include.
-- Kramdown paragraph wrapping bug for inline includes.
-- ci invalid docker image pointer (fix)
-- ci invalid rule when using exerpt tags (fix)
-- Restructured navigation and updated color palette output
+- None. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Fixed 404/MIME type mismatch blocks on Pagefind and Google Fonts CDN resources. ([`22bcfbb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/22bcfbb))
+- Fixed mismatched theme lockfile dependency naming in docs Gemfile.lock. ([`833bb08`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/833bb08))
+- Restored Google Analytics script tags closing syntax in head.html. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Fixed alignment issue where the branding text layout did not correctly render all three options. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Scrubbed non-compliant terminology ('premium') from all documentation and styles. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Prevent development GA pageviews from polluting production metrics. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- ci publish release - removed from tag-snapshots ([`5187798`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/5187798))
+- None. ([`0786076`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0786076))
+- Excluded auxiliary headings inside components (e.g. metrics, tooltips, cards) from the Table of Contents. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- Renamed case-mismatched Gemfile to prevent Linux environment pipeline failures. ([`684f435`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/684f435))
+- Fixed Liquid include syntax evaluation bug inside comment headers. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- None. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Suppressed Bundler root execution failure confusion and fixed gem native extension compile errors. ([`da47190`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/da47190))
+- Added ARIA describedby and screen-reader elements to the CSS tooltip include. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- None. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- None. ([closes #19](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/19)) ([`613b89c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/613b89c))
+- None. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Kramdown paragraph wrapping bug for inline includes. ([closes #17](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/17)) ([`b99e2d6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b99e2d6))
+- None. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- ci invalid docker image pointer (fix) ([`2a46a80`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/2a46a80))
+- ci invalid rule when using exerpt tags (fix) ([`732e6fc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/732e6fc))
+- None. ([closes #15](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/15)) ([`2b3067b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/2b3067b))
+- None. ([closes #14](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/14)) ([`449879a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/449879a))
+- None. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- Restructured navigation and updated color palette output ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
 
 ### Notes & Improvements
-- Set search indexing to opt-in by default to prevent index pollution.
-- Filter search-index.json to only compile pages where enable_search: true.
-- Conditionally apply data-pagefind-ignore to body tags in default and splash layouts for non-opt-in pages.
-- Bulk inject enable_search: true to front matter of all existing documentation and component pages.
-- Document page-level search opt-in metadata rules in search.md.
-- Corrected Pagefind CDN URLs from non-existent /dist/ path to npm folder structures (css/ui.css and ui.js).
-- Updated Pagefind script to load as an ES module, with fallback polling logic in default.html layout for async execution compatibility.
-- Fixed Google Fonts v2 API family separator query parameter from old | pipe to standard &family=.
-- Enable Font Awesome icons globally by default in root and docs configs.
-- Rename internal theme reference in docs Gemfile.lock to match standard naming.
-- docs: standardize headings and theme naming (components)
-- chore: untrack dev-notes in favor of local tracker (workflow)
-- Fixed spelling mistakes across workflow guidelines, search integrations, and extra components lists.
-- Resolved and checked off the collections architecture decision task pointing to solution files.
-- Removed non-compliant terminology ("premium") from view transitions and search comments.
-- Corrected typos (such as "milti-line", "peform", "Intergrations", "caviats").
-- Renamed gemspec to jekyll-theme-zero-dark.gemspec and updated spec properties (name, summary, description, homepage).
-- Updated repository pointers to target zero-dark-jekyll-theme.
-- Updated GitLab CI configuration packaging variables and script releases.
-- Checked off completed naming tasks in dev-notes.md and added solution logs.
-- Fixed incorrect repository links in footer.html and README.md.
-- Creates context-source directory containing lessons learned reference files.
-- Backfills extended lessons learned covering search integrations, Gitignore, case-sensitivity in CI, and WSL file locking issues.
-- Adds support for three search providers: Pagefind (WASM), Lyra (Orama client-side), and Algolia (hosted).
-- Supports CDN assets loading vs local self-hosted offline files caching.
-- Creates a custom, zero-dependency lightweight local search client (zd-search-local.js) as a fallback.
-- Corrects root .gitignore patterns to allow tracking of assets/js/vendor/.
-- Implemented global animations config object under theme_settings with options to toggle page loads and hover effects individually.
-- Added fade-in and slide-up page load animations for main content and sidebars.
-- Created micro-animations on hover and active states for cards, callouts, badges, tags, and buttons.
-- Integrated standard prefers-reduced-motion accessibility fallbacks.
-- Provided global animation-reset stylesheets when animations are disabled in configuration.
-- Updated documentation under configuration guide and checked off animations item in dev-notes.
-- docs: check off completed tasks (dev-notes)
-- Animates social media icons in the sidebar to morph from labels to logos.
-- Implements responsive footer columns (footer-2col, footer-3col, footer-item) configurable via _config.yml.
-- Adds collections sibling navigation architecture notice to the landing page.
-- Introduces advanced installation guides covering source compilation and layouts.
-- Adds user-friendly theme_settings typography controls to _config.yml.
-- Renames Zero-Dark-SP branding references to Zero-Dark.
-- Partition sidebar branding markup into top and bottom rows to enable precise alignment in inline, stacked, and split layouts.
-- Remove all instances of the word 'premium' across SASS comments, layout structures, and documentation, replacing them with 'elegant', 'professional', or 'useful'.
-- Mark resolved tasks in dev-notes.md.
-- Expose theme_settings.logo.layout configuration.
-- Implement inline, stacked, and split layouts for branding block.
-- Design premium app variant landing page in docs/splash.md.
-- Ensure Google Analytics is disabled in local development mode.
-- Style and document Kramdown code block line numbers support.
-- Synchronized VERSION file and docs/_config.yml with the output from Get-GitAutoVersion.
-- Updated generateTOC in default.html to exclude headings that are child elements of component wrappers.
-- Configured GIT_DEPTH: "0" in .gitlab-ci.yml to ensure full git history is fetched for correct SemVer evaluation.
-- Marked Heading & TOC Refinement task as completed in dev-notes.md.
-- Verified successful Jekyll build trace compiling.
-- Renamed GemFile and GemFile.lock to lowercase Gemfile and Gemfile.lock.
-- Documented the CI Gemfile location bug under the Bug Fixes section of dev-notes.md.
-- Enhanced Feature Grid to support data-driven source files and custom column layout sizes.
-- Added a dynamic site document stats JSON API endpoint.
-- Created a component dependency mapping display badge with automatic links.
-- Registered new components in the navigation structure and components gallery.
-- Updated dev-notes.md task lists, marked completed tasks, and polished unchecked tasks wording.
-- Verified successful Jekyll build with local trace.
-- Silenced root execution warnings in Bundler.
-- Restored jekyll build before_script with automatic Debian/Alpine compiler headers installation.
-- Disabled before_script on build_gem to optimize build stage execution.
-- Registered new components in navigation sidebar configuration.
-- Added premium CSS animations, focus trapping, and ARIA attributes for modals and tooltips.
-- Verified successful Jekyll local trace compiling.
-- style: add descriptive liquid header comments and finalize checklist (comps)
-- Created details.html collapsible block component using native HTML details/summary elements.
-- Styled using the pre-existing zd-details and zd-details-content SASS classes.
-- Created documentation in docs/components/details.md.
-- Registered Details Dropdown in docs/_data/navigation.yml.
-- Checked off details component in dev-notes.md.
-- Moved the version tag inside the zd-logo anchor element.
-- Configured the version tag to show a tag icon and highlight color.
-- Checked off the sub-task in dev-notes.md.
-- Added version tag display to the sidebar below the main logo (toggled via zd_show_version in config).
-- Created a customizable foot.html placeholder in includes/core.
-- Modified footer.html to include core/foot.html at the bottom of the page structure.
-- Updated docs config and theme root config with version: 1.0.0 and zd_show_version: true.
-- Checked off tasks in dev-notes.md and populated 10 proposed components.
-- Collapsed button.html, tag.html, shield.html, simple-icon.html, and font-awesome.html onto single physical lines.
-- Prevents Kramdown from inserting paragraph blocks inside paragraphs when includes are used inline.
-- Extended svgcharts.html with zero-JS support for polarArea, radar, scatter, and bubble charts.
-- Programmed circular sector calculation using dynamic rotation transformations.
-- Implemented trigonometric lookup tables for radar charts supporting 3 to 7 variables.
-- Programmed Cartesian coordinates (x:y and x:y:r) scaling for scatter and bubble charts.
-- Updated documentation in docs/components/svgcharts.md and docs/components/chartjs.md.
-- Set base executor image to phellams-automator for consistent pipelines.
-- Standardized job templates for test, build, deploy, and release stages.
-- Checked all includes/comps components for corresponding docs/components pages (100% covered).
-- Refined description texts to use professional/technical tone instead of informal phrasing (removed 'simply', 'easy').
-- Updated checklist in dev-notes.md.
-- Created example pages for blog-list, metrics, portfolio, space, and splash layouts.
-- Updated layouts.md to reference live layout previews.
-- Modified blog-list layout to output content at the top for custom overlays/buttons.
-- Marked layouts, markdown theme, and api-ref tasks as completed in dev-notes.md.
-- Added styling rules for inline code blocks (background, padding, borders).
-- Added styling rules for keyboard tags (`kbd`) simulating keys.
-- Configured left accent border and italic text for blockquotes.
-- Styled standard Markdown tables with custom padding, borders, headers, and striping.
-- Documented keyboard shortcuts styling additions in docs/markdown.md.
-- Renamed api-ref component and stylesheet to command-ref to better target CLI documentation.
-- Created api-reference component and stylesheet for REST/web API documentation.
-- Documented both components under docs/components.
-- Updated docs/components/index.md and docs/_data/navigation.yml.
-- Added svgcharts.html component for zero-JS server-side data visualizations.
-- Programmed bar, line, pie, and doughnut charts rendered completely in SVG.
-- Created dynamic legends and calculated percentage offsets for circular charts.
-- Documented component usage in docs/components/svgcharts.md.
-- Registered component in docs/_data/navigation.yml.
-- Added chartjs.html component utilizing Chart.js CDN for interactive canvas charts.
-- Configured default ZeroDark style themes (colors, borders, grid opacity, typography) on charts.
-- Added support for line, bar, pie, doughnut, radar, and polarArea charts.
-- Support sourcing datasets directly from site.data YAML files.
-- Documented usage in docs/components/chartjs.md and registered in navigation.yml.
-- Checked off all newly implemented extended components and features in dev-notes.md.
-- Added Google Analytics 4 script tag in core/head.html.
-- Added automatic outbound link and file download click tracking event listeners.
-- Documented settings and auto-event tracking in docs/configuration.md.
-- Added previously-read component for local history tracking.
-- Added page visit logging in default layout client script.
-- Documented component in docs/components/previously-read.md.
-- Added image component with blur-up Progressive Loading.
-- Added carousel component for sliding image decks.
-- Documented both components in docs/components.
-- Registered both components in docs/_data/navigation.yml.
-- Added heading hover anchor links in default layout.
-- Configured anchor links visibility toggle in site settings.
-- Documented feature in docs/components/heading.md.
-- Added rendered-el-showcase component for rendering live UI examples.
-- Documented the component in docs/components.
-- Registered the component in docs/_data/navigation.yml.
-- Added codepen component for interactive CodePen iframe embeds.
-- Added codesandbox component for embedding CodeSandbox dev boxes.
-- Added sponsored-by component for rendering sponsor/partner logos.
-- Added customer-callout component for rendering testimonials.
-- Added youtube component for privacy-respecting YouTube embeds.
-- Added iframe component with a skeleton loader.
-- Added written-by component for author profile display.
-- Added last-edited component for tracking file change timestamps.
-- Added typewriter.html for text typing animations
-- Added shield.html for Shields.io badges
-- Added faq.html and faq-item.html accordion panels
-- Added progress.html for percent-complete bars
-- Added hr.html for solid/gradient horizontal rules
-- Documented all new components under docs/components/
-- Restructured navigation and updated dev-notes.md checklist and grammar
-- Updated README.md with local build steps and Direct ZIP download links
-- Modified .gitlab-ci.yml to package release as generic ZIP asset and attach to Git Release
-- Final release for ZeroDark SP theme version 1.0.0
-- Updated dev-notes.md and set the release version to 1.0.0
-- Commit all base includes, layouts, sass, and assets
-- Commit base documentation and deployment guides
-- Documented tag, gradient-text, and inline-callout components
-- Updated grid-palette documentation for swatch and icon modes
-- Created theme-colors.md to showcase the branding palette
-- Documented Mermaid.js and LaTeX integration in customization.md
-- Restructured navigation.yml to make Deployment a top-level section
-- tag.html component for custom version/badge labels
-- gradient-text.html component for linear-gradient text styling
-- inline-callout.html component for compact admonitions
-- Expanded grid-palette.html to support swatch mode and icons
-- Centralized styles for version tags and text gradients in _components.scss
-- Compact swatch styling added to _color-blocks.scss
-- Conditionally load KaTeX and Mermaid scripts in head.html
-- Initialize Mermaid in default.html layout
-- chore: adding tools - script files
-- config: adding npm config files
-- license: Add or update license.
-- Initial commit
+- Set search indexing to opt-in by default to prevent index pollution. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Filter search-index.json to only compile pages where enable_search: true. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Conditionally apply data-pagefind-ignore to body tags in default and splash layouts for non-opt-in pages. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Bulk inject enable_search: true to front matter of all existing documentation and component pages. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Document page-level search opt-in metadata rules in search.md. ([`075c527`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/075c527))
+- Corrected Pagefind CDN URLs from non-existent /dist/ path to npm folder structures (css/ui.css and ui.js). ([`22bcfbb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/22bcfbb))
+- Updated Pagefind script to load as an ES module, with fallback polling logic in default.html layout for async execution compatibility. ([`22bcfbb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/22bcfbb))
+- Fixed Google Fonts v2 API family separator query parameter from old | pipe to standard &family=. ([`22bcfbb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/22bcfbb))
+- Enable Font Awesome icons globally by default in root and docs configs. ([`833bb08`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/833bb08))
+- Rename internal theme reference in docs Gemfile.lock to match standard naming. ([`833bb08`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/833bb08))
+- docs: standardize headings and theme naming (components) ([`4f36bb1`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4f36bb1))
+- chore: untrack dev-notes in favor of local tracker (workflow) ([`9f4907e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9f4907e))
+- Fixed spelling mistakes across workflow guidelines, search integrations, and extra components lists. ([`80eac3e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80eac3e))
+- Resolved and checked off the collections architecture decision task pointing to solution files. ([`80eac3e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80eac3e))
+- Removed non-compliant terminology ("premium") from view transitions and search comments. ([`80eac3e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80eac3e))
+- Corrected typos (such as "milti-line", "peform", "Intergrations", "caviats"). ([`80eac3e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80eac3e))
+- Renamed gemspec to jekyll-theme-zero-dark.gemspec and updated spec properties (name, summary, description, homepage). ([`e0d691c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e0d691c))
+- Updated repository pointers to target zero-dark-jekyll-theme. ([`e0d691c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e0d691c))
+- Updated GitLab CI configuration packaging variables and script releases. ([`e0d691c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e0d691c))
+- Checked off completed naming tasks in dev-notes.md and added solution logs. ([`e0d691c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e0d691c))
+- Fixed incorrect repository links in footer.html and README.md. ([`e0d691c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e0d691c))
+- Creates context-source directory containing lessons learned reference files. ([`913d4bc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/913d4bc))
+- Backfills extended lessons learned covering search integrations, Gitignore, case-sensitivity in CI, and WSL file locking issues. ([`913d4bc`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/913d4bc))
+- Adds support for three search providers: Pagefind (WASM), Lyra (Orama client-side), and Algolia (hosted). ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Supports CDN assets loading vs local self-hosted offline files caching. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Creates a custom, zero-dependency lightweight local search client (zd-search-local.js) as a fallback. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Corrects root .gitignore patterns to allow tracking of assets/js/vendor/. ([`3b63d31`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3b63d31))
+- Implemented global animations config object under theme_settings with options to toggle page loads and hover effects individually. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Added fade-in and slide-up page load animations for main content and sidebars. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Created micro-animations on hover and active states for cards, callouts, badges, tags, and buttons. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Integrated standard prefers-reduced-motion accessibility fallbacks. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Provided global animation-reset stylesheets when animations are disabled in configuration. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- Updated documentation under configuration guide and checked off animations item in dev-notes. ([`a661b07`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a661b07))
+- docs: check off completed tasks (dev-notes) ([`543023b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/543023b))
+- Animates social media icons in the sidebar to morph from labels to logos. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Implements responsive footer columns (footer-2col, footer-3col, footer-item) configurable via _config.yml. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Adds collections sibling navigation architecture notice to the landing page. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Introduces advanced installation guides covering source compilation and layouts. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Adds user-friendly theme_settings typography controls to _config.yml. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Renames Zero-Dark-SP branding references to Zero-Dark. ([`4749155`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4749155))
+- Partition sidebar branding markup into top and bottom rows to enable precise alignment in inline, stacked, and split layouts. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Remove all instances of the word 'premium' across SASS comments, layout structures, and documentation, replacing them with 'elegant', 'professional', or 'useful'. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Mark resolved tasks in dev-notes.md. ([`6ea07b6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/6ea07b6))
+- Expose theme_settings.logo.layout configuration. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Implement inline, stacked, and split layouts for branding block. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Design premium app variant landing page in docs/splash.md. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Ensure Google Analytics is disabled in local development mode. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Style and document Kramdown code block line numbers support. ([`abce552`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/abce552))
+- Synchronized VERSION file and docs/_config.yml with the output from Get-GitAutoVersion. ([`0786076`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0786076))
+- Updated generateTOC in default.html to exclude headings that are child elements of component wrappers. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- Configured GIT_DEPTH: "0" in .gitlab-ci.yml to ensure full git history is fetched for correct SemVer evaluation. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- Marked Heading & TOC Refinement task as completed in dev-notes.md. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- Verified successful Jekyll build trace compiling. ([`dda5e3b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/dda5e3b))
+- Renamed GemFile and GemFile.lock to lowercase Gemfile and Gemfile.lock. ([`684f435`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/684f435))
+- Documented the CI Gemfile location bug under the Bug Fixes section of dev-notes.md. ([`684f435`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/684f435))
+- Verified successful Jekyll build trace compiling. ([`684f435`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/684f435))
+- Enhanced Feature Grid to support data-driven source files and custom column layout sizes. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Added a dynamic site document stats JSON API endpoint. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Created a component dependency mapping display badge with automatic links. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Verified successful Jekyll build trace compiling. ([`b16ae37`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b16ae37))
+- Registered new components in the navigation structure and components gallery. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Updated dev-notes.md task lists, marked completed tasks, and polished unchecked tasks wording. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Verified successful Jekyll build with local trace. ([`ea90771`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/ea90771))
+- Silenced root execution warnings in Bundler. ([`da47190`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/da47190))
+- Restored jekyll build before_script with automatic Debian/Alpine compiler headers installation. ([`da47190`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/da47190))
+- Disabled before_script on build_gem to optimize build stage execution. ([`da47190`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/da47190))
+- Registered new components in navigation sidebar configuration. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Added premium CSS animations, focus trapping, and ARIA attributes for modals and tooltips. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- Verified successful Jekyll local trace compiling. ([`e98355b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/e98355b))
+- style: add descriptive liquid header comments and finalize checklist (comps) ([`359fed0`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/359fed0))
+- Created details.html collapsible block component using native HTML details/summary elements. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Styled using the pre-existing zd-details and zd-details-content SASS classes. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Created documentation in docs/components/details.md. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Registered Details Dropdown in docs/_data/navigation.yml. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Checked off details component in dev-notes.md. ([closes #20](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/20)) ([`0e16872`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0e16872))
+- Moved the version tag inside the zd-logo anchor element. ([closes #19](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/19)) ([`613b89c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/613b89c))
+- Configured the version tag to show a tag icon and highlight color. ([closes #19](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/19)) ([`613b89c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/613b89c))
+- Checked off the sub-task in dev-notes.md. ([closes #19](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/19)) ([`613b89c`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/613b89c))
+- Added version tag display to the sidebar below the main logo (toggled via zd_show_version in config). ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Created a customizable foot.html placeholder in includes/core. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Modified footer.html to include core/foot.html at the bottom of the page structure. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Updated docs config and theme root config with version: 1.0.0 and zd_show_version: true. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Checked off tasks in dev-notes.md and populated 10 proposed components. ([closes #18](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/18)) ([`f157f0d`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/f157f0d))
+- Collapsed button.html, tag.html, shield.html, simple-icon.html, and font-awesome.html onto single physical lines. ([closes #17](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/17)) ([`b99e2d6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b99e2d6))
+- Prevents Kramdown from inserting paragraph blocks inside paragraphs when includes are used inline. ([closes #17](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/17)) ([`b99e2d6`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b99e2d6))
+- Extended svgcharts.html with zero-JS support for polarArea, radar, scatter, and bubble charts. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Programmed circular sector calculation using dynamic rotation transformations. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Implemented trigonometric lookup tables for radar charts supporting 3 to 7 variables. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Programmed Cartesian coordinates (x:y and x:y:r) scaling for scatter and bubble charts. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Updated documentation in docs/components/svgcharts.md and docs/components/chartjs.md. ([closes #16](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/16)) ([`3dc2900`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/3dc2900))
+- Set base executor image to phellams-automator for consistent pipelines. ([closes #15](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/15)) ([`2b3067b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/2b3067b))
+- Standardized job templates for test, build, deploy, and release stages. ([closes #15](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/15)) ([`2b3067b`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/2b3067b))
+- Checked all includes/comps components for corresponding docs/components pages (100% covered). ([closes #14](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/14)) ([`449879a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/449879a))
+- Refined description texts to use professional/technical tone instead of informal phrasing (removed 'simply', 'easy'). ([closes #14](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/14)) ([`449879a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/449879a))
+- Updated checklist in dev-notes.md. ([closes #14](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/14)) ([`449879a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/449879a))
+- Created example pages for blog-list, metrics, portfolio, space, and splash layouts. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- Updated layouts.md to reference live layout previews. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- Modified blog-list layout to output content at the top for custom overlays/buttons. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- Marked layouts, markdown theme, and api-ref tasks as completed in dev-notes.md. ([closes #13](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/13)) ([`29a1790`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/29a1790))
+- Added styling rules for inline code blocks (background, padding, borders). ([closes #12](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/12)) ([`a963bfb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a963bfb))
+- Added styling rules for keyboard tags (`kbd`) simulating keys. ([closes #12](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/12)) ([`a963bfb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a963bfb))
+- Configured left accent border and italic text for blockquotes. ([closes #12](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/12)) ([`a963bfb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a963bfb))
+- Styled standard Markdown tables with custom padding, borders, headers, and striping. ([closes #12](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/12)) ([`a963bfb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a963bfb))
+- Documented keyboard shortcuts styling additions in docs/markdown.md. ([closes #12](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/12)) ([`a963bfb`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/a963bfb))
+- Renamed api-ref component and stylesheet to command-ref to better target CLI documentation. ([closes #11](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/11)) ([`bee2f4f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bee2f4f))
+- Created api-reference component and stylesheet for REST/web API documentation. ([closes #11](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/11)) ([`bee2f4f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bee2f4f))
+- Documented both components under docs/components. ([closes #11](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/11)) ([`bee2f4f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bee2f4f))
+- Updated docs/components/index.md and docs/_data/navigation.yml. ([closes #11](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/11)) ([`bee2f4f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bee2f4f))
+- Added svgcharts.html component for zero-JS server-side data visualizations. ([closes #10](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/10)) ([`d6f2320`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d6f2320))
+- Programmed bar, line, pie, and doughnut charts rendered completely in SVG. ([closes #10](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/10)) ([`d6f2320`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d6f2320))
+- Created dynamic legends and calculated percentage offsets for circular charts. ([closes #10](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/10)) ([`d6f2320`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d6f2320))
+- Documented component usage in docs/components/svgcharts.md. ([closes #10](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/10)) ([`d6f2320`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d6f2320))
+- Registered component in docs/_data/navigation.yml. ([closes #10](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/10)) ([`d6f2320`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d6f2320))
+- Added chartjs.html component utilizing Chart.js CDN for interactive canvas charts. ([closes #9](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/9)) ([`1baabde`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1baabde))
+- Configured default ZeroDark style themes (colors, borders, grid opacity, typography) on charts. ([closes #9](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/9)) ([`1baabde`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1baabde))
+- Added support for line, bar, pie, doughnut, radar, and polarArea charts. ([closes #9](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/9)) ([`1baabde`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1baabde))
+- Support sourcing datasets directly from site.data YAML files. ([closes #9](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/9)) ([`1baabde`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1baabde))
+- Documented usage in docs/components/chartjs.md and registered in navigation.yml. ([closes #9](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/issues/9)) ([`1baabde`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1baabde))
+- Checked off all newly implemented extended components and features in dev-notes.md. ([`272174e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/272174e))
+- Added Google Analytics 4 script tag in core/head.html. ([`1fad111`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fad111))
+- Added automatic outbound link and file download click tracking event listeners. ([`1fad111`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fad111))
+- Documented settings and auto-event tracking in docs/configuration.md. ([`1fad111`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/1fad111))
+- Added previously-read component for local history tracking. ([`d1bd302`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d1bd302))
+- Added page visit logging in default layout client script. ([`d1bd302`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d1bd302))
+- Documented component in docs/components/previously-read.md. ([`d1bd302`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d1bd302))
+- Registered component in docs/_data/navigation.yml. ([`d1bd302`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/d1bd302))
+- Added image component with blur-up Progressive Loading. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- Added carousel component for sliding image decks. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- Documented both components in docs/components. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- Registered both components in docs/_data/navigation.yml. ([`4832121`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/4832121))
+- Added heading hover anchor links in default layout. ([`bb10f6f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bb10f6f))
+- Configured anchor links visibility toggle in site settings. ([`bb10f6f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bb10f6f))
+- Documented feature in docs/components/heading.md. ([`bb10f6f`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/bb10f6f))
+- Added rendered-el-showcase component for rendering live UI examples. ([`873c460`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/873c460))
+- Documented the component in docs/components. ([`873c460`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/873c460))
+- Registered the component in docs/_data/navigation.yml. ([`873c460`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/873c460))
+- Added codepen component for interactive CodePen iframe embeds. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- Added codesandbox component for embedding CodeSandbox dev boxes. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- Documented both components in docs/components. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- Registered both components in docs/_data/navigation.yml. ([`86b8941`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/86b8941))
+- Added sponsored-by component for rendering sponsor/partner logos. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- Added customer-callout component for rendering testimonials. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- Documented both components in docs/components. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- Registered both components in docs/_data/navigation.yml. ([`90da4ba`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/90da4ba))
+- Added youtube component for privacy-respecting YouTube embeds. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- Added iframe component with a skeleton loader. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- Documented both components in docs/components. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- Registered both components in docs/_data/navigation.yml. ([`0249fc8`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/0249fc8))
+- Added written-by component for author profile display. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- Added last-edited component for tracking file change timestamps. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- Documented both components in docs/components. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- Registered both components in docs/_data/navigation.yml. ([`880274e`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/880274e))
+- Added typewriter.html for text typing animations ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Added shield.html for Shields.io badges ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Added faq.html and faq-item.html accordion panels ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Added progress.html for percent-complete bars ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Added hr.html for solid/gradient horizontal rules ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Documented all new components under docs/components/ ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Restructured navigation and updated dev-notes.md checklist and grammar ([`25629ad`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/25629ad))
+- Updated README.md with local build steps and Direct ZIP download links ([`8d073a5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d073a5))
+- Modified .gitlab-ci.yml to package release as generic ZIP asset and attach to Git Release ([`8d073a5`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/8d073a5))
+- Final release for ZeroDark SP theme version 1.0.0 ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Updated dev-notes.md and set the release version to 1.0.0 ([`fd2aac3`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/fd2aac3))
+- Commit all base includes, layouts, sass, and assets ([`cdefdae`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cdefdae))
+- Commit base documentation and deployment guides ([`cdefdae`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/cdefdae))
+- Documented tag, gradient-text, and inline-callout components ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- Updated grid-palette documentation for swatch and icon modes ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- Created theme-colors.md to showcase the branding palette ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- Documented Mermaid.js and LaTeX integration in customization.md ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- Restructured navigation.yml to make Deployment a top-level section ([`80b1865`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/80b1865))
+- tag.html component for custom version/badge labels ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- gradient-text.html component for linear-gradient text styling ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- inline-callout.html component for compact admonitions ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- Expanded grid-palette.html to support swatch mode and icons ([`b382145`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/b382145))
+- Centralized styles for version tags and text gradients in _components.scss ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
+- Compact swatch styling added to _color-blocks.scss ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
+- Conditionally load KaTeX and Mermaid scripts in head.html ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
+- Initialize Mermaid in default.html layout ([`12eb978`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/12eb978))
+- chore: adding tools - script files ([`27ed373`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/27ed373))
+- config: adding npm config files ([`9a01605`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9a01605))
+- license: Add or update license. ([`9ce9a8a`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/9ce9a8a))
+- Initial commit ([`03af2fe`](https://gitlab.com/staticcanvas/ravenui-jekyll-theme/-/commit/03af2fe))

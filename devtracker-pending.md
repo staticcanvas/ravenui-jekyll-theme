@@ -9,8 +9,6 @@
 - [ ] 🟡🌟 **DX/Deployment** - Deployment to third-party Jekyll theme directories. [#58](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/58)
 - [ ] 🟡🌟 **Features/IssueTemplate** - Research and design a "Report Issue" template component where users fill out a form that compiles to a merge request, exploring secure API integrations for static sites to prevent exposure of API keys. [#64](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/64)
 - [ ] 🟡🌟 **Features/TiltedCarousel** - Design and build a "Tilted Lapping Carousel" component featuring overlapping, swiveled, and layered card layouts (where spacing scales dynamically with card density). Implement card-flipping hover animations. [#65](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/65)
-- [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
-- [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
 ### **Bug Fixes (priority-4)**
 ### **Refactoring & QOL (priority-5)**
 ### **Documentation & Docs (priority-6)**

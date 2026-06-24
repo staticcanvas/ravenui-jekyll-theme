@@ -18,6 +18,30 @@ function Get-NextSemVer([string]$currentVersion, [string]$incrementType) {
     return $currentVersion
 }
 
+function Get-GitStagedClosedIssues {
+    $closedIssues = [System.Collections.Generic.List[int]]::new()
+    try {
+        $sourceFile = Resolve-RepoPath "devtracker-source.md"
+        if (-not [System.IO.File]::Exists($sourceFile)) { return $closedIssues }
+        
+        $diffLines = @(git diff --cached $sourceFile 2>$null)
+        foreach ($line in $diffLines) {
+            # Match added completed task line: e.g. "+- [x] 🟡🌟 **Category** - Desc [#62](...)"
+            if ($line -match '^\+\s*[-*]\s*\[[xX]\]\s*(?:[🟢🔴🟡🟠🟩🟥🟧🪲🌀❓✅✔️💡🌟🦀🩹0-9️⃣🔟\s]+)?\*\*(.*?)\*\*\s*-\s*(.*?)(?:\s+(?:#\d+|\[#(\d+)\]\(.*?\)))?$') {
+                if ($Matches.ContainsKey(3)) {
+                    $iid = [int]$Matches[3]
+                    if (-not $closedIssues.Contains($iid)) {
+                        $closedIssues.Add($iid)
+                    }
+                }
+            }
+        }
+    } catch {
+        # Ignore diff errors
+    }
+    return $closedIssues
+}
+
 function Invoke-GitCommitHelper {
     Write-TrackerLog 'act' "Starting Conventional Commit prompt..." "Commit"
     
@@ -128,6 +152,13 @@ function Invoke-GitCommitHelper {
     }
     $bugsBlock = if ($bugsList.Count -gt 0) { $bugsList -join "`n" } else { "- None" }
 
+    $stagedClosed = @(Get-GitStagedClosedIssues)
+    $closingBlock = ""
+    if ($stagedClosed.Count -gt 0) {
+        $issueList = foreach ($issue in $stagedClosed) { "closes #$issue" }
+        $closingBlock = $issueList -join "`n"
+    }
+
     # Build commit message
     $scopeStr = if ($scope) { "($scope)" } else { "" }
     $header = "$($type)$($scopeStr): $summary"
@@ -136,6 +167,9 @@ function Invoke-GitCommitHelper {
     [void]$sb.AppendLine($header)
     [void]$sb.AppendLine("")
     [void]$sb.AppendLine($versionLine)
+    if ($closingBlock) {
+        [void]$sb.AppendLine($closingBlock)
+    }
     [void]$sb.AppendLine("")
     [void]$sb.AppendLine("Notes:")
     [void]$sb.AppendLine($notesBlock)
@@ -412,6 +446,36 @@ function Invoke-GitChangelogHelper {
     # Get git commits line-by-line
     $gitLogRaw = git log --format="%H%n%aI%n%s%n%b%n---COMMIT_END---" 2>&1
     
+    $repoUrl = ""
+    try {
+        $remoteRaw = (git remote get-url origin 2>$null)
+        if ($null -ne $remoteRaw) {
+            $remoteRaw = $remoteRaw.Trim()
+            if ($remoteRaw -match '^https?://(?:[^@:]+:[^@]+@)?([^/]+)/(.+?)(?:\.git)?$') {
+                $domain = $Matches[1]
+                $path = $Matches[2]
+                $repoUrl = "https://$domain/$path"
+            }
+            elseif ($remoteRaw -match '^https?://(?:[^@]+@)?([^/]+)/(.+?)(?:\.git)?$') {
+                $domain = $Matches[1]
+                $path = $Matches[2]
+                $repoUrl = "https://$domain/$path"
+            }
+            elseif ($remoteRaw -match '^git@([^:]+):(.+?)(?:\.git)?$') {
+                $domain = $Matches[1]
+                $path = $Matches[2]
+                $repoUrl = "https://$domain/$path"
+            }
+            else {
+                $repoUrl = $remoteRaw
+            }
+        }
+    } catch {}
+    if (-not $repoUrl) {
+        $repoUrl = "https://gitlab.com/staticcanvas/ravenui-jekyll-theme"
+    }
+    $linkSeparator = if ($repoUrl -match "github\.com") { "/commit/" } else { "/-/commit/" }
+
     # Restore location
     Set-Location $oldDir
 
@@ -521,6 +585,36 @@ function Invoke-GitChangelogHelper {
             }
         }
 
+        # Extract closing issues and commit links
+        $commitClosingIssues = [System.Collections.Generic.List[int]]::new()
+        foreach ($line in $c.BodyLines) {
+            if ($line -match '(?i)(?:closes|fixes|resolves)\s+#(\d+)' -or $line -match '(?i)#(\d+)') {
+                $iid = [int]$Matches[1]
+                if (-not $commitClosingIssues.Contains($iid)) {
+                    $commitClosingIssues.Add($iid)
+                }
+            }
+        }
+        if ($c.Subject -match '(?i)#(\d+)') {
+            $iid = [int]$Matches[1]
+            if (-not $commitClosingIssues.Contains($iid)) {
+                $commitClosingIssues.Add($iid)
+            }
+        }
+
+        $closingText = ""
+        if ($commitClosingIssues.Count -gt 0) {
+            $issueLinks = foreach ($iid in $commitClosingIssues) {
+                $issueUrl = if ($repoUrl -match "github\.com") { "$repoUrl/issues/$iid" } else { "$repoUrl/-/issues/$iid" }
+                "[closes #$iid]($issueUrl)"
+            }
+            $closingText = " (" + ($issueLinks -join ", ") + ")"
+        }
+
+        $shortHash = $c.Hash.Substring(0, 7)
+        $commitUrl = "$repoUrl$linkSeparator$shortHash"
+        $commitLinkText = "([``$shortHash``]($commitUrl))"
+
         # Parse body sections
         $state = "none"
         $addedAny = $false
@@ -549,7 +643,7 @@ function Invoke-GitChangelogHelper {
                 if ($lineTrim -match '^[-*]\s*(.*)$') {
                     $val = $Matches[1].Trim()
                     if ($val -ne "None" -and $val -ne "") {
-                        $changelogData[$activeVersion].Notes.Add($val)
+                        $changelogData[$activeVersion].Notes.Add("$val$closingText $commitLinkText")
                         $addedAny = $true
                     }
                 }
@@ -558,7 +652,7 @@ function Invoke-GitChangelogHelper {
                 if ($lineTrim -match '^[-*]\s*(.*)$') {
                     $val = $Matches[1].Trim()
                     if ($val -ne "None" -and $val -ne "") {
-                        $changelogData[$activeVersion].Features.Add($val)
+                        $changelogData[$activeVersion].Features.Add("$val$closingText $commitLinkText")
                         $addedAny = $true
                     }
                 }
@@ -567,7 +661,7 @@ function Invoke-GitChangelogHelper {
                 if ($lineTrim -match '^[-*]\s*(.*)$') {
                     $val = $Matches[1].Trim()
                     if ($val -ne "None" -and $val -ne "") {
-                        $changelogData[$activeVersion].Bugs.Add($val)
+                        $changelogData[$activeVersion].Bugs.Add("$val$closingText $commitLinkText")
                         $addedAny = $true
                     }
                 }
@@ -581,23 +675,23 @@ function Invoke-GitChangelogHelper {
             
             if ($c.Subject -match '^(feat|fix|refactor|docs|chore|style|test|ci|build)(?:\((.*?)\))?:\s*(.*)$') {
                 $type = $Matches[1].ToLower()
-                $scope = $Matches[2]
+                $scope = if ($Matches.ContainsKey(2)) { $Matches[2] } else { $null }
                 $desc = $Matches[3].Trim()
                 $item = if ($scope) { "$desc ($scope)" } else { $desc }
 
                 if ($type -eq "feat") {
-                    $changelogData[$activeVersion].Features.Add($item)
+                    $changelogData[$activeVersion].Features.Add("$item$closingText $commitLinkText")
                 }
                 elseif ($type -eq "fix") {
-                    $changelogData[$activeVersion].Bugs.Add($item)
+                    $changelogData[$activeVersion].Bugs.Add("$item$closingText $commitLinkText")
                 }
                 else {
                     # Group refactor/docs/chore/etc under Notes
-                    $changelogData[$activeVersion].Notes.Add("${type}: $item")
+                    $changelogData[$activeVersion].Notes.Add("${type}: $item$closingText $commitLinkText")
                 }
             }
             else {
-                $changelogData[$activeVersion].Notes.Add($c.Subject)
+                $changelogData[$activeVersion].Notes.Add("$($c.Subject)$closingText $commitLinkText")
             }
         }
     }
@@ -660,4 +754,3 @@ function Invoke-GitChangelogHelper {
     [System.IO.File]::WriteAllText($destPath, $sb.ToString().Trim() + "`n", [System.Text.Encoding]::UTF8)
     Write-TrackerLog 'suc' "Changelog successfully compiled to CHANGELOG.md" "Changelog"
 }
-

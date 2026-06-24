@@ -53,7 +53,7 @@ function Invoke-Devt {
     [Alias('devt')]
     param(
         [Parameter(Mandatory=$false, Position=0)]
-        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "branches", "gitdiff", "changelog", "help")]
+        [ValidateSet("init", "compile", "comp", "sync", "prune", "stats", "list", "add", "remove", "rm", "commit", "diff", "validate", "sync-gitlab", "create-mr", "branches", "gitdiff", "changelog", "capsule", "help")]
         [string]$Mode = "compile",
 
         [Parameter(Mandatory=$false)]
@@ -201,61 +201,8 @@ function Invoke-Devt {
                     exit 1
                 }
 
-                $parsed = Parse-TaskFile $resolvedSourcePath
-                $output = [System.Collections.Generic.List[string]]::new()
-
-                # Add headers
-                foreach ($line in $parsed.HeaderLines) {
-                    $output.Add($line)
-                }
-
-                # Add instructions if kept
-                if ($KeepInstructions -and $parsed.InstructionsLines.Count -gt 0) {
-                    $output.Add("---")
-                    foreach ($line in $parsed.InstructionsLines) {
-                        if ($line -ne "---") {
-                            $output.Add($line)
-                        }
-                    }
-                    $output.Add("---")
-                }
-
-                # Add categories and their tasks
-                foreach ($category in $parsed.CategoryOrder) {
-                    $tasks = $parsed.TasksByCategory[$category]
-                    $filteredTasks = [System.Collections.Generic.List[TaskItem]]::new()
-                    foreach ($task in $tasks) {
-                        if (Should-KeepTask $task) {
-                            $filteredTasks.Add($task)
-                        }
-                    }
-
-                    $output.Add($category)
-
-                    foreach ($task in $filteredTasks) {
-                        $output.Add($task.RawText)
-                        foreach ($child in $task.Children) {
-                            $output.Add($child)
-                        }
-                    }
-                }
-
-                # Format and collapse consecutive blank lines
-                $sb = [System.Text.StringBuilder]::new()
-                $lastLineWasBlank = $false
-                foreach ($line in $output) {
-                    if ($line.Trim() -eq "") {
-                        if (-not $lastLineWasBlank) {
-                            [void]$sb.AppendLine("")
-                            $lastLineWasBlank = $true
-                        }
-                    } else {
-                        [void]$sb.AppendLine($line)
-                        $lastLineWasBlank = $false
-                    }
-                }
-
-                [System.IO.File]::WriteAllText($resolvedTargetPath, $sb.ToString(), [System.Text.Encoding]::UTF8)
+                $compiledContent = Get-CompiledTaskContent -sourcePath $resolvedSourcePath -KeepInstructions $KeepInstructions
+                [System.IO.File]::WriteAllText($resolvedTargetPath, $compiledContent, [System.Text.Encoding]::UTF8)
                 Write-TrackerLog 'suc' "Compiled tasks to $resolvedTargetPath" "Compile"
             }
 
@@ -891,6 +838,21 @@ function Invoke-Devt {
                 } else {
                     Write-TrackerLog 'suc' "All tasks format validated successfully!" "Validate"
                 }
+
+                # Verify task list sync status
+                Write-TrackerLog 'act' "Verifying task list sync status..." "Validate"
+                if (-not [System.IO.File]::Exists($resolvedTargetPath)) {
+                    Write-TrackerLog 'err' "Pending task file ($TargetPath) does not exist. Please run: ./devt compile" "Validate"
+                    exit 1
+                }
+                $contentCurrent = [System.IO.File]::ReadAllText($resolvedTargetPath, [System.Text.Encoding]::UTF8).Trim()
+                $contentExpected = (Get-CompiledTaskContent -sourcePath $resolvedSourcePath -KeepInstructions $KeepInstructions).Trim()
+                if ($contentCurrent -ne $contentExpected) {
+                    Write-TrackerLog 'err' "Task lists are OUT OF SYNC! The compiled pending tasks file ($TargetPath) does not match source ($SourcePath). Please run './devt compile' locally and commit the updated files." "Validate"
+                    exit 1
+                } else {
+                    Write-TrackerLog 'suc' "Task lists are fully in sync." "Validate"
+                }
             }
 
             "sync-gitlab" {
@@ -907,6 +869,10 @@ function Invoke-Devt {
 
             "gitdiff" {
                 Invoke-GitDiffModeHelper -compareBranch $Branch
+            }
+
+            "capsule" {
+                Invoke-ContextCapsuleHelper
             }
 
             "help" {
@@ -961,6 +927,7 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "branches" -color $cyan) -NoNewline; Write-Host "    : Renders a terminal comparison dashboard of repository branches."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "gitdiff" -color $cyan) -NoNewline; Write-Host "     : Shows structured code differences between the current branch and base/compare branch."
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "changelog" -color $cyan) -NoNewline; Write-Host "   : Automatically generates CHANGELOG.md from git conventional commit history."
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "capsule" -color $cyan) -NoNewline; Write-Host "     : Generates a structured workspace context-capsule.md for AI agents."
                 Write-Host ""
                 Write-Host (New-AsciiColor -string "OPTIONS & PARAMETERS" -color $boldWhite -Format Bold)
                 Write-Host "    -TaskText <string>          : The description text of the task to add."
@@ -983,6 +950,7 @@ function Invoke-Devt {
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode remove -TaskKey 'Test hook'" -color $green)
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode branches" -color $green)
                 Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode gitdiff -Branch develop" -color $green)
+                Write-Host "    " -NoNewline; Write-Host (New-AsciiColor -string "devt -Mode capsule" -color $green)
                 Write-Host ""
                 Write-Host "================================================================================"
                 Write-Host ""

@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["staticcanvas"]
   spec.email         = ["sgkens@gmail.com"]
 
-  spec.summary       = "A high-performance Jekyll theme framework and component library for technical documentation."
+  spec.summary       = "A Jekyll theme framework and component library for technical documentation."
   spec.description   = "A developer-first, component-heavy Jekyll theme framework optimized for technical documentation, featuring pluggable client search providers, automated build hooks, and a modular UI library."
   spec.homepage      = "https://gitlab.com/staticcanvas/ravenui-jekyll-theme"
   spec.license       = "MIT"
