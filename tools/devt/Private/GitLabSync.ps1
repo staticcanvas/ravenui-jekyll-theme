@@ -465,9 +465,21 @@ function Create-MergeRequestHelper {
     if (-not $assigneeId) { $assigneeId = 0 }
 
     # Format Merge Request Description
+    $commitCount = 0
+    try {
+        $countRaw = (git rev-list --count develop..HEAD 2>$null)
+        if ($null -ne $countRaw) {
+            $countRaw = $countRaw.Trim()
+            if ($countRaw -match '^\d+$') {
+                $commitCount = [int]$countRaw
+            }
+        }
+    } catch {}
+
     $sb = [System.Text.StringBuilder]::new()
     [void]$sb.AppendLine("## **Planned Changes & Scope**")
-    [void]$sb.AppendLine("Branch: `$currentBranch` targeting `develop``n")
+    [void]$sb.AppendLine("Branch: ``$currentBranch`` targeting ``develop``")
+    [void]$sb.AppendLine("Commits Count: **$($commitCount)**")
     [void]$sb.AppendLine("Proposed by: $formattedGitUser`n")
     
     if ($closingIssues.Count -gt 0) {
@@ -498,6 +510,12 @@ function Create-MergeRequestHelper {
     } else {
         [void]$sb.AppendLine("- None")
     }
+
+    [void]$sb.AppendLine("`n## **Zero-Touch Verification Checklist**")
+    [void]$sb.AppendLine("- [ ] **Linter Check**: Run `./rvcli lint` to ensure zero-error syntax formatting.")
+    [void]$sb.AppendLine("- [ ] **Build Verification**: Run `bundle exec jekyll build` to guarantee compilation passes cleanly.")
+    [void]$sb.AppendLine("- [ ] **Pester Testing**: Verify helper cmdlets locally (e.g. `Invoke-Pester` in `tests/` if available).")
+    [void]$sb.AppendLine("- [ ] **Task Alignment**: Run `./devt sync` and `./devt compile` to align local and remote checkmarks.")
 
     $mrDesc = $sb.ToString().Trim()
     

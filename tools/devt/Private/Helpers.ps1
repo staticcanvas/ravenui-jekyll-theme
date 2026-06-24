@@ -487,3 +487,66 @@ function Format-TuiRow {
     return $sb.ToString()
 }
 
+# Compile source task file content in memory
+function Get-CompiledTaskContent([string]$sourcePath, [bool]$KeepInstructions) {
+    if (-not [System.IO.File]::Exists($sourcePath)) {
+        return ""
+    }
+    
+    $parsed = Parse-TaskFile $sourcePath
+    $output = [System.Collections.Generic.List[string]]::new()
+
+    # Add headers
+    foreach ($line in $parsed.HeaderLines) {
+        $output.Add($line)
+    }
+
+    # Add instructions if kept
+    if ($KeepInstructions -and $parsed.InstructionsLines.Count -gt 0) {
+        $output.Add("---")
+        foreach ($line in $parsed.InstructionsLines) {
+            if ($line -ne "---") {
+                $output.Add($line)
+            }
+        }
+        $output.Add("---")
+    }
+
+    # Add categories and their tasks
+    foreach ($category in $parsed.CategoryOrder) {
+        $tasks = $parsed.TasksByCategory[$category]
+        $filteredTasks = [System.Collections.Generic.List[TaskItem]]::new()
+        foreach ($task in $tasks) {
+            if (Should-KeepTask $task) {
+                $filteredTasks.Add($task)
+            }
+        }
+
+        $output.Add($category)
+
+        foreach ($task in $filteredTasks) {
+            $output.Add($task.RawText)
+            foreach ($child in $task.Children) {
+                $output.Add($child)
+            }
+        }
+    }
+
+    # Format and collapse consecutive blank lines
+    $sb = [System.Text.StringBuilder]::new()
+    $lastLineWasBlank = $false
+    foreach ($line in $output) {
+        if ($line.Trim() -eq "") {
+            if (-not $lastLineWasBlank) {
+                [void]$sb.AppendLine("")
+                $lastLineWasBlank = $true
+            }
+        } else {
+            [void]$sb.AppendLine($line)
+            $lastLineWasBlank = $false
+        }
+    }
+    return $sb.ToString()
+}
+
+

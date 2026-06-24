@@ -67,7 +67,7 @@
 - [x] 🟡🌟 **Refine/Releases** - Integrate release tag metadata to showcase stable versions dynamically across component badges. `tag.html` now supports `text="latest"` and `text="latest-version"` resolving to `site.data.releases.first.tag_name`; documented in `docs/components/tag.md`. [#78](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/78)
 - [x] 🟡🌟 **Refine/Data** - Audit and update all data-driven components (timelines, charts, roadmaps) to accept data from both local `_data/` files and inline properties, and update documentation. `roadmap.html` now supports `data_source`, `items`, and legacy `content` capture. `timeline.html` already had full dual-mode support. Docs updated. [#79](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/79)
 - [x] 🟡🌟 **Refine/Components** - Audit codebase for component reuse, and enforce guidelines to write modular component includes and documentation for all new design patterns. Layout extracted into `comps/header.html`, `comps/sidebar.html`, `comps/footer.html`, `comps/toc.html`; `default.html` updated to use modular includes. Docs created for all four. [#80](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/80)
-- [ ] devt is needs to take advantage of powershells tab completion, via a dynamic augment completer or using the validateSet param property
+- [x] 🟡🌟 **CLI/Devt/TabCompletion** - Add PowerShell tab completion for devt parameters via dynamic completers and ValidateSet.
 
 ### **Feature Development (priority-3)**
 - [x] 🟡🌟 **Features/Liquid** - Created custom inline Liquid tags `rd_url` and `rd_asset` to resolve page paths and asset URLs dynamically relative to the site's `baseurl`. Automatically resolves quoted literals, context variables, and handles asset prefixing safely. Registered in `_plugins/path_tags.rb` and `lib/jekyll-theme-ravenui.rb`. Documented in `docs/custom-tags.md`. [#51](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/51)
@@ -99,13 +99,13 @@
     - [x] 🟡🌟 **CLI/Helpers/RequestTag** - Implement `Request-RvTag` to query tags from GitHub.
     - [x] 🟡🌟 **CLI/Helpers/ModuleWrappers** - Implement private helper functions wrapping `Find-Module`, `Install-Module`, and `Get-Module` to automate workspace dependency validation.
 
-- [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
+- [x] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
 - [x] 🟠🌟3️⃣ **Feature** - Implement automated conventional changelog generator compiling completed tasks
-- [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
-- [ ] 🟡🌟 **CLI/Devt/CommitLinks** - Update changelog compiler to display short commit hashes linked to commits for release notes or feature additions.
-- [ ] 🟡🌟 **CLI/Devt/MRFooter** - Implement merge request footer template including checklist verification (e.g., Pester tests).
-- [ ] 🟡🌟 **CLI/Devt/GitLabMapping** - Map GitLab task IDs to local devt tasks to automate issue closing references and ensure changelog consistency.
-- [ ] 🟡🌟 **CLI/Devt/MRCommitCount** - Enhance merge request generation to include commit count and detailed, informative summaries for zero-touch AI automation.
+- [x] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
+- [x] 🟡🌟 **CLI/Devt/CommitLinks** - Update changelog compiler to display short commit hashes linked to commits for release notes or feature additions.
+- [x] 🟡🌟 **CLI/Devt/MRFooter** - Implement merge request footer template including checklist verification (e.g., Pester tests).
+- [x] 🟡🌟 **CLI/Devt/GitLabMapping** - Map GitLab task IDs to local devt tasks to automate issue closing references and ensure changelog consistency.
+- [x] 🟡🌟 **CLI/Devt/MRCommitCount** - Enhance merge request generation to include commit count and detailed, informative summaries for zero-touch AI automation.
 ### **Bug Fixes (priority-4)**
 - [x] 🟡🪲 **Fix/SidebarBorder** - Adjusted the sidebar menu border color in the dark theme to prevent the light theme border from bleeding through, using a new `--rd-sidebar-border-color` custom property. [#71](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/71)
 
