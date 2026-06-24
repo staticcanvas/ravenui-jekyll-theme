@@ -119,6 +119,9 @@ RavenUI ships with several custom Ruby plugins located under `_plugins/` to auto
 * **Inline Component Tag (rdi):** Shorthand inline notation.
 * **Runtime Metadata Generator:** Injects active environment compiler, Gem, and engine versions into `site.config` during compilation.
 * **OG Image Generator:** Generates custom social share SVG cards dynamically.
+* **Jekyll Hooks Integration (`_plugins/hooks.rb`):** Automates compilation and optimization steps during the build lifecycle:
+  * 🔹 **Pre-Build (`after_reset`):** Generates tag history (`_data/git-tags.yml`) from git logs when `hooks.git_tags` is enabled.
+  * 🔹 **Post-Build (`post_write`):** Automatically indexes the output with Pagefind (`hooks.pagefind`) and minifies site assets (`hooks.minify`).
 
 ---
 

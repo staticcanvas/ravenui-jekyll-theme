@@ -41,7 +41,7 @@ layout: default
 title: My Documentation Page
 ---
 
-## Introduction
+## **Introduction**
 
 This is a standard **Markdown** documentation page.
 Kramdown converts this content before it enters the layout.

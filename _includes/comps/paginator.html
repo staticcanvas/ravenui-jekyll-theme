@@ -1,0 +1,62 @@
+{%- comment -%}
+Component__: Paginator
+Purpose____: Renders a beautiful, premium pagination panel for blogs or paginated document lists.
+Caveats____: Only outputs if paginator.total_pages > 1.
+Usage______: {% include comps/paginator.html %}
+{%- endcomment -%}
+{%- if paginator.total_pages > 1 -%}
+<nav class="rd-paginator {{ include.class }}" aria-label="Pagination">
+  <ul class="rd-pagination">
+    <!-- Previous Page -->
+    {%- if paginator.previous_page -%}
+      <li class="rd-page-item">
+        <a href="{{ paginator.previous_page_path | relative_url }}" class="rd-page-link rd-page-prev" aria-label="Previous page">
+          {% include comps/icon.html name="chevron-left" size=16 %}
+          <span>Prev</span>
+        </a>
+      </li>
+    {%- else -%}
+      <li class="rd-page-item rd-disabled">
+        <span class="rd-page-link rd-page-prev">
+          {% include comps/icon.html name="chevron-left" size=16 %}
+          <span>Prev</span>
+        </span>
+      </li>
+    {%- endif -%}
+
+    <!-- Page Numbers -->
+    {%- for page in (1..paginator.total_pages) -%}
+      {%- if page == paginator.page -%}
+        <li class="rd-page-item rd-active">
+          <span class="rd-page-link">{{ page }}</span>
+        </li>
+      {%- elsif page == 1 -%}
+        <li class="rd-page-item">
+          <a href="{{ '/' | relative_url }}" class="rd-page-link">{{ page }}</a>
+        </li>
+      {%- else -%}
+        <li class="rd-page-item">
+          <a href="{{ site.paginate_path | replace: ':num', page | relative_url }}" class="rd-page-link">{{ page }}</a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <!-- Next Page -->
+    {%- if paginator.next_page -%}
+      <li class="rd-page-item">
+        <a href="{{ paginator.next_page_path | relative_url }}" class="rd-page-link rd-page-next" aria-label="Next page">
+          <span>Next</span>
+          {% include comps/icon.html name="chevron-right" size=16 %}
+        </a>
+      </li>
+    {%- else -%}
+      <li class="rd-page-item rd-disabled">
+        <span class="rd-page-link rd-page-next">
+          <span>Next</span>
+          {% include comps/icon.html name="chevron-right" size=16 %}
+        </span>
+      </li>
+    {%- endif -%}
+  </ul>
+</nav>
+{%- endif -%}

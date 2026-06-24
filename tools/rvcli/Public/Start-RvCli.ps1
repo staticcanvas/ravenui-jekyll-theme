@@ -119,6 +119,24 @@ function Start-RvCli {
         { $_ -eq 'version' -or $_ -eq 'ver' } {
             Invoke-RvVersion -Args $cmdArgs -WorkspaceRoot $workspaceRoot
         }
+        "theme" {
+            Invoke-RvMultiTheme -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "themes" {
+            Invoke-RvMultiTheme -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "toggle" {
+            Invoke-RvFeatureToggle -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "toggles" {
+            Invoke-RvFeatureToggle -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "permalink" {
+            Invoke-RvPermalinkPreview -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
+        "permalink-preview" {
+            Invoke-RvPermalinkPreview -Args $cmdArgs -WorkspaceRoot $workspaceRoot
+        }
         default {
             Write-RvLog -Level "fail" -Message "Unknown command '$command'. Run 'rvcli --help' for details." -Context "router"
         }
@@ -162,6 +180,9 @@ function Show-RvHelp {
         "    {ct:accent:search-index} Compile Pagefind / Lyra indices using a single command.",
         "    {ct:accent:variant}      Automate packaging of site distributions (e.g. Minimalist layout).",
         "    {ct:accent:minify}       Minify HTML, CSS, and JS in a compiled site directory.",
+        "    {ct:accent:theme}        Manage custom theme variants: list, show, or pack.",
+        "    {ct:accent:toggle}       Manage global feature switches and dynamic plugin dependencies.",
+        "    {ct:accent:permalink}    Preview the compiled output URL and front-matter of a file.",
         "",
         "{ct:header:b:DATA & VERSIONING}",
         "    {ct:accent:git-tags}     Generate _data/git-tags.yml from sorted git tag history.",

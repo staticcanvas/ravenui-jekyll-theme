@@ -68,6 +68,8 @@
 @use "ravenui-sp/spacer";
 @use "ravenui-sp/depends-upon";
 @use "ravenui-sp/feature-flags";
+@use "ravenui-sp/plugins-comps";
+@use "ravenui-sp/static-files";
 
 // 5. Third Party / Syntax Highlighting
 @use "rogue/ethereal";

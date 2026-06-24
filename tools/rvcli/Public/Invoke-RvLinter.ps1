@@ -39,6 +39,9 @@ function Invoke-RvLinter {
         "footer-item" = "footer"
         "kbd-group" = "kbd"
         "tag" = "tags"
+        "feed-widget" = "plugin-components"
+        "gist" = "plugin-components"
+        "paginator" = "plugin-components"
     }
 
     if ([System.IO.Directory]::Exists($includesDir) -and [System.IO.Directory]::Exists($docsDir)) {
@@ -102,10 +105,27 @@ function Invoke-RvLinter {
         $ext = [System.IO.Path]::GetExtension($file).ToLower()
         if ($ext -notin @('.md', '.html')) { continue }
 
+        $inRawBlock = $false
+        $inFencedCode = $false
         $lines = [System.IO.File]::ReadAllLines($file)
         for ($li = 0; $li -lt $lines.Count; $li++) {
             $line = $lines[$li]
             $lineNum = $li + 1
+
+            if ($line -match '\{\%\s*raw\s*\%\}') {
+                $inRawBlock = $true
+            }
+            if ($line -match '^\s*`{3,4}') {
+                $inFencedCode = -not $inFencedCode
+            }
+
+            $isCode = $inRawBlock -or $inFencedCode
+
+            if ($line -match '\{\%\s*endraw\s*\%\}') {
+                $inRawBlock = $false
+            }
+
+            if ($isCode) { continue }
 
             # A. Markdown heading bold audit (H2 and H3 only) - limit to docs/ and dev-notes-tracker.md
             if ($ext -eq '.md' -and ($relPath -match '^docs/' -or $relPath -eq 'dev-notes-tracker.md')) {

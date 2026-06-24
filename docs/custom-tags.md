@@ -77,6 +77,48 @@ Captured content here.
 
 ---
 
+{% include comps/heading.html tag="h2" text="Path & Asset Resolution Tags (rd_url & rd_asset)" icon="link" size=20 %}
+
+To simplify pathing across varying subdirectories and base URLs, RavenUI provides two custom inline tags for automatic URL resolution:
+
+* 🔹 `{% raw %}{% rd_url [path] %}{% endraw %}`: Resolves page paths relative to the site's configured `baseurl`.
+* 🔹 `{% raw %}{% rd_asset [path] %}{% endraw %}`: Resolves asset paths relative to `baseurl`, automatically prepending `/assets/` if missing.
+
+Both tags support quoted string literals (e.g. `"css/main.css"`) and dynamic Liquid variables (e.g. `page.url`).
+
+### **Syntax & Examples**
+
+* 🔹 **Resolving Page URL (literal string):**
+  {% raw %}
+  ```liquid
+  <a href="{% rd_url "installation" %}">Installation</a>
+  <!-- Outputs: /installation (or /baseurl/installation) -->
+  ```
+  {% endraw %}
+
+* 🔹 **Resolving Asset Path (literal string):**
+  {% raw %}
+  ```liquid
+  <link rel="stylesheet" href="{% rd_asset "css/main.css" %}">
+  <!-- Outputs: /assets/css/main.css (or /baseurl/assets/css/main.css) -->
+  ```
+  {% endraw %}
+
+* 🔹 **Resolving Context Variables:**
+  {% raw %}
+  ```liquid
+  {% assign my_page_url = "/components/icon" %}
+  <a href="{% rd_url my_page_url %}">Icon Component</a>
+  <!-- Outputs: /components/icon -->
+
+  {% assign logo_path = "logo.svg" %}
+  <img src="{% rd_asset logo_path %}">
+  <!-- Outputs: /assets/logo.svg -->
+  ```
+  {% endraw %}
+
+---
+
 {% include comps/heading.html tag="h2" text="Context Resolution" icon="database" size=20 %}
 
 Custom tags resolve argument values dynamically. If a value is wrapped in quotes, it is parsed as a literal string. If it is unquoted, it will resolve to the value of that variable in the current Liquid context:

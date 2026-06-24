@@ -1,0 +1,27 @@
+{%- comment -%}
+Component__: GitHub Gist Wrapper
+Purpose____: Wraps jekyll-gist with a stylized frame, header, and clean link to the raw source.
+Caveats____: Requires the jekyll-gist plugin to be active.
+Usage______: {% include comps/gist.html id="d8ad5039f60bc9c4f4205dcbf1e285a8" file="test.js" %}
+{%- endcomment -%}
+{%- assign gist_id = include.id -%}
+{%- assign file = include.file -%}
+{%- if gist_id -%}
+<div class="rd-gist-wrapper {{ include.class }}">
+  <div class="rd-gist-header">
+    {% include comps/icon.html name="github" size=14 %}
+    <span class="rd-gist-title">GitHub Gist: {{ gist_id }} {% if file %}({{ file }}){% endif %}</span>
+    <a href="https://gist.github.com/{{ gist_id }}" target="_blank" class="rd-gist-external">
+      <span>View Gist</span>
+      {% include comps/icon.html name="external-link" size=12 %}
+    </a>
+  </div>
+  <div class="rd-gist-content">
+    {%- if file -%}
+      {% gist gist_id file %}
+    {%- else -%}
+      {% gist gist_id %}
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}

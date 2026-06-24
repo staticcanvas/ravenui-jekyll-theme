@@ -21,15 +21,17 @@ The `example-code.html` component is designed to hold markdown code blocks. It a
 {% include comps/example-code.html content=code_demo %}
 
 {% capture code_usage %}
-{% raw %}
+````liquid
+{{ "{" }}% capture my_code {{ "%" }}}
+{{ "{" }}% raw {{ "%" }}}
 ```liquid
-{% capture my_code %}
-    ... markdown code block ...
-{% endcapture %}
-
-{% include comps/example-code.html content=my_code %}
+{{ "{" }}% include comps/icon.html name="zap" color="#00ff9d" {{ "%" }}}
 ```
-{% endraw %}
+{{ "{" }}% endraw {{ "%" }}}
+{{ "{" }}% endcapture {{ "%" }}}
+
+{{ "{" }}% include comps/example-code.html content=my_code {{ "%" }}}
+````
 {% endcapture %}
 {% include comps/example-code.html content=code_usage %}
 

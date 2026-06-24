@@ -1,5 +1,12 @@
 ﻿# **CHANGELOG**
 
+## [2.11.0] - 2026-06-23
+
+### Notes & Improvements
+- Documented devt execution modes, CLI parameters, and task format conventions.
+- Added detailed section on technical implementation and dynamic git root resolution.
+- Compile changelog for recent commits
+
 ## [2.11.1] - 2026-06-19
 
 ### Feature Additions
@@ -42,7 +49,7 @@
 - Implemented a dynamic console table layout engine utilizing Format-TuiRow in Helpers.ps1 that dynamically measures branch name display widths and auto-sizes columns/borders to prevent box tearing.
 - Integrated a high-performance RunspacePool inside Invoke-GitBranchesHelper to query git branch metadata concurrently (ahead/behind commits, last commit age, and subject line), decreasing command latency from 5s to <300ms.
 - Optimized GitLabSync.ps1 and GitOps.ps1 by replacing pipeline cmdlets (Where-Object/Select-Object) with fast direct foreach loops.
-- Fixed 🪲 Beetle emoji (U+1FABC) character display width handling in Get-StringDisplayWidth to treat it as width 1 on standard terminals, eliminating stats dashboard alignment glitches.
+- Fixed ≡ƒ¬▓ Beetle emoji (U+1FABC) character display width handling in Get-StringDisplayWidth to treat it as width 1 on standard terminals, eliminating stats dashboard alignment glitches.
 - Expanded the task tracker with five workflow-specific development concepts (capsule exporter, changelog generator, local database constraints, SQLite caching, and CI blockers).
 
 ## [2.9.2] - 2026-06-19

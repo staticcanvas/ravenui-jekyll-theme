@@ -1,6 +1,6 @@
 # RavenUI
 
-A professional, component-heavy Jekyll theme optimized for high-contrast technical documentation. RavenUI has evolved from a clean documentation template into a robust framework, serving both as a production-ready theme and a comprehensive UI component library for technical websites.
+A high-performance, developer-first Jekyll theme framework and component library optimized for high-contrast technical documentation, API references, and developer portals. RavenUI has evolved from a clean template into a robust base layout engine featuring 70+ modular components, dynamic search providers, and automated build hooks.
 
 ---
 
