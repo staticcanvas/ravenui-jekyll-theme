@@ -178,5 +178,5 @@ function Invoke-RvSemverBump {
     }
 
     $bumped = "$major.$minor.$patch"
-    return if ($hasV) { "v$bumped" } else { $bumped }
+    if ($hasV) { return "v$bumped" } else { return $bumped }
 }

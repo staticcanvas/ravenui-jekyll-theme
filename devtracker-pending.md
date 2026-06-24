@@ -4,6 +4,8 @@
 
 ### **Critical Path (priority-1)**
 ### **Active Enhancements (priority-2)**
+- [ ] devt is needs to take advantage of powershells tab completion, via a dynamic augment completer or using the validateSet param property
+
 ### **Feature Development (priority-3)**
 - [ ] 🟡🌟 **DX/Deployment** - Deployment of theme to RubyGems. [#57](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/57)
 - [ ] 🟡🌟 **DX/Deployment** - Deployment to third-party Jekyll theme directories. [#58](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/58)
@@ -11,6 +13,10 @@
 - [ ] 🟡🌟 **Features/TiltedCarousel** - Design and build a "Tilted Lapping Carousel" component featuring overlapping, swiveled, and layered card layouts (where spacing scales dynamically with card density). Implement card-flipping hover animations. [#65](https://gitlab.com/staticcanvas/zero-dark-jekyll-theme/-/issues/65)
 - [ ] 🟡🌟3️⃣ **Feature** - Implement context capsule exporter mode to generate structured AI-ready workspace context
 - [ ] 🟡🌟3️⃣ **Feature** - Add CI verification checks to block merge requests if branch task list is out of sync
+- [ ] 🟡🌟 **CLI/Devt/CommitLinks** - Update changelog compiler to display short commit hashes linked to commits for release notes or feature additions.
+- [ ] 🟡🌟 **CLI/Devt/MRFooter** - Implement merge request footer template including checklist verification (e.g., Pester tests).
+- [ ] 🟡🌟 **CLI/Devt/GitLabMapping** - Map GitLab task IDs to local devt tasks to automate issue closing references and ensure changelog consistency.
+- [ ] 🟡🌟 **CLI/Devt/MRCommitCount** - Enhance merge request generation to include commit count and detailed, informative summaries for zero-touch AI automation.
 ### **Bug Fixes (priority-4)**
 ### **Refactoring & QOL (priority-5)**
 ### **Documentation & Docs (priority-6)**
